@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+  <Item id="dramalord_sausage"
+          name="{=Dramalord052}Sausage"
+          mesh="kitchen_sausage_c"
+          item_category="dramalord_stuff"
+          IsFood="true"
+          value="5"
+          weight="1"
+          Type="Goods">
+    <ItemComponent>
+      <Trade
+				morale_bonus="2" />
+    </ItemComponent>
+    <Flags Civilian="true" />
+  </Item>
+  <Item id="dramalord_leek"
+          name="{=Dramalord100}Leek"
+          mesh="kitchen_food_leek"
+          item_category="dramalord_stuff"
+          IsFood="true"
+          value="1"
+          weight="1"
+          Type="Goods">
+    <ItemComponent>
+      <Trade
+				morale_bonus="1" />
+    </ItemComponent>
+    <Flags Civilian="true" />
+  </Item>
+  <Item id="dramalord_pie"
+          name="{=Dramalord100}Pie"
+          mesh="kitchen_pie"
+          item_category="dramalord_stuff"
+          IsFood="true"
+          value="10"
+          weight="1"
+          Type="Goods">
+    <ItemComponent>
+      <Trade
+				morale_bonus="2" />
+    </ItemComponent>
+    <Flags Civilian="true" />
+  </Item>
+</Items>
