@@ -52,7 +52,6 @@ namespace Dramalord.UI
 
             Persuasions.ClearCurrentPersuasion();
             Info.IncreaseFlirtCountWithHero(Npc, Player);
-            AICampaignActions.CompleteDateActions(Npc, Player);
             if (!Info.GetIsCoupleWithHero(Player, Npc))
             {
                 Info.SetIsCoupleWithHero(Player, Npc, true);
@@ -60,7 +59,10 @@ namespace Dramalord.UI
                 Info.ChangeEmotionToHeroBy(Player, Npc, DramalordMCM.Get.MinEmotionForDating);
                 Notification.DrawBanner("You and " + Npc + " are now a couple");
             }
-            if(PlayerEncounter.Current != null)
+
+            AICampaignActions.CompleteDateActions(Npc, Player);
+
+            if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
             }

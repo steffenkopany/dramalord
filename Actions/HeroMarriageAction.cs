@@ -1,6 +1,7 @@
 ﻿using Dramalord.Data;
 using Dramalord.UI;
 using Helpers;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
@@ -66,33 +67,22 @@ namespace Dramalord.Actions
                 Hero Npc = (hero == Hero.MainHero) ? target : hero;
                 HeroLeaveClanAction.Apply(Npc, false, Npc);
                 HeroJoinClanAction.Apply(Npc, Clan.PlayerClan, false);
-                MarriageAction.Apply(Hero.MainHero, Npc, false);
             }
             else if(hero.Clan != null && target.Clan == null)
             {
                 HeroJoinClanAction.Apply(target, hero.Clan, false);
-
-                ChangeRomanticStateAction.Apply(hero, target, Romance.RomanceLevelEnum.Marriage);
-                CampaignEventDispatcher.Instance.OnHeroesMarried(hero, target, false);
             }
             else if (hero.Clan == null && target.Clan != null)
             {
                 HeroJoinClanAction.Apply(hero, target.Clan, false);
-                ChangeRomanticStateAction.Apply(target, hero, Romance.RomanceLevelEnum.Marriage);
-                CampaignEventDispatcher.Instance.OnHeroesMarried(target, hero, false);
             }
             else if (hero.Clan != null && target.Clan != null && hero.Clan != target.Clan)
             {
                 HeroLeaveClanAction.Apply(hero, false, hero);
                 HeroJoinClanAction.Apply(hero, target.Clan, false);
-                ChangeRomanticStateAction.Apply(target, hero, Romance.RomanceLevelEnum.Marriage);
-                CampaignEventDispatcher.Instance.OnHeroesMarried(target, hero, false);
             }
-            else
-            {
-                ChangeRomanticStateAction.Apply(hero, target, Romance.RomanceLevelEnum.Marriage);
-                CampaignEventDispatcher.Instance.OnHeroesMarried(hero, target, false);
-            }
+                
+            MarriageAction.Apply(hero, target, false);
 
             Info.SetIsCoupleWithHero(hero, target, true);
             Info.ChangeEmotionToHeroBy(hero, target, DramalordMCM.Get.EmotionalWinMarriage);

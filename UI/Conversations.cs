@@ -41,11 +41,11 @@ namespace Dramalord.UI
         internal static readonly string NPCMarryReply = "dl_npc_marry_reply";
         internal static readonly string NPCPresentReply = "dl_npc_present_reply";
         internal static readonly string NPCBreakupReply = "dl_npc_breakup_reply";
-        internal static readonly string NPCDivorceReply = "dl_npc_marry_reply";
         internal static readonly string PlayerFlirtReply = "dl_player_flirt_reply";
         internal static readonly string PlayerDateReply = "dl_player_date_reply";
         internal static readonly string PlayerJoinReply = "dl_player_join_reply";
         internal static readonly string PlayerDivorceReply = "dl_player_divorce_reply";
+        internal static readonly string NPCDivorceReply = "dl_npc_divorce_reply";
         internal static readonly string PlayerMarryReply = "dl_player_marry_reply";
         internal static readonly string NPCActionResult = "dl_npc_action_result";
         internal static readonly string NPCViolatedReply = "dl_npc_violated_result";

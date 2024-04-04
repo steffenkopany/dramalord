@@ -21,6 +21,7 @@ namespace Dramalord.Actions
             {
                 hero.Clan = clan;
                 hero.UpdateHomeSettlement();
+                hero.SetNewOccupation(Occupation.Lord);
                 hero.ChangeState(Hero.CharacterStates.Active);
 
                 if (withChildren)
@@ -31,6 +32,7 @@ namespace Dramalord.Actions
                         {
                             child.Clan = clan;
                             child.UpdateHomeSettlement();
+                            child.SetNewOccupation(Occupation.Lord);
                             child.ChangeState(Hero.CharacterStates.Active);
                         }
                     }

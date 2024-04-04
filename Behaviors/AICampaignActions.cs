@@ -164,6 +164,7 @@ namespace Dramalord.Behaviors
                     if (hero != Hero.MainHero && hero.GetHeroTraits().Calculating < 0 && hero.GetHeroTraits().Mercy < 0)
                     {
                         HeroKillAction.Apply(hero, target, target, KillReason.Pregnancy);
+                        return;
                     }
                     else if (hero != Hero.MainHero && AICampaignHelper.WantsToDivorceFrom(hero, target))
                     {
@@ -181,6 +182,7 @@ namespace Dramalord.Behaviors
                     if (target.GetHeroTraits().Calculating < 0 && target.GetHeroTraits().Mercy < 0)
                     {
                         HeroKillAction.Apply(target, hero, hero, KillReason.Pregnancy);
+                        return;
                     }
                     else if (AICampaignHelper.WantsToDivorceFrom(target, hero))
                     {
@@ -209,6 +211,7 @@ namespace Dramalord.Behaviors
                             if (partner.GetHeroTraits().Calculating < 0 && partner.GetHeroTraits().Mercy < 0)
                             {
                                 HeroKillAction.Apply(partner, hero, hero, KillReason.Intercourse);
+                                return;
                             }
                             else if (AICampaignHelper.WantsToDivorceFrom(partner, hero))
                             {
@@ -230,6 +233,7 @@ namespace Dramalord.Behaviors
                             if (partner.GetHeroTraits().Calculating < 0 && partner.GetHeroTraits().Mercy < 0)
                             {
                                 HeroKillAction.Apply(partner, target, hero, KillReason.Intercourse);
+                                return;
                             }
                             else if (AICampaignHelper.WantsToDivorceFrom(partner, target))
                             {

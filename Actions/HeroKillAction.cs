@@ -38,7 +38,7 @@ namespace Dramalord.Actions
                 else if (type == KillReason.Suicide)
                 {
                     KillCharacterAction.ApplyByMurder(victim, victim, false);
-                    LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenBornBastard(victim, killer, reason));
+                    LogEntry.AddLogEntry(new EncyclopediaLogKilledSuizide(victim));
                 }
 
                 DramalordEvents.OnHeroesKilled(killer, victim, reason, type);

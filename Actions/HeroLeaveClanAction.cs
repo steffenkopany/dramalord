@@ -52,10 +52,10 @@ namespace Dramalord.Actions
                         party.Party.SetCustomOwner(null);
                         DestroyPartyAction.Apply(null, party); // test
                     }
-
-                    hero.Clan = null;
-                    hero.UpdateHomeSettlement();
                 }
+
+                hero.Clan = null;
+                hero.UpdateHomeSettlement();
 
                 if (withChildren)
                 {
