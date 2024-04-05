@@ -1,16 +1,37 @@
-﻿using HarmonyLib;
+﻿
+/* Unmerged change from project 'Dramalord (net6)'
+Before:
+using HarmonyLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaleWorlds.CampaignSystem.CampaignBehaviors;
+After:
+using Dramalord.Data;
+using Dramalord.UI;
+using HarmonyLib;
+using JetBrains.Annotations;
+using System;
+*/
+using Dramalord.Data;
+using HarmonyLib;
+using JetBrains.Annotations;
+using System;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem
+/* Unmerged change from project 'Dramalord (net6)'
+Before:
 using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Encyclopedia;
-using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Pages;
+After:
+using TaleWorlds.CampaignBehaviors;
+*/
+.
+/* Unmerged change from project 'Dramalord (net6)'
+Before:
 using Dramalord.UI;
 using JetBrains.Annotations;
 using Dramalord.Data;
+After:
+using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Encyclopedia;
+*/
+CampaignBehaviors;
 
 namespace Dramalord.Patches
 {

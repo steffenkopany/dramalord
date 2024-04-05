@@ -1,23 +1,6 @@
-﻿using Dramalord.Actions;
-using Dramalord.Data;
-using SandBox.GauntletUI.Encyclopedia;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dramalord.Data;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.CampaignBehaviors;
-using TaleWorlds.CampaignSystem.CharacterDevelopment;
-using TaleWorlds.CampaignSystem.Conversation;
-using TaleWorlds.CampaignSystem.Conversation.Persuasion;
-using TaleWorlds.CampaignSystem.Encounters;
-using TaleWorlds.CampaignSystem.GameComponents;
-using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia;
-using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Pages;
-using TaleWorlds.Core;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Encyclopedia;
 
 namespace Dramalord.UI
 {

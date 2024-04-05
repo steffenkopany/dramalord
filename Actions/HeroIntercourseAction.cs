@@ -1,17 +1,9 @@
 ﻿using Dramalord.Data;
-using Dramalord.UI;
 using Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
-using TaleWorlds.CampaignSystem.MapNotificationTypes;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Actions
 {

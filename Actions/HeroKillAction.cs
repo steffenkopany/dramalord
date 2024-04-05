@@ -1,5 +1,4 @@
 ﻿using Dramalord.Data;
-using Dramalord.UI;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;

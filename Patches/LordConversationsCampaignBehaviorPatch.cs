@@ -2,12 +2,21 @@
 using HarmonyLib;
 using JetBrains.Annotations;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Conversation;
+using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.Core;
+
+/* Unmerged change from project 'Dramalord (net6)'
+Before:
 using TaleWorlds.Localization;
 using System;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
+After:
+using TaleWorlds.CampaignSystem.Conversation;
+using TaleWorlds.Core;
+using TaleWorlds.Localization;
+*/
+using TaleWorlds.Localization;
 
 namespace Dramalord.Patches
 {

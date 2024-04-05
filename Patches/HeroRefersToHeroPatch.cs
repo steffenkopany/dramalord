@@ -1,11 +1,11 @@
 ﻿using Dramalord.Data;
 using HarmonyLib;
 using JetBrains.Annotations;
+using System;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
-using System;
 
 namespace Dramalord.Patches
 {

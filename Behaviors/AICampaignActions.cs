@@ -1,13 +1,7 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Data;
-using Dramalord.UI;
-using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.LogEntries;
-using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 
 namespace Dramalord.Behaviors

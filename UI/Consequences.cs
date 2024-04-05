@@ -1,20 +1,9 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Behaviors;
 using Dramalord.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.ComponentInterfaces;
-using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
-using TaleWorlds.CampaignSystem.GameComponents;
-using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.Core;
-using TaleWorlds.Core.ViewModelCollection.Information;
 using TaleWorlds.ObjectSystem;
 
 namespace Dramalord.UI

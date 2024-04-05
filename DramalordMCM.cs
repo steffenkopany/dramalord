@@ -1,16 +1,7 @@
-﻿using Bannerlord.UIExtenderEx;
-using MCM.Abstractions.Attributes;
+﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
-using MCM.Abstractions.Base.Global;
 using MCM.Abstractions.Base.PerCampaign;
-using MCM.Abstractions.FluentBuilder;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaleWorlds.CampaignSystem;
 
 namespace Dramalord
 {

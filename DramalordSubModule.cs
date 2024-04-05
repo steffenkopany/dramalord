@@ -1,14 +1,8 @@
-﻿using Bannerlord.UIExtenderEx;
-using Dramalord.Behaviors;
+﻿using Dramalord.Behaviors;
 using Dramalord.UI;
 using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
-using TaleWorlds.Diamond;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.ObjectSystem;
 

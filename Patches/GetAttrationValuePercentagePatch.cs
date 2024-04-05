@@ -1,15 +1,8 @@
-﻿using Bannerlord.UIExtenderEx;
+﻿using Dramalord.Data;
 using HarmonyLib;
 using JetBrains.Annotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem;
-using Dramalord.Data;
-using Dramalord.UI;
+using TaleWorlds.CampaignSystem.GameComponents;
 
 namespace Dramalord.Patches
 {

@@ -1,14 +1,7 @@
 ﻿using Dramalord.Data;
-using Dramalord.UI;
 using HarmonyLib;
 using JetBrains.Annotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Encyclopedia;
 
 namespace Dramalord.Patches
 {

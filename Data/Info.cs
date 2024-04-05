@@ -1,16 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.Core;
-using TaleWorlds.LinQuick;
-using TaleWorlds.MountAndBlade;
 using static TaleWorlds.CampaignSystem.Actions.KillCharacterAction;
 
 namespace Dramalord.Data

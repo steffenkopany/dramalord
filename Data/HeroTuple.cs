@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
-using TaleWorlds.CampaignSystem;
+﻿using TaleWorlds.CampaignSystem;
 using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Data
