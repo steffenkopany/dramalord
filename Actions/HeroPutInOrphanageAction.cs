@@ -72,7 +72,7 @@ namespace Dramalord.Actions
             child.Clan = null;
             child.UpdateHomeSettlement();
             child.SetNewOccupation(Occupation.Wanderer);
-            MakeHeroFugitiveAction.Apply(child);
+            //MakeHeroFugitiveAction.Apply(child);
 
             Info.AddOrphan(child);
 

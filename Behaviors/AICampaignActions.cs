@@ -1,11 +1,13 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Data;
 using Dramalord.UI;
+using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 
 namespace Dramalord.Behaviors
@@ -69,6 +71,11 @@ namespace Dramalord.Behaviors
                             else
                             {
                                 HeroDivorceAction.Apply(spouse, hero);
+                                if(spouse.GetHeroTraits().Mercy < 0 && spouse.Clan != null && spouse.Clan == hero.Clan && spouse.Clan.Leader == spouse)
+                                {
+                                    HeroLeaveClanAction.Apply(hero, false, spouse); 
+                                }
+                                return;
                             }
                         }
                         else
@@ -85,7 +92,7 @@ namespace Dramalord.Behaviors
                                 {
                                     HeroDivorceAction.Apply(hero, spouse);
                                     HeroLeaveClanAction.Apply(hero, true, hero);
-                                    MakeHeroFugitiveAction.Apply(hero);
+                                    return;
                                 }
                             }
                             else
@@ -169,6 +176,11 @@ namespace Dramalord.Behaviors
                     else if (hero != Hero.MainHero && AICampaignHelper.WantsToDivorceFrom(hero, target))
                     {
                         HeroDivorceAction.Apply(hero, target);
+                        if (hero.GetHeroTraits().Mercy < 0 && hero.Clan != null && target.Clan == hero.Clan && hero.Clan.Leader == hero)
+                        {
+                            HeroLeaveClanAction.Apply(target, false, hero);
+                        }
+                        return;
                     }
                     else if (hero != Hero.MainHero && AICampaignHelper.WantsToBreakUpWith(hero, target))
                     {
@@ -187,6 +199,11 @@ namespace Dramalord.Behaviors
                     else if (AICampaignHelper.WantsToDivorceFrom(target, hero))
                     {
                         HeroDivorceAction.Apply(target, hero);
+                        if (target.GetHeroTraits().Mercy < 0 && target.Clan != null && target.Clan == hero.Clan && target.Clan.Leader == target)
+                        {
+                            HeroLeaveClanAction.Apply(hero, false, target);
+                        }
+                        return;
                     }
                     else if (AICampaignHelper.WantsToBreakUpWith(target, hero))
                     {
@@ -216,6 +233,11 @@ namespace Dramalord.Behaviors
                             else if (AICampaignHelper.WantsToDivorceFrom(partner, hero))
                             {
                                 HeroDivorceAction.Apply(partner, hero);
+                                if (partner.GetHeroTraits().Mercy < 0 && partner.Clan != null && partner.Clan == hero.Clan && partner.Clan.Leader == partner)
+                                {
+                                    HeroLeaveClanAction.Apply(hero, false, partner);
+                                }
+                                return;
                             }
                             else if (AICampaignHelper.WantsToBreakUpWith(partner, hero))
                             {
@@ -238,6 +260,11 @@ namespace Dramalord.Behaviors
                             else if (AICampaignHelper.WantsToDivorceFrom(partner, target))
                             {
                                 HeroDivorceAction.Apply(partner, target);
+                                if (partner.GetHeroTraits().Mercy < 0 && partner.Clan != null && partner.Clan == target.Clan && partner.Clan.Leader == partner)
+                                {
+                                    HeroLeaveClanAction.Apply(target, false, partner);
+                                }
+                                return;
                             }
                             else if (AICampaignHelper.WantsToBreakUpWith(partner, target))
                             {

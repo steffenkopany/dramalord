@@ -63,7 +63,6 @@ namespace Dramalord.Actions
 
             if(hero == Hero.MainHero || target == Hero.MainHero)
             {
-                Notification.PrintText("BEEEEEEEEEEEEEEEEEEEEP");
                 Hero Npc = (hero == Hero.MainHero) ? target : hero;
                 HeroLeaveClanAction.Apply(Npc, false, Npc);
                 HeroJoinClanAction.Apply(Npc, Clan.PlayerClan, false);
@@ -88,7 +87,8 @@ namespace Dramalord.Actions
             Info.ChangeEmotionToHeroBy(hero, target, DramalordMCM.Get.EmotionalWinMarriage);
             Info.ChangeEmotionToHeroBy(target, hero, DramalordMCM.Get.EmotionalWinMarriage);
 
-            LogEntry.AddLogEntry(new EncyclopediaLogMarriage(hero, target));
+            //alread logged by system
+            //LogEntry.AddLogEntry(new EncyclopediaLogMarriage(hero, target));
             DramalordEvents.OnHeroesMarried(hero, target);
         }
     }
