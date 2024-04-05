@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/BUTR/Bannerlord.XmlSchemas/master/SubModule.xsd" >
-  <Id value="Dramalord" />
-  <Name value="Dramalord" />
-  <Version value="v1.0.0_190" />
+  <Id value="$modulename$" />
+  <Name value="$modulename$" />
+  <Version value="v$version$" />
   <DefaultModule value="false" />
   <ModuleCategory value="Singleplayer"/>
   <ModuleType value="Community" />
@@ -47,21 +47,10 @@
       <Tags />
     </SubModule>
     <SubModule>
-      <Name value="Dramalord" />
-      <DLLName value="Dramalord.dll" />
-      <SubModuleClassType value="Dramalord.DramalordSubModule" />
+      <Name value="$modulename$" />
+      <DLLName value="$modulename$.dll" />
+      <SubModuleClassType value="$modulename$.DramalordSubModule" />
       <Tags />
     </SubModule>
   </SubModules>
-  <Xmls>
-    <XmlNode>
-      <XmlName id="Items" path="dramalord_items"/>
-      <IncludedGameTypes>
-        <GameType value = "Campaign"/>
-        <GameType value = "CampaignStoryMode"/>
-        <GameType value = "CustomGame"/>
-        <GameType value = "EditorGame"/>
-      </IncludedGameTypes>
-    </XmlNode>
-  </Xmls>
 </Module>

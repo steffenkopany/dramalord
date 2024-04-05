@@ -21,7 +21,7 @@ namespace Dramalord
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()
@@ -57,7 +57,7 @@ namespace Dramalord
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectPositive;
 
         public TextObject GetEncyclopediaText()
@@ -165,7 +165,7 @@ namespace Dramalord
             Child = child;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetEncyclopediaText()
@@ -357,7 +357,7 @@ namespace Dramalord
             ByForce = byForce;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetEncyclopediaText()
@@ -458,7 +458,7 @@ namespace Dramalord
             Child = child;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectPositive;
 
         public TextObject GetEncyclopediaText()
@@ -500,7 +500,7 @@ namespace Dramalord
             Child = child;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetEncyclopediaText()
@@ -542,7 +542,7 @@ namespace Dramalord
             CausedBy = causedBy;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()

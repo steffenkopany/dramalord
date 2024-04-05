@@ -15,6 +15,10 @@ namespace Dramalord
         public bool DebugOutput { get; set; } = false;
 
         [SettingPropertyGroup("General")]
+        [SettingPropertyBool("Minor Info Output", HintText = "Print not so important info (like affairs)", Order = 2, RequireRestart = false)]
+        public bool MinorOutput { get; set; } = false;
+
+        [SettingPropertyGroup("General")]
         [SettingPropertyFloatingInteger("Trait-Score Multiplyer", 1, 10, HintText = "Trait score multiplier for AI behavior", Order = 4, RequireRestart = false)]
         public int TraitScoreMultiplyer { get; set; } = 1;
 
