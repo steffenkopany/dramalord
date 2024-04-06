@@ -33,7 +33,11 @@ namespace Dramalord.Actions
                         MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                     }
 
-                    LogEntry.AddLogEntry(new EncyclopediaLogAdopted(hero, target, adopted));
+                    if(DramalordMCM.Get.BirthOutput)
+                    {
+                        LogEntry.AddLogEntry(new EncyclopediaLogAdopted(hero, target, adopted));
+                    }
+                        
                     DramalordEvents.OnHeroesAdopted(hero, target, adopted);
                 }  
             }

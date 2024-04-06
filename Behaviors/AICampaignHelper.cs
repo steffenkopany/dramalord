@@ -11,7 +11,7 @@ namespace Dramalord.Behaviors
 {
     internal static class AICampaignHelper
     {
-        public static List<Hero> ScopeSurroundingsForFlirts(Hero hero, bool includePlayer)
+        public static Hero? ScopeSurroundingsForFlirt(Hero hero, Hero excludeHero)
         {
             List<Hero> list = new();
 
@@ -22,7 +22,7 @@ namespace Dramalord.Behaviors
                     Settlement settlement = hero.CurrentSettlement;
                     foreach (Hero h in settlement.HeroesWithoutParty)
                     {
-                        if (h != hero && (h != Hero.MainHero || includePlayer) && Info.ValidateHeroInfo(h) && Info.GetAttractionToHero(hero, h) >= DramalordMCM.Get.MinAttractionForFlirting && (!Info.IsCloseRelativeTo(hero, h) || !DramalordMCM.Get.ProtectFamily))
+                        if (h != hero && (h != excludeHero) && Info.ValidateHeroInfo(h) && !Info.GetIsCoupleWithHero(hero, h) && Info.GetAttractionToHero(hero, h) >= DramalordMCM.Get.MinAttractionForFlirting && (!Info.IsCloseRelativeTo(hero, h) || !DramalordMCM.Get.ProtectFamily))
                         {
                             list.Add(h);
                         }
@@ -30,12 +30,12 @@ namespace Dramalord.Behaviors
 
                     foreach (MobileParty mp in settlement.Parties)
                     {
-                        if (mp != null && Info.IsHeroLegit(mp.LeaderHero) && mp.LeaderHero != hero && (mp.LeaderHero != Hero.MainHero || includePlayer))
+                        if (mp != null && Info.IsHeroLegit(mp.LeaderHero) && mp.LeaderHero != hero && (mp.LeaderHero != excludeHero))
                         {
                             Hero target = mp.LeaderHero;
-                            if (Info.GetAttractionToHero(hero, target) >= DramalordMCM.Get.MinAttractionForFlirting && (!Info.IsCloseRelativeTo(hero, target) || !DramalordMCM.Get.ProtectFamily))
+                            if (!Info.GetIsCoupleWithHero(hero, target) && Info.GetAttractionToHero(hero, target) >= DramalordMCM.Get.MinAttractionForFlirting && (!Info.IsCloseRelativeTo(hero, target) || !DramalordMCM.Get.ProtectFamily))
                             {
-                                list.Add(target);
+                                list.Add(mp.LeaderHero);
                             }
                         }
                     }
@@ -47,10 +47,10 @@ namespace Dramalord.Behaviors
                     {
                         foreach (MobileParty mp2 in mp.Army.Parties)
                         {
-                            if (mp2 != null && mp2 != mp && Info.IsHeroLegit(mp2.LeaderHero) && (mp2.LeaderHero != Hero.MainHero || includePlayer))
+                            if (mp2 != null && mp2 != mp && Info.IsHeroLegit(mp2.LeaderHero) && (mp2.LeaderHero != excludeHero))
                             {
                                 Hero target = mp2.LeaderHero;
-                                if (Info.GetAttractionToHero(hero, mp2.LeaderHero) >= DramalordMCM.Get.MinAttractionForFlirting && (!Info.IsCloseRelativeTo(hero, target) || !DramalordMCM.Get.ProtectFamily))
+                                if (!Info.GetIsCoupleWithHero(hero, target) && Info.GetAttractionToHero(hero, mp2.LeaderHero) >= DramalordMCM.Get.MinAttractionForFlirting && (!Info.IsCloseRelativeTo(hero, target) || !DramalordMCM.Get.ProtectFamily))
                                 {
                                     list.Add(mp2.LeaderHero);
                                 }
@@ -60,11 +60,14 @@ namespace Dramalord.Behaviors
                 }
             }
 
-            list.Sort((h1, h2) => Info.GetAttractionToHero(hero, h1) > Info.GetAttractionToHero(hero, h2) ? -1 : 1);
-            return list.Distinct().ToList().Take(DramalordMCM.Get.FlirtsPerDay).ToList();
+            if (list.Count > 0)
+            {
+                return list[MBRandom.RandomInt(list.Count)];
+            }
+            return null;
         }
 
-        public static List<Hero> ScopeSurroundingsForPartners(Hero hero, bool includePlayer)
+        public static Hero? ScopeSurroundingsForPartner(Hero hero, Hero excludeHero, bool includePlayer)
         {
             List<Hero> list = new();
 
@@ -75,7 +78,7 @@ namespace Dramalord.Behaviors
                     Settlement settlement = hero.CurrentSettlement;
                     foreach (Hero h in settlement.HeroesWithoutParty)
                     {
-                        if (h != hero && Info.IsHeroLegit(h) && (h != Hero.MainHero || includePlayer) && Info.GetIsCoupleWithHero(hero, h))
+                        if (h != hero && Info.IsHeroLegit(h) && (h != excludeHero) && (h != Hero.MainHero || includePlayer) && Info.GetIsCoupleWithHero(hero, h))
                         {
                             list.Add(h);
                         }
@@ -83,7 +86,7 @@ namespace Dramalord.Behaviors
 
                     foreach (MobileParty mp in settlement.Parties)
                     {
-                        if (mp != null && mp.LeaderHero != null && mp.LeaderHero != hero && Info.IsHeroLegit(mp.LeaderHero) && (mp.LeaderHero != Hero.MainHero || includePlayer) && Info.GetIsCoupleWithHero(hero, mp.LeaderHero))
+                        if (mp != null && mp.LeaderHero != null && mp.LeaderHero != hero && Info.IsHeroLegit(mp.LeaderHero) && (mp.LeaderHero != excludeHero) && (mp.LeaderHero != Hero.MainHero || includePlayer) && Info.GetIsCoupleWithHero(hero, mp.LeaderHero))
                         {
                             list.Add(mp.LeaderHero);
                         }
@@ -96,7 +99,7 @@ namespace Dramalord.Behaviors
                     {
                         foreach (MobileParty mp2 in mp.Army.Parties)
                         {
-                            if (mp2 != null && mp2 != mp && mp2.LeaderHero != null && Info.IsHeroLegit(mp2.LeaderHero) && (mp2.LeaderHero != Hero.MainHero || includePlayer) && Info.GetIsCoupleWithHero(hero, mp2.LeaderHero))
+                            if (mp2 != null && mp2 != mp && mp2.LeaderHero != null && Info.IsHeroLegit(mp2.LeaderHero) && (mp2.LeaderHero != excludeHero) && (mp2.LeaderHero != Hero.MainHero || includePlayer) && Info.GetIsCoupleWithHero(hero, mp2.LeaderHero))
                             {
                                 list.Add(mp2.LeaderHero);
                             }
@@ -105,8 +108,11 @@ namespace Dramalord.Behaviors
                 }
             }
 
-            list.Sort((h1, h2) => Info.GetEmotionToHero(hero, h1) > Info.GetEmotionToHero(hero, h2) ? -1 : 1);
-            return list.Distinct().ToList();
+            if(list.Count > 0)
+            {
+                return list[MBRandom.RandomInt(list.Count)];
+            }
+            return null;
         }
 
         public static Hero? ScopePrisonersForVictim(Hero hero, bool includePlayer)
@@ -123,7 +129,7 @@ namespace Dramalord.Behaviors
                             return h;
                         }
                     }
-
+                    /*
                     foreach (MobileParty mp in settlement.Parties)
                     {
                         if (mp != null && mp.LeaderHero != null && mp.LeaderHero.IsPrisoner && Info.IsHeroLegit(mp.LeaderHero) && mp.LeaderHero != hero && (mp.LeaderHero != Hero.MainHero || includePlayer) && Info.GetAttractionToHero(hero, mp.LeaderHero) >= DramalordMCM.Get.MinAttractionForFlirting && (!Info.IsCloseRelativeTo(hero, mp.LeaderHero) || !DramalordMCM.Get.ProtectFamily))
@@ -131,6 +137,7 @@ namespace Dramalord.Behaviors
                             return mp.LeaderHero;
                         }
                     }
+                    */
                 }
                 else if (hero.PartyBelongedTo != null)
                 {
@@ -232,7 +239,7 @@ namespace Dramalord.Behaviors
 
         public static bool WantsToBreakUpWith(Hero hero, Hero target)
         {
-            if (Info.ValidateHeroMemory(hero, target) && Info.GetEmotionToHero(hero, target) < DramalordMCM.Get.MinEmotionBeforeDivorce && hero.Spouse != target)
+            if (hero.Spouse != target && Info.GetIsCoupleWithHero(hero, target) && Info.GetEmotionToHero(hero, target) < DramalordMCM.Get.MinEmotionBeforeDivorce)
             {
                 return true;
             }
@@ -241,7 +248,7 @@ namespace Dramalord.Behaviors
 
         internal static bool WantsToDivorceFrom(Hero hero, Hero target)
         {
-            if (Info.ValidateHeroMemory(hero, target) && Info.GetEmotionToHero(hero, target) < DramalordMCM.Get.MinEmotionBeforeDivorce && hero.Spouse == target)
+            if (hero.Spouse == target && Info.ValidateHeroMemory(hero, target) && Info.GetEmotionToHero(hero, target) < DramalordMCM.Get.MinEmotionBeforeDivorce)
             {
                 return true;
             }
@@ -288,28 +295,6 @@ namespace Dramalord.Behaviors
                 }
             }
             return false;
-        }
-
-
-        internal static Hero? GetPotentialMarriagePartner(Hero hero)
-        {
-            if (Info.ValidateHeroInfo(hero) && hero.Spouse == null)
-            {
-                List<Hero> partners = ScopeSurroundingsForPartners(hero, true);
-                Hero? winner = null;
-                float score = 0;
-                foreach (Hero target in partners)
-                {
-                    float emotion = Info.GetEmotionToHero(hero, target);
-                    if (emotion >= DramalordMCM.Get.MinEmotionForMarriage && Info.GetEmotionToHero(target, hero) >= DramalordMCM.Get.MinEmotionForMarriage && emotion > score && target.Spouse == null)
-                    {
-                        score = emotion;
-                        winner = target;
-                    }
-                }
-                return winner;
-            }
-            return null;
         }
     }
 }

@@ -59,13 +59,9 @@ namespace Dramalord.UI
             }
         }
 
-        internal static void PrintTopFlirtTargets()
+        internal static void PrintPlayerAttraction()
         {
-            List<Hero> list = AICampaignHelper.ScopeSurroundingsForFlirts(Hero.OneToOneConversationHero, true);
-            foreach (Hero hero in list)
-            {
-                PrintText(hero.Name + ": " + Info.GetAttractionToHero(Hero.OneToOneConversationHero, hero));
-            }
+            PrintText("Attracted to player: " + Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.MainHero));
         }
     }
 }

@@ -22,22 +22,26 @@ namespace Dramalord.Actions
                 if (type == KillReason.Intercourse)
                 {
                     KillCharacterAction.ApplyByMurder(victim, killer, false);
-                    LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenCaught(victim, killer, reason));
+                    if (DramalordMCM.Get.DeathOutput)
+                        LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenCaught(victim, killer, reason));
                 }
                 else if (type == KillReason.Pregnancy)
                 {
                     KillCharacterAction.ApplyByMurder(victim, killer, false);
-                    LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenPregnant(victim, killer));
+                    if (DramalordMCM.Get.DeathOutput)
+                        LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenPregnant(victim, killer));
                 }
                 else if (type == KillReason.Bastard)
                 {
                     KillCharacterAction.ApplyByMurder(victim, killer, false);
-                    LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenBornBastard(victim, killer, reason));
+                    if (DramalordMCM.Get.DeathOutput)
+                        LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenBornBastard(victim, killer, reason));
                 }
                 else if (type == KillReason.Suicide)
                 {
                     KillCharacterAction.ApplyByMurder(victim, victim, false);
-                    LogEntry.AddLogEntry(new EncyclopediaLogKilledSuizide(victim));
+                    if (DramalordMCM.Get.DeathOutput)
+                        LogEntry.AddLogEntry(new EncyclopediaLogKilledSuizide(victim));
                 }
 
                 DramalordEvents.OnHeroesKilled(killer, victim, reason, type);

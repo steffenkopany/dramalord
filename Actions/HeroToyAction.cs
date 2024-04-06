@@ -24,7 +24,8 @@ namespace Dramalord.Actions
                     broke = true;
                 }
 
-                LogEntry.AddLogEntry(new LogUsedToy(hero));
+                if (DramalordMCM.Get.AffairOutput)
+                    LogEntry.AddLogEntry(new LogUsedToy(hero));
                 DramalordEvents.OnHeroesUsedToy(hero, broke);
             }
         }

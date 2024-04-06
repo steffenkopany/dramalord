@@ -1,6 +1,7 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Behaviors;
 using Dramalord.Data;
+using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Core;
@@ -49,7 +50,8 @@ namespace Dramalord.UI
                 Notification.DrawBanner("You and " + Npc + " are now a couple");
             }
 
-            AICampaignActions.CompleteDateActions(Npc, Player);
+            Hero? witness = AICampaignHelper.ScopeSurroundingsForPartner(Npc, Hero.MainHero, false);
+            AICampaignActions.CompleteDateActions(Npc, Player, witness);
 
             if (PlayerEncounter.Current != null)
             {

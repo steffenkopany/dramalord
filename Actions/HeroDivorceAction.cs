@@ -37,7 +37,8 @@ namespace Dramalord.Actions
                     MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                 }
 
-                LogEntry.AddLogEntry(new EncyclopediaLogDivorce(hero, target));
+                if (DramalordMCM.Get.MarriageOutput)
+                    LogEntry.AddLogEntry(new EncyclopediaLogDivorce(hero, target));
                 DramalordEvents.OnHeroesDivorced(hero, target);
             }
         }

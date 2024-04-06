@@ -51,10 +51,6 @@ namespace Dramalord
         public int MinAttractionForFlirting { get; set; } = 50;
 
         [SettingPropertyGroup("Hero Setup")]
-        [SettingPropertyFloatingInteger("Flirts Per Day", 1, 100, Order = 3, HintText = "With how many other heroes AI heroes flirt per day", RequireRestart = false)]
-        public int FlirtsPerDay { get; set; } = 3;
-
-        [SettingPropertyGroup("Hero Setup")]
         [SettingPropertyFloatingInteger("Min. Emotion For Discreet Meetings", 0, 100, Order = 4, HintText = "Minimum emotion for AI to consider meeting someone discreetly (dating)", RequireRestart = false)]
         public int MinEmotionForDating { get; set; } = 30;
 

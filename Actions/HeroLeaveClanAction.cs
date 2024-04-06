@@ -71,7 +71,8 @@ namespace Dramalord.Actions
                     }
                 }
 
-                LogEntry.AddLogEntry(new EncyclopediaLogLeaveClan(hero, oldClan, causedBy));
+                if (DramalordMCM.Get.ClanOutput)
+                    LogEntry.AddLogEntry(new EncyclopediaLogLeaveClan(hero, oldClan, causedBy));
                 DramalordEvents.OnHeroesLeaveClan(hero, oldClan, causedBy);
             }
         }

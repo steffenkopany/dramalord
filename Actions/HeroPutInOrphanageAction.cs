@@ -70,7 +70,8 @@ namespace Dramalord.Actions
 
             Info.AddOrphan(child);
 
-            LogEntry.AddLogEntry(new EncyclopediaLogPutChildToOrphanage(hero, child));
+            if (DramalordMCM.Get.BirthOutput)
+                LogEntry.AddLogEntry(new EncyclopediaLogPutChildToOrphanage(hero, child));
             DramalordEvents.OnHeroesPutToOrphanage(hero, child);
         }
     } 

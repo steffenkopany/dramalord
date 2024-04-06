@@ -24,7 +24,8 @@ namespace Dramalord.Actions
                     Info.ChangeEmotionToHeroBy(target, hero, score);
                 }
 
-                LogEntry.AddLogEntry(new LogAffairMeeting(hero, target));
+                if (DramalordMCM.Get.AffairOutput)
+                    LogEntry.AddLogEntry(new LogAffairMeeting(hero, target));
                 DramalordEvents.OnHeroesAffairMeeting(hero, target);
             }
         }

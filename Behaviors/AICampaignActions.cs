@@ -1,6 +1,7 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Data;
 using System.Collections.Generic;
+using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
@@ -18,29 +19,6 @@ namespace Dramalord.Behaviors
                 if (Info.GetHeroHasToy(hero))
                 {
                     HeroToyAction.Apply(hero);
-                }
-                List<Hero> partners = AICampaignHelper.ScopeSurroundingsForPartners(hero, true);
-                foreach (Hero target in partners)
-                {
-                    if (AICampaignHelper.WantsToDivorceFrom(hero, target))
-                    {
-                        HeroDivorceAction.Apply(hero, target);
-                    }
-                    else if (AICampaignHelper.WantsToBreakUpWith(hero, target))
-                    {
-                        HeroBreakupAction.Apply(hero, target);
-                    }
-
-                    if (AICampaignHelper.CanAdoptFromOrphanage(hero, target))
-                    {
-                        HeroAdoptAction.Apply(hero, target);
-                    }
-                }
-
-                Hero? candidate = AICampaignHelper.GetPotentialMarriagePartner(hero);
-                if (candidate != null)
-                {
-                    HeroMarriageAction.Apply(hero, candidate);
                 }
 
                 HeroOffspringData? offspring = AICampaignHelper.CanGiveBirth(hero);
@@ -65,9 +43,9 @@ namespace Dramalord.Behaviors
                             else
                             {
                                 HeroDivorceAction.Apply(spouse, hero);
-                                if(spouse.GetHeroTraits().Mercy < 0 && spouse.Clan != null && spouse.Clan == hero.Clan && spouse.Clan.Leader == spouse)
+                                if (spouse.GetHeroTraits().Mercy < 0 && spouse.Clan != null && spouse.Clan == hero.Clan && spouse.Clan.Leader == spouse)
                                 {
-                                    HeroLeaveClanAction.Apply(hero, false, spouse); 
+                                    HeroLeaveClanAction.Apply(hero, false, spouse);
                                 }
                                 return;
                             }
@@ -96,37 +74,46 @@ namespace Dramalord.Behaviors
                         }
                     }
                 }
-            }
-        }
 
-        internal static void DailyRomance(Hero hero)
-        {
-            if (hero == Hero.MainHero || !Info.IsHeroLegit(hero) || Info.GetHeroHasToy(hero) || hero.IsFugitive || hero.IsPrisoner)
-            {
-                return;
-            }
-
-            List<Hero> targets = AICampaignHelper.ScopeSurroundingsForFlirts(hero, false);
-            List<Hero> partners = AICampaignHelper.ScopeSurroundingsForPartners(hero, true);
-            foreach (Hero target in targets)
-            {
-                HeroFlirtAction.Apply(hero, target);
-
-                foreach (Hero partner in partners)
+                if(!Info.GetHeroHasToy(hero) && !hero.IsPrisoner)
                 {
-                    if (target != partner && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+                    Hero? flirt = AICampaignHelper.ScopeSurroundingsForFlirt(hero, Hero.MainHero);
+                    Hero? partner = AICampaignHelper.ScopeSurroundingsForPartner(hero, Hero.MainHero, false);
+                    Hero? witness = AICampaignHelper.ScopeSurroundingsForPartner(hero, partner, false);
+
+                    if (flirt != null)
                     {
-                        HeroWitnessAction.Apply(hero, target, partner, WitnessType.Flirting);
+                        HeroFlirtAction.Apply(hero, flirt);
+                        if(partner != null && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+                        {
+                            HeroWitnessAction.Apply(hero, flirt, partner, WitnessType.Flirting);
+                        }
                     }
-                }
-            }
 
-            foreach (Hero target in partners)
-            {
-                if(target != Hero.MainHero)
-                {
-                    CompleteDateActions(hero, target);
-                }
+                    if(partner != null)
+                    {
+                        if (AICampaignHelper.WantsToDivorceFrom(hero, partner))
+                        {
+                            HeroDivorceAction.Apply(hero, partner);
+                        }
+                        else if (AICampaignHelper.WantsToBreakUpWith(hero, partner))
+                        {
+                            HeroBreakupAction.Apply(hero, partner);
+                        }
+
+                        if (AICampaignHelper.CanAdoptFromOrphanage(hero, partner))
+                        {
+                            HeroAdoptAction.Apply(hero, partner);
+                        }
+
+                        if (hero.Spouse == null && partner.Spouse == null && Info.GetEmotionToHero(hero, partner) >= DramalordMCM.Get.MinEmotionForMarriage && Info.GetEmotionToHero(partner, hero) >= DramalordMCM.Get.MinEmotionForMarriage)
+                        {
+                            HeroMarriageAction.Apply(hero, partner);
+                        }
+
+                        CompleteDateActions(hero, partner, witness);
+                    }
+                }    
             }
         }
 
@@ -149,14 +136,13 @@ namespace Dramalord.Behaviors
             }
         }
 
-        internal static void CompleteDateActions(Hero hero, Hero target)
+        internal static void CompleteDateActions(Hero hero, Hero target, Hero? heroWitness)
         {
             if (AICampaignHelper.WantsToDateWith(hero, target))
             {
                 HeroAffairAction.Apply(hero, target);
 
-                List<Hero> heroPartners = AICampaignHelper.ScopeSurroundingsForPartners(hero, true);
-                List<Hero> targetPartners = AICampaignHelper.ScopeSurroundingsForPartners(target, true);
+                Hero? targetWitness = AICampaignHelper.ScopeSurroundingsForPartner(target, hero, false);
 
                 if (AICampaignHelper.NoticeUnknownPregnancy(hero, target))
                 {
@@ -213,75 +199,75 @@ namespace Dramalord.Behaviors
                         HeroConceiveAction.Apply(hero, target, false);
                     }
 
-                    foreach (Hero partner in heroPartners)
+                    if(heroWitness != null)
                     {
-                        if (target != partner && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+                        if (target != heroWitness && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
                         {
                             HeroWitnessAction.Apply(hero, target, hero, WitnessType.Intercourse);
 
-                            if (partner.GetHeroTraits().Calculating < 0 && partner.GetHeroTraits().Mercy < 0)
+                            if (heroWitness.GetHeroTraits().Calculating < 0 && heroWitness.GetHeroTraits().Mercy < 0)
                             {
-                                HeroKillAction.Apply(partner, hero, hero, KillReason.Intercourse);
+                                HeroKillAction.Apply(heroWitness, hero, hero, KillReason.Intercourse);
                                 return;
                             }
-                            else if (AICampaignHelper.WantsToDivorceFrom(partner, hero))
+                            else if (AICampaignHelper.WantsToDivorceFrom(heroWitness, hero))
                             {
-                                HeroDivorceAction.Apply(partner, hero);
-                                if (partner.GetHeroTraits().Mercy < 0 && partner.Clan != null && partner.Clan == hero.Clan && partner.Clan.Leader == partner)
+                                HeroDivorceAction.Apply(heroWitness, hero);
+                                if (heroWitness.GetHeroTraits().Mercy < 0 && heroWitness.Clan != null && heroWitness.Clan == hero.Clan && heroWitness.Clan.Leader == heroWitness)
                                 {
-                                    HeroLeaveClanAction.Apply(hero, false, partner);
+                                    HeroLeaveClanAction.Apply(hero, false, heroWitness);
                                 }
                                 return;
                             }
-                            else if (AICampaignHelper.WantsToBreakUpWith(partner, hero))
+                            else if (AICampaignHelper.WantsToBreakUpWith(heroWitness, hero))
                             {
-                                HeroBreakupAction.Apply(partner, hero);
+                                HeroBreakupAction.Apply(heroWitness, hero);
                             }
                         }
                     }
 
-                    foreach (Hero partner in targetPartners)
+                    if(targetWitness != null)
                     {
-                        if (hero != partner && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+                        if (hero != targetWitness && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
                         {
-                            HeroWitnessAction.Apply(target, hero, partner, WitnessType.Intercourse);
+                            HeroWitnessAction.Apply(target, hero, targetWitness, WitnessType.Intercourse);
 
-                            if (partner.GetHeroTraits().Calculating < 0 && partner.GetHeroTraits().Mercy < 0)
+                            if (targetWitness.GetHeroTraits().Calculating < 0 && targetWitness.GetHeroTraits().Mercy < 0)
                             {
-                                HeroKillAction.Apply(partner, target, hero, KillReason.Intercourse);
+                                HeroKillAction.Apply(targetWitness, target, hero, KillReason.Intercourse);
                                 return;
                             }
-                            else if (AICampaignHelper.WantsToDivorceFrom(partner, target))
+                            else if (AICampaignHelper.WantsToDivorceFrom(targetWitness, target))
                             {
-                                HeroDivorceAction.Apply(partner, target);
-                                if (partner.GetHeroTraits().Mercy < 0 && partner.Clan != null && partner.Clan == target.Clan && partner.Clan.Leader == partner)
+                                HeroDivorceAction.Apply(targetWitness, target);
+                                if (targetWitness.GetHeroTraits().Mercy < 0 && targetWitness.Clan != null && targetWitness.Clan == target.Clan && targetWitness.Clan.Leader == targetWitness)
                                 {
-                                    HeroLeaveClanAction.Apply(target, false, partner);
+                                    HeroLeaveClanAction.Apply(target, false, targetWitness);
                                 }
                                 return;
                             }
-                            else if (AICampaignHelper.WantsToBreakUpWith(partner, target))
+                            else if (AICampaignHelper.WantsToBreakUpWith(targetWitness, target))
                             {
-                                HeroBreakupAction.Apply(partner, target);
+                                HeroBreakupAction.Apply(targetWitness, target);
                             }
                         }
                     }
                 }
                 else
                 {
-                    foreach (Hero partner in heroPartners)
+                    if(heroWitness != null)
                     {
-                        if (target != partner && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+                        if (target != heroWitness && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
                         {
-                            HeroWitnessAction.Apply(hero, target, partner, WitnessType.Dating);
+                            HeroWitnessAction.Apply(hero, target, heroWitness, WitnessType.Dating);
                         }
                     }
 
-                    foreach (Hero partner in targetPartners)
+                    if(targetWitness != null)
                     {
-                        if (hero != partner && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+                        if (hero != targetWitness && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
                         {
-                            HeroWitnessAction.Apply(target, hero, partner, WitnessType.Dating);
+                            HeroWitnessAction.Apply(target, hero, targetWitness, WitnessType.Dating);
                         }
                     }
                 }

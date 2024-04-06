@@ -32,7 +32,8 @@ namespace Dramalord.Actions
                 Info.AddHeroOffspring(mother, father, byForce);
                 mother.IsPregnant = true;
 
-                LogEntry.AddLogEntry(new EncyclopediaLogConceived(hero, target, byForce));
+                if (DramalordMCM.Get.AffairOutput)
+                    LogEntry.AddLogEntry(new EncyclopediaLogConceived(hero, target, byForce));
                 DramalordEvents.OnHeroesConceive(hero, target, byForce);
             }
         }

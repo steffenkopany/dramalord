@@ -22,27 +22,32 @@ namespace Dramalord.Actions
                 if(type == WitnessType.Flirting)
                 {
                     Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossCaughtFlirting);
-                    LogEntry.AddLogEntry(new LogWitnessFlirt(hero, target, witness));
+                    if (DramalordMCM.Get.FlirtOutput)
+                        LogEntry.AddLogEntry(new LogWitnessFlirt(hero, target, witness));
                 }
                 else if(type == WitnessType.Dating)
                 {
                     Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossCaughtDate);
-                    LogEntry.AddLogEntry(new LogWitnessDate(hero, target, witness));
+                    if (DramalordMCM.Get.AffairOutput)
+                        LogEntry.AddLogEntry(new LogWitnessDate(hero, target, witness));
                 }
                 else if (type == WitnessType.Intercourse)
                 {
                     Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossCaughtIntercourse);
-                    LogEntry.AddLogEntry(new LogWitnessIntercourse(hero, target, witness));
+                    if (DramalordMCM.Get.AffairOutput)
+                        LogEntry.AddLogEntry(new LogWitnessIntercourse(hero, target, witness));
                 }
                 else if (type == WitnessType.Pregnancy)
                 {
                     Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossPregnancy);
-                    LogEntry.AddLogEntry(new LogWitnessPregnancy(hero, witness));
+                    if (DramalordMCM.Get.AffairOutput)
+                        LogEntry.AddLogEntry(new LogWitnessPregnancy(hero, witness));
                 }
                 else if (type == WitnessType.Bastard)
                 {
                     Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossBastard);
-                    LogEntry.AddLogEntry(new LogWitnessBastard(hero, target, witness));
+                    if (DramalordMCM.Get.BirthOutput)
+                        LogEntry.AddLogEntry(new LogWitnessBastard(hero, target, witness));
                 }
 
                 DramalordEvents.OnHeroesWitness(hero, target, witness, type);

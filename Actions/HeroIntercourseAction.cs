@@ -58,7 +58,8 @@ namespace Dramalord.Actions
                     }
                 }
 
-                LogEntry.AddLogEntry(new LogIntercourse(hero, target, byForce));
+                if (DramalordMCM.Get.AffairOutput)
+                    LogEntry.AddLogEntry(new LogIntercourse(hero, target, byForce));
                 DramalordEvents.OnHeroesIntercourse(hero, target, byForce);
             }
         }

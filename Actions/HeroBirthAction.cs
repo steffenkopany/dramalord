@@ -26,7 +26,8 @@ namespace Dramalord.Actions
                     MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(child.Father, hero, CampaignTime.Now));
                 }
 
-                LogEntry.AddLogEntry(new EncyclopediaLogBirth(hero, offspring.Father, child));
+                if (DramalordMCM.Get.BirthOutput)
+                    LogEntry.AddLogEntry(new EncyclopediaLogBirth(hero, offspring.Father, child));
                 DramalordEvents.OnHeroesBorn(hero, offspring.Father, child);
             }
         }

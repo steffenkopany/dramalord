@@ -34,7 +34,8 @@ namespace Dramalord.Actions
                 }
                 else
                 {
-                    LogEntry.AddLogEntry(new LogFlirt(hero, target));
+                    if (DramalordMCM.Get.FlirtOutput)
+                        LogEntry.AddLogEntry(new LogFlirt(hero, target));
                     DramalordEvents.OnHeroesFlirt(hero, target, false);
                 }
             }

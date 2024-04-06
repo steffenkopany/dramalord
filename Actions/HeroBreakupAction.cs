@@ -23,7 +23,8 @@ namespace Dramalord.Actions
                     MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                 }
 
-                LogEntry.AddLogEntry(new EncyclopediaLogBreakup(hero, target));
+                if (DramalordMCM.Get.AffairOutput)
+                    LogEntry.AddLogEntry(new EncyclopediaLogBreakup(hero, target));
                 DramalordEvents.OnHeroesBreakup(hero, target);
             }
         }
