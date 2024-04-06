@@ -16,7 +16,7 @@ namespace Dramalord.UI
         internal static bool PlayerCanAskForTalk()
         {
             SetRoles();
-            return Npc.IsLord;
+            return Info.IsHeroLegit(Npc);
         }
 
         internal static bool NpcWantsToTalk()
