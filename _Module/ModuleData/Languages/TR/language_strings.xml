@@ -11,8 +11,8 @@
     <string id="Dramalord004" text="Başka bir şey hakkında konuşalım..." />
     <string id="Dramalord005" text="Nasıl isterseniz." />
     <!-- Attraction Text -->
-    <string id="Dramalord006" text="Ne tarz insanlardan hoşlanıyorsunuz?" />
-    <string id="Dramalord007" text="Gördüğünüz şey hoşunuza gitti mi?" />
+    <string id="Dramalord006" text="Gördüğünüz şey hoşunuza gitti mi?" />
+    <string id="Dramalord007" text="Ne tarz insanlardan hoşlanıyorsunuz?" />
     <string id="Dramalord008" text="Ben kadınları {RATING_WOMEN} ve erkekleri {RATING_MEN} buluyorum. Partnerimin {RATING_WEIGHT} ve {RATING_BUILD} olmasını tercih ederim. Benim için en uygunu {RATING_CULTURE} {RATING_AGE} yaşlarında olması." />
     <string id="Dramalord009" text="Hmm... Bence sen {RATING_TOTAL}!" />
     <!-- Attraction general words -->

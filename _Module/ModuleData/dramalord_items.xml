@@ -2,7 +2,7 @@
 <Items>
   <Item id="dramalord_sausage"
           name="{=Dramalord052}Sausage"
-          mesh="kitchen_sausage_c"
+          mesh="sausage"
           item_category="dramalord_stuff"
           IsFood="true"
           value="5"
