@@ -38,22 +38,6 @@ namespace Dramalord.UI
 
         /// shortcuts
 
-        internal static void DebugPrint(string txt)
-        {
-            if (DramalordMCM.Get.DebugOutput)
-            {
-                PrintText(txt);
-            };
-        }
-
-        internal static void DebugPrint(TextObject txt)
-        {
-            if (DramalordMCM.Get.DebugOutput)
-            {
-                PrintText(txt);
-            };
-        }
-
         internal static void PrintNpcStats()
         {
             if (Hero.OneToOneConversationHero != null && Hero.MainHero != null)

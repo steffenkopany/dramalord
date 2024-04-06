@@ -21,7 +21,7 @@ namespace Dramalord
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()
@@ -57,7 +57,7 @@ namespace Dramalord
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectPositive;
 
         public TextObject GetEncyclopediaText()
@@ -93,7 +93,7 @@ namespace Dramalord
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.MarriageOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()
@@ -129,7 +129,7 @@ namespace Dramalord
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.MarriageOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectPositive;
 
         public TextObject GetEncyclopediaText()
@@ -157,7 +157,7 @@ namespace Dramalord
         public readonly Hero Hero;
 
         [SaveableField(26009)]
-        public readonly Hero Child; //TaleWorlds.CampaignSystem.LogEntries.RebellionStartedLogEntry
+        public readonly Hero Child; 
 
         public EncyclopediaLogPutChildToOrphanage(Hero hero1, Hero child)
         {
@@ -165,7 +165,7 @@ namespace Dramalord
             Child = child;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.BirthOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetEncyclopediaText()
@@ -205,7 +205,7 @@ namespace Dramalord
             Lover = lover;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.DeathOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()
@@ -242,7 +242,7 @@ namespace Dramalord
             Clan = clan;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.ClanOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()
@@ -278,7 +278,7 @@ namespace Dramalord
             Killer = killer;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.DeathOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()
@@ -318,7 +318,7 @@ namespace Dramalord
             ByForce = byForce;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
         public override ChatNotificationType NotificationType => Hero1 == Hero.MainHero || Hero2 == Hero.MainHero ? ChatNotificationType.PlayerClanPositive : ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
@@ -357,7 +357,7 @@ namespace Dramalord
             ByForce = byForce;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetEncyclopediaText()
@@ -402,7 +402,7 @@ namespace Dramalord
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.FlirtOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
@@ -428,7 +428,7 @@ namespace Dramalord
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
@@ -458,7 +458,7 @@ namespace Dramalord
             Child = child;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.BirthOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectPositive;
 
         public TextObject GetEncyclopediaText()
@@ -500,7 +500,7 @@ namespace Dramalord
             Child = child;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.BirthOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetEncyclopediaText()
@@ -542,7 +542,7 @@ namespace Dramalord
             CausedBy = causedBy;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.MinorOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.ClanOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()
@@ -591,7 +591,7 @@ namespace Dramalord
             Witness = witness;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.FlirtOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
@@ -622,7 +622,7 @@ namespace Dramalord
             Witness = witness;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
@@ -653,7 +653,7 @@ namespace Dramalord
             Witness = witness;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
@@ -680,7 +680,7 @@ namespace Dramalord
             Witness = witness;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
@@ -710,7 +710,7 @@ namespace Dramalord
             Witness = witness;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.BirthOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
@@ -741,7 +741,7 @@ namespace Dramalord
             Bastard = bastard;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.DeathOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()
@@ -774,7 +774,7 @@ namespace Dramalord
             Hero1 = hero;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.DebugOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
@@ -795,7 +795,7 @@ namespace Dramalord
             Hero = victim;
         }
 
-        public bool IsVisibleNotification => true;
+        public bool IsVisibleNotification => DramalordMCM.Get.DeathOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
 
         public TextObject GetEncyclopediaText()

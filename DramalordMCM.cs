@@ -11,19 +11,35 @@ namespace Dramalord
         internal static DramalordMCM Get => PerCampaignSettings<DramalordMCM>.Instance;
 
         [SettingPropertyGroup("General")]
-        [SettingPropertyBool("Debug Output", HintText = "Print Debug info (lots of spam)", Order = 1, RequireRestart = false)]
-        public bool DebugOutput { get; set; } = false;
+        [SettingPropertyBool("Flirt Logs", HintText = "Log Flirt Events", Order = 1, RequireRestart = false)]
+        public bool FlirtOutput { get; set; } = false;
 
         [SettingPropertyGroup("General")]
-        [SettingPropertyBool("Minor Info Output", HintText = "Print not so important info (like affairs)", Order = 2, RequireRestart = false)]
-        public bool MinorOutput { get; set; } = false;
+        [SettingPropertyBool("Affair Logs", HintText = "Log Affair Events", Order = 2, RequireRestart = false)]
+        public bool AffairOutput { get; set; } = false;
 
         [SettingPropertyGroup("General")]
-        [SettingPropertyFloatingInteger("Trait-Score Multiplyer", 1, 10, HintText = "Trait score multiplier for AI behavior", Order = 4, RequireRestart = false)]
+        [SettingPropertyBool("Clan Changes Logs", HintText = "Log Clan Events", Order = 3, RequireRestart = false)]
+        public bool ClanOutput { get; set; } = false;
+
+        [SettingPropertyGroup("General")]
+        [SettingPropertyBool("Marriage Logs", HintText = "Log Marriage Events", Order = 4, RequireRestart = false)]
+        public bool MarriageOutput { get; set; } = false;
+
+        [SettingPropertyGroup("General")]
+        [SettingPropertyBool("Death Logs", HintText = "Log Death (Details) Events", Order = 5, RequireRestart = false)]
+        public bool DeathOutput { get; set; } = false;
+
+        [SettingPropertyGroup("General")]
+        [SettingPropertyBool("Birth Logs", HintText = "Log Birth/Orphan Events", Order = 6, RequireRestart = false)]
+        public bool BirthOutput { get; set; } = false;
+
+        [SettingPropertyGroup("General")]
+        [SettingPropertyFloatingInteger("Trait-Score Multiplyer", 1, 10, HintText = "Trait score multiplier for AI behavior", Order = 7, RequireRestart = false)]
         public int TraitScoreMultiplyer { get; set; } = 1;
 
         [SettingPropertyGroup("General")]
-        [SettingPropertyBool("Protect Family", HintText = "No AI interaction with family members", Order = 5, RequireRestart = false)]
+        [SettingPropertyBool("Protect Family", HintText = "No AI interaction with family members", Order = 8, RequireRestart = false)]
         public bool ProtectFamily { get; set; } = true;
 
         [SettingPropertyGroup("Hero Setup")]

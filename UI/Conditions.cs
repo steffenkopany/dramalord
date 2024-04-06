@@ -159,6 +159,7 @@ namespace Dramalord.UI
         internal static bool PlayerCanGivePresent()
         {
             SetRoles();
+            //ItemObject leek = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_leek");
             ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
             ItemObject pie = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_pie");
             if(Npc.IsFemale)
