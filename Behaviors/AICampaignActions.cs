@@ -106,7 +106,7 @@ namespace Dramalord.Behaviors
                             HeroAdoptAction.Apply(hero, partner);
                         }
 
-                        if (hero.Spouse == null && partner.Spouse == null && Info.GetEmotionToHero(hero, partner) >= DramalordMCM.Get.MinEmotionForMarriage && Info.GetEmotionToHero(partner, hero) >= DramalordMCM.Get.MinEmotionForMarriage)
+                        if (hero.Spouse == null && partner.Spouse == null && (hero.Clan != null || partner.Clan != null) && Info.GetEmotionToHero(hero, partner) >= DramalordMCM.Get.MinEmotionForMarriage && Info.GetEmotionToHero(partner, hero) >= DramalordMCM.Get.MinEmotionForMarriage)
                         {
                             HeroMarriageAction.Apply(hero, partner);
                         }

@@ -3,6 +3,7 @@ using Dramalord.UI;
 using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
+using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
@@ -76,7 +77,7 @@ namespace Dramalord.Actions
                 HeroJoinClanAction.Apply(hero, target.Clan, false);
             }
                 
-            MarriageAction.Apply(hero, target, false);
+            MarriageAction.Apply(hero, target, false); 
 
             Info.SetIsCoupleWithHero(hero, target, true);
             Info.ChangeEmotionToHeroBy(hero, target, DramalordMCM.Get.EmotionalWinMarriage);

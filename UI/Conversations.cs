@@ -42,7 +42,7 @@ namespace Dramalord.UI
             starter.AddPlayerLine("Dramalord004", PlayerConversationMain,   NPCConversationExit,        "{=Dramalord004}Let's talk about something else...", null, null, 1);
             starter.AddDialogLine("Dramalord005", NPCConversationExit,      PlayerMainOptions,          "{=Dramalord005}As you wish", null, null);
 
-            starter.AddPlayerLine("Dramalord006", PlayerConversationMain,   NPCAttractionRating,        "{=Dramalord006}Do you like what you see?", Conditions.PlayerCanAskForTalk, null);
+            starter.AddPlayerLine("Dramalord007", PlayerConversationMain,   NPCAttractionRating,        "{=Dramalord007}What looks do you prefer?", Conditions.PlayerCanAskForTalk, null);
             starter.AddDialogLine("Dramalord008", NPCAttractionRating,      PlayerConversationMain,     "{=Dramalord008}I think women are {RATING_WOMEN} and men are {RATING_MEN}. I like {RATING_WEIGHT} people of {RATING_BUILD} build. Best around the age of {RATING_AGE}. Hmm... I think you look {RATING_TOTAL}!", SetConversationTextVariables, Notification.PrintPlayerAttraction);
 
             starter.AddPlayerLine("Dramalord030", PlayerConversationMain,   NPCEmotionRating,           "{=Dramalord030}How do you feel about me?", Conditions.PlayerCanAskForTalk, Notification.PrintNpcStats);

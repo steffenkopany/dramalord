@@ -38,7 +38,7 @@
     <string id="Dramalord026" text="nice." />
     <string id="Dramalord027" text="pretty." />
     <string id="Dramalord028" text="stunning!" />
-    <string id="Dramalord029" text="so fucking hot!" />
+    <string id="Dramalord029" text="incredibly beautiful!" />
     <!-- Emotion text -->
     <string id="Dramalord030" text="How do you feel about me?" />
     <string id="Dramalord031" text="I {EMOTION_SCORE} you!" />
@@ -52,7 +52,7 @@
     <string id="Dramalord038" text="like" />
     <string id="Dramalord039" text="think I'm falling for" />
     <string id="Dramalord040" text="can't stop thinking about" />
-    <string id="Dramalord041" text="am totally in love with" />
+    <string id="Dramalord041" text="love" />
     <!-- Action text -->
     <string id="Dramalord042" text="Would you like to..." />
     <string id="Dramalord043" text="Do what?" />
