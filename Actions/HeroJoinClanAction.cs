@@ -8,31 +8,31 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Clan clan, bool withChildren)
         {
-            if (Info.ValidateHeroInfo(hero) && hero.Clan == null)
-            {
-                hero.Clan = clan;
-                hero.UpdateHomeSettlement();
-                hero.SetNewOccupation(Occupation.Lord);
-                hero.ChangeState(Hero.CharacterStates.Active);
+            hero.Clan = clan;
+            hero.UpdateHomeSettlement();
+            hero.SetNewOccupation(Occupation.Lord);
+            hero.ChangeState(Hero.CharacterStates.Active);
 
-                if (withChildren)
+            if (withChildren)
+            {
+                foreach (Hero child in hero.Children)
                 {
-                    foreach (Hero child in hero.Children)
+                    if (child.IsChild)
                     {
-                        if (child.IsChild)
-                        {
-                            child.Clan = clan;
-                            child.UpdateHomeSettlement();
-                            child.SetNewOccupation(Occupation.Lord);
-                            child.ChangeState(Hero.CharacterStates.Active);
-                        }
+                        child.Clan = clan;
+                        child.UpdateHomeSettlement();
+                        child.SetNewOccupation(Occupation.Lord);
+                        child.ChangeState(Hero.CharacterStates.Active);
                     }
                 }
-
-                if (DramalordMCM.Get.ClanOutput)
-                    LogEntry.AddLogEntry(new EncyclopediaLogJoinClan(hero, clan));
-                DramalordEvents.OnHeroesJoinClan(hero, clan);
             }
+
+            if (DramalordMCM.Get.ClanOutput)
+            {
+                LogEntry.AddLogEntry(new EncyclopediaLogJoinClan(hero, clan));
+            }
+                
+            DramalordEvents.OnHeroesJoinClan(hero, clan);
         }
     }
 }

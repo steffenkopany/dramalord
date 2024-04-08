@@ -19,7 +19,7 @@ namespace Dramalord.Data
 
         public override int GetHashCode()
         {
-            return Actor.GetHashCode() ^ Target.GetHashCode();
+            return 7 + (Actor.GetHashCode() + Target.GetHashCode()) * 17 * 79;
         }
 
         public override bool Equals(object obj)
@@ -29,7 +29,7 @@ namespace Dramalord.Data
 
         public bool Equals(HeroTuple? tuple)
         {
-            return tuple != null && Actor == tuple.Actor && Target == tuple.Target;
+            return tuple != null && ((Actor == tuple.Actor && Target == tuple.Target) || (Actor == tuple.Target && Target == tuple.Actor));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target)
         {
-            if (Info.ValidateHeroMemory(hero, target) && hero.Spouse == target)
+            if(Info.ValidateHeroMemory(hero, target))
             {
                 Info.SetIsCoupleWithHero(hero, target, false);
                 Info.ChangeEmotionToHeroBy(target, hero, -DramalordMCM.Get.EmotionalLossDivorce);
@@ -38,9 +38,12 @@ namespace Dramalord.Actions
                 }
 
                 if (DramalordMCM.Get.MarriageOutput)
+                {
                     LogEntry.AddLogEntry(new EncyclopediaLogDivorce(hero, target));
+                }
+
                 DramalordEvents.OnHeroesDivorced(hero, target);
-            }
+            } 
         }
     }
 }

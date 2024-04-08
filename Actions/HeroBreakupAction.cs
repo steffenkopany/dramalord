@@ -11,7 +11,7 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target)
         {
-            if (Info.ValidateHeroMemory(hero, target))
+            if(Info.ValidateHeroMemory(hero, target))
             {
                 Info.SetIsCoupleWithHero(hero, target, false);
                 Info.ChangeEmotionToHeroBy(target, hero, -DramalordMCM.Get.EmotionalLossBreakup);
@@ -24,7 +24,10 @@ namespace Dramalord.Actions
                 }
 
                 if (DramalordMCM.Get.AffairOutput)
+                {
                     LogEntry.AddLogEntry(new EncyclopediaLogBreakup(hero, target));
+                }
+
                 DramalordEvents.OnHeroesBreakup(hero, target);
             }
         }

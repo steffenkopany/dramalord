@@ -39,13 +39,18 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if (Info.GetIsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && !Hero.MainHero.IsFemale)
+            if(!Info.ValidateHeroMemory(Hero.MainHero, Hero.OneToOneConversationHero))
+            {
+                return;
+            }
+
+            if (Info.IsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && !Hero.MainHero.IsFemale)
             {
                 TextObject textObject = new TextObject("{=!}{SALUTATION}...");
                 textObject.SetTextVariable("SALUTATION", new TextObject("{=Dramalord096}My lover"));
                 MBTextManager.SetTextVariable("SHORT_ABSENCE_GREETING", textObject);
             }
-            else if (Info.GetIsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.MainHero.IsFemale)
+            else if (Info.IsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.MainHero.IsFemale)
             {
                 TextObject textObject = new TextObject("{=!}{SALUTATION}...");
                 textObject.SetTextVariable("SALUTATION", new TextObject("{=Dramalord097}My love"));
@@ -84,11 +89,16 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if (Info.GetIsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && !Hero.MainHero.IsFemale)
+            if (!Info.ValidateHeroMemory(Hero.MainHero, Hero.OneToOneConversationHero))
+            {
+                return;
+            }
+
+            if (Info.IsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && !Hero.MainHero.IsFemale)
             {
                 MBTextManager.SetTextVariable("STR_SALUTATION", new TextObject("{=Dramalord096}My lover"));
             }
-            else if (Info.GetIsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.MainHero.IsFemale)
+            else if (Info.IsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.MainHero.IsFemale)
             {
                 MBTextManager.SetTextVariable("STR_SALUTATION", new TextObject("{=Dramalord097}My love"));
             }

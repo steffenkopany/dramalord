@@ -42,11 +42,12 @@ namespace Dramalord.UI
         {
             if (Hero.OneToOneConversationHero != null && Hero.MainHero != null)
             {
+                
                 PrintText("Attraction: " + Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.MainHero));
                 PrintText("Emotion: " + Info.GetEmotionToHero(Hero.OneToOneConversationHero, Hero.MainHero));
                 PrintText("Trait score: " + Info.GetTraitscoreToHero(Hero.OneToOneConversationHero, Hero.MainHero));
                 PrintText("Horny: " + Info.GetHeroHorny(Hero.OneToOneConversationHero));
-                if(Hero.OneToOneConversationHero.Spouse != null)
+                if(Hero.OneToOneConversationHero.Spouse != null && Info.ValidateHeroInfo(Hero.OneToOneConversationHero.Spouse) && Info.ValidateHeroMemory(Hero.OneToOneConversationHero,Hero.OneToOneConversationHero.Spouse))
                 {
                     PrintText("Married: " + Hero.OneToOneConversationHero.Spouse);
                     PrintText(Hero.OneToOneConversationHero.Spouse + " attraction: " + Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.OneToOneConversationHero.Spouse));

@@ -11,23 +11,22 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target, bool byForce)
         {
-            if (Info.ValidateHeroMemory(hero, target))
+            if(Info.ValidateHeroMemory(hero, target) && Info.ValidateHeroInfo(hero) && Info.ValidateHeroInfo(target))
             {
                 Info.ChangeIntercourseSkillBy(hero, 1);
                 Info.ChangeIntercourseSkillBy(target, (byForce) ? 0 : 1);
 
                 int score = Info.GetTraitscoreToHero(hero, target);
 
-                Info.ChangeEmotionToHeroBy(hero, target, score + Info.GetIntercourseSkill(target));
                 Info.ChangeEmotionToHeroBy(target, hero, (byForce) ? -100 : score + Info.GetIntercourseSkill(hero));
 
                 Info.ChangeHeroHornyBy(hero, -DramalordMCM.Get.HornyLossIntercourse);
                 Info.ChangeHeroHornyBy(target, -DramalordMCM.Get.HornyLossIntercourse);
 
-                if(target == Hero.MainHero || hero == Hero.MainHero)
+                if (target == Hero.MainHero || hero == Hero.MainHero)
                 {
                     Hero otherHero = (hero == Hero.MainHero) ? target : hero;
-                    if(byForce)
+                    if (byForce)
                     {
                         TextObject banner = new TextObject("{=Dramalord140}{HERO.LINK} violated you while being their prisoner.");
                         StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
@@ -39,7 +38,7 @@ namespace Dramalord.Actions
                         StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
                         MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                     }
-                    
+
                 }
 
                 Hero mother = hero.IsFemale ? hero : target;
@@ -59,7 +58,10 @@ namespace Dramalord.Actions
                 }
 
                 if (DramalordMCM.Get.AffairOutput)
+                {
                     LogEntry.AddLogEntry(new LogIntercourse(hero, target, byForce));
+                }
+
                 DramalordEvents.OnHeroesIntercourse(hero, target, byForce);
             }
         }

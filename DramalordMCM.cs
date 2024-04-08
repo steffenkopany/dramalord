@@ -1,5 +1,6 @@
 ﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
+using MCM.Abstractions.Base.Global;
 using MCM.Abstractions.Base.PerCampaign;
 using System.Diagnostics.CodeAnalysis;
 
@@ -8,7 +9,7 @@ namespace Dramalord
     internal sealed class DramalordMCM : AttributePerCampaignSettings<DramalordMCM>
     {
         [AllowNull]
-        internal static DramalordMCM Get => PerCampaignSettings<DramalordMCM>.Instance;
+        internal static DramalordMCM Get => AttributePerCampaignSettings<DramalordMCM>.Instance;
 
         [SettingPropertyGroup("General")]
         [SettingPropertyBool("Flirt Logs", HintText = "Log Flirt Events", Order = 1, RequireRestart = false)]
@@ -68,7 +69,7 @@ namespace Dramalord
 
         [SettingPropertyGroup("Hero Setup")]
         [SettingPropertyFloatingInteger("Min. Horny For Intercouse", 0, 100, Order = 8, HintText = "Minimum horniness of AI for intercourse interest", RequireRestart = false)]
-        public int MinHornyForIntercouse { get; set; } = 50;
+        public int MinHornyForIntercourse { get; set; } = 50;
 
         [SettingPropertyGroup("Hero Setup")]
         [SettingPropertyFloatingInteger("Hornyness Loss Intercourse", 0, 100, Order = 9, HintText = "Value of horniness lost by intercourse", RequireRestart = false)]

@@ -20,7 +20,6 @@ namespace Dramalord
 
             AddClassDefinition(typeof(EncyclopediaLogStartAffair), 5);
             AddClassDefinition(typeof(EncyclopediaLogBreakup), 6);
-            AddClassDefinition(typeof(EncyclopediaLogMarriage), 7);
             AddClassDefinition(typeof(EncyclopediaLogDivorce), 8);
             AddClassDefinition(typeof(EncyclopediaLogPutChildToOrphanage), 9);
             AddClassDefinition(typeof(EncyclopediaLogKilledWhenCaught), 10);

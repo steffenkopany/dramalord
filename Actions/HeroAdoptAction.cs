@@ -12,35 +12,32 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target)
         {
-            if (Info.ValidateHeroMemory(hero, target))
+            Hero? adopted = Info.PullRandomOrphan();
+            if (adopted != null && Info.ValidateHeroMemory(hero, target))
             {
-                Hero? adopted = Info.PullRandomOrphan();
-                if (adopted != null)
+                adopted.Mother = (hero.IsFemale) ? hero : target;
+                adopted.Father = (hero.IsFemale) ? target : hero;
+                adopted.Clan = hero.Clan;
+                adopted.SetNewOccupation(hero.Occupation);
+                adopted.UpdateHomeSettlement();
+                TeleportHeroAction.ApplyDelayedTeleportToSettlement(adopted, adopted.HomeSettlement);
+                Info.SetLastAdoption(hero, target, CampaignTime.Now.ToDays);
+
+                if (target == Hero.MainHero)
                 {
-                    adopted.Mother = (hero.IsFemale) ? hero : target;
-                    adopted.Father = (hero.IsFemale) ? target : hero;
-                    adopted.Clan = hero.Clan;
-                    adopted.SetNewOccupation(hero.Occupation);
-                    adopted.UpdateHomeSettlement();
-                    TeleportHeroAction.ApplyDelayedTeleportToSettlement(adopted, adopted.HomeSettlement);
-                    Info.SetLastAdoption(hero, target, CampaignTime.Now.ToDays);
+                    TextObject textObject = new TextObject("{=Dramalord133}{HERO.LINK} adopted {CHILD.LINK}.");
+                    StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
+                    StringHelpers.SetCharacterProperties("CHILD", adopted.CharacterObject, textObject);
+                    MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                }
 
-                    if (target == Hero.MainHero)
-                    {
-                        TextObject textObject = new TextObject("{=Dramalord133}{HERO.LINK} adopted {CHILD.LINK}.");
-                        StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
-                        StringHelpers.SetCharacterProperties("CHILD", adopted.CharacterObject, textObject);
-                        MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
-                    }
-
-                    if(DramalordMCM.Get.BirthOutput)
-                    {
-                        LogEntry.AddLogEntry(new EncyclopediaLogAdopted(hero, target, adopted));
-                    }
+                if(DramalordMCM.Get.BirthOutput)
+                {
+                    LogEntry.AddLogEntry(new EncyclopediaLogAdopted(hero, target, adopted));
+                }
                         
-                    DramalordEvents.OnHeroesAdopted(hero, target, adopted);
-                }  
-            }
+                DramalordEvents.OnHeroesAdopted(hero, target, adopted);
+            } 
         }
     }
 }

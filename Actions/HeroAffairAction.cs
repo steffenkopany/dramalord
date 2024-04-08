@@ -8,24 +8,24 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target)
         {
-            if (Info.ValidateHeroMemory(hero, target) && Info.GetIsCoupleWithHero(hero, target))
+            if (Info.ValidateHeroMemory(hero, target) && Info.ValidateHeroMemory(target, hero))
             {
                 Info.SetLastPrivateMeeting(hero, target, CampaignTime.Now.ToDays);
-                Info.SetLastPrivateMeeting(target, hero, CampaignTime.Now.ToDays);
                 Info.SetLastDaySeen(hero, target, CampaignTime.Now.ToDays);
-                Info.SetLastDaySeen(target, hero, CampaignTime.Now.ToDays);
 
                 int score = Info.GetTraitscoreToHero(hero, target);
-                if (score != 0)
+                if (score != 0 && Info.ValidateHeroInfo(hero) && Info.ValidateHeroInfo(target))
                 {
                     Info.ChangeHeroHornyBy(hero, (score > 0) ? score * Info.GetHeroLibido(hero) : 0);
-                    Info.ChangeHeroHornyBy(target, (score > 0) ? score * Info.GetHeroLibido(hero) : 0);
+                    Info.ChangeHeroHornyBy(target, (score > 0) ? score * Info.GetHeroLibido(target) : 0);
                     Info.ChangeEmotionToHeroBy(hero, target, score);
-                    Info.ChangeEmotionToHeroBy(target, hero, score);
                 }
 
                 if (DramalordMCM.Get.AffairOutput)
+                {
                     LogEntry.AddLogEntry(new LogAffairMeeting(hero, target));
+                }
+
                 DramalordEvents.OnHeroesAffairMeeting(hero, target);
             }
         }

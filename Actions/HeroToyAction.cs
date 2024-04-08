@@ -11,7 +11,7 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero)
         {
-            if (Info.ValidateHeroInfo(hero))
+            if(Info.ValidateHeroInfo(hero))
             {
                 bool broke = false;
                 if (MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ToyBreakChance)
@@ -25,9 +25,12 @@ namespace Dramalord.Actions
                 }
 
                 if (DramalordMCM.Get.AffairOutput)
+                {
                     LogEntry.AddLogEntry(new LogUsedToy(hero));
+                }
+
                 DramalordEvents.OnHeroesUsedToy(hero, broke);
-            }
+            }  
         }
     }
 }
