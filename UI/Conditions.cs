@@ -16,7 +16,7 @@ namespace Dramalord.UI
         internal static bool PlayerCanAskForTalk()
         {
             SetRoles();
-            return Info.IsHeroLegit(Npc);
+            return Info.ValidateHeroInfo(Npc) && Info.ValidateHeroMemory(Player,Npc);
         }
 
         internal static bool NpcWantsToTalk()
@@ -27,13 +27,14 @@ namespace Dramalord.UI
 
         internal static bool NpcDeclinesToTalk()
         {
+            SetRoles();
             return !NpcWantsToTalk();
         }
 
         internal static bool PlayerCanAskForAction()
         {
             SetRoles();
-            return DailyActionAvailable();
+            return CampaignTime.Now.ToDays - Info.GetLastDate(Npc, Player) > 0;
         }
 
         internal static bool PlayerCanAskForFlirt()
@@ -44,7 +45,7 @@ namespace Dramalord.UI
         internal static bool NpcWantsToFlirt()
         {
             SetRoles();
-            return (IsCoupleWithPlayer() || FindsPlayerAttractive()) && DailyActionAvailable();
+            return (IsCoupleWithPlayer() || FindsPlayerAttractive()) && CampaignTime.Now.ToDays - Info.GetLastDaySeen(Npc, Player) > 0;
         }
 
         internal static bool NpcDeclinesToFlirt()
@@ -175,7 +176,7 @@ namespace Dramalord.UI
         internal static bool PlayerCanAskForBreakup()
         {
             SetRoles();
-            return Info.GetIsCoupleWithHero(Player, Npc) && Player.Spouse != Npc;
+            return Info.IsCoupleWithHero(Player, Npc) && Player.Spouse != Npc;
         }
 
         internal static bool NpcDoesntMindBreakup()
@@ -210,6 +211,7 @@ namespace Dramalord.UI
 
         internal static bool PlayerCanViolateNpc()
         {
+            SetRoles();
             return Player.PartyBelongedTo != null && Player.PartyBelongedTo.PrisonRoster != null && Player.PartyBelongedTo.PrisonRoster.Contains(Npc.CharacterObject);
         }
 
@@ -223,7 +225,7 @@ namespace Dramalord.UI
         private static bool IsCoupleWithPlayer()
         {
             SetRoles();
-            return Info.GetIsCoupleWithHero(Npc, Player);
+            return Info.IsCoupleWithHero(Npc, Player);
         }
 
         private static bool NpcIsMarriedToPlayer()
@@ -268,12 +270,6 @@ namespace Dramalord.UI
             return Info.GetEmotionToHero(Npc, Player) >= DramalordMCM.Get.MinEmotionForMarriage;
         }
 
-        private static bool DailyActionAvailable()
-        {
-            SetRoles();
-            return Info.GetFlirtCountWithHero(Npc, Player) == 0;
-        }
-
         private static bool LastDateInPastEnough()
         {
             SetRoles();
@@ -282,16 +278,19 @@ namespace Dramalord.UI
 
         private static bool PersuasionSuccess()
         {
+            SetRoles();
             return ConversationManager.GetPersuasionIsActive() && ConversationManager.GetPersuasionProgressSatisfied();
         }
 
         private static bool PersuasionFail()
         {
+            SetRoles();
             return ConversationManager.GetPersuasionIsActive() && !ConversationManager.GetPersuasionProgressSatisfied();
         }
 
         private static bool PersuasionActive()
         {
+            SetRoles();
             return ConversationManager.GetPersuasionIsActive();
         }
 

@@ -79,42 +79,6 @@ namespace Dramalord
         }
     }
 
-    public class EncyclopediaLogMarriage : LogEntry, IEncyclopediaLog, IChatNotification
-    {
-        [SaveableField(26004)]
-        public readonly Hero Hero1;
-
-        [SaveableField(26005)]
-        public readonly Hero Hero2;
-
-        public EncyclopediaLogMarriage(Hero hero1, Hero hero2)
-        {
-            Hero1 = hero1;
-            Hero2 = hero2;
-        }
-
-        public bool IsVisibleNotification => DramalordMCM.Get.MarriageOutput;
-        public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectNegative;
-
-        public TextObject GetEncyclopediaText()
-        {
-            TextObject textObject = new TextObject("{=Dramalord113}{HERO1.LINK} married {HERO2.LINK}");
-            StringHelpers.SetCharacterProperties("HERO1", Hero1.CharacterObject, textObject);
-            StringHelpers.SetCharacterProperties("HERO2", Hero2.CharacterObject, textObject);
-            return textObject;
-        }
-
-        public TextObject GetNotificationText()
-        {
-            return GetEncyclopediaText();
-        }
-
-        public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase
-        {
-            return obj == Hero1 || obj == Hero2;
-        }
-    }
-
     public class EncyclopediaLogDivorce : LogEntry, IEncyclopediaLog, IChatNotification
     {
         [SaveableField(26006)]

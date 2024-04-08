@@ -27,7 +27,12 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if (Info.GetIsCoupleWithHero(talkTroop, referringTo) && talkTroop.Spouse != referringTo && !referringTo.IsFemale)
+            if (!Info.ValidateHeroMemory(talkTroop, referringTo))
+            {
+                return;
+            }
+
+            if (Info.IsCoupleWithHero(talkTroop, referringTo) && talkTroop.Spouse != referringTo && !referringTo.IsFemale)
             {
                 string text = new TextObject("{=Dramalord076}lover").ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)
@@ -41,7 +46,7 @@ namespace Dramalord.Patches
                 }
                 __result = text;
             }
-            else if (Info.GetIsCoupleWithHero(talkTroop, referringTo) && talkTroop.Spouse != referringTo && referringTo.IsFemale)
+            else if (Info.IsCoupleWithHero(talkTroop, referringTo) && talkTroop.Spouse != referringTo && referringTo.IsFemale)
             {
                 string text = new TextObject("{=Dramalord077}love").ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)

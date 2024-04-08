@@ -25,7 +25,12 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if (Info.GetIsCoupleWithHero(baseHero, queriedHero) && baseHero.Spouse != queriedHero)
+            if (!Info.ValidateHeroMemory(baseHero, queriedHero))
+            {
+                return;
+            }
+
+            if (Info.IsCoupleWithHero(baseHero, queriedHero) && baseHero.Spouse != queriedHero)
             {
                 string text = new TextObject("{=Dramalord075}affair").ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)

@@ -22,7 +22,7 @@ namespace Dramalord.UI
             SetRoles();
 
             HeroFlirtAction.Apply(Player, Npc);
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
+            
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
@@ -31,7 +31,8 @@ namespace Dramalord.UI
 
         internal static void NpcDeclinedFlirt()
         {
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
+            SetRoles();
+            Info.SetLastDaySeen(Npc, Player, CampaignTime.Now.ToDays);
         }
 
         //DATE
@@ -41,17 +42,21 @@ namespace Dramalord.UI
             SetRoles();
 
             Persuasions.ClearCurrentPersuasion();
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
-            if (!Info.GetIsCoupleWithHero(Player, Npc))
+            if (!Info.IsCoupleWithHero(Player, Npc))
             {
                 Info.SetIsCoupleWithHero(Player, Npc, true);
-                Info.ChangeEmotionToHeroBy(Npc, Player, DramalordMCM.Get.MinEmotionForDating);
-                Info.ChangeEmotionToHeroBy(Player, Npc, DramalordMCM.Get.MinEmotionForDating);
+                Info.ChangeEmotionToHeroBy(Npc, Player, DramalordMCM.Get.EmotionalWinAffair);
                 Notification.DrawBanner("You and " + Npc + " are now a couple");
             }
 
-            Hero? witness = AICampaignHelper.ScopeSurroundingsForPartner(Npc, Hero.MainHero, false);
-            AICampaignActions.CompleteDateActions(Npc, Player, witness);
+            List<Hero> flirts = new();
+            List<Hero> partners = new();
+            List<Hero> prisoners = new();
+
+            AICampaignActions.ScopeSurroundings(Npc, ref flirts, ref partners, ref prisoners);
+            partners.Remove(Hero.MainHero);
+            Hero? partner = (partners.Count > 0) ? partners[MBRandom.RandomInt(partners.Count)] : null;
+            AICampaignActions.CompleteDateActions(Npc, Player, partner);
 
             if (PlayerEncounter.Current != null)
             {
@@ -61,36 +66,17 @@ namespace Dramalord.UI
 
         internal static void NpcWasConsideringDate()
         {
+            SetRoles();
             Persuasions.CreatePersuasionTaskForDate();
         }
 
         internal static void NpcDeclinedDate()
         {
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
-            Persuasions.ClearCurrentPersuasion();
-        }
-
-        //JOIN
-
-        internal static void NpcAcceptedJoin()
-        {
             SetRoles();
-
+            Info.SetLastPrivateMeeting(Npc, Player, CampaignTime.Now.ToDays);
             Persuasions.ClearCurrentPersuasion();
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
-            // TODO
         }
 
-        internal static void NpcWasConsideringJoin()
-        {
-            Persuasions.CreatePersuasionTaskForJoining();
-        }
-
-        internal static void NpcDeclinedJoin()
-        {
-            Persuasions.ClearCurrentPersuasion();
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
-        }
 
         //DIVORCE
 
@@ -99,10 +85,10 @@ namespace Dramalord.UI
             SetRoles();
 
             Persuasions.ClearCurrentPersuasion();
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
 
             HeroDivorceAction.Apply(Npc, NpcSpouse);
-            
+            Info.SetLastPrivateMeeting(Npc, Player, CampaignTime.Now.ToDays);
+
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
@@ -111,13 +97,15 @@ namespace Dramalord.UI
 
         internal static void NpcWasConsideringDivorce()
         {
+            SetRoles();
             Persuasions.CreatePersuasionTaskForDivorce();
         }
 
         internal static void NpcDeclinedDivorce()
         {
+            SetRoles();
             Persuasions.ClearCurrentPersuasion();
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
+            Info.SetLastPrivateMeeting(Npc, Player, CampaignTime.Now.ToDays);
         }
 
         //MARRIAGE
@@ -127,7 +115,7 @@ namespace Dramalord.UI
             SetRoles();
 
             Persuasions.ClearCurrentPersuasion();
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
+            Info.SetLastPrivateMeeting(Npc, Player, CampaignTime.Now.ToDays);
             HeroMarriageAction.Apply(Player, Npc);
 
             if (PlayerEncounter.Current != null)
@@ -138,13 +126,15 @@ namespace Dramalord.UI
 
         internal static void NpcWasConsideringMarriage()
         {
+            SetRoles();
             Persuasions.CreatePersuasionTaskForMarriage();
         }
 
         internal static void NpcDeclinedMarriage()
         {
+            SetRoles();
             Persuasions.ClearCurrentPersuasion();
-            Info.IncreaseFlirtCountWithHero(Npc, Player);
+            Info.SetLastPrivateMeeting(Npc, Player, CampaignTime.Now.ToDays);
         }
 
         internal static void NpcGotPresentFromPlayer()
@@ -171,11 +161,13 @@ namespace Dramalord.UI
 
         internal static void NpcDidntCareAboutBreakup()
         {
+            SetRoles();
             Info.SetIsCoupleWithHero(Npc, Player, false);
         }
 
         internal static void NpcWasSurprisedByBreakup()
         {
+            SetRoles();
             HeroBreakupAction.Apply(Player, Npc);
             if (PlayerEncounter.Current != null)
             {
@@ -185,6 +177,7 @@ namespace Dramalord.UI
 
         internal static void NpcWasHeartBrokenByBreakup()
         {
+            SetRoles();
             HeroBreakupAction.Apply(Player, Npc);
 
             if (Npc.Clan != null && Npc.Clan == Player.Clan)
@@ -199,6 +192,7 @@ namespace Dramalord.UI
 
         internal static void NpcGotSuicidalByBreakup()
         {
+            SetRoles();
             HeroBreakupAction.Apply(Player, Npc);
             HeroKillAction.Apply(Npc, Npc, Player, KillReason.Suicide);
             if (PlayerEncounter.Current != null)
@@ -209,11 +203,13 @@ namespace Dramalord.UI
 
         internal static void NpcDidntCareAboutDivorce()
         {
+            SetRoles();
             HeroDivorceAction.Apply(Player, Npc);
         }
 
         internal static void NpcWasSurprisedByDivorce()
         {
+            SetRoles();
             HeroDivorceAction.Apply(Player, Npc);
             if (PlayerEncounter.Current != null)
             {
@@ -223,6 +219,7 @@ namespace Dramalord.UI
 
         internal static void NpcWasHeartBrokenByDivorce()
         {
+            SetRoles();
             HeroDivorceAction.Apply(Player, Npc);
 
             if (Npc.Clan != null && Npc.Clan == Player.Clan)
@@ -237,6 +234,7 @@ namespace Dramalord.UI
 
         internal static void NpcGotSuicidalByDivorce()
         {
+            SetRoles();
             HeroDivorceAction.Apply(Player, Npc);
             HeroKillAction.Apply(Npc, Npc, Player, KillReason.Suicide);
             if (PlayerEncounter.Current != null)
@@ -247,11 +245,15 @@ namespace Dramalord.UI
 
         internal static void PlayerViolatedNpc()
         {
-            if(AICampaignHelper.WillHaveIntercourse(Player, Npc, true))
+            SetRoles();
+            if (Info.GetHeroHorny(Player) >= DramalordMCM.Get.MinHornyForIntercourse)
             {
                 HeroIntercourseAction.Apply(Player, Npc, true);
-            
-                if (AICampaignHelper.WillConceiveOffspring(Player, Npc))
+
+                Hero mother = Player.IsFemale ? Player : Npc;
+                Hero father = Npc.IsFemale ? Player : Npc;
+
+                if (mother != father && !mother.IsPregnant && Info.CanGetPregnant(mother) && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
                 {
                     HeroConceiveAction.Apply(Player, Npc, true);
                 }

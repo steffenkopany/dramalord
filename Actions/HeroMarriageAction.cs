@@ -13,9 +13,9 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target)
         {
-            if (Info.ValidateHeroMemory(hero, target) && hero.Spouse != target)
+            if(Info.ValidateHeroMemory(hero, target))
             {
-                if(target == Hero.MainHero)
+                if (target == Hero.MainHero)
                 {
                     TextObject title = new TextObject("{=Dramalord134}Marriage request");
                     TextObject text = new TextObject("{=Dramalord135}{HERO.LINK} says they love you and asks you if you consider marrying them.");
@@ -31,10 +31,10 @@ namespace Dramalord.Actions
 
                                 DoMarry(target, hero);
                             },
-                            () => { 
+                            () => {
 
                                 Info.ChangeEmotionToHeroBy(hero, target, -DramalordMCM.Get.EmotionalLossBreakup);
-                                MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation"); 
+                                MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                             }
                         );
                 }
@@ -42,7 +42,7 @@ namespace Dramalord.Actions
                 {
                     DoMarry(hero, target);
                 }
-            }
+            }  
         }
 
         private static void DoMarry(Hero hero, Hero target)
@@ -81,10 +81,7 @@ namespace Dramalord.Actions
 
             Info.SetIsCoupleWithHero(hero, target, true);
             Info.ChangeEmotionToHeroBy(hero, target, DramalordMCM.Get.EmotionalWinMarriage);
-            Info.ChangeEmotionToHeroBy(target, hero, DramalordMCM.Get.EmotionalWinMarriage);
 
-            //alread logged by system
-            //LogEntry.AddLogEntry(new EncyclopediaLogMarriage(hero, target));
             DramalordEvents.OnHeroesMarried(hero, target);
         }
     }

@@ -13,7 +13,7 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void GetAttractionValuePercentage(Hero potentiallyInterestedCharacter, Hero heroOfInterest, ref int __result)
         {
-            if(Info.ValidateHeroMemory(potentiallyInterestedCharacter,heroOfInterest))
+            if(Info.ValidateHeroInfo(potentiallyInterestedCharacter))
             {
                 __result = Info.GetAttractionToHero(potentiallyInterestedCharacter, heroOfInterest);
             }
