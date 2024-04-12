@@ -29,7 +29,7 @@
     <Flags Civilian="true" />
   </Item>
   <Item id="dramalord_pie"
-          name="{=Dramalord100}Pie"
+          name="{=Dramalord101}Pie"
           mesh="kitchen_pie"
           item_category="dramalord_stuff"
           IsFood="true"

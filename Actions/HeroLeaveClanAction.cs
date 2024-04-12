@@ -1,5 +1,6 @@
 ﻿using Dramalord.Data;
 using Helpers;
+using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
@@ -54,6 +55,7 @@ namespace Dramalord.Actions
             }
 
             hero.SetNewOccupation(Occupation.Wanderer);
+            //hero.SetName(new TextObject(hero.FirstName.ToString() + " the Wanderer"), hero.FirstName);
             hero.UpdateHomeSettlement();
             CampaignEventDispatcher.Instance.OnHeroChangedClan(hero, oldClan);
 

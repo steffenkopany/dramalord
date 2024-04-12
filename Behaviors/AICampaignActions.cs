@@ -3,11 +3,16 @@ using Dramalord.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
+using TaleWorlds.CampaignSystem.GameComponents;
+using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+
 
 namespace Dramalord.Behaviors
 {
@@ -26,13 +31,13 @@ namespace Dramalord.Behaviors
                     {
                         if (CampaignTime.Now.ToDays - offspring.Conceived > DramalordMCM.Get.PregnancyDuration)
                         {
-                            HeroBirthAction.Apply(hero, offspring);
+                            HeroBirthAction.Apply(hero, offspring); //DefaultDiplomacyModel.GetBaseRelation
 
                             Hero? child = hero.Children.FirstOrDefault(item => item.BirthDay.ToDays == CampaignTime.Now.ToDays);
                             if (child != null && hero.Spouse != null && child.Father != hero.Spouse)
                             {
                                 Hero spouse = hero.Spouse;
-                                if (spouse.CurrentSettlement == hero.CurrentSettlement)
+                                if (spouse.CurrentSettlement == hero.CurrentSettlement && Info.ValidateHeroMemory(hero, spouse))
                                 {
                                     HeroWitnessAction.Apply(hero, child, spouse, WitnessType.Bastard);
                                     HeroPutInOrphanageAction.Apply(spouse, child);
@@ -54,15 +59,16 @@ namespace Dramalord.Behaviors
                                 }
                                 else
                                 {
-                                    if (child.Father != Hero.MainHero)
+                                    if (child.Father != Hero.MainHero && Info.ValidateHeroMemory(hero, child.Father) && Info.ValidateHeroMemory(hero, spouse))
                                     {
-                                        if (child.Father.Clan != null && hero.Clan != null && child.Father.Clan != hero.Clan && Info.IsCoupleWithHero(hero, child.Father) && Info.GetEmotionToHero(hero, child.Father) > Info.GetEmotionToHero(hero, spouse))
+                                        
+                                        if (child.Father.Clan != null && hero.Clan != null && child.Father.Clan != hero.Clan && Info.IsCoupleWithHero(hero, child.Father) && Info.GetEmotionToHero(hero, spouse) < DramalordMCM.Get.MinEmotionForDating && Info.GetEmotionToHero(hero, child.Father) > DramalordMCM.Get.MinEmotionForDating)
                                         {
                                             HeroDivorceAction.Apply(hero, spouse);
                                             HeroLeaveClanAction.Apply(hero, true, hero);
                                             HeroJoinClanAction.Apply(hero, child.Father.Clan, true);
                                         }
-                                        else if (hero.GetHeroTraits().Valor > 0)
+                                        else if (hero.GetHeroTraits().Valor > 0 && Info.GetEmotionToHero(hero, spouse) < DramalordMCM.Get.MinEmotionForDating)
                                         {
                                             HeroDivorceAction.Apply(hero, spouse);
                                             HeroLeaveClanAction.Apply(hero, true, hero);
@@ -135,7 +141,7 @@ namespace Dramalord.Behaviors
                         }
                     }
 
-                    if(partner != null)
+                    if(partner != null && Info.ValidateHeroMemory(hero, partner))
                     {
                         float heroEmotion = Info.GetEmotionToHero(hero, partner);
 
@@ -166,8 +172,6 @@ namespace Dramalord.Behaviors
 
                         CompleteDateActions(hero, partner, witness);
                     }
-
-                    
                 }    
             }
         }
@@ -261,7 +265,7 @@ namespace Dramalord.Behaviors
 
                             if (heroWitness.GetHeroTraits().Calculating < 0 && heroWitness.GetHeroTraits().Mercy < 0)
                             {
-                                HeroKillAction.Apply(heroWitness, hero, hero, KillReason.Intercourse);
+                                HeroKillAction.Apply(heroWitness, hero, target, KillReason.Intercourse);
                                 return;
                             }
                             else if (heroWitness.Spouse == hero && witnessEmotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
@@ -304,7 +308,7 @@ namespace Dramalord.Behaviors
                 Settlement settlement = hero.CurrentSettlement;
                 foreach (Hero h in settlement.HeroesWithoutParty)
                 {
-                    if (h != hero && Info.ValidateHeroMemory(hero, h))
+                    if (h != null && h != hero && Info.ValidateHeroMemory(hero, h))
                     {
                         bool isCouple = Info.IsCoupleWithHero(hero, h);
                         int attraction = Info.GetAttractionToHero(hero, h);
@@ -336,7 +340,7 @@ namespace Dramalord.Behaviors
                     if (mp != null && mp.LeaderHero != null)
                     {
                         Hero h = mp.LeaderHero;
-                        if (h != hero && Info.ValidateHeroMemory(hero, h))
+                        if (h != null && h != hero && Info.ValidateHeroMemory(hero, h))
                         {
                             bool isCouple = Info.IsCoupleWithHero(hero, h);
                             int attraction = Info.GetAttractionToHero(hero, h);
@@ -364,7 +368,7 @@ namespace Dramalord.Behaviors
                     }
                 }
             }
-            else if (hero.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null)
+            else if (hero.PartyBelongedTo != null)
             {
                 if (hero.PartyBelongedTo.Army != null)
                 {
@@ -373,7 +377,7 @@ namespace Dramalord.Behaviors
                         if (mp != null && mp.LeaderHero != null)
                         {
                             Hero h = mp.LeaderHero;
-                            if (h != hero && Info.ValidateHeroMemory(hero, h))
+                            if (h != null && h != hero && Info.ValidateHeroMemory(hero, h))
                             {
                                 bool isCouple = Info.IsCoupleWithHero(hero, h);
                                 int attraction = Info.GetAttractionToHero(hero, h);
@@ -401,7 +405,7 @@ namespace Dramalord.Behaviors
                         if (tre.Character.IsHero)
                         {
                             Hero h = tre.Character.HeroObject;
-                            if (h != hero && Info.ValidateHeroMemory(hero, h))
+                            if (h != null && h != hero && Info.ValidateHeroMemory(hero, h))
                             {
                                 bool isCouple = Info.IsCoupleWithHero(hero, h);
                                 int attraction = Info.GetAttractionToHero(hero, h);

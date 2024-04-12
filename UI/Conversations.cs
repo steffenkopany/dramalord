@@ -1,5 +1,6 @@
 ﻿using Dramalord.Data;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace Dramalord.UI
@@ -117,7 +118,7 @@ namespace Dramalord.UI
                     MBTextManager.SetTextVariable("RATING_MEN", attractionMen > 75 ? "{=Dramalord010}sexy" : attractionMen > 50 ? "{=Dramalord011}alright" : attractionMen < 25 ? "{=Dramalord012}disgusting" : "{=Dramalord013}not my thing");
                     MBTextManager.SetTextVariable("RATING_WEIGHT", data.AttractionWeight > 0.6 ? "{=Dramalord014}chubby" : data.AttractionWeight > 0.3 ? "{=Dramalord015}average" : "{=Dramalord016}slim");
                     MBTextManager.SetTextVariable("RATING_BUILD", data.AttractionBuild > 0.6 ? "{=Dramalord017}muscular" : data.AttractionBuild > 0.3 ? "{=Dramalord018}normal" : "{=Dramalord019}low");
-                    MBTextManager.SetTextVariable("RATING_AGE", Info.Clamp<int>((int)Hero.OneToOneConversationHero.Age + data.AttractionAgeDiff, 18, 130));
+                    MBTextManager.SetTextVariable("RATING_AGE", MBMath.ClampInt((int)Hero.OneToOneConversationHero.Age + data.AttractionAgeDiff, 18, 130));
                 }
 
                 int rating = Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.MainHero);

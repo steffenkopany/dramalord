@@ -743,7 +743,7 @@ namespace Dramalord
 
         public TextObject GetNotificationText()
         {
-            TextObject textObject = new TextObject("{=Dramalord129}{HERO.LINK} played with their toy.");
+            TextObject textObject = new TextObject("{=Dramalord129}{HERO.LINK} played with their toy while thinking of you.");
             StringHelpers.SetCharacterProperties("HERO", Hero1.CharacterObject, textObject);
             return textObject;
         }

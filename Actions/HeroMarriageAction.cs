@@ -56,8 +56,17 @@ namespace Dramalord.Actions
             {
                 HeroDivorceAction.Apply(target, target.Spouse);
             }
+            if(hero.Occupation == Occupation.Wanderer)
+            {
+                hero.SetName(hero.FirstName, hero.FirstName);
+            }
 
-            if(hero == Hero.MainHero || target == Hero.MainHero)
+            if (target.Occupation == Occupation.Wanderer)
+            {
+                target.SetName(TextObject.Empty, target.FirstName);
+            }
+
+            if (hero == Hero.MainHero || target == Hero.MainHero)
             {
                 Hero Npc = (hero == Hero.MainHero) ? target : hero;
                 HeroLeaveClanAction.Apply(Npc, false, Npc);
@@ -80,7 +89,7 @@ namespace Dramalord.Actions
             MarriageAction.Apply(hero, target, false); 
 
             Info.SetIsCoupleWithHero(hero, target, true);
-            Info.ChangeEmotionToHeroBy(hero, target, DramalordMCM.Get.EmotionalWinMarriage);
+            //Info.ChangeEmotionToHeroBy(hero, target, DramalordMCM.Get.EmotionalWinMarriage);
 
             DramalordEvents.OnHeroesMarried(hero, target);
         }

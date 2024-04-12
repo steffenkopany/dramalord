@@ -29,11 +29,12 @@ namespace Dramalord.Actions
             {
                 MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(child.Father, hero, CampaignTime.Now));
             }
-
+            /*
             if (DramalordMCM.Get.BirthOutput)
             {
                 LogEntry.AddLogEntry(new EncyclopediaLogBirth(hero, offspring.Father, child));
             }
+            */
                 
             DramalordEvents.OnHeroesBorn(hero, offspring.Father, child);
         }

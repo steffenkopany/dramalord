@@ -60,10 +60,9 @@ namespace Dramalord.Actions
         {
             Hero father = child.Father;
             Hero mother = child.Mother;
-            child.Father = null;
-            child.Mother = null;
             father.Children.Remove(child);
             mother.Children.Remove(child);
+            Clan oldClan = child.Clan;
             child.Clan = null;
             if (child.BornSettlement == null)
             {
@@ -71,6 +70,10 @@ namespace Dramalord.Actions
             }
             child.SetNewOccupation(Occupation.Wanderer);
             child.UpdateHomeSettlement();
+            if(oldClan != null)
+            {
+                CampaignEventDispatcher.Instance.OnHeroChangedClan(child, oldClan);
+            }
 
             Info.AddOrphan(child);
 

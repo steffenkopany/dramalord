@@ -45,7 +45,7 @@ namespace Dramalord.UI
             if (!Info.IsCoupleWithHero(Player, Npc))
             {
                 Info.SetIsCoupleWithHero(Player, Npc, true);
-                Info.ChangeEmotionToHeroBy(Npc, Player, DramalordMCM.Get.EmotionalWinAffair);
+                //Info.ChangeEmotionToHeroBy(Npc, Player, DramalordMCM.Get.EmotionalWinAffair);
                 Notification.DrawBanner("You and " + Npc + " are now a couple");
             }
 
