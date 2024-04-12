@@ -26,7 +26,8 @@ namespace Dramalord.Actions
                 if (hero != Hero.MainHero && !Info.IsCoupleWithHero(hero, target) && emotionHero >= DramalordMCM.Get.MinEmotionForDating && (!Info.IsCloseRelativeTo(hero, target) || !DramalordMCM.Get.ProtectFamily))
                 {
                     Info.SetIsCoupleWithHero(hero, target, true);
-                    if(DramalordMCM.Get.AffairOutput)
+                    //Info.ChangeEmotionToHeroBy(hero, target, DramalordMCM.Get.EmotionalWinAffair);
+                    if (DramalordMCM.Get.AffairOutput)
                     {
                         LogEntry.AddLogEntry(new EncyclopediaLogStartAffair(hero, target));
                     }

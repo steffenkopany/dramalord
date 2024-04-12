@@ -136,7 +136,7 @@ namespace Dramalord.UI
         internal static bool PlayerCanAskForMarriage()
         {
             SetRoles();
-            return !NpcIsMarried() && IsCoupleWithPlayer();
+            return !NpcIsMarried() && Player.Spouse == null && IsCoupleWithPlayer();
         }
 
         internal static bool NpcWantsToMarry()

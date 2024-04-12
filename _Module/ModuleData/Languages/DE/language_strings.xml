@@ -147,7 +147,7 @@
     <string id="Dramalord128" text="{KILLER.LINK} ermordete {HERO.LINK} dafür den Bastard {CHILD.LINK} in die Welt gesetzt zu haben." />
     <string id="Dramalord142" text="{HERO.LINK} spielte {SPOUSE.LINK} vor jetzt von ihm schwanger zu sein." />
     <!-- Banner -->
-    <string id="Dramalord129" text="{HERO.LINK} hatte Spaß mit dem Spielzeug." />
+    <string id="Dramalord129" text="{HERO.LINK} hatte Spaß mit dem Spielzeug und hat dabei an Euch gedacht." />
     <string id="Dramalord130" text="{HERO.LINK}s Spielzeug ging kaputt!" />
     <string id="Dramalord131" text="{HERO.LINK} hat sich von Euch scheiden lassen." />
     <string id="Dramalord132" text="{HERO.LINK} hat die Affäre mit Euch beendet." />
@@ -164,5 +164,95 @@
     <string id="Dramalord135" text="{HERO.LINK} ist voller Liebe zu Euch und wünscht sich die Ehe." />
     <string id="Dramalord137" text="Kinder Fürsorge" />
     <string id="Dramalord138" text="{HERO.LINK} bittet Euch {CHILD.LINK} aufzunehmen und vor {SPOUSE.LINK} zu schützen." />
+    <!-- Encyclopedia -->
+    <string id="Dramalord229" text="Anziehung:" />
+    <string id="Dramalord230" text="Gefühle:" />
+    <string id="Dramalord231" text="Erregung:" />
+    <string id="Dramalord232" text="Hat Spielzeug:" />
+    <string id="Dramalord233" text="Charakter Punkte:" />
+    <string id="Dramalord234" text="Periode Starttag:" />
+    <!-- MCM -->
+    <string id="Dramalord147" text="Allgemeines" />
+    <string id="Dramalord148" text="Helden Einstellungen" />
+    <string id="Dramalord149" text="Spieler Einstellungen" />
+    <string id="Dramalord150" text="Verschiedenes" />
+    <string id="Dramalord151" text="Flirt Nachrichten" />
+    <string id="Dramalord152" text="Zeige flirt Events in den Logs" />
+    <string id="Dramalord153" text="Affären Nachrichten" />
+    <string id="Dramalord154" text="Zeige Affären Events in den Logs" />
+    <string id="Dramalord155" text="Clan Änderung Nachrichten" />
+    <string id="Dramalord156" text="Zeige Clan bezogene Events in den Logs" />
+    <string id="Dramalord157" text="Ehe Nachrichten" />
+    <string id="Dramalord158" text="Zeige Ehe Events in den Logs" />
+    <string id="Dramalord159" text="Todes Nachrichten" />
+    <string id="Dramalord160" text="Zeige Todes Events in den Logs" />
+    <string id="Dramalord161" text="Geburten Nachrichten" />
+    <string id="Dramalord162" text="Zeige Geburten/Waisen Events in den Logs" />
+    <string id="Dramalord163" text="Charakter Punkte Faktor" />
+    <string id="Dramalord164" text="Charakterpunkte Faktor für AI Gefühle Wachstum (höher = schneller)" />
+    <string id="Dramalord165" text="Familienschutz" />
+    <string id="Dramalord166" text="Keine AI Interaktionen mit Familienmitgliedern" />
+    <string id="Dramalord167" text="Interesse Am Anderen Geschlecht" />
+    <string id="Dramalord168" text="Sexuelle Orientierung für AI (negativ = eigenes Geschlecht, positive = anderes Geschlecht, 0 = neutral)" />
+    <string id="Dramalord169" text="Min. Anziehungspunkte" />
+    <string id="Dramalord170" text="Minimal benötigte Anziehungspunkte für AI um mit anderen Helden zu kommunizieren" />
+    <string id="Dramalord171" text="Min. Gefühle für Affären" />
+    <string id="Dramalord172" text="Minimale Gefühle für AI um mit Helden eine Affäre zu starten" />
+    <string id="Dramalord173" text="Tage zwischen geheimen Treffen" />
+    <string id="Dramalord174" text="Tage die AI wartet um sich erneut mit dem selben Helden geheim zu treffen" />
+    <string id="Dramalord175" text="Min. Gefühle für Ehe" />
+    <string id="Dramalord176" text="Minimum an Gefühlen für AI um eine Ehe mit einem Helden in Erwägung zu ziehen" />
+    <string id="Dramalord177" text="Min. Gefühle für Scheidung" />
+    <string id="Dramalord178" text="Gefühlsgrenze bevor AI eine Scheidung in Erwägung zieht" />
+    <string id="Dramalord179" text="Min. Erregung für Geschlechtsverkehr" />
+    <string id="Dramalord180" text="Minimum an Erregung bevor sich AI für Geschlechtverkehr interessiert" />
+    <string id="Dramalord181" text="Erregungsverlust durch Geschlechtsverkehr" />
+    <string id="Dramalord182" text="Anzahl an Erregungspunkten die man durch Geschlechtverkehr verliert" />
+    <string id="Dramalord183" text="Chance Erwischt zu Werden" />
+    <string id="Dramalord184" text="Chance von Partnern erwischt zu werden während man mit anderen interagiert" />
+    <string id="Dramalord185" text="Gefühlsverlust Flirten" />
+    <string id="Dramalord186" text="Verlust an Gefühlspunkten wenn man seinen Partner beim Flirten mit anderen erwischt" />
+    <string id="Dramalord187" text="Gefühlsverlust geheimes Treffen" />
+    <string id="Dramalord188" text="Verlust an Gefühlspunkten wenn man seinen Partner bei geheimen Treffen mit anderen erwischt" />
+    <string id="Dramalord189" text="Gefühlsverlust Geschlechtverkehr" />
+    <string id="Dramalord190" text="Verlust an Gefühlspunkten wenn man seinen Partner beim Geschlechtverkehr mit anderen erwischt" />
+    <string id="Dramalord191" text="Gefühlsverlust Ehe" />
+    <string id="Dramalord192" text="Verlust an Gefühlspunkten wenn sein Partner jemand anderen heiratet" />
+    <string id="Dramalord193" text="Gefühlsverlust Schluß machen" />
+    <string id="Dramalord194" text="Verlust an Gefühlspunkten wenn sein Partner mit einem Schluß macht" />
+    <string id="Dramalord195" text="Gefühlsverlust Scheidung" />
+    <string id="Dramalord196" text="Verlust an Gefühlspunkten wenn sein Partner sich scheiden lässt" />
+    <string id="Dramalord197" text="Gefühlsverlust Schwangerschaft" />
+    <string id="Dramalord198" text="Verlust an Gefühlspunkten wenn man seinen Partner schwanger von jemanden anderen sieht" />
+    <string id="Dramalord199" text="Gefühlsverlust Geburt" />
+    <string id="Dramalord200" text="Verlust an Gefühlspunkten wenn sein Partner das Kind von jemand anderen gebährt" />
+    <string id="Dramalord201" text="Gefühlsgewinn Affäre" />
+    <string id="Dramalord202" text="Gewinn an Gefühlspunkten wenn man eine Affäre beginnt" />
+    <string id="Dramalord203" text="Gefühlsgewinn Ehe" />
+    <string id="Dramalord204" text="Gewinn an Gefühlspunkten wenn man jemanden heiratet" />
+    <string id="Dramalord205" text="Schwangerschafts Chance" />
+    <string id="Dramalord206" text="Chance schwanger zu werden durch Geschlechtsverkehr" />
+    <string id="Dramalord207" text="Schwangerschaft Dauer" />
+    <string id="Dramalord208" text="Dauer einer Schwangerschaft bis zur Geburt" />
+    <string id="Dramalord209" text="Tage bis Schwangerschafts Sichtbar" />
+    <string id="Dramalord210" text="Wieviel Tage vergehen müssen bevor eine Schwangerschaft für andere sichtbar ist" />
+    <string id="Dramalord211" text="Tage zwischen Adoptionen" />
+    <string id="Dramalord212" text="Wieviel Tage müssen zwischen Adoptionen vom selben Paar vergehen (gleichgeschlechtlich oder alte Paare)" />
+    <string id="Dramalord213" text="Max. Fruchtbarkeits ALter" />
+    <string id="Dramalord214" text="Maximales Alter bis zu dem man fruchtbar ist" />
+    <string id="Dramalord215" text="Periode Dauer" />
+    <string id="Dramalord216" text="Dauer der Periode pro Jahreszeit in Tagen (kann nicht schwanger werden)" />
+    <string id="Dramalord217" text="Spielzeug Bruch Chance" />
+    <string id="Dramalord218" text="Chance dass ein Spielzeug bei benützung kaputt geht" />
+    <string id="Dramalord219" text="Min. Verhältnis für Gespräch" />
+    <string id="Dramalord220" text="Minimum an Beziehungspunkten (Relation) damit AI ein intimes Gespräch mit dem Spieler führt" />
+    <string id="Dramalord221" text="Spieler Immer Anziehend" />
+    <string id="Dramalord222" text="Der Spieler ist immer anziehend für alle Helden (cheat)" />
+    <string id="Dramalord223" text="Spieler immer Geliebt" />
+    <string id="Dramalord224" text="Der Spieler wird immer von allen anderen geliebt (cheat)" />
+    <string id="Dramalord225" text="Keine Gefangenschafts Nachrichten" />
+    <string id="Dramalord226" text="Keine Nachrichten über Gefangenschaften (derzeit nur Englisch!)" />
+    <string id="Dramalord227" text="Keine Beziehungs Nachrichten" />
+    <string id="Dramalord228" text="Keine Nachrichten wenn sich die Beziehung zu wichtigen Personen ändert" />
   </strings>
 </base>

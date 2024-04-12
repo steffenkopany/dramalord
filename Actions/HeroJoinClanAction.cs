@@ -8,6 +8,11 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Clan clan, bool withChildren)
         {
+            if (hero.Occupation == Occupation.Wanderer)
+            {
+                hero.SetName(hero.FirstName, hero.FirstName);
+            }
+
             hero.Clan = clan;
             hero.UpdateHomeSettlement();
             hero.SetNewOccupation(Occupation.Lord);

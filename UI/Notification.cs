@@ -3,9 +3,13 @@ using Dramalord.Data;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.ViewModelCollection;
+using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade.GauntletUI.Widgets;
+using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Crafting;
 
 namespace Dramalord.UI
 {

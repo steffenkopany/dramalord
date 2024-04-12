@@ -4,6 +4,7 @@ using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using static TaleWorlds.CampaignSystem.Actions.KillCharacterAction;
 
 namespace Dramalord.Data
@@ -64,7 +65,7 @@ namespace Dramalord.Data
 
         internal static void ChangeIntercourseSkillBy(Hero hero, float value)
         {
-            HeroInfo[hero].IntercourseSkill = Clamp<float>(HeroInfo[hero].IntercourseSkill + value, 0, 100);
+            HeroInfo[hero].IntercourseSkill = MBMath.ClampFloat(HeroInfo[hero].IntercourseSkill + value, 0, 100);
         }
 
         internal static bool CanGetPregnant(Hero hero)
@@ -112,7 +113,7 @@ namespace Dramalord.Data
         internal static void ChangeEmotionToHeroBy(Hero hero, Hero target, float change)
         {
             HeroTuple tuple = new(hero, target);
-            HeroMemory[tuple].Emotion = Clamp<float>(HeroMemory[tuple].Emotion + change, -100, 100);
+            HeroMemory[tuple].Emotion = MBMath.ClampFloat(HeroMemory[tuple].Emotion + change, -100, 100);
         }
 
         internal static float GetHeroHorny(Hero hero)
@@ -122,7 +123,7 @@ namespace Dramalord.Data
 
         internal static void ChangeHeroHornyBy(Hero hero, float change)
         {
-            HeroInfo[hero].Horny = Clamp<float>(HeroInfo[hero].Horny + change, 0, 100);
+            HeroInfo[hero].Horny = MBMath.ClampFloat(HeroInfo[hero].Horny + change, 0, 100);
         }
 
         internal static float GetHeroLibido(Hero hero)
@@ -154,9 +155,9 @@ namespace Dramalord.Data
             rating += (hero.Culture == target.Culture) ? 10 : 0;
             rating -= Math.Abs((heroData.AttractionWeight - target.BodyProperties.Weight) * 10);
             rating -= Math.Abs((heroData.AttractionBuild - target.BodyProperties.Build) * 10);
-            rating -= Math.Abs(Clamp<float>(heroData.AttractionAgeDiff + hero.Age, 18, 130) - target.Age);
+            rating -= Math.Abs(MBMath.ClampFloat(heroData.AttractionAgeDiff + hero.Age, 18, 130) - target.Age);
 
-            return Clamp<int>((int)rating, 0, 100);
+            return MBMath.ClampInt((int)rating, 0, 100);
         }
 
         internal static int GetFlirtedWithPlayer(Hero hero)
@@ -294,6 +295,7 @@ namespace Dramalord.Data
             }
 
             int score = 0;
+            /*
             score += (heroTraits.Mercy < 0 && targetTraits.Mercy < 0) || (heroTraits.Mercy > 0 && targetTraits.Mercy > 0 || (heroTraits.Mercy == targetTraits.Mercy)) ? 1 : 0;
             score += (heroTraits.Mercy < 0 && targetTraits.Mercy > 0) || (heroTraits.Mercy > 0 && targetTraits.Mercy < 0) ? -1 : 0;
             score += (heroTraits.Generosity < 0 && targetTraits.Generosity < 0) || (heroTraits.Generosity > 0 && targetTraits.Generosity > 0 || (heroTraits.Generosity == targetTraits.Generosity)) ? 1 : 0;
@@ -302,6 +304,19 @@ namespace Dramalord.Data
             score += (heroTraits.Honor < 0 && targetTraits.Honor > 0) || (heroTraits.Honor > 0 && targetTraits.Honor < 0) ? -1 : 0;
             score += (heroTraits.Valor < 0 && targetTraits.Valor < 0) || (heroTraits.Valor > 0 && targetTraits.Valor > 0 || (heroTraits.Valor == targetTraits.Valor)) ? 1 : 0;
             score += (heroTraits.Valor < 0 && targetTraits.Valor > 0) || (heroTraits.Valor > 0 && targetTraits.Valor < 0) ? -1 : 0;
+            */
+
+            score += ((heroTraits.Mercy > 0 && targetTraits.Mercy > 0) || (heroTraits.Mercy < 0 && targetTraits.Mercy < 0)) ? 1 : 0;
+            score += ((heroTraits.Mercy < 0 && targetTraits.Mercy > 0) || (heroTraits.Mercy > 0 && targetTraits.Mercy < 0)) ? -1 : 0;
+            score += ((heroTraits.Generosity > 0 && targetTraits.Generosity > 0) || (heroTraits.Generosity < 0 && targetTraits.Generosity < 0)) ? 1 : 0;
+            score += ((heroTraits.Generosity < 0 && targetTraits.Generosity > 0) || (heroTraits.Generosity > 0 && targetTraits.Generosity < 0)) ? -1 : 0;
+            score += ((heroTraits.Honor > 0 && targetTraits.Honor > 0) || (heroTraits.Honor < 0 && targetTraits.Honor < 0)) ? 1 : 0;
+            score += ((heroTraits.Honor < 0 && targetTraits.Honor > 0) || (heroTraits.Honor > 0 && targetTraits.Honor < 0)) ? -1 : 0;
+            score += ((heroTraits.Valor > 0 && targetTraits.Valor > 0) || (heroTraits.Valor < 0 && targetTraits.Valor < 0)) ? 1 : 0;
+            score += ((heroTraits.Valor < 0 && targetTraits.Valor > 0) || (heroTraits.Valor > 0 && targetTraits.Valor < 0)) ? -1 : 0;
+            score += ((heroTraits.Calculating > 0 && targetTraits.Calculating > 0) || (heroTraits.Calculating < 0 && targetTraits.Calculating < 0)) ? 1 : 0;
+            score += ((heroTraits.Calculating < 0 && targetTraits.Calculating > 0) || (heroTraits.Calculating > 0 && targetTraits.Calculating < 0)) ? -1 : 0;
+            //score += hero.GetSkillValue(DefaultSkills.Charm) / 100;
             return score * DramalordMCM.Get.TraitScoreMultiplyer;
         }
 
@@ -336,7 +351,7 @@ namespace Dramalord.Data
                 if(!HeroMemory.ContainsKey(heroTuple))
                 {
                     HeroMemory.Add(heroTuple, new HeroMemoryData(
-                            (hero.Spouse == target) ? DramalordMCM.Get.MinEmotionForMarriage : Info.GetTraitscoreToHero(hero, target),
+                            (hero.Spouse == target) ? DramalordMCM.Get.MinEmotionForMarriage : 0,
                             0,
                             (hero.Spouse == target) ? MBRandom.RandomInt(84, 840) : 0,
                             (hero.Spouse == target),
@@ -415,11 +430,11 @@ namespace Dramalord.Data
             return false;
         }
 
-        public static T Clamp<T>(this T val, T min, T max) where T : IComparable<T>
+        /*public static T Clamp<T>(this T val, T min, T max) where T : IComparable<T>
         {
             if (val.CompareTo(min) < 0) return min;
             else if (val.CompareTo(max) > 0) return max;
             else return val;
-        }
+        }*/
     }
 }

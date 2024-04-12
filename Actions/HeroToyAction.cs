@@ -17,12 +17,14 @@ namespace Dramalord.Actions
                 if (MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ToyBreakChance)
                 {
                     Info.SetHeroHasToy(hero, false);
-                    TextObject textObject = new TextObject("{=Dramalord130}{HERO.LINK} played with their toy.");
+                    TextObject textObject = new TextObject("{=Dramalord130}{HERO.LINK}s toy broke!");
                     StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
                     MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
 
                     broke = true;
                 }
+
+                Info.ChangeEmotionToHeroBy(hero, Hero.MainHero, 1);
 
                 if (DramalordMCM.Get.AffairOutput)
                 {

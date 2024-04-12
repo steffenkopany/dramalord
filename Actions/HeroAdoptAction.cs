@@ -19,6 +19,12 @@ namespace Dramalord.Actions
                 adopted.Father = (hero.IsFemale) ? target : hero;
                 adopted.Clan = hero.Clan;
                 adopted.SetNewOccupation(hero.Occupation);
+
+                if (hero.Occupation == Occupation.Lord)
+                {
+                    adopted.SetName(hero.FirstName, hero.FirstName);
+                }
+
                 adopted.UpdateHomeSettlement();
                 TeleportHeroAction.ApplyDelayedTeleportToSettlement(adopted, adopted.HomeSettlement);
                 Info.SetLastAdoption(hero, target, CampaignTime.Now.ToDays);

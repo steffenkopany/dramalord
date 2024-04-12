@@ -148,7 +148,7 @@
     <string id="Dramalord142" text="{HERO.LINK} tricked {SPOUSE.LINK} being the cause of her pregancy." />
     <string id="Dramalord146" text="{HERO.LINK} commited suizide." />
     <!-- Banner -->
-    <string id="Dramalord129" text="{HERO.LINK} played with their toy." />
+    <string id="Dramalord129" text="{HERO.LINK} played with their toy while thinking of you." />
     <string id="Dramalord130" text="{HERO.LINK}s toy broke!" />
     <string id="Dramalord131" text="{HERO.LINK} divorced from you." />
     <string id="Dramalord132" text="{HERO.LINK} ended the affair with you." />
@@ -165,5 +165,95 @@
     <string id="Dramalord135" text="{HERO.LINK} says they love you and asks you if you consider marrying them." />
     <string id="Dramalord137" text="Take care of your child" />
     <string id="Dramalord138" text="{HERO.LINK} asks you to take {CHILD.LINK} into your care to protect them from {SPOUSE.LINK}." />
+    <!-- Encyclopedia -->
+    <string id="Dramalord229" text="Attraction:" />
+    <string id="Dramalord230" text="Emotion:" />
+    <string id="Dramalord231" text="Horny:" />
+    <string id="Dramalord232" text="Has Toy:" />
+    <string id="Dramalord233" text="Trait Score:" />
+    <string id="Dramalord234" text="Period Start Day:" />
+    <!-- MCM -->
+    <string id="Dramalord147" text="General" />
+    <string id="Dramalord148" text="Hero Setup" />
+    <string id="Dramalord149" text="Player Setup" />
+    <string id="Dramalord150" text="Extra QOL" />
+    <string id="Dramalord151" text="Flirt Logs" />
+    <string id="Dramalord152" text="Show flirt events in logs" />
+    <string id="Dramalord153" text="Affair Logs" />
+    <string id="Dramalord154" text="Show affair events in logs" />
+    <string id="Dramalord155" text="Clan Changes Logs" />
+    <string id="Dramalord156" text="Show clan related events in logs" />
+    <string id="Dramalord157" text="Marriage Logs" />
+    <string id="Dramalord158" text="Show marriages events in logs" />
+    <string id="Dramalord159" text="Death Logs" />
+    <string id="Dramalord160" text="Show death events in logs" />
+    <string id="Dramalord161" text="Birth Logs" />
+    <string id="Dramalord162" text="Show birth/orphan events in logs" />
+    <string id="Dramalord163" text="Trait-Score Multiplier" />
+    <string id="Dramalord164" text="Trait score multiplier for AI emotion grow (higher = faster)" />
+    <string id="Dramalord165" text="Protect Family" />
+    <string id="Dramalord166" text="No AI interaction with family members" />
+    <string id="Dramalord167" text="Other Sex Attraction Modifier" />
+    <string id="Dramalord168" text="AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)" />
+    <string id="Dramalord169" text="Min. Attraction Score" />
+    <string id="Dramalord170" text="AI minimum attraction score to to start interacting with each other" />
+    <string id="Dramalord171" text="Min. Emotion For Affairs" />
+    <string id="Dramalord172" text="Minimum emotion value for AI to consider starting an affair" />
+    <string id="Dramalord173" text="Days Between Discreet Meetings" />
+    <string id="Dramalord174" text="Days AI will wait before having a discreet meeting with the same hero again" />
+    <string id="Dramalord175" text="Min. Emotion For Marriage" />
+    <string id="Dramalord176" text="Minimum emotion value for AI to consider marriage with a hero" />
+    <string id="Dramalord177" text="Min. Emotion For Divorce" />
+    <string id="Dramalord178" text="Emotion value for AI to consider divorce" />
+    <string id="Dramalord179" text="Min. Horny Value For Intercouse" />
+    <string id="Dramalord180" text="Minimum horniness of AI for interest in intercourse" />
+    <string id="Dramalord181" text="Intercourse Horniness Loss" />
+    <string id="Dramalord182" text="Value of horniness lost by intercourse" />
+    <string id="Dramalord183" text="Chance Getting Caught" />
+    <string id="Dramalord184" text="Chance of getting caught by by partners while interacting wth other heroes" />
+    <string id="Dramalord185" text="Emotional Loss Flirting Witnessed" />
+    <string id="Dramalord186" text="Loss of emotion of heroes witnessing their partners flirting with others" />
+    <string id="Dramalord187" text="Emotional Loss Meeting Witnessed" />
+    <string id="Dramalord188" text="Loss of emotion of heroes witnessing their partners meeting in secret with others" />
+    <string id="Dramalord189" text="Emotional Loss Intercourse Witnessed" />
+    <string id="Dramalord190" text="Loss of emotion of heroes witnessing their partner having intercourse with others" />
+    <string id="Dramalord191" text="Emotional Loss Marry Other" />
+    <string id="Dramalord192" text="Loss of emotion of hero if their partner marries someone else" />
+    <string id="Dramalord193" text="Emotional Loss Breakup" />
+    <string id="Dramalord194" text="Loss of emotion of hero if their partner breaks up with them (affairs)" />
+    <string id="Dramalord195" text="Emotional Loss Divorce" />
+    <string id="Dramalord196" text="Loss of emotion of hero if their partner ends their marriage" />
+    <string id="Dramalord197" text="Emotional Loss Pregnancy" />
+    <string id="Dramalord198" text="Loss of emotion of heroes if their partners are visibly pregnant from someone else" />
+    <string id="Dramalord199" text="Emotional Loss Bastard" />
+    <string id="Dramalord200" text="Loss of emotion of partners if heros give birth to children of someone else" />
+    <string id="Dramalord201" text="Emotional Win Affair" />
+    <string id="Dramalord202" text="Emotional gain of heroes who start an affair" />
+    <string id="Dramalord203" text="Emotional Win Marriage" />
+    <string id="Dramalord204" text="Emotional gain of heroes who are getting married" />
+    <string id="Dramalord205" text="Pregnancy Chance" />
+    <string id="Dramalord206" text="Chance of getting pregnant during intercourse" />
+    <string id="Dramalord207" text="Pregnancy Duration" />
+    <string id="Dramalord208" text="How many days a hero is pregnant before giving birth" />
+    <string id="Dramalord209" text="Days Until Pregnancy Visible" />
+    <string id="Dramalord210" text="How many days a hero is pregnant before the pregnancy is visible to other heroes" />
+    <string id="Dramalord211" text="Wait Between Adopting" />
+    <string id="Dramalord212" text="How many days to wait between adptions (same sex or old couples)" />
+    <string id="Dramalord213" text="Max Fertility Age" />
+    <string id="Dramalord214" text="Maximum age of being fertile" />
+    <string id="Dramalord215" text="Period Duration" />
+    <string id="Dramalord216" text="Duration of period in days for female heroes per season (can't get pregnant)" />
+    <string id="Dramalord217" text="Toy Break Chance" />
+    <string id="Dramalord218" text="Chance a toy will break when being used by a hero" />
+    <string id="Dramalord219" text="Min. Emotion For Conversation" />
+    <string id="Dramalord220" text="Minimum emotion value of AI to accept an intimate conversation with the player" />
+    <string id="Dramalord221" text="Player Always Attractive" />
+    <string id="Dramalord222" text="Player is always 100% attractive to other heroes (cheat)" />
+    <string id="Dramalord223" text="Player Always Loved" />
+    <string id="Dramalord224" text="Player is always loved by other heroes (cheat)" />
+    <string id="Dramalord225" text="No Captivity Messages" />
+    <string id="Dramalord226" text="Disable spam of captured or freed heroes (english only!)" />
+    <string id="Dramalord227" text="No Relation Change Notification" />
+    <string id="Dramalord228" text="Disable spam of relation increase with notables" />
   </strings>
 </base>
