@@ -182,7 +182,7 @@ namespace Dramalord.UI
 
             if (Npc.Clan != null && Npc.Clan == Player.Clan)
             {
-                HeroLeaveClanAction.Apply(Npc, true, Npc);
+                HeroLeaveClanAction.Apply(Npc, Npc);
             }
             if (PlayerEncounter.Current != null)
             {
@@ -224,7 +224,7 @@ namespace Dramalord.UI
 
             if (Npc.Clan != null && Npc.Clan == Player.Clan)
             {
-                HeroLeaveClanAction.Apply(Npc, true, Npc);
+                HeroLeaveClanAction.Apply(Npc, Npc);
             }
             if (PlayerEncounter.Current != null)
             {

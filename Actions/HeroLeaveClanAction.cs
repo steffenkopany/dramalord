@@ -11,9 +11,13 @@ namespace Dramalord.Actions
 {
     internal static class HeroLeaveClanAction
     {
-        internal static void Apply(Hero hero, bool withChildren, Hero causedBy)
+        internal static void Apply(Hero hero, Hero causedBy)
         {
             Clan oldClan = hero.Clan;
+            if(oldClan == null)
+            {
+                return;
+            }
 
             Kingdom? kingdom = hero.MapFaction as Kingdom;
             if (kingdom != null && kingdom.RulingClan != null && kingdom.RulingClan.Leader == hero)
@@ -55,21 +59,8 @@ namespace Dramalord.Actions
             }
 
             hero.SetNewOccupation(Occupation.Wanderer);
-            //hero.SetName(new TextObject(hero.FirstName.ToString() + " the Wanderer"), hero.FirstName);
             hero.UpdateHomeSettlement();
             CampaignEventDispatcher.Instance.OnHeroChangedClan(hero, oldClan);
-
-            if (withChildren)
-            {
-                foreach (Hero child in hero.Children)
-                {
-                    if (child.IsChild)
-                    {
-                        child.Clan = null;
-                        child.UpdateHomeSettlement();
-                    }
-                }
-            }
 
             if (DramalordMCM.Get.ClanOutput)
             {

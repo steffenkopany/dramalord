@@ -6,7 +6,7 @@ namespace Dramalord.Actions
 {
     internal static class HeroJoinClanAction
     {
-        internal static void Apply(Hero hero, Clan clan, bool withChildren)
+        internal static void Apply(Hero hero, Clan clan)
         {
             if (hero.Occupation == Occupation.Wanderer)
             {
@@ -18,17 +18,14 @@ namespace Dramalord.Actions
             hero.SetNewOccupation(Occupation.Lord);
             hero.ChangeState(Hero.CharacterStates.Active);
 
-            if (withChildren)
+            foreach (Hero child in hero.Children)
             {
-                foreach (Hero child in hero.Children)
+                if (child.IsChild && child.Clan == null)
                 {
-                    if (child.IsChild)
-                    {
-                        child.Clan = clan;
-                        child.UpdateHomeSettlement();
-                        child.SetNewOccupation(Occupation.Lord);
-                        child.ChangeState(Hero.CharacterStates.Active);
-                    }
+                    child.Clan = clan;
+                    child.UpdateHomeSettlement();
+                    child.SetNewOccupation(Occupation.Lord);
+                    child.ChangeState(Hero.CharacterStates.Active);
                 }
             }
 

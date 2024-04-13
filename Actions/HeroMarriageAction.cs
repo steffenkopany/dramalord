@@ -1,6 +1,7 @@
 ﻿using Dramalord.Data;
 using Dramalord.UI;
 using Helpers;
+using System;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.GameComponents;
@@ -69,27 +70,41 @@ namespace Dramalord.Actions
             if (hero == Hero.MainHero || target == Hero.MainHero)
             {
                 Hero Npc = (hero == Hero.MainHero) ? target : hero;
-                HeroLeaveClanAction.Apply(Npc, false, Npc);
-                HeroJoinClanAction.Apply(Npc, Clan.PlayerClan, false);
+                HeroLeaveClanAction.Apply(Npc, Npc);
+                HeroJoinClanAction.Apply(Npc, Clan.PlayerClan);
             }
             else if(hero.Clan != null && target.Clan == null)
             {
-                HeroJoinClanAction.Apply(target, hero.Clan, false);
+                HeroJoinClanAction.Apply(target, hero.Clan);
             }
             else if (hero.Clan == null && target.Clan != null)
             {
-                HeroJoinClanAction.Apply(hero, target.Clan, false);
+                HeroJoinClanAction.Apply(hero, target.Clan);
             }
             else if (hero.Clan != null && target.Clan != null && hero.Clan != target.Clan)
             {
-                HeroLeaveClanAction.Apply(hero, false, hero);
-                HeroJoinClanAction.Apply(hero, target.Clan, false);
+                HeroLeaveClanAction.Apply(hero, hero);
+                HeroJoinClanAction.Apply(hero, target.Clan);
             }
                 
-            MarriageAction.Apply(hero, target, false); 
+            MarriageAction.Apply(hero, target, false);
+
+            foreach (Hero child in hero.Children)
+            {
+                if (child.IsChild && child.Clan == null)
+                {
+                    if (child.Occupation == Occupation.Wanderer)
+                    {
+                        child.SetName(child.FirstName, child.FirstName);
+                    }
+                    child.Clan = target.Clan;
+                    child.UpdateHomeSettlement();
+                    child.SetNewOccupation(Occupation.Lord);
+                    child.ChangeState(Hero.CharacterStates.Active);
+                }
+            }
 
             Info.SetIsCoupleWithHero(hero, target, true);
-            //Info.ChangeEmotionToHeroBy(hero, target, DramalordMCM.Get.EmotionalWinMarriage);
 
             DramalordEvents.OnHeroesMarried(hero, target);
         }

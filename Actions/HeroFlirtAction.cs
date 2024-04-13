@@ -13,9 +13,10 @@ namespace Dramalord.Actions
                 int score = Info.GetTraitscoreToHero(hero, target);
                 if (score != 0 && Info.ValidateHeroInfo(hero) && Info.ValidateHeroInfo(target))
                 {
+                    /*
                     Info.ChangeHeroHornyBy(target, (score > 0) ? score : 0);
                     Info.ChangeHeroHornyBy(hero, (score > 0) ? score : 0);
-
+                    */
                     Info.ChangeEmotionToHeroBy(hero, target, score);
                 }
 
