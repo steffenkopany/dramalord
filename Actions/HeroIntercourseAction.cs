@@ -20,8 +20,8 @@ namespace Dramalord.Actions
 
                 Info.ChangeEmotionToHeroBy(target, hero, (byForce) ? -100 : score + Info.GetIntercourseSkill(hero));
 
-                Info.ChangeHeroHornyBy(hero, -DramalordMCM.Get.HornyLossIntercourse);
-                Info.ChangeHeroHornyBy(target, -DramalordMCM.Get.HornyLossIntercourse);
+                Info.ChangeHeroHornyBy(hero, DramalordMCM.Get.HornyLossIntercourse * -1);
+                Info.ChangeHeroHornyBy(target, DramalordMCM.Get.HornyLossIntercourse * -1);
 
                 if (target == Hero.MainHero || hero == Hero.MainHero)
                 {

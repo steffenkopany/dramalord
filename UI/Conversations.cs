@@ -80,22 +80,22 @@ namespace Dramalord.UI
             starter.AddDialogLine("Dramalord545", NPCMarryReply, PlayerConversationMain, "{=Dramalord046}No I would not like to do that.", Conditions.NpcDeclinesToMarry, Consequences.NpcDeclinedMarriage);
 
 
-            starter.AddPlayerLine("Dramalord098", PlayerConversationMain, NPCActionReply, "{=Dramalord098}I would like to...", null, null);
+            starter.AddPlayerLine("Dramalord098", PlayerMainOptions, NPCActionReply, "{=Dramalord098}I would like to...", Conditions.PlayerCanAskForTalk, null);
             starter.AddDialogLine("Dramalord102", NPCActionReply, PlayerConversationAction, "{=Dramalord102}What do you want?", null, null);
 
             starter.AddPlayerLine("Dramalord103", PlayerConversationAction, NPCPresentReply, "{=Dramalord103}...give you something.", Conditions.PlayerCanGivePresent, null);
             starter.AddPlayerLine("Dramalord104", PlayerConversationAction, NPCBreakupReply, "{=Dramalord104}...end this love affair.", Conditions.PlayerCanAskForBreakup, null);
             starter.AddPlayerLine("Dramalord105", PlayerConversationAction, NPCDivorceReply, "{=Dramalord105}...end this marriage.", Conditions.PlayerCanAskForDivorce, null);
-            starter.AddPlayerLine("Dramalord972", PlayerConversationAction, NPCStartReplyGroup, "{=Dramalord072}Nevermind.", null, null);
+            starter.AddPlayerLine("Dramalord972", PlayerConversationAction, NPCConversationExit, "{=Dramalord072}Nevermind.", null, null);
 
-            starter.AddDialogLine("Dramalord106", NPCPresentReply, PlayerConversationMain, "{=Dramalord106}Oh! I will put it to good use!", null, Consequences.NpcGotPresentFromPlayer);
+            starter.AddDialogLine("Dramalord106", NPCPresentReply, PlayerMainOptions, "{=Dramalord106}Oh! I will put it to good use!", null, Consequences.NpcGotPresentFromPlayer);
 
-            starter.AddDialogLine("Dramalord107", NPCBreakupReply, PlayerConversationMain, "{=Dramalord107}Ugh. Finally this is over!", Conditions.NpcDoesntMindBreakup, Consequences.NpcDidntCareAboutBreakup);
+            starter.AddDialogLine("Dramalord107", NPCBreakupReply, PlayerMainOptions, "{=Dramalord107}Ugh. Finally this is over!", Conditions.NpcDoesntMindBreakup, Consequences.NpcDidntCareAboutBreakup);
             starter.AddDialogLine("Dramalord108", NPCBreakupReply, CloseConversation, "{=Dramalord108}Oh. This is a suprise. I.. I have to be alone now...", Conditions.NpcSurprisedByBreakup, Consequences.NpcWasSurprisedByBreakup);
             starter.AddDialogLine("Dramalord109", NPCBreakupReply, CloseConversation, "{=Dramalord109}What? You bastard! I never want to see you again!", Conditions.NpcHeartbrokenByBreakup, Consequences.NpcWasHeartBrokenByBreakup);
             starter.AddDialogLine("Dramalord110", NPCBreakupReply, CloseConversation, "{=Dramalord110}Oh god... my darkes nightmare has come true... I can't live without you...", Conditions.NpcSuicidalByBreakup, Consequences.NpcGotSuicidalByBreakup);
 
-            starter.AddDialogLine("Dramalord907", NPCDivorceReply, PlayerConversationMain, "{=Dramalord107}Ugh. Finally this is over!", Conditions.NpcDoesntMindBreakup, Consequences.NpcDidntCareAboutDivorce);
+            starter.AddDialogLine("Dramalord907", NPCDivorceReply, PlayerMainOptions, "{=Dramalord107}Ugh. Finally this is over!", Conditions.NpcDoesntMindBreakup, Consequences.NpcDidntCareAboutDivorce);
             starter.AddDialogLine("Dramalord908", NPCDivorceReply, CloseConversation, "{=Dramalord108}Oh. This is a suprise. I.. I have to be alone now...", Conditions.NpcSurprisedByBreakup, Consequences.NpcWasSurprisedByDivorce);
             starter.AddDialogLine("Dramalord909", NPCDivorceReply, CloseConversation, "{=Dramalord109}What? You bastard! I never want to see you again!", Conditions.NpcHeartbrokenByBreakup, Consequences.NpcWasHeartBrokenByDivorce);
             starter.AddDialogLine("Dramalord910", NPCDivorceReply, CloseConversation, "{=Dramalord110}Oh god... my darkes nightmare has come true... I can't live without you...", Conditions.NpcSuicidalByBreakup, Consequences.NpcGotSuicidalByDivorce);
