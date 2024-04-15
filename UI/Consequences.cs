@@ -246,7 +246,7 @@ namespace Dramalord.UI
         internal static void PlayerViolatedNpc()
         {
             SetRoles();
-            if (Info.GetHeroHorny(Player) >= DramalordMCM.Get.MinHornyForIntercourse)
+            if (Info.ValidateHeroMemory(Player, Npc))
             {
                 HeroIntercourseAction.Apply(Player, Npc, true);
 

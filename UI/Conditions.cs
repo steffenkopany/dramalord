@@ -212,7 +212,7 @@ namespace Dramalord.UI
         internal static bool PlayerCanViolateNpc()
         {
             SetRoles();
-            return Player.PartyBelongedTo != null && Player.PartyBelongedTo.PrisonRoster != null && Player.PartyBelongedTo.PrisonRoster.Contains(Npc.CharacterObject);
+            return (Player.PartyBelongedTo != null && Player.PartyBelongedTo.PrisonRoster != null && Player.PartyBelongedTo.PrisonRoster.Contains(Npc.CharacterObject)) || (Npc.IsPrisoner && Npc.CurrentSettlement != null && Npc.CurrentSettlement.OwnerClan == Player.Clan);
         }
 
         // private stuff
