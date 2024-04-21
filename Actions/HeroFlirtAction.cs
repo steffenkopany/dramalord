@@ -13,21 +13,18 @@ namespace Dramalord.Actions
                 int score = Info.GetTraitscoreToHero(hero, target);
                 if (score != 0 && Info.ValidateHeroInfo(hero) && Info.ValidateHeroInfo(target))
                 {
-                    /*
-                    Info.ChangeHeroHornyBy(target, (score > 0) ? score : 0);
-                    Info.ChangeHeroHornyBy(hero, (score > 0) ? score : 0);
-                    */
                     Info.ChangeEmotionToHeroBy(hero, target, score);
                 }
 
                 Info.SetLastDaySeen(hero, target, CampaignTime.Now.ToDays);
 
                 float emotionHero = Info.GetEmotionToHero(hero, target);
+                bool honorful = hero.GetHeroTraits().Honor > 0 || target.GetHeroTraits().Honor > 0;
 
-                if (hero != Hero.MainHero && !Info.IsCoupleWithHero(hero, target) && emotionHero >= DramalordMCM.Get.MinEmotionForDating && (!Info.IsCloseRelativeTo(hero, target) || !DramalordMCM.Get.ProtectFamily))
+                if (!honorful && hero != Hero.MainHero && !Info.IsCoupleWithHero(hero, target) && emotionHero >= DramalordMCM.Get.MinEmotionForDating && (!Info.IsCloseRelativeTo(hero, target) || !DramalordMCM.Get.ProtectFamily))
                 {
                     Info.SetIsCoupleWithHero(hero, target, true);
-                    //Info.ChangeEmotionToHeroBy(hero, target, DramalordMCM.Get.EmotionalWinAffair);
+                    
                     if (DramalordMCM.Get.AffairOutput)
                     {
                         LogEntry.AddLogEntry(new EncyclopediaLogStartAffair(hero, target));

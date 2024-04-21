@@ -22,6 +22,8 @@ namespace Dramalord
         public static List<Action<Hero, Hero, Hero, WitnessType>> OnHeroesWitnessActions = new();
         public static List<Action<Hero, Hero, Hero, KillReason>> OnHeroesKilledActions = new();
         public static List<Action<Hero, bool>> OnHeroesUsedToyActions = new();
+        public static List<Action<Clan, Kingdom, bool>> OnClanLeftKingdomActions = new();
+        public static List<Action<Clan, Kingdom>> OnClanJoinedKingdomActions = new();
 
         internal static void OnHeroesMarried(Hero hero, Hero target)
         {
@@ -96,6 +98,16 @@ namespace Dramalord
         internal static void OnHeroesUsedToy(Hero hero, bool broke)
         {
             OnHeroesUsedToyActions.ForEach(item => item(hero, broke));
+        }
+
+        internal static void OnClanLeftKingdom(Clan clan, Kingdom kingdom, bool forced)
+        {
+            OnClanLeftKingdomActions.ForEach(item => item(clan, kingdom, forced));
+        }
+
+        internal static void OnClanJoinedKingdom(Clan clan, Kingdom kingdom)
+        {
+            OnClanJoinedKingdomActions.ForEach(item => item(clan, kingdom));
         }
     }
 }

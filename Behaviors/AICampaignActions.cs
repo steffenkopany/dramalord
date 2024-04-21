@@ -1,5 +1,7 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Data;
+using Dramalord.UI;
+using Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.CharacterCreationContent;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.Party;
@@ -16,7 +19,7 @@ using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
-
+using TaleWorlds.Localization;
 
 namespace Dramalord.Behaviors
 {
@@ -72,6 +75,7 @@ namespace Dramalord.Behaviors
                                             HeroLeaveClanAction.Apply(hero, hero);
                                             HeroLeaveClanAction.Apply(child, child);
                                             HeroJoinClanAction.Apply(hero, child.Father.Clan);
+                                            return;
                                         }
                                         else if (hero.GetHeroTraits().Valor > 0 && Info.GetEmotionToHero(hero, spouse) < DramalordMCM.Get.MinEmotionForDating)
                                         {
@@ -196,10 +200,15 @@ namespace Dramalord.Behaviors
                         HeroWitnessAction.Apply(target, target, hero, WitnessType.Pregnancy);
 
                         float heroEmotion = Info.GetEmotionToHero(hero, target);
-
-                        if (hero != Hero.MainHero && hero.GetHeroTraits().Calculating < 0 && hero.GetHeroTraits().Mercy < 0)
+                        CharacterTraits traits = hero.GetHeroTraits();
+                        if (hero != Hero.MainHero && traits.Calculating < 0 && traits.Mercy < 0)
                         {
                             HeroKillAction.Apply(hero, target, target, KillReason.Pregnancy);
+                            return;
+                        }
+                        else if(traits.Calculating < 0 && hero.IsKingdomLeader && target.IsClanLeader && hero.Clan != null && target.Clan != null && hero.Clan != target.Clan && target.Clan.Kingdom == hero.Clan.Kingdom)
+                        {
+                            ClanLeaveKingdomAction.Apply(target.Clan, true);
                             return;
                         }
                         else if (hero.Spouse == target && heroEmotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
@@ -226,10 +235,15 @@ namespace Dramalord.Behaviors
                         HeroWitnessAction.Apply(hero, hero, target, WitnessType.Pregnancy);
 
                         float targetEmotion = Info.GetEmotionToHero(target, hero);
-
-                        if (target.GetHeroTraits().Calculating < 0 && target.GetHeroTraits().Mercy < 0)
+                        CharacterTraits traits = target.GetHeroTraits();
+                        if (target != Hero.MainHero && traits.Calculating < 0 && traits.Mercy < 0)
                         {
                             HeroKillAction.Apply(target, hero, hero, KillReason.Pregnancy);
+                            return;
+                        }
+                        else if (traits.Calculating < 0 && target.IsKingdomLeader && hero.IsClanLeader && target.Clan != null && hero.Clan != null && target.Clan != hero.Clan && hero.Clan.Kingdom == target.Clan.Kingdom)
+                        {
+                            ClanLeaveKingdomAction.Apply(hero.Clan, true);
                             return;
                         }
                         else if (target.Spouse == hero && targetEmotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
@@ -251,44 +265,31 @@ namespace Dramalord.Behaviors
                 
                 if ((Info.GetHeroHorny(hero) >= DramalordMCM.Get.MinHornyForIntercourse || hero == Hero.MainHero) && (Info.GetHeroHorny(target) >= DramalordMCM.Get.MinHornyForIntercourse || target == Hero.MainHero))
                 {
-                    HeroIntercourseAction.Apply(hero, target, false);
-
-                    Hero mother = hero.IsFemale ? hero : target;
-                    Hero father = target.IsFemale ? hero : target;
-
-                    if (mother != father && !mother.IsPregnant && Info.CanGetPregnant(mother) && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
+                    if(hero != Hero.MainHero && target != Hero.MainHero)
                     {
-                        HeroConceiveAction.Apply(hero, target, false);
+                        HandleDateIntercourse(hero, target, heroWitness);
                     }
-
-                    if(heroWitness != null)
+                    else
                     {
-                        if (target != heroWitness && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
-                        {
-                            HeroWitnessAction.Apply(hero, target, heroWitness, WitnessType.Intercourse);
+                        Hero main = (hero == Hero.MainHero) ? hero : target;
+                        Hero other = (hero == Hero.MainHero) ? target : hero;
 
-                            float witnessEmotion = Info.GetEmotionToHero(heroWitness, hero);
+                        TextObject title = new TextObject("{=Dramalord245}Intimate Opportunity");
+                        TextObject text = new TextObject("{=Dramalord246}{HERO.LINK} has a special spark in their eyes today and you have a feeling they want to go further. Will you let it happen?");
+                        StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, text);
 
-                            if (heroWitness.GetHeroTraits().Calculating < 0 && heroWitness.GetHeroTraits().Mercy < 0)
-                            {
-                                HeroKillAction.Apply(heroWitness, hero, target, KillReason.Intercourse);
-                                return;
-                            }
-                            else if (heroWitness.Spouse == hero && witnessEmotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
-                            {
-                                HeroDivorceAction.Apply(heroWitness, hero);
-                                if (heroWitness.GetHeroTraits().Mercy < 0 && heroWitness.Clan != null && heroWitness.Clan == hero.Clan && heroWitness.Clan.Leader == heroWitness)
-                                {
-                                    HeroLeaveClanAction.Apply(hero, heroWitness);
+                        Notification.DrawMessageBox(
+                                title,
+                                text,
+                                true,
+                                () => {
+
+                                    HandleDateIntercourse(hero, target, heroWitness);
+                                },
+                                () => {
+
                                 }
-                                return;
-                            }
-                            else if (heroWitness.Spouse != hero && witnessEmotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
-                            {
-                                HeroBreakupAction.Apply(heroWitness, hero);
-                                return;
-                            }
-                        }
+                            );
                     }
                 }
                 else
@@ -299,6 +300,58 @@ namespace Dramalord.Behaviors
                         {
                             HeroWitnessAction.Apply(hero, target, heroWitness, WitnessType.Dating);
                         }
+                    }
+                }
+            }
+        }
+
+        internal static void HandleDateIntercourse(Hero hero, Hero target, Hero? heroWitness)
+        {
+            HeroIntercourseAction.Apply(hero, target, false);
+
+            Hero mother = hero.IsFemale ? hero : target;
+            Hero father = target.IsFemale ? hero : target;
+
+            if (mother != father && !mother.IsPregnant && Info.CanGetPregnant(mother) && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
+            {
+                HeroConceiveAction.Apply(hero, target, false);
+            }
+
+            if (heroWitness != null)
+            {
+                if (target != heroWitness && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+                {
+                    HeroWitnessAction.Apply(hero, target, heroWitness, WitnessType.Intercourse);
+
+                    float witnessEmotion = Info.GetEmotionToHero(heroWitness, hero);
+                    CharacterTraits traits = heroWitness.GetHeroTraits();
+
+                    if (heroWitness != Hero.MainHero && traits.Calculating < 0 && traits.Mercy < 0)
+                    {
+                        HeroKillAction.Apply(heroWitness, hero, target, KillReason.Intercourse);
+                        if (traits.Calculating < 0 && heroWitness.IsKingdomLeader && target.IsClanLeader && heroWitness.Clan != null && target.Clan != null && heroWitness.Clan != target.Clan && target.Clan.Kingdom == heroWitness.Clan.Kingdom)
+                        {
+                            ClanLeaveKingdomAction.Apply(target.Clan, true);
+                        }
+                        return;
+                    }
+                    else if (heroWitness.Spouse == hero && witnessEmotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
+                    {
+                        HeroDivorceAction.Apply(heroWitness, hero);
+                        if (heroWitness.GetHeroTraits().Mercy < 0 && heroWitness.Clan != null && heroWitness.Clan == hero.Clan && heroWitness.Clan.Leader == heroWitness)
+                        {
+                            HeroLeaveClanAction.Apply(hero, heroWitness);
+                        }
+                        if (traits.Calculating < 0 && heroWitness.IsKingdomLeader && target.IsClanLeader && heroWitness.Clan != null && target.Clan != null && heroWitness.Clan != target.Clan && target.Clan.Kingdom == heroWitness.Clan.Kingdom)
+                        {
+                            ClanLeaveKingdomAction.Apply(target.Clan, true);
+                        }
+                        return;
+                    }
+                    else if (heroWitness.Spouse != hero && witnessEmotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
+                    {
+                        HeroBreakupAction.Apply(heroWitness, hero);
+                        return;
                     }
                 }
             }
@@ -336,8 +389,10 @@ namespace Dramalord.Behaviors
                         bool isCouple = Info.IsCoupleWithHero(hero, h);
                         int attraction = Info.GetAttractionToHero(hero, h);
                         bool isRelative = Info.IsCloseRelativeTo(hero, h);
+                        bool clanCheck = h.Clan != Clan.PlayerClan || DramalordMCM.Get.AllowPlayerClanAI;
+                        bool wandererCheck = h.Occupation != Occupation.Wanderer || DramalordMCM.Get.AllowWandererAI;
 
-                        if (!isRelative || !noFamily)
+                        if ((!isRelative || !noFamily) && clanCheck && wandererCheck)
                         {
                             if (!isCouple && attraction >= flirtLimit)
                             {
@@ -367,9 +422,11 @@ namespace Dramalord.Behaviors
                         {
                             bool isCouple = Info.IsCoupleWithHero(hero, h);
                             int attraction = Info.GetAttractionToHero(hero, h);
-                            bool isRelative = Info.IsCloseRelativeTo(hero, h);
+                            bool isRelative = Info.IsCloseRelativeTo(hero, h); 
+                            bool clanCheck = h.Clan != Clan.PlayerClan || DramalordMCM.Get.AllowPlayerClanAI;
+                            bool wandererCheck = h.Occupation != Occupation.Wanderer || DramalordMCM.Get.AllowWandererAI;
 
-                            if (!isRelative || !noFamily)
+                            if ((!isRelative || !noFamily) && clanCheck && wandererCheck)
                             {
                                 if (!isCouple && attraction >= flirtLimit)
                                 {
@@ -405,8 +462,10 @@ namespace Dramalord.Behaviors
                                 bool isCouple = Info.IsCoupleWithHero(hero, h);
                                 int attraction = Info.GetAttractionToHero(hero, h);
                                 bool isRelative = Info.IsCloseRelativeTo(hero, h);
+                                bool clanCheck = h.Clan != Clan.PlayerClan || DramalordMCM.Get.AllowPlayerClanAI;
+                                bool wandererCheck = h.Occupation != Occupation.Wanderer || DramalordMCM.Get.AllowWandererAI;
 
-                                if (!isRelative || !noFamily)
+                                if ((!isRelative || !noFamily) && clanCheck && wandererCheck)
                                 {
                                     if (!isCouple && attraction >= flirtLimit)
                                     {

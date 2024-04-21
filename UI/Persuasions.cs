@@ -207,7 +207,7 @@ namespace Dramalord.UI
             persuasionTask.SpokenLine = new TextObject("{=Dramalord088}Why should I spend time with you?");
             persuasionTask.FinalFailLine = new TextObject("{=Dramalord089}You are boring me.");
             persuasionTask.TryLaterLine = new TextObject("{=Dramalord055}I feel tired. Let's talk about this a other time.");
-            PersuasionArgumentStrength persuasionArgumentStrength = PersuasionArgumentStrength.Easy;
+            PersuasionArgumentStrength persuasionArgumentStrength = PersuasionArgumentStrength.Normal;
 
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord090}I have some exciting stories to tell!"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord091}Wouldn't you like some entertainment?"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
@@ -224,7 +224,7 @@ namespace Dramalord.UI
             persuasionTask.SpokenLine = new TextObject("{=Dramalord053}Why should I ride with you?");
             persuasionTask.FinalFailLine = new TextObject("{=Dramalord054}I think I will leave my horse in the stable.");
             persuasionTask.TryLaterLine = new TextObject("{=Dramalord055}I feel tired. Let's talk about this a other time.");
-            PersuasionArgumentStrength persuasionArgumentStrength = PersuasionArgumentStrength.Easy;
+            PersuasionArgumentStrength persuasionArgumentStrength = PersuasionArgumentStrength.Normal;
 
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord056}We will ride fast as the wind!"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord057}Sitting in a castle all day is boring."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
@@ -241,7 +241,7 @@ namespace Dramalord.UI
             persuasionTask.SpokenLine = new TextObject("{=Dramalord061}Why should I give up my marriage?");
             persuasionTask.FinalFailLine = new TextObject("{=Dramalord068}I will not give up my marriage for you!");
             persuasionTask.TryLaterLine = new TextObject("{=Dramalord055}I feel tired. Let's talk about this a other time.");
-            PersuasionArgumentStrength persuasionArgumentStrength = PersuasionArgumentStrength.Easy;
+            PersuasionArgumentStrength persuasionArgumentStrength = PersuasionArgumentStrength.Normal;
 
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord056}We will ride fast as the wind!"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord078}On the long this is the better choice."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
@@ -258,7 +258,7 @@ namespace Dramalord.UI
             persuasionTask.SpokenLine = new TextObject("{=Dramalord082}Why should I marry you");
             persuasionTask.FinalFailLine = new TextObject("{=Dramalord081}I will not marry someone like you");
             persuasionTask.TryLaterLine = new TextObject("{=Dramalord055}I feel tired. Let's talk about this a other time.");
-            PersuasionArgumentStrength persuasionArgumentStrength = PersuasionArgumentStrength.Easy;
+            PersuasionArgumentStrength persuasionArgumentStrength = PersuasionArgumentStrength.Normal;
 
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord083}Together we will experience new adventures!"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord084}Imagine how we can build our future together."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));

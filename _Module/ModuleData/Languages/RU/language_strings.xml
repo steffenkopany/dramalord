@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base type="string">
+  <tags>
+    <tag language="Русский"/>
+  </tags>
+  <strings>
+    <string id="Dramalord001" text="Могу я спросить у тебя кое-что личное?" />
+    <string id="Dramalord002" text="Конечно. Что ты хочешь узнать?" />
+    <string id="Dramalord003" text="Я чувствую себя с вами недостаточно комфортно для такого рода разговоров." />
+    <string id="Dramalord004" text="Давай поговорим о чем-нибудь другом..." />
+    <string id="Dramalord005" text="Как скажешь." />
+    <string id="Dramalord006" text="Тебе нравится то, что ты видишь?" />
+    <string id="Dramalord007" text="Какую внешность ты предпочитаешь?" />
+    <string id="Dramalord008" text="Я думаю, что женщины - это {RATING_WOMEN}, а мужчины -  {RATING_MEN}. Мне нравятся {RATING_WEIGHT} люди телосложения {RATING_BUILD}. Лучшие из {RATING_CULTURE} примерно в возрасте {RATING_AGE}." />
+    <string id="Dramalord009" text="Хм... Я думаю, ты выглядишь {RATING_TOTAL}!" />
+    <string id="Dramalord010" text="сексуально" />
+    <string id="Dramalord011" text="хорошо" />
+    <string id="Dramalord012" text="отвратительно" />
+    <string id="Dramalord013" text="как кто-то не в моем вкусе" />
+    <string id="Dramalord014" text="пухлые" />
+    <string id="Dramalord015" text="среднего веса" />
+    <string id="Dramalord016" text="худощавые" />
+    <string id="Dramalord017" text="мускулистого" />
+    <string id="Dramalord018" text="среднего" />
+    <string id="Dramalord019" text="субтильного" />
+    <string id="Dramalord020" text="абсолютно отвратительно!" />
+    <string id="Dramalord021" text="отвратительно!" />
+    <string id="Dramalord022" text="очень уродливо." />
+    <string id="Dramalord023" text="уродливо." />
+    <string id="Dramalord024" text="некрасиво." />
+    <string id="Dramalord025" text="средне." />
+    <string id="Dramalord026" text="красиво." />
+    <string id="Dramalord027" text="красиво." />
+    <string id="Dramalord028" text="потрясающе!" />
+    <string id="Dramalord029" text="невероятно красиво!" />
+    <string id="Dramalord030" text="Что ты чувствуешь ко мне?" />
+    <string id="Dramalord031" text="{EMOTION_SCORE}!" />
+    <string id="Dramalord032" text="Я тебя абсолютно презираю" />
+    <string id="Dramalord033" text="Я тебя ненавижу" />
+    <string id="Dramalord034" text="Я тебятерпеть не могу" />
+    <string id="Dramalord035" text="Ты мне не нравишься" />
+    <string id="Dramalord036" text="Не являюсь твоим поклонником" />
+    <string id="Dramalord037" text="Я тебя уважаю" />
+    <string id="Dramalord038" text="Ты мне нравишься" />
+    <string id="Dramalord039" text="Кажется, я влюбляюсь" />
+    <string id="Dramalord040" text="Не могу перестать думать о тебе" />
+    <string id="Dramalord041" text="Я тебя люблю" />
+    <string id="Dramalord042" text="А не хочешь ли ты..." />
+    <string id="Dramalord043" text="Продолжай?" />
+    <string id="Dramalord044" text="...уединиться в более тихом месте?" />
+    <string id="Dramalord045" text="О... что ж, думаю, с удовольствием." />
+    <string id="Dramalord046" text="Нет, мне бы не хотелось этого делать." />
+    <string id="Dramalord047" text="...пойдешь со мной ненадолго?" />
+    <string id="Dramalord048" text="муж" />
+    <string id="Dramalord049" text="жена" />
+    <string id="Dramalord050" text="...развестись, чтобы сосредоточиться на себе?" />
+    <string id="Dramalord051" text="...выйти за меня замуж?" />
+    <string id="Dramalord052" text="Колбаса" />
+    <string id="Dramalord053" text="Зачем мне ехать с тобой?" />
+    <string id="Dramalord054" text="Думаю, я оставлю свою лошадь в конюшне" />
+    <string id="Dramalord055" text="Я чувствую усталость. Давай поговорим об этом в другой раз" />
+    <string id="Dramalord056" text="Мы будем мчаться быстрее ветра!" />
+    <string id="Dramalord057" text="Сидеть целый день в замке скучно." />
+    <string id="Dramalord058" text="Я затоплю тебя своим вниманием!" />
+    <string id="Dramalord059" text="Ваше присутствие оказало бы мне честь" />
+    <string id="Dramalord060" text="Бедные лошади только и делают, что стоят целый день." />
+    <string id="Dramalord061" text="Зачем мне отказываться от своего брака?" />
+    <string id="Dramalord062" text="У {HERO1.LINK} и {HERO2.LINK} начался роман." />
+    <string id="Dramalord063" text="{HERO1.LINK} закончил свой роман с {HERO2.LINK}" />
+    <string id="Dramalord064" text="{HERO1.LINK} расторгает брак с {HERO2.LINK}" />
+    <string id="Dramalord065" text="{HERO1.LINK} поместил ребенка {CHILD.LINK} в детский дом." />
+    <string id="Dramalord066" text="{KILLER.LINK} убивает {VICTIM.LINK} после того, как узнает об измене с {LOVER.LINK}." />
+    <string id="Dramalord067" text="{HERO.LINK} вступает в {CLAN}." />
+    <string id="Dramalord068" text="Я не откажусь от своего брака ради тебя!" />
+    <string id="Dramalord069" text="Я не могу смириться с тем, что тебя втянули в этот брак." />
+    <string id="Dramalord070" text="...пойдешь со мной на прогулку?" />
+    <string id="Dramalord071" text="Поехали!" />
+    <string id="Dramalord072" text="Неважно" />
+    <string id="Dramalord073" text="Это было здорово!" />
+    <string id="Dramalord074" text="Это было скучно" />
+    <string id="Dramalord075" text="роман" />
+    <string id="Dramalord076" text="любовник" />
+    <string id="Dramalord077" text="любовь" />
+    <string id="Dramalord078" text="В долгосрочной перспективе это лучший выбор." />
+    <string id="Dramalord079" text="Все ваши инвестиции в этот брак напрасны!" />
+    <string id="Dramalord080" text="Этот брак позорит тебя." />
+    <string id="Dramalord081" text="Я не выйду замуж за такого, как ты!" />
+    <string id="Dramalord082" text="Зачем мне вступать в брак с тобой?" />
+    <string id="Dramalord083" text="Вместе нас ждут новые приключения!" />
+    <string id="Dramalord084" text="Представь, как мы можем построить наше будущее вместе." />
+    <string id="Dramalord085" text="Мы бы всем делились друг с другом." />
+    <string id="Dramalord086" text="В нашей ситуации это благородный поступок." />
+    <string id="Dramalord087" text="Я не могу жить без тебя!" />
+    <string id="Dramalord088" text="Почему я должен проводить с тобой время?" />
+    <string id="Dramalord089" text="Ты мне уже надоедаешь." />
+    <string id="Dramalord090" text="Я хочу рассказать тебе несколько захватывающих историй!" />
+    <string id="Dramalord091" text="Не хотите ли немного развлечься?" />
+    <string id="Dramalord092" text="Я угощу тебя выпивкой в местной таверне." />
+    <string id="Dramalord093" text="Для меня было бы честью провести с тобой немного времени." />
+    <string id="Dramalord094" text="Умоляю тебя! Мне так скучно!" />
+    <string id="Dramalord095" text="Я не в браке..." />
+    <string id="Dramalord096" text="Мой возлюбленный" />
+    <string id="Dramalord097" text="Моя любовь" />
+    <string id="Dramalord098" text="Мне бы хотелось..." />
+    <string id="Dramalord099" text="{KILLER.LINK} убил {VICTIM.LINK} после того, как заметил, что она беременна от кого-то другого." />
+    <string id="Dramalord100" text="Лук-порей" />
+    <string id="Dramalord101" text="Пирог" />
+    <string id="Dramalord102" text="Чего ты хочешь?" />
+    <string id="Dramalord103" text="...дать тебе кое-что" />
+    <string id="Dramalord104" text="...покончим с этой любовью!" />
+    <string id="Dramalord105" text="...покончим с этим браком!" />
+    <string id="Dramalord106" text="О! Я найду этому достойное применение!" />
+    <string id="Dramalord107" text="Уф. Наконец-то это закончилось!" />
+    <string id="Dramalord108" text="О. Это сюрприз. Я... Мне... Мне надо побыть в одиночестве..." />
+    <string id="Dramalord109" text="Что? Ты мразь! Я больше никогда не хочу тебя видеть!" />
+    <string id="Dramalord110" text="О боже... мой темный кошмар стал явью... Я не могу жить без тебя..." />
+    <string id="Dramalord111" text="Ты и я... мы сейчас повеселимся..." />
+    <string id="Dramalord112" text="О боже! Пожалуйста, нет! Держись от меня подальше!" />
+    <string id="Dramalord113" text="{HERO1.LINK} женится на {HERO2.LINK}" />
+    <string id="Dramalord114" text="{HERO1.LINK} вступает в половую связь с {HERO2.LINK}" />
+    <string id="Dramalord115" text="{HERO1.LINK} была оплодотворена {HERO2.LINK}" />
+    <string id="Dramalord116" text="{HERO1.LINK} навязал себя {HERO2.LINK}" />
+    <string id="Dramalord117" text="{HERO1.LINK} была насильственно оплодотворена {HERO2.LINK}" />
+    <string id="Dramalord118" text="{HERO1.LINK} флиртует с {HERO2.LINK}" />
+    <string id="Dramalord119" text="{HERO1.LINK} тайно встречается с {HERO2.LINK}" />
+    <string id="Dramalord120" text="{HERO1.LINK} и {HERO2.LINK} усыновляют сироту {CHILD.LINK}" />
+    <string id="Dramalord121" text="{CHILD.LINK} рождается в паре {HERO1.LINK} и {HERO2.LINK}" />
+    <string id="Dramalord122" text="{HERO.LINK} покидает {OLDCLAN}" />
+    <string id="Dramalord123" text="{HERO.LINK} изгоняется из {OLDCLAN} по причине {CAUSEDBY.LINK}" />
+    <string id="Dramalord124" text="{WITNESS.LINK} становится свидетелем того, как {HERO1.LINK} флиртует с {HERO2.LINK}" />
+    <string id="Dramalord125" text="{WITNESS.LINK} становится свидетелем того, как {HERO1.LINK} отправляется на свидание с {HERO2.LINK}" />
+    <string id="Dramalord126" text="{WITNESS.LINK} застает {HERO1.LINK} в постели с {HERO2.LINK}" />
+    <string id="Dramalord127" text="{WITNESS.LINK} замечает, что {CHILD.LINK} рожденный {HERO1.LINK} не от него." />
+    <string id="Dramalord128" text="{KILLER.LINK} убивает {HERO.LINK} за рождение бастарда {CHILD.LINK}" />
+    <string id="Dramalord129" text="{HERO.LINK} играет со своей игрушкой, думая о тебе." />
+    <string id="Dramalord130" text="{HERO.LINK} ломает свою игрушку!" />
+    <string id="Dramalord131" text="{HERO.LINK} разводится с тобой." />
+    <string id="Dramalord132" text="{HERO.LINK} разрывает роман с тобой." />
+    <string id="Dramalord133" text="{HERO.LINK} усыновляет {CHILD.LINK}." />
+    <string id="Dramalord134" text="Предложение руки и сердца" />
+    <string id="Dramalord135" text="{HERO.LINK} говорит, что любит тебя, и просит твоих руки и сердца" />
+    <string id="Dramalord136" text="Ты разбиваешь сердце {HERO.LINK}!" />
+    <string id="Dramalord137" text="Позаботься о своем ребенке" />
+    <string id="Dramalord138" text="{HERO.LINK} просит тебя взять {CHILD.LINK} под свою опеку, чтобы защитить от {SPOUSE.LINK}." />
+    <string id="Dramalord139" text="{HERO.LINK} сбегает из клана {CLAN}, чтобы избежать конфронтации с {SPOUSE.LINK}." />
+    <string id="Dramalord140" text="{HERO.LINK} насилует тебя, пока ты находишься в плену" />
+    <string id="Dramalord141" text="Ты берешь {HERO.LINK} под свою опеку." />
+    <string id="Dramalord142" text="{HERO.LINK} изменяет {SPOUSE.LINK}, что стало причиной ее беременности." />
+    <string id="Dramalord143" text="Ты забеременнела от {HERO.LINK}." />
+    <string id="Dramalord144" text="{HERO.LINK} забеременнела от тебя." />
+    <string id="Dramalord145" text="Ты берешь {HERO.LINK} под свою опеку." />
+    <string id="Dramalord146" text="опасность" />
+    <string id="Dramalord147" text="Общие сведения" />
+    <string id="Dramalord148" text="Настройка героя" />
+    <string id="Dramalord149" text="Настройка игрока" />
+    <string id="Dramalord150" text="Дополнительное качество" />
+    <string id="Dramalord151" text="Журналы флирта" />
+    <string id="Dramalord152" text="Показывать события флирта в журналах" />
+    <string id="Dramalord153" text="Журналы интрижек" />
+    <string id="Dramalord154" text="Журнал событий шоу-бизнеса" />
+    <string id="Dramalord155" text="Журнал изменений клана" />
+    <string id="Dramalord156" text="Показывать события, связанные с кланом, в журналах" />
+    <string id="Dramalord157" text="Журналы браков" />
+    <string id="Dramalord158" text="Отображать события бракосочетания в журналах" />
+    <string id="Dramalord159" text="Журналы смертей" />
+    <string id="Dramalord160" text="Показывать события смерти в журналах" />
+    <string id="Dramalord161" text="Журналы рождений" />
+    <string id="Dramalord162" text="Показывать события рождения/сиротства в журналах" />
+    <string id="Dramalord163" text="Множитель характеристик" />
+    <string id="Dramalord164" text="Множитель оценки характеристик для усиления эмоций ИИ (выше = быстрее)" />
+    <string id="Dramalord165" text="Защита семьи" />
+    <string id="Dramalord166" text="Отсутствие взаимодействия искусственного интеллекта с членами семьи" />
+    <string id="Dramalord167" text="Модификатор сексуального влечения к другим лицам" />
+    <string id="Dramalord168" text="Модификатор привлекательности искусственного интеллекта для другого пола (отрицательный = свой пол, положительный = противоположный пол, 0 = нейтральный)" />
+    <string id="Dramalord169" text="Мин. Оценка привлекательности" />
+    <string id="Dramalord170" text="Минимальный балл привлекательности ИИ для того, чтобы начать взаимодействовать друг с другом" />
+    <string id="Dramalord171" text="Мин. Эмоции для серьезных отношений" />
+    <string id="Dramalord172" text="Минимальное значение эмоций для ИИ, чтобы задуматься о начале романа" />
+    <string id="Dramalord173" text="Дни между тайными встречами" />
+    <string id="Dramalord174" text="ИИ подождет несколько дней, прежде чем снова встретится с тем же героем" />
+    <string id="Dramalord175" text="Минимум. Эмоции для брака" />
+    <string id="Dramalord176" text="Минимальное значение эмоций для ИИ, позволяющее рассматривать брак с героем" />
+    <string id="Dramalord177" text="Мин. Эмоции, побуждающие к разводу" />
+    <string id="Dramalord178" text="Значение эмоций для ИИ при рассмотрении вопроса о разводе" />
+    <string id="Dramalord179" text="Мин. Высокая ценность Для Внутренней Связи" />
+    <string id="Dramalord180" text="Минимальная заинтересованность ИИ в половом акте" />
+    <string id="Dramalord181" text="Потеря заинтересованности в половом акте" />
+    <string id="Dramalord182" text="Значение сексуальности, утраченное при половом акте" />
+    <string id="Dramalord183" text="Шанс быть пойманным" />
+    <string id="Dramalord184" text="Шанс быть пойманным партнерами во время взаимодействия с другими героями" />
+    <string id="Dramalord185" text="Эмоциональная потеря при флирте" />
+    <string id="Dramalord186" text="Эмоциональная потеря героев при флирте их партнеров с другими" />
+    <string id="Dramalord187" text="Встреча с эмоциональной потерей, свидетелем которой стал" />
+    <string id="Dramalord188" text="Потеря эмоций у героев, ставших свидетелями тайной встречи своих партнеров с другими" />
+    <string id="Dramalord189" text="Эмоциональная потеря при половом акте" />
+    <string id="Dramalord190" text="Потеря эмоций у героев, ставших свидетелями того, как их партнер занимается сексом с другими" />
+    <string id="Dramalord191" text="Эмоциональная потеря в браке с другим" />
+    <string id="Dramalord192" text="Герой теряет эмоции, если его партнер женится на ком-то другом" />
+    <string id="Dramalord193" text="Эмоциональная потеря, разрыв отношений" />
+    <string id="Dramalord194" text="Герой теряет эмоции, если его партнер расстается с ним (изменяет отношения)" />
+    <string id="Dramalord195" text="Эмоциональная потеря при разводе" />
+    <string id="Dramalord196" text="Герой теряет эмоции, если его партнер расторгает брак" />
+    <string id="Dramalord197" text="Беременность с эмоциональными потерями" />
+    <string id="Dramalord198" text="Герои теряют эмоции, если их партнерши явно беременны от кого-то другого" />
+    <string id="Dramalord199" text="Эмоциональная потеря партнера" />
+    <string id="Dramalord200" text="Эмоциональная потеря партнера, если герои рожают детей от кого-то другого" />
+    <string id="Dramalord201" text="Эмоциональный выигрышный роман" />
+    <string id="Dramalord202" text="Эмоциональный выигрыш героев, которые заводят роман" />
+    <string id="Dramalord203" text="Эмоциональный выигрыш в браке" />
+    <string id="Dramalord204" text="Эмоциональный подъем героев, которые женятся" />
+    <string id="Dramalord205" text="Вероятность беременности" />
+    <string id="Dramalord206" text="Вероятность забеременеть во время полового акта" />
+    <string id="Dramalord207" text="Продолжительность беременности" />
+    <string id="Dramalord208" text="Сколько дней героиня находится в состоянии беременности до родов" />
+    <string id="Dramalord209" text="Дни до появления признаков беременности" />
+    <string id="Dramalord210" text="Сколько дней герой находится в состоянии беременности, прежде чем беременность станет заметна другим героям" />
+    <string id="Dramalord211" text="Ожидание между усыновлениями" />
+    <string id="Dramalord212" text="Сколько дней нужно ждать между усыновлениями (однополыми или пожилыми парами)" />
+    <string id="Dramalord213" text="Максимальный возраст фертильности" />
+    <string id="Dramalord214" text="Максимальный возраст фертильности" />
+    <string id="Dramalord215" text="Продолжительность периода" />
+    <string id="Dramalord216" text="Продолжительность месячных в днях для героинь женского пола в сезоне (не могут забеременеть)" />
+    <string id="Dramalord217" text="Шанс поломки игрушки" />
+    <string id="Dramalord218" text="Вероятность того, что игрушка сломается при использовании героем" />
+    <string id="Dramalord219" text="Минимальная Эмоции для разговора" />
+    <string id="Dramalord220" text="Минимальное значение эмоций ИИ, позволяющее вести интимный разговор с игроком" />
+    <string id="Dramalord221" text="Игрок всегда привлекателен" />
+    <string id="Dramalord222" text="Игрок всегда на 100% привлекателен для других героев (чит)" />
+    <string id="Dramalord223" text="Игрок всегда любим" />
+    <string id="Dramalord224" text="Другие герои всегда любят игрока (чит)" />
+    <string id="Dramalord225" text="Сообщений о пленении нет" />
+    <string id="Dramalord226" text="Отключите рассылку спама от захваченных или освобожденных героев (только на английском языке!)" />
+    <string id="Dramalord227" text="Уведомление об изменении отношений не требуется" />
+    <string id="Dramalord228" text="Отключить рассылку спама о расширении связей с известными людьми" />
+    <string id="Dramalord229" text="Влечение:" />
+    <string id="Dramalord230" text="Эмоции:" />
+    <string id="Dramalord231" text="Возбуждение:" />
+    <string id="Dramalord232" text="Имеет игрушку:" />
+    <string id="Dramalord233" text="Оценка характеристик:" />
+    <string id="Dramalord234" text="День начала периода:" />
+    <string id="Dramalord235" text="{CLAN} отрекается от верности {KINGDOM}." />
+    <string id="Dramalord236" text="{HERO.LINK} изгоняет {CLAN} из государства {KINGDOM}." />
+    <string id="Dramalord237" text="{CLAN} присягает на верность {KINGDOM}." />
+    <string id="Dramalord238" text="{HERO.LINK} совершил самоубийство." />
+    <string id="Dramalord239" text="Журнал изменений в королевстве" />
+    <string id="Dramalord240" text="Показывать в Журнале события, связанные с королевством" />
+    <string id="Dramalord241" text="Взаимодействие Странника с искусственным интеллектом" />
+    <string id="Dramalord242" text="Разрешить Странникам взаимодействовать с лордами и другими странниками" />
+    <string id="Dramalord243" text="Взаимодействие с ИИ клана игрока" />
+    <string id="Dramalord244" text="Разрешить членам вашего клана участвовать во взаимодействиях с ИИ" />
+    <string id="Dramalord245" text="Интимная возможность" />
+    <string id="Dramalord246" text="У {HERO.LINK} сегодня в глазах особая искра, и вы чувствуете, что они хотят пойти дальше. Вы позволите этому случиться?" />
+  </strings>
+</base>

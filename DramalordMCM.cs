@@ -19,6 +19,10 @@ namespace Dramalord
         public bool AffairOutput { get; set; } = false;
 
         [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord239}Kingdom Changes Logs", HintText = "{=Dramalord240}Show kingdom related events in logs", Order = 3, RequireRestart = false)]
+        public bool KingdomOutput { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord155}Clan Changes Logs", HintText = "{=Dramalord156}Show clan related events in logs", Order = 3, RequireRestart = false)]
         public bool ClanOutput { get; set; } = false;
 
@@ -41,6 +45,14 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord165}Protect Family", HintText = "{=Dramalord166}No AI interaction with family members", Order = 8, RequireRestart = false)]
         public bool ProtectFamily { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord241}Wanderer AI interaction", HintText = "{=Dramalord242}Allow Wanderers to interact with lords and other wanderers", Order = 9, RequireRestart = false)]
+        public bool AllowWandererAI { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord243}Player Clan AI interaction", HintText = "{=Dramalord244}Allow Members of your clan to participate in AI interactions", Order = 10, RequireRestart = false)]
+        public bool AllowPlayerClanAI { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord167}Other Sex Attraction Modifier", -100, 100, Order = 1, HintText = "{=Dramalord168}AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)", RequireRestart = false)]

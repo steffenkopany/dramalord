@@ -1,9 +1,11 @@
 ﻿using Dramalord.Data;
 using Helpers;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade.Diamond;
 
 namespace Dramalord.Actions
 {
@@ -55,6 +57,16 @@ namespace Dramalord.Actions
                         StringHelpers.SetCharacterProperties("SPOUSE", father.CharacterObject, banner);
                         MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                     }
+                }
+
+                if(mother.Spouse != null && mother.Spouse != father && mother.GetHeroTraits().Honor > 0)
+                {
+                    mother.SetTraitLevel(DefaultTraits.Honor, mother.GetHeroTraits().Honor - 1);
+                }
+
+                if (father.Spouse != null && father.Spouse != mother && father.GetHeroTraits().Honor > 0)
+                {
+                    father.SetTraitLevel(DefaultTraits.Honor, father.GetHeroTraits().Honor - 1);
                 }
 
                 if (DramalordMCM.Get.AffairOutput)

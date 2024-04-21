@@ -8,7 +8,7 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target)
         {
-            if (Info.ValidateHeroMemory(hero, target) && Info.ValidateHeroMemory(target, hero))
+            if (Info.ValidateHeroMemory(hero, target) /*&& Info.ValidateHeroMemory(target, hero)*/)
             {
                 Info.SetLastPrivateMeeting(hero, target, CampaignTime.Now.ToDays);
                 Info.SetLastDaySeen(hero, target, CampaignTime.Now.ToDays);

@@ -247,7 +247,7 @@ namespace Dramalord
 
         public TextObject GetEncyclopediaText()
         {
-            TextObject textObject = new TextObject("{=Dramalord068}{KILLER.LINK} killed {VICTIM.LINK} after noticing she is pregnant from someone else.");
+            TextObject textObject = new TextObject("{=Dramalord099}{KILLER.LINK} killed {VICTIM.LINK} after noticing she is pregnant from someone else.");
             StringHelpers.SetCharacterProperties("KILLER", Killer.CharacterObject, textObject);
             StringHelpers.SetCharacterProperties("VICTIM", Hero.CharacterObject, textObject);
             return textObject;
@@ -764,7 +764,7 @@ namespace Dramalord
 
         public TextObject GetEncyclopediaText()
         {
-            TextObject textObject = new TextObject("{=Dramalord146}{HERO.LINK} commited suizide.");
+            TextObject textObject = new TextObject("{=Dramalord238}{HERO.LINK} commited suizide.");
             StringHelpers.SetCharacterProperties("HERO", Hero.CharacterObject, textObject);
             return textObject;
         }
@@ -777,6 +777,94 @@ namespace Dramalord
         public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase
         {
             return obj == Hero;
+        }
+    }
+
+    public class EncyclopediaLogClanLeftKingdom : LogEntry, IEncyclopediaLog, IChatNotification
+    {
+        [SaveableField(26055)]
+        public readonly Clan Clan;
+
+        [SaveableField(26056)]
+        public readonly Kingdom OldKingdom;
+
+        [SaveableField(26057)]
+        public readonly bool Forced;
+
+        public EncyclopediaLogClanLeftKingdom(Clan clan, Kingdom oldKingdom, bool forced)
+        {
+            Clan = clan;
+            OldKingdom = oldKingdom;
+            Forced = forced;
+        }
+
+        public bool IsVisibleNotification => DramalordMCM.Get.KingdomOutput;
+        public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectPositive;
+
+        public TextObject GetEncyclopediaText()
+        {
+            TextObject textObject = TextObject.Empty;
+            if (Forced && OldKingdom.Leader != null)
+            {
+                textObject = new TextObject("{=Dramalord236}{HERO.LINK} banished {CLAN} from {KINGDOM}.");
+                StringHelpers.SetCharacterProperties("HERO", OldKingdom.Leader.CharacterObject, textObject);
+                textObject.SetTextVariable("CLAN", Clan.EncyclopediaLinkWithName);
+                textObject.SetTextVariable("KINGDOM", OldKingdom.EncyclopediaLinkWithName);
+            }
+            else
+            {
+                textObject = new TextObject("{=Dramalord235}{CLAN} left {KINGDOM}.");
+                textObject.SetTextVariable("CLAN", Clan.EncyclopediaLinkWithName);
+                textObject.SetTextVariable("KINGDOM", OldKingdom.EncyclopediaLinkWithName);
+            }
+            return textObject;
+        }
+
+        public TextObject GetNotificationText()
+        {
+            return GetEncyclopediaText();
+        }
+
+        public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase
+        {
+            return obj == Clan || obj == OldKingdom;
+        }
+    }
+
+    public class EncyclopediaLogClanJoinedKingdom : LogEntry, IEncyclopediaLog, IChatNotification
+    {
+        [SaveableField(26058)]
+        public readonly Clan Clan;
+
+        [SaveableField(26059)]
+        public readonly Kingdom NewKingdom;
+
+        public EncyclopediaLogClanJoinedKingdom(Clan clan, Kingdom oldKingdom)
+        {
+            Clan = clan;
+            NewKingdom = oldKingdom;
+        }
+
+        public bool IsVisibleNotification => DramalordMCM.Get.KingdomOutput;
+        public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionIndirectPositive;
+
+        public TextObject GetEncyclopediaText()
+        {
+            TextObject textObject = new TextObject("{=Dramalord237}{CLAN} joined {KINGDOM}.");
+            textObject.SetTextVariable("CLAN", Clan.EncyclopediaLinkWithName);
+            textObject.SetTextVariable("KINGDOM", NewKingdom.EncyclopediaLinkWithName);
+         
+            return textObject;
+        }
+
+        public TextObject GetNotificationText()
+        {
+            return GetEncyclopediaText();
+        }
+
+        public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase
+        {
+            return obj == Clan || obj == NewKingdom;
         }
     }
 }
