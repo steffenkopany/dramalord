@@ -14,7 +14,17 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target)
         {
-            if(Info.ValidateHeroMemory(hero, target))
+            if(hero.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null)
+            {
+                return; // no army marriage
+            }
+
+            if (target.PartyBelongedTo != null && target.PartyBelongedTo.Army != null)
+            {
+                return; // no army marriage
+            }
+
+            if (Info.ValidateHeroMemory(hero, target))
             {
                 if (target == Hero.MainHero)
                 {

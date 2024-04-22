@@ -54,8 +54,16 @@ namespace Dramalord
         [SettingPropertyBool("{=Dramalord243}Player Clan AI interaction", HintText = "{=Dramalord244}Allow Members of your clan to participate in AI interactions", Order = 10, RequireRestart = false)]
         public bool AllowPlayerClanAI { get; set; } = true;
 
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord247}Heroes in Army AI interaction", HintText = "{=Dramalord248}Allow Members of an army to interact with each other", Order = 11, RequireRestart = false)]
+        public bool AllowArmyInteractionAI { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord249}Allow Clan banishment", HintText = "{=Dramalord250}Allow Kingdom leaders to banish clans if they're angry on their leader", Order = 11, RequireRestart = false)]
+        public bool AllowClanBanishment { get; set; } = true;
+
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord167}Other Sex Attraction Modifier", -100, 100, Order = 1, HintText = "{=Dramalord168}AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord167}Other Sex Attraction Modifier", -50, 50, Order = 1, HintText = "{=Dramalord168}AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)", RequireRestart = false)]
         public int OtherSexAttractionModifier { get; set; } = 0;
 
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]

@@ -250,5 +250,9 @@
     <string id="Dramalord244" text="Permitir que los miembros de tu clan participen en interacciones de AI" />
     <string id="Dramalord245" text="Oportunidad íntima" />
     <string id="Dramalord246" text="{HERO.LINK} tiene una chispa especial en sus ojos hoy y tienes la sensación de que quieren ir más allá. ¿Dejarás que suceda?" />
+    <string id="Dramalord247" text="Interacción con la IA de los héroes en el ejército" />
+    <string id="Dramalord248" text="Permitir que los miembros de un ejército interactúen entre sí" />
+    <string id="Dramalord249" text="Permitir destierro de clan" />
+    <string id="Dramalord250" text="Permitir que los líderes del Reino destierren clanes si están enojados con su líder" />
   </strings>
 </base>

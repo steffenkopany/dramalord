@@ -250,5 +250,9 @@
     <string id="Dramalord244" text="Allow Members of your clan to participate in AI interactions" />
     <string id="Dramalord245" text="Intimate Opportunity" />
     <string id="Dramalord246" text="{HERO.LINK} has a special spark in their eyes today and you have a feeling they want to go further. Will you let it happen?" />
+    <string id="Dramalord247" text="Heroes in Army AI interaction" />
+    <string id="Dramalord248" text="Allow Members of an army to interact with each other" />
+    <string id="Dramalord249" text="Allow Clan banishment" />
+    <string id="Dramalord250" text="Allow Kingdom leaders to banish clans if they're angry on their leader" />
   </strings>
 </base>

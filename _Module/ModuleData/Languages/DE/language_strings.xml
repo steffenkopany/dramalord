@@ -251,5 +251,9 @@
     <string id="Dramalord244" text="Erlaube Mitgliedern deines Clans, an AI-Interaktionen teilzunehmen" />
     <string id="Dramalord245" text="Intime Gelegenheit" />
     <string id="Dramalord246" text="{HERO.LINK} hat heute funkeln in den Augen und deutet an heute einen Schritt weiter gehen zu wollen. Wollt Ihr es passieren lassen?" />
+    <string id="Dramalord247" text="Helden in Armee AI Interaktion" />
+    <string id="Dramalord248" text="Erlaube Helden in einer Amree miteinander zu interagieren" />
+    <string id="Dramalord249" text="Erlaube Clan Verbannung" />
+    <string id="Dramalord250" text="Erlaube dem Anführer eines Königreichs Clans zu verbannen wenn sie wütend auf dessen Anführer sind" />
   </strings>
 </base>

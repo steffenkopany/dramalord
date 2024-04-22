@@ -251,5 +251,9 @@
     <string id="Dramalord244" text="Permitir que membros do seu clã participem de interações de IA" />
     <string id="Dramalord245" text="Oportunidade Íntima" />
     <string id="Dramalord246" text="{HERO.LINK} tem um brilho especial em seus olhos hoje e você tem a sensação de que eles querem ir mais longe. Você vai deixar isso acontecer?" />
+    <string id="Dramalord247" text="Heróis na interação da IA do Exército" />
+    <string id="Dramalord248" text="Permitir que membros de um exército interajam entre si" />
+    <string id="Dramalord249" text="Permitir banimento do clã" />
+    <string id="Dramalord250" text="Permitir que os líderes do Reino banam clãs se estiverem com raiva de seu líder" />
   </strings>
 </base>

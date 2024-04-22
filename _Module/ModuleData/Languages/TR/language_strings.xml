@@ -250,5 +250,9 @@
     <string id="Dramalord244" text="Klanınızın üyelerinin yapay zeka etkileşimlerine katılmasına izin verin" />
     <string id="Dramalord245" text="Samimi Fırsat" />
     <string id="Dramalord246" text="{HERO.LINK}'nin bugün gözlerinde özel bir kıvılcım var ve daha ileri gitmek istedikleri hissine kapılıyorsunuz. Bunun olmasına izin verecek misiniz?" />
+    <string id="Dramalord247" text="Ordu yapay zeka etkileşimindeki kahramanlar" />
+    <string id="Dramalord248" text="Bir ordunun üyelerinin birbirleriyle etkileşime girmesine izin ver" />
+    <string id="Dramalord249" text="Klanın sürgün edilmesine izin ver" />
+    <string id="Dramalord250" text="Krallık liderlerinin, liderlerine kızgın olmaları halinde klanları sürgün etmesine izin ver" />
   </strings>
 </base>

@@ -206,7 +206,7 @@ namespace Dramalord.Behaviors
                             HeroKillAction.Apply(hero, target, target, KillReason.Pregnancy);
                             return;
                         }
-                        else if(traits.Calculating < 0 && hero.IsKingdomLeader && target.IsClanLeader && hero.Clan != null && target.Clan != null && hero.Clan != target.Clan && target.Clan.Kingdom == hero.Clan.Kingdom)
+                        else if(traits.Calculating < 0 && hero.IsKingdomLeader && target.IsClanLeader && hero.Clan != null && target.Clan != null && hero.Clan != target.Clan && target.Clan.Kingdom == hero.Clan.Kingdom && DramalordMCM.Get.AllowClanBanishment)
                         {
                             ClanLeaveKingdomAction.Apply(target.Clan, true);
                             return;
@@ -241,7 +241,7 @@ namespace Dramalord.Behaviors
                             HeroKillAction.Apply(target, hero, hero, KillReason.Pregnancy);
                             return;
                         }
-                        else if (traits.Calculating < 0 && target.IsKingdomLeader && hero.IsClanLeader && target.Clan != null && hero.Clan != null && target.Clan != hero.Clan && hero.Clan.Kingdom == target.Clan.Kingdom)
+                        else if (traits.Calculating < 0 && target.IsKingdomLeader && hero.IsClanLeader && target.Clan != null && hero.Clan != null && target.Clan != hero.Clan && hero.Clan.Kingdom == target.Clan.Kingdom && DramalordMCM.Get.AllowClanBanishment)
                         {
                             ClanLeaveKingdomAction.Apply(hero.Clan, true);
                             return;
@@ -329,7 +329,7 @@ namespace Dramalord.Behaviors
                     if (heroWitness != Hero.MainHero && traits.Calculating < 0 && traits.Mercy < 0)
                     {
                         HeroKillAction.Apply(heroWitness, hero, target, KillReason.Intercourse);
-                        if (traits.Calculating < 0 && heroWitness.IsKingdomLeader && target.IsClanLeader && heroWitness.Clan != null && target.Clan != null && heroWitness.Clan != target.Clan && target.Clan.Kingdom == heroWitness.Clan.Kingdom)
+                        if (traits.Calculating < 0 && heroWitness.IsKingdomLeader && target.IsClanLeader && heroWitness.Clan != null && target.Clan != null && heroWitness.Clan != target.Clan && target.Clan.Kingdom == heroWitness.Clan.Kingdom && DramalordMCM.Get.AllowClanBanishment)
                         {
                             ClanLeaveKingdomAction.Apply(target.Clan, true);
                         }
@@ -342,7 +342,7 @@ namespace Dramalord.Behaviors
                         {
                             HeroLeaveClanAction.Apply(hero, heroWitness);
                         }
-                        if (traits.Calculating < 0 && heroWitness.IsKingdomLeader && target.IsClanLeader && heroWitness.Clan != null && target.Clan != null && heroWitness.Clan != target.Clan && target.Clan.Kingdom == heroWitness.Clan.Kingdom)
+                        if (traits.Calculating < 0 && heroWitness.IsKingdomLeader && target.IsClanLeader && heroWitness.Clan != null && target.Clan != null && heroWitness.Clan != target.Clan && target.Clan.Kingdom == heroWitness.Clan.Kingdom && DramalordMCM.Get.AllowClanBanishment)
                         {
                             ClanLeaveKingdomAction.Apply(target.Clan, true);
                         }
@@ -450,7 +450,7 @@ namespace Dramalord.Behaviors
             }
             else if (hero.PartyBelongedTo != null)
             {
-                if (hero.PartyBelongedTo.Army != null)
+                if (hero.PartyBelongedTo.Army != null && DramalordMCM.Get.AllowArmyInteractionAI)
                 {
                     foreach (MobileParty mp in hero.PartyBelongedTo.Army.Parties)
                     {
