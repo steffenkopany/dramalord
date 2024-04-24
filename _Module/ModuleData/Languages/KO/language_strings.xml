@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="한국어" />
+  </tags>
+  <strings>
+    <string id="Dramalord001" text="개인적인 질문을 해도 될까요?" />
+    <string id="Dramalord002" text="물론이죠, 무엇이 알고 싶으신가요?" />
+    <string id="Dramalord003" text="이런 얘기를 할 만큼 당신과 충분히 편한 사이는 아닌 거 같아요." />
+    <string id="Dramalord004" text="다른 얘기를 해볼까요..." />
+    <string id="Dramalord005" text="당신이 원하시는 대로 하세요." />
+    <string id="Dramalord006" text="당신은 어떤 사람을 좋아하나요?" />
+    <string id="Dramalord007" text="이상형이 어떻게 되나요?" />
+    <string id="Dramalord008" text="전 여성은 {RATING_WOMEN}하고, 남성은 {RATING_MEN}해요. {RATING_WEIGHT}하면서 {RATING_BUILD}을 가진 사람을 좋아해요. {RATING_AGE}세 정도의 연령대에 {RATING_CULTURE} 출신이 가장 좋아요." />
+    <string id="Dramalord009" text="흠... 결론을 내리자면 당신은 {RATING_TOTAL}" />
+    <string id="Dramalord010" text="사랑" />
+    <string id="Dramalord011" text="좋아" />
+    <string id="Dramalord012" text="질색" />
+    <string id="Dramalord013" text="무관심" />
+    <string id="Dramalord014" text="통통" />
+    <string id="Dramalord015" text="평범" />
+    <string id="Dramalord016" text="날씬" />
+    <string id="Dramalord017" text="근육질인 체형" />
+    <string id="Dramalord018" text="일반적인 체형" />
+    <string id="Dramalord019" text="마른 체형" />
+    <string id="Dramalord020" text="엄청 혐오스러워요!" />
+    <string id="Dramalord021" text="역겨워요!" />
+    <string id="Dramalord022" text="엄청 못생겼어요." />
+    <string id="Dramalord023" text="못생겼어요." />
+    <string id="Dramalord024" text="그저 그래요." />
+    <string id="Dramalord025" text="평범해요." />
+    <string id="Dramalord026" text="좋네요." />
+    <string id="Dramalord027" text="예뻐요." />
+    <string id="Dramalord028" text="굉장히 아름다워요!" />
+    <string id="Dramalord029" text="믿을 수 없을 정도로 아름다워요!" />
+    <string id="Dramalord030" text="저에 대해 어떻게 생각하세요?" />
+    <string id="Dramalord031" text="전 당신을 {EMOTION_SCORE}!" />
+    <string id="Dramalord032" text="엄청 경멸해요" />
+    <string id="Dramalord033" text="혐오해요" />
+    <string id="Dramalord034" text="신뢰하지 않아요" />
+    <string id="Dramalord035" text="싫어요" />
+    <string id="Dramalord036" text="신경쓰지 않아요" />
+    <string id="Dramalord037" text="존중해요" />
+    <string id="Dramalord038" text="좋아해요" />
+    <string id="Dramalord039" text="생각하며 푹 빠져 있어요" />
+    <string id="Dramalord040" text="한 순간도 생각하지 않았던 적이 없어요" />
+    <string id="Dramalord041" text="진심을 다해 사랑해요" />
+    <string id="Dramalord042" text="실례가 안된다면..." />
+    <string id="Dramalord043" text="뭐 하고 싶은 말이라도 있으신가요?" />
+    <string id="Dramalord044" text="좀 더 조용한 곳으로 빠질까요?" />
+    <string id="Dramalord045" text="오... 그래요, 그게 좋겠어요." />
+    <string id="Dramalord046" text="아니요, 그러고 싶지 않아요." />
+    <string id="Dramalord047" text="저랑 잠깐 같이 가실까요?" />
+    <string id="Dramalord048" text="남편" />
+    <string id="Dramalord049" text="아내" />
+    <string id="Dramalord050" text="우리에게 집중할 수 있도록 이혼해줄 수 있어요?" />
+    <string id="Dramalord051" text="...저와 결혼할래요?" />
+    <string id="Dramalord052" text="소세지" />
+    <string id="Dramalord053" text="왜 제가 당신과 같이 타야 하죠?" />
+    <string id="Dramalord054" text="마굿간에서 제 말을 가져와야할 거 같군요." />
+    <string id="Dramalord055" text="피곤해요. 이 얘긴 다음에 해요." />
+    <string id="Dramalord056" text="우린 바람같이 달릴 거에요!" />
+    <string id="Dramalord057" text="하루 종일 성에 앉아만 있는 건 지루해요." />
+    <string id="Dramalord058" text="내 관심에 당신은 헤어나오지 못할 거에요!" />
+    <string id="Dramalord059" text="전 당신의 존재 그 자체가 영광이에요." />
+    <string id="Dramalord060" text="그 불쌍한 말들은 하루종일 서 있기만 할 뿐이죠." />
+    <string id="Dramalord061" text="왜 제가 결혼을 포기해야 하죠?" />
+    <string id="Dramalord062" text="{HERO1.LINK}와(과) {HERO2.LINK}은(는) 불륜 관계가 되었습니다." />
+    <string id="Dramalord063" text="{HERO1.LINK}와(과) {HERO2.LINK}은(는) 불륜 관계를 끝냈습니다." />
+    <string id="Dramalord064" text="{HERO1.LINK}와(과) {HERO2.LINK}은(는) 결혼 생활을 마무리했습니다." />
+    <string id="Dramalord065" text="{HERO1.LINK}은(는) {CHILD.LINK}을(를) 고아원으로 보냈습니다." />
+    <string id="Dramalord066" text="{KILLER.LINK}은(는) {LOVER.LINK}와(과) 같이 있는 {VICTIM.LINK}을(를) 붙잡아서 살해했습니다." />
+    <string id="Dramalord067" text="{HERO.LINK}이(가) {CLAN}에 들어왔습니다." />
+    <string id="Dramalord068" text="전 당신 때문에 제 결혼 생활을 포기하지 않을 거에요!" />
+    <string id="Dramalord069" text="당신이 이 결혼 생활에 잡혀사는 걸 보면 참을 수 없어요." />
+    <string id="Dramalord070" text="나랑 좀 걸을래요?" />
+    <string id="Dramalord071" text="가요!" />
+    <string id="Dramalord072" text="신경쓰지 마요." />
+    <string id="Dramalord073" text="정말 훌륭해요!" />
+    <string id="Dramalord074" text="지루하네요." />
+    <string id="Dramalord075" text="불륜" />
+    <string id="Dramalord076" text="연인" />
+    <string id="Dramalord077" text="사랑" />
+    <string id="Dramalord078" text="장기적으로는 이게 더 나은 선택이에요." />
+    <string id="Dramalord079" text="이 결혼에 대한 당신의 모든 투자는 아무 소용이 없어요!" />
+    <string id="Dramalord080" text="당신은 이 결혼으로 인해 망신당할 거에요." />
+    <string id="Dramalord081" text="전 당신같은 사람과는 결혼하지 않을 거에요." />
+    <string id="Dramalord082" text="왜 제가 당신과 결혼해야 하죠?" />
+    <string id="Dramalord083" text="우리 같이 새로운 모험을 떠날 거에요!" />
+    <string id="Dramalord084" text="어떻게 우리가 함께 미래를 만들어 나갈지 상상해 봐요." />
+    <string id="Dramalord085" text="우린 서로 모든 걸 공유할 거에요." />
+    <string id="Dramalord086" text="우리 관계에서 한다는 건 영광스러운 일이에요." />
+    <string id="Dramalord087" text="당신이 제 곁에 없으면 못 살겠어요!" />
+    <string id="Dramalord088" text="왜 제가 당신과 시간을 보내야 하죠?" />
+    <string id="Dramalord089" text="당신은 정말 지루하군요." />
+    <string id="Dramalord090" text="흥미로운 이야기가 있어요!" />
+    <string id="Dramalord091" text="기분 전환이 필요하지 않나요?" />
+    <string id="Dramalord092" text="동네 여관에서 술 한 잔 사줄게요." />
+    <string id="Dramalord093" text="당신과 시간을 함께 보낼 수 있다면 영광일 거에요." />
+    <string id="Dramalord094" text="부탁이에요! 너무 지루하다구요!" />
+    <string id="Dramalord095" text="전 아직 미혼이에요..." />
+    <string id="Dramalord096" text="내 연인" />
+    <string id="Dramalord097" text="내 사랑" />
+    <string id="Dramalord098" text="저기..." />
+    <string id="Dramalord099" text="{KILLER.LINK}은(는) 그녀가 다른 사람으로부터 임신을 했다는 사실을 알아내고 {VICTIM.LINK}을(를) 살해했습니다." />
+    <string id="Dramalord100" text="부추" />
+    <string id="Dramalord101" text="파이" />
+    <string id="Dramalord102" text="뭐 원하는 거라도 있나요?" />
+    <string id="Dramalord103" text="뭔가 줄 게 있어요." />
+    <string id="Dramalord104" text="이 불륜 관계를 끝내요." />
+    <string id="Dramalord105" text="이 결혼 생활을 끝내요." />
+    <string id="Dramalord106" text="오! 잘 활용해볼게요!" />
+    <string id="Dramalord107" text="으윽. 드디어 끝났네요!" />
+    <string id="Dramalord108" text="오. 놀랍네요. 전.. 전 이제 혼자가 되겠군요..." />
+    <string id="Dramalord109" text="뭐라고요? 이 개자식! 꼴도 보기 싫어요!" />
+    <string id="Dramalord110" text="세상에... 내 끔찍한 악몽이 현실이 되다니... 전 당신 없인 못 살아요..." />
+    <string id="Dramalord111" text="우리... 저희 이제 좀 재밌게 놀아볼까요..." />
+    <string id="Dramalord112" text="맙소사! 제발, 싫어요! 나한테서 떨어져요!" />
+    <string id="Dramalord113" text="{HERO1.LINK}이(가) {HERO2.LINK}와(과) 결혼했습니다." />
+    <string id="Dramalord114" text="{HERO1.LINK}은(는) {HERO2.LINK}와(과) 육체적인 관계를 맺었습니다." />
+    <string id="Dramalord115" text="{HERO1.LINK}은(는) {HERO2.LINK}을(를) 임신시켰습니다." />
+    <string id="Dramalord116" text="{HERO1.LINK}은(는) {HERO2.LINK}에게 자신의 마음을 드러냈습니다." />
+    <string id="Dramalord117" text="{HERO1.LINK}이(가) {HERO2.LINK}에게 강제로 임신당했습니다." />
+    <string id="Dramalord118" text="{HERO1.LINK}이(가) {HERO2.LINK}을(를) 유혹합니다." />
+    <string id="Dramalord119" text="{HERO1.LINK}은(는) {HERO2.LINK}와(과) 은밀한 만남을 가졌습니다." />
+    <string id="Dramalord120" text="{HERO1.LINK}와(과) {HERO2.LINK}은(는) 고아인 {CHILD.LINK}을(를) 입양했습니다." />
+    <string id="Dramalord121" text="{CHILD.LINK}은(는) {HERO1.LINK}와(과) {HERO2.LINK} 사이에서 태어났습니다." />
+    <string id="Dramalord122" text="{HERO.LINK}이(가) {OLDCLAN} 클랜을 떠났습니다." />
+    <string id="Dramalord123" text="{CAUSEDBY.LINK}로 인해 {OLDCLAN} 클랜에서 {HERO.LINK}이(가) 추방당했습니다." />
+    <string id="Dramalord124" text="{WITNESS.LINK}은(는) {HERO1.LINK}이(가) {HERO2.LINK}을(를) 유혹하는 것을 목격했습니다." />
+    <string id="Dramalord125" text="{WITNESS.LINK}은(는) {HERO1.LINK}이(가) {HERO2.LINK}와(과) 만나고 있는 것을 목격했습니다." />
+    <string id="Dramalord126" text="{WITNESS.LINK}이(가) {HERO1.LINK}와(과) {HERO2.LINK}이(가) 한 침대에 있는 것을 잡아냈습니다 " />
+    <string id="Dramalord127" text="{WITNESS.LINK}은(는) {HERO1.LINK}이(가) 낳은 {CHILD.LINK}이(가) 그들의 자녀가 아니라는 것을 알아챘습니다." />
+    <string id="Dramalord128" text="{KILLER.LINK}은(는) {HERO.LINK}이(가) 사생아인 {CHILD.LINK}을(를) 출산했다는 이유로 살해했습니다." />
+    <string id="Dramalord129" text="{HERO.LINK}은(는) 당신을 상상하며 장난감을 가지고 놀았습니다." />
+    <string id="Dramalord130" text="{HERO.LINK}의 장난감이 망가졌습니다!" />
+    <string id="Dramalord131" text="{HERO.LINK}은(는) 당신과 이혼했습니다." />
+    <string id="Dramalord132" text="{HERO.LINK}은(는) 당신과 불륜 관계를 끝냈습니다." />
+    <string id="Dramalord133" text="{HERO.LINK}은(는) {CHILD.LINK}을(를) 입양했습니다." />
+    <string id="Dramalord134" text="혼인 신고" />
+    <string id="Dramalord135" text="{HERO.LINK}이(가) 말하길, 그들은 당신을 사랑하고 당신은 그들과 결혼하는 걸 고려하는지 물었습니다." />
+    <string id="Dramalord136" text="당신은 {HERO.LINK}의 마음을 아프게 했습니다!" />
+    <string id="Dramalord137" text="당신의 아이를 보호하세요" />
+    <string id="Dramalord138" text="{HERO.LINK}이(가) {CHILD.LINK}을(를) {SPOUSE.LINK}로부터 보호를 요청했습니다." />
+    <string id="Dramalord139" text="{HERO.LINK}이(가) {SPOUSE.LINK}와(과)의 대결을 피하기 위해 {CLAN}에서 도망쳤습니다." />
+    <string id="Dramalord140" text="{HERO.LINK}은(는) 포로가 되어있는 동안 당신을 범했습니다." />
+    <string id="Dramalord141" text="당신은 {HERO.LINK}와(과) 친밀한 관계가 되었습니다." />
+    <string id="Dramalord142" text="{HERO.LINK}이(가) 그녀의 임신은 {SPOUSE.LINK}이(가) 원인이라고 속였습니다." />
+    <string id="Dramalord143" text="당신은 {HERO.LINK}(으)로부터 임신했습니다." />
+    <string id="Dramalord144" text="{HERO.LINK}은(는) 당신으로부터 임신했습니다." />
+    <string id="Dramalord145" text="당신은 {HERO.LINK}을(를) 보살펴 주었습니다." />
+    <string id="Dramalord146" text="위험" />
+    <string id="Dramalord147" text="일반" />
+    <string id="Dramalord148" text="영웅 설정" />
+    <string id="Dramalord149" text="플레이어 설정" />
+    <string id="Dramalord150" text="추가 QOL" />
+    <string id="Dramalord151" text="유혹 로그" />
+    <string id="Dramalord152" text="유혹 이벤트를 로그에 표시합니다." />
+    <string id="Dramalord153" text="불륜 로그" />
+    <string id="Dramalord154" text="불륜 이벤트를 로그에 표시합니다." />
+    <string id="Dramalord155" text="클랜 변경 로그" />
+    <string id="Dramalord156" text="클랜 변경 이벤트를 로그에 표시합니다." />
+    <string id="Dramalord157" text="결혼 로그" />
+    <string id="Dramalord158" text="결혼 이벤트를 로그에 표시합니다." />
+    <string id="Dramalord159" text="사망 로그" />
+    <string id="Dramalord160" text="사망 이벤트를 로그에 표시합니다." />
+    <string id="Dramalord161" text="출산 로그" />
+    <string id="Dramalord162" text="출산 또는 고아 이벤트를 로그에 표시합니다." />
+    <string id="Dramalord163" text="특성 점수 배수" />
+    <string id="Dramalord164" text="AI의 감정이 오르는 것에 대한 특성 점수 배율입니다 (높을수록 빠릅니다.)" />
+    <string id="Dramalord165" text="가문 보호" />
+    <string id="Dramalord166" text="AI가 가문 구성원들에게는 상호작용하지 않습니다." />
+    <string id="Dramalord167" text="이성 매력 설정" />
+    <string id="Dramalord168" text="AI가 이성에 대한 끌림을 설정합니다 (부정적 = 동성, 긍정적 = 이성, 0 = 중립)" />
+    <string id="Dramalord169" text="최소 매력 점수" />
+    <string id="Dramalord170" text="AI가 상호작용을 시작하기 위한 최소 매력 점수입니다." />
+    <string id="Dramalord171" text="불륜을 위한 최소 감정" />
+    <string id="Dramalord172" text="AI가 불륜을 시작하는 것을 고려할 수 있는 최소 감정 값입니다." />
+    <string id="Dramalord173" text="신중한 만남을 위한 날짜" />
+    <string id="Dramalord174" text="AI가 동일한 영웅과 다시 신중한 만남을 갖기까지 기다리는 날짜입니다." />
+    <string id="Dramalord175" text="결혼을 위한 최소 감정" />
+    <string id="Dramalord176" text="AI가 영웅과의 결혼을 고려하는 최소 감정 값입니다." />
+    <string id="Dramalord177" text="이혼을 위한 최소 감정" />
+    <string id="Dramalord178" text="AI가 이혼을 고려하는 최소 감정 값입니다." />
+    <string id="Dramalord179" text="성관계를 위한 최소 성욕" />
+    <string id="Dramalord180" text="성관계에 관심을 가지기 위한 AI의 최소 성욕입니다." />
+    <string id="Dramalord181" text="성욕 상실" />
+    <string id="Dramalord182" text="성관계를 통해 상실되는 성욕의 값입니다." />
+    <string id="Dramalord183" text="발각 가능성" />
+    <string id="Dramalord184" text="다른 영웅과 상호작용을 하는 동안 연인에게 걸릴 확률입니다." />
+    <string id="Dramalord185" text="유혹 목격으로 인한 감정 상실" />
+    <string id="Dramalord186" text="연인이 다른 사람에게 유혹하는 걸 목격한 영웅이 잃게 되는 감정 값입니다." />
+    <string id="Dramalord187" text="만남 목격으로 인한 감정 상실" />
+    <string id="Dramalord188" text="연인이 몰래 다른 사람과 만나는 걸 목격한 영웅이 잃게 되는 감정 값입니다." />
+    <string id="Dramalord189" text="성관계 적발로 인한 감정 상실" />
+    <string id="Dramalord190" text="연인이 다른 사람과 성관계하는 것을 목격한 영웅이 잃게 되는 감정 값입니다." />
+    <string id="Dramalord191" text="다른 사람과 결혼으로 인한 감정 상실" />
+    <string id="Dramalord192" text="연인이 다른 사람과 결혼했을 경우 영웅이 잃게 되는 감정 값입니다." />
+    <string id="Dramalord193" text="이별로 인한 감정 상실" />
+    <string id="Dramalord194" text="연인과 이별했을 경우(불륜) 영웅이 잃게 되는 감정 값입니다." />
+    <string id="Dramalord195" text="이혼으로 인한 감정 상실" />
+    <string id="Dramalord196" text="배우자와 결혼 생활을 끝냈을 경우 영웅이 잃게 되는 감정 값입니다." />
+    <string id="Dramalord197" text="임신으로 인한 감정 상실" />
+    <string id="Dramalord198" text="연인이 다른 사람을 통한 임신이 눈에 띄었을 경우 영웅이 잃게 되는 감정 값입니다." />
+    <string id="Dramalord199" text="사생아로 인한 감정 상실" />
+    <string id="Dramalord200" text="배우자가 다른 사람의 자녀를 출산했을 경우 잃게 되는 감정 값입니다." />
+    <string id="Dramalord201" text="불륜 성공으로 인한 감정 증가" />
+    <string id="Dramalord202" text="불륜을 시작하는 영웅들의 증가하는 감정 값입니다." />
+    <string id="Dramalord203" text="결혼으로 인한 감정 증가" />
+    <string id="Dramalord204" text="결혼하는 영웅들의 증가하는 감정 값입니다." />
+    <string id="Dramalord205" text="임신 확률" />
+    <string id="Dramalord206" text="성관계를 통한 임신 가능성입니다." />
+    <string id="Dramalord207" text="임신 기간" />
+    <string id="Dramalord208" text="임신한 날로부터 영웅이 출산하기 전까지의 날짜를 설정합니다." />
+    <string id="Dramalord209" text="임신이 눈으로 확인이 될 때까지의 기간" />
+    <string id="Dramalord210" text="다른 영웅들이 임신한 영웅을 알아채기 전까지의 날짜입니다." />
+    <string id="Dramalord211" text="입양 대기일" />
+    <string id="Dramalord212" text="입양하는 동안 기다리는 날짜입니다. (동성이거나 늙은 연인)" />
+    <string id="Dramalord213" text="최대 출산 가능 연령" />
+    <string id="Dramalord214" text="출산이 가능한 최대 연령입니다." />
+    <string id="Dramalord215" text="생리 기간" />
+    <string id="Dramalord216" text="계절별 여성 영웅의 생리 기간입니다. (임신 불가)" />
+    <string id="Dramalord217" text="장난감 부서질 확률" />
+    <string id="Dramalord218" text="영웅이 사용하다 장난감이 부서질 확률입니다." />
+    <string id="Dramalord219" text="대화를 위한 최소 감정" />
+    <string id="Dramalord220" text="플레이어와 친밀한 대화를 위한 AI의 최소 감정 값입니다." />
+    <string id="Dramalord221" text="항상 매력적인 플레이어" />
+    <string id="Dramalord222" text="플레이어는 항상 다른 영웅들에게 100% 매력적으로 느낍니다. (치트)" />
+    <string id="Dramalord223" text="항상 사랑받는 플레이어" />
+    <string id="Dramalord224" text="플레이어는 항상 다른 영웅들에게 사랑을 받습니다. (치트)" />
+    <string id="Dramalord225" text="포로 메시지 끄기" />
+    <string id="Dramalord226" text="포로가 되거나 탈출한 영웅의 알림을 비활성화합니다. (영문만 가능!)" />
+    <string id="Dramalord227" text="관계 변경 알림 끄기" />
+    <string id="Dramalord228" text="주목할만한 관계 증가에 대한 알림을 비활성화합니다." />
+    <string id="Dramalord229" text="끌림:" />
+    <string id="Dramalord230" text="감정:" />
+    <string id="Dramalord231" text="성욕:" />
+    <string id="Dramalord232" text="장난감 사용:" />
+    <string id="Dramalord233" text="특성 점수:" />
+    <string id="Dramalord234" text="생리 시작일:" />
+    <string id="Dramalord235" text="{CLAN}이(가) {KINGDOM}을 떠났습니다." />
+    <string id="Dramalord236" text="{HERO.LINK}이(가) {KINGDOM}에서 {CLAN}을 추방했습니다." />
+    <string id="Dramalord237" text="{CLAN}이(가) {KINGDOM}에 합류했습니다." />
+    <string id="Dramalord238" text="{HERO.LINK}이(가) 목숨을 끊었습니다." />
+    <string id="Dramalord239" text="왕국 변경 로그" />
+    <string id="Dramalord240" text="왕국 관련 이벤트를 로그에 표시합니다." />
+    <string id="Dramalord241" text="방랑자 AI 상호작용" />
+    <string id="Dramalord242" text="방랑자가 영주와 다른 방랑자와 상호작용할 수 있게 허용합니다." />
+    <string id="Dramalord243" text="플레이어 가문 AI 상호작용" />
+    <string id="Dramalord244" text="가문 구성원이 AI 상호작용에 참여할 수 있게 허용합니다." />
+    <string id="Dramalord245" text="긴밀한 기회" />
+    <string id="Dramalord246" text="{HERO.LINK}의 눈은 초롱초롱하고 더 나아가고 싶어하는 느낌이 듭니다. 그렇게 하시겠습니까?" />
+    <string id="Dramalord247" text="군대 소집된 영웅 AI 상호작용" />
+    <string id="Dramalord248" text="군대 안 구성원 간에 상호작용을 허용합니다." />
+    <string id="Dramalord249" text="가문 추방 허용" />
+    <string id="Dramalord250" text="왕국 지도자에게 분노한 가문이 있을 경우 왕국 지도자가 가문을 추방할 수 있습니다." />
+  </strings>
+</base>

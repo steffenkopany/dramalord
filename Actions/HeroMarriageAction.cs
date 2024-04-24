@@ -96,6 +96,9 @@ namespace Dramalord.Actions
                 HeroLeaveClanAction.Apply(hero, hero);
                 HeroJoinClanAction.Apply(hero, target.Clan);
             }
+
+            hero.ExSpouses.Remove(target);
+            target.ExSpouses.Remove(hero);
                 
             MarriageAction.Apply(hero, target, false);
 

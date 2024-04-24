@@ -49,12 +49,12 @@ namespace Dramalord.Behaviors
                                     HeroWitnessAction.Apply(hero, child, spouse, WitnessType.Bastard);
                                     HeroPutInOrphanageAction.Apply(spouse, child);
 
-                                    if (spouse.GetHeroTraits().Calculating < 0 && spouse.GetHeroTraits().Mercy < 0)
+                                    if (spouse != Hero.MainHero && spouse.GetHeroTraits().Calculating < 0 && spouse.GetHeroTraits().Mercy < 0)
                                     {
                                         HeroKillAction.Apply(spouse, hero, child, KillReason.Bastard);
                                         return;
                                     }
-                                    else
+                                    else if(spouse != Hero.MainHero)
                                     {
                                         HeroDivorceAction.Apply(spouse, hero);
                                         if (spouse.GetHeroTraits().Mercy < 0 && spouse.Clan != null && spouse.Clan == hero.Clan && spouse.Clan.Leader == spouse)
@@ -101,7 +101,7 @@ namespace Dramalord.Behaviors
                     return;
                 }
 
-                if (!hero.IsPrisoner)
+                if (!hero.IsPrisoner && (hero.Clan != Clan.PlayerClan || DramalordMCM.Get.AllowPlayerClanAI))
                 {
                     List<Hero> flirts = new();
                     List<Hero> partners = new();
