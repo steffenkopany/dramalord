@@ -25,7 +25,7 @@ namespace Dramalord.Actions
             int seed = MBRandom.RandomInt();
             string hairTags = (child.IsFemale ? hero.HairTags : offspring.Father.HairTags);
             string tattooTags = (child.IsFemale ? hero.TattooTags : offspring.Father.TattooTags);
-            hero.ModifyPlayersFamilyAppearance(BodyProperties.GetRandomBodyProperties(hero.CharacterObject.Race, child.IsFemale, bodyProperties, bodyProperties2, 1, seed, hairTags, offspring.Father.BeardTags, tattooTags).StaticProperties);
+            child.ModifyPlayersFamilyAppearance(BodyProperties.GetRandomBodyProperties(template.Race, child.IsFemale, bodyProperties, bodyProperties2, 1, seed, hairTags, offspring.Father.BeardTags, tattooTags).StaticProperties);
    
             if (child.BornSettlement == null)
             {
