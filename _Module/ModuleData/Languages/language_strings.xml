@@ -254,5 +254,28 @@
     <string id="Dramalord248" text="Allow Members of an army to interact with each other" />
     <string id="Dramalord249" text="Allow Clan banishment" />
     <string id="Dramalord250" text="Allow Kingdom leaders to banish clans if they're angry on their leader" />
+    <string id="Dramalord251" text="NPC Approach Player Chance" />
+    <string id="Dramalord252" text="Chance that heroes approach the player for intimate conversations" />
+    <string id="Dramalord253" text="Individual Relations" />
+    <string id="Dramalord254" text="Use/Show individual relation Lords/Ladies instead of their clan leader relation" />
+    <string id="Dramalord255" text="{TITLE}, I would like to talk to you." />
+    <string id="Dramalord256" text="You met in private {HERO.LINK}." />
+    <string id="Dramalord257" text="You flirted with {HERO.LINK}." />
+    <string id="Dramalord258" text="You and {HERO.LINK} are now a couple." />
+    <string id="Dramalord259" text="Approach Player In Settlements" />
+    <string id="Dramalord260" text="Allow NPCs to approach you while being in the same settlement" />
+    <string id="Dramalord261" text="Approach Player In Party" />
+    <string id="Dramalord262" text="Allow NPCs to approach you while being in your party" />
+    <string id="Dramalord263" text="You gave {HERO.LINK} a {TOY}." />
+    <string id="Dramalord264" text="You saw {HERO.LINK} flirting with {TARGET.LINK}." />
+    <string id="Dramalord265" text="{HERO.LINK} saw you flirting with {TARGET.LINK}." />
+    <string id="Dramalord266" text="You saw {HERO.LINK} meeting in secret with {TARGET.LINK}." />
+    <string id="Dramalord267" text="{HERO.LINK} saw you meeting in secret with {TARGET.LINK}." />
+    <string id="Dramalord268" text="You caught {HERO.LINK} being intimate with {TARGET.LINK}." />
+    <string id="Dramalord269" text="{HERO.LINK} caught you being intimate with {TARGET.LINK}." />
+    <string id="Dramalord270" text="You noticed {HERO.LINK} is pregnant from someone else." />
+    <string id="Dramalord271" text="{HERO.LINK} noticed you are pregnant from someone else." />
+    <string id="Dramalord272" text="You noticed that {TARGET.LINK} born by {HERO.LINK} is not your child." />
+    <string id="Dramalord273" text="{HERO.LINK} noticed your child {TARGET.LINK} is not theirs." />
   </strings>
 </base>

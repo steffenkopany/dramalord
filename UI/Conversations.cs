@@ -1,5 +1,7 @@
 ﻿using Dramalord.Data;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
@@ -29,10 +31,15 @@ namespace Dramalord.UI
         internal static readonly string PlayerDateReply = "dl_player_date_reply";
         internal static readonly string PlayerJoinReply = "dl_player_join_reply";
         internal static readonly string PlayerDivorceReply = "dl_player_divorce_reply";
+        internal static readonly string PlayerBreakupReply = "dl_player_breakup_reply";
         internal static readonly string NPCDivorceReply = "dl_npc_divorce_reply";
         internal static readonly string PlayerMarryReply = "dl_player_marry_reply";
         internal static readonly string NPCActionResult = "dl_npc_action_result";
         internal static readonly string NPCViolatedReply = "dl_npc_violated_result";
+        internal static readonly string NPCStart = "start";
+        internal static readonly string NPCStartRequest = "dl_npc_start_request";
+        internal static readonly string NPCRequestToPlayer = "dl_npc_request_to_player";
+        internal static readonly string NPCStatementToPlayer = "dl_npc_statement_to_player";
 
         internal static void AddDialogs(CampaignGameStarter starter)
         {
@@ -102,8 +109,29 @@ namespace Dramalord.UI
 
             starter.AddPlayerLine("Dramalord111", PlayerMainOptions, NPCViolatedReply, "{=Dramalord111}You and I... we're going to have some fun now...", Conditions.PlayerCanViolateNpc, null);
             starter.AddDialogLine("Dramalord112", NPCViolatedReply, CloseConversation, "{=Dramalord112}Oh god! Please, no! Stay away from me!", null, Consequences.PlayerViolatedNpc);
-        }
 
+            //approaching
+            starter.AddDialogLine("Dramalord255", NPCStart, NPCStartRequest, "{=Dramalord255}{TITLE}, I would like to talk to you.", Conditions.NPCCanApproachPlayer, null, 120);
+
+            starter.AddDialogLine("Dramalord942", NPCStartRequest, NPCRequestToPlayer, "{=Dramalord042}Would you like to...", Conditions.NPCAsksPlayerSomething, null);
+            starter.AddDialogLine("Dramalord998", NPCStartRequest, NPCStatementToPlayer, "{=Dramalord098}I would like to...", Conditions.NPCTellsPlayerSomething, null);
+
+            starter.AddDialogLine("Dramalord970", NPCRequestToPlayer, PlayerFlirtReply, "{=Dramalord070}...go for a walk with me?", Conditions.NPCCanAskForFlirt, null);
+            starter.AddDialogLine("Dramalord944", NPCRequestToPlayer, PlayerDateReply, "{=Dramalord044}...retreat to somewhere more silent?", Conditions.NPCCanAskForDate, null);
+            starter.AddDialogLine("Dramalord951", NPCRequestToPlayer, PlayerMarryReply, "{=Dramalord051}...marry me?", Conditions.NPCCanAskForMarriage, null);
+
+            starter.AddDialogLine("Dramalord970", NPCStatementToPlayer, CloseConversation, "{=Dramalord104}...end this love affair.", Conditions.NPCCanAskForBreakup, Consequences.NpcBrokeUpWithPlayer);
+            starter.AddDialogLine("Dramalord944", NPCStatementToPlayer, CloseConversation, "{=Dramalord105}...end this marriage.", Conditions.NPCCanAskForDivorce, Consequences.NpcDivorcedPlayer);
+
+            starter.AddPlayerLine("Dramalord845", PlayerFlirtReply, CloseConversation, "{=Dramalord045}Oh... well, I think I would like that.", null, Consequences.NpcAcceptedFlirt);
+            starter.AddPlayerLine("Dramalord846", PlayerFlirtReply, CloseConversation, "{=Dramalord046}No I would not like to do that.", null, Consequences.NpcDeclinedFlirt);
+
+            starter.AddPlayerLine("Dramalord645", PlayerDateReply, CloseConversation, "{=Dramalord045}Oh... well, I think I would like that.", null, Consequences.PlayerAcceptedDate);
+            starter.AddPlayerLine("Dramalord646", PlayerDateReply, CloseConversation, "{=Dramalord046}No I would not like to do that.", null, Consequences.NpcDeclinedDate);
+
+            starter.AddPlayerLine("Dramalord445", PlayerMarryReply, CloseConversation, "{=Dramalord045}Oh... well, I think I would like that.", null, Consequences.NpcAcceptedMarriage);
+            starter.AddPlayerLine("Dramalord446", PlayerMarryReply, CloseConversation, "{=Dramalord046}No I would not like to do that.", null, Consequences.NpcDeclinedMarriage);
+        }
 
         internal static bool SetConversationTextVariables()
         {

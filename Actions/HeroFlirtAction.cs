@@ -1,6 +1,9 @@
 ﻿using Dramalord.Data;
+using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
+using TaleWorlds.Core;
+using TaleWorlds.Localization;
 
 namespace Dramalord.Actions
 {
@@ -34,6 +37,14 @@ namespace Dramalord.Actions
                 }
                 else
                 {
+                    if (target == Hero.MainHero || hero == Hero.MainHero)
+                    {
+                        Hero otherHero = (hero == Hero.MainHero) ? target : hero;
+
+                        TextObject banner = new TextObject("{=Dramalord257}You flirted with {HERO.LINK}.");
+                        StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, otherHero.CharacterObject, "event:/ui/notification/relation");
+                    }
                     if (DramalordMCM.Get.FlirtOutput)
                     {
                         LogEntry.AddLogEntry(new LogFlirt(hero, target));

@@ -254,5 +254,28 @@
     <string id="Dramalord248" text="군대 안 구성원 간에 상호작용을 허용합니다." />
     <string id="Dramalord249" text="가문 추방 허용" />
     <string id="Dramalord250" text="왕국 지도자에게 분노한 가문이 있을 경우 왕국 지도자가 가문을 추방할 수 있습니다." />
+    <string id="Dramalord251" text="NPC 플레이어 접근 확률" />
+    <string id="Dramalord252" text="영웅이 플레이어에게 접근하여 친밀한 대화를 나눌 확률" />
+    <string id="Dramalord253" text="개인관계" />
+    <string id="Dramalord254" text="클랜 리더 관계 대신 영주/부인 개인 관계 사용/표시" />
+    <string id="Dramalord255" text="{TITLE}님, 통화하고 싶습니다." />
+    <string id="Dramalord256" text="당신은 {HERO.LINK}님과 비공개로 만났습니다." />
+    <string id="Dramalord257" text="당신은 {HERO.LINK}에게 관심을 보였습니다." />
+    <string id="Dramalord258" text="당신과 {HERO.LINK}은(는) 이제 커플이 되었습니다." />
+    <string id="Dramalord259" text="정착지에서 플레이어에게 접근" />
+    <string id="Dramalord260" text="같은 정착지에 있는 동안 NPC가 접근할 수 있도록 허용합니다." />
+    <string id="Dramalord261" text="파티에 있는 플레이어에게 접근" />
+    <string id="Dramalord262" text="파티에 있는 동안 NPC가 접근하도록 허용합니다." />
+    <string id="Dramalord263" text="{HERO.LINK}에게 {TOY}을(를) 주셨습니다." />
+    <string id="Dramalord264" text="{HERO.LINK}이(가) {TARGET.LINK}을(를) 유혹하는 것을 보았습니다." />
+    <string id="Dramalord265" text="{HERO.LINK}님이 귀하가 {TARGET.LINK}님을 유혹하는 것을 보았습니다." />
+    <string id="Dramalord266" text="{HERO.LINK}이(가) {TARGET.LINK}과(와) 비밀리에 만나는 것을 보셨습니다." />
+    <string id="Dramalord267" text="{HERO.LINK}님이 당신이 {TARGET.LINK}님과 비밀리에 만나는 것을 보았습니다." />
+    <string id="Dramalord268" text="{HERO.LINK}이(가) {TARGET.LINK}과(와) 친밀한 관계에 있는 것을 포착하셨습니다." />
+    <string id="Dramalord269" text="{HERO.LINK}님이 귀하가 {TARGET.LINK}님과 친밀한 관계에 있는 것을 포착했습니다." />
+    <string id="Dramalord270" text="{HERO.LINK}님이 다른 사람의 임신을 했다는 것을 알게 되셨습니다." />
+    <string id="Dramalord271" text="{HERO.LINK}님이 귀하가 다른 사람의 임신을 했다는 사실을 알아냈습니다." />
+    <string id="Dramalord272" text="{HERO.LINK}님이 태어난 {TARGET.LINK}님이 귀하의 자녀가 아니라는 사실을 확인하셨습니다." />
+    <string id="Dramalord273" text="{HERO.LINK}님이 귀하의 자녀 {TARGET.LINK}이(가) 자신의 자녀가 아님을 확인했습니다." />
   </strings>
 </base>

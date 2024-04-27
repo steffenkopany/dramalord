@@ -254,5 +254,28 @@
     <string id="Dramalord248" text="Разрешить членам армии взаимодействовать друг с другом" />
     <string id="Dramalord249" text="Разрешить изгнание клана" />
     <string id="Dramalord250" text="Разрешить лидерам Королевства изгонять кланы, если они злятся на своего лидера" />
+    <string id="Dramalord251" text="Шанс приближения NPC к игроку" />
+    <string id="Dramalord252" text="Шанс, что герои подойдут к игроку для задушевных разговоров" />
+    <string id="Dramalord253" text="Индивидуальные отношения" />
+    <string id="Dramalord254" text="Использовать/показывать индивидуальные отношения Лордов/Леди вместо отношений с лидерами клана" />
+    <string id="Dramalord255" text="{TITLE}, я хотел бы поговорить с вами." />
+    <string id="Dramalord256" text="Вы встретились наедине {HERO.LINK}." />
+    <string id="Dramalord257" text="Вы флиртовали с {HERO.LINK}." />
+    <string id="Dramalord258" text="Вы и {HERO.LINK} теперь пара." />
+    <string id="Dramalord259" text="Подход к игроку в поселениях" />
+    <string id="Dramalord260" text="Разрешить NPC приближаться к вам, находясь в том же поселении" />
+    <string id="Dramalord261" text="Подойти к игроку в группе" />
+    <string id="Dramalord262" text="Разрешить NPC приближаться к вам, пока вы находитесь в вашей группе" />
+    <string id="Dramalord263" text="Вы подарили {HERO.LINK} {ИГРУШКУ}." />
+    <string id="Dramalord264" text="Вы видели, как {HERO.LINK} флиртовал с {TARGET.LINK}." />
+    <string id="Dramalord265" text="{HERO.LINK} видел, как вы флиртовали с {TARGET.LINK}." />
+    <string id="Dramalord266" text="Вы видели, как {HERO.LINK} тайно встречался с {TARGET.LINK}." />
+    <string id="Dramalord267" text="{HERO.LINK} видел, как вы тайно встречались с {TARGET.LINK}." />
+    <string id="Dramalord268" text="Вы застали {HERO.LINK} в интимной близости с {TARGET.LINK}." />
+    <string id="Dramalord269" text="{HERO.LINK} застал вас в интимной близости с {TARGET.LINK}." />
+    <string id="Dramalord270" text="Вы заметили, что {HERO.LINK} беременна от кого-то другого." />
+    <string id="Dramalord271" text="{HERO.LINK} заметил, что вы беременны от другого." />
+    <string id="Dramalord272" text="Вы заметили, что {TARGET.LINK}, рожденный от {HERO.LINK}, не ваш ребенок." />
+    <string id="Dramalord273" text="{HERO.LINK} заметил, что ваш ребенок {TARGET.LINK} не принадлежит ему." />
   </strings>
 </base>

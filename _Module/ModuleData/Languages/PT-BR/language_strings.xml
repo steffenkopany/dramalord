@@ -255,5 +255,28 @@
     <string id="Dramalord248" text="Permitir que membros de um exército interajam entre si" />
     <string id="Dramalord249" text="Permitir banimento do clã" />
     <string id="Dramalord250" text="Permitir que os líderes do Reino banam clãs se estiverem com raiva de seu líder" />
+    <string id="Dramalord251" text="Oportunidade de aproximação do jogador com NPC" />
+    <string id="Dramalord252" text="Chance de que os heróis se aproximem do jogador para conversas íntimas" />
+    <string id="Dramalord253" text="Relações Individuais" />
+    <string id="Dramalord254" text="Usar/Mostrar relação individual Senhores/Senhoras em vez da relação líder do clã" />
+    <string id="Dramalord255" text="{TITLE}, gostaria de falar com você." />
+    <string id="Dramalord256" text="Vocês se conheceram em particular {HERO.LINK}." />
+    <string id="Dramalord257" text="Você flertou com {HERO.LINK}." />
+    <string id="Dramalord258" text="Você e {HERO.LINK} agora são um casal." />
+    <string id="Dramalord259" text="Abordar jogador em assentamentos" />
+    <string id="Dramalord260" text="Permitir que NPCs se aproximem de você enquanto estiver no mesmo assentamento" />
+    <string id="Dramalord261" text="Abordar jogador no grupo" />
+    <string id="Dramalord262" text="Permitir que NPCs se aproximem de você enquanto estiver em seu grupo" />
+    <string id="Dramalord263" text="Você deu a {HERO.LINK} um {BRINQUEDO}." />
+    <string id="Dramalord264" text="Você viu {HERO.LINK} flertando com {TARGET.LINK}." />
+    <string id="Dramalord265" text="{HERO.LINK} vi você flertando com {TARGET.LINK}." />
+    <string id="Dramalord266" text="Você viu {HERO.LINK} se reunindo em segredo com {TARGET.LINK}." />
+    <string id="Dramalord267" text="{HERO.LINK} viu você se encontrando em segredo com {TARGET.LINK}." />
+    <string id="Dramalord268" text="Você pegou {HERO.LINK} sendo íntimo de {TARGET.LINK}." />
+    <string id="Dramalord269" text="{HERO.LINK} pegou você sendo íntimo de {TARGET.LINK}." />
+    <string id="Dramalord270" text="Você percebeu que {HERO.LINK} está grávida de outra pessoa." />
+    <string id="Dramalord271" text="{HERO.LINK} percebeu que você está grávida de outra pessoa." />
+    <string id="Dramalord272" text="Você notou que {TARGET.LINK} nascido de {HERO.LINK} não é seu filho." />
+    <string id="Dramalord273" text="{HERO.LINK} notou que seu filho {TARGET.LINK} não é dele." />
   </strings>
 </base>

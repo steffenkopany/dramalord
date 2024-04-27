@@ -2,6 +2,7 @@
 using Dramalord.Data;
 using Dramalord.UI;
 using Helpers;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,10 @@ using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.CampaignBehaviors.CommentBehaviors;
 using TaleWorlds.CampaignSystem.CharacterCreationContent;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
+using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.Party;
@@ -95,6 +98,24 @@ namespace Dramalord.Behaviors
                     }
                 }
 
+                bool isSameParty = hero.PartyBelongedTo != null && hero.PartyBelongedTo == Hero.MainHero.PartyBelongedTo && DramalordMCM.Get.AllowApproachInParty;
+                bool isSameSettlement = hero.CurrentSettlement != null && hero.CurrentSettlement == Hero.MainHero.CurrentSettlement && DramalordMCM.Get.AllowApproachInSettlement;
+                if (!hero.IsPrisoner && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.ChanceNPCApproachPlayer && (isSameParty || isSameSettlement))
+                {
+                    bool wantsFlirt = Info.GetAttractionToHero(hero, Hero.MainHero) >= DramalordMCM.Get.MinAttractionForFlirting && !Info.IsCoupleWithHero(hero, Hero.MainHero) && Info.GetEmotionToHero(hero, Hero.MainHero) > DramalordMCM.Get.MinEmotionForConversation && Info.GetEmotionToHero(hero, Hero.MainHero) < DramalordMCM.Get.MinEmotionForDating && CampaignTime.Now.ToDays - Info.GetLastDaySeen(hero, Hero.MainHero) > 1;
+                    bool wantsDate = (Info.IsCoupleWithHero(hero, Hero.MainHero) || Info.GetEmotionToHero(hero, Hero.MainHero) >= DramalordMCM.Get.MinEmotionForDating) && CampaignTime.Now.ToDays - Info.GetLastDate(hero, Hero.MainHero) >= DramalordMCM.Get.DaysBetweenDates && Info.GetEmotionToHero(hero, Hero.MainHero) < DramalordMCM.Get.MinEmotionForMarriage;
+                    bool wantsToMarry = Info.IsCoupleWithHero(hero, Hero.MainHero) && hero.Spouse != Hero.MainHero && Info.GetEmotionToHero(hero, Hero.MainHero) >= DramalordMCM.Get.MinEmotionForMarriage;
+                    bool wantsToDivorce = hero.Spouse == Hero.MainHero && Info.GetEmotionToHero(hero, Hero.MainHero) < DramalordMCM.Get.MinEmotionBeforeDivorce;
+                    bool wantsToBreakUp = hero.Spouse != Hero.MainHero && Info.GetEmotionToHero(hero, Hero.MainHero) < DramalordMCM.Get.MinEmotionBeforeDivorce && Info.IsCoupleWithHero(hero, Hero.MainHero);
+                    if (wantsFlirt || wantsDate || wantsToMarry || wantsToBreakUp || wantsToDivorce)
+                    {
+                        Campaign.Current.SetTimeSpeed(0);
+                        Conditions.ApproachingHero = hero;
+                        CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(hero.CharacterObject));
+                        return;
+                    }
+                }
+
                 if (Info.GetHeroHasToy(hero))
                 {
                     HeroToyAction.Apply(hero);
@@ -107,7 +128,7 @@ namespace Dramalord.Behaviors
                     List<Hero> partners = new();
                     List<Hero> prisoners = new();
 
-                    ScopeSurroundings(hero, ref flirts, ref partners, ref prisoners);
+                    ScopeSurroundings(hero, ref flirts, ref partners, ref prisoners, false);
 
                     // evil stuff first
                     if (hero.GetHeroTraits().Mercy < 0)
@@ -151,7 +172,7 @@ namespace Dramalord.Behaviors
                         }
                     }
 
-                    if(partner != null && Info.ValidateHeroMemory(hero, partner))
+                    if(partner != null && Info.ValidateHeroMemory(hero, partner)) //CompanionGrievanceBehavior
                     {
                         float heroEmotion = Info.GetEmotionToHero(hero, partner);
 
@@ -374,7 +395,7 @@ namespace Dramalord.Behaviors
             }
         }
 
-        internal static void ScopeSurroundings(Hero hero, ref List<Hero> flirts, ref List<Hero> partners, ref List<Hero> prisoners)
+        internal static void ScopeSurroundings(Hero hero, ref List<Hero> flirts, ref List<Hero> partners, ref List<Hero> prisoners, bool lookupTroops)
         {
             int flirtLimit = DramalordMCM.Get.MinAttractionForFlirting;
             bool noFamily = DramalordMCM.Get.ProtectFamily;
@@ -480,7 +501,8 @@ namespace Dramalord.Behaviors
                         }
                     }
                 }
-                if (hero.PartyBelongedTo.PrisonRoster != null && hero.PartyBelongedTo.PrisonRoster.TotalHeroes > 1)
+
+                if (hero.PartyBelongedTo.PrisonRoster != null && hero.PartyBelongedTo.PrisonRoster.TotalHeroes > 0)
                 {
                     foreach (TroopRosterElement tre in hero.PartyBelongedTo.PrisonRoster.GetTroopRoster())
                     {
@@ -496,6 +518,29 @@ namespace Dramalord.Behaviors
                                 if (!isCouple && attraction >= flirtLimit && (!isRelative || !noFamily))
                                 {
                                     prisoners.Add(h);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if(lookupTroops && hero.PartyBelongedTo.MemberRoster != null)
+                {
+                    if(hero.PartyBelongedTo.MemberRoster.TotalHeroes > 1)
+                    {
+                        foreach (TroopRosterElement tre in hero.PartyBelongedTo.MemberRoster.GetTroopRoster())
+                        {
+                            if (tre.Character.IsHero)
+                            {
+                                Hero h = tre.Character.HeroObject;
+                                if (h != null && h != hero && Info.ValidateHeroMemory(hero, h))
+                                {
+                                    bool isCouple = Info.IsCoupleWithHero(hero, h);
+
+                                    if (isCouple)
+                                    {
+                                        partners.Add(h);
+                                    }
                                 }
                             }
                         }

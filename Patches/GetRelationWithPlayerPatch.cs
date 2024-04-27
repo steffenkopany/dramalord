@@ -12,7 +12,10 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void GetRelationWithPlayer(ref Hero __instance, ref float __result)
         {
-            __result = Hero.MainHero.GetBaseHeroRelation(__instance);
+            if(DramalordMCM.Get.IndividualRelation)
+            {
+                __result = Hero.MainHero.GetBaseHeroRelation(__instance);
+            }  
         }
     }
 }

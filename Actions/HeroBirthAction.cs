@@ -5,6 +5,7 @@ using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Actions
 {
@@ -18,7 +19,14 @@ namespace Dramalord.Actions
             Hero child = HeroCreator.CreateSpecialHero(template, bornSettlement, faction, null, 0);
             child.Mother = hero;
             child.Father = offspring.Father;
-
+            hero.HeroDeveloper.InitializeHeroDeveloper(isByNaturalGrowth: true);
+            BodyProperties bodyProperties = hero.BodyProperties;
+            BodyProperties bodyProperties2 = offspring.Father.BodyProperties;
+            int seed = MBRandom.RandomInt();
+            string hairTags = (child.IsFemale ? hero.HairTags : offspring.Father.HairTags);
+            string tattooTags = (child.IsFemale ? hero.TattooTags : offspring.Father.TattooTags);
+            hero.ModifyPlayersFamilyAppearance(BodyProperties.GetRandomBodyProperties(hero.CharacterObject.Race, child.IsFemale, bodyProperties, bodyProperties2, 1, seed, hairTags, offspring.Father.BeardTags, tattooTags).StaticProperties);
+   
             if (child.BornSettlement == null)
             {
                 child.BornSettlement = SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);

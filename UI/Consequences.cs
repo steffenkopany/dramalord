@@ -1,10 +1,12 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Behaviors;
 using Dramalord.Data;
+using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Core;
+using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
 namespace Dramalord.UI
@@ -21,8 +23,34 @@ namespace Dramalord.UI
         {
             SetRoles();
 
-            HeroFlirtAction.Apply(Player, Npc);
-            
+            HeroFlirtAction.Apply(Npc, Player);
+
+            List<Hero> flirts = new();
+            List<Hero> partners = new();
+            List<Hero> prisoners = new();
+
+            AICampaignActions.ScopeSurroundings(Npc, ref flirts, ref partners, ref prisoners, true);
+
+            partners.Remove(Player);
+            Hero? partner = (partners.Count > 0) ? partners[MBRandom.RandomInt(partners.Count)] : null;
+
+            if (partner != null && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+            {
+                HeroWitnessAction.Apply(Npc, Player, partner, WitnessType.Flirting);
+            }
+
+            partners.Clear();
+
+            AICampaignActions.ScopeSurroundings(Player, ref flirts, ref partners, ref prisoners, true);
+
+            partners.Remove(Npc);
+            Hero? partner2 = (partners.Count > 0) ? partners[MBRandom.RandomInt(partners.Count)] : null;
+
+            if (partner2 != null && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+            {
+                HeroWitnessAction.Apply(Player, Npc, partner2, WitnessType.Flirting);
+            }
+
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
@@ -33,6 +61,7 @@ namespace Dramalord.UI
         {
             SetRoles();
             Info.SetLastDaySeen(Npc, Player, CampaignTime.Now.ToDays);
+            Info.ChangeEmotionToHeroBy(Npc, Player, DramalordMCM.Get.EmotionalLossCaughtFlirting * -1);
         }
 
         //DATE
@@ -45,17 +74,19 @@ namespace Dramalord.UI
             if (!Info.IsCoupleWithHero(Player, Npc))
             {
                 Info.SetIsCoupleWithHero(Player, Npc, true);
-                Notification.DrawBanner("You and " + Npc + " are now a couple");
+                TextObject banner = new TextObject("{=Dramalord258}You and {HERO.LINK} are now a couple.");
+                StringHelpers.SetCharacterProperties("HERO", Npc.CharacterObject, banner);
+                MBInformationManager.AddQuickInformation(banner, 1000, Npc.CharacterObject, "event:/ui/notification/relation");
             }
 
             List<Hero> flirts = new();
             List<Hero> partners = new();
             List<Hero> prisoners = new();
 
-            AICampaignActions.ScopeSurroundings(Npc, ref flirts, ref partners, ref prisoners);
-            partners.Remove(Hero.MainHero);
+            AICampaignActions.ScopeSurroundings(Player, ref flirts, ref partners, ref prisoners, true);
+            partners.Remove(Npc);
             Hero? partner = (partners.Count > 0) ? partners[MBRandom.RandomInt(partners.Count)] : null;
-            AICampaignActions.CompleteDateActions(Npc, Player, partner);
+            AICampaignActions.CompleteDateActions(Player, Npc, partner);
 
             if (PlayerEncounter.Current != null)
             {
@@ -73,6 +104,7 @@ namespace Dramalord.UI
         {
             SetRoles();
             Info.SetLastPrivateMeeting(Npc, Player, CampaignTime.Now.ToDays);
+            Info.ChangeEmotionToHeroBy(Npc, Player, DramalordMCM.Get.EmotionalLossCaughtDate * -1);
             Persuasions.ClearCurrentPersuasion();
         }
 
@@ -134,28 +166,33 @@ namespace Dramalord.UI
             SetRoles();
             Persuasions.ClearCurrentPersuasion();
             Info.SetLastPrivateMeeting(Npc, Player, CampaignTime.Now.ToDays);
+            Info.ChangeEmotionToHeroBy(Npc, Player, DramalordMCM.Get.EmotionalLossMarryOther * -1);
         }
 
         internal static void NpcGotPresentFromPlayer()
         {
             SetRoles();
-            
+
+            TextObject toy = TextObject.Empty;
             if (Npc.IsFemale)
             {
                 ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
                 Player.PartyBelongedTo.ItemRoster.AddToCounts(wurst, -1);
                 Info.SetHeroHasToy(Npc, true);
-
-                Notification.DrawBanner("You gave " + Npc + " a " + wurst.Name);
+                toy = new TextObject("{=Dramalord052}sausage");
             }
             else
             {
                 ItemObject pie = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_pie");
                 Player.PartyBelongedTo.ItemRoster.AddToCounts(pie, -1);
                 Info.SetHeroHasToy(Npc, true);
-
-                Notification.DrawBanner("You gave " + Npc + " a " + pie.Name);
+                toy = new TextObject("{=Dramalord101}Pie");
             }
+
+            TextObject banner = new TextObject("{=Dramalord258}You gave {HERO.LINK} a {TOY}.");
+            StringHelpers.SetCharacterProperties("HERO", Npc.CharacterObject, banner);
+            banner.SetTextVariable("TOY", toy);
+            MBInformationManager.AddQuickInformation(banner, 1000, Npc.CharacterObject, "event:/ui/notification/relation");
         }
 
         internal static void NpcDidntCareAboutBreakup()
@@ -256,6 +293,92 @@ namespace Dramalord.UI
                 {
                     HeroConceiveAction.Apply(Player, Npc, true);
                 }
+            }
+        }
+
+        internal static void PlayerAcceptedFlirt()
+        {
+            SetRoles();
+
+            HeroFlirtAction.Apply(Player, Npc);
+
+            List<Hero> flirts = new();
+            List<Hero> partners = new();
+            List<Hero> prisoners = new();
+
+            AICampaignActions.ScopeSurroundings(Player, ref flirts, ref partners, ref prisoners, true);
+
+            partners.Remove(Npc);
+            Hero? partner = (partners.Count > 0) ? partners[MBRandom.RandomInt(partners.Count)] : null;
+
+            if (partner != null && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+            {
+                HeroWitnessAction.Apply(Player, Npc, partner, WitnessType.Flirting);
+            }
+
+            partners.Clear();
+
+            AICampaignActions.ScopeSurroundings(Npc, ref flirts, ref partners, ref prisoners, true);
+
+            partners.Remove(Player);
+            Hero? partner2 = (partners.Count > 0) ? partners[MBRandom.RandomInt(partners.Count)] : null;
+
+            if (partner2 != null && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
+            {
+                HeroWitnessAction.Apply(Npc, Player, partner2, WitnessType.Flirting);
+            }
+
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        internal static void PlayerAcceptedDate()
+        {
+            SetRoles();
+
+            Persuasions.ClearCurrentPersuasion();
+            if (!Info.IsCoupleWithHero(Player, Npc))
+            {
+                Info.SetIsCoupleWithHero(Player, Npc, true);
+                TextObject banner = new TextObject("{=Dramalord258}You and {HERO.LINK} are now a couple.");
+                StringHelpers.SetCharacterProperties("HERO", Npc.CharacterObject, banner);
+                MBInformationManager.AddQuickInformation(banner, 1000, Npc.CharacterObject, "event:/ui/notification/relation");
+            }
+
+            List<Hero> flirts = new();
+            List<Hero> partners = new();
+            List<Hero> prisoners = new();
+
+            AICampaignActions.ScopeSurroundings(Player, ref flirts, ref partners, ref prisoners, true);
+            partners.Remove(Npc);
+            Hero? partner = (partners.Count > 0) ? partners[MBRandom.RandomInt(partners.Count)] : null;
+            AICampaignActions.CompleteDateActions(Player, Npc, partner);
+
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        internal static void NpcBrokeUpWithPlayer()
+        {
+            SetRoles();
+            HeroBreakupAction.Apply(Npc, Player);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        internal static void NpcDivorcedPlayer()
+        {
+            SetRoles();
+            HeroDivorceAction.Apply(Npc, Player);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
             }
         }
 

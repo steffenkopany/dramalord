@@ -59,8 +59,20 @@ namespace Dramalord
         public bool AllowArmyInteractionAI { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord147}General")]
-        [SettingPropertyBool("{=Dramalord249}Allow Clan banishment", HintText = "{=Dramalord250}Allow Kingdom leaders to banish clans if they're angry on their leader", Order = 11, RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord249}Allow Clan banishment", HintText = "{=Dramalord250}Allow Kingdom leaders to banish clans if they're angry on their leader", Order = 12, RequireRestart = false)]
         public bool AllowClanBanishment { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyFloatingInteger("{=Dramalord251}NPC Approach Player Chance", 0, 100, HintText = "{=Dramalord252}Chance that heroes approach the player for intimate conversations", Order = 13, RequireRestart = false)]
+        public int ChanceNPCApproachPlayer { get; set; } = 20;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord259}Approach Player In Settlements", HintText = "{=Dramalord260}Allow NPCs to approach you while being in the same settlement", Order = 14, RequireRestart = false)]
+        public bool AllowApproachInSettlement { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord261}Approach Player In Party", HintText = "{=Dramalord262}Allow NPCs to approach you while being in your party", Order = 15, RequireRestart = false)]
+        public bool AllowApproachInParty { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord167}Other Sex Attraction Modifier", -50, 50, Order = 1, HintText = "{=Dramalord168}AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)", RequireRestart = false)]
@@ -190,8 +202,12 @@ namespace Dramalord
         [SettingPropertyBool("{=Dramalord223}Player Always Loved", Order = 3, HintText = "{=Dramalord224}Player is always loved by other heroes (cheat)", RequireRestart = false)]
         public bool PlayerAlwaysLoved { get; set; } = false;
 
+        [SettingPropertyGroup("{=Dramalord149}Player Options")]
+        [SettingPropertyBool("{=Dramalord253}Individual Relations", Order = 4, HintText = "{=Dramalord254}Use/Show individual relation Lords/Ladies instead of their clan leader relation", RequireRestart = false)]
+        public bool IndividualRelation { get; set; } = true;
+
         [SettingPropertyGroup("{=Dramalord150}Extra QOL")]
-        [SettingPropertyBool("{=Dramalord224}No Captivity Messages", Order = 1, HintText = "{=Dramalord226}Disable spam of captured or freed heroes (english only!)", RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord225}No Captivity Messages", Order = 1, HintText = "{=Dramalord226}Disable spam of captured or freed heroes (english only!)", RequireRestart = false)]
         public bool NoCaptivityMessages { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord150}Extra QOL")]

@@ -254,5 +254,28 @@
     <string id="Dramalord248" text="Bir ordunun üyelerinin birbirleriyle etkileşime girmesine izin ver" />
     <string id="Dramalord249" text="Klanın sürgün edilmesine izin ver" />
     <string id="Dramalord250" text="Krallık liderlerinin, liderlerine kızgın olmaları halinde klanları sürgün etmesine izin ver" />
+    <string id="Dramalord251" text="NPC Oyuncuya Yaklaşma Şansı" />
+    <string id="Dramalord252" text="Kahramanların samimi konuşmalar için oyuncuya yaklaşma şansı" />
+    <string id="Dramalord253" text="Bireysel İlişkiler" />
+    <string id="Dramalord254" text="Klan lideri ilişkisi yerine bireysel Lordlar/Leydiler ilişkisini Kullan/Göster" />
+    <string id="Dramalord255" text="{TITLE}, seninle konuşmak istiyorum." />
+    <string id="Dramalord256" text="{HERO.LINK} ile özel olarak tanıştınız." />
+    <string id="Dramalord257" text="{HERO.LINK} ile flört ettin." />
+    <string id="Dramalord258" text="Siz ve {HERO.LINK} artık bir çiftsiniz." />
+    <string id="Dramalord259" text="Yerleşim Yerlerinde Oyuncuya Yaklaşın" />
+    <string id="Dramalord260" text="Aynı yerleşim yerindeyken NPC'lerin size yaklaşmasına izin verin" />
+    <string id="Dramalord261" text="Grupta Oyuncuya Yaklaş" />
+    <string id="Dramalord262" text="Partinizdeyken NPC'lerin size yaklaşmasına izin verin" />
+    <string id="Dramalord263" text="{HERO.LINK}'a bir {TOY} verdiniz." />
+    <string id="Dramalord264" text="{HERO.LINK}'ın {TARGET.LINK} ile flört ettiğini gördünüz." />
+    <string id="Dramalord265" text="{HERO.LINK} seni {TARGET.LINK} ile flört ederken gördü." />
+    <string id="Dramalord266" text="{HERO.LINK}'ın {TARGET.LINK} ile gizlice buluştuğunu gördünüz." />
+    <string id="Dramalord267" text="{HERO.LINK}, {TARGET.LINK} ile gizlice buluştuğunuzu gördü." />
+    <string id="Dramalord268" text="{HERO.LINK}'ı, {TARGET.LINK} ile yakınlaşırken yakaladınız." />
+    <string id="Dramalord269" text="{HERO.LINK} seni {TARGET.LINK} ile yakınlaşırken yakaladı." />
+    <string id="Dramalord270" text="{HERO.LINK}'nin başka birinden hamile olduğunu fark ettiniz." />
+    <string id="Dramalord271" text="{HERO.LINK} başka birinden hamile olduğunuzu fark etti." />
+    <string id="Dramalord272" text="{HERO.LINK} tarafından doğan {TARGET.LINK}'ın sizin çocuğunuz olmadığını fark ettiniz." />
+    <string id="Dramalord273" text="{HERO.LINK}, {TARGET.LINK} adlı çocuğunuzun kendisine ait olmadığını fark etti." />
   </strings>
 </base>

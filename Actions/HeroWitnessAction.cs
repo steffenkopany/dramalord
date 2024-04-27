@@ -1,6 +1,9 @@
 ﻿using Dramalord.Data;
+using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
+using TaleWorlds.Core;
+using TaleWorlds.Localization;
 
 namespace Dramalord.Actions
 {
@@ -26,6 +29,21 @@ namespace Dramalord.Actions
                     {
                         LogEntry.AddLogEntry(new LogWitnessFlirt(hero, target, witness));
                     }
+
+                    if(witness == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord264}You saw {HERO.LINK} flirting with {TARGET.LINK}.");
+                        StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                    }
+                    else if (hero == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord265}{HERO.LINK} saw you flirting with {TARGET.LINK}.");
+                        StringHelpers.SetCharacterProperties("HERO", witness.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, witness.CharacterObject, "event:/ui/notification/relation");
+                    }
                 }
                 else if (type == WitnessType.Dating)
                 {
@@ -33,6 +51,21 @@ namespace Dramalord.Actions
                     if (DramalordMCM.Get.AffairOutput)
                     {
                         LogEntry.AddLogEntry(new LogWitnessDate(hero, target, witness));
+                    }
+
+                    if (witness == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord266}You saw {HERO.LINK} meeting in secret with {TARGET.LINK}.");
+                        StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                    }
+                    else if (hero == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord267}{HERO.LINK} saw you meeting in secret with {TARGET.LINK}.");
+                        StringHelpers.SetCharacterProperties("HERO", witness.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, witness.CharacterObject, "event:/ui/notification/relation");
                     }
                 }
                 else if (type == WitnessType.Intercourse)
@@ -42,6 +75,21 @@ namespace Dramalord.Actions
                     {
                         LogEntry.AddLogEntry(new LogWitnessIntercourse(hero, target, witness));
                     }
+
+                    if (witness == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord268}You caught {HERO.LINK} being intimate with {TARGET.LINK}.");
+                        StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                    }
+                    else if (hero == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord269}{HERO.LINK} caught you being intimate with {TARGET.LINK}.");
+                        StringHelpers.SetCharacterProperties("HERO", witness.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, witness.CharacterObject, "event:/ui/notification/relation");
+                    }
                 }
                 else if (type == WitnessType.Pregnancy)
                 {
@@ -50,6 +98,19 @@ namespace Dramalord.Actions
                     {
                         LogEntry.AddLogEntry(new LogWitnessPregnancy(hero, witness));
                     }
+
+                    if (witness == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord270}You noticed {HERO.LINK} is pregnant from someone else.");
+                        StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                    }
+                    else if (hero == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord271}{HERO.LINK} noticed you are pregnant from someone else.");
+                        StringHelpers.SetCharacterProperties("HERO", witness.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, witness.CharacterObject, "event:/ui/notification/relation");
+                    }
                 }
                 else if (type == WitnessType.Bastard)
                 {
@@ -57,6 +118,21 @@ namespace Dramalord.Actions
                     if (DramalordMCM.Get.BirthOutput)
                     {
                         LogEntry.AddLogEntry(new LogWitnessBastard(hero, target, witness));
+                    }
+
+                    if (witness == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord272}You noticed that {TARGET.LINK} born by {HERO.LINK} is not your child.");
+                        StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                    }
+                    else if (hero == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord273}{HERO.LINK} noticed your child {TARGET.LINK} is not theirs.");
+                        StringHelpers.SetCharacterProperties("HERO", witness.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 1000, witness.CharacterObject, "event:/ui/notification/relation");
                     }
                 }
             }

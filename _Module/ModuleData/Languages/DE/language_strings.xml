@@ -255,5 +255,28 @@
     <string id="Dramalord248" text="Erlaube Helden in einer Amree miteinander zu interagieren" />
     <string id="Dramalord249" text="Erlaube Clan Verbannung" />
     <string id="Dramalord250" text="Erlaube dem Anführer eines Königreichs Clans zu verbannen wenn sie wütend auf dessen Anführer sind" />
+    <string id="Dramalord251" text="NPC Spricht Spieler An Chance" />
+    <string id="Dramalord252" text="Chance, dass Helden auf den Spieler zu intimen Gesprächen zugehen" />
+    <string id="Dramalord253" text="Individuelle Beziehungen" />
+    <string id="Dramalord254" text="Individuelle Beziehungen zu Lords/Ladies anstelle ihre Clan-Anführer Beziehung zu verwenden/anzuzeigen" />
+    <string id="Dramalord255" text="{TITLE}, ich würde gerne mit Euch sprechen." />
+    <string id="Dramalord256" text="Ihr habt Euch privat mit {HERO.LINK} getroffen." />
+    <string id="Dramalord257" text="Ihr habt mit {HERO.LINK} geflirtet." />
+    <string id="Dramalord258" text="Ihr und {HERO.LINK} sind jetzt ein Paar." />
+    <string id="Dramalord259" text="Ansprechen von Spieler in Siedlungen" />
+    <string id="Dramalord260" text="Erlauben Sie NPCs, euch anzusprechen, während Sie sich in derselben Siedlung befinden" />
+    <string id="Dramalord261" text="Spieler in der Truppe ansprechen" />
+    <string id="Dramalord262" text="Erlaube NPCs, dich anszusprechen, während du in deiner Gruppe bist" />
+    <string id="Dramalord263" text="Ihr habt {HERO.LINK} ein(e) {TOY} gegeben." />
+    <string id="Dramalord264" text="Ihr habt gesehen, wie {HERO.LINK} mit {TARGET.LINK} geflirtet hat." />
+    <string id="Dramalord265" text="{HERO.LINK} hat gesehen, wie Ihr mit {TARGET.LINK} geflirtet habt." />
+    <string id="Dramalord266" text="Ihr habt gesehen, wie sich {HERO.LINK} heimlich mit {TARGET.LINK} getroffen hat." />
+    <string id="Dramalord267" text="{HERO.LINK} hat gesehen, wie Ihr Euch heimlich mit {TARGET.LINK} getroffen habt." />
+    <string id="Dramalord268" text="Ihr habt {HERO.LINK} dabei erwischt, mit {TARGET.LINK} intim zu sein." />
+    <string id="Dramalord269" text="{HERO.LINK} hat Euch dabei erwischt, wie Ihr mit {TARGET.LINK} intim wart." />
+    <string id="Dramalord270" text="Ihr habt bemerkt, dass {HERO.LINK} von jemand anderem schwanger ist." />
+    <string id="Dramalord271" text="{HERO.LINK} hat bemerkt, dass Ihr von jemand anderem schwanger seid." />
+    <string id="Dramalord272" text="Ihr habt bemerkt, dass {TARGET.LINK}, geboren von {HERO.LINK}, nicht Euer Kind ist." />
+    <string id="Dramalord273" text="{HERO.LINK} hat bemerkt, dass Euer Kind {TARGET.LINK} von jemand anderen ist." />
   </strings>
 </base>
