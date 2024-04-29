@@ -114,6 +114,11 @@ namespace Dramalord.Data
         {
             HeroTuple tuple = new(hero, target);
             HeroMemory[tuple].Emotion = MBMath.ClampFloat(HeroMemory[tuple].Emotion + change, -100, 100);
+            if(DramalordMCM.Get.LinkEmotionToRelation)
+            {
+                int relation = hero.GetBaseHeroRelation(target);
+                hero.SetPersonalRelation(target, relation + (int)change);
+            }
         }
 
         internal static float GetHeroHorny(Hero hero)

@@ -277,5 +277,15 @@
     <string id="Dramalord271" text="{HERO.LINK} noticed you are pregnant from someone else." />
     <string id="Dramalord272" text="You noticed that {TARGET.LINK} born by {HERO.LINK} is not your child." />
     <string id="Dramalord273" text="{HERO.LINK} noticed your child {TARGET.LINK} is not theirs." />
+    <string id="Dramalord274" text="Link Emotion Changes to Relation" />
+    <string id="Dramalord275" text="Allow changes to emotion being reflected to relation" />
+    <string id="Dramalord276" text="Allow Marriages" />
+    <string id="Dramalord277" text="Allow marriages triggered by Dramalord (the original marriage system still works)" />
+    <string id="Dramalord278" text="Allow Divorces" />
+    <string id="Dramalord279" text="Allow marriages being divorced by Dramalord events" />
+    <string id="Dramalord280" text="Allow Rage Kills" />
+    <string id="Dramalord281" text="Allow enraged heroes to kill if being cheated on" />
+    <string id="Dramalord282" text="Allow Clan Changes" />
+    <string id="Dramalord283" text="Allow heroes being kicked out of clans or leaving voluntarily" />
   </strings>
 </base>

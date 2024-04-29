@@ -74,6 +74,26 @@ namespace Dramalord
         [SettingPropertyBool("{=Dramalord261}Approach Player In Party", HintText = "{=Dramalord262}Allow NPCs to approach you while being in your party", Order = 15, RequireRestart = false)]
         public bool AllowApproachInParty { get; set; } = true;
 
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord274}Link Emotion Changes to Relation", HintText = "{=Dramalord275}Allow changes to emotion being reflected to relation", Order = 16, RequireRestart = false)]
+        public bool LinkEmotionToRelation { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord276}Allow Marriages", HintText = "{=Dramalord277}Allow marriages triggered by Dramalord (the original marriage system still works)", Order = 17, RequireRestart = false)]
+        public bool AllowMarriages { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord278}Allow Divorces", HintText = "{=Dramalord279}Allow marriages being divorced by Dramalord events", Order = 18, RequireRestart = false)]
+        public bool AllowDivorces { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord280}Allow Rage Kills", HintText = "{=Dramalord281}Allow enraged heroes to kill if being cheated on", Order = 19, RequireRestart = false)]
+        public bool AllowRageKills { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord282}Allow Clan Changes", HintText = "{=Dramalord283}Allow heroes being kicked out of clans or leaving voluntarily", Order = 19, RequireRestart = false)]
+        public bool AllowClanChanges { get; set; } = true;
+
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord167}Other Sex Attraction Modifier", -50, 50, Order = 1, HintText = "{=Dramalord168}AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)", RequireRestart = false)]
         public int OtherSexAttractionModifier { get; set; } = 0;

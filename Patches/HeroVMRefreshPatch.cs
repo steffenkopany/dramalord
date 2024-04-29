@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaleWorlds.CampaignSystem.Encyclopedia;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
-using TaleWorlds.Localization;
+﻿using Dramalord.Data;
 using HarmonyLib;
-using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using JetBrains.Annotations;
-using TaleWorlds.CampaignSystem.Encyclopedia.Pages;
-using Dramalord.Data;
-using System.Security.Cryptography;
-using static TaleWorlds.CampaignSystem.Encyclopedia.Pages.DefaultEncyclopediaHeroPage;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Encyclopedia;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Pages;
+using TaleWorlds.Core;
 using TaleWorlds.Core.ViewModelCollection.Generic;
+using TaleWorlds.Localization;
 
 namespace Dramalord.Patches
 {
@@ -27,8 +16,8 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void RefreshPatch(ref EncyclopediaHeroPageVM __instance)
         {
-            Hero hero = __instance.Obj as Hero;
-            if(hero != Hero.MainHero && Info.ValidateHeroInfo(hero) && Info.ValidateHeroMemory(hero, Hero.MainHero))
+            Hero? hero = __instance.Obj as Hero;
+            if(hero != null && hero != Hero.MainHero && Info.ValidateHeroInfo(hero) && Info.ValidateHeroMemory(hero, Hero.MainHero))
             {
                 string text = GameTexts.FindText("str_missing_info_indicator").ToString();
                 string yes = GameTexts.FindText("str_yes").ToString();

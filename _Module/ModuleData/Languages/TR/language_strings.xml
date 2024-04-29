@@ -277,5 +277,15 @@
     <string id="Dramalord271" text="{HERO.LINK} başka birinden hamile olduğunuzu fark etti." />
     <string id="Dramalord272" text="{HERO.LINK} tarafından doğan {TARGET.LINK}'ın sizin çocuğunuz olmadığını fark ettiniz." />
     <string id="Dramalord273" text="{HERO.LINK}, {TARGET.LINK} adlı çocuğunuzun kendisine ait olmadığını fark etti." />
+    <string id="Dramalord274" text="Duygu Değişikliklerini İlişkiye Bağla" />
+    <string id="Dramalord275" text="Duygudaki değişikliklerin ilişkiye yansımasına izin ver" />
+    <string id="Dramalord276" text="Evliliğe İzin Ver" />
+    <string id="Dramalord277" text="Dramalord tarafından tetiklenen evliliklere izin ver (orijinal evlilik sistemi hala çalışıyor)" />
+    <string id="Dramalord278" text="Boşanmalara İzin Ver" />
+    <string id="Dramalord279" text="Evliliklerin Dramalord olayları nedeniyle boşanmasına izin ver" />
+    <string id="Dramalord280" text="Öfke Öldürmelerine İzin Ver" />
+    <string id="Dramalord281" text="Öfkeli kahramanların aldatılmaları durumunda öldürmelerine izin ver" />
+    <string id="Dramalord282" text="Klan Değişikliklerine İzin Ver" />
+    <string id="Dramalord283" text="Kahramanların klandan atılmasına veya gönüllü olarak ayrılmasına izin ver" />
   </strings>
 </base>

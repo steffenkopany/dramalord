@@ -49,8 +49,11 @@ namespace Dramalord
         {
             base.OnGameStart(game, starter);
 
-            CampaignGameStarter campaignGameStarter = (CampaignGameStarter)starter;
-            campaignGameStarter.AddBehavior((CampaignBehaviorBase) new DramalordCampaignBehavior(campaignGameStarter));
+            CampaignGameStarter? campaignGameStarter = starter as CampaignGameStarter;
+            if(campaignGameStarter != null)
+            {
+                campaignGameStarter.AddBehavior(new DramalordCampaignBehavior(campaignGameStarter));
+            }  
         }
 
         private void HarmonyPatch()

@@ -29,7 +29,7 @@ namespace Dramalord.Patches
             {
                 return;
             }
-
+            /*
             if (Info.IsCoupleWithHero(baseHero, queriedHero) && baseHero.Spouse != queriedHero)
             {
                 string text = new TextObject("{=Dramalord075}affair").ToString();
@@ -44,7 +44,7 @@ namespace Dramalord.Patches
                 }
                 __result = text;
             }
-            else if (baseHero.Father == queriedHero && queriedHero.IsFemale)
+            else */if (baseHero.Father == queriedHero && queriedHero.IsFemale)
             {
                 string text = GameTexts.FindText("str_mother").ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)

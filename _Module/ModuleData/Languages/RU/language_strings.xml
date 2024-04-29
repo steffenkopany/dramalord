@@ -277,5 +277,15 @@
     <string id="Dramalord271" text="{HERO.LINK} заметил, что вы беременны от другого." />
     <string id="Dramalord272" text="Вы заметили, что {TARGET.LINK}, рожденный от {HERO.LINK}, не ваш ребенок." />
     <string id="Dramalord273" text="{HERO.LINK} заметил, что ваш ребенок {TARGET.LINK} не принадлежит ему." />
+    <string id="Dramalord274" text="Свяжите изменения эмоций с отношениями" />
+    <string id="Dramalord275" text="Разрешить изменение эмоций, отражаемых в отношениях" />
+    <string id="Dramalord276" text="Разрешить браки" />
+    <string id="Dramalord277" text="Разрешить браки, инициированные Драмалордом (исходная система браков все еще работает)" />
+    <string id="Dramalord278" text="Разрешить разводы" />
+    <string id="Dramalord279" text="Разрешить развод браков по событиям Драмалорда" />
+    <string id="Dramalord280" text="Разрешить убийства в ярости" />
+    <string id="Dramalord281" text="Разрешить разъяренным героям убивать, если их обманули" />
+    <string id="Dramalord282" text="Разрешить изменения клана" />
+    <string id="Dramalord283" text="Разрешить изгнание героев из кланов или их добровольный выход" />
   </strings>
 </base>

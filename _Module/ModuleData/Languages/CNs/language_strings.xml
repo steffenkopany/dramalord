@@ -277,5 +277,15 @@
     <string id="Dramalord271" text="{HERO.LINK} 注意到您怀了别人的身孕。" />
     <string id="Dramalord272" text="您注意到 {HERO.LINK} 所生的 {TARGET.LINK} 不是您的孩子。" />
     <string id="Dramalord273" text="{HERO.LINK} 注意到您的孩子 {TARGET.LINK} 不是他们的。" />
+    <string id="Dramalord274" text="将情感变化链接到关系" />
+    <string id="Dramalord275" text="允许情感变化反映到关系中" />
+    <string id="Dramalord276" text="允许婚姻" />
+    <string id="Dramalord277" text="允许由戏剧领主触发的婚姻（原婚姻系统仍然有效）" />
+    <string id="Dramalord278" text="允许离婚" />
+    <string id="Dramalord279" text="允许因戏剧领主事件而离婚" />
+    <string id="Dramalord280" text="允许愤怒击杀" />
+    <string id="Dramalord281" text="如果被欺骗，允许被激怒的英雄杀死" />
+    <string id="Dramalord282" text="允许氏族变更" />
+    <string id="Dramalord283" text="允许英雄被踢出部落或自愿离开" />
   </strings>
 </base>

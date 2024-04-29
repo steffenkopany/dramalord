@@ -269,31 +269,44 @@ namespace Dramalord.UI
         internal static bool NPCCanAskForFlirt()
         {
             SetRoles();
-            return Info.GetAttractionToHero(Npc, Player) >= DramalordMCM.Get.MinAttractionForFlirting && !Info.IsCoupleWithHero(Npc, Player) && Info.GetEmotionToHero(Npc, Player) > DramalordMCM.Get.MinEmotionForConversation && Info.GetEmotionToHero(Npc, Player) < DramalordMCM.Get.MinEmotionForDating;
+            float emotion = Info.GetEmotionToHero(Npc, Player);
+            int attraction = Info.GetAttractionToHero(Npc, Player);
+            bool isCouple = Info.IsCoupleWithHero(Npc, Player);
+            return attraction >= DramalordMCM.Get.MinAttractionForFlirting && !isCouple && emotion > DramalordMCM.Get.MinEmotionForConversation && emotion < DramalordMCM.Get.MinEmotionForDating && CampaignTime.Now.ToDays - Info.GetLastDaySeen(Npc, Player) > 1;
         }
 
         internal static bool NPCCanAskForDate()
         {
             SetRoles();
-            return (Info.GetEmotionToHero(Npc, Player) >= DramalordMCM.Get.MinEmotionForDating || Info.IsCoupleWithHero(Npc, Player)) && CampaignTime.Now.ToDays - Info.GetLastDate(Npc, Player) >= DramalordMCM.Get.DaysBetweenDates && Info.GetEmotionToHero(Npc, Player) < DramalordMCM.Get.MinEmotionForMarriage;
+            float emotion = Info.GetEmotionToHero(Npc, Player);
+            bool isCouple = Info.IsCoupleWithHero(Npc, Player);
+            bool isSameArmy = Npc.PartyBelongedTo != null && Npc.PartyBelongedTo.Army != null && Player.PartyBelongedTo != null && Player.PartyBelongedTo.Army != null && Npc.PartyBelongedTo.Army == Player.PartyBelongedTo.Army;
+            return (isCouple || emotion >= DramalordMCM.Get.MinEmotionForDating) && emotion >= DramalordMCM.Get.MinEmotionBeforeDivorce && CampaignTime.Now.ToDays - Info.GetLastDate(Npc, Player) >= DramalordMCM.Get.DaysBetweenDates && (emotion < DramalordMCM.Get.MinEmotionForMarriage || isSameArmy);
         }
 
         internal static bool NPCCanAskForMarriage()
         {
             SetRoles();
-            return Info.IsCoupleWithHero(Npc, Player) && Npc.Spouse != Player && Info.GetEmotionToHero(Npc, Player) >= DramalordMCM.Get.MinEmotionForMarriage;
+            float emotion = Info.GetEmotionToHero(Npc, Player);
+            bool isCouple = Info.IsCoupleWithHero(Npc, Player);
+            bool isSameArmy = Npc.PartyBelongedTo != null && Npc.PartyBelongedTo.Army != null && Player.PartyBelongedTo != null && Player.PartyBelongedTo.Army != null && Npc.PartyBelongedTo.Army == Player.PartyBelongedTo.Army;
+            return isCouple && Npc.Spouse != Player && emotion >= DramalordMCM.Get.MinEmotionForMarriage && !isSameArmy && DramalordMCM.Get.AllowMarriages;
         }
 
         internal static bool NPCCanAskForDivorce()
         {
             SetRoles();
-            return Npc.Spouse == Player && Info.GetEmotionToHero(Npc, Player) < DramalordMCM.Get.MinEmotionBeforeDivorce;
+            float emotion = Info.GetEmotionToHero(Npc, Player);
+            return Npc.Spouse == Player && emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && DramalordMCM.Get.AllowDivorces;
         }
 
         internal static bool NPCCanAskForBreakup()
         {
             SetRoles();
-            return Info.IsCoupleWithHero(Npc, Player) && Npc.Spouse != Player && Info.GetEmotionToHero(Npc, Player) < DramalordMCM.Get.MinEmotionBeforeDivorce;
+
+            float emotion = Info.GetEmotionToHero(Npc, Player);
+            bool isCouple = Info.IsCoupleWithHero(Npc, Player);
+            return Npc.Spouse != Player && emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && isCouple;
         }
 
         // private stuff

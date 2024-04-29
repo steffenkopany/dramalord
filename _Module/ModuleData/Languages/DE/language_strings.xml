@@ -278,5 +278,15 @@
     <string id="Dramalord271" text="{HERO.LINK} hat bemerkt, dass Ihr von jemand anderem schwanger seid." />
     <string id="Dramalord272" text="Ihr habt bemerkt, dass {TARGET.LINK}, geboren von {HERO.LINK}, nicht Euer Kind ist." />
     <string id="Dramalord273" text="{HERO.LINK} hat bemerkt, dass Euer Kind {TARGET.LINK} von jemand anderen ist." />
+    <string id="Dramalord274" text="Verknüpfen Sie Emotionsänderungen mit Beziehungen" />
+    <string id="Dramalord275" text="Zulassen, dass Änderungen an Emotionen in der Beziehung widergespiegelt werden" />
+    <string id="Dramalord276" text="Ehen zulassen" />
+    <string id="Dramalord277" text="Erlaube von Dramalord ausgelöste Ehen (das ursprüngliche Ehesystem funktioniert immer noch)" />
+    <string id="Dramalord278" text="Scheidungen zulassen" />
+    <string id="Dramalord279" text="Zulassen, dass Ehen aufgrund von Dramalord-Ereignissen geschieden werden" />
+    <string id="Dramalord280" text="Wut Morde zulassen" />
+    <string id="Dramalord281" text="Erlaube wütenden Helden zu töten, wenn sie betrogen werden" />
+    <string id="Dramalord282" text="Clan-Änderungen zulassen" />
+    <string id="Dramalord283" text="Erlaube Helden, aus Clans geworfen zu werden oder sie freiwillig zu verlassen" />
   </strings>
 </base>
