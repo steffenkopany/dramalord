@@ -15,6 +15,10 @@ namespace Dramalord.Actions
         {
             CharacterObject template = (MBRandom.RandomInt(1, 100) > 50) ? hero.CharacterObject : offspring.Father.CharacterObject;
             Settlement bornSettlement = (hero.CurrentSettlement != null) ? hero.CurrentSettlement : hero.HomeSettlement;
+            if (bornSettlement == null)
+            {
+                bornSettlement = SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
+            }
             Clan faction = hero.Clan;
             Hero child = HeroCreator.CreateSpecialHero(template, bornSettlement, faction, null, 0);
             child.Mother = hero;
@@ -27,13 +31,8 @@ namespace Dramalord.Actions
             string tattooTags = (child.IsFemale ? hero.TattooTags : offspring.Father.TattooTags);
             child.ModifyPlayersFamilyAppearance(BodyProperties.GetRandomBodyProperties(template.Race, child.IsFemale, bodyProperties, bodyProperties2, 1, seed, hairTags, offspring.Father.BeardTags, tattooTags).StaticProperties);
    
-            if (child.BornSettlement == null)
-            {
-                child.BornSettlement = SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
-            }
-
-            hero.SetNewOccupation(hero.Occupation);
-            hero.UpdateHomeSettlement();
+            child.SetNewOccupation(hero.Occupation);
+            //child.UpdateHomeSettlement();
 
             Info.RemoveHeroOffspring(hero);
 

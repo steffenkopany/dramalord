@@ -216,7 +216,7 @@ namespace Dramalord.UI
             SetRoles();
             HeroBreakupAction.Apply(Player, Npc);
 
-            if (Npc.Clan != null && Npc.Clan == Player.Clan)
+            if (Npc.Clan != null && Npc.Clan == Player.Clan && DramalordMCM.Get.AllowClanChanges)
             {
                 HeroLeaveClanAction.Apply(Npc, Npc);
             }
@@ -230,7 +230,11 @@ namespace Dramalord.UI
         {
             SetRoles();
             HeroBreakupAction.Apply(Player, Npc);
-            HeroKillAction.Apply(Npc, Npc, Player, KillReason.Suicide);
+            if(DramalordMCM.Get.AllowRageKills)
+            {
+                HeroKillAction.Apply(Npc, Npc, Player, KillReason.Suicide);
+            }
+            
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
@@ -258,7 +262,7 @@ namespace Dramalord.UI
             SetRoles();
             HeroDivorceAction.Apply(Player, Npc);
 
-            if (Npc.Clan != null && Npc.Clan == Player.Clan)
+            if (Npc.Clan != null && Npc.Clan == Player.Clan && DramalordMCM.Get.AllowClanChanges)
             {
                 HeroLeaveClanAction.Apply(Npc, Npc);
             }
@@ -272,7 +276,10 @@ namespace Dramalord.UI
         {
             SetRoles();
             HeroDivorceAction.Apply(Player, Npc);
-            HeroKillAction.Apply(Npc, Npc, Player, KillReason.Suicide);
+            if (DramalordMCM.Get.AllowRageKills)
+            {
+                HeroKillAction.Apply(Npc, Npc, Player, KillReason.Suicide);
+            }
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;

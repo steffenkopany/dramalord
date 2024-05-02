@@ -2,24 +2,14 @@
 using Dramalord.Data;
 using Dramalord.UI;
 using Helpers;
-using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.CampaignBehaviors;
-using TaleWorlds.CampaignSystem.CampaignBehaviors.CommentBehaviors;
-using TaleWorlds.CampaignSystem.CharacterCreationContent;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Conversation;
-using TaleWorlds.CampaignSystem.GameComponents;
-using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
-using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
@@ -97,7 +87,7 @@ namespace Dramalord.Behaviors
                         }
                     }
                 }
-
+                //TaleWorlds.CampaignSystem.Hero.SetHeroEncyclopediaTextAndLinks
                 bool isSameParty = hero.PartyBelongedTo != null && hero.PartyBelongedTo == Hero.MainHero.PartyBelongedTo && DramalordMCM.Get.AllowApproachInParty;
                 bool isSameSettlement = hero.CurrentSettlement != null && hero.CurrentSettlement == Hero.MainHero.CurrentSettlement && DramalordMCM.Get.AllowApproachInSettlement;
                 bool isSameArmy = hero.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null && Hero.MainHero.PartyBelongedTo != null && Hero.MainHero.PartyBelongedTo.Army != null && hero.PartyBelongedTo.Army == Hero.MainHero.PartyBelongedTo.Army;
@@ -178,11 +168,11 @@ namespace Dramalord.Behaviors
                         }
                     }
 
-                    if(partner != null && Info.ValidateHeroMemory(hero, partner)) //CompanionGrievanceBehavior
+                    if(partner != null && Info.ValidateHeroMemory(hero, partner)) 
                     {
                         float heroEmotion = Info.GetEmotionToHero(hero, partner);
 
-                        if (hero.Spouse == partner && heroEmotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
+                        if (hero.Spouse == partner && heroEmotion < DramalordMCM.Get.MinEmotionBeforeDivorce && DramalordMCM.Get.AllowDivorces)
                         {
                             HeroDivorceAction.Apply(hero, partner);
                         }
