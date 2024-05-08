@@ -287,5 +287,41 @@
     <string id="Dramalord281" text="Разрешить разъяренным героям убивать, если их обманули" />
     <string id="Dramalord282" text="Разрешить изменения клана" />
     <string id="Dramalord283" text="Разрешить изгнание героев из кланов или их добровольный выход" />
+    <string id="Dramalord284" text="Подход к игроку в армии" />
+    <string id="Dramalord285" text="Разрешить NPC приближаться к вам, находясь в одной армии" />
+    <string id="Dramalord286" text="Шанс посещения NPC для выполнения квеста" />
+    <string id="Dramalord287" text="Шанс, что герои попросят отсутствующего игрока навестить их из-за неотложной необходимости" />
+    <string id="Dramalord288" text="{HERO.LINK} просит вашего присутствия" />
+    <string id="Dramalord289" text="Посыльный доставил сообщение от {HERO.LINK}. Они хотят увидеть вас как можно скорее, так как у них есть срочные дела, о которых вам нужно позаботиться." />
+    <string id="Dramalord290" text="{HERO.LINK} разочарован тем, что вы пренебрегаете их делом." />
+    <string id="Dramalord291" text="Наконец-то вы здесь!" />
+    <string id="Dramalord292" text="Вот и я. О каком срочном деле вы просили меня позаботиться?" />
+    <string id="Dramalord293" text="Проблема... тем временем была решена кем-то очень умелым." />
+    <string id="Dramalord294" text="Следуйте за мной. Я хотел бы воспользоваться вашей находчивостью..." />
+    <string id="Dramalord295" text="Никогда! Вы не запятнаете мою честь такими предложениями!" />
+    <string id="Dramalord296" text="Я бы подумал о том, чтобы позволить вам пойти за... какой-нибудь особой услугой от вас..." />
+    <string id="Dramalord297" text="Ну иди сюда, красотка, ты заключила сделку!" />
+    <string id="Dramalord298" text="Взаимодействовать как свидетель" />
+    <string id="Dramalord299" text="Взаимодействуйте, когда видите, как ваш партнер делает что-то с другими (в противном случае вы просто получите уведомление)" />
+    <string id="Dramalord300" text="Находясь рядом с {HERO.LINK}, вы замечаете, что ее живот необычно большой, и сразу понимаете, что причиной этого является не еда." />
+    <string id="Dramalord301" text="Когда вы собирались прогуляться, вы заметили подозрительный звук. Следуя за ним, вы поймали {HERO.LINK} и {TARGET.LINK} в однозначной ситуации. {TARGET.LINK} убежали сцена." />
+    <string id="Dramalord302" text="Дата рождения не подходит, и вы не находите сходства с собой в лице ребенка." />
+    <string id="Dramalord303" text="При поиске {HERO.LINK} вы нашли их вместе с {TARGET.LINK}. Они были слишком близко, чтобы можно было безобидно разговаривать." />
+    <string id="Dramalord304" text="{TITLE}, я... я... [if:convo_astonished]" />
+    <string id="Dramalord305" text="У вас нет моего ребенка, я прав?" />
+    <string id="Dramalord306" text="Полагаю, вы и {TARGET} не говорили о политике, а?" />
+    <string id="Dramalord307" text="Похоже, тебе трудно держать трусы." />
+    <string id="Dramalord308" text="{TARGET} явно не мой ребенок, как ты посмел родить ублюдка?!" />
+    <string id="Dramalord309" text="Вы правы. И что? Мне все равно.[if:convo_angry_voice]" />
+    <string id="Dramalord310" text="Что? Я понятия не имею, о чем вы говорите!" />
+    <string id="Dramalord311" text="{TITLE}, пожалуйста! Это все недоразумение!" />
+    <string id="Dramalord312" text="Это ваш последний вздох!" />
+    <string id="Dramalord313" text="Уйди с моих глаз! Я больше никогда не хочу тебя видеть!" />
+    <string id="Dramalord314" text="Всё! Всё кончено!" />
+    <string id="Dramalord315" text="Что угодно..." />
+    <string id="Dramalord316" text="Вы убили {HERO.LINK}" />
+    <string id="Dramalord317" text="Вы расстались с {HERO.LINK}" />
+    <string id="Dramalord318" text="Вы развелись с {HERO.LINK}." />
+    <string id="Dramalord319" text="Вы исключили {HERO.LINK} из своего клана." />
   </strings>
 </base>

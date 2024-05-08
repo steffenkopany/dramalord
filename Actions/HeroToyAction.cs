@@ -25,6 +25,7 @@ namespace Dramalord.Actions
                 }
 
                 Info.ChangeEmotionToHeroBy(hero, Hero.MainHero, 1);
+                Info.ChangeHeroHornyBy(hero, 1);
                 if(hero.Spouse != null && hero.Spouse != Hero.MainHero && Info.ValidateHeroMemory(hero, hero.Spouse))
                 {
                     Info.ChangeEmotionToHeroBy(hero, hero.Spouse, -1);

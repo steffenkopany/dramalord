@@ -1,7 +1,10 @@
 ﻿using Dramalord.Data;
+using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
+using TaleWorlds.Core;
+using TaleWorlds.Localization;
 
 namespace Dramalord.Actions
 {
@@ -48,6 +51,13 @@ namespace Dramalord.Actions
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogKilledSuizide(victim));
                 }
+            }
+
+            if(killer == Hero.MainHero && type != KillReason.Suicide)
+            {
+                TextObject banner = new TextObject("{=Dramalord316}You killed {HERO.LINK}");
+                StringHelpers.SetCharacterProperties("HERO", victim.CharacterObject, banner);
+                MBInformationManager.AddQuickInformation(banner, 1000, victim.CharacterObject, "event:/ui/notification/relation");
             }
 
             DramalordEvents.OnHeroesKilled(killer, victim, reason, type);

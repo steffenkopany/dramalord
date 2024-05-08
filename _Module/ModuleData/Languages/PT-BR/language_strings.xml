@@ -288,5 +288,41 @@
     <string id="Dramalord281" text="Permitir que heróis enfurecidos matem se forem traídos" />
     <string id="Dramalord282" text="Permitir alterações de clã" />
     <string id="Dramalord283" text="Permitir que heróis sejam expulsos de clãs ou saiam voluntariamente" />
+    <string id="Dramalord284" text="Abordar jogador no exército" />
+    <string id="Dramalord285" text="Permitir que NPCs se aproximem de você enquanto estiver no mesmo exército" />
+    <string id="Dramalord286" text="Oportunidade de missão de visita de NPC" />
+    <string id="Dramalord287" text="Chance de os heróis solicitarem que o jogador ausente os visite devido a necessidades urgentes" />
+    <string id="Dramalord288" text="{HERO.LINK} solicita sua presença" />
+    <string id="Dramalord289" text="Um mensageiro entregou uma mensagem de {HERO.LINK}. Eles querem ver você o mais rápido possível, pois têm algo urgente que você precisa resolver." />
+    <string id="Dramalord290" text="{HERO.LINK} está decepcionado com sua negligência no assunto deles." />
+    <string id="Dramalord291" text="Finalmente você está aqui!" />
+    <string id="Dramalord292" text="Aqui estou. Qual é o assunto urgente que você me pediu para cuidar?" />
+    <string id="Dramalord293" text="O assunto... foi resolvido por alguém muito habilidoso entretanto." />
+    <string id="Dramalord294" text="Siga-me. Gostaria de aproveitar sua desenvoltura..." />
+    <string id="Dramalord295" text="Nunca! Você não manchará minha honra com tais ofertas!" />
+    <string id="Dramalord296" text="Eu consideraria deixar você ir para... algum serviço especial seu..." />
+    <string id="Dramalord297" text="Bem, venha aqui, linda, você conseguiu um acordo!" />
+    <string id="Dramalord298" text="Interagir sendo testemunha" />
+    <string id="Dramalord299" text="Interaja ao testemunhar seu parceiro fazendo coisas com outras pessoas (caso contrário, você receberá apenas uma notificação)" />
+    <string id="Dramalord300" text="Ao estar perto de {HERO.LINK} você percebe que a barriga dela está estranhamente grande e instantaneamente sabe que não foi a comida que estava causando isso." />
+    <string id="Dramalord301" text="Quando você estava passeando, você percebeu um som suspeito. Ao segui-lo, você pegou {HERO.LINK} e {TARGET.LINK} em uma situação inequívoca. {TARGET.LINK} fugiu a cena." />
+    <string id="Dramalord302" text="A data de nascimento não cabe e você não encontra nenhuma semelhança consigo mesmo no rosto da criança." />
+    <string id="Dramalord303" text="Ao procurar por {HERO.LINK} você os encontrou junto com {TARGET.LINK}. Eles estavam próximos demais para conversar sem causar danos." />
+    <string id="Dramalord304" text="{TITLE}, eu... eu... [if:convo_astonished]" />
+    <string id="Dramalord305" text="Você não carrega nenhum filho meu, estou correto?" />
+    <string id="Dramalord306" text="Acho que você e {TARGET} não estavam conversando sobre política, hein?" />
+    <string id="Dramalord307" text="Parece que você está tendo dificuldade em manter sua cueca." />
+    <string id="Dramalord308" text="{TARGET} claramente não é meu filho, como você se atreve a dar à luz um bastardo?!" />
+    <string id="Dramalord309" text="Você está certo. E daí? Eu não me importo.[if:convo_angry_voice]" />
+    <string id="Dramalord310" text="O quê? Não tenho ideia do que você está falando!" />
+    <string id="Dramalord311" text="{TITLE}, por favor! Isso tudo é um mal-entendido!" />
+    <string id="Dramalord312" text="Este é o último suspiro que você dá!" />
+    <string id="Dramalord313" text="Saia da minha frente! Nunca mais quero ver você!" />
+    <string id="Dramalord314" text="É isso! Acabou!" />
+    <string id="Dramalord315" text="Tanto faz..." />
+    <string id="Dramalord316" text="Você matou {HERO.LINK}" />
+    <string id="Dramalord317" text="Você terminou com {HERO.LINK}" />
+    <string id="Dramalord318" text="Você se divorciou de {HERO.LINK}." />
+    <string id="Dramalord319" text="Você baniu {HERO.LINK} do seu clã." />
   </strings>
 </base>

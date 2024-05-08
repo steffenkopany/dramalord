@@ -269,13 +269,13 @@
     <string id="Dramalord263" text="You gave {HERO.LINK} a {TOY}." />
     <string id="Dramalord264" text="You saw {HERO.LINK} flirting with {TARGET.LINK}." />
     <string id="Dramalord265" text="{HERO.LINK} saw you flirting with {TARGET.LINK}." />
-    <string id="Dramalord266" text="You saw {HERO.LINK} meeting in secret with {TARGET.LINK}." />
+    <string id="Dramalord266" text="You saw {HERO.LINK} meeting in secret with {TARGET.LINK}" />
     <string id="Dramalord267" text="{HERO.LINK} saw you meeting in secret with {TARGET.LINK}." />
-    <string id="Dramalord268" text="You caught {HERO.LINK} being intimate with {TARGET.LINK}." />
+    <string id="Dramalord268" text="You caught {HERO.LINK} being intimate with {TARGET.LINK}" />
     <string id="Dramalord269" text="{HERO.LINK} caught you being intimate with {TARGET.LINK}." />
-    <string id="Dramalord270" text="You noticed {HERO.LINK} is pregnant from someone else." />
+    <string id="Dramalord270" text="You noticed {HERO.LINK} is pregnant from someone else" />
     <string id="Dramalord271" text="{HERO.LINK} noticed you are pregnant from someone else." />
-    <string id="Dramalord272" text="You noticed that {TARGET.LINK} born by {HERO.LINK} is not your child." />
+    <string id="Dramalord272" text="You noticed that {TARGET.LINK} born by {HERO.LINK} is not your child" />
     <string id="Dramalord273" text="{HERO.LINK} noticed your child {TARGET.LINK} is not theirs." />
     <string id="Dramalord274" text="Link Emotion Changes to Relation" />
     <string id="Dramalord275" text="Allow changes to emotion being reflected to relation" />
@@ -287,5 +287,41 @@
     <string id="Dramalord281" text="Allow enraged heroes to kill if being cheated on" />
     <string id="Dramalord282" text="Allow Clan Changes" />
     <string id="Dramalord283" text="Allow heroes being kicked out of clans or leaving voluntarily" />
+    <string id="Dramalord284" text="Approach Player In Army" />
+    <string id="Dramalord285" text="Allow NPCs to approach you while being in the same army" />
+    <string id="Dramalord286" text="NPC Visit Quest Chance" />
+    <string id="Dramalord287" text="Chance that heroes request the absent player to visit them due to urgent needs" />
+    <string id="Dramalord288" text="{HERO.LINK} requests your presence" />
+    <string id="Dramalord289" text="A messenger delivered a message from {HERO.LINK}. They want to see you as soon as possible, as they have something urgent you need to take care of." />
+    <string id="Dramalord290" text="{HERO.LINK} is disappointed by your neglection of their matter." />
+    <string id="Dramalord291" text="Finally you are here!" />
+    <string id="Dramalord292" text="Here I am. What is the urgent matter you asked me to take care about?" />
+    <string id="Dramalord293" text="The matter... was resolved by someone very skillful meanwhile." />
+    <string id="Dramalord294" text="Follow me. I would like to make use of your resourcefulness..." />
+    <string id="Dramalord295" text="Never! You will not taint my honor with such offers!" />
+    <string id="Dramalord296" text="I would consider letting you go for... some special service from you..." />
+    <string id="Dramalord297" text="Well come here pretty, you got yourself a deal!" />
+    <string id="Dramalord298" text="Interact Being Witness" />
+    <string id="Dramalord299" text="Interact when witnessing your partner doing stuff with others (otherwise you will just get a notification)" />
+    <string id="Dramalord300" text="While being close to {HERO.LINK} you notice her belly being unusally big and instantly know that not food was causing this." />
+    <string id="Dramalord301" text="When you were going for a stroll you noticed a suspicious sound. When following it you caught {HERO.LINK} and {TARGET.LINK} in an unambiguous situation. {TARGET.LINK} fled the scene." />
+    <string id="Dramalord302" text="The date of birth does not fit and you find no similarities to yourself in the childs face." />
+    <string id="Dramalord303" text="When looking for {HERO.LINK} you found them together with {TARGET.LINK}. They were too close for conversing harmlessly." />
+    <string id="Dramalord304" text="{TITLE}, I... I... [if:convo_astonished]" />
+    <string id="Dramalord305" text="You carry no child of mine, am I correct?" />
+    <string id="Dramalord306" text="I guess you and {TARGET} were not talking about politics, eh?" />
+    <string id="Dramalord307" text="Looks like you're having a hard time keeping your underpants on." />
+    <string id="Dramalord308" text="{TARGET} is clearly not my child, how dare you to give birth to a bastard?!" />
+    <string id="Dramalord309" text="You are right. So what? I don't care.[if:convo_angry_voice]" />
+    <string id="Dramalord310" text="What? I have no idea what you are talking about!" />
+    <string id="Dramalord311" text="{TITLE}, please! This is all a misunderstanding!" />
+    <string id="Dramalord312" text="This is the last breath you take!" />
+    <string id="Dramalord313" text="Get out of my sight! I never want to see you again!" />
+    <string id="Dramalord314" text="That's it! It's over!" />
+    <string id="Dramalord315" text="Whatever..." />
+    <string id="Dramalord316" text="You killed {HERO.LINK}" />
+    <string id="Dramalord317" text="You broke up with {HERO.LINK}" />
+    <string id="Dramalord318" text="You divorced from {HERO.LINK}." />
+    <string id="Dramalord319" text="You banished {HERO.LINK} from your clan." />
   </strings>
 </base>

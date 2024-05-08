@@ -435,6 +435,32 @@ namespace Dramalord.Data
             return false;
         }
 
+        internal static void GetInteractionVariables(Hero hero, Hero target, out bool wantsFlirt, out bool wantsDate, out bool wantsToMarry, out bool wantsToBreakUp, out bool wantsToDivorce)
+        {
+            if(ValidateHeroMemory(hero, target))
+            {
+                HeroTuple tuple = new ( hero, target );
+                HeroMemoryData memory = HeroMemory[tuple];
+
+                float emotion = memory.Emotion;
+                int attraction = Info.GetAttractionToHero(hero, target);
+                bool isCouple = memory.IsCouple;
+                bool isInArmy = hero.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null;
+
+                wantsFlirt = attraction >= DramalordMCM.Get.MinAttractionForFlirting && !isCouple && emotion > DramalordMCM.Get.MinEmotionForConversation && emotion < DramalordMCM.Get.MinEmotionForDating && CampaignTime.Now.ToDays - memory.LastMet > 1;
+                wantsDate = (isCouple || emotion >= DramalordMCM.Get.MinEmotionForDating) && emotion >= DramalordMCM.Get.MinEmotionBeforeDivorce && CampaignTime.Now.ToDays - memory.LastDate >= DramalordMCM.Get.DaysBetweenDates && (emotion < DramalordMCM.Get.MinEmotionForMarriage || isInArmy);
+                wantsToMarry = isCouple && hero.Spouse != target && emotion >= DramalordMCM.Get.MinEmotionForMarriage && !isInArmy && DramalordMCM.Get.AllowMarriages;
+                wantsToDivorce = hero.Spouse == target && emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && DramalordMCM.Get.AllowDivorces;
+                wantsToBreakUp = hero.Spouse != target && emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && isCouple;
+                return;
+            }
+            wantsDate = false;
+            wantsFlirt = false;
+            wantsToBreakUp = false;
+            wantsToDivorce = false;
+            wantsToMarry = false;
+        }
+
         /*public static T Clamp<T>(this T val, T min, T max) where T : IComparable<T>
         {
             if (val.CompareTo(min) < 0) return min;

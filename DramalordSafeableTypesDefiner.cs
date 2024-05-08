@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Quests;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.SaveSystem;
@@ -42,6 +43,7 @@ namespace Dramalord
             AddClassDefinition(typeof(EncyclopediaLogKilledSuizide), 27);
             AddClassDefinition(typeof(EncyclopediaLogClanLeftKingdom), 28);
             AddClassDefinition(typeof(EncyclopediaLogClanJoinedKingdom), 29);
+            AddClassDefinition(typeof(VisitLoverQuest), 30);
         }
 
         protected override void DefineContainerDefinitions()

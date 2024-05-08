@@ -1,4 +1,5 @@
-﻿using Dramalord.Data;
+﻿using Dramalord.Actions;
+using Dramalord.Data;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Party;
@@ -16,6 +17,10 @@ namespace Dramalord.UI
         static Hero? NpcSpouse = null;
 
         internal static Hero? ApproachingHero = null;
+
+        internal static Hero? CheatingHero = null;
+        internal static WitnessType WitnessOf = WitnessType.Flirting;
+        internal static Hero? LoverOrChild = null;
 
         internal static bool PlayerCanAskForTalk()
         {
@@ -219,6 +224,7 @@ namespace Dramalord.UI
             return (Player.PartyBelongedTo != null && Player.PartyBelongedTo.PrisonRoster != null && Player.PartyBelongedTo.PrisonRoster.Contains(Npc.CharacterObject)) || (Npc.IsPrisoner && Npc.CurrentSettlement != null && Npc.CurrentSettlement.OwnerClan == Player.Clan);
         }
 
+        // APPROACHING
         internal static bool NPCCanApproachPlayer()
         {
             if(Hero.OneToOneConversationHero != null && (Hero.OneToOneConversationHero.IsLord || Hero.OneToOneConversationHero.Occupation == Occupation.Wanderer))
@@ -256,6 +262,18 @@ namespace Dramalord.UI
             return false;  
         }
 
+        internal static bool NPCAcceptsViolation()
+        {
+            SetRoles();
+            return Npc.GetHeroTraits().Honor < 1;
+        }
+
+        internal static bool NPCDeclinesViolation()
+        {
+            SetRoles();
+            return Npc.GetHeroTraits().Honor >= 1;
+        }
+
         internal static bool NPCAsksPlayerSomething()
         {
             return NPCCanAskForFlirt() || NPCCanAskForDate() || NPCCanAskForMarriage();
@@ -269,44 +287,134 @@ namespace Dramalord.UI
         internal static bool NPCCanAskForFlirt()
         {
             SetRoles();
-            float emotion = Info.GetEmotionToHero(Npc, Player);
-            int attraction = Info.GetAttractionToHero(Npc, Player);
-            bool isCouple = Info.IsCoupleWithHero(Npc, Player);
-            return attraction >= DramalordMCM.Get.MinAttractionForFlirting && !isCouple && emotion > DramalordMCM.Get.MinEmotionForConversation && emotion < DramalordMCM.Get.MinEmotionForDating && CampaignTime.Now.ToDays - Info.GetLastDaySeen(Npc, Player) > 1;
+            bool wantsFlirt;
+            Info.GetInteractionVariables(Npc, Player, out wantsFlirt, out _, out _, out _, out _);
+            return wantsFlirt;
         }
 
         internal static bool NPCCanAskForDate()
         {
             SetRoles();
-            float emotion = Info.GetEmotionToHero(Npc, Player);
-            bool isCouple = Info.IsCoupleWithHero(Npc, Player);
-            bool isSameArmy = Npc.PartyBelongedTo != null && Npc.PartyBelongedTo.Army != null && Player.PartyBelongedTo != null && Player.PartyBelongedTo.Army != null && Npc.PartyBelongedTo.Army == Player.PartyBelongedTo.Army;
-            return (isCouple || emotion >= DramalordMCM.Get.MinEmotionForDating) && emotion >= DramalordMCM.Get.MinEmotionBeforeDivorce && CampaignTime.Now.ToDays - Info.GetLastDate(Npc, Player) >= DramalordMCM.Get.DaysBetweenDates && (emotion < DramalordMCM.Get.MinEmotionForMarriage || isSameArmy);
+            bool wantsDate;
+            Info.GetInteractionVariables(Npc, Player, out _, out wantsDate, out _, out _, out _);
+            return wantsDate;
         }
 
         internal static bool NPCCanAskForMarriage()
         {
             SetRoles();
-            float emotion = Info.GetEmotionToHero(Npc, Player);
-            bool isCouple = Info.IsCoupleWithHero(Npc, Player);
-            bool isSameArmy = Npc.PartyBelongedTo != null && Npc.PartyBelongedTo.Army != null && Player.PartyBelongedTo != null && Player.PartyBelongedTo.Army != null && Npc.PartyBelongedTo.Army == Player.PartyBelongedTo.Army;
-            return isCouple && Npc.Spouse != Player && emotion >= DramalordMCM.Get.MinEmotionForMarriage && !isSameArmy && DramalordMCM.Get.AllowMarriages;
+            bool wantsToMarry;
+            Info.GetInteractionVariables(Npc, Player, out _, out _, out wantsToMarry, out _, out _);
+            return wantsToMarry;
         }
 
         internal static bool NPCCanAskForDivorce()
         {
             SetRoles();
-            float emotion = Info.GetEmotionToHero(Npc, Player);
-            return Npc.Spouse == Player && emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && DramalordMCM.Get.AllowDivorces;
+            bool wantsToDivorce;
+            Info.GetInteractionVariables(Npc, Player, out _, out _, out _, out _, out wantsToDivorce);
+            return wantsToDivorce;
         }
 
         internal static bool NPCCanAskForBreakup()
         {
             SetRoles();
+            bool wantsToBreakUp;
+            Info.GetInteractionVariables(Npc, Player, out _, out _, out _, out wantsToBreakUp, out _);
+            return wantsToBreakUp;
+        }
 
-            float emotion = Info.GetEmotionToHero(Npc, Player);
-            bool isCouple = Info.IsCoupleWithHero(Npc, Player);
-            return Npc.Spouse != Player && emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && isCouple;
+        // CONFRONTATION
+        internal static bool PlayerCanConfrontNpc()
+        {
+            if (Hero.OneToOneConversationHero != null && (Hero.OneToOneConversationHero.IsLord || Hero.OneToOneConversationHero.Occupation == Occupation.Wanderer))
+            {
+                SetRoles();
+                bool result = CheatingHero == Npc;
+                CheatingHero = null;
+                if (result)
+                {
+                    string text = string.Empty;
+                    if (Npc.Spouse == Player)
+                    {
+                        text = Hero.MainHero.IsFemale ? new TextObject("{=Dramalord049}wife").ToString() : new TextObject("{=Dramalord048}husband").ToString();
+                    }
+                    else if (Info.IsCoupleWithHero(Npc, Player))
+                    {
+                        text = Hero.MainHero.IsFemale ? new TextObject("{=Dramalord097}My love").ToString() : new TextObject("{=Dramalord096}My lover").ToString();
+                    }
+                    else
+                    {
+                        text = Hero.MainHero.IsFemale ? GameTexts.FindText("str_my_lady").ToString() : GameTexts.FindText("str_my_lord").ToString();
+                    }
+
+                    char[] array = text.ToCharArray();
+                    text = array[0].ToString().ToUpper();
+                    for (int i = 1; i < array.Length; i++)
+                    {
+                        text += array[i];
+                    }
+
+                    MBTextManager.SetTextVariable("TITLE", text);
+                }
+                return result;
+            }
+            return false;
+        }
+
+        internal static bool PlayerSeesPregnancy()
+        {
+            return WitnessOf == WitnessType.Pregnancy;
+        }
+
+        internal static bool PlayerSeesDate()
+        {
+            return WitnessOf == WitnessType.Dating;
+        }
+
+        internal static bool PlayerSeesIntercourse()
+        {
+            return WitnessOf == WitnessType.Intercourse;
+        }
+
+        internal static bool PlayerSeesBastard()
+        {
+            return WitnessOf == WitnessType.Bastard;
+        }
+
+        internal static bool NpcAccusedDoesntCare()
+        {
+            SetRoles();
+            return Info.GetEmotionToHero(Npc, Player) < DramalordMCM.Get.MinEmotionBeforeDivorce;
+        }
+
+        internal static bool NpcAccusedPlaysInnocent()
+        {
+            SetRoles();
+            return Info.GetEmotionToHero(Npc, Player) < DramalordMCM.Get.MinEmotionForMarriage;
+        }
+
+        internal static bool NpcAccusedBegsForgiveness()
+        {
+            SetRoles();
+            return Info.GetEmotionToHero(Npc, Player) >= DramalordMCM.Get.MinEmotionForMarriage;
+        }
+
+        internal static bool PlayerCanKillNpc()
+        {
+            return WitnessOf == WitnessType.Pregnancy || WitnessOf == WitnessType.Bastard || WitnessOf == WitnessType.Intercourse;
+        }
+
+        internal static bool PlayerCanKickNpcOut()
+        {
+            SetRoles();
+            return Npc.Clan == Clan.PlayerClan;
+        }
+
+        internal static bool PlayerCanBreakUpOrDivorce()
+        {
+            SetRoles();
+            return Player.Spouse == Npc || Info.IsCoupleWithHero(Player, Npc);
         }
 
         // private stuff

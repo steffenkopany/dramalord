@@ -76,6 +76,7 @@ namespace Dramalord.Actions
             }
 
             Info.AddOrphan(child);
+            //child.SetBirthDay(CampaignTime.Days((float)CampaignTime.Now.ToDays - (CampaignTime.DaysInYear * 17 + (CampaignTime.DaysInYear-1)))); Testing onherocomesofage
 
             if (DramalordMCM.Get.BirthOutput)
             {

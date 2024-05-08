@@ -287,5 +287,41 @@
     <string id="Dramalord281" text="속일 경우 분노한 영웅이 죽도록 허용" />
     <string id="Dramalord282" text="클랜 변경 허용" />
     <string id="Dramalord283" text="영웅이 클랜에서 추방되거나 자발적으로 탈퇴하도록 허용" />
+    <string id="Dramalord284" text="군대에 있는 플레이어에게 접근" />
+    <string id="Dramalord285" text="같은 군대에 있는 동안 NPC가 접근하도록 허용합니다" />
+    <string id="Dramalord286" text="NPC 방문 퀘스트 확률" />
+    <string id="Dramalord287" text="영웅이 긴급한 필요로 인해 부재 중인 플레이어에게 방문을 요청할 확률" />
+    <string id="Dramalord288" text="{HERO.LINK}님이 귀하의 존재를 요청합니다" />
+    <string id="Dramalord289" text="메신저가 {HERO.LINK}로부터 메시지를 전달했습니다. 그들은 당신이 처리해야 할 긴급한 일이 있기 때문에 가능한 한 빨리 당신을 만나고 싶어합니다." />
+    <string id="Dramalord290" text="{HERO.LINK}은(는) 귀하가 자신들의 문제를 무시한 것에 실망했습니다." />
+    <string id="Dramalord291" text="드디어 오셨습니다!" />
+    <string id="Dramalord292" text="저는 여기 있습니다. 저에게 처리하라고 하신 긴급한 문제가 무엇입니까?" />
+    <string id="Dramalord293" text="이 문제는... 아주 능숙한 누군가에 의해 해결되었습니다." />
+    <string id="Dramalord294" text="팔로우하세요. 당신의 재주를 잘 활용하고 싶습니다..." />
+    <string id="Dramalord295" text="절대 안 됩니다! 그런 제안으로 내 명예를 더럽힐 수는 없습니다!" />
+    <string id="Dramalord296" text="특별한 서비스를 받으시도록 허락해 드리고 싶습니다..." />
+    <string id="Dramalord297" text="자, 여기로 오세요. 계약을 맺으셨네요!" />
+    <string id="Dramalord298" text="증인이 되어 상호작용" />
+    <string id="Dramalord299" text="파트너가 다른 사람과 함께 뭔가를 하는 것을 목격할 때 상호작용하세요(그렇지 않으면 알림만 받게 됩니다)" />
+    <string id="Dramalord300" text="{HERO.LINK}와 가까이 있는 동안 그녀의 배가 비정상적으로 크다는 것을 발견하고 음식이 원인이 아니라는 것을 즉시 알 수 있습니다." />
+    <string id="Dramalord301" text="산책 중이던 수상한 소리를 발견했습니다. 이를 따라가던 중 {HERO.LINK}님과 {TARGET.LINK}님이 분명한 상황에 처해 있는 것을 발견했습니다. {TARGET.LINK}님은 도망갔습니다. 장면." />
+    <string id="Dramalord302" text="생년월일이 맞지도 않고 아이의 얼굴에서 자신과 닮은 점을 찾을 수 없습니다." />
+    <string id="Dramalord303" text="{HERO.LINK}을(를) 검색할 때 {TARGET.LINK}과(와) 함께 있는 것을 발견했습니다. 그들은 무해하게 대화하기에는 너무 가까웠습니다." />
+    <string id="Dramalord304" text="{TITLE}, 나... 나... [if:convo_astonished]" />
+    <string id="Dramalord305" text="당신은 내 아이를 갖고 있지 않습니다. 제 말이 맞나요?" />
+    <string id="Dramalord306" text="당신과 {TARGET}은(는) 정치에 대해 이야기하고 있지 않았던 것 같은데요, 그렇죠?" />
+    <string id="Dramalord307" text="속바지를 입는 데 어려움을 겪고 계시는 것 같군요." />
+    <string id="Dramalord308" text="{TARGET}은(는) 분명히 내 아이가 아닌데, 어찌 감히 새끼를 낳으십니까?!" />
+    <string id="Dramalord309" text="당신 말이 맞아요. 그래서 어쩌죠? 상관없어요.[if:convo_angry_voice]" />
+    <string id="Dramalord310" text="뭐라고요? 무슨 말씀하시는지 모르겠어요!" />
+    <string id="Dramalord311" text="{TITLE} 부탁드려요! 이건 모두 오해입니다!" />
+    <string id="Dramalord312" text="이것이 당신이 들이쉬는 마지막 숨입니다!" />
+    <string id="Dramalord313" text="내 눈앞에서 사라지세요! 다시는 당신을 보고 싶지 않습니다!" />
+    <string id="Dramalord314" text="됐어요! 끝났어요!" />
+    <string id="Dramalord315" text="뭐든..." />
+    <string id="Dramalord316" text="당신은 {HERO.LINK}}을(를) 죽였습니다" />
+    <string id="Dramalord317" text="{HERO.LINK}님과 헤어졌습니다" />
+    <string id="Dramalord318" text="{HERO.LINK}님과 이혼하셨습니다." />
+    <string id="Dramalord319" text="귀하의 클랜에서 {HERO.LINK}님을 추방하셨습니다." />
   </strings>
 </base>

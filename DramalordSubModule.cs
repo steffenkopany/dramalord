@@ -28,10 +28,10 @@ namespace Dramalord
             }
 
             ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
-            ItemObject leek = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_leek");
+            //ItemObject leek = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_leek");
             ItemObject pie = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_pie");
             Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(wurst);
-            Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(leek);
+            //Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(leek);
             Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(pie);
         }
 

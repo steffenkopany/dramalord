@@ -36,10 +36,14 @@ namespace Dramalord.UI
         internal static readonly string PlayerMarryReply = "dl_player_marry_reply";
         internal static readonly string NPCActionResult = "dl_npc_action_result";
         internal static readonly string NPCViolatedReply = "dl_npc_violated_result";
-        internal static readonly string NPCStart = "start";
+        internal static readonly string NPCStart = "lord_start";
         internal static readonly string NPCStartRequest = "dl_npc_start_request";
         internal static readonly string NPCRequestToPlayer = "dl_npc_request_to_player";
         internal static readonly string NPCStatementToPlayer = "dl_npc_statement_to_player";
+        internal static readonly string NPCDirectStart = "start";
+        internal static readonly string PlayerAccuseNpc = "dl_player_accuse_npc";
+        internal static readonly string NpcReplyAccusation = "dl_npc_reply_accusation";
+        internal static readonly string PlayerReactAccusation = "dl_player_react_accusation";
 
         internal static void AddDialogs(CampaignGameStarter starter)
         {
@@ -107,8 +111,9 @@ namespace Dramalord.UI
             starter.AddDialogLine("Dramalord909", NPCDivorceReply, CloseConversation, "{=Dramalord109}What? You bastard! I never want to see you again!", Conditions.NpcHeartbrokenByBreakup, Consequences.NpcWasHeartBrokenByDivorce);
             starter.AddDialogLine("Dramalord910", NPCDivorceReply, CloseConversation, "{=Dramalord110}Oh god... my darkes nightmare has come true... I can't live without you...", Conditions.NpcSuicidalByBreakup, Consequences.NpcGotSuicidalByDivorce);
 
-            starter.AddPlayerLine("Dramalord111", PlayerMainOptions, NPCViolatedReply, "{=Dramalord111}You and I... we're going to have some fun now...", Conditions.PlayerCanViolateNpc, null);
-            starter.AddDialogLine("Dramalord112", NPCViolatedReply, CloseConversation, "{=Dramalord112}Oh god! Please, no! Stay away from me!", null, Consequences.PlayerViolatedNpc);
+            starter.AddPlayerLine("Dramalord111", PlayerMainOptions, NPCViolatedReply, "{=Dramalord296}I would consider letting you go for... some special service from you...", Conditions.PlayerCanViolateNpc, null);
+            starter.AddDialogLine("Dramalord112", NPCViolatedReply, CloseConversation, "{=Dramalord297}Well come here pretty, you got yourself a deal!", Conditions.NPCAcceptsViolation, Consequences.PlayerViolatedNpc);
+            starter.AddDialogLine("Dramalord112", NPCViolatedReply, CloseConversation, "{=Dramalord295}Never! You will not taint my honor with such offers!", Conditions.NPCDeclinesViolation, null);
 
             //approaching
             starter.AddDialogLine("Dramalord255", NPCStart, NPCStartRequest, "{=Dramalord255}{TITLE}, I would like to talk to you.", Conditions.NPCCanApproachPlayer, null, 120);
@@ -131,6 +136,23 @@ namespace Dramalord.UI
 
             starter.AddPlayerLine("Dramalord445", PlayerMarryReply, CloseConversation, "{=Dramalord045}Oh... well, I think I would like that.", null, Consequences.NpcAcceptedMarriage);
             starter.AddPlayerLine("Dramalord446", PlayerMarryReply, CloseConversation, "{=Dramalord046}No I would not like to do that.", null, Consequences.NpcDeclinedMarriage);
+
+            //caught
+            starter.AddDialogLine("Dramalord304", NPCDirectStart, PlayerAccuseNpc, "{=Dramalord304}{TITLE}, I... I... [if:convo_astonished]", Conditions.PlayerCanConfrontNpc, null, 120);
+
+            starter.AddPlayerLine("Dramalord305", PlayerAccuseNpc, NpcReplyAccusation, "{=Dramalord305}You carry no child of mine, am I correct?", Conditions.PlayerSeesPregnancy, null);
+            starter.AddPlayerLine("Dramalord306", PlayerAccuseNpc, NpcReplyAccusation, "{=Dramalord306}I guess you and {TARGET} were not talking about politics, eh?", Conditions.PlayerSeesDate, null);
+            starter.AddPlayerLine("Dramalord307", PlayerAccuseNpc, NpcReplyAccusation, "{=Dramalord307}Looks like you're having a hard time keeping your underpants on.", Conditions.PlayerSeesIntercourse, null);
+            starter.AddPlayerLine("Dramalord308", PlayerAccuseNpc, NpcReplyAccusation, "{=Dramalord308}{TARGET} is clearly not my child, how dare you to give birth to a bastard?!", Conditions.PlayerSeesBastard, null);
+
+            starter.AddDialogLine("Dramalord309", NpcReplyAccusation, PlayerReactAccusation, "{=Dramalord309}You are right. So what? I don't care.[if:convo_angry_voice]", Conditions.NpcAccusedDoesntCare, null);
+            starter.AddDialogLine("Dramalord310", NpcReplyAccusation, PlayerReactAccusation, "{=Dramalord310}What? I have no idea what you are talking about!", Conditions.NpcAccusedPlaysInnocent, null);
+            starter.AddDialogLine("Dramalord311", NpcReplyAccusation, PlayerReactAccusation, "{=Dramalord311}{TITLE}, please! This is all a misunderstanding!", Conditions.NpcAccusedBegsForgiveness, null);
+
+            starter.AddPlayerLine("Dramalord312", PlayerReactAccusation, CloseConversation, "{=Dramalord312}This is the last breath you take!", Conditions.PlayerCanKillNpc, Consequences.PlayerKillsNpc);
+            starter.AddPlayerLine("Dramalord313", PlayerReactAccusation, CloseConversation, "{=Dramalord313}Get out of my sight! I never want to see you again!", Conditions.PlayerCanKickNpcOut, Consequences.PlayerKicksNpcOut);
+            starter.AddPlayerLine("Dramalord314", PlayerReactAccusation, CloseConversation, "{=Dramalord314}That's it! It's over!", Conditions.PlayerCanBreakUpOrDivorce, Consequences.PlayerBreaksUpWithNpc);
+            starter.AddPlayerLine("Dramalord315", PlayerReactAccusation, CloseConversation, "{=Dramalord315}Whatever...", null, null);
         }
 
         internal static bool SetConversationTextVariables()

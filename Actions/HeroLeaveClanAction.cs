@@ -6,6 +6,7 @@ using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Settlements;
+using TaleWorlds.Core;
 
 namespace Dramalord.Actions
 {
@@ -61,6 +62,13 @@ namespace Dramalord.Actions
             hero.SetNewOccupation(Occupation.Wanderer);
             hero.UpdateHomeSettlement();
             CampaignEventDispatcher.Instance.OnHeroChangedClan(hero, oldClan);
+
+            if(hero != causedBy && causedBy == Hero.MainHero)
+            {
+                TextObject textObject = new TextObject("{=Dramalord319}You banished {HERO.LINK} from your clan.");
+                StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
+                MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+            }
 
             if (DramalordMCM.Get.ClanOutput)
             {

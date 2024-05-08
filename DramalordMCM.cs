@@ -1,14 +1,15 @@
 ﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
+using MCM.Abstractions.Base.Global;
 using MCM.Abstractions.Base.PerCampaign;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Dramalord
 {
-    internal sealed class DramalordMCM : AttributePerCampaignSettings<DramalordMCM>
+    internal sealed class DramalordMCM : AttributeGlobalSettings<DramalordMCM>
     {
         [AllowNull]
-        internal static DramalordMCM Get => AttributePerCampaignSettings<DramalordMCM>.Instance;
+        internal static DramalordMCM Get => AttributeGlobalSettings<DramalordMCM>.Instance;
 
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord151}Flirt Logs", HintText = "{=Dramalord152}Show flirt events in logs", Order = 1, RequireRestart = false)]
@@ -75,6 +76,10 @@ namespace Dramalord
         public bool AllowApproachInParty { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord284}Approach Player In Army", HintText = "{=Dramalord285}Allow NPCs to approach you while being in the same army", Order = 15, RequireRestart = false)]
+        public bool AllowApproachInArmy { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord274}Link Emotion Changes to Relation", HintText = "{=Dramalord275}Allow changes to emotion being reflected to relation", Order = 16, RequireRestart = false)]
         public bool LinkEmotionToRelation { get; set; } = true;
 
@@ -91,8 +96,12 @@ namespace Dramalord
         public bool AllowRageKills { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord147}General")]
-        [SettingPropertyBool("{=Dramalord282}Allow Clan Changes", HintText = "{=Dramalord283}Allow heroes being kicked out of clans or leaving voluntarily", Order = 19, RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord282}Allow Clan Changes", HintText = "{=Dramalord283}Allow heroes being kicked out of clans or leaving voluntarily", Order = 20, RequireRestart = false)]
         public bool AllowClanChanges { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyFloatingInteger("{=Dramalord286}NPC Visit Quest Chance", 0, 100, HintText = "{=Dramalord287}Chance that heroes request the absent player to visit them due to urgent needs", Order = 21, RequireRestart = false)]
+        public int ChanceNPCQuestVisitPlayer { get; set; } = 20;
 
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord167}Other Sex Attraction Modifier", -50, 50, Order = 1, HintText = "{=Dramalord168}AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)", RequireRestart = false)]
@@ -212,7 +221,7 @@ namespace Dramalord
 
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
         [SettingPropertyFloatingInteger("{=Dramalord219}Min. Emotion For Conversation", 0, 100, Order = 1, HintText = "{=Dramalord220}Minimum emotion value of AI to accept an intimate conversation with the player", RequireRestart = false)]
-        public int MinEmotionForConversation { get; set; } = 10;
+        public int MinEmotionForConversation { get; set; } = 0;
 
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
         [SettingPropertyBool("{=Dramalord221}Player Always Attractive", Order = 2, HintText = "{=Dramalord222}Player is always 100% attractive to other heroes (cheat)", RequireRestart = false)]
@@ -225,6 +234,10 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
         [SettingPropertyBool("{=Dramalord253}Individual Relations", Order = 4, HintText = "{=Dramalord254}Use/Show individual relation Lords/Ladies instead of their clan leader relation", RequireRestart = false)]
         public bool IndividualRelation { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord149}Player Options")]
+        [SettingPropertyBool("{=Dramalord298}Interact Being Witness", Order = 5, HintText = "{=Dramalord299}Interact when witnessing your partner doing stuff with others (otherwise you will just get a notification)", RequireRestart = false)]
+        public bool InteractOnBeingWitness { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord150}Extra QOL")]
         [SettingPropertyBool("{=Dramalord225}No Captivity Messages", Order = 1, HintText = "{=Dramalord226}Disable spam of captured or freed heroes (english only!)", RequireRestart = false)]

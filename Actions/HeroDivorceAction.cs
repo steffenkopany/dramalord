@@ -36,6 +36,12 @@ namespace Dramalord.Actions
                     StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
                     MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                 }
+                else if (hero == Hero.MainHero)
+                {
+                    TextObject textObject = new TextObject("{=Dramalord318}You divorced from {HERO.LINK}.");
+                    StringHelpers.SetCharacterProperties("HERO", target.CharacterObject, textObject);
+                    MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                }
 
                 if (DramalordMCM.Get.MarriageOutput)
                 {

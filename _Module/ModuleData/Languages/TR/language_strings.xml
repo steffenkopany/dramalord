@@ -287,5 +287,41 @@
     <string id="Dramalord281" text="Öfkeli kahramanların aldatılmaları durumunda öldürmelerine izin ver" />
     <string id="Dramalord282" text="Klan Değişikliklerine İzin Ver" />
     <string id="Dramalord283" text="Kahramanların klandan atılmasına veya gönüllü olarak ayrılmasına izin ver" />
+    <string id="Dramalord284" text="Ordudaki Oyuncuya Yaklaş" />
+    <string id="Dramalord285" text="Aynı ordudayken NPC'lerin size yaklaşmasına izin verin" />
+    <string id="Dramalord286" text="NPC Ziyareti Görev Şansı" />
+    <string id="Dramalord287" text="Kahramanların, acil ihtiyaçlar nedeniyle, bulunmayan oyuncudan kendilerini ziyaret etmesini isteme ihtimali" />
+    <string id="Dramalord288" text="{HERO.LINK} varlığınızı istiyor" />
+    <string id="Dramalord289" text="Bir haberci, {HERO.LINK}'dan bir mesaj iletti. İlgilenmeniz gereken acil bir işleri olduğu için sizi mümkün olan en kısa sürede görmek istiyorlar." />
+    <string id="Dramalord290" text="{HERO.LINK}, onların meselesini ihmal etmenizden dolayı hayal kırıklığına uğradı." />
+    <string id="Dramalord291" text="Nihayet buradasınız!" />
+    <string id="Dramalord292" text="İşte buradayım. İlgilenmemi istediğiniz acil konu nedir?" />
+    <string id="Dramalord293" text="Sorun... bu arada çok yetenekli biri tarafından çözüldü." />
+    <string id="Dramalord294" text="Beni takip edin. Becerikliliğinizden yararlanmak isterim..." />
+    <string id="Dramalord295" text="Asla! Bu tür tekliflerle onurumu lekeleyemezsiniz!" />
+    <string id="Dramalord296" text="Sizden özel bir hizmet almak için gitmenize izin vermeyi düşünüyorum..." />
+    <string id="Dramalord297" text="Peki buraya gel güzelim, kendine bir anlaşma yaptın!" />
+    <string id="Dramalord298" text="Tanık Olarak Etkileşime Geçin" />
+    <string id="Dramalord299" text="Partnerinizin başkalarıyla bir şeyler yaptığına tanık olduğunuzda etkileşim kurun (aksi takdirde yalnızca bir bildirim alırsınız)" />
+    <string id="Dramalord300" text="{HERO.LINK}'a yakın olduğunuzda karnının alışılmadık derecede büyük olduğunu fark edersiniz ve buna yemeklerin sebep olmadığını anında anlarsınız." />
+    <string id="Dramalord301" text="Gezmeye çıktığınızda şüpheli bir ses fark ettiniz. Onu takip ederken {HERO.LINK} ve {TARGET.LINK}'yi belirsiz bir durumda yakaladınız. {TARGET.LINK} kaçtı sahne." />
+    <string id="Dramalord302" text="Doğum tarihi uymuyor ve çocuğunuzun yüzünde kendinizle hiçbir benzerlik bulamıyorsunuz." />
+    <string id="Dramalord303" text="{HERO.LINK}'ı ararken onları {TARGET.LINK} ile birlikte buldunuz. Zararsız bir şekilde konuşamayacak kadar yakındılar." />
+    <string id="Dramalord304" text="{TITLE}, Ben... Ben... [if:convo_astonished]" />
+    <string id="Dramalord305" text="Benim çocuğumu taşımıyorsun, doğru muyum?" />
+    <string id="Dramalord306" text="Sanırım siz ve {TARGET} politikadan bahsetmiyordunuz, değil mi?" />
+    <string id="Dramalord307" text="Görünüşe göre külotunu giymekte zorlanıyorsun." />
+    <string id="Dramalord308" text="{TARGET} açıkça benim çocuğum değil, bir piç doğurmaya nasıl cesaret edersin?!" />
+    <string id="Dramalord309" text="Haklısın. Ne olmuş yani? Umurumda değil.[if:convo_angry_voice]" />
+    <string id="Dramalord310" text="Ne? Neden bahsettiğiniz hakkında hiçbir fikrim yok!" />
+    <string id="Dramalord311" text="{TITLE}, lütfen! Bunların hepsi bir yanlış anlama!" />
+    <string id="Dramalord312" text = "Bu, aldığın son nefes!" />
+    <string id="Dramalord313" text="Gözümün önünden çekil! Seni bir daha asla görmek istemiyorum!" />
+    <string id="Dramalord314" text="İşte bu kadar! Bitti!" />
+    <string id="Dramalord315" text="Her neyse..." />
+    <string id="Dramalord316" text="{HERO.LINK}'u öldürdünüz" />
+    <string id="Dramalord317" text="{HERO.LINK}'dan ayrıldınız" />
+    <string id="Dramalord318" text="{HERO.LINK}'dan boşandınız." />
+    <string id="Dramalord319" text="{HERO.LINK}'ı klandan uzaklaştırdınız." />
   </strings>
 </base>

@@ -287,5 +287,41 @@
     <string id="Dramalord281" text="如果被欺骗，允许被激怒的英雄杀死" />
     <string id="Dramalord282" text="允许氏族变更" />
     <string id="Dramalord283" text="允许英雄被踢出部落或自愿离开" />
+    <string id="Dramalord284" text="接近军队中的玩家" />
+    <string id="Dramalord285" text="允许 NPC 在同一支军队中接近你" />
+    <string id="Dramalord286" text="NPC 访问任务机会" />
+    <string id="Dramalord287" text="英雄因紧急需要而请求缺席玩家拜访的几率" />
+    <string id="Dramalord288" text="{HERO.LINK} 请求您出席" />
+    <string id="Dramalord289" text="一位信使从 {HERO.LINK} 发送了一条消息。他们希望尽快见到您，因为他们有紧急事情需要您处理。" />
+    <string id="Dramalord290" text="{HERO.LINK} 对您忽视他们的事情感到失望。" />
+    <string id="Dramalord291" text="你终于来了！" />
+    <string id="Dramalord292" text="我在这里。你让我处理什么紧急事情？" />
+    <string id="Dramalord293" text="这件事......同时被一个非常熟练的人解决了。" />
+    <string id="Dramalord294" text="跟我来。我想利用你的足智多谋......" />
+    <string id="Dramalord295" text="决不！你不会用这样的优惠玷污我的荣誉！" />
+    <string id="Dramalord296" text="我会考虑让你去...一些特殊的服务..." />
+    <string id="Dramalord297" text="好吧，漂亮的来这里，你得到了一笔交易！" />
+    <string id="Dramalord298" text="互动见证" />
+    <string id="Dramalord299" text="目睹你的伴侣与他人做事时进行互动（否则你只会收到通知）" />
+    <string id="Dramalord300" text="当靠近 {HERO.LINK} 时，您会注意到她的肚子异常大，并且立即知道这不是食物造成的。" />
+    <string id="Dramalord301" text="当你散步时，你注意到了可疑的声音。当你跟踪它时，你在明确的情况下发现了{HERO.LINK}和{TARGET.LINK}。{TARGET.LINK}逃跑了 现场。" />
+    <string id="Dramalord302" text="出生日期不符，您在孩子的脸上没有发现与自己相似的地方。" />
+    <string id="Dramalord303" text="在寻找 {HERO.LINK} 时，你发现他们和 {TARGET.LINK} 在一起。他们距离太近，无法进行无害的交谈。" />
+    <string id="Dramalord304" text="{TITLE}，我...我... [if:convo_astonished]" />
+    <string id="Dramalord305" text="你没有我的孩子，我说得对吗？" />
+    <string id="Dramalord306" text="我猜你和 {TARGET} 没有谈论政治，是吗？" />
+    <string id="Dramalord307" text="看起来你很难穿好内裤。" />
+    <string id="Dramalord308" text="{TARGET}分明不是我的孩子，你竟然敢生个私生子？！" />
+    <string id="Dramalord309" text="你是对的。那又怎样？我不在乎。[if:convo_angry_voice]" />
+    <string id="Dramalord310" text="什么？我不知道你在说什么！" />
+    <string id="Dramalord311" text="{TITLE}，拜托！这都是误会！" />
+    <string id="Dramalord312" text="这是你最后一次呼吸！" />
+    <string id="Dramalord313" text="滚出我的视线！我再也不想见到你了！" />
+    <string id="Dramalord314" text="就是这样！结束了！" />
+    <string id="Dramalord315" text="随便..." />
+    <string id="Dramalord316" text="你杀死了 {HERO.LINK}" />
+    <string id="Dramalord317" text="您与 {HERO.LINK} 分手了" />
+    <string id="Dramalord318" text="您与 {HERO.LINK} 离婚。" />
+    <string id="Dramalord319" text="您从您的部落中驱逐了 {HERO.LINK}。" />
   </strings>
 </base>

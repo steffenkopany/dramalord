@@ -288,5 +288,41 @@
     <string id="Dramalord281" text="Erlaube wütenden Helden zu töten, wenn sie betrogen werden" />
     <string id="Dramalord282" text="Clan-Änderungen zulassen" />
     <string id="Dramalord283" text="Erlaube Helden, aus Clans geworfen zu werden oder sie freiwillig zu verlassen" />
+    <string id="Dramalord284" text="Annäherung an Spieler in der Armee" />
+    <string id="Dramalord285" text="Erlaube NPCs, sich dir zu nähern, während du in derselben Armee bist" />
+    <string id="Dramalord286" text="NPC-Besuch-Quest-Chance" />
+    <string id="Dramalord287" text="Chance, dass Helden den abwesenden Spieler aufgrund dringender Bedürfnisse bitten, sie zu besuchen" />
+    <string id="Dramalord288" text="{HERO.LINK} bittet um Ihre Anwesenheit" />
+    <string id="Dramalord289" text="Ein Bote hat eine Nachricht von {HERO.LINK} übermittelt. Sie möchten dich so schnell wie möglich sehen, da sie etwas Dringendes haben, um das du dich kümmern musst." />
+    <string id="Dramalord290" text="{HERO.LINK} ist enttäuscht darüber, dass Sie ihre Angelegenheit vernachlässigen." />
+    <string id="Dramalord291" text="Endlich bist du hier!" />
+    <string id="Dramalord292" text="Hier bin ich. Um welche dringende Angelegenheit soll ich mich kümmern?" />
+    <string id="Dramalord293" text="Die Angelegenheit... wurde inzwischen von jemandem sehr geschickten gelöst." />
+    <string id="Dramalord294" text="Folge mir. Ich möchte deinen Einfallsreichtum nutzen..." />
+    <string id="Dramalord295" text="Niemals! Du wirst meine Ehre nicht mit solchen Angeboten beflecken!" />
+    <string id="Dramalord296" text="Ich würde darüber nachdenken, dich gehen zu lassen, um... einen besonderen Service von dir zu bekommen..." />
+    <string id="Dramalord297" text="Na komm her, meine Liebe, du hast einen Deal gemacht!" />
+    <string id="Dramalord298" text="Interagiere als Zeuge" />
+    <string id="Dramalord299" text="Interagiere, wenn Du beobachtest, wie dein Partner Dinge mit anderen unternimmt (andernfalls erhaltest du nur eine Benachrichtigung)" />
+    <string id="Dramalord300" text="Während Ihr in der Nähe von {HERO.LINK} seit, bemerkt Ihr, dass ihr Bauch ungewöhnlich groß ist, und Ihr wisst sofort, dass dies nicht durch Essen verursacht wurde." />
+    <string id="Dramalord301" text="Beim Spaziergang ist Euch ein verdächtiges Geräusch aufgefallen. Als Ihr ihm gefolgt seit, habt Ihr {HERO.LINK} und {TARGET.LINK} in einer eindeutigen Situation erwischt. {TARGET.LINK} floh von der Szene." />
+    <string id="Dramalord302" text="Das Geburtsdatum passt nicht und Ihr findet im Gesicht des Kindes keine Ähnlichkeit mit Euch selbst." />
+    <string id="Dramalord303" text="Bei der Suche nach {HERO.LINK} habt Ihr sie zusammen mit {TARGET.LINK} gefunden. Sie standen sich zu nahe, um sich harmlos zu unterhalten." />
+    <string id="Dramalord304" text="{TITLE}, ich... ich... [if:convo_astonished]" />
+    <string id="Dramalord305" text="Ihr habt kein Kind von mir, habe ich recht?" />
+    <string id="Dramalord306" text="Ich schätze, Ihr und {TARGET} habt nicht über Politik gesprochen, oder?" />
+    <string id="Dramalord307" text="Sieht so aus, als ob es Euch schwerfällt, Eure Unterhose anzubehalten." />
+    <string id="Dramalord308" text="{TARGET} ist eindeutig nicht mein Kind, wie könnt Ihr es wagen, einen Bastard zur Welt zu bringen?!" />
+    <string id="Dramalord309" text="Ihr habt recht. Na und? Ist mir egal.[if:convo_angry_voice]" />
+    <string id="Dramalord310" text="Was? Ich habe keine Ahnung, wovon Ihr sprecht!" />
+    <string id="Dramalord311" text="{TITLE}, bitte! Das ist alles ein Missverständnis!" />
+    <string id="Dramalord312" text="Das ist der letzte Atemzug, den Ihr nehmt!" />
+    <string id="Dramalord313" text="Geht mir aus den Augen! Ich will Euch nie wieder sehen!" />
+    <string id="Dramalord314" text="Das war's! Es ist vorbei!" />
+    <string id="Dramalord315" text="Was auch immer..." />
+    <string id="Dramalord316" text="Ihr habt {HERO.LINK} getötet" />
+    <string id="Dramalord317" text="Ihr habt mit {HERO.LINK} Schluss gemacht" />
+    <string id="Dramalord318" text="Ihr habt Euch von {HERO.LINK} scheiden lassen." />
+    <string id="Dramalord319" text="Ihr habt {HERO.LINK} aus eurem Clan verbannt." />
   </strings>
 </base>

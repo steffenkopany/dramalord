@@ -389,6 +389,53 @@ namespace Dramalord.UI
             }
         }
 
+        //ACCUSATIONS
+        internal static void PlayerKillsNpc()
+        {
+            SetRoles();
+            KillReason reason = KillReason.Intercourse;
+            if(Conditions.WitnessOf == WitnessType.Pregnancy)
+            {
+                reason = KillReason.Pregnancy;
+            }
+            else if (Conditions.WitnessOf == WitnessType.Bastard)
+            {
+                reason = KillReason.Bastard;
+            }
+            HeroKillAction.Apply(Player, Npc, Conditions.LoverOrChild, reason);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        internal static void PlayerKicksNpcOut()
+        {
+            SetRoles();
+            HeroLeaveClanAction.Apply(Npc, Player);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        internal static void PlayerBreaksUpWithNpc()
+        {
+            SetRoles();
+            if(Npc.Spouse == Player)
+            {
+                HeroDivorceAction.Apply(Player, Npc);
+            }
+            else
+            {
+                HeroBreakupAction.Apply(Player, Npc);
+            }
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
         private static void SetRoles()
         {
             Player = Hero.MainHero;
