@@ -1,6 +1,7 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Behaviors;
 using Dramalord.Data;
+using Dramalord.Quests;
 using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
@@ -429,6 +430,33 @@ namespace Dramalord.UI
             else
             {
                 HeroBreakupAction.Apply(Player, Npc);
+            }
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        //QUEST
+        internal static void VisitQuestFail()
+        {
+            SetRoles();
+            if(VisitLoverQuest.HeroList.ContainsKey(Npc))
+            {
+                VisitLoverQuest.HeroList[Npc].QuestFail();
+            }
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        internal static void VisitQuestSuccess()
+        {
+            SetRoles();
+            if (VisitLoverQuest.HeroList.ContainsKey(Npc))
+            {
+                VisitLoverQuest.HeroList[Npc].QuestSuccess();
             }
             if (PlayerEncounter.Current != null)
             {

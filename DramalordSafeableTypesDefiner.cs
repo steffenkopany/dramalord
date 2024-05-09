@@ -52,6 +52,7 @@ namespace Dramalord
             ConstructContainerDefinition(typeof(Dictionary<HeroTuple, HeroMemoryData>));
             ConstructContainerDefinition(typeof(Dictionary<Hero, HeroOffspringData>));
             ConstructContainerDefinition(typeof(List<Hero>));
+            ConstructContainerDefinition(typeof(Dictionary<Hero, VisitLoverQuest>));
         }
     }
 }

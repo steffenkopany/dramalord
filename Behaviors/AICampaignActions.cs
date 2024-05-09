@@ -132,9 +132,9 @@ namespace Dramalord.Behaviors
                         return;
                     }
                 }
-                else if(!hero.IsPrisoner && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.ChanceNPCQuestVisitPlayer && !VisitLoverQuest.HeroList.Contains(hero))
+                else if(!hero.IsPrisoner && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.ChanceNPCQuestVisitPlayer && !VisitLoverQuest.HeroList.ContainsKey(hero))
                 {
-                    if(Info.IsCoupleWithHero(hero, Hero.MainHero) && Info.GetHeroHorny(hero) >= DramalordMCM.Get.MinHornyForIntercourse && Info.GetEmotionToHero(hero, Hero.MainHero) >= DramalordMCM.Get.MinEmotionBeforeDivorce)
+                    if(Info.IsCoupleWithHero(hero, Hero.MainHero) && Info.GetHeroHorny(hero) >= DramalordMCM.Get.MinHornyForIntercourse && Info.GetEmotionToHero(hero, Hero.MainHero) >= DramalordMCM.Get.MinEmotionBeforeDivorce && CampaignTime.Now.ToDays - Info.GetLastDate(hero, Hero.MainHero) > DramalordMCM.Get.DaysBetweenDates)
                     {
                         TextObject title = new TextObject("{=Dramalord288}{HERO.LINK} requests your presence");
                         TextObject text = new TextObject("{=Dramalord289}A messenger delivered a message from {HERO.LINK}. They want to see you as soon as possible, as they have something urgent you need to take care of.");

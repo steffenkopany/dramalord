@@ -1,5 +1,6 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Data;
+using Dramalord.Quests;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Party;
@@ -415,6 +416,26 @@ namespace Dramalord.UI
         {
             SetRoles();
             return Player.Spouse == Npc || Info.IsCoupleWithHero(Player, Npc);
+        }
+
+        //QUEST
+
+        internal static bool NpcHasQuest()
+        {
+            SetRoles();
+            return VisitLoverQuest.HeroList.ContainsKey(Npc);
+        }
+
+        internal static bool NpcQuestFail()
+        {
+            SetRoles();
+            return Info.GetHeroHorny(Npc) < DramalordMCM.Get.MinHornyForIntercourse;
+        }
+
+        internal static bool NpcQuestSuccess()
+        {
+            SetRoles();
+            return Info.GetHeroHorny(Npc) >= DramalordMCM.Get.MinHornyForIntercourse;
         }
 
         // private stuff

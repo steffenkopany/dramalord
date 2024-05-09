@@ -44,6 +44,8 @@ namespace Dramalord.UI
         internal static readonly string PlayerAccuseNpc = "dl_player_accuse_npc";
         internal static readonly string NpcReplyAccusation = "dl_npc_reply_accusation";
         internal static readonly string PlayerReactAccusation = "dl_player_react_accusation";
+        internal static readonly string PlayerQuestImHere = "dl_player_quest_imhere";
+        internal static readonly string NpcQuestResolution = "dl_npc_quest_resolution";
 
         internal static void AddDialogs(CampaignGameStarter starter)
         {
@@ -153,6 +155,14 @@ namespace Dramalord.UI
             starter.AddPlayerLine("Dramalord313", PlayerReactAccusation, CloseConversation, "{=Dramalord313}Get out of my sight! I never want to see you again!", Conditions.PlayerCanKickNpcOut, Consequences.PlayerKicksNpcOut);
             starter.AddPlayerLine("Dramalord314", PlayerReactAccusation, CloseConversation, "{=Dramalord314}That's it! It's over!", Conditions.PlayerCanBreakUpOrDivorce, Consequences.PlayerBreaksUpWithNpc);
             starter.AddPlayerLine("Dramalord315", PlayerReactAccusation, CloseConversation, "{=Dramalord315}Whatever...", null, null);
+
+            //quest
+            starter.AddDialogLine("Dramalord291", NPCDirectStart, PlayerQuestImHere, "{=Dramalord291}Finally you are here!", Conditions.NpcHasQuest, null, 120);
+
+            starter.AddPlayerLine("Dramalord292", PlayerQuestImHere, NpcQuestResolution, "{=Dramalord292}Here I am. What is the urgent matter you asked me to take care about?", null, null);
+
+            starter.AddDialogLine("Dramalord293", NpcQuestResolution, CloseConversation, "{=Dramalord293}The matter... was resolved by someone very skillful meanwhile.", Conditions.NpcQuestFail, Consequences.VisitQuestFail);
+            starter.AddDialogLine("Dramalord294", NpcQuestResolution, CloseConversation, "{=Dramalord294}Follow me. I would like to make use of your resourcefulness...", Conditions.NpcQuestSuccess, Consequences.VisitQuestSuccess);
         }
 
         internal static bool SetConversationTextVariables()

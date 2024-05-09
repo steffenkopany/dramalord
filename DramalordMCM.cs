@@ -252,5 +252,7 @@ namespace Dramalord
         public override string DisplayName => DramalordSubModule.ModuleName;
 
         public override string FolderName => DramalordSubModule.ModuleFolder;
+
+        public override string FormatType => "json";
     }
 }
