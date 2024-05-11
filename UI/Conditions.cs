@@ -422,8 +422,12 @@ namespace Dramalord.UI
 
         internal static bool NpcHasQuest()
         {
-            SetRoles();
-            return VisitLoverQuest.HeroList.ContainsKey(Npc);
+            if (Hero.OneToOneConversationHero != null && (Hero.OneToOneConversationHero.IsLord || Hero.OneToOneConversationHero.Occupation == Occupation.Wanderer))
+            {
+                SetRoles();
+                return VisitLoverQuest.HeroList.ContainsKey(Npc);
+            }
+            return false;
         }
 
         internal static bool NpcQuestFail()

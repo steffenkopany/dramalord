@@ -59,6 +59,7 @@ namespace Dramalord.Actions
                 hero.BornSettlement = SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
             }
 
+            hero.CompanionOf = null;
             hero.SetNewOccupation(Occupation.Wanderer);
             hero.UpdateHomeSettlement();
             CampaignEventDispatcher.Instance.OnHeroChangedClan(hero, oldClan);

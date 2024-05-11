@@ -157,7 +157,7 @@ namespace Dramalord.UI
             starter.AddPlayerLine("Dramalord315", PlayerReactAccusation, CloseConversation, "{=Dramalord315}Whatever...", null, null);
 
             //quest
-            starter.AddDialogLine("Dramalord291", NPCDirectStart, PlayerQuestImHere, "{=Dramalord291}Finally you are here!", Conditions.NpcHasQuest, null, 120);
+            starter.AddDialogLine("Dramalord291", NPCStart, PlayerQuestImHere, "{=Dramalord291}Finally you are here!", Conditions.NpcHasQuest, null, 120);
 
             starter.AddPlayerLine("Dramalord292", PlayerQuestImHere, NpcQuestResolution, "{=Dramalord292}Here I am. What is the urgent matter you asked me to take care about?", null, null);
 

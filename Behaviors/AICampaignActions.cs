@@ -219,7 +219,7 @@ namespace Dramalord.Behaviors
                         HeroFlirtAction.Apply(hero, flirt);
                         if(partner != null && MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
                         {
-                            HeroWitnessAction.Apply(hero, flirt, partner, WitnessType.Flirting);
+                            HeroWitnessAction.Apply(hero, flirt, (witness == null ) ? partner : witness, WitnessType.Flirting);
                         }
                     }
 
@@ -276,8 +276,8 @@ namespace Dramalord.Behaviors
                             Campaign.Current.SetTimeSpeed(0);
                             TextObject title = new TextObject("{=Dramalord270}You noticed {HERO.LINK} is pregnant from someone else");
                             TextObject text = new TextObject("{=Dramalord300}While being close to {HERO.LINK} you notice her belly being unusally big and instantly know that not food was causing this.");
-                            StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, title);
-                            StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, text);
+                            StringHelpers.SetCharacterProperties("HERO", target.CharacterObject, title);
+                            StringHelpers.SetCharacterProperties("HERO", target.CharacterObject, text);
                             Notification.DrawMessageBox(
                                     title,
                                     text,
@@ -287,7 +287,7 @@ namespace Dramalord.Behaviors
                                         Conditions.CheatingHero = target;
                                         Conditions.WitnessOf = WitnessType.Pregnancy;
                                         Conditions.LoverOrChild = target;
-                                        CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(hero.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
+                                        CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(target.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
                                     },
                                     () => {
 
@@ -404,7 +404,7 @@ namespace Dramalord.Behaviors
 
                         TextObject title = new TextObject("{=Dramalord245}Intimate Opportunity");
                         TextObject text = new TextObject("{=Dramalord246}{HERO.LINK} has a special spark in their eyes today and you have a feeling they want to go further. Will you let it happen?");
-                        StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, text);
+                        StringHelpers.SetCharacterProperties("HERO", other.CharacterObject, text);
 
                         Notification.DrawMessageBox(
                                 title,
@@ -412,7 +412,7 @@ namespace Dramalord.Behaviors
                                 true,
                                 () => {
 
-                                    HandleDateIntercourse(hero, target, heroWitness);
+                                    HandleDateIntercourse(main, other, heroWitness);
                                 },
                                 () => {
 

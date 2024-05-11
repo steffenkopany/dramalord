@@ -442,7 +442,7 @@ namespace Dramalord.Data
                 HeroTuple tuple = new ( hero, target );
                 HeroMemoryData memory = HeroMemory[tuple];
 
-                float emotion = memory.Emotion;
+                float emotion = (target == Hero.MainHero && DramalordMCM.Get.PlayerAlwaysLoved) ? 100 : memory.Emotion;
                 int attraction = Info.GetAttractionToHero(hero, target);
                 bool isCouple = memory.IsCouple;
                 bool isInArmy = hero.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null;

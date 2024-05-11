@@ -5,6 +5,7 @@ using Dramalord.Quests;
 using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
@@ -301,6 +302,7 @@ namespace Dramalord.UI
                 {
                     HeroConceiveAction.Apply(Player, Npc, true);
                 }
+                EndCaptivityAction.ApplyByRansom(Npc, Npc);
             }
         }
 
