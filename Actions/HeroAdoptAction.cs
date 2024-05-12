@@ -22,11 +22,11 @@ namespace Dramalord.Actions
 
                 if (hero.Occupation == Occupation.Lord)
                 {
-                    adopted.SetName(hero.FirstName, hero.FirstName);
+                    adopted.SetName(adopted.FirstName, adopted.FirstName);
                 }
 
                 adopted.UpdateHomeSettlement();
-                TeleportHeroAction.ApplyDelayedTeleportToSettlement(adopted, adopted.HomeSettlement);
+                TeleportHeroAction.ApplyImmediateTeleportToSettlement(adopted, adopted.HomeSettlement);
                 Info.SetLastAdoption(hero, target, CampaignTime.Now.ToDays);
 
                 if (target == Hero.MainHero)

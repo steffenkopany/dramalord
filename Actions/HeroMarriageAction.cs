@@ -68,14 +68,17 @@ namespace Dramalord.Actions
             {
                 HeroDivorceAction.Apply(target, target.Spouse);
             }
-            if(hero.Occupation == Occupation.Wanderer)
+            if(hero.Occupation == Occupation.Wanderer && target.Occupation != Occupation.Wanderer)
             {
                 hero.SetName(hero.FirstName, hero.FirstName);
             }
-
-            if (target.Occupation == Occupation.Wanderer)
+            else if (hero.Occupation != Occupation.Wanderer && target.Occupation == Occupation.Wanderer)
             {
-                target.SetName(TextObject.Empty, target.FirstName);
+                target.SetName(target.FirstName, target.FirstName);
+            }
+            else if (hero.Occupation == Occupation.Wanderer && target.Occupation == Occupation.Wanderer)
+            {
+                target.SetName(hero.FirstName, target.FirstName);
             }
 
             if (hero == Hero.MainHero || target == Hero.MainHero)
@@ -100,7 +103,7 @@ namespace Dramalord.Actions
 
             hero.ExSpouses.Remove(target);
             target.ExSpouses.Remove(hero);
-                
+
             MarriageAction.Apply(hero, target, false);
 
             foreach (Hero child in hero.Children)

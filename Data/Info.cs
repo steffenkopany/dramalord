@@ -218,6 +218,32 @@ namespace Dramalord.Data
             return null;
         }
 
+        internal static Hero? PullMaleOrphan()
+        {
+            foreach(Hero orphan in HeroOrphanage)
+            {
+                if(!orphan.IsFemale)
+                {
+                    HeroOrphanage.Remove(orphan);
+                    return orphan;
+                }
+            }
+            return null;
+        }
+
+        internal static Hero? PullFemaleOrphan()
+        {
+            foreach (Hero orphan in HeroOrphanage)
+            {
+                if (orphan.IsFemale)
+                {
+                    HeroOrphanage.Remove(orphan);
+                    return orphan;
+                }
+            }
+            return null;
+        }
+
         internal static bool IsOrphanageEmpty()
         {
             return HeroOrphanage.IsEmpty();
@@ -251,6 +277,11 @@ namespace Dramalord.Data
         {
             HeroTuple tuple = new(hero, target);
             HeroMemory[tuple].LastAdoption = value;
+        }
+
+        internal static int GetOrphanCount()
+        {
+            return HeroOrphanage.Count();
         }
 
         /*

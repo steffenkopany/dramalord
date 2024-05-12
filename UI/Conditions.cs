@@ -146,25 +146,25 @@ namespace Dramalord.UI
         internal static bool PlayerCanAskForMarriage()
         {
             SetRoles();
-            return !NpcIsMarried() && Player.Spouse == null && IsCoupleWithPlayer();
+            return !NpcIsMarried() && Player.Spouse == null && IsCoupleWithPlayer() && !NpcIsInArmy();
         }
 
         internal static bool NpcWantsToMarry()
         {
             SetRoles();
-            return (EnoughEmotionForMarriage() && IsCoupleWithPlayer()) || PersuasionSuccess();
+            return (EnoughEmotionForMarriage() && IsCoupleWithPlayer() && !NpcIsInArmy()) || PersuasionSuccess();
         }
 
         internal static bool NpcConsidersToMarry()
         {
             SetRoles();
-            return !EnoughEmotionForMarriage() && EnoughEmotionForDate() && IsCoupleWithPlayer();
+            return !EnoughEmotionForMarriage() && EnoughEmotionForDate() && IsCoupleWithPlayer() && !NpcIsInArmy();
         }
 
         internal static bool NpcDeclinesToMarry()
         {
             SetRoles();
-            return (!EnoughEmotionForMarriage() && EnoughEmotionForDate()) || !IsCoupleWithPlayer();
+            return (!EnoughEmotionForMarriage() && EnoughEmotionForDate()) || !IsCoupleWithPlayer() || NpcIsInArmy();
         }
 
         internal static bool PlayerCanGivePresent()
@@ -465,6 +465,12 @@ namespace Dramalord.UI
         {
             SetRoles();
             return NpcSpouse != null;
+        }
+
+        private static bool NpcIsInArmy()
+        {
+            SetRoles();
+            return Npc.PartyBelongedTo != null && Npc.PartyBelongedTo.Army != null;
         }
 
         private static bool NpcLovesHusband()

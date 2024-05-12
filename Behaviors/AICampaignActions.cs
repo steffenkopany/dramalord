@@ -21,6 +21,29 @@ namespace Dramalord.Behaviors
     {
         internal static void DailyHeroUpdate(Hero hero)
         {
+            if(hero == Hero.MainHero && hero.IsFemale)
+            {
+                HeroOffspringData? offspring = Info.GetHeroOffspring(hero);
+                if (offspring != null)
+                {
+                    if (CampaignTime.Now.ToDays - offspring.Conceived > DramalordMCM.Get.PregnancyDuration)
+                    {
+                        HeroBirthAction.Apply(hero, offspring); 
+
+                        Hero? child = hero.Children.FirstOrDefault(item => item.BirthDay.ToDays == CampaignTime.Now.ToDays);
+                        if (child != null && hero.Spouse != null && child.Father != hero.Spouse)
+                        {
+                            Hero spouse = hero.Spouse;
+                            if (spouse.CurrentSettlement == hero.CurrentSettlement && Info.ValidateHeroMemory(hero, spouse))
+                            {
+                                HeroWitnessAction.Apply(hero, child, spouse, WitnessType.Bastard);
+                                HeroPutInOrphanageAction.Apply(spouse, child);
+                                // todo: NPC confronts player
+                            }
+                        }
+                    }
+                }
+            }
             if (hero != Hero.MainHero && Info.ValidateHeroInfo(hero) && !hero.IsFugitive) //StoryMode.Quests.FirstPhase.BannerInvestigationQuest
             {
                 Info.ValidateHeroMemory(hero, Hero.MainHero);
@@ -132,7 +155,7 @@ namespace Dramalord.Behaviors
                         return;
                     }
                 }
-                else if(!hero.IsPrisoner && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.ChanceNPCQuestVisitPlayer && !VisitLoverQuest.HeroList.ContainsKey(hero))
+                else if(!hero.IsPrisoner && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.ChanceNPCQuestVisitPlayer && !VisitLoverQuest.HeroList.ContainsKey(hero) && hero.CurrentSettlement != Hero.MainHero.CurrentSettlement)
                 {
                     if(Info.IsCoupleWithHero(hero, Hero.MainHero) && Info.GetHeroHorny(hero) >= DramalordMCM.Get.MinHornyForIntercourse && Info.GetEmotionToHero(hero, Hero.MainHero) >= DramalordMCM.Get.MinEmotionBeforeDivorce && CampaignTime.Now.ToDays - Info.GetLastDate(hero, Hero.MainHero) > DramalordMCM.Get.DaysBetweenDates)
                     {
