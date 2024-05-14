@@ -1,4 +1,6 @@
-﻿using Dramalord.Data;
+﻿using Dramalord.Behaviors;
+using Dramalord.Conversations;
+using Dramalord.Data;
 using Dramalord.UI;
 using Helpers;
 using StoryMode.StoryModeObjects;
@@ -83,8 +85,11 @@ namespace Dramalord.Quests
         internal void QuestSuccess()
         {
             CompleteQuestWithSuccess();
-            Consequences.NpcAcceptedDate();
             HeroList.Remove(QuestGiver);
+
+            Persuasions.ClearCurrentPersuasion();
+            PlayerCampaignActions.PostConversationAction = PlayerCampaignActions.PlayerDateAction;
+
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;

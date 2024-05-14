@@ -323,5 +323,17 @@
     <string id="Dramalord317" text="您与 {HERO.LINK} 分手了" />
     <string id="Dramalord318" text="您与 {HERO.LINK} 离婚。" />
     <string id="Dramalord319" text="您从您的部落中驱逐了 {HERO.LINK}。" />
+    <string id="Dramalord320" text="您现在可以怀孕吗？" />
+    <string id="Dramalord321" text="你觉得这……特别痒吗？" />
+    <string id="Dramalord322" text="你喜欢我的样子吗？" />
+    <string id="Dramalord323" text="嗯...我觉得你看起来 {RATING_TOTAL}！" />
+    <string id="Dramalord324" text="我目前处于生育期，我的经期将在 {PERIOD_DAYS} 天后开始。" />
+    <string id="Dramalord325" text="我来月经了，所以接下来的 {PERIOD_DAYS} 天我不会受孕。" />
+    <string id="Dramalord326" text="恐怕我太老了，不能生育了。" />
+    <string id="Dramalord327" text="多么愚蠢的问题...我是一个男人。" />
+    <string id="Dramalord328" text="嗯...是的...如果有人能帮我挠痒痒的话我会很高兴..." />
+    <string id="Dramalord329" text="不，不是真的。我现在没心情。" />
+    <string id="Dramalord330" text="抱歉，你不是我喜欢的类型。" />
+    <string id="Dramalord331" text="再来一次？请让我休息一下..." />
   </strings>
 </base>

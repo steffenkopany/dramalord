@@ -40,7 +40,7 @@ namespace Dramalord
             AddClassDefinition(typeof(LogWitnessBastard), 24);
             AddClassDefinition(typeof(EncyclopediaLogKilledWhenBornBastard), 25); 
             AddClassDefinition(typeof(LogUsedToy), 26); 
-            AddClassDefinition(typeof(EncyclopediaLogKilledSuizide), 27);
+            AddClassDefinition(typeof(EncyclopediaLogKilledSuicide), 27);
             AddClassDefinition(typeof(EncyclopediaLogClanLeftKingdom), 28);
             AddClassDefinition(typeof(EncyclopediaLogClanJoinedKingdom), 29);
             AddClassDefinition(typeof(VisitLoverQuest), 30);

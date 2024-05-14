@@ -298,10 +298,10 @@
     <string id="Dramalord291" text="Endlich bist du hier!" />
     <string id="Dramalord292" text="Hier bin ich. Um welche dringende Angelegenheit soll ich mich kümmern?" />
     <string id="Dramalord293" text="Die Angelegenheit... wurde inzwischen von jemandem sehr geschickten gelöst." />
-    <string id="Dramalord294" text="Folge mir. Ich möchte deinen Einfallsreichtum nutzen..." />
-    <string id="Dramalord295" text="Niemals! Du wirst meine Ehre nicht mit solchen Angeboten beflecken!" />
-    <string id="Dramalord296" text="Ich würde darüber nachdenken, dich gehen zu lassen, um... einen besonderen Service von dir zu bekommen..." />
-    <string id="Dramalord297" text="Na komm her, meine Liebe, du hast einen Deal gemacht!" />
+    <string id="Dramalord294" text="Folgt mir. Ich möchte Euren Einfallsreichtum nutzen..." />
+    <string id="Dramalord295" text="Niemals! Ihr werdet meine Ehre nicht mit solchen Angeboten beflecken!" />
+    <string id="Dramalord296" text="Ich würde darüber nachdenken, Euch gehen zu lassen, um... einen besonderen Service von Euch zu bekommen..." />
+    <string id="Dramalord297" text="Na kommt her, runter mit der Hose, Ihr habt einen Deal gemacht!" />
     <string id="Dramalord298" text="Interagiere als Zeuge" />
     <string id="Dramalord299" text="Interagiere, wenn Du beobachtest, wie dein Partner Dinge mit anderen unternimmt (andernfalls erhaltest du nur eine Benachrichtigung)" />
     <string id="Dramalord300" text="Während Ihr in der Nähe von {HERO.LINK} seit, bemerkt Ihr, dass ihr Bauch ungewöhnlich groß ist, und Ihr wisst sofort, dass dies nicht durch Essen verursacht wurde." />
@@ -324,5 +324,17 @@
     <string id="Dramalord317" text="Ihr habt mit {HERO.LINK} Schluss gemacht" />
     <string id="Dramalord318" text="Ihr habt Euch von {HERO.LINK} scheiden lassen." />
     <string id="Dramalord319" text="Ihr habt {HERO.LINK} aus eurem Clan verbannt." />
+    <string id="Dramalord320" text="Könnt Ihr derzeit schwanger werden?" />
+    <string id="Dramalord321" text="Spürt Ihr diesen... besonderen Juckreiz?" />
+    <string id="Dramalord322" text="Wie gefällt Euch mein Aussehen?" />
+    <string id="Dramalord323" text="Hmm... ich finde, Ihr seht {RATING_TOTAL} aus!" />
+    <string id="Dramalord324" text="Ich bin derzeit fruchtbar, meine Periode beginnt in {PERIOD_DAYS} Tagen." />
+    <string id="Dramalord325" text="Ich habe meine Periode und bin daher in den nächsten {PERIOD_DAYS} Tagen nicht fruchtbar." />
+    <string id="Dramalord326" text="Ich fürchte, ich bin zu alt, um fruchtbar zu sein." />
+    <string id="Dramalord327" text="Was für eine dumme Frage ... ich bin ein Mann." />
+    <string id="Dramalord328" text="Hmm... ja... ich würde es lieben, wenn jemand meinen Juckreiz kratzen würde..." />
+    <string id="Dramalord329" text="Nein, nicht wirklich. Ich bin momentan nicht in der Stimmung." />
+    <string id="Dramalord330" text="Es tut mir leid, aber Ihr seid nicht mein Typ." />
+    <string id="Dramalord331" text="Schon wieder? Bitte lasst mich ein wenig ausruhen..." />
   </strings>
 </base>

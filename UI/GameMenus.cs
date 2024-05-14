@@ -26,7 +26,7 @@ namespace Dramalord.UI
 
         internal static bool ConditionOrphanageAvailable(MenuCallbackArgs args)
         {
-            args.IsEnabled = Hero.MainHero.Spouse != null && CampaignTime.Now.ToDays - Info.GetLastAdoption(Hero.MainHero, Hero.MainHero.Spouse) > DramalordMCM.Get.WaitBetweenAdopting && Info.GetOrphanCount() > 0;
+            args.IsEnabled = Hero.MainHero.Spouse != null && Info.ValidateHeroMemory(Hero.MainHero, Hero.MainHero.Spouse) && CampaignTime.Now.ToDays - Info.GetLastAdoption(Hero.MainHero, Hero.MainHero.Spouse) > DramalordMCM.Get.WaitBetweenAdopting && Info.GetOrphanCount() > 0;
             args.Tooltip = new TextObject("Visit the orphanage to adopt a child", null);
             if (Hero.MainHero.Spouse == null)
                 return MenuHelper.SetOptionProperties(args, false, true, new TextObject("You have to be married in order to adopt a child"));

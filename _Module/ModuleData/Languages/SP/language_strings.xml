@@ -323,5 +323,17 @@
     <string id="Dramalord317" text="Rompiste con {HERO.LINK}" />
     <string id="Dramalord318" text="Te divorciaste de {HERO.LINK}." />
     <string id="Dramalord319" text="Has desterrado a {HERO.LINK} de tu clan." />
+    <string id="Dramalord320" text="¿Puedes quedar embarazada actualmente?" />
+    <string id="Dramalord321" text="¿Sientes esta... picazón especial?" />
+    <string id="Dramalord322" text="¿Qué te parece cómo me veo?" />
+    <string id="Dramalord323" text="Hmm... ¡Creo que te ves {RATING_TOTAL}!" />
+    <string id="Dramalord324" text="Actualmente soy fértil, mi período comienza en {PERIOD_DAYS} días." />
+    <string id="Dramalord325" text="Tengo mi período, por lo que no seré fértil durante los próximos {PERIOD_DAYS} días." />
+    <string id="Dramalord326" text="Me temo que soy demasiado mayor para ser fértil." />
+    <string id="Dramalord327" text="Qué pregunta más tonta... Soy un hombre." />
+    <string id="Dramalord328" text="Hmm... sí... Me encantaría que alguien me rascara la picazón..." />
+    <string id="Dramalord329" text="No, realmente no. Actualmente no estoy de humor." />
+    <string id="Dramalord330" text="Lo siento, pero no eres mi tipo." />
+    <string id="Dramalord331" text="¿Otra vez? Por favor, déjame descansar un poco..." />
   </strings>
 </base>

@@ -38,7 +38,7 @@ namespace Dramalord.Actions
                     {
                         TextObject banner = new TextObject("{=Dramalord141}You were intimate with {HERO.LINK}.");
                         StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
-                        MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                        MBInformationManager.AddQuickInformation(banner, 1000, otherHero.CharacterObject, "event:/ui/notification/relation");
                     }
 
                 }

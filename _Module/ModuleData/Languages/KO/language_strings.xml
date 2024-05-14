@@ -323,5 +323,17 @@
     <string id="Dramalord317" text="{HERO.LINK}님과 헤어졌습니다" />
     <string id="Dramalord318" text="{HERO.LINK}님과 이혼하셨습니다." />
     <string id="Dramalord319" text="귀하의 클랜에서 {HERO.LINK}님을 추방하셨습니다." />
+    <string id="Dramalord320" text="현재 임신할 수 있나요?" />
+    <string id="Dramalord321" text="이런... 특별한 가려움증을 느끼시나요?" />
+    <string id="Dramalord322" text="내 모습이 마음에 드시나요?" />
+    <string id="Dramalord323" text="흠... 내 생각에 당신은 {RATING_TOTAL}처럼 보이는군요!" />
+    <string id="Dramalord324" text="현재 임신 가능성이 있습니다. 생리는 {PERIOD_DAYS}일 후에 시작됩니다." />
+    <string id="Dramalord325" text="생리 예정이므로 앞으로 {PERIOD_DAYS}일 동안 임신이 불가능합니다." />
+    <string id="Dramalord326" text="나이가 너무 많아서 임신을 할 수 없을 것 같아요." />
+    <string id="Dramalord327" text="정말 어리석은 질문이네요... 저는 남자입니다." />
+    <string id="Dramalord328" text="흠... 네... 누군가가 가려운 곳을 긁어주면 좋겠습니다..." />
+    <string id="Dramalord329" text="아니요, 별로요. 지금은 기분이 안 좋아요." />
+    <string id="Dramalord330" text="죄송하지만 당신은 내 타입이 아니네요." />
+    <string id="Dramalord331" text="또요? 좀 쉬게 해주세요..." />
   </strings>
 </base>

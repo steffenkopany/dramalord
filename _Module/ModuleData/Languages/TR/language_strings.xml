@@ -323,5 +323,17 @@
     <string id="Dramalord317" text="{HERO.LINK}'dan ayrıldınız" />
     <string id="Dramalord318" text="{HERO.LINK}'dan boşandınız." />
     <string id="Dramalord319" text="{HERO.LINK}'ı klandan uzaklaştırdınız." />
+    <string id="Dramalord320" text="Şu anda hamile kalabilir misiniz?" />
+    <string id="Dramalord321" text="Bu... özel kaşıntıyı hissediyor musun?" />
+    <string id="Dramalord322" text="Görünüş tarzımı beğendin mi?" />
+    <string id="Dramalord323" text="Hımm... Sanırım {RATING_TOTAL} görünüyorsun!" />
+    <string id="Dramalord324" text="Şu anda doğurganım, adetim {PERIOD_DAYS} gün içinde başlayacak." />
+    <string id="Dramalord325" text="Adet dönemim olduğu için önümüzdeki {PERIOD_DAYS} gün boyunca doğurgan değilim." />
+    <string id="Dramalord326" text="Korkarım doğurgan olamayacak kadar yaşlıyım." />
+    <string id="Dramalord327" text="Ne kadar aptalca bir soru... Ben bir erkeğim." />
+    <string id="Dramalord328" text="Hımm... evet... Birisi kaşıntımı kaşırsa çok sevinirim..." />
+    <string id="Dramalord329" text="Hayır, pek sayılmaz. Şu anda havamda değilim." />
+    <string id="Dramalord330" text="Üzgünüm ama tipim değilsin." />
+    <string id="Dramalord331" text="Yine mi? Lütfen biraz dinlenmeme izin verin..." />
   </strings>
 </base>

@@ -1,4 +1,5 @@
-﻿using Dramalord.Data;
+﻿using Dramalord.Conversations;
+using Dramalord.Data;
 using Dramalord.UI;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,13 @@ namespace Dramalord.Behaviors
     {
         internal DramalordCampaignBehavior(CampaignGameStarter starter)
         {
-            Conversations.AddDialogs(starter);
             Persuasions.AddDialogs(starter);
+            IntimateQuestions.AddDialogs(starter);
+            PlayerRequests.AddDialogs(starter);
+            PlayerInteractions.AddDialogs(starter);
+            NpcInteractions.AddDialogs(starter);
+            PlayerConfrontation.AddDialogs(starter);
+            QuestInteractions.AddDialogs(starter);
         }
 
         public override void RegisterEvents()

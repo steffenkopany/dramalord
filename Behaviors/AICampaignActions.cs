@@ -1,4 +1,5 @@
 ﻿using Dramalord.Actions;
+using Dramalord.Conversations;
 using Dramalord.Data;
 using Dramalord.Quests;
 using Dramalord.UI;
@@ -78,9 +79,9 @@ namespace Dramalord.Behaviors
                                                 text,
                                                 false,
                                                 () => {
-                                                    Conditions.CheatingHero = hero;
-                                                    Conditions.WitnessOf = WitnessType.Bastard;
-                                                    Conditions.LoverOrChild = hero;
+                                                    PlayerConfrontation.CheatingHero = hero;
+                                                    PlayerConfrontation.WitnessOf = WitnessType.Bastard;
+                                                    PlayerConfrontation.LoverOrChild = hero;
                                                     CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(hero.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
                                                 },
                                                 () => {
@@ -150,7 +151,7 @@ namespace Dramalord.Behaviors
                     if (wantsFlirt || wantsDate || wantsToMarry || wantsToBreakUp || wantsToDivorce)
                     {
                         Campaign.Current.SetTimeSpeed(0);
-                        Conditions.ApproachingHero = hero;
+                        NpcInteractions.ApproachingHero = hero;
                         CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(hero.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
                         return;
                     }
@@ -306,10 +307,10 @@ namespace Dramalord.Behaviors
                                     text,
                                     false,
                                     () => {
-                                        
-                                        Conditions.CheatingHero = target;
-                                        Conditions.WitnessOf = WitnessType.Pregnancy;
-                                        Conditions.LoverOrChild = target;
+
+                                        PlayerConfrontation.CheatingHero = target;
+                                        PlayerConfrontation.WitnessOf = WitnessType.Pregnancy;
+                                        PlayerConfrontation.LoverOrChild = target;
                                         CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(target.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
                                     },
                                     () => {
@@ -369,10 +370,10 @@ namespace Dramalord.Behaviors
                                     text,
                                     false,
                                     () => {
-                                        
-                                        Conditions.CheatingHero = hero;
-                                        Conditions.WitnessOf = WitnessType.Pregnancy;
-                                        Conditions.LoverOrChild = hero;
+
+                                        PlayerConfrontation.CheatingHero = hero;
+                                        PlayerConfrontation.WitnessOf = WitnessType.Pregnancy;
+                                        PlayerConfrontation.LoverOrChild = hero;
                                         CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(hero.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
                                     },
                                     () => {
@@ -465,10 +466,10 @@ namespace Dramalord.Behaviors
                                         text,
                                         false,
                                         () => {
-                                            
-                                            Conditions.CheatingHero = hero;
-                                            Conditions.WitnessOf = WitnessType.Dating;
-                                            Conditions.LoverOrChild = target;
+
+                                            PlayerConfrontation.CheatingHero = hero;
+                                            PlayerConfrontation.WitnessOf = WitnessType.Dating;
+                                            PlayerConfrontation.LoverOrChild = target;
                                             CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(hero.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
                                         },
                                         () => {
@@ -516,10 +517,10 @@ namespace Dramalord.Behaviors
                                 text,
                                 false,
                                 () => {
-                                    
-                                    Conditions.CheatingHero = hero;
-                                    Conditions.WitnessOf = WitnessType.Intercourse;
-                                    Conditions.LoverOrChild = target;
+
+                                    PlayerConfrontation.CheatingHero = hero;
+                                    PlayerConfrontation.WitnessOf = WitnessType.Intercourse;
+                                    PlayerConfrontation.LoverOrChild = target;
                                     CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(hero.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
                                 },
                                 () => {

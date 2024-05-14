@@ -324,5 +324,17 @@
     <string id="Dramalord317" text="Você terminou com {HERO.LINK}" />
     <string id="Dramalord318" text="Você se divorciou de {HERO.LINK}." />
     <string id="Dramalord319" text="Você baniu {HERO.LINK} do seu clã." />
+    <string id="Dramalord320" text="Você pode engravidar atualmente?" />
+    <string id="Dramalord321" text="Você sente essa... coceira especial?" />
+    <string id="Dramalord322" text="Você gosta da minha aparência?" />
+    <string id="Dramalord323" text="Hmm... Acho que você parece {RATING_TOTAL}!" />
+    <string id="Dramalord324" text="Atualmente estou fértil, minha menstruação começa em {PERIOD_DAYS} dias." />
+    <string id="Dramalord325" text="Estou menstruada, então não estarei fértil nos próximos {PERIOD_DAYS} dias." />
+    <string id="Dramalord326" text="Receio que esteja velho demais para ser fértil." />
+    <string id="Dramalord327" text="Que pergunta boba... eu sou um homem." />
+    <string id="Dramalord328" text="Hmm... sim... eu adoraria se alguém coçasse minha coceira..." />
+    <string id="Dramalord329" text="Não, na verdade não. No momento não estou com disposição." />
+    <string id="Dramalord330" text="Sinto muito, mas você não faz meu tipo." />
+    <string id="Dramalord331" text="De novo? Por favor, deixe-me descansar um pouco..." />
   </strings>
 </base>

@@ -749,12 +749,12 @@ namespace Dramalord
         }
     }
 
-    public class EncyclopediaLogKilledSuizide : LogEntry, IEncyclopediaLog, IChatNotification
+    public class EncyclopediaLogKilledSuicide : LogEntry, IEncyclopediaLog, IChatNotification
     {
         [SaveableField(26054)]
         public readonly Hero Hero;
 
-        public EncyclopediaLogKilledSuizide(Hero victim)
+        public EncyclopediaLogKilledSuicide(Hero victim)
         {
             Hero = victim;
         }
@@ -764,7 +764,7 @@ namespace Dramalord
 
         public TextObject GetEncyclopediaText()
         {
-            TextObject textObject = new TextObject("{=Dramalord238}{HERO.LINK} commited suizide.");
+            TextObject textObject = new TextObject("{=Dramalord238}{HERO.LINK} commited suicide.");
             StringHelpers.SetCharacterProperties("HERO", Hero.CharacterObject, textObject);
             return textObject;
         }

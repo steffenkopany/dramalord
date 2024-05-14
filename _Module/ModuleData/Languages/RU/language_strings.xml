@@ -323,5 +323,17 @@
     <string id="Dramalord317" text="Вы расстались с {HERO.LINK}" />
     <string id="Dramalord318" text="Вы развелись с {HERO.LINK}." />
     <string id="Dramalord319" text="Вы исключили {HERO.LINK} из своего клана." />
+    <string id="Dramalord320" text="Можете ли вы сейчас забеременеть?" />
+    <string id="Dramalord321" text="Вы чувствуете этот... особый зуд?" />
+    <string id="Dramalord322" text="Как вам, как я выгляжу?" />
+    <string id="Dramalord323" text="Хм... Мне кажется, ты выглядишь на {RATING_TOTAL}!" />
+    <string id="Dramalord324" text="В настоящее время я фертильна, менструация начнется через {PERIOD_DAYS} дн." />
+    <string id="Dramalord325" text="У меня месячные, поэтому я не смогу зачать ребенка в ближайшие {PERIOD_DAYS} дней." />
+    <string id="Dramalord326" text="Боюсь, я слишком стар, чтобы быть плодородным." />
+    <string id="Dramalord327" text="Какой глупый вопрос... Я мужчина." />
+    <string id="Dramalord328" text="Хм... да... Мне бы очень хотелось, если бы кто-нибудь почесал мой зуд..." />
+    <string id="Dramalord329" text="Нет, не совсем. Я сейчас не в настроении." />
+    <string id="Dramalord330" text="Извини, но ты не в моем вкусе." />
+    <string id="Dramalord331" text="Опять? Пожалуйста, дайте мне немного отдохнуть..." />
   </strings>
 </base>

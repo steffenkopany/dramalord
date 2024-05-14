@@ -241,7 +241,7 @@
     <string id="Dramalord235" text="{CLAN} left {KINGDOM}." />
     <string id="Dramalord236" text="{HERO.LINK} banished {CLAN} from {KINGDOM}." />
     <string id="Dramalord237" text="{CLAN} joined {KINGDOM}." />
-    <string id="Dramalord238" text="{HERO.LINK} commited suizide." />
+    <string id="Dramalord238" text="{HERO.LINK} commited suicide." />
     <string id="Dramalord239" text="Kingdom Changes Logs" />
     <string id="Dramalord240" text="Show kingdom related events in logs" />
     <string id="Dramalord241" text="Wanderer AI interaction" />
@@ -323,5 +323,17 @@
     <string id="Dramalord317" text="You broke up with {HERO.LINK}" />
     <string id="Dramalord318" text="You divorced from {HERO.LINK}." />
     <string id="Dramalord319" text="You banished {HERO.LINK} from your clan." />
+    <string id="Dramalord320" text="Can you currently get pregnant?" />
+    <string id="Dramalord321" text="Do you feel this... special itch?" />
+    <string id="Dramalord322" text="How do you like the way I look?" />
+    <string id="Dramalord323" text="Hmm... I think you look {RATING_TOTAL}!" />
+    <string id="Dramalord324" text="I am currently fertile, my period starts in {PERIOD_DAYS} days." />
+    <string id="Dramalord325" text="I have my period, so I am not fertile for the next {PERIOD_DAYS} days." />
+    <string id="Dramalord326" text="I'm afraid I'm too old to be fertile." />
+    <string id="Dramalord327" text="What a silly question... I am a man." />
+    <string id="Dramalord328" text="Hmm... yes... I'd love it if someone would scratch my itch..." />
+    <string id="Dramalord329" text="No, not really. I'm currently not in the mood." />
+    <string id="Dramalord330" text="I'm sorry, but you're not my type." />
+    <string id="Dramalord331" text="Again? Please, let me rest a little..." />
   </strings>
 </base>

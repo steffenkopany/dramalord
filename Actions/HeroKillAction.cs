@@ -49,7 +49,7 @@ namespace Dramalord.Actions
                 KillCharacterAction.ApplyByMurder(victim, victim, false);
                 if (DramalordMCM.Get.DeathOutput)
                 {
-                    LogEntry.AddLogEntry(new EncyclopediaLogKilledSuizide(victim));
+                    LogEntry.AddLogEntry(new EncyclopediaLogKilledSuicide(victim));
                 }
             }
 

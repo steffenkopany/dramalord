@@ -71,7 +71,11 @@ namespace Dramalord.Data
         internal static bool CanGetPregnant(Hero hero)
         {
             HeroInfoData info = HeroInfo[hero];
-            if (hero.IsFemale && hero.Age <= DramalordMCM.Get.MaxFertilityAge && (info.PeriodDayOfSeason > CampaignTime.Now.GetDayOfSeason || info.PeriodDayOfSeason + DramalordMCM.Get.PeriodDuration < CampaignTime.Now.GetDayOfSeason))
+            int daysInSeason = CampaignTime.DaysInSeason;
+            int today = (int)CampaignTime.Now.GetDayOfSeason;
+            bool inPeriod = (today > info.PeriodDayOfSeason && today < info.PeriodDayOfSeason + DramalordMCM.Get.PeriodDuration) || (today < info.PeriodDayOfSeason && today < (info.PeriodDayOfSeason + DramalordMCM.Get.PeriodDuration) % daysInSeason);
+
+            if (hero.IsFemale && hero.Age <= DramalordMCM.Get.MaxFertilityAge && !inPeriod)
             {
                 return true;
             }
@@ -477,10 +481,11 @@ namespace Dramalord.Data
                 int attraction = Info.GetAttractionToHero(hero, target);
                 bool isCouple = memory.IsCouple;
                 bool isInArmy = hero.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null;
+                bool isInArmy2 = target.PartyBelongedTo != null && target.PartyBelongedTo.Army != null;
 
                 wantsFlirt = attraction >= DramalordMCM.Get.MinAttractionForFlirting && !isCouple && emotion > DramalordMCM.Get.MinEmotionForConversation && emotion < DramalordMCM.Get.MinEmotionForDating && CampaignTime.Now.ToDays - memory.LastMet > 1;
                 wantsDate = (isCouple || emotion >= DramalordMCM.Get.MinEmotionForDating) && emotion >= DramalordMCM.Get.MinEmotionBeforeDivorce && CampaignTime.Now.ToDays - memory.LastDate >= DramalordMCM.Get.DaysBetweenDates && (emotion < DramalordMCM.Get.MinEmotionForMarriage || isInArmy);
-                wantsToMarry = isCouple && hero.Spouse != target && emotion >= DramalordMCM.Get.MinEmotionForMarriage && !isInArmy && DramalordMCM.Get.AllowMarriages;
+                wantsToMarry = isCouple && hero.Spouse != target && emotion >= DramalordMCM.Get.MinEmotionForMarriage && !isInArmy && !isInArmy2 && DramalordMCM.Get.AllowMarriages;
                 wantsToDivorce = hero.Spouse == target && emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && DramalordMCM.Get.AllowDivorces;
                 wantsToBreakUp = hero.Spouse != target && emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && isCouple;
                 return;
