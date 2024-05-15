@@ -35,7 +35,7 @@ namespace Dramalord.Behaviors
 
         internal static void PlayerFlirtAction(Hero npc)
         {
-            HeroFlirtAction.Apply(npc, Hero.MainHero);
+            HeroFlirtAction.Apply(Hero.MainHero, npc);
 
             List<Hero> flirts = new();
             List<Hero> partners = new();
@@ -124,7 +124,7 @@ namespace Dramalord.Behaviors
                 Hero mother = Hero.MainHero.IsFemale ? Hero.MainHero : npc;
                 Hero father = npc.IsFemale ? Hero.MainHero : npc;
 
-                if (mother != father && !mother.IsPregnant && Info.CanGetPregnant(mother) && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
+                if (mother != father && !mother.IsPregnant && Info.IsHeroFertile(mother) && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
                 {
                     HeroConceiveAction.Apply(Hero.MainHero, npc, true);
                 }

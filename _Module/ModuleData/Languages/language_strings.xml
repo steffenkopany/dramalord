@@ -335,5 +335,7 @@
     <string id="Dramalord329" text="No, not really. I'm currently not in the mood." />
     <string id="Dramalord330" text="I'm sorry, but you're not my type." />
     <string id="Dramalord331" text="Again? Please, let me rest a little..." />
+    <string id="Dramalord332" text="Fertile:" />
+    <string id="Dramalord333" text="I'm already pregnant, silly!" />
   </strings>
 </base>

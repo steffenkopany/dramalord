@@ -335,5 +335,7 @@
     <string id="Dramalord329" text="Hayır, pek sayılmaz. Şu anda havamda değilim." />
     <string id="Dramalord330" text="Üzgünüm ama tipim değilsin." />
     <string id="Dramalord331" text="Yine mi? Lütfen biraz dinlenmeme izin verin..." />
+    <string id="Dramalord332" text="Verimli:" />
+    <string id="Dramalord333" text="Zaten hamileyim, aptal!" />
   </strings>
 </base>

@@ -63,8 +63,9 @@ namespace Dramalord.Actions
             hero.SetNewOccupation(Occupation.Wanderer);
             hero.UpdateHomeSettlement();
             CampaignEventDispatcher.Instance.OnHeroChangedClan(hero, oldClan);
+            TeleportHeroAction.ApplyImmediateTeleportToSettlement(hero, hero.HomeSettlement);
 
-            if(hero != causedBy && causedBy == Hero.MainHero)
+            if (hero != causedBy && causedBy == Hero.MainHero)
             {
                 TextObject textObject = new TextObject("{=Dramalord319}You banished {HERO.LINK} from your clan.");
                 StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);

@@ -27,11 +27,13 @@ namespace Dramalord.Patches
                 TextObject horny = new TextObject("{=Dramalord231}Horny:");
                 TextObject hastoy = new TextObject("{=Dramalord232}Has Toy:");
                 TextObject traitscore = new TextObject("{=Dramalord233}Trait Score:");
+                TextObject fertile = new TextObject("{=Dramalord332}Fertile:");
                 __instance.Stats.Add(new StringPairItemVM(attraction.ToString(), __instance.IsInformationHidden ? text : Info.GetAttractionToHero(hero, Hero.MainHero).ToString()));
                 __instance.Stats.Add(new StringPairItemVM(emotion.ToString(), __instance.IsInformationHidden ? text : Info.GetEmotionToHero(hero, Hero.MainHero).ToString()));
-                __instance.Stats.Add(new StringPairItemVM(traitscore.ToString(), __instance.IsInformationHidden ? text : Info.GetTraitscoreToHero(hero, Hero.MainHero).ToString()));
+                __instance.Stats.Add(new StringPairItemVM(traitscore.ToString(), __instance.IsInformationHidden ? text : Info.GetTraitscoreToHero(Hero.MainHero, hero).ToString()));
                 __instance.Stats.Add(new StringPairItemVM(horny.ToString(), __instance.IsInformationHidden ? text : Info.GetHeroHorny(hero).ToString()));
                 __instance.Stats.Add(new StringPairItemVM(hastoy.ToString(), __instance.IsInformationHidden ? text : (Info.GetHeroHasToy(hero)) ? yes : no));
+                __instance.Stats.Add(new StringPairItemVM(fertile.ToString(), __instance.IsInformationHidden ? text : (Info.IsHeroFertile(hero)) ? yes : no));
             }  
         }
     }

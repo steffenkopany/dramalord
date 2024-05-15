@@ -65,15 +65,27 @@ namespace Dramalord.Data
 
         internal static void ChangeIntercourseSkillBy(Hero hero, float value)
         {
-            HeroInfo[hero].IntercourseSkill = MBMath.ClampFloat(HeroInfo[hero].IntercourseSkill + value, 0, 100);
+            HeroInfo[hero].IntercourseSkill = MBMath.ClampFloat(HeroInfo[hero].IntercourseSkill + value, 0, 10);
         }
 
-        internal static bool CanGetPregnant(Hero hero)
+        internal static bool IsHeroFertile(Hero hero)
         {
+            if(!hero.IsFemale)
+            {
+                return true;
+            }
+            else if(hero.IsPregnant)
+            {
+                return false;
+            }
+
             HeroInfoData info = HeroInfo[hero];
-            int daysInSeason = CampaignTime.DaysInSeason;
             int today = (int)CampaignTime.Now.GetDayOfSeason;
-            bool inPeriod = (today > info.PeriodDayOfSeason && today < info.PeriodDayOfSeason + DramalordMCM.Get.PeriodDuration) || (today < info.PeriodDayOfSeason && today < (info.PeriodDayOfSeason + DramalordMCM.Get.PeriodDuration) % daysInSeason);
+            int nextToday = today + CampaignTime.DaysInSeason;
+            int startPeriod = (int)info.PeriodDayOfSeason;
+            int endPeriod = startPeriod + DramalordMCM.Get.PeriodDuration;
+
+            bool inPeriod = (today >= startPeriod && today <= endPeriod) || (nextToday >= startPeriod && nextToday <= endPeriod);
 
             if (hero.IsFemale && hero.Age <= DramalordMCM.Get.MaxFertilityAge && !inPeriod)
             {
@@ -165,6 +177,7 @@ namespace Dramalord.Data
             rating -= Math.Abs((heroData.AttractionWeight - target.BodyProperties.Weight) * 10);
             rating -= Math.Abs((heroData.AttractionBuild - target.BodyProperties.Build) * 10);
             rating -= Math.Abs(MBMath.ClampFloat(heroData.AttractionAgeDiff + hero.Age, 18, 130) - target.Age);
+            rating += (target == Hero.MainHero) ? GetEmotionToHero(hero, target) / 4 : 0;
 
             return MBMath.ClampInt((int)rating, 0, 100);
         }
@@ -335,16 +348,6 @@ namespace Dramalord.Data
             }
 
             int score = 0;
-            /*
-            score += (heroTraits.Mercy < 0 && targetTraits.Mercy < 0) || (heroTraits.Mercy > 0 && targetTraits.Mercy > 0 || (heroTraits.Mercy == targetTraits.Mercy)) ? 1 : 0;
-            score += (heroTraits.Mercy < 0 && targetTraits.Mercy > 0) || (heroTraits.Mercy > 0 && targetTraits.Mercy < 0) ? -1 : 0;
-            score += (heroTraits.Generosity < 0 && targetTraits.Generosity < 0) || (heroTraits.Generosity > 0 && targetTraits.Generosity > 0 || (heroTraits.Generosity == targetTraits.Generosity)) ? 1 : 0;
-            score += (heroTraits.Generosity < 0 && targetTraits.Generosity > 0) || (heroTraits.Generosity > 0 && targetTraits.Generosity < 0) ? -1 : 0;
-            score += (heroTraits.Honor < 0 && targetTraits.Honor < 0) || (heroTraits.Honor > 0 && targetTraits.Honor > 0 || (heroTraits.Honor == targetTraits.Honor)) ? 1 : 0;
-            score += (heroTraits.Honor < 0 && targetTraits.Honor > 0) || (heroTraits.Honor > 0 && targetTraits.Honor < 0) ? -1 : 0;
-            score += (heroTraits.Valor < 0 && targetTraits.Valor < 0) || (heroTraits.Valor > 0 && targetTraits.Valor > 0 || (heroTraits.Valor == targetTraits.Valor)) ? 1 : 0;
-            score += (heroTraits.Valor < 0 && targetTraits.Valor > 0) || (heroTraits.Valor > 0 && targetTraits.Valor < 0) ? -1 : 0;
-            */
 
             score += ((heroTraits.Mercy > 0 && targetTraits.Mercy > 0) || (heroTraits.Mercy < 0 && targetTraits.Mercy < 0)) ? 1 : 0;
             score += ((heroTraits.Mercy < 0 && targetTraits.Mercy > 0) || (heroTraits.Mercy > 0 && targetTraits.Mercy < 0)) ? -1 : 0;
@@ -356,7 +359,10 @@ namespace Dramalord.Data
             score += ((heroTraits.Valor < 0 && targetTraits.Valor > 0) || (heroTraits.Valor > 0 && targetTraits.Valor < 0)) ? -1 : 0;
             score += ((heroTraits.Calculating > 0 && targetTraits.Calculating > 0) || (heroTraits.Calculating < 0 && targetTraits.Calculating < 0)) ? 1 : 0;
             score += ((heroTraits.Calculating < 0 && targetTraits.Calculating > 0) || (heroTraits.Calculating > 0 && targetTraits.Calculating < 0)) ? -1 : 0;
-            //score += hero.GetSkillValue(DefaultSkills.Charm) / 100;
+            if(hero == Hero.MainHero)
+            {
+                score += (hero.GetSkillValue(DefaultSkills.Charm) / 20);
+            }
             return score * DramalordMCM.Get.TraitScoreMultiplyer;
         }
 

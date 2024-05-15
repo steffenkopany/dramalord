@@ -32,7 +32,7 @@ namespace Dramalord.Actions
                     {
                         TextObject banner = new TextObject("{=Dramalord140}{HERO.LINK} violated you while being their prisoner.");
                         StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
-                        MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                        MBInformationManager.AddQuickInformation(banner, 1000, otherHero.CharacterObject, "event:/ui/notification/relation");
                     }
                     else
                     {

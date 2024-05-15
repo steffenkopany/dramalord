@@ -212,7 +212,7 @@ namespace Dramalord.Behaviors
                             Hero mother = hero.IsFemale ? hero : victim;
                             Hero father = victim.IsFemale ? hero : victim;
 
-                            if (mother != father && !mother.IsPregnant && Info.CanGetPregnant(mother) && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
+                            if (mother != father && !mother.IsPregnant && Info.IsHeroFertile(mother) && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
                             {
                                 HeroConceiveAction.Apply(hero, victim, true);
                             }
@@ -492,7 +492,7 @@ namespace Dramalord.Behaviors
             Hero mother = hero.IsFemale ? hero : target;
             Hero father = target.IsFemale ? hero : target;
 
-            if (mother != father && !mother.IsPregnant && Info.CanGetPregnant(mother) && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
+            if (mother != father && !mother.IsPregnant && Info.IsHeroFertile(mother) && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
             {
                 HeroConceiveAction.Apply(hero, target, false);
             }
@@ -604,7 +604,7 @@ namespace Dramalord.Behaviors
                             bool clanCheck = h.Clan != Clan.PlayerClan || DramalordMCM.Get.AllowPlayerClanAI;
                             bool wandererCheck = h.Occupation != Occupation.Wanderer || DramalordMCM.Get.AllowWandererAI;
 
-                            if ((!isRelative || !noFamily) && clanCheck && wandererCheck)
+                            if ((!isRelative || !noFamily) && (hero.Spouse == h || clanCheck) && wandererCheck)
                             {
                                 if (!isCouple && attraction >= flirtLimit)
                                 {
@@ -638,7 +638,7 @@ namespace Dramalord.Behaviors
                                 bool clanCheck = h.Clan != Clan.PlayerClan || DramalordMCM.Get.AllowPlayerClanAI;
                                 bool wandererCheck = h.Occupation != Occupation.Wanderer || DramalordMCM.Get.AllowWandererAI;
 
-                                if ((!isRelative || !noFamily) && clanCheck && wandererCheck)
+                                if ((!isRelative || !noFamily) && (hero.Spouse == h || clanCheck) && wandererCheck)
                                 {
                                     if (!isCouple && attraction >= flirtLimit)
                                     {
@@ -677,7 +677,7 @@ namespace Dramalord.Behaviors
                                     bool clanCheck = h.Clan != Clan.PlayerClan || DramalordMCM.Get.AllowPlayerClanAI;
                                     bool wandererCheck = h.Occupation != Occupation.Wanderer || DramalordMCM.Get.AllowWandererAI;
 
-                                    if ((!isRelative || !noFamily) && clanCheck && wandererCheck)
+                                    if ((!isRelative || !noFamily) && (hero.Spouse == h || clanCheck) && wandererCheck)
                                     {
                                         if (!isCouple && attraction >= flirtLimit)
                                         {

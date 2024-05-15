@@ -30,7 +30,6 @@ namespace Dramalord.Quests
 
         public VisitLoverQuest(Hero questGiver) : base("DramalordVisitLoverQuest", questGiver, CampaignTime.DaysFromNow(7), 0)
         {
-            RelationshipChangeWithQuestGiver = Info.GetTraitscoreToHero(questGiver, Hero.MainHero) * 10;
             if(!IsTracked(questGiver))
             {
                 AddTrackedObject(questGiver);
