@@ -338,5 +338,49 @@
     <string id="Dramalord331" text="De novo? Por favor, deixe-me descansar um pouco..." />
     <string id="Dramalord332" text="Fértil:" />
     <string id="Dramalord333" text="Já estou grávida, bobo!" />
+    <string id="Dramalord334" text="Amante" />
+    <string id="Dramalord335" text="Amigo com benefícios" />
+    <string id="Dramalord336" text="Então você e {TARGET} se casaram pelas minhas costas?" />
+    <string id="Dramalord337" text="{TITLE}, preciso falar com você![if:convo_angry_voice]" />
+    <string id="Dramalord338" text="Eu vi você e {TARGET.LINK} com meus próprios olhos!" />
+    <string id="Dramalord339" text="Aprendi isso com {SOURCE.LINK}!" />
+    <string id="Dramalord340" text="Perda de tensão sexual" />
+    <string id="Dramalord341" text="Valor da tensão perdida pela relação sexual" />
+    <string id="Dramalord342" text="{WITNESS.LINK} viu {HERO1.LINK} e {HERO2.LINK} se casarem." />
+    <string id="Dramalord343" text="Registros de confronto" />
+    <string id="Dramalord344" text="Mostrar eventos de confronto nos registros" />
+    <string id="Dramalord345" text="Registros de fofoca" />
+    <string id="Dramalord346" text="Mostrar eventos de fofoca nos registros" />
+    <string id="Dramalord347" text="{HERO1.LINK} confessou a {HERO2.LINK} que teve um encontro com {HERO3.LINK}" />
+    <string id="Dramalord348" text="{HERO1.LINK} confessou a {HERO2.LINK} que teve relações sexuais com {HERO3.LINK}" />
+    <string id="Dramalord349" text="{HERO1.LINK} confessou a {HERO2.LINK} que eles se casaram com {HERO3.LINK}" />
+    <string id="Dramalord350" text="{HERO1.LINK} contou uma fofoca para {HERO2.LINK} sobre um encontro de {HERO2.LINK} e {HERO4.LINK}" />
+    <string id="Dramalord351" text="{HERO1.LINK} contou uma fofoca para {HERO2.LINK} sobre {HERO2.LINK} e {HERO4.LINK} tendo relações sexuais" />
+    <string id="Dramalord352" text="{HERO1.LINK} contou uma fofoca para {HERO2.LINK} sobre o casamento de {HERO3.LINK} e {HERO4.LINK}" />
+    <string id="Dramalord353" text="{HERO1.LINK} disse a {HERO2.LINK} que eles testemunharam um encontro de {HERO2.LINK} e {HERO4.LINK}" />
+    <string id="Dramalord354" text="{HERO1.LINK} disse a {HERO2.LINK} que eles testemunharam {HERO2.LINK} e {HERO4.LINK} tendo relações sexuais" />
+    <string id="Dramalord355" text="{HERO1.LINK} disse a {HERO2.LINK} que eles testemunharam o casamento de {HERO2.LINK} e {HERO4.LINK}" />
+    <string id="Dramalord356" text="Bem, da próxima vez me convide também. Poderíamos nos divertir juntos!" />
+    <string id="Dramalord357" text="Eu te perdôo... Mas nunca mais faça isso!" />
+    <string id="Dramalord358" text="Posso ver isso claramente!" />
+    <string id="Dramalord359" text="{HERO1.LINK} e {HERO2.LINK} começaram a ser amigos com benefícios" />
+    <string id="Dramalord360" text="Ativar gravidez padrão" />
+    <string id="Dramalord361" text="Permitir que gravidezes padrão do Bannerlord aconteçam" />
+    <string id="Dramalord362" text="Ativar casamentos padrão" />
+    <string id="Dramalord363" text="Permitir que casamentos padrão de Bannerlord aconteçam" />
+    <string id="Dramalord364" text="Mostrar amantes na Enciclopédia" />
+    <string id="Dramalord365" text="Mostrar amantes na Enciclopédia (seção Família)" />
+    <string id="Dramalord366" text="Mostrar amigos com benefícios na Enciclopédia" />
+    <string id="Dramalord367" text="Mostrar amigos com benefícios na Enciclopédia (seção Família)" />
+    <string id="Dramalord368" text="Duração da memória de data" />
+    <string id="Dramalord369" text="Tempo em dias que os heróis lembram dos eventos da data" />
+    <string id="Dramalord370" text="Duração da memória sexual" />
+    <string id="Dramalord371" text="Tempo em dias que os heróis se lembram dos eventos sexuais" />
+    <string id="Dramalord372" text="Duração da memória de nascimento" />
+    <string id="Dramalord373" text="Tempo em dias que os heróis lembram dos eventos do nascimento" />
+    <string id="Dramalord374" text="Duração da memória do casamento" />
+    <string id="Dramalord375" text="Tempo em dias que os heróis lembram dos eventos do casamento" />
+    <string id="Dramalord376" text="Nível mínimo de confiança" />
+    <string id="Dramalord377" text="É necessário um mínimo de confiança para fazer um herói confiar em outro" />
   </strings>
 </base>

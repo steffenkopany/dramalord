@@ -1,5 +1,6 @@
 ﻿using Dramalord.Behaviors;
 using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
@@ -47,15 +48,15 @@ namespace Dramalord.UI
             if (Hero.OneToOneConversationHero != null && Hero.MainHero != null)
             {
                 
-                PrintText("Attraction: " + Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.MainHero));
-                PrintText("Emotion: " + Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero));
-                PrintText("Trait score: " + Info.GetTraitscoreToHero(Hero.OneToOneConversationHero, Hero.MainHero));
-                PrintText("Horny: " + Info.GetHeroHorny(Hero.OneToOneConversationHero));
-                if(Hero.OneToOneConversationHero.Spouse != null && Info.ValidateHeroInfo(Hero.OneToOneConversationHero.Spouse) && Info.ValidateHeroMemory(Hero.OneToOneConversationHero,Hero.OneToOneConversationHero.Spouse))
+                PrintText("Attraction: " + Hero.OneToOneConversationHero.GetDramalordAttractionTo(Hero.MainHero));
+                PrintText("Emotion: " + Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion);
+                PrintText("Trait score: " + Hero.OneToOneConversationHero.GetDramalordTraitScore(Hero.MainHero));
+                PrintText("Horny: " + Hero.OneToOneConversationHero.GetDramalordTraits().Horny);
+                if(Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.Spouse.IsDramalordLegit())
                 {
                     PrintText("Married: " + Hero.OneToOneConversationHero.Spouse);
-                    PrintText(Hero.OneToOneConversationHero.Spouse + " attraction: " + Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.OneToOneConversationHero.Spouse));
-                    PrintText(Hero.OneToOneConversationHero.Spouse + " emotion: " + Info.GetEmotionToHero(Hero.OneToOneConversationHero, Hero.OneToOneConversationHero.Spouse));
+                    PrintText(Hero.OneToOneConversationHero.Spouse + " attraction: " + Hero.OneToOneConversationHero.GetDramalordAttractionTo(Hero.OneToOneConversationHero.Spouse));
+                    PrintText(Hero.OneToOneConversationHero.Spouse + " emotion: " + Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.OneToOneConversationHero.Spouse).Emotion);
                 }
                 else
                 {
@@ -66,7 +67,7 @@ namespace Dramalord.UI
 
         internal static void PrintPlayerAttraction()
         {
-            PrintText("Attracted to player: " + Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.MainHero));
+            PrintText("Attracted to player: " + Hero.OneToOneConversationHero.GetDramalordAttractionTo(Hero.MainHero));
         }
     }
 }

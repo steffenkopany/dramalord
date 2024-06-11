@@ -337,5 +337,49 @@
     <string id="Dramalord331" text="또요? 좀 쉬게 해주세요..." />
     <string id="Dramalord332" text="비옥함:" />
     <string id="Dramalord333" text="난 이미 임신했어, 바보야!" />
+    <string id="Dramalord334" text="연인" />
+    <string id="Dramalord335" text="혜택이 있는 친구" />
+    <string id="Dramalord336" text="그럼 당신과 {TARGET}님이 내 뒤에서 결혼했다는 겁니까?" />
+    <string id="Dramalord337" text="{TITLE}, 할 말이 있어요![if:convo_angry_voice]" />
+    <string id="Dramalord338" text="나는 당신과 {TARGET.LINK}을 내 눈으로 보았습니다!" />
+    <string id="Dramalord339" text="{SOURCE.LINK}에서 배웠어요!" />
+    <string id="Dramalord340" text="성관계 긴장감소" />
+    <string id="Dramalord341" text="성교로 인해 상실된 긴장감의 가치" />
+    <string id="Dramalord342" text="{WITNESS.LINK}가 {HERO1.LINK}과 {HERO2.LINK}이(가) 결혼하는 것을 보았습니다." />
+    <string id="Dramalord343" text="대결 기록" />
+    <string id="Dramalord344" text="로그에 대결 이벤트 표시" />
+    <string id="Dramalord345" text="가십 기록" />
+    <string id="Dramalord346" text="로그에 가십 이벤트 표시" />
+    <string id="Dramalord347" text="{HERO1.LINK}님이 {HERO2.LINK}님에게 {HERO3.LINK}님과 데이트를 했다고 고백했습니다." />
+    <string id="Dramalord348" text="{HERO1.LINK}가 {HERO2.LINK}에게 {HERO3.LINK}와 성관계를 가졌다고 고백했습니다." />
+    <string id="Dramalord349" text="{HERO1.LINK}이(가) {HERO2.LINK}에게 {HERO3.LINK}과(와) 결혼했다고 고백했습니다." />
+    <string id="Dramalord350" text="{HERO1.LINK}이(가) {HERO2.LINK}에게 {HERO2.LINK}와 {HERO4.LINK}의 데이트에 대한 소문을 전했습니다." />
+    <string id="Dramalord351" text="{HERO1.LINK}가 {HERO2.LINK}에게 {HERO2.LINK}와 {HERO4.LINK}가 성관계를 갖고 있다는 소문을 전했습니다." />
+    <string id="Dramalord352" text="{HERO1.LINK}가 {HERO2.LINK}에게 {HERO3.LINK}와 {HERO4.LINK}의 결혼에 대한 소문을 전했습니다." />
+    <string id="Dramalord353" text="{HERO1.LINK}가 {HERO2.LINK}에게 {HERO2.LINK}와 {HERO4.LINK}의 데이트를 목격했다고 말했습니다." />
+    <string id="Dramalord354" text="{HERO1.LINK}는 {HERO2.LINK}에게 {HERO2.LINK}와 {HERO4.LINK}가 성관계를 갖는 것을 목격했다고 말했습니다." />
+    <string id="Dramalord355" text="{HERO1.LINK}가 {HERO2.LINK}에게 {HERO2.LINK}와 {HERO4.LINK}의 결혼을 목격했다고 말했습니다." />
+    <string id="Dramalord356" text="그럼 다음에는 저도 초대해 주세요. 우리 같이 재미있게 놀 수 있겠네요!" />
+    <string id="Dramalord357" text="용서합니다... 하지만 다시는 그러지 마세요!" />
+    <string id="Dramalord358" text="확실히 보이네요!" />
+    <string id="Dramalord359" text="{HERO1.LINK}님과 {HERO2.LINK}님이 혜택을 받으며 친구가 되기 시작했습니다." />
+    <string id="Dramalord360" text="기본 임신 활성화" />
+    <string id="Dramalord361" text="기본 Bannerlord 임신 허용" />
+    <string id="Dramalord362" text="기본 결혼 활성화" />
+    <string id="Dramalord363" text="기본 Bannerlord 결혼을 허용합니다" />
+    <string id="Dramalord364" text="백과사전에 연인 표시" />
+    <string id="Dramalord365" text="백과사전에 연인 표시(가족 섹션)" />
+    <string id="Dramalord366" text="백과사전에서 친구에게 혜택 표시" />
+    <string id="Dramalord367" text="백과사전에서 친구에게 혜택 표시(가족 섹션)" />
+    <string id="Dramalord368" text="날짜 기억 기간" />
+    <string id="Dramalord369" text="영웅이 날짜 이벤트를 기억하는 시간(일)" />
+    <string id="Dramalord370" text="성교 기억 기간" />
+    <string id="Dramalord371" text="영웅이 성관계 사건을 기억하는 시간(일)" />
+    <string id="Dramalord372" text="출생기억 기간" />
+    <string id="Dramalord373" text="영웅이 출생 사건을 기억하는 시간(일)" />
+    <string id="Dramalord374" text="결혼 기억 기간" />
+    <string id="Dramalord375" text="영웅이 결혼 사건을 기억하는 시간(일)" />
+    <string id="Dramalord376" text="최소 신뢰 수준" />
+    <string id="Dramalord377" text="영웅이 다른 영웅을 신뢰하려면 최소한의 신뢰가 필요합니다." />
   </strings>
 </base>

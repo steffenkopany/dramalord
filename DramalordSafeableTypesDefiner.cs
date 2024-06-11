@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using Dramalord.Quests;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
@@ -6,6 +7,7 @@ using TaleWorlds.SaveSystem;
 
 namespace Dramalord
 {
+    /*
     internal class DramalordSafeableTypesDefiner : SaveableTypeDefiner
     {
         public DramalordSafeableTypesDefiner() : base(26051980)
@@ -51,8 +53,8 @@ namespace Dramalord
             ConstructContainerDefinition(typeof(Dictionary<Hero, HeroInfoData>));
             ConstructContainerDefinition(typeof(Dictionary<HeroTuple, HeroMemoryData>));
             ConstructContainerDefinition(typeof(Dictionary<Hero, HeroOffspringData>));
-            ConstructContainerDefinition(typeof(List<Hero>));
             ConstructContainerDefinition(typeof(Dictionary<Hero, VisitLoverQuest>));
         }
     }
+    */
 }

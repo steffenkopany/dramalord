@@ -23,7 +23,7 @@ namespace Dramalord.Actions
             {
                 LogEntry.AddLogEntry(new EncyclopediaLogClanJoinedKingdom(clan, kingdom));
             }
-            DramalordEvents.OnClanJoinedKingdom(clan, kingdom);
+            DramalordEventCallbacks.OnClanJoinedKingdom(clan, kingdom);
         }
     }  
 }

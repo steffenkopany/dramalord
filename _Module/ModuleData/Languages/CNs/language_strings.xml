@@ -337,5 +337,49 @@
     <string id="Dramalord331" text="再来一次？请让我休息一下..." />
     <string id="Dramalord332" text="肥沃：" />
     <string id="Dramalord333" text="我已经怀孕了，傻瓜！" />
+    <string id="Dramalord334" text="情人" />
+    <string id="Dramalord335" text="炮友" />
+    <string id="Dramalord336" text="所以你和 {TARGET} 背着我结​​婚了？" />
+    <string id="Dramalord337" text="{TITLE}，我必须跟你谈谈！[if:convo_angry_voice]" />
+    <string id="Dramalord338" text="我亲眼看到你和 {TARGET.LINK}！" />
+    <string id="Dramalord339" text="我从 {SOURCE.LINK} 那里知道的！" />
+    <string id="Dramalord340" text="性交紧张感消失" />
+    <string id="Dramalord341" text="性交紧张感消失值" />
+    <string id="Dramalord342" text="{WITNESS.LINK} 看到 {HERO1.LINK} 和 {HERO2.LINK} 结婚了。" />
+    <string id="Dramalord343" text="对峙日志" />
+    <string id="Dramalord344" text="在日志中显示对峙事件" />
+    <string id="Dramalord345" text="八卦日志" />
+    <string id="Dramalord346" text="在日志中显示八卦事件" />
+    <string id="Dramalord347" text="{HERO1.LINK} 向 {HERO2.LINK} 坦白，他们与 {HERO3.LINK} 约会过" />
+    <string id="Dramalord348" text="{HERO1.LINK} 向 {HERO2.LINK} 坦白，他们与 {HERO3.LINK} 发生过性关系" />
+    <string id="Dramalord349" text="{HERO1.LINK} 向 {HERO2.LINK} 坦白，他们与 {HERO3.LINK} 结婚了" />
+    <string id="Dramalord350" text="{HERO1.LINK} 向 {HERO2.LINK} 透露了关于 {HERO2.LINK} 和 {HERO4.LINK} 约会的八卦" />
+    <string id="Dramalord351" text="{HERO1.LINK} 向 {HERO2.LINK} 透露了关于 {HERO2.LINK} 和 {HERO4.LINK} 性交的八卦" />
+    <string id="Dramalord352" text="{HERO1.LINK} 向 {HERO2.LINK} 透露了关于 {HERO3.LINK} 和 {HERO4.LINK} 结婚的八卦" />
+    <string id="Dramalord353" text="{HERO1.LINK} 告诉 {HERO2.LINK} 他们目睹了 {HERO2.LINK} 和 {HERO4.LINK} 约会" />
+    <string id="Dramalord354" text="{HERO1.LINK} 告诉{HERO2.LINK} 告诉 {HERO2.LINK} 他们目睹了 {HERO2.LINK} 和 {HERO4.LINK} 发生性关系" />
+    <string id="Dramalord355" text="{HERO1.LINK} 告诉 {HERO2.LINK} 他们目睹了 {HERO2.LINK} 和 {HERO4.LINK} 的婚礼" />
+    <string id="Dramalord356" text="好吧，下次也邀请我。我们可以一起玩得开心！" />
+    <string id="Dramalord357" text="我原谅你……但再也不会这样做了！" />
+    <string id="Dramalord358" text="我看得很清楚！" />
+    <string id="Dramalord359" text="{HERO1.LINK} 和 {HERO2.LINK} 开始成为炮友" />
+    <string id="Dramalord360" text="启用默认怀孕" />
+    <string id="Dramalord361" text="允许默认 Bannerlord 怀孕" />
+    <string id="Dramalord362" text="启用默认婚姻" />
+    <string id="Dramalord363" text="允许默认 Bannerlord 婚姻" />
+    <string id="Dramalord364" text="在百科全书中显示恋人" />
+    <string id="Dramalord365" text="在百科全书中显示恋人（家庭部分）" />
+    <string id="Dramalord366" text="在百科全书中显示有好处的朋友" />
+    <string id="Dramalord367" text="在百科全书中显示有好处的朋友（家庭部分）" />
+    <string id="Dramalord368" text="日期记忆持续时间" />
+    <string id="Dramalord369" text="英雄记住日期事件的天数" />
+    <string id="Dramalord370" text="性交记忆持续时间" />
+    <string id="Dramalord371" text="英雄记住性交事件的天数" />
+    <string id="Dramalord372" text="出生记忆持续时间" />
+    <string id="Dramalord373" text="英雄记住出生事件的天数" />
+    <string id="Dramalord374" text="婚姻记忆持续时间" />
+    <string id="Dramalord375" text="英雄记住婚姻事件的时间（以天为单位）" />
+    <string id="Dramalord376" text="最低信任级别" />
+    <string id="Dramalord377" text="让英雄信任另一个英雄需要最低程度的信任" />
   </strings>
 </base>

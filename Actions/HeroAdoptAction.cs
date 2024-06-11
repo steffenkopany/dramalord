@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
@@ -10,39 +11,39 @@ namespace Dramalord.Actions
 {
     internal static class HeroAdoptAction
     {
-        internal static void Apply(Hero hero, Hero target)
+        internal static void Apply(Hero hero, Hero target, Hero orphan)
         {
-            Hero? adopted = Info.PullRandomOrphan();
-            if (adopted != null && Info.ValidateHeroMemory(hero, target))
+            if (orphan != null && hero.IsDramalordLegit() && target.IsDramalordLegit())
             {
-                adopted.Mother = (hero.IsFemale) ? hero : target;
-                adopted.Father = (hero.IsFemale) ? target : hero;
-                adopted.Clan = hero.Clan;
-                adopted.SetNewOccupation(hero.Occupation);
+                orphan.Mother = (hero.IsFemale) ? hero : target;
+                orphan.Father = (hero.IsFemale) ? target : hero;
+                orphan.Clan = hero.Clan;
+                orphan.SetNewOccupation(hero.Occupation);
 
                 if (hero.Occupation == Occupation.Lord)
                 {
-                    adopted.SetName(adopted.FirstName, adopted.FirstName);
+                    orphan.SetName(orphan.FirstName, orphan.FirstName);
                 }
 
-                adopted.UpdateHomeSettlement();
-                TeleportHeroAction.ApplyImmediateTeleportToSettlement(adopted, adopted.HomeSettlement);
-                Info.SetLastAdoption(hero, target, CampaignTime.Now.ToDays);
+                orphan.UpdateHomeSettlement();
+                TeleportHeroAction.ApplyImmediateTeleportToSettlement(orphan, orphan.HomeSettlement);
+                DramalordOrphanage.SetLastAdoptionDay(hero, (uint)CampaignTime.Now.ToDays);
+                DramalordOrphanage.SetLastAdoptionDay(target, (uint)CampaignTime.Now.ToDays);
 
-                if (target == Hero.MainHero)
+                if (hero.Clan == Clan.PlayerClan)
                 {
                     TextObject textObject = new TextObject("{=Dramalord133}{HERO.LINK} adopted {CHILD.LINK}.");
                     StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
-                    StringHelpers.SetCharacterProperties("CHILD", adopted.CharacterObject, textObject);
+                    StringHelpers.SetCharacterProperties("CHILD", orphan.CharacterObject, textObject);
                     MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                 }
 
                 if(DramalordMCM.Get.BirthOutput)
                 {
-                    LogEntry.AddLogEntry(new EncyclopediaLogAdopted(hero, target, adopted));
+                    LogEntry.AddLogEntry(new EncyclopediaLogAdopted(hero, target, orphan));
                 }
                         
-                DramalordEvents.OnHeroesAdopted(hero, target, adopted);
+                DramalordEventCallbacks.OnHeroesAdopted(hero, target, orphan);
             } 
         }
     }

@@ -1,112 +1,33 @@
 ﻿using Dramalord.Data;
-using Dramalord.UI;
-using Helpers;
-using SandBox.Conversation;
-using System;
+using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.GameComponents;
+using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
-using TaleWorlds.Localization;
 
 namespace Dramalord.Actions
 {
     internal static class HeroMarriageAction
     {
-        internal static void Apply(Hero hero, Hero target)
+        internal static void Apply(Hero firstHero, Hero secondHero, List<Hero> closeHeroes)
         {
-            if(hero.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null)
+            if(firstHero.Spouse != null && !firstHero.IsSpouse(firstHero.Spouse))
             {
-                return; // no army marriage
+                firstHero.SetSpouse(firstHero.Spouse);
             }
 
-            if (target.PartyBelongedTo != null && target.PartyBelongedTo.Army != null)
+            if (secondHero.Spouse != null && !secondHero.IsSpouse(secondHero.Spouse))
             {
-                return; // no army marriage
+                secondHero.SetSpouse(secondHero.Spouse);
             }
 
-            if (Info.ValidateHeroMemory(hero, target))
-            {
-                if (target == Hero.MainHero)
-                {
-                    TextObject title = new TextObject("{=Dramalord134}Marriage request");
-                    TextObject text = new TextObject("{=Dramalord135}{HERO.LINK} says they love you and asks you if you consider marrying them.");
-                    TextObject banner = new TextObject("{=Dramalord136}You broke {HERO.LINK}s heart!");
-                    StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, text);
-                    StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+            MarriageAction.Apply(firstHero, secondHero, false);
 
-                    Notification.DrawMessageBox(
-                            title,
-                            text,
-                            true,
-                            () => {
+            firstHero.SetSpouse(secondHero);
 
-                                DoMarry(target, hero);
-                            },
-                            () => {
+            Clan clan = (firstHero.Clan == null) ? secondHero.Clan : firstHero.Clan;
 
-                                Info.ChangeEmotionToHeroBy(hero, target, -DramalordMCM.Get.EmotionalLossBreakup);
-                                MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
-                            }
-                        );
-                }
-                else
-                {
-                    DoMarry(hero, target);
-                }
-            }  
-        }
-
-        private static void DoMarry(Hero hero, Hero target)
-        {
-            if (hero.Spouse != null)
-            {
-                HeroDivorceAction.Apply(hero, hero.Spouse);
-            }
-
-            if (target.Spouse != null)
-            {
-                HeroDivorceAction.Apply(target, target.Spouse);
-            }
-            if(hero.Occupation == Occupation.Wanderer && target.Occupation != Occupation.Wanderer)
-            {
-                hero.SetName(hero.FirstName, hero.FirstName);
-            }
-            else if (hero.Occupation != Occupation.Wanderer && target.Occupation == Occupation.Wanderer)
-            {
-                target.SetName(target.FirstName, target.FirstName);
-            }
-            else if (hero.Occupation == Occupation.Wanderer && target.Occupation == Occupation.Wanderer)
-            {
-                target.SetName(hero.FirstName, target.FirstName);
-            }
-
-            if (hero == Hero.MainHero || target == Hero.MainHero)
-            {
-                Hero Npc = (hero == Hero.MainHero) ? target : hero;
-                HeroLeaveClanAction.Apply(Npc, Npc);
-                HeroJoinClanAction.Apply(Npc, Clan.PlayerClan);
-            }
-            else if(hero.Clan != null && target.Clan == null)
-            {
-                HeroJoinClanAction.Apply(target, hero.Clan);
-            }
-            else if (hero.Clan == null && target.Clan != null)
-            {
-                HeroJoinClanAction.Apply(hero, target.Clan);
-            }
-            else if (hero.Clan != null && target.Clan != null && hero.Clan != target.Clan)
-            {
-                HeroLeaveClanAction.Apply(hero, hero);
-                HeroJoinClanAction.Apply(hero, target.Clan);
-            }
-
-            hero.ExSpouses.Remove(target);
-            target.ExSpouses.Remove(hero);
-
-            MarriageAction.Apply(hero, target, false);
-
-            foreach (Hero child in hero.Children)
+            foreach (Hero child in firstHero.Children)
             {
                 if (child.IsChild && child.Clan == null)
                 {
@@ -114,16 +35,55 @@ namespace Dramalord.Actions
                     {
                         child.SetName(child.FirstName, child.FirstName);
                     }
-                    child.Clan = target.Clan;
+                    child.Clan = clan;
                     child.UpdateHomeSettlement();
                     child.SetNewOccupation(Occupation.Lord);
                     child.ChangeState(Hero.CharacterStates.Active);
                 }
             }
 
-            Info.SetIsCoupleWithHero(hero, target, true);
+            foreach (Hero child in secondHero.Children)
+            {
+                if (child.IsChild && child.Clan == null)
+                {
+                    if (child.Occupation == Occupation.Wanderer)
+                    {
+                        child.SetName(child.FirstName, child.FirstName);
+                    }
+                    child.Clan = clan;
+                    child.UpdateHomeSettlement();
+                    child.SetNewOccupation(Occupation.Lord);
+                    child.ChangeState(Hero.CharacterStates.Active);
+                }
+            }
 
-            DramalordEvents.OnHeroesMarried(hero, target);
+            int eventID = DramalordEvents.AddHeroEvent(firstHero, secondHero, EventType.Marriage, DramalordMCM.Get.MarriageMemoryDuration);
+            firstHero.AddDramalordMemory(eventID, MemoryType.Participant, firstHero, true);
+            secondHero.AddDramalordMemory(eventID, MemoryType.Participant, secondHero, true);
+
+            closeHeroes.ForEach(item => {
+
+                if(item != firstHero && item != secondHero)
+                {
+                    item.AddDramalordMemory(eventID, MemoryType.Witness, item, true);
+                    LogEntry.AddLogEntry(new LogWitnessMarriage(firstHero, secondHero, item));
+
+                    if (item.IsSpouse(firstHero) || item.IsLover(firstHero))
+                    {
+                        HeroFeelings witnessFeelings = item.GetDramalordFeelings(firstHero);
+                        witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossMarryOther;
+                        witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossMarryOther;
+                    }
+                    else if (item.IsSpouse(secondHero) || item.IsLover(secondHero))
+                    {
+                        HeroFeelings witnessFeelings = item.GetDramalordFeelings(secondHero);
+                        witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossMarryOther;
+                        witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossMarryOther;
+                    }
+                }
+            });
+
+            DramalordEventCallbacks.OnHeroesMarried(firstHero, secondHero);
         }
     }
 }

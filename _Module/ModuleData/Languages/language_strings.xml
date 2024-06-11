@@ -310,7 +310,7 @@
     <string id="Dramalord304" text="{TITLE}, I... I... [if:convo_astonished]" />
     <string id="Dramalord305" text="You carry no child of mine, am I correct?" />
     <string id="Dramalord306" text="I guess you and {TARGET} were not talking about politics, eh?" />
-    <string id="Dramalord307" text="Looks like you're having a hard time keeping your underpants on." />
+    <string id="Dramalord307" text="Looks like you're having a hard time keeping your underpants on when meeting {TARGET}." />
     <string id="Dramalord308" text="{TARGET} is clearly not my child, how dare you to give birth to a bastard?!" />
     <string id="Dramalord309" text="You are right. So what? I don't care.[if:convo_angry_voice]" />
     <string id="Dramalord310" text="What? I have no idea what you are talking about!" />
@@ -337,5 +337,49 @@
     <string id="Dramalord331" text="Again? Please, let me rest a little..." />
     <string id="Dramalord332" text="Fertile:" />
     <string id="Dramalord333" text="I'm already pregnant, silly!" />
+    <string id="Dramalord334" text="Lover" />
+    <string id="Dramalord335" text="Friend with Benefits" />
+    <string id="Dramalord336" text="So you and {TARGET} married behind my back?" />
+    <string id="Dramalord337" text="{TITLE}, I have to talk to you![if:convo_angry_voice]" />
+    <string id="Dramalord338" text="I saw you and {TARGET.LINK} with my own eyes!" />
+    <string id="Dramalord339" text="I learned that from {SOURCE.LINK}!" />
+    <string id="Dramalord340" text="Intercourse Tension Loss" />
+    <string id="Dramalord341" text="Value of tension lost by intercourse" />
+    <string id="Dramalord342" text="{WITNESS.LINK} saw {HERO1.LINK} and {HERO2.LINK} getting married." />
+    <string id="Dramalord343" text="Confrontation Logs" />
+    <string id="Dramalord344" text="Show confrontation events in logs" />
+    <string id="Dramalord345" text="Gossip Logs" />
+    <string id="Dramalord346" text="Show gossip events in logs" />
+    <string id="Dramalord347" text="{HERO1.LINK} confessed to {HERO2.LINK} that they had a date with {HERO3.LINK}" />
+    <string id="Dramalord348" text="{HERO1.LINK} confessed to {HERO2.LINK} that they had intercourse with {HERO3.LINK}" />
+    <string id="Dramalord349" text="{HERO1.LINK} confessed to {HERO2.LINK} that they married {HERO3.LINK}" />
+    <string id="Dramalord350" text="{HERO1.LINK} told gossip to {HERO2.LINK} about a date of {HERO2.LINK} and {HERO4.LINK}" />
+    <string id="Dramalord351" text="{HERO1.LINK} told gossip to {HERO2.LINK} about {HERO2.LINK} and {HERO4.LINK} having intercourse" />
+    <string id="Dramalord352" text="{HERO1.LINK} told gossip to {HERO2.LINK} about the marriage of {HERO3.LINK} and {HERO4.LINK}" />
+    <string id="Dramalord353" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed a date of {HERO2.LINK} and {HERO4.LINK}" />
+    <string id="Dramalord354" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed {HERO2.LINK} and {HERO4.LINK} having intercourse" />
+    <string id="Dramalord355" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed the marriage of {HERO2.LINK} and {HERO4.LINK}" />
+    <string id="Dramalord356" text="Well, next time invite me too. we could have fun together!" />
+    <string id="Dramalord357" text="I forgive you... But never do that again!" />
+    <string id="Dramalord358" text="I can clearly see that!" />
+    <string id="Dramalord359" text="{HERO1.LINK} and {HERO2.LINK} started being friends with benefits" />
+    <string id="Dramalord360" text="Enable Default Pregnancies" />
+    <string id="Dramalord361" text="Allow default Bannerlord pregnancies to happen" />
+    <string id="Dramalord362" text="Enable Default Marriages" />
+    <string id="Dramalord363" text="Allow default Bannerlord marriages to happen" />
+    <string id="Dramalord364" text="Show lovers in Encyclopedia" />
+    <string id="Dramalord365" text="Show lovers in Encyclopedia (Family section)" />
+    <string id="Dramalord366" text="Show friends with benefits in Encyclopedia" />
+    <string id="Dramalord367" text="Show friends with benefits in Encyclopedia (Family section)" />
+    <string id="Dramalord368" text="Date Memory Duration" />
+    <string id="Dramalord369" text="Time in days heroes remember date events" />
+    <string id="Dramalord370" text="Intercourse Memory Duration" />
+    <string id="Dramalord371" text="Time in days heroes remember intercourse events" />
+    <string id="Dramalord372" text="Birth Memory Duration" />
+    <string id="Dramalord373" text="Time in days heroes remember birth events" />
+    <string id="Dramalord374" text="Marriage Memory Duration" />
+    <string id="Dramalord375" text="Time in days heroes remember marriage events" />
+    <string id="Dramalord376" text="Minimum Trust Level" />
+    <string id="Dramalord377" text="Minimum mount of trust is required making a hero trust another" />
   </strings>
 </base>

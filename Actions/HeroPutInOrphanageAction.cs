@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using Dramalord.UI;
 using Helpers;
 using TaleWorlds.CampaignSystem;
@@ -13,7 +14,7 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero child)
         {
-            if(Info.ValidateHeroMemory(hero, child.Father))
+            if(child.Father.IsDramalordLegit())
             {
                 if (child.Father == Hero.MainHero)
                 {
@@ -44,7 +45,7 @@ namespace Dramalord.Actions
                             },
                             () => {
 
-                                Info.ChangeEmotionToHeroBy(hero, child.Father, -DramalordMCM.Get.EmotionalLossBreakup);
+                                hero.GetDramalordFeelings(child.Father).Emotion -= DramalordMCM.Get.EmotionalLossBreakup;
                                 MakeOrphan(hero, child);
                             }
                         );
@@ -75,7 +76,7 @@ namespace Dramalord.Actions
                 CampaignEventDispatcher.Instance.OnHeroChangedClan(child, oldClan);
             }
 
-            Info.AddOrphan(child);
+            DramalordOrphanage.AddOrphan(child.CharacterObject);
             //child.SetBirthDay(CampaignTime.Days((float)CampaignTime.Now.ToDays - (CampaignTime.DaysInYear * 17 + (CampaignTime.DaysInYear-1)))); Testing onherocomesofage
 
             if (DramalordMCM.Get.BirthOutput)
@@ -83,7 +84,7 @@ namespace Dramalord.Actions
                 LogEntry.AddLogEntry(new EncyclopediaLogPutChildToOrphanage(hero, child));
             }
                 
-            DramalordEvents.OnHeroesPutToOrphanage(hero, child);
+            DramalordEventCallbacks.OnHeroesPutToOrphanage(hero, child);
         }
     } 
 }

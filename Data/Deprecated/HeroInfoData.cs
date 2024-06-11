@@ -1,6 +1,6 @@
 ﻿using TaleWorlds.SaveSystem;
 
-namespace Dramalord.Data
+namespace Dramalord.Data.Deprecated
 {
     internal class HeroInfoData
     {
@@ -34,7 +34,7 @@ namespace Dramalord.Data
         [SaveableProperty(10)]
         internal bool HasToy { get; set; }
 
-        internal HeroInfoData(int attractionMen, int attractionWomen, float attractionWeight, float attractionBuild, int attractionAgeDiff, float horny, float libido,  float periodDayOfSeason, float intercourseSkill)
+        internal HeroInfoData(int attractionMen, int attractionWomen, float attractionWeight, float attractionBuild, int attractionAgeDiff, float horny, float libido, float periodDayOfSeason, float intercourseSkill)
         {
             AttractionMen = attractionMen;
             AttractionWomen = attractionWomen;

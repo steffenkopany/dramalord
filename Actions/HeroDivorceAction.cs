@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using Helpers;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -12,13 +13,12 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target)
         {
-            if(Info.ValidateHeroMemory(hero, target))
+            if(hero.IsDramalordLegit() && target.IsDramalordLegit())
             {
-                Info.SetIsCoupleWithHero(hero, target, false);
-                Info.ChangeEmotionToHeroBy(target, hero, -DramalordMCM.Get.EmotionalLossDivorce);
+                hero.ClearAllRelationships(target);
 
-                hero.ExSpouses.Remove(target);
-                target.ExSpouses.Remove(hero);
+                hero.GetDramalordFeelings(target).Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
+                target.GetDramalordFeelings(hero).Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
 
                 foreach (Romance.RomanticState romanticState in Romance.RomanticStateList.ToList())
                 {
@@ -27,8 +27,29 @@ namespace Dramalord.Actions
                         romanticState.Level = Romance.RomanceLevelEnum.FailedInPracticalities;
                     }
                 }
-                hero.Spouse = null;
-                target.Spouse = null;
+
+                if(hero.Spouse == target)
+                {
+                    if(hero.GetHeroSpouses().Count() > 0)
+                    {
+                        hero.Spouse = hero.GetHeroSpouses().ElementAt(0).HeroObject;
+                    }
+                    else
+                    {
+                        hero.Spouse = null;
+                    }
+                }
+                if(target.Spouse == hero)
+                {
+                    if(target.GetHeroSpouses().Count() > 0)
+                    {
+                        target.Spouse = target.GetHeroSpouses().ElementAt(0).HeroObject;
+                    }
+                    else
+                    {
+                        target.Spouse = null;
+                    }
+                }
 
                 if (target == Hero.MainHero)
                 {
@@ -48,7 +69,7 @@ namespace Dramalord.Actions
                     LogEntry.AddLogEntry(new EncyclopediaLogDivorce(hero, target));
                 }
 
-                DramalordEvents.OnHeroesDivorced(hero, target);
+                DramalordEventCallbacks.OnHeroesDivorced(hero, target);
             } 
         }
     }

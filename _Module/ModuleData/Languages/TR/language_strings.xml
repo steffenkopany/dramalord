@@ -337,5 +337,49 @@
     <string id="Dramalord331" text="Yine mi? Lütfen biraz dinlenmeme izin verin..." />
     <string id="Dramalord332" text="Verimli:" />
     <string id="Dramalord333" text="Zaten hamileyim, aptal!" />
+    <string id="Dramalord334" text = "Sevgili" />
+    <string id="Dramalord335" text="Avantajlı Arkadaş" />
+    <string id="Dramalord336" text="Yani sen ve {TARGET} benim haberim olmadan mı evlendiniz?" />
+    <string id="Dramalord337" text="{TITLE}, seninle konuşmam lazım![if:convo_angry_voice]" />
+    <string id="Dramalord338" text="Seni ve {TARGET.LINK} kendi gözlerimle gördüm!" />
+    <string id="Dramalord339" text="Bunu {SOURCE.LINK}'dan öğrendim!" />
+    <string id="Dramalord340" text="İlişkide Gerilim Kaybı" />
+    <string id="Dramalord341" text="İlişki nedeniyle kaybedilen gerilimin değeri" />
+    <string id="Dramalord342" text="{WITNESS.LINK}, {HERO1.LINK} ve {HERO2.LINK}'nin evlendiğini gördü." />
+    <string id="Dramalord343" text="Yüzleşme Günlükleri" />
+    <string id="Dramalord344" text="Günlüklerdeki yüzleşme olaylarını göster" />
+    <string id="Dramalord345" text="Dedikodu Günlükleri" />
+    <string id="Dramalord346" text="Günlüklerdeki dedikodu olaylarını göster" />
+    <string id="Dramalord347" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO3.LINK} ile randevuları olduğunu itiraf etti" />
+    <string id="Dramalord348" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO3.LINK} ile cinsel ilişkiye girdiklerini itiraf etti" />
+    <string id="Dramalord349" text="{HERO1.LINK}, {HERO2.LINK}'ye {HERO3.LINK} ile evlendiklerini itiraf etti" />
+    <string id="Dramalord350" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO2.LINK} ve {HERO4.LINK}'nin tarihi hakkında dedikodu yaptı" />
+    <string id="Dramalord351" text="{HERO1.LINK}, {HERO2.LINK}'ye {HERO2.LINK} ve {HERO4.LINK}'nin cinsel ilişkiye girdiğine dair dedikodu yaptı" />
+    <string id="Dramalord352" text="{HERO1.LINK}, {HERO2.LINK}'ye {HERO3.LINK} ve {HERO4.LINK}'nin evliliği hakkında dedikodu yaptı" />
+    <string id="Dramalord353" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO2.LINK} ve {HERO4.LINK}'nin randevusuna tanık olduklarını söyledi" />
+    <string id="Dramalord354" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO2.LINK} ve {HERO4.LINK}'nin cinsel ilişkiye girdiğine tanık olduklarını söyledi" />
+    <string id="Dramalord355" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO2.LINK} ile {HERO4.LINK}'nin evliliğine tanık olduklarını söyledi" />
+    <string id="Dramalord356" text="Peki, bir dahaki sefere beni de davet et. Birlikte eğlenebiliriz!" />
+    <string id="Dramalord357" text="Seni affediyorum... Ama bunu bir daha asla yapma!" />
+    <string id="Dramalord358" text="Bunu açıkça görebiliyorum!" />
+    <string id="Dramalord359" text="{HERO1.LINK} ve {HERO2.LINK} avantajlarla arkadaş olmaya başladı" />
+    <string id="Dramalord360" text="Varsayılan Gebelikleri Etkinleştir" />
+    <string id="Dramalord361" text="Varsayılan Bannerlord gebeliklerinin gerçekleşmesine izin ver" />
+    <string id="Dramalord362" text="Varsayılan Evlilikleri Etkinleştir" />
+    <string id="Dramalord363" text="Varsayılan Bannerlord evliliklerinin gerçekleşmesine izin ver" />
+    <string id="Dramalord364" text="Ansiklopedide sevgilileri göster" />
+    <string id="Dramalord365" text="Ansiklopedide sevgilileri göster (Aile bölümü)" />
+    <string id="Dramalord366" text="Ansiklopedide avantajları olan arkadaşlarınızı gösterin" />
+    <string id="Dramalord367" text="Ansiklopedideki avantajlara sahip arkadaşlarınızı gösterin (Aile bölümü)" />
+    <string id="Dramalord368" text="Tarih Belleği Süresi" />
+    <string id="Dramalord369" text="Kahramanların tarih olaylarını hatırladığı gün cinsinden süre" />
+    <string id="Dramalord370" text="İlişki Hafıza Süresi" />
+    <string id="Dramalord371" text="Kahramanların cinsel ilişki olaylarını hatırladığı gün sayısı" />
+    <string id="Dramalord372" text="Doğum Hafızası Süresi" />
+    <string id="Dramalord373" text="Kahramanların doğum olaylarını hatırladığı gün sayısı" />
+    <string id="Dramalord374" text="Evlilik Hafıza Süresi" />
+    <string id="Dramalord375" text="Kahramanların evlilik olaylarını hatırladığı gün sayısı" />
+    <string id="Dramalord376" text="Minimum Güven Düzeyi" />
+    <string id="Dramalord377" text="Bir kahramanın diğerine güvenmesi için minimum güven düzeyi gereklidir" />
   </strings>
 </base>

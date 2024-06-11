@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using Dramalord.UI;
 using Helpers;
 using System.Reflection;
@@ -9,24 +10,16 @@ using TaleWorlds.Localization;
 
 namespace Dramalord.Actions
 {
-    public enum WitnessType
-    {
-        Flirting,
-        Dating,
-        Intercourse,
-        Pregnancy,
-        Bastard
-    }
-
     internal static class HeroWitnessAction
     {
-        internal static void Apply(Hero hero, Hero target, Hero witness, WitnessType type)
+        internal static void Apply(Hero hero, Hero target, Hero witness, EventType type, int eventID)
         {
-            if(Info.ValidateHeroMemory(witness, hero))
+            if(witness.IsDramalordLegit())
             {
-                if (type == WitnessType.Flirting)
+                witness.AddDramalordMemory(eventID, MemoryType.Witness, witness, true);
+
+                if (type == EventType.Flirt)
                 {
-                    Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossCaughtFlirting);
                     if (DramalordMCM.Get.FlirtOutput)
                     {
                         LogEntry.AddLogEntry(new LogWitnessFlirt(hero, target, witness));
@@ -47,9 +40,8 @@ namespace Dramalord.Actions
                         MBInformationManager.AddQuickInformation(banner, 1000, witness.CharacterObject, "event:/ui/notification/relation");
                     }
                 }
-                else if (type == WitnessType.Dating)
+                else if (type == EventType.Date)
                 {
-                    Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossCaughtDate);
                     if (DramalordMCM.Get.AffairOutput)
                     {
                         LogEntry.AddLogEntry(new LogWitnessDate(hero, target, witness));
@@ -70,9 +62,9 @@ namespace Dramalord.Actions
                         MBInformationManager.AddQuickInformation(banner, 1000, witness.CharacterObject, "event:/ui/notification/relation");
                     }
                 }
-                else if (type == WitnessType.Intercourse)
+                else if (type == EventType.Intercourse)
                 {
-                    Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossCaughtIntercourse);
+                    witness.GetDramalordFeelings(hero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
                     if (DramalordMCM.Get.AffairOutput)
                     {
                         LogEntry.AddLogEntry(new LogWitnessIntercourse(hero, target, witness));
@@ -93,9 +85,9 @@ namespace Dramalord.Actions
                         MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                     }
                 }
-                else if (type == WitnessType.Pregnancy)
+                else if (type == EventType.Pregnancy)
                 {
-                    Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossPregnancy);
+                    witness.GetDramalordFeelings(hero).Emotion -= DramalordMCM.Get.EmotionalLossPregnancy;
                     if (DramalordMCM.Get.AffairOutput)
                     {
                         LogEntry.AddLogEntry(new LogWitnessPregnancy(hero, witness));
@@ -114,9 +106,9 @@ namespace Dramalord.Actions
                         MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                     }
                 }
-                else if (type == WitnessType.Bastard)
+                else if (type == EventType.Birth)
                 {
-                    Info.ChangeEmotionToHeroBy(witness, hero, -DramalordMCM.Get.EmotionalLossBastard);
+                    witness.GetDramalordFeelings(hero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
                     if (DramalordMCM.Get.BirthOutput)
                     {
                         LogEntry.AddLogEntry(new LogWitnessBastard(hero, target, witness));
@@ -139,7 +131,7 @@ namespace Dramalord.Actions
                 }
             }
             
-            DramalordEvents.OnHeroesWitness(hero, target, witness, type);  
+            DramalordEventCallbacks.OnHeroesWitness(hero, target, witness, type);  
         }
     }
 }

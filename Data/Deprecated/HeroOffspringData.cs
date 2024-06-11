@@ -1,7 +1,7 @@
 ﻿using TaleWorlds.CampaignSystem;
 using TaleWorlds.SaveSystem;
 
-namespace Dramalord.Data
+namespace Dramalord.Data.Deprecated
 {
     internal class HeroOffspringData
     {

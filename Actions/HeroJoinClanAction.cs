@@ -34,7 +34,7 @@ namespace Dramalord.Actions
                 LogEntry.AddLogEntry(new EncyclopediaLogJoinClan(hero, clan));
             }
                 
-            DramalordEvents.OnHeroesJoinClan(hero, clan);
+            DramalordEventCallbacks.OnHeroesJoinClan(hero, clan);
         }
     }
 }

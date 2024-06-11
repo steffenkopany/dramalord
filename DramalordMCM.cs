@@ -40,11 +40,19 @@ namespace Dramalord
         public bool BirthOutput { get; set; } = false;
 
         [SettingPropertyGroup("{=Dramalord147}General")]
-        [SettingPropertyFloatingInteger("{=Dramalord163}Trait-Score Multiplier", 1, 10, HintText = "{=Dramalord164}Trait score multiplier for AI emotion grow (higher = faster)", Order = 7, RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord343}Confrontation Logs", HintText = "{=Dramalord344}Show confrontation events in logs", Order = 7, RequireRestart = false)]
+        public bool ConfrontationOutput { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord345}Gossip Logs", HintText = "{=Dramalord346}Show gossip events in logs", Order = 8, RequireRestart = false)]
+        public bool GossipOutput { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyFloatingInteger("{=Dramalord163}Trait-Score Multiplier", 1, 10, HintText = "{=Dramalord164}Trait score multiplier for AI emotion grow (higher = faster)", Order = 9, RequireRestart = false)]
         public int TraitScoreMultiplyer { get; set; } = 1;
 
         [SettingPropertyGroup("{=Dramalord147}General")]
-        [SettingPropertyBool("{=Dramalord165}Protect Family", HintText = "{=Dramalord166}No AI interaction with family members", Order = 8, RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord165}Protect Family", HintText = "{=Dramalord166}No AI interaction with family members (incest)", Order = 10, RequireRestart = false)]
         public bool ProtectFamily { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord147}General")]
@@ -54,7 +62,7 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord243}Player Clan AI interaction", HintText = "{=Dramalord244}Allow Members of your clan to participate in AI interactions", Order = 10, RequireRestart = false)]
         public bool AllowPlayerClanAI { get; set; } = true;
-
+        /*
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord247}Heroes in Army AI interaction", HintText = "{=Dramalord248}Allow Members of an army to interact with each other", Order = 11, RequireRestart = false)]
         public bool AllowArmyInteractionAI { get; set; } = true;
@@ -62,11 +70,11 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord249}Allow Clan banishment", HintText = "{=Dramalord250}Allow Kingdom leaders to banish clans if they're angry on their leader", Order = 12, RequireRestart = false)]
         public bool AllowClanBanishment { get; set; } = true;
-
+        */
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyFloatingInteger("{=Dramalord251}NPC Approach Player Chance", 0, 100, HintText = "{=Dramalord252}Chance that heroes approach the player for intimate conversations", Order = 13, RequireRestart = false)]
         public int ChanceNPCApproachPlayer { get; set; } = 20;
-
+        /*
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord259}Approach Player In Settlements", HintText = "{=Dramalord260}Allow NPCs to approach you while being in the same settlement", Order = 14, RequireRestart = false)]
         public bool AllowApproachInSettlement { get; set; } = true;
@@ -90,7 +98,7 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord278}Allow Divorces", HintText = "{=Dramalord279}Allow marriages being divorced by Dramalord events", Order = 18, RequireRestart = false)]
         public bool AllowDivorces { get; set; } = true;
-
+        */
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord280}Allow Rage Kills", HintText = "{=Dramalord281}Allow enraged heroes to kill if being cheated on", Order = 19, RequireRestart = false)]
         public bool AllowRageKills { get; set; } = true;
@@ -103,13 +111,47 @@ namespace Dramalord
         [SettingPropertyFloatingInteger("{=Dramalord286}NPC Visit Quest Chance", 0, 100, HintText = "{=Dramalord287}Chance that heroes request the absent player to visit them due to urgent needs", Order = 21, RequireRestart = false)]
         public int ChanceNPCQuestVisitPlayer { get; set; } = 20;
 
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord360}Enable Default Pregnancies", HintText = "{=Dramalord361}Allow default Bannerlord pregnancies to happen", Order = 22, RequireRestart = false)]
+        public bool AllowDefaultPregnancies { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord362}Enable Default Marriages", HintText = "{=Dramalord363}Allow default Bannerlord marriages to happen", Order = 23, RequireRestart = false)]
+        public bool AllowDefaultMarriages { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord364}Show lovers in Encyclopedia", HintText = "{=Dramalord365}Show lovers in Encyclopedia (Family section)", Order = 24, RequireRestart = false)]
+        public bool ShowLoversEncyclopedia { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord366}Show friends with benefits in Encyclopedia", HintText = "{=Dramalord367}Show friends with benefits in Encyclopedia (Family section)", Order = 24, RequireRestart = false)]
+        public bool ShowFWBEncyclopedia { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyFloatingInteger("{=Dramalord368}Date Memory Duration", 1, 100, HintText = "{=Dramalord369}Time in days heroes remember date events", Order = 25, RequireRestart = false)]
+        public int DateMemoryDuration { get; set; } = 5;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyFloatingInteger("{=Dramalord370}Intercourse Memory Duration", 1, 100, HintText = "{=Dramalord371}Time in days heroes remember intercouse events", Order = 26, RequireRestart = false)]
+        public int IntercourseMemoryDuration { get; set; } = 7;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyFloatingInteger("{=Dramalord372}Birth Memory Duration", 1, 100, HintText = "{=Dramalord373}Time in days heroes remember birth events", Order = 27, RequireRestart = false)]
+        public int BirthMemoryDuration { get; set; } = 10;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyFloatingInteger("{=Dramalord374}Marriage Memory Duration", 1, 100, HintText = "{=Dramalord375}Time in days heroes remember marriage events", Order = 28, RequireRestart = false)]
+        public int MarriageMemoryDuration { get; set; } = 10;
+
+        /*
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord167}Other Sex Attraction Modifier", -50, 50, Order = 1, HintText = "{=Dramalord168}AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)", RequireRestart = false)]
         public int OtherSexAttractionModifier { get; set; } = 0;
+        */
 
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord169}Min. Attraction Score", 0, 100, Order = 2, HintText = "{=Dramalord170}AI minimum attraction score to to start interacting with each other", RequireRestart = false)]
-        public int MinAttractionForFlirting { get; set; } = 50;
+        public int MinAttractionForFlirting { get; set; } = 30;
 
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord171}Min. Emotion For Affairs", 0, 100, Order = 4, HintText = "{=Dramalord172}Minimum emotion value for AI to consider starting an affair", RequireRestart = false)]
@@ -134,19 +176,11 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord181}Intercourse Horniness Loss", 0, 100, Order = 9, HintText = "{=Dramalord182}Value of horniness lost by intercourse", RequireRestart = false)]
         public int HornyLossIntercourse { get; set; } = 50;
-        /*
-        [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("Days Apart Start Forget", 0, 100, Order = 10, HintText = "Days AI has no conversation with other heroes before forgetting emotional value", RequireRestart = false)]
-        public int DaysApartStartForget { get; set; } = 21;
 
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("Amount Emotion Forget", 0, 100, Order = 10, HintText = "Emotional value AI forgets about others after passing the days apart border", RequireRestart = false)]
-        public int AmountEmotionForget { get; set; } = 1;
+        [SettingPropertyFloatingInteger("{=Dramalord340}Intercourse Tension Loss", 0, 100, Order = 10, HintText = "{=Dramalord341}Value of tension lost by intercourse", RequireRestart = false)]
+        public int TensionLossIntercourse { get; set; } = 50;
 
-        [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("Days Apart Completely Forgotten", 0, 100, Order = 10, HintText = "Days AI has no conversation with other heroes before forgetting them completely", RequireRestart = false)]
-        public int DaysApartCompleteForget { get; set; } = 84;
-        */
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord183}Chance Getting Caught", 0, 100, Order = 11, HintText = "{=Dramalord184}Chance of getting caught by by partners while interacting wth other heroes", RequireRestart = false)]
         public int ChanceGettingCaught { get; set; } = 10;
@@ -182,15 +216,11 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord199}Emotional Loss Bastard", 0, 100, Order = 15, HintText = "{=Dramalord200}Loss of emotion of partners if heros give birth to children of someone else", RequireRestart = false)]
         public int EmotionalLossBastard { get; set; } = 100;
-        /*
-        [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord201}Emotional Win Affair", 0, 100, Order = 16, HintText = "{=Dramalord202}Emotional gain of heroes who start an affair", RequireRestart = false)]
-        public int EmotionalWinAffair { get; set; } = 10;
 
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord203}Emotional Win Marriage", 0, 100, Order = 17, HintText = "{=Dramalord204}Emotional gain of heroes who are getting married", RequireRestart = false)]
-        public int EmotionalWinMarriage { get; set; } = 20;
-        */
+        [SettingPropertyFloatingInteger("{=Dramalord199}Emotional Loss Gossip", 0, 100, Order = 15, HintText = "{=Dramalord200}Loss of emotion of heroes if they hear gossip about their partners", RequireRestart = false)]
+        public int EmotionalLossGossip { get; set; } = 10;
+
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord205}Pregnancy Chance", 0, 100, Order = 18, HintText = "{=Dramalord206}Chance of getting pregnant during intercourse", RequireRestart = false)]
         public int PregnancyChance { get; set; } = 10;
@@ -218,6 +248,10 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord217}Toy Break Chance", 0, 100, Order = 24, HintText = "{=Dramalord218}Chance a toy will break when being used by a hero", RequireRestart = false)]
         public int ToyBreakChance { get; set; } = 5;
+
+        [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
+        [SettingPropertyFloatingInteger("{=Dramalord376}Minimum Trust Level", 0, 100, HintText = "{=Dramalord377}Minimum mount of trust is required making a hero trust another", Order = 25, RequireRestart = false)]
+        public int MinimumTrustLevel { get; set; } = 50;
 
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
         [SettingPropertyFloatingInteger("{=Dramalord219}Min. Emotion For Conversation", 0, 100, Order = 1, HintText = "{=Dramalord220}Minimum emotion value of AI to accept an intimate conversation with the player", RequireRestart = false)]

@@ -1,7 +1,14 @@
-﻿using Dramalord.Behaviors;
+﻿using Bannerlord.UIExtenderEx;
+using Dramalord.Behaviors;
+using Dramalord.Data;
+using Dramalord.Models;
 using Dramalord.UI;
 using HarmonyLib;
+using System;
+using System.Reflection;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.ObjectSystem;
@@ -21,18 +28,17 @@ namespace Dramalord
         public override void OnGameInitializationFinished(Game game)
         {
             base.OnGameInitializationFinished(game);
-            if(!Patched && game.GameType is Campaign)
-            {
-                HarmonyPatch();
-                Patched = true;
-            }
 
             ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
-            //ItemObject leek = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_leek");
             ItemObject pie = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_pie");
             Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(wurst);
-            //Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(leek);
             Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(pie);
+            Hero.AllAliveHeroes.ForEach(item => HeroTraits.ApplyToHero(item));
+        }
+
+        public override void OnGameLoaded(Game game, object initializerObject)
+        {
+            HeroTraits.AddToAllTraits();
         }
 
         protected override void OnSubModuleUnloaded()
@@ -45,6 +51,7 @@ namespace Dramalord
             base.OnBeforeInitialModuleScreenSetAsRoot();
             Notification.PrintText("Dramalord loaded");
         }
+
         protected override void OnGameStart(Game game, IGameStarter starter)
         {
             base.OnGameStart(game, starter);
@@ -53,20 +60,48 @@ namespace Dramalord
             if(campaignGameStarter != null)
             {
                 campaignGameStarter.AddBehavior(new DramalordCampaignBehavior(campaignGameStarter));
-            }  
+                campaignGameStarter.AddBehavior(new AICampaignBehavior(campaignGameStarter));
+                campaignGameStarter.AddBehavior(new PlayerCampaignBehavior(campaignGameStarter));
+
+                //campaignGameStarter.AddModel(new DramalordPregnancyModel());
+                campaignGameStarter.AddModel(new DramalordMarriageModel());
+                campaignGameStarter.AddModel(new DramalordRomanceModel());
+                
+
+                if (!Patched && game.GameType is Campaign)
+                {
+                    HarmonyPatch();
+                    Patched = true;
+                }
+
+                HeroTraits.InitializeAll();
+            }
         }
 
         private void HarmonyPatch()
         {
-            try
-            {
-                (new Harmony(ModuleName)).PatchAll();
-            }
+           // try
+           // {
+                Harmony harmony = new Harmony(ModuleName);
+                Type[] typesFromAssembly = AccessTools.GetTypesFromAssembly(typeof(DramalordSubModule).Assembly);
+                foreach (Type type in typesFromAssembly)
+                {
+                    try
+                    {
+                        new PatchClassProcessor(harmony, type).Patch();
+                    }
+                    catch(HarmonyException e)
+                    {
+                        Notification.PrintText("[Dramalord] Could not apply patch " + type.Name);
+                    }
+                }
+                //(new Harmony(ModuleName)).PatchAll();
+           /* }
             catch (HarmonyException e)
             {
-                Notification.PrintText("[Dramalord] Could not apply Harmony patches " + e.Source);
+                Notification.PrintText("[Dramalord] Could not apply Harmony patches " + e.Message);
             }
-            
+            */
         }
     }
 }

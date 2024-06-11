@@ -1,5 +1,6 @@
 ﻿using Dramalord.Behaviors;
 using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using Dramalord.UI;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Dramalord.Conversations
 
             starter.AddPlayerLine("player_asks_for_flirt", "npc_player_actions_list", "npc_replies_to_flirt", "{=Dramalord070}...go for a walk with me?", null, null);
             starter.AddPlayerLine("player_asks_for_date", "npc_player_actions_list", "npc_replies_to_date", "{=Dramalord044}...retreat to somewhere more silent?", ConditionPlayerAskForDate, null);
-            starter.AddPlayerLine("player_asks_for_divorcing_husband", "npc_player_actions_list", "npc_replies_to_divorcing_husband", "{=Dramalord050}...get divorced so we can focus on us?", ConditionPlayerAskForDivorcingHusband, null);
+            //starter.AddPlayerLine("player_asks_for_divorcing_husband", "npc_player_actions_list", "npc_replies_to_divorcing_husband", "{=Dramalord050}...get divorced so we can focus on us?", ConditionPlayerAskForDivorcingHusband, null);
             starter.AddPlayerLine("player_asks_for_marriage", "npc_player_actions_list", "npc_replies_to_marriage", "{=Dramalord051}...marry me?", ConditionPlayerAskForMarriage, null);
             starter.AddPlayerLine("player_stops_asking", "npc_player_actions_list", "npc_replies_to_ending_conversation", "{=Dramalord072}Nevermind.", null, null);
 
@@ -34,11 +35,11 @@ namespace Dramalord.Conversations
             starter.AddDialogLine("npc_considers_date", "npc_replies_to_date", Persuasions.PlayerDateArgument, "{=Dramalord088}Why should I spend time with you?", ConditionNpcConsidersDate, ConsequenceNpcConsidersDate);
             starter.AddDialogLine("npc_declines_date_wait", "npc_replies_to_date", "npc_player_actions_list", "{=Dramalord331}Again? Please, let me rest a little...", ConditionNpcDeclinesDateWait, ConsequenceNpcDeclinesDateWait);
             starter.AddDialogLine("npc_declines_date", "npc_replies_to_date", "npc_player_actions_list", "{=Dramalord046}No I would not like to do that.", ConditionNpcDeclinesDate, ConsequenceNpcDeclinesDate);
-
+            /*
             starter.AddDialogLine("Dramalord745", "npc_replies_to_divorcing_husband", "close_window", "{=Dramalord045}Oh... well, I think I would like that.", ConditionNpcAcceptsDivorcingSpouse, ConsequenceNpcAcceptsDivorcingHusband);
             starter.AddDialogLine("Dramalord748", "npc_replies_to_divorcing_husband", Persuasions.PlayerDivorceArgument, "{=Dramalord061}Why should I give up my marriage?", ConditionNpcConsidersDivorcingSpouse, ConsequenceNpcConsidersDivorcingHusband);
             starter.AddDialogLine("Dramalord746", "npc_replies_to_divorcing_husband", "npc_player_actions_list", "{=Dramalord068}I will not give up my marriage for you!", ConditionNpcDeclinesDivorcingSpouse, ConsequenceNpcDeclinesDivorcingHusband);
-
+            */
             starter.AddDialogLine("Dramalord545", "npc_replies_to_marriage", "close_window", "{=Dramalord045}Oh... well, I think I would like that.", ConditonNpcAcceptsMarriage, ConsequenceNpcAcceptsMarriage);
             starter.AddDialogLine("Dramalord546", "npc_replies_to_marriage", Persuasions.PlayerMarryArgument, "{=Dramalord082}Why should I marry you", ConditionNpcConsidersMarriage, ConsquenceNpcConsidersMarriage);
             starter.AddDialogLine("Dramalord545", "npc_replies_to_marriage", "npc_player_actions_list", "{=Dramalord046}No I would not like to do that.", ConditionNpcDeclinesMarriage, ConsquenceNpcDeclinesMarriage);
@@ -49,111 +50,102 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionPlayerCanAskForActions()
         {
-            return Info.ValidateHeroInfo(Hero.OneToOneConversationHero) && Info.ValidateHeroMemory(Hero.MainHero, Hero.OneToOneConversationHero);
+            return Hero.OneToOneConversationHero.IsDramalordLegit();
         }
 
         internal static bool ConditionPlayerAskForDate()
         {
-            return Hero.MainHero.Spouse == Hero.OneToOneConversationHero || Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero) || Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero) >= DramalordMCM.Get.MinEmotionForDating;
+            return Hero.MainHero.Spouse == Hero.OneToOneConversationHero || Hero.MainHero.IsLover(Hero.OneToOneConversationHero) || Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion >= DramalordMCM.Get.MinEmotionForDating;
         }
-
+        
+        /*
         internal static bool ConditionPlayerAskForDivorcingHusband()
         {
-            return Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero);
+            return Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.MainHero.IsLover(Hero.OneToOneConversationHero);
         }
+        */
 
         internal static bool ConditionPlayerAskForMarriage()
         {
             bool isInArmy = Hero.MainHero.PartyBelongedTo != null && Hero.MainHero.PartyBelongedTo.Army != null;
-            return !isInArmy && Hero.OneToOneConversationHero.Spouse == null && Hero.MainHero.Spouse == null && Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero);
+            return !isInArmy && Hero.MainHero.IsLover(Hero.OneToOneConversationHero);
         }
 
         internal static bool ConditionNpcAcceptsFlirt()
         {
-            return (Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.MainHero) >= DramalordMCM.Get.MinAttractionForFlirting || Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero)) && 
-                CampaignTime.Now.ToDays - Info.GetLastDaySeen(Hero.MainHero, Hero.OneToOneConversationHero) > 0;
+            return (Hero.OneToOneConversationHero.GetDramalordAttractionTo(Hero.MainHero) >= DramalordMCM.Get.MinAttractionForFlirting || Hero.MainHero.IsLover(Hero.OneToOneConversationHero) || Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero)) && 
+                CampaignTime.Now.ToDays - Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay >= 1;
         }
 
         internal static bool ConditionNpcDeclinesFlirtUgly()
         {
-            return Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.MainHero) < DramalordMCM.Get.MinAttractionForFlirting && !Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero);
+            return Hero.OneToOneConversationHero.GetDramalordAttractionTo(Hero.MainHero) < DramalordMCM.Get.MinAttractionForFlirting && !Hero.MainHero.IsLover(Hero.OneToOneConversationHero) && !Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero);
         }
         internal static bool ConditionNpcDeclinesFlirtWait()
         {
-            return (Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.MainHero) >= DramalordMCM.Get.MinAttractionForFlirting || Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero)) && 
-                CampaignTime.Now.ToDays - Info.GetLastDaySeen(Hero.MainHero, Hero.OneToOneConversationHero) < 1;
+            return CampaignTime.Now.ToDays - Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay < 1;
         }
 
         internal static bool ConditionNpcAcceptsDate()
         {
-            return (Hero.MainHero.Spouse != Hero.OneToOneConversationHero || Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero) && CampaignTime.Now.ToDays - Info.GetLastDate(Hero.MainHero, Hero.OneToOneConversationHero) >= DramalordMCM.Get.DaysBetweenDates) || 
+            return ((Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero) || Hero.MainHero.IsLover(Hero.OneToOneConversationHero) && CampaignTime.Now.ToDays - Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay >= DramalordMCM.Get.DaysBetweenDates)) || 
                 (ConversationManager.GetPersuasionIsActive() && ConversationManager.GetPersuasionProgressSatisfied());
         }
 
         internal static bool ConditionNpcConsidersDate()
         {
-            return Hero.MainHero.Spouse != Hero.OneToOneConversationHero && !Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero) && Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero) >= DramalordMCM.Get.MinEmotionForDating && 
-                CampaignTime.Now.ToDays - Info.GetLastDate(Hero.MainHero, Hero.OneToOneConversationHero) >= DramalordMCM.Get.DaysBetweenDates;
+            return !Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero) && !Hero.MainHero.IsLover(Hero.OneToOneConversationHero) && Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion >= DramalordMCM.Get.MinEmotionForDating;
         }
 
         internal static bool ConditionNpcDeclinesDateWait()
         {
-            return (Hero.MainHero.Spouse == Hero.OneToOneConversationHero || Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero)) && CampaignTime.Now.ToDays - Info.GetLastDate(Hero.MainHero, Hero.OneToOneConversationHero) < DramalordMCM.Get.DaysBetweenDates;
+            return CampaignTime.Now.ToDays - Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay < DramalordMCM.Get.DaysBetweenDates;
         }
 
         internal static bool ConditionNpcDeclinesDate()
         {
             return !ConditionNpcAcceptsDate() && !ConditionNpcConsidersDate() && !ConditionNpcDeclinesDateWait();
-            /*
-            return (Hero.MainHero.Spouse != Hero.OneToOneConversationHero && !Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero) && Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero) < DramalordMCM.Get.MinEmotionForDating) ||
-                ConversationManager.GetPersuasionIsActive() && !ConversationManager.GetPersuasionProgressSatisfied();
-            */
         }
-
+        /*
         internal static bool ConditionNpcAcceptsDivorcingSpouse()
         {
-            return (Hero.OneToOneConversationHero.Spouse != null && Info.GetEmotionToHero(Hero.OneToOneConversationHero, Hero.OneToOneConversationHero.Spouse) < DramalordMCM.Get.MinEmotionBeforeDivorce) || 
+            return (Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.OneToOneConversationHero.Spouse).Emotion < DramalordMCM.Get.MinEmotionBeforeDivorce) || 
                 ConversationManager.GetPersuasionIsActive() && ConversationManager.GetPersuasionProgressSatisfied();
         }
 
         internal static bool ConditionNpcConsidersDivorcingSpouse()
         {
-            return Hero.OneToOneConversationHero.Spouse != null && Info.GetEmotionToHero(Hero.OneToOneConversationHero, Hero.OneToOneConversationHero.Spouse) < Info.GetEmotionToHero(Hero.OneToOneConversationHero, Hero.MainHero);
+            return Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.OneToOneConversationHero.Spouse).Emotion < Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion;
         }
 
         internal static bool ConditionNpcDeclinesDivorcingSpouse()
         {
-            return (Hero.OneToOneConversationHero.Spouse != null && Info.GetEmotionToHero(Hero.OneToOneConversationHero, Hero.OneToOneConversationHero.Spouse) >= Info.GetEmotionToHero(Hero.OneToOneConversationHero, Hero.MainHero)) ||
-                ConversationManager.GetPersuasionIsActive() && !ConversationManager.GetPersuasionProgressSatisfied();
+            return (Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.OneToOneConversationHero.Spouse).Emotion >= Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion) ||
+                ConversationManager.GetPersuasionIsActive() && !ConversationManager.GetPersuasionProgressSatisfied(); 
         }
-
+        */
         internal static bool ConditonNpcAcceptsMarriage()
         {
-            bool isInArmy = Hero.OneToOneConversationHero.PartyBelongedTo != null && Hero.OneToOneConversationHero.PartyBelongedTo.Army != null;
-            return !isInArmy && (
-                (Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero) && Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero) >= DramalordMCM.Get.MinEmotionForMarriage) || 
-                ConversationManager.GetPersuasionIsActive() && ConversationManager.GetPersuasionProgressSatisfied()
-                );
+            return (Hero.MainHero.IsLover(Hero.OneToOneConversationHero) && Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion >= DramalordMCM.Get.MinEmotionForMarriage) || 
+                ConversationManager.GetPersuasionIsActive() && ConversationManager.GetPersuasionProgressSatisfied();
         }
 
         internal static bool ConditionNpcConsidersMarriage()
         {
-            bool isInArmy = Hero.OneToOneConversationHero.PartyBelongedTo != null && Hero.OneToOneConversationHero.PartyBelongedTo.Army != null;
-            return !isInArmy && Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero) < DramalordMCM.Get.MinEmotionForMarriage &&
-                Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero) > DramalordMCM.Get.MinEmotionForDating;
+            return Hero.MainHero.IsLover(Hero.OneToOneConversationHero) && Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion < DramalordMCM.Get.MinEmotionForMarriage &&
+                Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion > DramalordMCM.Get.MinEmotionForDating;
         }
 
         internal static bool ConditionNpcDeclinesMarriage()
         {
-            bool isInArmy = Hero.OneToOneConversationHero.PartyBelongedTo != null && Hero.OneToOneConversationHero.PartyBelongedTo.Army != null;
-            return isInArmy || Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero) < DramalordMCM.Get.MinEmotionForMarriage;
+            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion < DramalordMCM.Get.MinEmotionForMarriage;
         }
 
         // CONSEQUENCES
 
         internal static void ConsequenceNpcAcceptsFlirt()
         {
-            PlayerCampaignActions.PostConversationAction = PlayerCampaignActions.PlayerFlirtAction;
+            ConversationHelper.PostConversationAction = ConversationHelper.PlayerFlirtAction;
 
             if (PlayerEncounter.Current != null)
             {
@@ -163,14 +155,14 @@ namespace Dramalord.Conversations
 
         internal static void ConsequenceNpcDeclinesFlirtUgly()
         {
-            Info.SetLastDaySeen(Hero.MainHero, Hero.OneToOneConversationHero, CampaignTime.Now.ToDays);
-            Info.ChangeEmotionToHeroBy(Hero.MainHero, Hero.OneToOneConversationHero, DramalordMCM.Get.EmotionalLossCaughtFlirting * -1);
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
         }
 
         internal static void ConsequenceNpcAcceptsDate()
         {
             Persuasions.ClearCurrentPersuasion();
-            PlayerCampaignActions.PostConversationAction = PlayerCampaignActions.PlayerDateAction;
+            ConversationHelper.PostConversationAction = ConversationHelper.PlayerDateAction;
 
             if (PlayerEncounter.Current != null)
             {
@@ -190,23 +182,11 @@ namespace Dramalord.Conversations
 
         internal static void ConsequenceNpcDeclinesDate()
         {
-            Info.SetLastPrivateMeeting(Hero.MainHero, Hero.OneToOneConversationHero, CampaignTime.Now.ToDays);
-            Info.ChangeEmotionToHeroBy(Hero.MainHero, Hero.OneToOneConversationHero, DramalordMCM.Get.EmotionalLossCaughtFlirting * -1);
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
             Persuasions.ClearCurrentPersuasion();
         }
-
-        internal static void ConsequenceNpcAcceptsDivorcingHusband()
-        {
-            Persuasions.ClearCurrentPersuasion();
-
-            PlayerCampaignActions.PostConversationAction = PlayerCampaignActions.PlayerConvincedDivorceAction;
-
-            if (PlayerEncounter.Current != null)
-            {
-                PlayerEncounter.LeaveEncounter = true;
-            }
-        }
-
+        /*
         internal static void ConsequenceNpcConsidersDivorcingHusband()
         {
             Persuasions.CreatePersuasionTaskForDivorce();
@@ -215,13 +195,13 @@ namespace Dramalord.Conversations
         internal static void ConsequenceNpcDeclinesDivorcingHusband()
         {
             Persuasions.ClearCurrentPersuasion();
-            Info.ChangeEmotionToHeroBy(Hero.MainHero, Hero.OneToOneConversationHero, DramalordMCM.Get.EmotionalLossCaughtFlirting * -1);
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
         }
-
+        */
         internal static void ConsequenceNpcAcceptsMarriage()
         {
             Persuasions.ClearCurrentPersuasion();
-            PlayerCampaignActions.PostConversationAction = PlayerCampaignActions.PlayerMarriageAction;
+            ConversationHelper.PostConversationAction = ConversationHelper.PlayerMarriageAction;
 
             if (PlayerEncounter.Current != null)
             {
@@ -237,7 +217,7 @@ namespace Dramalord.Conversations
         internal static void ConsquenceNpcDeclinesMarriage()
         {
             Persuasions.ClearCurrentPersuasion();
-            Info.ChangeEmotionToHeroBy(Hero.MainHero, Hero.OneToOneConversationHero, DramalordMCM.Get.EmotionalLossCaughtFlirting * -1);
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
         }
     }
 }

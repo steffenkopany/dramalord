@@ -1,7 +1,7 @@
 ﻿using TaleWorlds.CampaignSystem;
 using TaleWorlds.SaveSystem;
 
-namespace Dramalord.Data
+namespace Dramalord.Data.Deprecated
 {
     internal class HeroTuple
     {
@@ -29,7 +29,7 @@ namespace Dramalord.Data
 
         public bool Equals(HeroTuple? tuple)
         {
-            return tuple != null && ((Actor == tuple.Actor && Target == tuple.Target) || (Actor == tuple.Target && Target == tuple.Actor));
+            return tuple != null && (Actor == tuple.Actor && Target == tuple.Target || Actor == tuple.Target && Target == tuple.Actor);
         }
     }
 }
