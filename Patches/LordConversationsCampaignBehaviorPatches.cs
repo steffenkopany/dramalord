@@ -1,28 +1,17 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using HarmonyLib;
 using JetBrains.Annotations;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.Core;
-
-/* Unmerged change from project 'Dramalord (net6)'
-Before:
-using TaleWorlds.Localization;
-using System;
-using TaleWorlds.CampaignSystem.CampaignBehaviors;
-using TaleWorlds.CampaignSystem.CharacterDevelopment;
-After:
-using TaleWorlds.CampaignSystem.Conversation;
-using TaleWorlds.Core;
-using TaleWorlds.Localization;
-*/
 using TaleWorlds.Localization;
 
 namespace Dramalord.Patches
 {
 
     [HarmonyPatch(typeof(LordConversationsCampaignBehavior), "conversation_lord_greets_under_24_hours_on_condition")]
-    public static class LordConversationsCampaignBehaviorPatch
+    public static class conversation_lord_greets_under_24_hours_on_conditionPatch
     {
          
         [UsedImplicitly]
@@ -39,18 +28,18 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if(!Info.ValidateHeroMemory(Hero.MainHero, Hero.OneToOneConversationHero))
+            if(!Hero.OneToOneConversationHero.IsDramalordLegit())
             {
                 return;
             }
-
-            if (Info.IsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && !Hero.MainHero.IsFemale)
+            
+            if (Hero.OneToOneConversationHero.IsLover(Hero.MainHero) && !Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero) && !Hero.MainHero.IsFemale)
             {
                 TextObject textObject = new TextObject("{=!}{SALUTATION}...");
                 textObject.SetTextVariable("SALUTATION", new TextObject("{=Dramalord096}My lover"));
                 MBTextManager.SetTextVariable("SHORT_ABSENCE_GREETING", textObject);
             }
-            else if (Info.IsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.MainHero.IsFemale)
+            else if (Hero.OneToOneConversationHero.IsLover(Hero.MainHero) && !Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero) && Hero.MainHero.IsFemale)
             {
                 TextObject textObject = new TextObject("{=!}{SALUTATION}...");
                 textObject.SetTextVariable("SALUTATION", new TextObject("{=Dramalord097}My love"));
@@ -72,7 +61,7 @@ namespace Dramalord.Patches
     }
 
     [HarmonyPatch(typeof(LordConversationsCampaignBehavior), "conversation_lord_greets_over_24_hours_on_condition")]
-    public static class LordConversationsCampaignBehaviorPatch2
+    public static class conversation_lord_greets_over_24_hours_on_conditionPatch
     {
 
         [UsedImplicitly]
@@ -89,16 +78,16 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if (!Info.ValidateHeroMemory(Hero.MainHero, Hero.OneToOneConversationHero))
+            if (!Hero.OneToOneConversationHero.IsDramalordLegit())
             {
                 return;
             }
 
-            if (Info.IsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && !Hero.MainHero.IsFemale)
+            if (Hero.OneToOneConversationHero.IsLover(Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && !Hero.MainHero.IsFemale)
             {
                 MBTextManager.SetTextVariable("STR_SALUTATION", new TextObject("{=Dramalord096}My lover"));
             }
-            else if (Info.IsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.MainHero.IsFemale)
+            else if (Hero.OneToOneConversationHero.IsLover(Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.MainHero.IsFemale)
             {
                 MBTextManager.SetTextVariable("STR_SALUTATION", new TextObject("{=Dramalord097}My love"));
             }

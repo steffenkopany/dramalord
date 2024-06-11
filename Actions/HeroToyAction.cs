@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
@@ -11,12 +12,12 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero)
         {
-            if(Info.ValidateHeroInfo(hero))
+            if(hero.IsDramalordLegit())
             {
                 bool broke = false;
                 if (MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ToyBreakChance)
                 {
-                    Info.SetHeroHasToy(hero, false);
+                    hero.GetHeroTraits().SetPropertyValue(HeroTraits.HasToy, 0);
                     TextObject textObject = new TextObject("{=Dramalord130}{HERO.LINK}s toy broke!");
                     StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
                     MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
@@ -24,11 +25,11 @@ namespace Dramalord.Actions
                     broke = true;
                 }
 
-                Info.ChangeEmotionToHeroBy(hero, Hero.MainHero, 1);
-                Info.ChangeHeroHornyBy(hero, 1);
-                if(hero.Spouse != null && hero.Spouse != Hero.MainHero && Info.ValidateHeroMemory(hero, hero.Spouse))
+                hero.GetDramalordFeelings(Hero.MainHero).Emotion += 1;
+                hero.GetHeroTraits().SetPropertyValue(HeroTraits.Horny, hero.GetDramalordTraits().Horny + 1);
+                if (hero.Spouse != null && hero.Spouse != Hero.MainHero)
                 {
-                    Info.ChangeEmotionToHeroBy(hero, hero.Spouse, -1);
+                    hero.GetDramalordFeelings(hero.Spouse).Emotion -= 1;
                 }
 
                 if (DramalordMCM.Get.AffairOutput)
@@ -36,7 +37,7 @@ namespace Dramalord.Actions
                     LogEntry.AddLogEntry(new LogUsedToy(hero));
                 }
 
-                DramalordEvents.OnHeroesUsedToy(hero, broke);
+                DramalordEventCallbacks.OnHeroesUsedToy(hero, broke);
             }  
         }
     }

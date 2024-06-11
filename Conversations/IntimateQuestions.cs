@@ -1,9 +1,13 @@
 ﻿using Dramalord.Behaviors;
 using Dramalord.Data;
+using Dramalord.Data.Deprecated;
 using Dramalord.UI;
+using Helpers;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.LogEntries;
+using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
@@ -45,49 +49,45 @@ namespace Dramalord.Conversations
         // CONDITIONS
         internal static bool ConditionPlayerCanAskIntimateQuestions()
         {
-            return Info.ValidateHeroInfo(Hero.OneToOneConversationHero) && Info.ValidateHeroMemory(Hero.MainHero, Hero.OneToOneConversationHero);
+            return Hero.OneToOneConversationHero.IsDramalordLegit();
         }
 
         internal static bool ConditionNpcAcceptsIntimateQuestions()
         {
-            return Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero) >= DramalordMCM.Get.MinEmotionForConversation;
+            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion >= DramalordMCM.Get.MinEmotionForConversation;
         }
 
         internal static bool ConditionNpcDeclinesIntimateQuestions()
         {
-            return Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero) < DramalordMCM.Get.MinEmotionForConversation;
+            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion < DramalordMCM.Get.MinEmotionForConversation;
         }
 
         internal static bool ConditionPlayerAskFertility()
         {
-            return Hero.MainHero.Spouse == Hero.OneToOneConversationHero || Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero);
+            return Hero.MainHero.Spouse == Hero.OneToOneConversationHero || Hero.MainHero.IsLover(Hero.OneToOneConversationHero);
         }
 
         internal static bool ConditionPlayerAskHorny()
         {
-            return Hero.MainHero.Spouse == Hero.OneToOneConversationHero || Info.IsCoupleWithHero(Hero.MainHero, Hero.OneToOneConversationHero);
+            return Hero.MainHero.Spouse == Hero.OneToOneConversationHero || Hero.MainHero.IsLover(Hero.OneToOneConversationHero);
         }
 
         internal static bool ConditionNpcRepliesAboutLooks()
         {
-            HeroInfoData? data = Info.GetHeroInfoDataCopy(Hero.OneToOneConversationHero);
-            if (data != null)
-            {
-                int attractionWomen = (Hero.OneToOneConversationHero.IsFemale) ? data.AttractionWomen - DramalordMCM.Get.OtherSexAttractionModifier : data.AttractionWomen + DramalordMCM.Get.OtherSexAttractionModifier;
-                int attractionMen = (!Hero.OneToOneConversationHero.IsFemale) ? data.AttractionMen - DramalordMCM.Get.OtherSexAttractionModifier : data.AttractionMen + DramalordMCM.Get.OtherSexAttractionModifier;
-                MBTextManager.SetTextVariable("RATING_WOMEN", new TextObject(attractionWomen > 75 ? "{=Dramalord010}sexy" : attractionWomen > 50 ? "{=Dramalord011}alright" : attractionWomen < 25 ? "{=Dramalord012}disgusting" : "{=Dramalord013}not my thing").ToString());
-                MBTextManager.SetTextVariable("RATING_MEN", attractionMen > 75 ? "{=Dramalord010}sexy" : attractionMen > 50 ? "{=Dramalord011}alright" : attractionMen < 25 ? "{=Dramalord012}disgusting" : "{=Dramalord013}not my thing");
-                MBTextManager.SetTextVariable("RATING_WEIGHT", data.AttractionWeight > 0.6 ? "{=Dramalord014}chubby" : data.AttractionWeight > 0.3 ? "{=Dramalord015}average" : "{=Dramalord016}slim");
-                MBTextManager.SetTextVariable("RATING_BUILD", data.AttractionBuild > 0.6 ? "{=Dramalord017}muscular" : data.AttractionBuild > 0.3 ? "{=Dramalord018}normal" : "{=Dramalord019}low");
-                MBTextManager.SetTextVariable("RATING_AGE", MBMath.ClampInt((int)Hero.OneToOneConversationHero.Age + data.AttractionAgeDiff, 18, 130));
-            }
-
+            int attractionWomen = Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWomen;
+            int attractionMen = Hero.OneToOneConversationHero.GetDramalordTraits().AttractionMen;
+            MBTextManager.SetTextVariable("RATING_WOMEN", new TextObject(attractionWomen > 75 ? "{=Dramalord010}sexy" : attractionWomen > 50 ? "{=Dramalord011}alright" : attractionWomen < 25 ? "{=Dramalord012}disgusting" : "{=Dramalord013}not my thing").ToString());
+            MBTextManager.SetTextVariable("RATING_MEN", attractionMen > 75 ? "{=Dramalord010}sexy" : attractionMen > 50 ? "{=Dramalord011}alright" : attractionMen < 25 ? "{=Dramalord012}disgusting" : "{=Dramalord013}not my thing");
+            MBTextManager.SetTextVariable("RATING_WEIGHT", Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWeight > 60 ? "{=Dramalord014}chubby" : Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWeight > 30 ? "{=Dramalord015}average" : "{=Dramalord016}slim");
+            MBTextManager.SetTextVariable("RATING_BUILD", Hero.OneToOneConversationHero.GetDramalordTraits().AttractionBuild > 60 ? "{=Dramalord017}muscular" : Hero.OneToOneConversationHero.GetDramalordTraits().AttractionBuild > 30 ? "{=Dramalord018}normal" : "{=Dramalord019}low");
+            MBTextManager.SetTextVariable("RATING_AGE", MBMath.ClampInt((int)Hero.OneToOneConversationHero.Age + Hero.OneToOneConversationHero.GetDramalordTraits().AttractionAgeDiff, 18, 130));
+   
             return true;
         }
 
         internal static bool ConditionNpcRepliesAboutPlayerLooks()
         {
-            int rating = Info.GetAttractionToHero(Hero.OneToOneConversationHero, Hero.MainHero);
+            int rating = Hero.OneToOneConversationHero.GetDramalordAttractionTo(Hero.MainHero);
             if (rating < 10)
             {
                 MBTextManager.SetTextVariable("RATING_TOTAL", new TextObject("{=Dramalord020}absolutely disgusting!"));
@@ -135,7 +135,7 @@ namespace Dramalord.Conversations
         internal static bool ConditionNpcRepliesAboutFeelings()
         {
 
-            int emotion = (int)Info.GetEmotionToHero(Hero.MainHero, Hero.OneToOneConversationHero);
+            int emotion = (int)Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion;
 
             if (emotion < -80)
             {
@@ -183,54 +183,49 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionNpcRepliesAboutFertilityPositive()
         {
-            if(Hero.OneToOneConversationHero.IsFemale && Info.IsHeroFertile(Hero.OneToOneConversationHero))
+            if(Hero.OneToOneConversationHero.IsFemale && Hero.OneToOneConversationHero.GetDramalordIsFertile())
             {
-                HeroInfoData? data = Info.GetHeroInfoDataCopy(Hero.OneToOneConversationHero);
-                if(data != null)
+                int today = (int)CampaignTime.Now.GetDayOfSeason;
+                int dayOfPeriod = Hero.OneToOneConversationHero.GetDramalordTraits().PeriodDayOfSeason;
+
+                if (today < dayOfPeriod)
                 {
-                    int today = (int)CampaignTime.Now.GetDayOfSeason;
-
-                    if (today < data.PeriodDayOfSeason)
-                    {
-                        MBTextManager.SetTextVariable("PERIOD_DAYS", data.PeriodDayOfSeason - today);
-                    }
-                    else
-                    {
-                        MBTextManager.SetTextVariable("PERIOD_DAYS", (CampaignTime.DaysInSeason + data.PeriodDayOfSeason) - today);
-                    }
-
-                    return true;
+                    MBTextManager.SetTextVariable("PERIOD_DAYS", dayOfPeriod - today);
                 }
+                else
+                {
+                    MBTextManager.SetTextVariable("PERIOD_DAYS", (CampaignTime.DaysInSeason + dayOfPeriod) - today);
+                }
+
+                return true;
+                
             }
             return false;
         }
 
         internal static bool ConditionNpcRepliesAboutFertilityPeriod()
         {
-            if (Hero.OneToOneConversationHero.IsFemale && !Hero.OneToOneConversationHero.IsPregnant && Hero.OneToOneConversationHero.Age <= DramalordMCM.Get.MaxFertilityAge && !Info.IsHeroFertile(Hero.OneToOneConversationHero))
+            if (Hero.OneToOneConversationHero.IsFemale && !Hero.OneToOneConversationHero.IsPregnant && Hero.OneToOneConversationHero.Age <= DramalordMCM.Get.MaxFertilityAge && !Hero.OneToOneConversationHero.GetDramalordIsFertile())
             {
-                HeroInfoData? data = Info.GetHeroInfoDataCopy(Hero.OneToOneConversationHero);
-                if (data != null)
+                int today = (int)CampaignTime.Now.GetDayOfSeason;
+                int nextToday = today + CampaignTime.DaysInSeason;
+                int startPeriod = Hero.OneToOneConversationHero.GetDramalordTraits().PeriodDayOfSeason;
+                int endPeriod = startPeriod + DramalordMCM.Get.PeriodDuration;
+
+                bool inPeriod = (today >= startPeriod && today <= endPeriod) || (nextToday >= startPeriod && nextToday <= endPeriod);
+
+
+                if (today >= startPeriod)
                 {
-                    int today = (int)CampaignTime.Now.GetDayOfSeason;
-                    int nextToday = today + CampaignTime.DaysInSeason;
-                    int startPeriod = (int)data.PeriodDayOfSeason;
-                    int endPeriod = startPeriod + DramalordMCM.Get.PeriodDuration;
-
-                    bool inPeriod = (today >= startPeriod && today <= endPeriod) || (nextToday >= startPeriod && nextToday <= endPeriod);
-
-
-                    if (today >= startPeriod)
-                    {
-                        MBTextManager.SetTextVariable("PERIOD_DAYS", endPeriod - today);
-                    }
-                    else
-                    {
-                        MBTextManager.SetTextVariable("PERIOD_DAYS", endPeriod - nextToday);
-                    }
-
-                    return true;
+                    MBTextManager.SetTextVariable("PERIOD_DAYS", endPeriod - today);
                 }
+                else
+                {
+                    MBTextManager.SetTextVariable("PERIOD_DAYS", endPeriod - nextToday);
+                }
+
+                return true;
+               
             }
             return false;
         }
@@ -244,10 +239,10 @@ namespace Dramalord.Conversations
         {
             if(Hero.OneToOneConversationHero.IsPregnant)
             {
-                HeroOffspringData? offspring = Info.GetHeroOffspring(Hero.OneToOneConversationHero);
+                HeroPregnancy? offspring = Hero.OneToOneConversationHero.GetDramalordPregnancy();
                 if(offspring != null)
                 {
-                    return offspring.Father == Hero.MainHero;
+                    return offspring.Father == Hero.MainHero.CharacterObject;
                 }
             }
             return false;
@@ -257,11 +252,16 @@ namespace Dramalord.Conversations
         {
             if (Hero.OneToOneConversationHero.IsPregnant)
             {
-                HeroOffspringData? offspring = Info.GetHeroOffspring(Hero.OneToOneConversationHero);
-                if (offspring != null && offspring.Father != Hero.MainHero)
+                HeroPregnancy? pregnancy = Hero.OneToOneConversationHero.GetDramalordPregnancy();
+                if (pregnancy != null && pregnancy.Father != Hero.MainHero.CharacterObject)
                 {
-                    PlayerConfrontation.CheatingHero = Hero.OneToOneConversationHero;
-                    PlayerConfrontation.WitnessOf = Actions.WitnessType.Pregnancy;
+                    Hero.MainHero.AddDramalordMemory(pregnancy.EventID, MemoryType.Witness, Hero.OneToOneConversationHero, true);
+                    LogEntry.AddLogEntry(new LogWitnessPregnancy(Hero.MainHero, Hero.OneToOneConversationHero));
+
+                    TextObject banner = new TextObject("{=Dramalord270}You noticed {HERO.LINK} is pregnant from someone else");
+                    StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
+                    MBInformationManager.AddQuickInformation(banner, 1000, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
+
                     return true;
                 }
             }
@@ -275,12 +275,12 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionNpcRepliesAboutHornyPositive()
         {
-            return Info.GetHeroHorny(Hero.OneToOneConversationHero) >= DramalordMCM.Get.MinHornyForIntercourse;
+            return Hero.OneToOneConversationHero.GetDramalordTraits().Horny >= DramalordMCM.Get.MinHornyForIntercourse; 
         }
 
         internal static bool ConditionNpcRepliesAboutHornyNegative()
         {
-            return Info.GetHeroHorny(Hero.OneToOneConversationHero) < DramalordMCM.Get.MinHornyForIntercourse;
+            return Hero.OneToOneConversationHero.GetDramalordTraits().Horny < DramalordMCM.Get.MinHornyForIntercourse;
         }
     }
 }

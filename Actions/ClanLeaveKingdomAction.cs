@@ -17,7 +17,7 @@ namespace Dramalord.Actions
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogClanLeftKingdom(clan, kingdom, forced));
                 }
-                DramalordEvents.OnClanLeftKingdom(clan, kingdom, forced);
+                DramalordEventCallbacks.OnClanLeftKingdom(clan, kingdom, forced);
             }
         }
     }  

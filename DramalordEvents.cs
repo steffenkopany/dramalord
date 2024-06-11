@@ -1,29 +1,31 @@
 ﻿using Dramalord.Actions;
+using Dramalord.Data;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 
 namespace Dramalord
 {
-    public class DramalordEvents
+    public class DramalordEventCallbacks
     {
         public static List<Action<Hero, Hero>> OnHeroesMarriedActions = new();
         public static List<Action<Hero, Hero>> OnHeroesDivorcedActions = new();
         public static List<Action<Hero, Hero>> OnHeroesAffairMeetingActions = new();
         public static List<Action<Hero, Hero>> OnHeroesBreakupActions = new();
-        public static List<Action<Hero, Hero, bool>> OnHeroesIntercourseActions = new();
-        public static List<Action<Hero, Hero, bool>> OnHeroesConceiveActions = new();
-        public static List<Action<Hero, Hero, bool>> OnHeroesFlirtActions = new();
+        public static List<Action<Hero, Hero>> OnHeroesIntercourseActions = new();
+        public static List<Action<Hero, Hero>> OnHeroesConceiveActions = new();
+        public static List<Action<Hero, Hero>> OnHeroesFlirtActions = new();
         public static List<Action<Hero, Hero, Hero>> OnHeroesAdoptedActions = new();
         public static List<Action<Hero, Hero, Hero>> OnHeroesBornActions = new();
         public static List<Action<Hero, Clan, Hero>> OnHeroesLeaveClanActions = new();
         public static List<Action<Hero, Clan>> OnHeroesJoinClanActions = new();
         public static List<Action<Hero, Hero>> OnHeroesPutToOrphanageActions = new();
-        public static List<Action<Hero, Hero, Hero, WitnessType>> OnHeroesWitnessActions = new();
-        public static List<Action<Hero, Hero, Hero, KillReason>> OnHeroesKilledActions = new();
+        public static List<Action<Hero, Hero, Hero, EventType>> OnHeroesWitnessActions = new();
+        public static List<Action<Hero, Hero, Hero, EventType>> OnHeroesKilledActions = new();
         public static List<Action<Hero, bool>> OnHeroesUsedToyActions = new();
         public static List<Action<Clan, Kingdom, bool>> OnClanLeftKingdomActions = new();
         public static List<Action<Clan, Kingdom>> OnClanJoinedKingdomActions = new();
+        public static List<Action<Hero, Hero, Hero, HeroEvent>> OnHeroesConfrontationActions = new();
 
         internal static void OnHeroesMarried(Hero hero, Hero target)
         {
@@ -40,14 +42,14 @@ namespace Dramalord
             OnHeroesAffairMeetingActions.ForEach(item => item(hero, target));
         }
 
-        internal static void OnHeroesIntercourse(Hero hero, Hero target, bool byForce)
+        internal static void OnHeroesIntercourse(Hero hero, Hero target)
         {
-            OnHeroesIntercourseActions.ForEach(item => item(hero, target, byForce));
+            OnHeroesIntercourseActions.ForEach(item => item(hero, target));
         }
 
-        internal static void OnHeroesConceive(Hero hero, Hero target, bool byForce)
+        internal static void OnHeroesConceive(Hero hero, Hero target)
         {
-            OnHeroesConceiveActions.ForEach(item => item(hero, target, byForce));
+            OnHeroesConceiveActions.ForEach(item => item(hero, target));
         }
 
         internal static void OnHeroesBreakup(Hero hero, Hero target)
@@ -55,9 +57,9 @@ namespace Dramalord
             OnHeroesBreakupActions.ForEach(item => item(hero, target));
         }
 
-        internal static void OnHeroesFlirt(Hero hero, Hero target, bool startedAffair)
+        internal static void OnHeroesFlirt(Hero hero, Hero target)
         {
-            OnHeroesConceiveActions.ForEach(item => item(hero, target, startedAffair));
+            OnHeroesFlirtActions.ForEach(item => item(hero, target));
         }
 
         internal static void OnHeroesAdopted(Hero hero, Hero target, Hero child)
@@ -85,12 +87,12 @@ namespace Dramalord
             OnHeroesPutToOrphanageActions.ForEach(item => item(hero, child));
         }
 
-        internal static void OnHeroesWitness(Hero hero, Hero target, Hero witness, WitnessType type)
+        internal static void OnHeroesWitness(Hero hero, Hero target, Hero witness, EventType type)
         {
             OnHeroesWitnessActions.ForEach(item => item(hero, target, witness, type));
         }
 
-        internal static void OnHeroesKilled(Hero killer, Hero victim, Hero reason, KillReason type)
+        internal static void OnHeroesKilled(Hero killer, Hero victim, Hero reason, EventType type)
         {
             OnHeroesKilledActions.ForEach(item => item(killer, victim, reason, type));
         }
@@ -108,6 +110,11 @@ namespace Dramalord
         internal static void OnClanJoinedKingdom(Clan clan, Kingdom kingdom)
         {
             OnClanJoinedKingdomActions.ForEach(item => item(clan, kingdom));
+        }
+
+        internal static void OnHeroesConfrontation(Hero hero1, Hero hero2, Hero hero3, HeroEvent hEvent)
+        {
+            OnHeroesConfrontationActions.ForEach(item => item(hero1, hero2, hero3, hEvent));
         }
     }
 }

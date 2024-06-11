@@ -1,22 +1,24 @@
 ﻿using Dramalord.Actions;
-using Dramalord.Behaviors;
 using Dramalord.Data;
-using Dramalord.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
-using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
 namespace Dramalord.Conversations
 {
-    internal static class NpcInteractions
+    internal sealed class NpcInteractions
     {
         internal static Hero? ApproachingHero;
+        internal static EventType? Intention;
+
+        internal static void start(Hero approachingHero, EventType intention)
+        {
+            NpcInteractions.ApproachingHero = approachingHero;
+            NpcInteractions.Intention = intention;
+            CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(ApproachingHero.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
+        }
+
         internal static void AddDialogs(CampaignGameStarter starter)
         {
             starter.AddDialogLine("npc_starts_interaction", "lord_start", "npc_interaction_path", "{=Dramalord255}{TITLE}, I would like to talk to you.", ConditionNPCStartsInteraction, null, 120);
@@ -26,6 +28,7 @@ namespace Dramalord.Conversations
 
             starter.AddDialogLine("npc_requests_flirt", "npc_request_list", "player_flirt_request_reply", "{=Dramalord070}...go for a walk with me?", ConditionNpcAsksForFlirt, null);
             starter.AddDialogLine("npc_requests_date", "npc_request_list", "player_date_request_reply", "{=Dramalord044}...retreat to somewhere more silent?", ConditionNpcAksForDate, null);
+            starter.AddDialogLine("npc_requests_prisonfun", "npc_request_list", "player_prisonfun_reply", "{=Dramalord296}...consider letting you go for... some special service from you...", ConditionNpcAskForPrisonFun, null);
             starter.AddDialogLine("npc_requests_marriage", "npc_request_list", "player_marriage_request_reply", "{=Dramalord051}...marry me?", ConditionNpcAsksForMarriage, null);
 
             starter.AddDialogLine("Dramalord970", "player_request_list", "close_window", "{=Dramalord104}...end this love affair.", ConditionNpcWantsBreakup, ConsequenceNpcBrokeUpWithPlayer);
@@ -39,41 +42,18 @@ namespace Dramalord.Conversations
 
             starter.AddPlayerLine("Dramalord445", "player_marriage_request_reply", "close_window", "{=Dramalord045}Oh... well, I think I would like that.", null, ConsequencePlayerAcceptsMarriage);
             starter.AddPlayerLine("Dramalord446", "player_marriage_request_reply", "close_window", "{=Dramalord046}No I would not like to do that.", null, ConsquencePlayerDeclinesMarriage);
+
+            starter.AddPlayerLine("npc_prisonfun_accept", "player_prisonfun_reply", "close_window", "{=Dramalord297}Well come here pretty, you got yourself a deal!", null, ConsequencePlayerReactsPrisonfunAccept);
+            starter.AddPlayerLine("npc_prisonfun_decline", "player_prisonfun_reply", "close_window", "{=Dramalord295}Never! You will not taint my honor with such offers!", null, null);
         }
 
         // CONDITIONS
         internal static bool ConditionNPCStartsInteraction()
         {
-            if (Hero.OneToOneConversationHero != null && (Hero.OneToOneConversationHero.IsLord || Hero.OneToOneConversationHero.Occupation == Occupation.Wanderer))
+            if (NpcInteractions.ApproachingHero != null)
             {
-                bool result = ApproachingHero == Hero.OneToOneConversationHero;
-                ApproachingHero = null;
-                if (result)
-                {
-                    string text = string.Empty;
-                    if (Hero.OneToOneConversationHero.Spouse == Hero.MainHero)
-                    {
-                        text = Hero.MainHero.IsFemale ? new TextObject("{=Dramalord049}wife").ToString() : new TextObject("{=Dramalord048}husband").ToString();
-                    }
-                    else if (Info.IsCoupleWithHero(Hero.OneToOneConversationHero, Hero.MainHero))
-                    {
-                        text = Hero.MainHero.IsFemale ? new TextObject("{=Dramalord097}My love").ToString() : new TextObject("{=Dramalord096}My lover").ToString();
-                    }
-                    else
-                    {
-                        text = Hero.MainHero.IsFemale ? GameTexts.FindText("str_my_lady").ToString() : GameTexts.FindText("str_my_lord").ToString();
-                    }
-
-                    char[] array = text.ToCharArray();
-                    text = array[0].ToString().ToUpper();
-                    for (int i = 1; i < array.Length; i++)
-                    {
-                        text += array[i];
-                    }
-
-                    MBTextManager.SetTextVariable("TITLE", text);
-                }
-                return result;
+                MBTextManager.SetTextVariable("TITLE", ConversationHelper.GetHeroGreeting(NpcInteractions.ApproachingHero, Hero.MainHero, true));
+                return true;
             }
             return false;
         }
@@ -90,68 +70,72 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionNpcAsksForFlirt()
         {
-            bool wantsFlirt;
-            Info.GetInteractionVariables(Hero.OneToOneConversationHero, Hero.MainHero, out wantsFlirt, out _, out _, out _, out _);
-            return wantsFlirt;
+            return Intention == EventType.Flirt;
         }
 
         internal static bool ConditionNpcAksForDate()
         {
-            bool wantsDate;
-            Info.GetInteractionVariables(Hero.OneToOneConversationHero, Hero.MainHero, out _, out wantsDate, out _, out _, out _);
-            return wantsDate;
+            return Intention == EventType.Date;
+        }
+
+        internal static bool ConditionNpcAskForPrisonFun()
+        {
+            return Hero.MainHero.IsPrisoner;
         }
 
         internal static bool ConditionNpcAsksForMarriage()
         {
-            bool wantsToMarry;
-            Info.GetInteractionVariables(Hero.OneToOneConversationHero, Hero.MainHero, out _, out _, out wantsToMarry, out _, out _);
-            return wantsToMarry;
+            return Intention == EventType.Marriage;
         }
 
         internal static bool ConditionNpcWantsDivorce()
         {
-            bool wantsToDivorce;
-            Info.GetInteractionVariables(Hero.OneToOneConversationHero, Hero.MainHero, out _, out _, out _, out _, out wantsToDivorce);
-            return wantsToDivorce;
+            return Intention == EventType.Divorce;
         }
 
         internal static bool ConditionNpcWantsBreakup()
         {
-            bool wantsToBreakUp;
-            Info.GetInteractionVariables(Hero.OneToOneConversationHero, Hero.MainHero, out _, out _, out _, out wantsToBreakUp, out _);
-            return wantsToBreakUp;
+            return Intention == EventType.BreakUp;
         }
 
         //CONSEQUENCES
         internal static void ConsequencePlayerAcceptedFlirt()
         {
-            PlayerCampaignActions.PostConversationAction = PlayerCampaignActions.PlayerFlirtAction;
+            ConversationHelper.PostConversationAction = ConversationHelper.PlayerFlirtAction;
 
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
             }
+
+            NpcInteractions.ApproachingHero = null;
+            NpcInteractions.Intention = null;
         }
 
         internal static void ConsequencePlayerAcceptedDate()
         {
-            PlayerCampaignActions.PostConversationAction = PlayerCampaignActions.PlayerDateAction;
+            ConversationHelper.PostConversationAction = ConversationHelper.PlayerDateAction;
 
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
             }
+
+            NpcInteractions.ApproachingHero = null;
+            NpcInteractions.Intention = null;
         }
 
         internal static void ConsequencePlayerAcceptsMarriage()
         {
-            PlayerCampaignActions.PostConversationAction = PlayerCampaignActions.PlayerMarriageAction;
+            ConversationHelper.PostConversationAction = ConversationHelper.PlayerMarriageAction;
 
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
             }
+
+            NpcInteractions.ApproachingHero = null;
+            NpcInteractions.Intention = null;
         }
 
         internal static void ConsequenceNpcBrokeUpWithPlayer()
@@ -161,6 +145,9 @@ namespace Dramalord.Conversations
             {
                 PlayerEncounter.LeaveEncounter = true;
             }
+
+            NpcInteractions.ApproachingHero = null;
+            NpcInteractions.Intention = null;
         }
 
         internal static void ConsequenceNpcDivorcedPlayer()
@@ -170,24 +157,64 @@ namespace Dramalord.Conversations
             {
                 PlayerEncounter.LeaveEncounter = true;
             }
+
+            NpcInteractions.ApproachingHero = null;
+            NpcInteractions.Intention = null;
         }
 
         internal static void ConsequencePlayerDeclinesDate()
         {
-            Info.SetLastPrivateMeeting(Hero.MainHero, Hero.OneToOneConversationHero, CampaignTime.Now.ToDays);
-            Info.ChangeEmotionToHeroBy(Hero.MainHero, Hero.OneToOneConversationHero, DramalordMCM.Get.EmotionalLossCaughtFlirting * -1);
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+
+            NpcInteractions.ApproachingHero = null;
+            NpcInteractions.Intention = null;
         }
 
         internal static void ConsequencePlayerDeclinesFlirt()
         {
-            Info.SetLastDaySeen(Hero.MainHero, Hero.OneToOneConversationHero, CampaignTime.Now.ToDays);
-            Info.ChangeEmotionToHeroBy(Hero.MainHero, Hero.OneToOneConversationHero, DramalordMCM.Get.EmotionalLossCaughtFlirting * -1);
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+
+            NpcInteractions.ApproachingHero = null;
+            NpcInteractions.Intention = null;
         }
 
         internal static void ConsquencePlayerDeclinesMarriage()
         {
-            Info.SetLastDaySeen(Hero.MainHero, Hero.OneToOneConversationHero, CampaignTime.Now.ToDays);
-            Info.ChangeEmotionToHeroBy(Hero.MainHero, Hero.OneToOneConversationHero, DramalordMCM.Get.EmotionalLossCaughtFlirting * -1);
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
+            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+
+            NpcInteractions.ApproachingHero = null;
+            NpcInteractions.Intention = null;
+        }
+
+        internal static void ConsequencePlayerReactsPrisonfunAccept()
+        {
+            ConversationHelper.PostConversationAction = ConversationHelper.PlayerPerformsPrisonerDeal;
+
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+
+            NpcInteractions.ApproachingHero = null;
+            NpcInteractions.Intention = null;
         }
     }
 }

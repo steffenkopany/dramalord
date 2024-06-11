@@ -87,7 +87,7 @@ namespace Dramalord.Quests
             HeroList.Remove(QuestGiver);
 
             Persuasions.ClearCurrentPersuasion();
-            PlayerCampaignActions.PostConversationAction = PlayerCampaignActions.PlayerDateAction;
+            ConversationHelper.PostConversationAction = ConversationHelper.PlayerDateAction;
 
             if (PlayerEncounter.Current != null)
             {
@@ -100,7 +100,8 @@ namespace Dramalord.Quests
             CompleteQuestWithFail();
             TextObject banner = new TextObject("{=Dramalord290}{HERO.LINK} is disappointed by your neglection of their matter.");
             StringHelpers.SetCharacterProperties("HERO", QuestGiver.CharacterObject, banner);
-            Info.ChangeEmotionToHeroBy(QuestGiver, Hero.MainHero, -DramalordMCM.Get.EmotionalLossCaughtDate);
+     
+            QuestGiver.GetDramalordFeelings(Hero.MainHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtDate;
             MBInformationManager.AddQuickInformation(banner, 1000, QuestGiver.CharacterObject, "event:/ui/notification/relation");
             HeroList.Remove(QuestGiver);
             if (PlayerEncounter.Current != null)

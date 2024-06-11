@@ -338,5 +338,49 @@
     <string id="Dramalord331" text="Schon wieder? Bitte lasst mich ein wenig ausruhen..." />
     <string id="Dramalord332" text="Fruchtbar:" />
     <string id="Dramalord333" text="Ich bin schon schwanger, Dummerchen!" />
+    <string id="Dramalord334" text="Liebhaber" />
+    <string id="Dramalord335" text="Freund mit gewissen Vorzügen" />
+    <string id="Dramalord336" text="Also, Ihr und {TARGET} habt hinter meinem Rücken geheiratet?" />
+    <string id="Dramalord337" text="{TITLE}, ich muss mit Euch reden![if:convo_angry_voice]" />
+    <string id="Dramalord338" text="Ich habe Euch und {TARGET.LINK} mit eigenen Augen gesehen!" />
+    <string id="Dramalord339" text="Das habe ich von {SOURCE.LINK} gelernt!" />
+    <string id="Dramalord340" text="Spannungsverlust durch Geschlechtsverkehr" />
+    <string id="Dramalord341" text="Wert des durch Geschlechtsverkehr verlorenen Spannungsverlusts" />
+    <string id="Dramalord342" text="{WITNESS.LINK} hat gesehen, wie {HERO1.LINK} und {HERO2.LINK} geheiratet haben." />
+    <string id="Dramalord343" text="Konfrontationslogs" />
+    <string id="Dramalord344" text="Konfrontationsereignisse in Logs anzeigen" />
+    <string id="Dramalord345" text="Klatschlogs" />
+    <string id="Dramalord346" text="Klatsch in Logs anzeigen" />
+    <string id="Dramalord347" text="{HERO1.LINK} gestand {HERO2.LINK}, ein Date mit {HERO3.LINK} gehabt zu haben" />
+    <string id="Dramalord348" text="{HERO1.LINK} gestand {HERO2.LINK}, Geschlechtsverkehr mit {HERO3.LINK} gehabt zu haben" />
+    <string id="Dramalord349" text="{HERO1.LINK} gestand {HERO2.LINK}, {HERO3.LINK} geheiratet zu haben" />
+    <string id="Dramalord350" text="{HERO1.LINK} hat {HERO2.LINK} Gerüchte über ein Date von {HERO2.LINK} und {HERO4.LINK} erzählt" />
+    <string id="Dramalord351" text="{HERO1.LINK} hat {HERO2.LINK} Gerüchte über Geschlechtsverkehr von {HERO2.LINK} und {HERO4.LINK} erzählt" />
+    <string id="Dramalord352" text="{HERO1.LINK} hat {HERO2.LINK} Gerüchte über die Hochzeit von {HERO3.LINK} und {HERO4.LINK} erzählt" />
+    <string id="Dramalord353" text="{HERO1.LINK} hat {HERO2.LINK} erzählt, Zeuge eines Dates von {HERO2.LINK} und {HERO4.LINK} gewesen zu sein" />
+    <string id="Dramalord354" text="{HERO1.LINK} hat {HERO2.LINK} erzählt, Zeuge des Geschlechtsverkehrs zwischen {HERO2.LINK} und {HERO4.LINK} gewesen zu sein" />
+    <string id="Dramalord355" text="{HERO1.LINK} hat {HERO2.LINK} erzählt, Zeuge der Hochzeit zwischen {HERO2.LINK} und {HERO4.LINK} gewesen zu sein" />
+    <string id="Dramalord356" text="Also, ladet mich das nächste Mal auch mit ein. Wir könnten zusammen Spaß haben!" />
+    <string id="Dramalord357" text="Ich verzeihe Euch... Aber tut das nie wieder!" />
+    <string id="Dramalord358" text="Das sehe ich deutlich!" />
+    <string id="Dramalord359" text="{HERO1.LINK} und {HERO2.LINK} sind jetzt Freunde mit gewissen Vorzügen" />
+    <string id="Dramalord360" text="Standardschwangerschaften aktivieren" />
+    <string id="Dramalord361" text="Standardschwangerschaften von Bannerlords zulassen" />
+    <string id="Dramalord362" text="Standardheiraten aktivieren" />
+    <string id="Dramalord363" text="Standardheiraten von Bannerlords zulassen" />
+    <string id="Dramalord364" text="Liebhaber in Enzyklopädie anzeigen" />
+    <string id="Dramalord365" text="Liebhaber in Enzyklopädie anzeigen (Familienbereich)" />
+    <string id="Dramalord366" text="Freunde mit gewissen Vorzügen in der Enzyklopädie anzeigen" />
+    <string id="Dramalord367" text="Freunde mit gewissen Vorzügen in der Enzyklopädie anzeigen (Familienbereich)" />
+    <string id="Dramalord368" text="Dauer der Erinnerung an Dates" />
+    <string id="Dramalord369" text="Zeit in Tagen, an die sich Helden an Dateereignisse erinnern" />
+    <string id="Dramalord370" text="Dauer der Erinnerung an Geschlechtsverkehr" />
+    <string id="Dramalord371" text="Zeit in Tagen, an die sich Helden an Geschlechtsverkehrereignisse erinnern" />
+    <string id="Dramalord372" text="Dauer der Erinnerung an Geburt" />
+    <string id="Dramalord373" text="Zeit in Tagen, an die sich Helden an Geburtsereignisse erinnern" />
+    <string id="Dramalord374" text="Dauer der Erinnerung an Ehe" />
+    <string id="Dramalord375" text="Zeit in Tagen, in der sich Helden an Hochzeitsereignisse erinnern" />
+    <string id="Dramalord376" text="Mindestvertrauensniveau" />
+    <string id="Dramalord377" text="Mindestmaß an Vertrauen das erforderlich ist, damit ein Held einem anderen vertraut" />
   </strings>
 </base>

@@ -8,19 +8,11 @@ using TaleWorlds.Localization;
 
 namespace Dramalord.Actions
 {
-    public enum KillReason
-    {
-        Intercourse,
-        Pregnancy,
-        Bastard,
-        Suicide
-    }
-
     internal static class HeroKillAction
     {
-        internal static void Apply(Hero killer, Hero victim, Hero reason, KillReason type)
+        internal static void Apply(Hero killer, Hero victim, Hero reason, EventType type)
         {
-            if (type == KillReason.Intercourse)
+            if (type == EventType.Intercourse || type == EventType.Date)
             {
                 KillCharacterAction.ApplyByMurder(victim, killer, false);
                 if (DramalordMCM.Get.DeathOutput)
@@ -28,7 +20,7 @@ namespace Dramalord.Actions
                     LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenCaught(victim, killer, reason));
                 }
             }
-            else if (type == KillReason.Pregnancy)
+            else if (type == EventType.Pregnancy)
             {
                 KillCharacterAction.ApplyByMurder(victim, killer, false);
                 if (DramalordMCM.Get.DeathOutput)
@@ -36,7 +28,7 @@ namespace Dramalord.Actions
                     LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenPregnant(victim, killer));
                 }
             }
-            else if (type == KillReason.Bastard)
+            else if (type == EventType.Birth)
             {
                 KillCharacterAction.ApplyByMurder(victim, killer, false);
                 if (DramalordMCM.Get.DeathOutput)
@@ -44,23 +36,15 @@ namespace Dramalord.Actions
                     LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenBornBastard(victim, killer, reason));
                 }
             }
-            else if (type == KillReason.Suicide)
-            {
-                KillCharacterAction.ApplyByMurder(victim, victim, false);
-                if (DramalordMCM.Get.DeathOutput)
-                {
-                    LogEntry.AddLogEntry(new EncyclopediaLogKilledSuicide(victim));
-                }
-            }
 
-            if(killer == Hero.MainHero && type != KillReason.Suicide)
+            if(killer == Hero.MainHero)
             {
                 TextObject banner = new TextObject("{=Dramalord316}You killed {HERO.LINK}");
                 StringHelpers.SetCharacterProperties("HERO", victim.CharacterObject, banner);
                 MBInformationManager.AddQuickInformation(banner, 1000, victim.CharacterObject, "event:/ui/notification/relation");
             }
 
-            DramalordEvents.OnHeroesKilled(killer, victim, reason, type);
+            DramalordEventCallbacks.OnHeroesKilled(killer, victim, reason, type);
         }
     }
 }

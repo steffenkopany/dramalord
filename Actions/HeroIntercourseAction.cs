@@ -1,46 +1,35 @@
 ﻿using Dramalord.Data;
 using Helpers;
+using System.Collections.Generic;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade.Diamond;
 
 namespace Dramalord.Actions
 {
     internal static class HeroIntercourseAction
     {
-        internal static void Apply(Hero hero, Hero target, bool byForce)
+        internal static void Apply(Hero hero, Hero target, List<Hero> closeHeroes)
         {
-            if(Info.ValidateHeroMemory(hero, target) && Info.ValidateHeroInfo(hero) && Info.ValidateHeroInfo(target))
+            if(hero.IsDramalordLegit() && target.IsDramalordLegit())
             {
-                Info.ChangeIntercourseSkillBy(hero, 1);
-                Info.ChangeIntercourseSkillBy(target, (byForce) ? 0 : 1);
+                hero.GetHeroTraits().SetPropertyValue(HeroTraits.IntercourseSkill, hero.GetDramalordTraits().IntercourseSkill + 1);
+                target.GetHeroTraits().SetPropertyValue(HeroTraits.IntercourseSkill, target.GetDramalordTraits().IntercourseSkill + 1);
+                hero.GetHeroTraits().SetPropertyValue(HeroTraits.Horny, hero.GetDramalordTraits().Horny - DramalordMCM.Get.HornyLossIntercourse);
+                target.GetHeroTraits().SetPropertyValue(HeroTraits.Horny, target.GetDramalordTraits().Horny - DramalordMCM.Get.HornyLossIntercourse);
 
-                int score = Info.GetTraitscoreToHero(hero, target);
-
-                Info.ChangeEmotionToHeroBy(target, hero, (byForce) ? -100 : score + Info.GetIntercourseSkill(hero));
-
-                Info.ChangeHeroHornyBy(hero, DramalordMCM.Get.HornyLossIntercourse * -1);
-                Info.ChangeHeroHornyBy(target, DramalordMCM.Get.HornyLossIntercourse * -1);
+                hero.GetDramalordFeelings(target).Tension -= DramalordMCM.Get.TensionLossIntercourse;
+                target.GetDramalordFeelings(hero).Tension -= DramalordMCM.Get.TensionLossIntercourse;
 
                 if (target == Hero.MainHero || hero == Hero.MainHero)
                 {
                     Hero otherHero = (hero == Hero.MainHero) ? target : hero;
-                    if (byForce)
-                    {
-                        TextObject banner = new TextObject("{=Dramalord140}{HERO.LINK} violated you while being their prisoner.");
-                        StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
-                        MBInformationManager.AddQuickInformation(banner, 1000, otherHero.CharacterObject, "event:/ui/notification/relation");
-                    }
-                    else
-                    {
-                        TextObject banner = new TextObject("{=Dramalord141}You were intimate with {HERO.LINK}.");
-                        StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
-                        MBInformationManager.AddQuickInformation(banner, 1000, otherHero.CharacterObject, "event:/ui/notification/relation");
-                    }
-
+          
+                    TextObject banner = new TextObject("{=Dramalord141}You were intimate with {HERO.LINK}.");
+                    StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
+                    MBInformationManager.AddQuickInformation(banner, 1000, otherHero.CharacterObject, "event:/ui/notification/relation");
                 }
 
                 Hero mother = hero.IsFemale ? hero : target;
@@ -48,10 +37,10 @@ namespace Dramalord.Actions
 
                 if (mother != father && mother.Spouse == father && mother.IsPregnant)
                 {
-                    HeroOffspringData? offspring = Info.GetHeroOffspring(mother);
-                    if (offspring != null && offspring.Father != father && CampaignTime.Now.ToDays - offspring.Conceived < DramalordMCM.Get.DaysUntilPregnancyVisible)
+                    HeroPregnancy? offspring = target.GetDramalordPregnancy();
+                    if (offspring != null && offspring.Father != father.CharacterObject && CampaignTime.Now.ToDays - offspring.Conceived < DramalordMCM.Get.DaysUntilPregnancyVisible)
                     {
-                        Info.ChangeOffspringFather(mother, father);
+                        offspring.Father = father.CharacterObject;
                         TextObject banner = new TextObject("{=Dramalord142}{HERO.LINK} tricked {SPOUSE.LINK} being the cause of her pregancy.");
                         StringHelpers.SetCharacterProperties("HERO", mother.CharacterObject, banner);
                         StringHelpers.SetCharacterProperties("SPOUSE", father.CharacterObject, banner);
@@ -59,22 +48,50 @@ namespace Dramalord.Actions
                     }
                 }
 
-                if(mother.Spouse != null && mother.Spouse != father && mother.GetHeroTraits().Honor > 0)
-                {
-                    mother.SetTraitLevel(DefaultTraits.Honor, mother.GetHeroTraits().Honor - 1);
-                }
+                int eventID = DramalordEvents.AddHeroEvent(hero, target, EventType.Intercourse, DramalordMCM.Get.IntercourseMemoryDuration);
+                hero.AddDramalordMemory(eventID, MemoryType.Participant, hero, true);
+                target.AddDramalordMemory(eventID, MemoryType.Participant, target, true);
 
-                if (father.Spouse != null && father.Spouse != mother && father.GetHeroTraits().Honor > 0)
-                {
-                    father.SetTraitLevel(DefaultTraits.Honor, father.GetHeroTraits().Honor - 1);
-                }
+                LogEntry.AddLogEntry(new LogIntercourse(hero, target));
+                DramalordEventCallbacks.OnHeroesIntercourse(hero, target);
 
-                if (DramalordMCM.Get.AffairOutput)
+                if (MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
                 {
-                    LogEntry.AddLogEntry(new LogIntercourse(hero, target, byForce));
-                }
+                    Hero? witness = closeHeroes.Where(item => item != hero && item != target).GetRandomElementInefficiently();
+                    if (witness != null)
+                    {
+                        witness.AddDramalordMemory(eventID, MemoryType.Witness, witness, true);
+                        LogEntry.AddLogEntry(new LogWitnessIntercourse(hero, target, witness));
 
-                DramalordEvents.OnHeroesIntercourse(hero, target, byForce);
+                        if (witness == Hero.MainHero)
+                        {
+                            TextObject banner = new TextObject("{=Dramalord268}You caught {HERO.LINK} being intimate with {TARGET.LINK}");
+                            StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+                            StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                            MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                        }
+                        else if (hero == Hero.MainHero || target == Hero.MainHero)
+                        {
+                            TextObject banner = new TextObject("{=Dramalord269}{HERO.LINK} caught you being intimate with {TARGET.LINK}.");
+                            StringHelpers.SetCharacterProperties("HERO", witness.CharacterObject, banner);
+                            StringHelpers.SetCharacterProperties("TARGET", target.CharacterObject, banner);
+                            MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
+                        }
+
+                        if (witness.IsSpouse(hero) || witness.IsLover(hero))
+                        {
+                            HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
+                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                            witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                        }
+                        else if (witness.IsSpouse(target) || witness.IsLover(target))
+                        {
+                            HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
+                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                            witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                        }
+                    }
+                }
             }
         }
     }

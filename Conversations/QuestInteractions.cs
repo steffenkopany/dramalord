@@ -35,12 +35,12 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionNpcQuestFail()
         {
-            return Info.GetHeroHorny(Hero.OneToOneConversationHero) < DramalordMCM.Get.MinHornyForIntercourse;
+            return Hero.OneToOneConversationHero.GetDramalordTraits().Horny < DramalordMCM.Get.MinHornyForIntercourse;
         }
 
         internal static bool ConditionNpcQuestSuccess()
         {
-            return Info.GetHeroHorny(Hero.OneToOneConversationHero) >= DramalordMCM.Get.MinHornyForIntercourse;
+            return Hero.OneToOneConversationHero.GetDramalordTraits().Horny >= DramalordMCM.Get.MinHornyForIntercourse;
         }
 
         //CONSEQUENCES

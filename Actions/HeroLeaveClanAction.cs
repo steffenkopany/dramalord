@@ -77,7 +77,7 @@ namespace Dramalord.Actions
                 LogEntry.AddLogEntry(new EncyclopediaLogLeaveClan(hero, oldClan, causedBy));
             }
                 
-            DramalordEvents.OnHeroesLeaveClan(hero, oldClan, causedBy);
+            DramalordEventCallbacks.OnHeroesLeaveClan(hero, oldClan, causedBy);
         }
     }
 }

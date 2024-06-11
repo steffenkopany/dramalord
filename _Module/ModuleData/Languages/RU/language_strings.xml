@@ -337,5 +337,49 @@
     <string id="Dramalord331" text="Опять? Пожалуйста, дайте мне немного отдохнуть..." />
     <string id="Dramalord332" text="Фертильная:" />
     <string id="Dramalord333" text="Я уже беременна, глупый!" />
+    <string id="Dramalord334" text="Любовник" />
+    <string id="Dramalord335" text="Друг с выгодой" />
+    <string id="Dramalord336" text="Значит, вы с {TARGET} поженились за моей спиной?" />
+    <string id="Dramalord337" text="{TITLE}, мне нужно с тобой поговорить![if:convo_angry_voice]" />
+    <string id="Dramalord338" text="Я видел вас и {TARGET.LINK} собственными глазами!" />
+    <string id="Dramalord339" text="Я узнал об этом от {SOURCE.LINK}!" />
+    <string id="Dramalord340" text="Потеря напряжения во время полового акта" />
+    <string id="Dramalord341" text="Значение напряжения, потерянного во время полового акта" />
+    <string id="Dramalord342" text="{WITNESS.LINK} видел, как {HERO1.LINK} и {HERO2.LINK} поженились." />
+    <string id="Dramalord343" text="Журналы противостояния" />
+    <string id="Dramalord344" text="Показывать события противостояния в журналах" />
+    <string id="Dramalord345" text="Журналы сплетен" />
+    <string id="Dramalord346" text="Показывать события сплетен в журналах" />
+    <string id="Dramalord347" text="{HERO1.LINK} признался пользователю {HERO2.LINK}, что у них было свидание с {HERO3.LINK}" />
+    <string id="Dramalord348" text="{HERO1.LINK} признался {HERO2.LINK}, что у них был половой акт с {HERO3.LINK}" />
+    <string id="Dramalord349" text="{HERO1.LINK} признался {HERO2.LINK}, что они поженились на {HERO3.LINK}" />
+    <string id="Dramalord350" text="{HERO1.LINK} рассказал {HERO2.LINK} сплетню о свидании {HERO2.LINK} и {HERO4.LINK}" />
+    <string id="Dramalord351" text="{HERO1.LINK} рассказал {HERO2.LINK} сплетню о том, что {HERO2.LINK} и {HERO4.LINK} занимаются сексом" />
+    <string id="Dramalord352" text="{HERO1.LINK} рассказал {HERO2.LINK} сплетню о браке {HERO3.LINK} и {HERO4.LINK}" />
+    <string id="Dramalord353" text="{HERO1.LINK} сообщил пользователю {HERO2.LINK}, что они были свидетелями свидания {HERO2.LINK} и {HERO4.LINK}" />
+    <string id="Dramalord354" text="{HERO1.LINK} сообщил {HERO2.LINK}, что они были свидетелями полового акта {HERO2.LINK} и {HERO4.LINK}" />
+    <string id="Dramalord355" text="{HERO1.LINK} сообщил пользователю {HERO2.LINK}, что они были свидетелями свадьбы {HERO2.LINK} и {HERO4.LINK}" />
+    <string id="Dramalord356" text="Ну, в следующий раз пригласи и меня. Мы могли бы весело провести время вместе!" />
+    <string id="Dramalord357" text="Я прощаю тебя... Но никогда больше так не делай!" />
+    <string id="Dramalord358" text="Я это ясно вижу!" />
+    <string id="Dramalord359" text="{HERO1.LINK} и {HERO2.LINK} начали дружить с преимуществами" />
+    <string id="Dramalord360" text="Включить беременность по умолчанию" />
+    <string id="Dramalord361" text="Разрешить беременность по умолчанию в Bannerlord" />
+    <string id="Dramalord362" text="Включить браки по умолчанию" />
+    <string id="Dramalord363" text="Разрешить браки Баннерлорда по умолчанию" />
+    <string id="Dramalord364" text="Показать любовников в энциклопедии" />
+    <string id="Dramalord365" text="Показать влюбленных в Энциклопедии (Семейный раздел)" />
+    <string id="Dramalord366" text="Показывать друзей с преимуществами в Энциклопедии" />
+    <string id="Dramalord367" text="Показать друзей с привилегиями в Энциклопедии (Семейный раздел)" />
+    <string id="Dramalord368" text="Продолжительность памяти даты" />
+    <string id="Dramalord369" text="Время в днях, когда герои помнят события даты" />
+    <string id="Dramalord370" text="Продолжительность памяти полового акта" />
+    <string id="Dramalord371" text="Время в днях, когда герои помнят события полового акта" />
+    <string id="Dramalord372" text="Продолжительность памяти о рождении" />
+    <string id="Dramalord373" text="Время в днях, когда герои помнят события рождения" />
+    <string id="Dramalord374" text="Продолжительность памяти о браке" />
+    <string id="Dramalord375" text="Время в днях, когда герои вспоминают свадебные события" />
+    <string id="Dramalord376" text="Минимальный уровень доверия" />
+    <string id="Dramalord377" text="Требуется минимальное количество доверия, чтобы герой доверял другому" />
   </strings>
 </base>
