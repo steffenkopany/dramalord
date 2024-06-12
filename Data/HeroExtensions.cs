@@ -136,6 +136,7 @@ namespace Dramalord.Data
             {
                 int eventID = DramalordEvents.AddHeroEvent(hero, father, EventType.Pregnancy, 1000);
                 DramalordPregnancies.AddHeroPregnancy(hero, father, eventID);
+                hero.IsPregnant = true;
                 return true;
             }
             return false;
@@ -178,6 +179,7 @@ namespace Dramalord.Data
                 return 100;
             }
             int rating = 0;
+            rating += (hero.IsFemale != target.IsFemale) ? DramalordMCM.Get.OtherSexAttractionModifier : -DramalordMCM.Get.OtherSexAttractionModifier;
             rating += (target.IsFemale) ? hero.GetDramalordTraits().AttractionWomen : hero.GetDramalordTraits().AttractionMen;
             rating += (hero.Culture == target.Culture) ? 10 : 0;
             rating -= Math.Abs(hero.GetDramalordTraits().AttractionWeight - (int)(target.BodyProperties.Weight * 100f));
@@ -218,6 +220,9 @@ namespace Dramalord.Data
             CharacterTraits heroTraits = hero.GetHeroTraits();
             CharacterTraits targetTraits = target.GetHeroTraits();
 
+            DramalordTraits heroDramaTraits = hero.GetDramalordTraits();
+            DramalordTraits targetDramaTraits = hero.GetDramalordTraits();
+
             if (heroTraits == null || targetTraits == null)
             {
                 return 0;
@@ -235,6 +240,16 @@ namespace Dramalord.Data
             score += ((heroTraits.Valor < 0 && targetTraits.Valor > 0) || (heroTraits.Valor > 0 && targetTraits.Valor < 0)) ? -1 : 0;
             score += ((heroTraits.Calculating > 0 && targetTraits.Calculating > 0) || (heroTraits.Calculating < 0 && targetTraits.Calculating < 0)) ? 1 : 0;
             score += ((heroTraits.Calculating < 0 && targetTraits.Calculating > 0) || (heroTraits.Calculating > 0 && targetTraits.Calculating < 0)) ? -1 : 0;
+            score += ((heroDramaTraits.Openness > 0 && heroDramaTraits.Openness > 0) || (heroDramaTraits.Openness < 0 && heroDramaTraits.Openness < 0)) ? 1 : 0;
+            score += ((heroDramaTraits.Openness < 0 && heroDramaTraits.Openness > 0) || (heroDramaTraits.Openness > 0 && heroDramaTraits.Openness < 0)) ? -1 : 0;
+            score += ((heroDramaTraits.Agreeableness > 0 && heroDramaTraits.Agreeableness > 0) || (heroDramaTraits.Agreeableness < 0 && heroDramaTraits.Agreeableness < 0)) ? 1 : 0;
+            score += ((heroDramaTraits.Agreeableness < 0 && heroDramaTraits.Agreeableness > 0) || (heroDramaTraits.Agreeableness > 0 && heroDramaTraits.Agreeableness < 0)) ? -1 : 0;
+            score += ((heroDramaTraits.Conscientiousness > 0 && heroDramaTraits.Conscientiousness > 0) || (heroDramaTraits.Conscientiousness < 0 && heroDramaTraits.Conscientiousness < 0)) ? 1 : 0;
+            score += ((heroDramaTraits.Conscientiousness < 0 && heroDramaTraits.Conscientiousness > 0) || (heroDramaTraits.Conscientiousness > 0 && heroDramaTraits.Conscientiousness < 0)) ? -1 : 0;
+            score += ((heroDramaTraits.Neuroticism > 0 && heroDramaTraits.Neuroticism > 0) || (heroDramaTraits.Neuroticism < 0 && heroDramaTraits.Neuroticism < 0)) ? 1 : 0;
+            score += ((heroDramaTraits.Neuroticism < 0 && heroDramaTraits.Neuroticism > 0) || (heroDramaTraits.Neuroticism > 0 && heroDramaTraits.Neuroticism < 0)) ? -1 : 0;
+            score += ((heroDramaTraits.Extroversion > 0 && heroDramaTraits.Extroversion > 0) || (heroDramaTraits.Extroversion < 0 && heroDramaTraits.Extroversion < 0)) ? 1 : 0;
+            score += ((heroDramaTraits.Extroversion < 0 && heroDramaTraits.Extroversion > 0) || (heroDramaTraits.Extroversion > 0 && heroDramaTraits.Extroversion < 0)) ? -1 : 0;
 
             return score * DramalordMCM.Get.TraitScoreMultiplyer;
         }
