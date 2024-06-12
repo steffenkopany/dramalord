@@ -143,11 +143,9 @@ namespace Dramalord
         [SettingPropertyFloatingInteger("{=Dramalord374}Marriage Memory Duration", 1, 100, HintText = "{=Dramalord375}Time in days heroes remember marriage events", Order = 28, RequireRestart = false)]
         public int MarriageMemoryDuration { get; set; } = 10;
 
-        /*
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord167}Other Sex Attraction Modifier", -50, 50, Order = 1, HintText = "{=Dramalord168}AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)", RequireRestart = false)]
         public int OtherSexAttractionModifier { get; set; } = 0;
-        */
 
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord169}Min. Attraction Score", 0, 100, Order = 2, HintText = "{=Dramalord170}AI minimum attraction score to to start interacting with each other", RequireRestart = false)]

@@ -38,6 +38,7 @@ namespace Dramalord.Conversations
             starter.AddDialogLine("npc_accusation_date", "npc_accusation_type", "npc_accusation_source", "{=Dramalord306}I guess you and {TARGET} were not talking about politics, eh?", ConditionNpcAccusationDate, null);
             starter.AddDialogLine("npc_accusation_intercourse", "npc_accusation_type", "npc_accusation_source", "{=Dramalord307}Looks like you're having a hard time keeping your underpants on when meeting {TARGET}.", ConditionNpcAccusationIntercourse, null);
             starter.AddDialogLine("npc_accusation_marriage", "npc_accusation_type", "npc_accusation_source", "{=Dramalord336}So you and {TARGET} married behind my back?", ConditionNpcAccusationMarriage, null);
+            starter.AddDialogLine("npc_accusation_lostit", "npc_accusation_type", "npc_accusation_source", "{=Dramalord378}Uh... I somehow forgot what I wanted to say. Excuse me.", ConditionNpcAccusationForgot, null);
 
             starter.AddDialogLine("npc_accusation_witnessed", "npc_accusation_source", "player_accusation_reaction", "{=Dramalord338}I saw you and {TARGET.LINK} with my own eyes!", ConditionNpcAccusationWitness, null);
             starter.AddDialogLine("npc_accusation_gossip", "npc_accusation_source", "player_accusation_reaction", "{=Dramalord339}I learned that from {SOURCE.LINK}!", ConditionNpcAccusationGossip, null);
@@ -115,6 +116,11 @@ namespace Dramalord.Conversations
             return false;
         }
 
+        internal static bool ConditionNpcAccusationForgot()
+        {
+            return !ConditionNpcSeesPregnancy() && !ConditionNpcSeesBastard() && !ConditionNpcAccusationDate() && !ConditionNpcAccusationIntercourse() && !ConditionNpcAccusationMarriage();
+        }
+
         internal static bool ConditionNpcAccusationWitness()
         {
             if(NPCConfrontation.Memory.Type == MemoryType.Witness && (NPCConfrontation.Memory.Event.Type != EventType.Pregnancy && NPCConfrontation.Memory.Event.Type != EventType.Birth))
@@ -127,7 +133,7 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionNpcAccusationGossip()
         {
-            if (NPCConfrontation.Memory.Type != MemoryType.Witness && NPCConfrontation.Memory.Type != MemoryType.Participant && (NPCConfrontation.Memory.Event.Type != EventType.Pregnancy && NPCConfrontation.Memory.Event.Type != EventType.Birth))
+            if (!ConditionNpcAccusationDirect() && !ConditionNpcAccusationWitness())
             {
                 StringHelpers.SetCharacterProperties("SOURCE", NPCConfrontation.Memory.Source);
                 return true;

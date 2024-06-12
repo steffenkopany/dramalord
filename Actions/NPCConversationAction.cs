@@ -27,13 +27,14 @@ namespace Dramalord.Actions
                     bool isAttracted = hero.GetDramalordAttractionTo(target) > DramalordMCM.Get.MinAttractionForFlirting;
                     int emotion = hero.GetDramalordFeelings(target).Emotion;
                     uint daysPassed = (uint)CampaignTime.Now.ToDays - hero.GetDramalordFeelings(target).LastInteractionDay;
+                    bool isRelative = (hero.IsDramalordRelativeTo(target) && DramalordMCM.Get.ProtectFamily);
 
                     if(daysPassed == 0)
                     {
                         return true;
                     }
 
-                    if(!isLover && !isSpouse && isAttracted)
+                    if(!isLover && !isSpouse && isAttracted && !isRelative)
                     {
                         NpcInteractions.start(hero, EventType.Flirt);
                     }
@@ -217,7 +218,9 @@ namespace Dramalord.Actions
                 if(hero.IsFemale != target.IsFemale && MBRandom.RandomInt(1,100) <= DramalordMCM.Get.PregnancyChance)
                 {
                     ChildConceivedPatch.Father = hero.IsFemale ? target.CharacterObject : hero.CharacterObject;
-                    MakePregnantAction.Apply(hero.IsFemale ? hero : target);
+                    //MakePregnantAction.Apply(hero.IsFemale ? hero : target);
+                    Hero mother = hero.IsFemale ? hero : target;
+                    ChildConceivedPatch.ChildConceived(ref mother);
                 }
             }
 

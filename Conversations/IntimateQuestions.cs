@@ -74,8 +74,8 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionNpcRepliesAboutLooks()
         {
-            int attractionWomen = Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWomen;
-            int attractionMen = Hero.OneToOneConversationHero.GetDramalordTraits().AttractionMen;
+            int attractionWomen = Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWomen + ((Hero.OneToOneConversationHero.IsFemale) ? -DramalordMCM.Get.OtherSexAttractionModifier : DramalordMCM.Get.OtherSexAttractionModifier);
+            int attractionMen = Hero.OneToOneConversationHero.GetDramalordTraits().AttractionMen + ((!Hero.OneToOneConversationHero.IsFemale) ? -DramalordMCM.Get.OtherSexAttractionModifier : DramalordMCM.Get.OtherSexAttractionModifier);
             MBTextManager.SetTextVariable("RATING_WOMEN", new TextObject(attractionWomen > 75 ? "{=Dramalord010}sexy" : attractionWomen > 50 ? "{=Dramalord011}alright" : attractionWomen < 25 ? "{=Dramalord012}disgusting" : "{=Dramalord013}not my thing").ToString());
             MBTextManager.SetTextVariable("RATING_MEN", attractionMen > 75 ? "{=Dramalord010}sexy" : attractionMen > 50 ? "{=Dramalord011}alright" : attractionMen < 25 ? "{=Dramalord012}disgusting" : "{=Dramalord013}not my thing");
             MBTextManager.SetTextVariable("RATING_WEIGHT", Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWeight > 60 ? "{=Dramalord014}chubby" : Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWeight > 30 ? "{=Dramalord015}average" : "{=Dramalord016}slim");

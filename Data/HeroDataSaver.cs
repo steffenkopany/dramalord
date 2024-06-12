@@ -432,7 +432,7 @@ namespace Dramalord.Data
                 Dictionary<string, HeroFeelingsSave> feelingList2 = (feelings.ContainsKey(tuple.Target.CharacterObject.StringId)) ? feelings[tuple.Target.CharacterObject.StringId] : new();
 
                 HeroFeelingsSave feelings1 = (feelingList1.ContainsKey(tuple.Target.CharacterObject.StringId)) ? feelingList1[tuple.Target.CharacterObject.StringId] : new(new HeroFeelings((int)memories[tuple].Emotion, memories[tuple].IsCouple ? 50 : 0, memories[tuple].IsCouple ? 20 : 0, (uint)memories[tuple].LastMet));
-                HeroFeelingsSave feelings2 = (feelingList2.ContainsKey(tuple.Actor.CharacterObject.StringId)) ? feelingList1[tuple.Actor.CharacterObject.StringId] : new(new HeroFeelings((int)memories[tuple].Emotion, memories[tuple].IsCouple ? 50 : 0, memories[tuple].IsCouple ? 20 : 0, (uint)memories[tuple].LastMet));
+                HeroFeelingsSave feelings2 = (feelingList2.ContainsKey(tuple.Actor.CharacterObject.StringId)) ? feelingList2[tuple.Actor.CharacterObject.StringId] : new(new HeroFeelings((int)memories[tuple].Emotion, memories[tuple].IsCouple ? 50 : 0, memories[tuple].IsCouple ? 20 : 0, (uint)memories[tuple].LastMet));
 
                 if(tuple.Actor.Spouse == tuple.Target)
                 {

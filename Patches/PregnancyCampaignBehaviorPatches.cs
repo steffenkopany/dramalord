@@ -56,7 +56,8 @@ namespace Dramalord.Patches
             if (((heroSettlement != null && heroSettlement == heroSettlement2) || (heroParty != null && heroParty == heroParty2)) && MBRandom.RandomInt(1,100) <= DramalordMCM.Get.PregnancyChance)
             {
                 ChildConceivedPatch.Father = hero.Spouse?.CharacterObject;
-                MakePregnantAction.Apply(hero);
+                //MakePregnantAction.Apply(hero);
+                ChildConceivedPatch.ChildConceived(ref hero);
             }
             return false;
         }
