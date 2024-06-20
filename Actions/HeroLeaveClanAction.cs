@@ -61,6 +61,7 @@ namespace Dramalord.Actions
 
             hero.CompanionOf = null;
             hero.SetNewOccupation(Occupation.Wanderer);
+            hero.SetHasMet();
             hero.UpdateHomeSettlement();
             CampaignEventDispatcher.Instance.OnHeroChangedClan(hero, oldClan);
             TeleportHeroAction.ApplyImmediateTeleportToSettlement(hero, hero.HomeSettlement);

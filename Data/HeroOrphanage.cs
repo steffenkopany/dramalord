@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+using TaleWorlds.Localization;
 using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Data
@@ -41,13 +44,17 @@ namespace Dramalord.Data
     {
         internal static List<HeroOrphan> Orphans { get; set; } = new();
 
+        internal static CharacterObject? OrphanManager = null;
+
+        internal static Dictionary<Settlement, CharacterObject> OrphanCharacters { get; set; } = new ();
+
         internal static Dictionary<CharacterObject, uint> LastAdoptionDays { get; set; } = new();
 
         internal static uint GetLastAdoptionDay(Hero hero)
         {
             if(LastAdoptionDays.ContainsKey(hero.CharacterObject))
             {
-                return LastAdoptionDays[hero.CharacterObject];
+                return LastAdoptionDays[hero.CharacterObject]; 
             }
             return 0;
         }

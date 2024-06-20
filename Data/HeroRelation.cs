@@ -9,7 +9,6 @@ namespace Dramalord.Data
     {
         private int _emotion;
         private int _tension;
-        private int _trust;
 
         internal int Emotion
         {
@@ -23,19 +22,12 @@ namespace Dramalord.Data
             set => _tension = MBMath.ClampInt(value, 0, 100);
         }
 
-        internal int Trust
-        {
-            get => _trust;
-            set => _trust = MBMath.ClampInt(value, 0, 100);
-        }
-
         internal uint LastInteractionDay { get; set; }
 
-        internal HeroFeelings(int emotion, int tension, int trust, uint lastInteractionDay)
+        internal HeroFeelings(int emotion, int tension, uint lastInteractionDay)
         {
             Emotion = MBMath.ClampInt(emotion,0,100);
             Tension = MBMath.ClampInt(tension, 0, 100);
-            Trust = MBMath.ClampInt(trust, 0, 100);
             LastInteractionDay = lastInteractionDay;
         }
 
@@ -43,7 +35,6 @@ namespace Dramalord.Data
         {
             Emotion = other.Emotion;
             Tension = other.Tension;
-            Trust = other.Trust;
             LastInteractionDay = other.LastInteractionDay;
         }
     }
@@ -71,15 +62,15 @@ namespace Dramalord.Data
             }
             else if(Partners.ContainsKey(from.CharacterObject))
             {
-                HeroFeelings relation = new(0, 0, 0, 0);
+                HeroFeelings relation = new(0, 0, 0);
                 Partners[from.CharacterObject].Feelings.Add(to.CharacterObject, relation);
                 return relation;
             }
             else
             {
-                HeroFeelings feelings = new HeroFeelings(0, 0, 0, 0);
+                HeroFeelings feelings = new HeroFeelings(0, 0, 0);
                 HeroPartners partners = new();
-                partners.Feelings.Add(to.CharacterObject, new HeroFeelings(0, 0, 0, 0));
+                partners.Feelings.Add(to.CharacterObject, feelings);
                 Partners.Add(from.CharacterObject, partners);
                 return feelings;
             }
@@ -135,10 +126,10 @@ namespace Dramalord.Data
 
         [SaveableProperty(2)]
         internal int Tension { get; set; }
-
+        /*
         [SaveableProperty(3)]
         internal int Trust { get; set; }
-
+        */
         [SaveableProperty(4)]
         internal uint LastInteractionDay { get; set; }
 
@@ -146,13 +137,12 @@ namespace Dramalord.Data
         {
             Emotion = feelings.Emotion;
             Tension = feelings.Tension;
-            Trust = feelings.Trust;
             LastInteractionDay = feelings.LastInteractionDay;
         }
 
         internal HeroFeelings Create()
         {
-            return new HeroFeelings(Emotion, Tension, Trust, LastInteractionDay); 
+            return new HeroFeelings(Emotion, Tension, LastInteractionDay); 
         }
     }
 }

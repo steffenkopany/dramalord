@@ -4,6 +4,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Actions
 {
@@ -13,8 +14,15 @@ namespace Dramalord.Actions
         {
             hero.ClearAllRelationships(target);
 
-            hero.GetDramalordFeelings(target).Emotion -= DramalordMCM.Get.EmotionalLossBreakup;
-            target.GetDramalordFeelings(hero).Emotion -= DramalordMCM.Get.EmotionalLossBreakup;
+            HeroFeelings heroFeelings = hero.GetDramalordFeelings(target);
+            HeroFeelings targetFeelings = target.GetDramalordFeelings(hero);
+
+            targetFeelings.Emotion -= DramalordMCM.Get.EmotionalLossBreakup; 
+            if (DramalordMCM.Get.LinkEmotionToRelation)
+            {
+                target.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossBreakup / 2) * -1);
+            }
+            target.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysDate);
 
             if (target == Hero.MainHero)
             {

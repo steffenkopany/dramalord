@@ -136,7 +136,7 @@ namespace Dramalord.Conversations
 
         internal static bool ClickableOnCondition1(out TextObject hintText)
         {
-            hintText = TextObject.Empty;
+            hintText = new TextObject();
             if (CurrentTask.Options.Count > 0)
             {
                 return !CurrentTask.Options.ElementAt(0).IsBlocked;
@@ -148,7 +148,7 @@ namespace Dramalord.Conversations
 
         internal static bool ClickableOnCondition2(out TextObject hintText)
         {
-            hintText = TextObject.Empty;
+            hintText = new TextObject();
             if (CurrentTask.Options.Count > 1)
             {
                 return !CurrentTask.Options.ElementAt(1).IsBlocked;
@@ -160,7 +160,7 @@ namespace Dramalord.Conversations
 
         internal static bool ClickableOnCondition3(out TextObject hintText)
         {
-            hintText = TextObject.Empty;
+            hintText = new TextObject();
             if (CurrentTask.Options.Count > 2)
             {
                 return !CurrentTask.Options.ElementAt(2).IsBlocked;
@@ -172,7 +172,7 @@ namespace Dramalord.Conversations
 
         internal static bool ClickableOnCondition4(out TextObject hintText)
         {
-            hintText = TextObject.Empty;
+            hintText = new TextObject();
             if (CurrentTask.Options.Count > 3)
             {
                 return !CurrentTask.Options.ElementAt(3).IsBlocked;
@@ -184,7 +184,7 @@ namespace Dramalord.Conversations
 
         internal static bool ClickableOnCondition5(out TextObject hintText)
         {
-            hintText = TextObject.Empty;
+            hintText = new TextObject();
             if (CurrentTask.Options.Count > 4)
             {
                 return !CurrentTask.Options.ElementAt(4).IsBlocked;

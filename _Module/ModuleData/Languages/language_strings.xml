@@ -379,8 +379,58 @@
     <string id="Dramalord373" text="Time in days heroes remember birth events" />
     <string id="Dramalord374" text="Marriage Memory Duration" />
     <string id="Dramalord375" text="Time in days heroes remember marriage events" />
-    <string id="Dramalord376" text="Minimum Trust Level" />
-    <string id="Dramalord377" text="Minimum mount of trust is required making a hero trust another" />
+    <string id="Dramalord376" text="Minimum Relation Level" />
+    <string id="Dramalord377" text="Minimum amount of relation is required making a hero trust another" />
     <string id="Dramalord378" text="Uh... I somehow forgot what I wanted to say. Excuse me." />
+    <string id="Dramalord379" text="Anger Duration Flirt" />
+    <string id="Dramalord380" text="How long a hero is angry in days if witnessing their partner flirting with someone else" />
+    <string id="Dramalord381" text="Anger Duration Date" />
+    <string id="Dramalord382" text="How long a hero is angry in days if witnessing their partner on a date with someone else" />
+    <string id="Dramalord383" text="Anger Duration Intercourse" />
+    <string id="Dramalord384" text="How long a hero is angry in days if witnessing their partner having intercourse with someone else" />
+    <string id="Dramalord385" text="Anger Duration Pregnancy" />
+    <string id="Dramalord386" text="How long a hero is angry in days if witnessing their partner being pregnant from someone else" />
+    <string id="Dramalord387" text="Anger Duration Bastard" />
+    <string id="Dramalord388" text="How long a hero is angry in days if witnessing their partner birthing a child by someone else" />
+    <string id="Dramalord389" text="Anger Duration Marriage" />
+    <string id="Dramalord390" text="How long a hero is angry in days if witnessing their partner marry someone else" />
+    <string id="Dramalord391" text="I am angry with you and I don't want to talk to you! [if:convo_angry_voice]" />
+    <string id="Dramalord392" text="There is clearly a bulge on {HERO.LINK}'s belly, and after doing some calculations it becomes clear to you that you are not the cause." />
+    <string id="Dramalord393" text="You saw {HERO.LINK} marry {TARGET.LINK}" />
+    <string id="Dramalord394" text="{HERO.LINK} saw you marry {TARGET.LINK}" />
+    <string id="Dramalord395" text="You heard cheering next to the church and when you got close you saw to your surprise that {HERO.LINK} and {TARGET.LINK} just got married." />
+    <string id="Dramalord396" text="Angry:" />
+    <string id="Dramalord397" text="{ANGRY} days" />
+    <string id="Dramalord398" text="{HERO1.LINK} confronted {HERO2.LINK} about the date with {HERO3.LINK} they have witnessed." />
+    <string id="Dramalord399" text="{HERO1.LINK} confronted {HERO2.LINK} about the intercourse with {HERO3.LINK} they have witnessed." />
+    <string id="Dramalord400" text="{HERO1.LINK} confronted {HERO2.LINK} about the marriage with {HERO3.LINK} they have witnessed." />
+    <string id="Dramalord401" text="{HERO1.LINK} confronted {HERO2.LINK} about being pregnant from {HERO3.LINK}." />
+    <string id="Dramalord402" text="{HERO1.LINK} confronted {HERO2.LINK} about giving birth to {HERO3.LINK} who is not their child." />
+    <string id="Dramalord403" text="{HERO1.LINK} confessed to {HERO2.LINK} that they are pregnant from {HERO3.LINK}" />
+    <string id="Dramalord404" text="{HERO1.LINK} confessed to {HERO2.LINK} that their child {HERO3.LINK} is from {HERO4.LINK}" />
+    <string id="Dramalord405" text="{HERO1.LINK} told gossip to {HERO2.LINK} about {HERO3.LINK} being pregnant from {HERO4.LINK}" />
+    <string id="Dramalord406" text="{HERO1.LINK} told gossip to {HERO2.LINK} that {HERO3.LINK}' child is from {HERO4.LINK}" />
+    <string id="Dramalord407" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed {HERO2.LINK} being pregnant from {HERO4.LINK}" />
+    <string id="Dramalord408" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed that {HERO2.LINK}'s child is from {HERO4.LINK}" />
+    <string id="Dramalord409" text="{HERO.LINK} is carrying your child, am I correct?" />
+    <string id="Dramalord410" text="Good day, {TITLE}. How can I help you?" />
+    <string id="Dramalord411" text="I would like to extend my family and adopt an orphan." />
+    <string id="Dramalord412" text="Oh that is great {TITLE}. We have currently {BOYS} boys and {GIRLS} girls in our orphanage." />
+    <string id="Dramalord413" text="I am truly sorry {TITLE}, but you have to be married in order to adopt a child." />
+    <string id="Dramalord414" text="I am truly sorry {TITLE}, but there are currently no children in our orphanage." />
+    <string id="Dramalord415" text="I am truly sorry {TITLE}, but you adopted recently. You have to wait a while before you can adopt again." />
+    <string id="Dramalord416" text="I would like to adopt a boy." />
+    <string id="Dramalord417" text="I would like to adopt a girl." />
+    <string id="Dramalord418" text="Who would you like to adopt?" />
+    <string id="Dramalord419" text="{ORPHAN.NAME}, {ORPHANAGE} years old." />
+    <string id="Dramalord420" text="I am thinking of a different orphan." />
+    <string id="Dramalord421" text="Very well. Are you absolutely sure you want to adopt {ORPHAN.NAME}?" />
+    <string id="Dramalord422" text="Congratulations! I'm sure {ORPHAN.NAME} will be in good hands." />
+    <string id="Dramalord423" text="Oh well, that's sad. {ORPHAN.NAME} will be very disappointed." />
+    <string id="Dramalord424" text="Allow AI Adoption" />
+    <string id="Dramalord425" text="Allow heroes adopting children from the orphanage" />
+    <string id="Dramalord426" text="Hero wants to join your clan" />
+    <string id="Dramalord427" text="{HERO.LINK} requests joining your clan. Will you accept?" />
+    <string id="Dramalord428" text="You accepted {HERO.LINK} joining your clan." />
   </strings>
 </base>

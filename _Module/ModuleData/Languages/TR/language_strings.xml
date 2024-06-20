@@ -379,8 +379,58 @@
     <string id="Dramalord373" text="Kahramanların doğum olaylarını hatırladığı gün sayısı" />
     <string id="Dramalord374" text="Evlilik Hafıza Süresi" />
     <string id="Dramalord375" text="Kahramanların evlilik olaylarını hatırladığı gün sayısı" />
-    <string id="Dramalord376" text="Minimum Güven Düzeyi" />
-    <string id="Dramalord377" text="Bir kahramanın diğerine güvenmesi için minimum güven düzeyi gereklidir" />
+    <string id="Dramalord376" text="Minimum İlişki Düzeyi" />
+    <string id="Dramalord377" text="Bir kahramanın diğerine güvenmesi için minimum düzeyde ilişki gerekir" />
     <string id="Dramalord378" text="Hı... Bir şekilde ne söylemek istediğimi unuttum. Afedersiniz." />
+    <string id="Dramalord379" text="Öfke Süresiyle Flört" />
+    <string id="Dramalord380" text="Bir kahraman, partnerinin başka biriyle flört ettiğini görürse günlerce ne kadar süre öfkelenir" />
+    <string id="Dramalord381" text="Öfke Süresi Tarihi" />
+    <string id="Dramalord382" text="Bir kahraman, partnerinin başka biriyle randevusuna tanık olduğunda günlerce ne kadar süreyle öfkelenir" />
+    <string id="Dramalord383" text="Öfke Süresi İlişkisi" />
+    <string id="Dramalord384" text="Bir kahraman, partnerinin başka biriyle cinsel ilişkiye girdiğine tanık olduğunda günlerce ne kadar süre öfkelenir" />
+    <string id="Dramalord385" text="Öfke Süresi Gebelik" />
+    <string id="Dramalord386" text="Bir kahraman, partnerinin başka birinden hamile kaldığına tanık olursa günlerce ne kadar süre öfkelenir" />
+    <string id="Dramalord387" text="Öfke Süresi Piç" />
+    <string id="Dramalord388" text="Bir kahraman, partnerinin başka birinden çocuk doğurmasına tanık olursa günlerce ne kadar öfkelenir" />
+    <string id="Dramalord389" text="Öfke Süresi Evliliği" />
+    <string id="Dramalord390" text="Bir kahraman, partnerinin başka biriyle evlenmesine tanık olursa günlerce ne kadar süre öfkelenir" />
+    <string id="Dramalord391" text="Sana kızgınım ve seninle konuşmak istemiyorum! [if:convo_angry_voice]" />
+    <string id="Dramalord392" text="{HERO.LINK}'un karnında açıkça bir şişkinlik var ve bazı hesaplamalar yaptıktan sonra bunun sebebinin siz olmadığınızı açıkça anlıyorsunuz." />
+    <string id="Dramalord393" text="{HERO.LINK}'un {TARGET.LINK} ile evlendiğini gördünüz" />
+    <string id="Dramalord394" text="{HERO.LINK}, {TARGET.LINK} ile evlendiğinizi gördü" />
+    <string id="Dramalord395" text="Kilisenin yanında tezahüratlar duydunuz ve yaklaştığınızda şaşkınlıkla {HERO.LINK} ile {TARGET.LINK}'ın yeni evlendiğini gördünüz." />
+    <string id="Dramalord396" text = "Öfkeli:" />
+    <string id="Dramalord397" text="{ANGRY} gün" />
+    <string id="Dramalord398" text="{HERO1.LINK}, {HERO3.LINK} ile tanık oldukları randevu konusunda {HERO2.LINK} ile yüzleşti." />
+    <string id="Dramalord399" text="{HERO1.LINK}, {HERO3.LINK} ile tanık oldukları ilişki konusunda {HERO2.LINK} ile yüzleşti." />
+    <string id="Dramalord400" text="{HERO1.LINK}, tanık oldukları {HERO3.LINK} ile evlilik konusunda {HERO2.LINK} ile yüzleşti." />
+    <string id="Dramalord401" text="{HERO1.LINK}, {HERO3.LINK}'tan hamile olduğu konusunda {HERO2.LINK} ile yüzleşti." />
+    <string id="Dramalord402" text="{HERO1.LINK}, kendi çocukları olmayan {HERO3.LINK}'ı doğurması konusunda {HERO2.LINK} ile yüzleşti." />
+    <string id="Dramalord403" text="{HERO1.LINK}, {HERO2.LINK}'ye {HERO3.LINK}'tan hamile olduklarını itiraf etti" />
+    <string id="Dramalord404" text="{HERO1.LINK}, {HERO2.LINK}'ye çocuklarının {HERO3.LINK}'nin {HERO4.LINK}'tan olduğunu itiraf etti" />
+    <string id="Dramalord405" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO3.LINK}'nin {HERO4.LINK}'tan hamile olduğu dedikodusunu anlattı" />
+    <string id="Dramalord406" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO3.LINK}'nin çocuğunun {HERO4.LINK}'tan olduğuna dair dedikodu yaptığını söyledi" />
+    <string id="Dramalord407" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO2.LINK}'nin {HERO4.LINK}'tan hamile olduğuna tanık olduklarını söyledi" />
+    <string id="Dramalord408" text="{HERO1.LINK}, {HERO2.LINK}'ye, {HERO2.LINK}'nin çocuğunun {HERO4.LINK}'tan olduğuna tanık olduklarını söyledi" />
+    <string id="Dramalord409" text="{HERO.LINK} çocuğunuzu taşıyor, doğru muyum?" />
+    <string id="Dramalord410" text="İyi günler, {TITLE}. Size nasıl yardımcı olabilirim?" />
+    <string id="Dramalord411" text="Ailemi genişletmek ve bir yetimi evlat edinmek istiyorum." />
+    <string id="Dramalord412" text="Ah, bu harika {TITLE}. Şu anda yetimhanemizde {BOYS} erkek ve {GIRLS} kız çocuğumuz var." />
+    <string id="Dramalord413" text="Gerçekten üzgünüm {TITLE}, ama çocuk evlat edinmek için evli olman gerekiyor." />
+    <string id="Dramalord414" text="Gerçekten üzgünüm {TITLE}, ama şu anda yetimhanemizde hiç çocuk yok." />
+    <string id="Dramalord415" text="Gerçekten üzgünüm {TITLE}, ama yakın zamanda evlat edindiniz. Tekrar sahiplenmeden önce bir süre beklemeniz gerekiyor." />
+    <string id="Dramalord416" text="Bir erkek çocuğu evlat edinmek istiyorum." />
+    <string id="Dramalord417" text="Bir kızı evlat edinmek istiyorum." />
+    <string id="Dramalord418" text="Kimi evlat edinmek istersiniz?" />
+    <string id="Dramalord419" text="{ORPHAN.NAME}, {ORPHANAGE} yaşında." />
+    <string id="Dramalord420" text="Farklı bir yetim düşünüyorum." />
+    <string id="Dramalord421" text="Çok iyi. {ORPHAN.NAME}'ı sahiplenmek istediğinizden kesinlikle emin misiniz?" />
+    <string id="Dramalord422" text="Tebrikler! {ORPHAN.NAME} emin ellerde olacağından eminim." />
+    <string id="Dramalord423" text="Ah, bu çok üzücü. {ORPHAN.NAME} çok hayal kırıklığına uğrayacak." />
+    <string id="Dramalord424" text="Yapay Zekanın Benimsenmesine İzin Ver" />
+    <string id="Dramalord425" text="Kahramanların yetimhanedeki çocukları evlat edinmesine izin ver" />
+    <string id="Dramalord426" text="Kahraman klanınıza katılmak istiyor" />
+    <string id="Dramalord427" text="{HERO.LINK} klanınıza katılma isteğinde bulundu. Kabul edecek misiniz?" />
+    <string id="Dramalord428" text="{HERO.LINK}'nin klanınıza katılmasını kabul ettiniz." />
   </strings>
 </base>

@@ -50,12 +50,12 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionPlayerCanAskForActions()
         {
-            return Hero.OneToOneConversationHero.IsDramalordLegit();
+            return Hero.OneToOneConversationHero != null && Hero.OneToOneConversationHero.IsDramalordLegit() && !Hero.OneToOneConversationHero.IsPrisoner;
         }
 
         internal static bool ConditionPlayerAskForDate()
         {
-            return Hero.MainHero.Spouse == Hero.OneToOneConversationHero || Hero.MainHero.IsLover(Hero.OneToOneConversationHero) || Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion >= DramalordMCM.Get.MinEmotionForDating;
+            return Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero) || Hero.MainHero.IsLover(Hero.OneToOneConversationHero) || Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion >= DramalordMCM.Get.MinEmotionForDating;
         }
         
         /*
@@ -68,7 +68,7 @@ namespace Dramalord.Conversations
         internal static bool ConditionPlayerAskForMarriage()
         {
             bool isInArmy = Hero.MainHero.PartyBelongedTo != null && Hero.MainHero.PartyBelongedTo.Army != null;
-            return !isInArmy && Hero.MainHero.IsLover(Hero.OneToOneConversationHero);
+            return !isInArmy && Hero.MainHero.IsLover(Hero.OneToOneConversationHero) && !Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero);
         }
 
         internal static bool ConditionNpcAcceptsFlirt()

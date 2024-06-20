@@ -28,37 +28,11 @@ namespace Dramalord.Patches
                 return false;
             }
 
-            Settlement? heroSettlement = hero.CurrentSettlement;
-            MobileParty? heroParty = hero.PartyBelongedTo;
-
-            Settlement? heroSettlement2 = hero.Spouse?.CurrentSettlement;
-            MobileParty? heroParty2 = hero.Spouse?.PartyBelongedTo;
-
-            if (heroParty?.AttachedTo != null)
+            if (hero.Spouse != null && hero.IsNearby(hero.Spouse) && MBRandom.RandomInt(1,100) <= DramalordMCM.Get.PregnancyChance)
             {
-                heroParty = heroParty.AttachedTo;
+                HeroConceiveAction.Apply(hero, hero.Spouse);
             }
 
-            if (heroParty2?.AttachedTo != null)
-            {
-                heroParty2 = heroParty2.AttachedTo;
-            }
-
-            if (heroSettlement == null)
-            {
-                heroSettlement = heroParty?.CurrentSettlement;
-            }
-            if (heroSettlement2 == null)
-            {
-                heroSettlement2 = heroParty2?.CurrentSettlement;
-            }
-
-            if (((heroSettlement != null && heroSettlement == heroSettlement2) || (heroParty != null && heroParty == heroParty2)) && MBRandom.RandomInt(1,100) <= DramalordMCM.Get.PregnancyChance)
-            {
-                ChildConceivedPatch.Father = hero.Spouse?.CharacterObject;
-                //MakePregnantAction.Apply(hero);
-                ChildConceivedPatch.ChildConceived(ref hero);
-            }
             return false;
         }
     }
@@ -68,10 +42,10 @@ namespace Dramalord.Patches
     {
         [UsedImplicitly]
         [HarmonyPrefix]
-        public static void CheckOffspringsToDeliver(ref Hero hero)
+        public static bool CheckOffspringsToDeliver(ref Hero hero)
         {
             HeroPregnancy? pregnancy = hero.GetDramalordPregnancy();
-            if(pregnancy == null)
+            if(hero.IsPregnant && pregnancy == null)
             {
                 hero.IsPregnant = false;
             }
@@ -79,44 +53,20 @@ namespace Dramalord.Patches
             {
                 HeroBirthAction.Apply(hero, pregnancy, hero.GetCloseHeroes());
             }
+            return false;
         }
     }
 
     [HarmonyPatch(typeof(PregnancyCampaignBehavior), "ChildConceived", new Type[] { typeof(Hero) })]
     public static class ChildConceivedPatch
     {
-        internal static CharacterObject? Father;
+        internal static Hero? Father;
 
         [UsedImplicitly]
         [HarmonyPrefix]
         public static bool ChildConceived(ref Hero mother)
         {
-            CharacterObject? fatherChar = Father ?? mother.Spouse?.CharacterObject;
-            if(fatherChar != null && fatherChar.IsHero)
-            {
-                mother.MakeDramalordPregnant(fatherChar.HeroObject);
-            
-                if (mother == Hero.MainHero)
-                {
-                    TextObject banner = new TextObject("{=Dramalord143}You got pregnant from {HERO.LINK}");
-                    StringHelpers.SetCharacterProperties("HERO", fatherChar, banner);
-                    MBInformationManager.AddQuickInformation(banner, 1000, fatherChar, "event:/ui/notification/relation");
-                }
-                else if (fatherChar.HeroObject == Hero.MainHero)
-                {
-                    TextObject banner = new TextObject("{=Dramalord144}{HERO.LINK} got pregnant from you.");
-                    StringHelpers.SetCharacterProperties("HERO", mother.CharacterObject, banner);
-                    MBInformationManager.AddQuickInformation(banner, 1000, mother.CharacterObject, "event:/ui/notification/relation");
-                }
-
-                if (DramalordMCM.Get.AffairOutput)
-                {
-                    LogEntry.AddLogEntry(new EncyclopediaLogConceived(mother, fatherChar.HeroObject));
-                }
-
-                DramalordEventCallbacks.OnHeroesConceive(mother, fatherChar.HeroObject);
-            }
-
+            HeroConceiveAction.Apply(mother, Father ?? mother.Spouse);
             return false;
         }
     }   

@@ -16,6 +16,8 @@ namespace Dramalord.Conversations
         {
             NpcInteractions.ApproachingHero = approachingHero;
             NpcInteractions.Intention = intention;
+            ConversationHelper.ConversationIntention = ConversationType.NPCInteraction;
+            Campaign.Current.SetTimeSpeed(0);
             CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(ApproachingHero.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
         }
 
@@ -50,8 +52,9 @@ namespace Dramalord.Conversations
         // CONDITIONS
         internal static bool ConditionNPCStartsInteraction()
         {
-            if (NpcInteractions.ApproachingHero != null)
+            if (NpcInteractions.ApproachingHero != null && ConversationHelper.ConversationIntention == ConversationType.NPCInteraction)
             {
+                ConversationHelper.ConversationIntention = ConversationType.PlayerInteraction;
                 MBTextManager.SetTextVariable("TITLE", ConversationHelper.GetHeroGreeting(NpcInteractions.ApproachingHero, Hero.MainHero, true));
                 return true;
             }
@@ -65,7 +68,7 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionNpcTellsSomething()
         {
-            return ConditionNpcWantsDivorce() || ConditionNpcWantsBreakup();
+            return ConditionNpcWantsDivorce() || ConditionNpcWantsBreakup() || ConditionNpcAskForPrisonFun();
         }
 
         internal static bool ConditionNpcAsksForFlirt()

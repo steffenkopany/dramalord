@@ -379,8 +379,58 @@
     <string id="Dramalord373" text="Время в днях, когда герои помнят события рождения" />
     <string id="Dramalord374" text="Продолжительность памяти о браке" />
     <string id="Dramalord375" text="Время в днях, когда герои вспоминают свадебные события" />
-    <string id="Dramalord376" text="Минимальный уровень доверия" />
-    <string id="Dramalord377" text="Требуется минимальное количество доверия, чтобы герой доверял другому" />
+    <string id="Dramalord376" text="Минимальный уровень отношений" />
+    <string id="Dramalord377" text="Требуется минимальное количество отношений, чтобы герой доверял другому" />
     <string id="Dramalord378" text="Эм... Я как-то забыл, что хотел сказать. Извините." />
+    <string id="Dramalord379" text="Продолжительность гнева, флирт" />
+    <string id="Dramalord380" text="Как долго в днях герой злится, если становится свидетелем того, как его партнер флиртует с кем-то еще" />
+    <string id="Dramalord381" text="Дата продолжительности гнева" />
+    <string id="Dramalord382" text="Как долго в днях герой злится, если видит своего партнера на свидании с кем-то другим" />
+    <string id="Dramalord383" text="Продолжительность гнева, половой акт" />
+    <string id="Dramalord384" text="Как долго в днях герой злится, если становится свидетелем того, как его партнер занимается сексом с кем-то другим" />
+    <string id="Dramalord385" text="Продолжительность гнева Беременность" />
+    <string id="Dramalord386" text="Как долго герой в днях злится, если видит, что его партнерша беременна от кого-то другого" />
+    <string id="Dramalord387" text="Продолжительность гнева, ублюдок" />
+    <string id="Dramalord388" text="Как долго герой в днях злится, если становится свидетелем того, как его партнерша рожает ребенка от кого-то другого" />
+    <string id="Dramalord389" text="Продолжительность гнева в браке" />
+    <string id="Dramalord390" text="Как долго герой злится в днях, если становится свидетелем того, как его партнер женится на ком-то другом" />
+    <string id="Dramalord391" text="Я злюсь на тебя и не хочу с тобой разговаривать! [if:convo_angry_voice]" />
+    <string id="Dramalord392" text="На животе {HERO.LINK} явно имеется выпуклость, и после некоторых расчетов вам становится ясно, что причиной этому являетесь не вы." />
+    <string id="Dramalord393" text="Вы видели, как {HERO.LINK} женился на {TARGET.LINK}" />
+    <string id="Dramalord394" text="{HERO.LINK} видел, как вы вышли замуж за {TARGET.LINK}" />
+    <string id="Dramalord395" text="Вы услышали аплодисменты рядом с церковью, а когда подошли поближе, то, к своему удивлению, увидели, что {HERO.LINK} и {TARGET.LINK} только что поженились." />
+    <string id="Dramalord396" text="Злой:" />
+    <string id="Dramalord397" text="{ANGRY} дней" />
+    <string id="Dramalord398" text="{HERO1.LINK} рассказал {HERO2.LINK} о свидании с {HERO3.LINK}, свидетелями которого они стали" />
+    <string id="Dramalord399" text="{HERO1.LINK} рассказал {HERO2.LINK} о половом акте с {HERO3.LINK}, свидетелем которого они стали" />
+    <string id="Dramalord400" text="{HERO1.LINK} рассказал {HERO2.LINK} о браке с {HERO3.LINK}, свидетелями которого они стали" />
+    <string id="Dramalord401" text="{HERO1.LINK} сообщил {HERO2.LINK} о том, что она беременна от {HERO3.LINK}." />
+    <string id="Dramalord402" text="{HERO1.LINK} столкнулся с {HERO2.LINK} по поводу рождения {HERO3.LINK}, который не является их ребенком" />
+    <string id="Dramalord403" text="{HERO1.LINK} призналась {HERO2.LINK}, что беременна от {HERO3.LINK}" />
+    <string id="Dramalord404" text="{HERO1.LINK} признался пользователю {HERO2.LINK}, что их ребенок {HERO3.LINK} родом из {HERO4.LINK}" />
+    <string id="Dramalord405" text="{HERO1.LINK} рассказал {HERO2.LINK} сплетню о том, что {HERO3.LINK} беременна от {HERO4.LINK}" />
+    <string id="Dramalord406" text="{HERO1.LINK} рассказал {HERO2.LINK}, что ребенок {HERO3.LINK} от {HERO4.LINK}" />
+    <string id="Dramalord407" text="{HERO1.LINK} сообщил {HERO2.LINK}, что они были свидетелями беременности {HERO2.LINK} от {HERO4.LINK}" />
+    <string id="Dramalord408" text="{HERO1.LINK} сообщил {HERO2.LINK}, что они стали свидетелями того, что ребенок {HERO2.LINK} — от {HERO4.LINK}" />
+    <string id="Dramalord409" text="{HERO.LINK} носит вашего ребенка, я прав?" />
+    <string id="Dramalord410" text="Добрый день, {TITLE}. Чем я могу вам помочь?" />
+    <string id="Dramalord411" text="Я хотел бы расширить свою семью и усыновить сироту." />
+    <string id="Dramalord412" text="О, это здорово, {TITLE}. Сейчас в нашем приюте {BOYS} мальчиков и {GIRLS} девочек." />
+    <string id="Dramalord413" text="Мне искренне жаль, {TITLE}, но вам нужно выйти замуж, чтобы усыновить ребенка." />
+    <string id="Dramalord414" text="Мне искренне жаль, {TITLE}, но в нашем приюте сейчас нет детей." />
+    <string id="Dramalord415" text="Мне очень жаль, {TITLE}, но вы недавно усыновили ребенка. Вам придется подождать некоторое время, прежде чем вы сможете снова усыновить ребенка." />
+    <string id="Dramalord416" text="Я бы хотела усыновить мальчика." />
+    <string id="Dramalord417" text="Я бы хотел усыновить девочку." />
+    <string id="Dramalord418" text="Кого бы вы хотели усыновить?" />
+    <string id="Dramalord419" text="{ORPHAN.NAME}, {ORPHANAGE} лет." />
+    <string id="Dramalord420" text="Я думаю о другом сироте." />
+    <string id="Dramalord421" text="Очень хорошо. Вы абсолютно уверены, что хотите усыновить {ORPHAN.NAME}?" />
+    <string id="Dramalord422" text="Поздравляем! Я уверен, что {ORPHAN.NAME} будет в надежных руках." />
+    <string id="Dramalord423" text="Ну что ж, это грустно. {ORPHAN.NAME} будет очень разочарован." />
+    <string id="Dramalord424" text="Разрешить внедрение ИИ" />
+    <string id="Dramalord425" text="Разрешить героям усыновлять детей из приюта" />
+    <string id="Dramalord426" text="Герой хочет вступить в ваш клан" />
+    <string id="Dramalord427" text="{HERO.LINK} просит вступить в ваш клан. Вы примете?" />
+    <string id="Dramalord428" text="Вы приняли {HERO.LINK} вступление в ваш клан." />
   </strings>
 </base>

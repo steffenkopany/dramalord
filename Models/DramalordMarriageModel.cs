@@ -1,4 +1,5 @@
-﻿using Dramalord.Data;
+﻿using Dramalord.Actions;
+using Dramalord.Data;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameComponents;
 
@@ -8,6 +9,11 @@ namespace Dramalord.Models
     {
         public override bool IsCoupleSuitableForMarriage(Hero firstHero, Hero secondHero)
         {
+            if(!HeroMarriageAction.IsDramalordMarriage)
+            {
+                return base.IsCoupleSuitableForMarriage(firstHero, secondHero);
+            }
+
             if(IsSuitableForMarriage(firstHero) && IsSuitableForMarriage(secondHero) && (firstHero.Clan != null || secondHero.Clan != null))
             {
                 if(firstHero.Spouse == null && secondHero.Spouse == null)
@@ -28,34 +34,41 @@ namespace Dramalord.Models
                 DramalordTraits firstTraits = firstHero.GetDramalordTraits();
                 DramalordTraits secondTraits = secondHero.GetDramalordTraits();
 
-                bool firstPoly = firstTraits.Openness == 2 && firstTraits.Agreeableness == 2 && firstTraits.Extroversion > 0 && firstTraits.Neuroticism < 0;
-                bool secondPoly = secondTraits.Openness == 2 && secondTraits.Agreeableness == 2 && secondTraits.Extroversion > 0 && secondTraits.Neuroticism < 0;
-
-                return firstPoly && secondPoly;
+                return firstTraits.IsEmotionallyOpen && secondTraits.IsEmotionallyOpen;
             }
             return false;
         }
 
         public override bool IsClanSuitableForMarriage(Clan clan)
         {
-            if(DramalordMCM.Get.AllowDefaultMarriages)
+            if (!HeroMarriageAction.IsDramalordMarriage)
             {
-                if (clan != null && !clan.IsBanditFaction)
-                {
-                    return !clan.IsRebelClan;
-                }
+                return base.IsClanSuitableForMarriage(clan);
             }
 
+            if (clan != null && !clan.IsBanditFaction)
+            {
+                return !clan.IsRebelClan;
+            }
             return false;
         }
 
         public override bool IsSuitableForMarriage(Hero maidenOrSuitor)
         {
-            return maidenOrSuitor.IsDramalordLegit() && maidenOrSuitor.Age > 18;
+            if (!HeroMarriageAction.IsDramalordMarriage)
+            {
+                return base.IsSuitableForMarriage(maidenOrSuitor);
+            }
+            return maidenOrSuitor.IsDramalordLegit() && maidenOrSuitor.Age > 18 && ( maidenOrSuitor.Spouse == null || maidenOrSuitor == Hero.MainHero || maidenOrSuitor.GetDramalordTraits().IsEmotionallyOpen);
         }
 
         public override Clan GetClanAfterMarriage(Hero firstHero, Hero secondHero)
         {
+            if (!HeroMarriageAction.IsDramalordMarriage)
+            {
+                return base.GetClanAfterMarriage(firstHero, secondHero);
+            }
+
             if (firstHero.IsHumanPlayerCharacter)
             {
                 return firstHero.Clan;

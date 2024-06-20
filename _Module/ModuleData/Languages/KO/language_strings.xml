@@ -379,8 +379,58 @@
     <string id="Dramalord373" text="영웅이 출생 사건을 기억하는 시간(일)" />
     <string id="Dramalord374" text="결혼 기억 기간" />
     <string id="Dramalord375" text="영웅이 결혼 사건을 기억하는 시간(일)" />
-    <string id="Dramalord376" text="최소 신뢰 수준" />
-    <string id="Dramalord377" text="영웅이 다른 영웅을 신뢰하려면 최소한의 신뢰가 필요합니다." />
+    <string id="Dramalord376" text="최소 관계 수준" />
+    <string id="Dramalord377" text="영웅이 다른 영웅을 신뢰하려면 최소한의 관계가 필요합니다." />
     <string id="Dramalord378" text="어... 무슨 말을 하고 싶은지 잊어버렸네요. 죄송합니다." />
+    <string id="Dramalord379" text="분노 지속 시간 바람둥이" />
+    <string id="Dramalord380" text="파트너가 다른 사람을 유혹하는 것을 목격하면 영웅이 화를 내는 기간은 며칠입니다." />
+    <string id="Dramalord381" text="분노 지속 날짜" />
+    <string id="Dramalord382" text="상대방이 다른 사람과 데이트하는 모습을 목격하면 영웅이 화를 내는 기간은 며칠입니다." />
+    <string id="Dramalord383" text="분노 지속 시간" />
+    <string id="Dramalord384" text="상대방이 다른 사람과 성관계를 갖는 것을 목격하면 영웅이 화를 내는 기간은 며칠입니다." />
+    <string id="Dramalord385" text="분노 기간 임신" />
+    <string id="Dramalord386" text="파트너가 다른 사람의 임신을 목격한 경우 영웅이 화를 내는 기간은 며칠입니다." />
+    <string id="Dramalord387" text="분노 지속시간 개자식" />
+    <string id="Dramalord388" text="배우자가 다른 사람에 의해 아이를 낳는 것을 목격하면 영웅이 화를 내는 기간은 며칠입니다." />
+    <string id="Dramalord389" text="분노 지속 결혼" />
+    <string id="Dramalord390" text="파트너가 다른 사람과 결혼하는 것을 목격하면 영웅이 화를 내는 기간은 며칠입니다." />
+    <string id="Dramalord391" text="나는 당신에게 화가 났고 당신과 이야기하고 싶지 않습니다! [if:convo_angry_voice]" />
+    <string id="Dramalord392" text="{HERO.LINK}의 배에 불룩한 부분이 분명히 있습니다. 몇 가지 계산을 해본 결과 당신이 원인이 아니라는 것이 분명해졌습니다." />
+    <string id="Dramalord393" text="{HERO.LINK}님이 {TARGET.LINK}님과 결혼하는 것을 보셨습니다." />
+    <string id="Dramalord394" text="{HERO.LINK} 님이 귀하가 {TARGET.LINK} 님과 결혼하는 것을 보았습니다" />
+    <string id="Dramalord395" text="교회 옆에서 환호하는 소리를 듣고 가까이 다가가 보니 {HERO.LINK}와 {TARGET.LINK}이 막 결혼했다는 사실에 놀랐습니다." />
+    <string id="Dramalord396" text="화난:" />
+    <string id="Dramalord397" text="{ANGRY}일" />
+    <string id="Dramalord398" text="{HERO1.LINK}는 목격한 {HERO3.LINK}와의 날짜에 대해 {HERO2.LINK}과 대면했습니다." />
+    <string id="Dramalord399" text="{HERO1.LINK}는 자신들이 목격한 {HERO3.LINK}와의 성관계에 대해 {HERO2.LINK}과 대면했습니다." />
+    <string id="Dramalord400" text="{HERO1.LINK}는 자신들이 목격한 {HERO3.LINK}와의 결혼에 대해 {HERO2.LINK}과 대면했습니다." />
+    <string id="Dramalord401" text="{HERO1.LINK}이(가) {HERO3.LINK}의 임신에 대해 {HERO2.LINK}과(와) 대결했습니다." />
+    <string id="Dramalord402" text="{HERO1.LINK}이(가) 자신의 자녀가 아닌 {HERO3.LINK}를 낳은 것에 대해 {HERO2.LINK}과(와) 대결했습니다." />
+    <string id="Dramalord403" text="{HERO1.LINK}이(가) {HERO2.LINK}에게 {HERO3.LINK}에게서 임신했다고 고백했습니다." />
+    <string id="Dramalord404" text="{HERO1.LINK}이(가) {HERO2.LINK}에게 자신의 자녀 {HERO3.LINK}이(가) {HERO4.LINK} 출신이라고 고백했습니다." />
+    <string id="Dramalord405" text="{HERO1.LINK}가 {HERO2.LINK}에게 {HERO3.LINK}이(가) {HERO4.LINK}에게서 임신했다는 소문을 전했습니다." />
+    <string id="Dramalord406" text="{HERO1.LINK}이(가) {HERO2.LINK}에게 {HERO3.LINK}의 자녀가 {HERO4.LINK} 출신이라는 소문을 전했습니다." />
+    <string id="Dramalord407" text="{HERO1.LINK}는 {HERO2.LINK}에게 {HERO2.LINK}가 {HERO4.LINK}에게서 임신하는 것을 목격했다고 말했습니다." />
+    <string id="Dramalord408" text="{HERO1.LINK}는 {HERO2.LINK}에게 {HERO2.LINK}의 자녀가 {HERO4.LINK} 출신임을 목격했다고 말했습니다." />
+    <string id="Dramalord409" text="{HERO.LINK}님이 아이를 안고 있습니다. 제 말이 맞나요?" />
+    <string id="Dramalord410" text="좋은 하루 되세요, {TITLE}님. 무엇을 도와드릴까요?" />
+    <string id="Dramalord411" text="가족을 늘리고 고아를 입양하고 싶습니다." />
+    <string id="Dramalord412" text="오 멋지네요 {TITLE}. 현재 우리 고아원에는 남자아이 {BOYS}명과 여자아이 {GIRLS}명이 있습니다." />
+    <string id="Dramalord413" text="{TITLE}님, 정말 죄송합니다. 아이를 입양하려면 결혼을 해야 합니다." />
+    <string id="Dramalord414" text="{TITLE}님, 정말 죄송합니다. 현재 저희 고아원에는 아이들이 없습니다." />
+    <string id="Dramalord415" text="{TITLE} 정말 죄송합니다. 최근 입양하셨습니다. 다시 입양하시려면 잠시 기다려야 합니다." />
+    <string id="Dramalord416" text="남자 아이를 입양하고 싶습니다." />
+    <string id="Dramalord417" text="여자아이를 입양하고 싶습니다." />
+    <string id="Dramalord418" text="누구를 입양하고 싶으신가요?" />
+    <string id="Dramalord419" text="{ORPHAN.NAME}, {ORPHANAGE}세." />
+    <string id="Dramalord420" text="다른 고아를 생각하고 있습니다." />
+    <string id="Dramalord421" text="알겠습니다. {ORPHAN.NAME}님을 입양하시겠습니까?" />
+    <string id="Dramalord422" text="축하합니다! {ORPHAN.NAME}이(가) 잘 될 거라고 확신합니다." />
+    <string id="Dramalord423" text="아, 아쉽군요. {ORPHAN.NAME}이(가) 매우 실망할 것입니다." />
+    <string id="Dramalord424" text="AI 채택 허용" />
+    <string id="Dramalord425" text="영웅이 고아원에서 아이들을 입양하도록 허용합니다" />
+    <string id="Dramalord426" text="영웅이 귀하의 클랜에 가입하고 싶어합니다" />
+    <string id="Dramalord427" text="{HERO.LINK}님이 클랜 가입을 요청합니다. 수락하시겠습니까?" />
+    <string id="Dramalord428" text="{HERO.LINK}님의 클랜 가입을 수락하셨습니다." />
   </strings>
 </base>

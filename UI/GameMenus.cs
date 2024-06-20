@@ -1,18 +1,9 @@
-﻿using Dramalord.Actions;
+﻿using Dramalord.Conversations;
 using Dramalord.Data;
-using Dramalord.Data.Deprecated;
 using Helpers;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.GameMenus;
-using TaleWorlds.CampaignSystem.Settlements.Locations;
-using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
@@ -27,13 +18,13 @@ namespace Dramalord.UI
 
         internal static bool ConditionOrphanageAvailable(MenuCallbackArgs args)
         {
-            args.IsEnabled = Hero.MainHero.Spouse != null /*&& CampaignTime.Now.ToDays - Info.GetLastAdoption(Hero.MainHero, Hero.MainHero.Spouse) > DramalordMCM.Get.WaitBetweenAdopting*/ && DramalordOrphanage.Orphans.Count() > 0;
+            /*args.IsEnabled = Hero.MainHero.Spouse != null && CampaignTime.Now.ToDays - Info.GetLastAdoption(Hero.MainHero, Hero.MainHero.Spouse) > DramalordMCM.Get.WaitBetweenAdopting && DramalordOrphanage.Orphans.Count() > 0;*/
             args.Tooltip = new TextObject("Visit the orphanage to adopt a child", null);
-            if (Hero.MainHero.Spouse == null)
+            /*if (Hero.MainHero.Spouse == null)
                 return MenuHelper.SetOptionProperties(args, false, true, new TextObject("You have to be married in order to adopt a child"));
             if (DramalordOrphanage.Orphans.Count() == 0)
                 return MenuHelper.SetOptionProperties(args, false, true, new TextObject("There are currently no children in the orphanage"));
-            /*
+            
             if (CampaignTime.Now.ToDays - Info.GetLastAdoption(Hero.MainHero, Hero.MainHero.Spouse) <= DramalordMCM.Get.WaitBetweenAdopting)
             {
                 TextObject obj = new TextObject("You have to wait {DAYS} days between adoptions");
@@ -48,11 +39,14 @@ namespace Dramalord.UI
 
         internal static void ConsequenceOrphanageAvailable(MenuCallbackArgs args)
         {
+            OrphanageConversation.start(Hero.MainHero.CurrentSettlement);
+            /*
             TextObject title = new TextObject("Orphanage Menu");
             TextObject text = new TextObject("There are currently {NUMBER} children in the orphanage. Would you like to adopt a child?");
             text.SetTextVariable("NUMBER", DramalordOrphanage.Orphans.Count());
 
             InformationManager.ShowInquiry(new InquiryData(title.ToString(), text.ToString(), true, true, GameTexts.FindText("str_ok").ToString(), GameTexts.FindText("str_no").ToString(), OrphanageBoyGirlPick, null, "event:/ui/notification/relation"));
+        */
         }
 
         internal static void OrphanageBoyGirlPick()

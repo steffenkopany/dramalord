@@ -15,7 +15,9 @@ namespace Dramalord.Data
         Birth,
         Kill,
         Divorce,
-        BreakUp
+        BreakUp,
+        Anger,
+        Adoption
     }
     public sealed class HeroEvent
     {
