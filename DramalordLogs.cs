@@ -497,7 +497,7 @@ namespace Dramalord
 
         public TextObject GetEncyclopediaText()
         {
-            TextObject textObject = TextObject.Empty;
+            TextObject textObject = new TextObject();
             if (CausedBy == Hero)
             {
                 textObject = new TextObject("{=Dramalord122}{HERO.LINK} has left {OLDCLAN}");
@@ -789,7 +789,7 @@ namespace Dramalord
 
         public TextObject GetEncyclopediaText()
         {
-            TextObject textObject = TextObject.Empty;
+            TextObject textObject = new TextObject();
             if (Forced && OldKingdom.Leader != null)
             {
                 textObject = new TextObject("{=Dramalord236}{HERO.LINK} banished {CLAN} from {KINGDOM}.");
@@ -1078,26 +1078,34 @@ namespace Dramalord
             EType = (int)@event.Type;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.FlirtOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.ConfrontationOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
         {
             EventType eventType = (EventType)EType;
-            TextObject tobj = TextObject.Empty;
+            TextObject tobj = new TextObject();
             if(eventType == EventType.Date)
             {
-                tobj = new TextObject("{HERO1.LINK} confronted {HERO2.LINK} about the date with {HERO3.LINK} they have witnessed.");
+                tobj = new TextObject("{=Dramalord398}{HERO1.LINK} confronted {HERO2.LINK} about the date with {HERO3.LINK} they have witnessed.");
             }
             else if (eventType == EventType.Intercourse)
             {
-                tobj = new TextObject("{HERO1.LINK} confronted {HERO2.LINK} about the intercourse with {HERO3.LINK} they have witnessed.");
+                tobj = new TextObject("{=Dramalord399}{HERO1.LINK} confronted {HERO2.LINK} about the intercourse with {HERO3.LINK} they have witnessed.");
             }
             else if (eventType == EventType.Marriage)
             {
-                tobj = new TextObject("{HERO1.LINK} confronted {HERO2.LINK} about the marriage with {HERO3.LINK} they have witnessed.");
+                tobj = new TextObject("{=Dramalord400}{HERO1.LINK} confronted {HERO2.LINK} about the marriage with {HERO3.LINK} they have witnessed.");
             }
-           
+            else if (eventType == EventType.Pregnancy)
+            {
+                tobj = new TextObject("{=Dramalord401}{HERO1.LINK} confronted {HERO2.LINK} about being pregnant from {HERO3.LINK}.");
+            }
+            else if (eventType == EventType.Birth)
+            {
+                tobj = new TextObject("{=Dramalord402}{HERO1.LINK} confronted {HERO2.LINK} about giving birth to {HERO3.LINK} who is not their child.");
+            }
+
             StringHelpers.SetCharacterProperties("HERO1", Hero1.CharacterObject, tobj);
             StringHelpers.SetCharacterProperties("HERO2", Hero2.CharacterObject, tobj);
             StringHelpers.SetCharacterProperties("HERO3", Hero3.CharacterObject, tobj);
@@ -1166,14 +1174,14 @@ namespace Dramalord
             MType = (int)mType;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.GossipOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.ConfrontationOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetNotificationText()
         {
             MemoryType memoryType = (MemoryType)MType;
             EventType eventType = (EventType)EType;
-            TextObject tobj = TextObject.Empty;
+            TextObject tobj = new TextObject();
             if (memoryType == MemoryType.Confession)
             {
                 if(eventType == EventType.Date)
@@ -1187,6 +1195,14 @@ namespace Dramalord
                 else if (eventType == EventType.Marriage)
                 {
                     tobj = new TextObject("{=Dramalord349}{HERO1.LINK} confessed to {HERO2.LINK} that they married {HERO3.LINK}");
+                }
+                else if (eventType == EventType.Pregnancy)
+                {
+                    tobj = new TextObject("{=Dramalord403}{HERO1.LINK} confessed to {HERO2.LINK} that they are pregnant from {HERO3.LINK}");
+                }
+                else if (eventType == EventType.Birth)
+                {
+                    tobj = new TextObject("{=Dramalord404}{HERO1.LINK} confessed to {HERO2.LINK} that their child {HERO3.LINK} is from {HERO4.LINK}");
                 }
             }
             else if (memoryType == MemoryType.Gossip)
@@ -1203,6 +1219,14 @@ namespace Dramalord
                 {
                     tobj = new TextObject("{=Dramalord352}{HERO1.LINK} told gossip to {HERO2.LINK} about the marriage of {HERO3.LINK} and {HERO4.LINK}");
                 }
+                else if (eventType == EventType.Pregnancy)
+                {
+                    tobj = new TextObject("{=Dramalord405}{HERO1.LINK} told gossip to {HERO2.LINK} about {HERO3.LINK} being pregnant from {HERO4.LINK}");
+                }
+                else if (eventType == EventType.Birth)
+                {
+                    tobj = new TextObject("{=Dramalord406}{HERO1.LINK} told gossip to {HERO2.LINK} that {HERO3.LINK}' child is from {HERO4.LINK}");
+                }
             }
             else if (memoryType == MemoryType.Witness)
             {
@@ -1217,6 +1241,14 @@ namespace Dramalord
                 else if (eventType == EventType.Marriage)
                 {
                     tobj = new TextObject("{=Dramalord355}{HERO1.LINK} told {HERO2.LINK} that they witnessed the marriage of {HERO2.LINK} and {HERO4.LINK}");
+                }
+                else if (eventType == EventType.Pregnancy)
+                {
+                    tobj = new TextObject("{=Dramalord407}{HERO1.LINK} told {HERO2.LINK} that they witnessed {HERO2.LINK} being pregnant from {HERO4.LINK}");
+                }
+                else if (eventType == EventType.Birth)
+                {
+                    tobj = new TextObject("{=Dramalord408}{HERO1.LINK} told {HERO2.LINK} that they witnessed that {HERO2.LINK}'s child is from {HERO4.LINK}");
                 }
             }
 

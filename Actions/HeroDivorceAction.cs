@@ -1,5 +1,4 @@
 ﻿using Dramalord.Data;
-using Dramalord.Data.Deprecated;
 using Helpers;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -19,6 +18,16 @@ namespace Dramalord.Actions
 
                 hero.GetDramalordFeelings(target).Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
                 target.GetDramalordFeelings(hero).Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
+
+                HeroFeelings heroFeelings = hero.GetDramalordFeelings(target);
+                HeroFeelings targetFeelings = target.GetDramalordFeelings(hero);
+
+                targetFeelings.Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
+                if (DramalordMCM.Get.LinkEmotionToRelation)
+                {
+                    target.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossDivorce / 2) * -1);
+                }
+                target.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysMarriage);
 
                 foreach (Romance.RomanticState romanticState in Romance.RomanticStateList.ToList())
                 {

@@ -1,26 +1,21 @@
 ﻿using Dramalord.Conversations;
 using Dramalord.Data;
-using Dramalord.Patches;
-using Dramalord.UI;
 using HarmonyLib;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
-using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Actions
 {
-    internal static class NPCConversationAction
+    internal static class HeroConversationAction
     {
         internal static bool Apply(Hero hero, Hero target, DramalordTraits heroTraits, List<HeroMemory> memories, List<Hero> potentialWitnesses)
         {
             if(target == Hero.MainHero)
             {
-                if(MBRandom.RandomInt(1,100) <= DramalordMCM.Get.ChanceNPCApproachPlayer)
+                if(hero.CanInteractWithPlayer() && !hero.IsAngryWith(target) && MBRandom.RandomInt(1,100) <= DramalordMCM.Get.ChanceNPCApproachPlayer && hero.HasMet)
                 {
                     bool isLover = hero.IsLover(target);
                     bool isSpouse = hero.IsSpouse(target);
@@ -34,7 +29,7 @@ namespace Dramalord.Actions
                         return true;
                     }
 
-                    if(!isLover && !isSpouse && isAttracted && !isRelative)
+                    if(!isLover && !isSpouse && isAttracted && !isRelative && emotion < DramalordMCM.Get.MinEmotionForDating)
                     {
                         NpcInteractions.start(hero, EventType.Flirt);
                     }
@@ -50,7 +45,7 @@ namespace Dramalord.Actions
                     {
                         NpcInteractions.start(hero, EventType.Divorce);
                     }
-                    else if(isLover || isSpouse)
+                    else if(isLover || isSpouse || emotion >= DramalordMCM.Get.MinEmotionForDating)
                     {
                         NpcInteractions.start(hero, EventType.Date);
                     }
@@ -62,15 +57,20 @@ namespace Dramalord.Actions
             HeroFeelings targetFeelings = target.GetDramalordFeelings(hero);
             DramalordTraits targetTraits = target.GetDramalordTraits();
 
+            if(hero.IsAngryWith(target))
+            {
+                return true;
+            }
+
             // tell secrets
-            if (heroFeelings.Trust > DramalordMCM.Get.MinimumTrustLevel)
+            if (hero.GetRelationTo(target) > DramalordMCM.Get.MinimumRelationLevel)
             {
                 memories.Where(item => item.Type == MemoryType.Participant || item.Type == MemoryType.Confession).Do(memory =>
                 {
                     target.AddDramalordMemory(memory.EventId, (memory.Type == MemoryType.Participant) ? MemoryType.Confession : MemoryType.Gossip, hero, true);
                     hero.ActivateDramalordMemory(memory.EventId, false);
-                    target.SetPersonalRelation(hero, target.GetBaseHeroRelation(hero) + 1);
-                    targetFeelings.Trust += 1;
+                    target.ChangeRelationTo(hero, 1);
+                    
                     if((memory.Type == MemoryType.Participant))
                     {
                         if (DramalordMCM.Get.GossipOutput)
@@ -80,12 +80,18 @@ namespace Dramalord.Actions
 
                         if(target.IsLover(memory.Event.Hero1.HeroObject) || target.IsSpouse(memory.Event.Hero1.HeroObject))
                         {
-                            target.GetDramalordFeelings(memory.Event.Hero1.HeroObject).Trust -= DramalordMCM.Get.EmotionalLossGossip;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                target.ChangeRelationTo(memory.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                            }
                             target.GetDramalordFeelings(memory.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                         else if (target.IsLover(memory.Event.Hero2.HeroObject) || target.IsSpouse(memory.Event.Hero2.HeroObject))
                         {
-                            target.GetDramalordFeelings(memory.Event.Hero2.HeroObject).Trust -= DramalordMCM.Get.EmotionalLossGossip;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                target.ChangeRelationTo(memory.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                            }
                             target.GetDramalordFeelings(memory.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                     }
@@ -98,12 +104,19 @@ namespace Dramalord.Actions
 
                         if (target.IsLover(memory.Event.Hero1.HeroObject) || target.IsSpouse(memory.Event.Hero1.HeroObject))
                         {
-                            target.GetDramalordFeelings(memory.Event.Hero1.HeroObject).Trust -= DramalordMCM.Get.EmotionalLossGossip;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                target.ChangeRelationTo(memory.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                            }
+                            
                             target.GetDramalordFeelings(memory.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                         else if (target.IsLover(memory.Event.Hero2.HeroObject) || target.IsSpouse(memory.Event.Hero2.HeroObject))
                         {
-                            target.GetDramalordFeelings(memory.Event.Hero2.HeroObject).Trust -= DramalordMCM.Get.EmotionalLossGossip;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                target.ChangeRelationTo(memory.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                            }
                             target.GetDramalordFeelings(memory.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                     }
@@ -112,7 +125,7 @@ namespace Dramalord.Actions
             }
 
             // tell gossip
-            if (heroFeelings.Trust >= 0)
+            if (hero.GetRelationTo(target) >= 0)
             {
                 memories.Where(item => item.Type == MemoryType.Gossip || item.Type == MemoryType.Witness).Do(item =>
                 {
@@ -123,9 +136,9 @@ namespace Dramalord.Actions
 
                     target.AddDramalordMemory(item.EventId, MemoryType.Gossip, hero, true);
                     hero.ActivateDramalordMemory(item.EventId, false);
-                    target.SetPersonalRelation(hero, target.GetBaseHeroRelation(hero) + 1);
-                    targetFeelings.Trust += 1;
-                    if(item.Type == MemoryType.Witness)
+                    target.ChangeRelationTo(hero, 1);
+
+                    if (item.Type == MemoryType.Witness)
                     {
                         if (DramalordMCM.Get.GossipOutput)
                         {
@@ -134,12 +147,18 @@ namespace Dramalord.Actions
 
                         if (target.IsLover(item.Event.Hero1.HeroObject) || target.IsSpouse(item.Event.Hero1.HeroObject))
                         {
-                            target.GetDramalordFeelings(item.Event.Hero1.HeroObject).Trust -= DramalordMCM.Get.EmotionalLossGossip;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                target.ChangeRelationTo(item.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                            }
                             target.GetDramalordFeelings(item.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                         else if (target.IsLover(item.Event.Hero2.HeroObject) || target.IsSpouse(item.Event.Hero2.HeroObject))
                         {
-                            target.GetDramalordFeelings(item.Event.Hero2.HeroObject).Trust -= DramalordMCM.Get.EmotionalLossGossip;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                target.ChangeRelationTo(item.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                            }
                             target.GetDramalordFeelings(item.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                     }
@@ -152,12 +171,19 @@ namespace Dramalord.Actions
 
                         if (target.IsLover(item.Event.Hero1.HeroObject) || target.IsSpouse(item.Event.Hero1.HeroObject))
                         {
-                            target.GetDramalordFeelings(item.Event.Hero1.HeroObject).Trust -= DramalordMCM.Get.EmotionalLossGossip;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                target.ChangeRelationTo(item.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                            }
                             target.GetDramalordFeelings(item.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                         else if (target.IsLover(item.Event.Hero2.HeroObject) || target.IsSpouse(item.Event.Hero2.HeroObject))
                         {
-                            target.GetDramalordFeelings(item.Event.Hero2.HeroObject).Trust -= DramalordMCM.Get.EmotionalLossGossip;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                target.ChangeRelationTo(item.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                            }
+                            
                             target.GetDramalordFeelings(item.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                     }
@@ -183,7 +209,7 @@ namespace Dramalord.Actions
             bool isCoupleNoHate = heroFeelings.Emotion >= 0 && targetFeelings.Emotion >= 0;
             bool isCoupleLove = heroFeelings.Emotion >= DramalordMCM.Get.MinEmotionForDating && targetFeelings.Emotion >= DramalordMCM.Get.MinEmotionForDating;
             bool isCoupleMarryLove = heroFeelings.Emotion >= DramalordMCM.Get.MinEmotionForMarriage && targetFeelings.Emotion >= DramalordMCM.Get.MinEmotionForMarriage;
-            bool isCoupleTrusty = heroFeelings.Trust >= DramalordMCM.Get.MinimumTrustLevel && heroFeelings.Trust >= DramalordMCM.Get.MinimumTrustLevel;
+            bool isCoupleTrusty = hero.GetRelationTo(target) >= DramalordMCM.Get.MinimumRelationLevel && target.GetRelationTo(hero) >= DramalordMCM.Get.MinimumRelationLevel;
 
             bool isCoupleFwb = target.IsFriendWithBenefits(hero);
             bool isCoupleLover = target.IsLover(hero);
@@ -192,16 +218,22 @@ namespace Dramalord.Actions
             if(isCoupleTension && isCoupleHorny && isCoupleNoHate && !isCoupleLove && !isCoupleFwb && !isCoupleLover && !isCoupleMarried)
             {
                 hero.SetFriendWithBenefits(target);
-                Notification.PrintText(hero.Name + " and " + target.Name + " are now friends with benefits");
                 isCoupleFwb = true;
+                if(DramalordMCM.Get.AffairOutput)
+                {
+                    LogEntry.AddLogEntry(new EncyclopediaLogStartFWB(hero, target));
+                }
             }
             else if(isCoupleLove && !isCoupleLover && !isCoupleMarried)
             {
                 hero.SetLover(target);
-                LogEntry.AddLogEntry(new EncyclopediaLogStartAffair(hero, target));
                 isCoupleLover = true;
+                if (DramalordMCM.Get.AffairOutput)
+                {
+                    LogEntry.AddLogEntry(new EncyclopediaLogStartAffair(hero, target));
+                }
             }
-            else if(isCoupleMarryLove && isCoupleTrusty && isCoupleLover)
+            else if(isCoupleMarryLove && isCoupleTrusty && isCoupleLover && DramalordMCM.Get.AllowMarriages)
             {
                 HeroMarriageAction.Apply(hero, target, potentialWitnesses);
                 isCoupleMarried = true;
@@ -217,10 +249,7 @@ namespace Dramalord.Actions
                 HeroIntercourseAction.Apply(hero, target, potentialWitnesses);
                 if(hero.IsFemale != target.IsFemale && MBRandom.RandomInt(1,100) <= DramalordMCM.Get.PregnancyChance)
                 {
-                    ChildConceivedPatch.Father = hero.IsFemale ? target.CharacterObject : hero.CharacterObject;
-                    //MakePregnantAction.Apply(hero.IsFemale ? hero : target);
-                    Hero mother = hero.IsFemale ? hero : target;
-                    ChildConceivedPatch.ChildConceived(ref mother);
+                    HeroConceiveAction.Apply(hero.IsFemale ? hero : target, hero.IsFemale ? target : hero);
                 }
             }
 

@@ -21,6 +21,7 @@ namespace Dramalord.Behaviors
             PlayerConfrontation.AddDialogs(starter);
             QuestInteractions.AddDialogs(starter);
             NPCConfrontation.AddDialogs(starter);
+            OrphanageConversation.AddDialogs(starter);
         }
 
         public override void RegisterEvents()

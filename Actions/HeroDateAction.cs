@@ -1,10 +1,10 @@
 ﻿using Dramalord.Data;
-using Dramalord.Data.Deprecated;
+using HarmonyLib;
 using Helpers;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
@@ -29,8 +29,45 @@ namespace Dramalord.Actions
                 heroFeelings.Tension += heroAttractionScore;
                 targetFeeling.Tension += targetAttractionScore;
 
-                heroFeelings.Emotion += hero.GetDramalordTraitScore(target);
-                targetFeeling.Emotion += target.GetDramalordTraitScore(hero);
+                int heroTraitScore = hero.GetDramalordTraitScore(target);
+                int targetTraitScore = target.GetDramalordTraitScore(hero);
+
+                heroFeelings.Emotion += heroTraitScore;
+                targetFeeling.Emotion += targetTraitScore;
+
+                hero.ChangeRelationTo(target, (((heroTraitScore > targetTraitScore) ? targetTraitScore : heroTraitScore) / 2));
+
+                if (hero != Hero.MainHero)
+                {
+                    hero.GetHeroSpouses().Where(item => item != target.CharacterObject).Do(item =>
+                    {
+                        HeroFeelings itemFeelings = hero.GetDramalordFeelings(item.HeroObject);
+                        itemFeelings.Tension -= heroAttractionScore / 2;
+                        itemFeelings.Emotion -= heroTraitScore / 2;
+                    });
+                    hero.GetHeroLovers().Where(item => item != target.CharacterObject).Do(item =>
+                    {
+                        HeroFeelings itemFeelings = hero.GetDramalordFeelings(item.HeroObject);
+                        itemFeelings.Tension -= heroAttractionScore / 2;
+                        itemFeelings.Emotion -= heroTraitScore / 2;
+                    });
+                }
+                
+                if(target != Hero.MainHero)
+                {
+                    target.GetHeroSpouses().Where(item => item != hero.CharacterObject).Do(item =>
+                    {
+                        HeroFeelings itemFeelings = target.GetDramalordFeelings(item.HeroObject);
+                        itemFeelings.Tension -= targetAttractionScore / 2;
+                        itemFeelings.Emotion -= targetTraitScore / 2;
+                    });
+                    target.GetHeroLovers().Where(item => item != hero.CharacterObject).Do(item =>
+                    {
+                        HeroFeelings itemFeelings = target.GetDramalordFeelings(item.HeroObject);
+                        itemFeelings.Tension -= targetAttractionScore / 2;
+                        itemFeelings.Emotion -= targetTraitScore / 2;
+                    });
+                }
 
                 heroFeelings.LastInteractionDay = (uint)CampaignTime.Now.ToDays;
                 targetFeeling.LastInteractionDay = (uint)CampaignTime.Now.ToDays;
@@ -76,8 +113,16 @@ namespace Dramalord.Actions
                             MBInformationManager.AddQuickInformation(banner, 1000, target.CharacterObject, "event:/ui/notification/relation");
                         }
 
-                        targetFeeling.Emotion -= DramalordMCM.Get.EmotionalLossPregnancy;
-                        targetFeeling.Trust -= DramalordMCM.Get.EmotionalLossPregnancy;
+                        if (!target.GetDramalordTraits().IsEmotionallyOpen)
+                        {
+                            targetFeeling.Emotion -= DramalordMCM.Get.EmotionalLossPregnancy;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                target.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossPregnancy / 2) * -1);
+                            }
+
+                            target.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysPregnancy);
+                        }
                     }
                 }
 
@@ -102,8 +147,16 @@ namespace Dramalord.Actions
                             MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                         }
 
-                        heroFeelings.Emotion -= DramalordMCM.Get.EmotionalLossPregnancy;
-                        heroFeelings.Trust -= DramalordMCM.Get.EmotionalLossPregnancy;
+                        if (!hero.GetDramalordTraits().IsEmotionallyOpen)
+                        {
+                            heroFeelings.Emotion -= DramalordMCM.Get.EmotionalLossPregnancy;
+                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            {
+                                hero.ChangeRelationTo(target, (DramalordMCM.Get.EmotionalLossPregnancy / 2) * -1);
+                            }
+
+                            hero.MakeAngryWith(target, DramalordMCM.Get.AngerDaysPregnancy);
+                        }   
                     }
                 }
 
@@ -132,15 +185,31 @@ namespace Dramalord.Actions
 
                         if (witness.IsSpouse(hero) || witness.IsLover(hero))
                         {
-                            HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
-                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtDate;
-                            witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossCaughtDate;
+                            if (!witness.GetDramalordTraits().IsEmotionallyOpen)
+                            {
+                                HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
+                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtDate;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    witness.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossCaughtDate / 2) * -1);
+                                }
+
+                                witness.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysDate);
+                            } 
                         }
                         else if (witness.IsSpouse(target) || witness.IsLover(target))
                         {
-                            HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
-                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtDate;
-                            witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossCaughtDate;
+                            if (!witness.GetDramalordTraits().IsEmotionallyOpen)
+                            {
+                                HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
+                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtDate;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    witness.ChangeRelationTo(target, (DramalordMCM.Get.EmotionalLossCaughtDate / 2) * -1);
+                                }
+                                
+                                witness.MakeAngryWith(target, DramalordMCM.Get.AngerDaysDate);
+                            }  
                         }
                     }
                 }

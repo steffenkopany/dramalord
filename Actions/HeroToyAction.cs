@@ -1,5 +1,4 @@
 ﻿using Dramalord.Data;
-using Dramalord.Data.Deprecated;
 using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
@@ -26,6 +25,7 @@ namespace Dramalord.Actions
                 }
 
                 hero.GetDramalordFeelings(Hero.MainHero).Emotion += 1;
+
                 hero.GetHeroTraits().SetPropertyValue(HeroTraits.Horny, hero.GetDramalordTraits().Horny + 1);
                 if (hero.Spouse != null && hero.Spouse != Hero.MainHero)
                 {

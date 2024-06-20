@@ -36,7 +36,7 @@ namespace Dramalord.Behaviors
 
         internal void OnDailyHeroTick(Hero hero)
         {
-            if(hero.IsDramalordLegit() && hero != Hero.MainHero && !(hero.Clan == Clan.PlayerClan && !DramalordMCM.Get.AllowPlayerClanAI))
+            if(hero.IsDramalordLegit() && hero != Hero.MainHero && !hero.IsPrisoner && (hero.Clan != Clan.PlayerClan || DramalordMCM.Get.AllowPlayerClanAI) && (hero.Occupation != Occupation.Wanderer || DramalordMCM.Get.AllowWandererAI))
             {
                 int dailyChance = MBRandom.RandomInt(0, 100);
                 DramalordTraits traits = hero.GetDramalordTraits();
@@ -53,16 +53,27 @@ namespace Dramalord.Behaviors
                     {
                         memories.Where(item => item.Active).Do(item =>
                         {
+                            bool result = false;
                             if (closeHeroes.Contains(item.Event.Hero1.HeroObject) && (hero.IsLover(item.Event.Hero1.HeroObject) || hero.IsSpouse(item.Event.Hero1.HeroObject)))
                             {
-                                HeroConfrontationAction.Apply(hero, item.Event.Hero1.HeroObject, traits, item);
+                                bool outcome = HeroConfrontationAction.Apply(hero, item.Event.Hero1.HeroObject, traits, item);
+                                if(outcome)
+                                {
+                                    result = true;
+                                }
                                 closeHeroes.Remove(item.Event.Hero1.HeroObject);
-                                hero.ActivateDramalordMemory(item.EventId, false);
                             }
                             if (closeHeroes.Contains(item.Event.Hero2.HeroObject) && (hero.IsLover(item.Event.Hero2.HeroObject) || hero.IsSpouse(item.Event.Hero2.HeroObject)))
                             {
-                                HeroConfrontationAction.Apply(hero, item.Event.Hero2.HeroObject, traits, item);
-                                closeHeroes.Remove(item.Event.Hero1.HeroObject);
+                                bool outcome = HeroConfrontationAction.Apply(hero, item.Event.Hero2.HeroObject, traits, item);
+                                if (outcome)
+                                {
+                                    result = true;
+                                }
+                                closeHeroes.Remove(item.Event.Hero2.HeroObject);
+                            }
+                            if(result)
+                            {
                                 hero.ActivateDramalordMemory(item.EventId, false);
                             }
                         });
@@ -95,12 +106,12 @@ namespace Dramalord.Behaviors
 
         internal bool HandleCloseHeroes(Hero hero, Hero target, DramalordTraits traits, List<HeroMemory> memories, List<Hero> potentialWitnesses)
         {
-            return NPCConversationAction.Apply(hero, target, traits, memories, potentialWitnesses);
+            return HeroConversationAction.Apply(hero, target, traits, memories, potentialWitnesses);
         }
 
         internal void ThinkOverMemories(Hero hero, DramalordTraits traits, List<HeroMemory> memories)
         {
-            if(hero.Clan == null && hero.GetHeroSpouses().Count > 0)
+            if(hero.Clan == null && hero.GetHeroSpouses().Count > 0 && DramalordMCM.Get.AllowClanChanges)
             {
                 CharacterObject? result = hero.GetHeroSpouses().Where(item => item.HeroObject.Clan != null).First();
                 if(result != null)
@@ -112,9 +123,18 @@ namespace Dramalord.Behaviors
 
             if(hero.IsLover(Hero.MainHero) || hero.IsSpouse(Hero.MainHero))
             {
-                if(hero.GetDramalordTraits().Horny >= DramalordMCM.Get.MinHornyForIntercourse && !VisitLoverQuest.HeroList.ContainsKey(hero) && MBRandom.RandomInt(1,100) < DramalordMCM.Get.ChanceNPCQuestVisitPlayer)
+                if(hero.CanInteractWithPlayer() && !hero.IsAngryWith(Hero.MainHero) && hero.GetDramalordTraits().Horny >= DramalordMCM.Get.MinHornyForIntercourse && !VisitLoverQuest.HeroList.ContainsKey(hero) && MBRandom.RandomInt(1,100) < DramalordMCM.Get.ChanceNPCQuestVisitPlayer && !hero.IsNearby(Hero.MainHero))
                 {
                     (new VisitLoverQuest(hero)).StartQuest();
+                }
+            }
+
+            if (DramalordMCM.Get.AllowAIAdoptions && hero.Spouse != null && CampaignTime.Now.ToDays - DramalordOrphanage.GetLastAdoptionDay(hero) > DramalordMCM.Get.WaitBetweenAdopting && (hero.IsFemale == hero.Spouse.IsFemale || hero.Age > DramalordMCM.Get.MaxFertilityAge ))
+            {
+                CharacterObject? orphan = DramalordOrphanage.PullRandomOrphan();
+                if(orphan != null)
+                {
+                    HeroAdoptAction.Apply(hero, hero.Spouse, orphan.HeroObject);
                 }
             }
         }
@@ -128,7 +148,7 @@ namespace Dramalord.Behaviors
                 {
                     if (hero.GetDramalordAttractionTo(item) > DramalordMCM.Get.MinAttractionForFlirting)
                     {
-                        if (item == Hero.MainHero)
+                        if (item == Hero.MainHero && hero.HasMet)
                         {
                             NpcInteractions.start(hero, EventType.Intercourse);
                         }

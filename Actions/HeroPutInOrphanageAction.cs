@@ -33,6 +33,7 @@ namespace Dramalord.Actions
                     }
                     StringHelpers.SetCharacterProperties("HERO", child.CharacterObject, banner);
 
+                    Campaign.Current.SetTimeSpeed(0);
                     Notification.DrawMessageBox(
                             title,
                             text,

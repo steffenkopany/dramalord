@@ -380,8 +380,58 @@
     <string id="Dramalord373" text="Tempo em dias que os heróis lembram dos eventos do nascimento" />
     <string id="Dramalord374" text="Duração da memória do casamento" />
     <string id="Dramalord375" text="Tempo em dias que os heróis lembram dos eventos do casamento" />
-    <string id="Dramalord376" text="Nível mínimo de confiança" />
-    <string id="Dramalord377" text="É necessário um mínimo de confiança para fazer um herói confiar em outro" />
+    <string id="Dramalord376" text="Nível mínimo de relacionamento" />
+    <string id="Dramalord377" text="É necessária uma quantidade mínima de relacionamento para fazer um herói confiar em outro" />
     <string id="Dramalord378" text="Uh... de alguma forma esqueci o que queria dizer. Com licença." />
+    <string id="Dramalord379" text="Flirt de duração da raiva" />
+    <string id="Dramalord380" text="Quanto tempo um herói fica com raiva em dias ao testemunhar seu parceiro flertando com outra pessoa" />
+    <string id="Dramalord381" text="Data de duração da raiva" />
+    <string id="Dramalord382" text="Quanto tempo um herói fica com raiva em dias se testemunhar seu parceiro em um encontro com outra pessoa" />
+    <string id="Dramalord383" text="Relação sexual com duração da raiva" />
+    <string id="Dramalord384" text="Quanto tempo um herói fica com raiva em dias ao testemunhar seu parceiro tendo relações sexuais com outra pessoa" />
+    <string id="Dramalord385" text="Duração da raiva na gravidez" />
+    <string id="Dramalord386" text="Quanto tempo um herói fica com raiva em dias ao testemunhar sua parceira grávida de outra pessoa" />
+    <string id="Dramalord387" text="Duração da Raiva Bastardo" />
+    <string id="Dramalord388" text="Quanto tempo um herói fica com raiva em dias ao testemunhar seu parceiro dando à luz um filho de outra pessoa" />
+    <string id="Dramalord389" text="Raiva Duração Casamento" />
+    <string id="Dramalord390" text="Quanto tempo um herói fica com raiva em dias se testemunhar seu parceiro se casar com outra pessoa" />
+    <string id="Dramalord391" text="Estou com raiva de você e não quero falar com você! [if:convo_angry_voice]" />
+    <string id="Dramalord392" text="Há claramente uma protuberância na barriga de {HERO.LINK}, e depois de fazer alguns cálculos, fica claro para você que você não é a causa." />
+    <string id="Dramalord393" text="Você viu {HERO.LINK} se casar com {TARGET.LINK}" />
+    <string id="Dramalord394" text="{HERO.LINK} vi você se casar com {TARGET.LINK}" />
+    <string id="Dramalord395" text="Você ouviu aplausos perto da igreja e quando chegou perto viu, para sua surpresa, que {HERO.LINK} e {TARGET.LINK} acabaram de se casar." />
+    <string id="Dramalord396" text="Angry:" />
+    <string id="Dramalord397" text="{ANGRY} dias" />
+    <string id="Dramalord398" text="{HERO1.LINK} confrontou {HERO2.LINK} sobre o encontro com {HERO3.LINK} que eles testemunharam." />
+    <string id="Dramalord399" text="{HERO1.LINK} confrontou {HERO2.LINK} sobre a relação sexual com {HERO3.LINK} que eles testemunharam." />
+    <string id="Dramalord400" text="{HERO1.LINK} confrontou {HERO2.LINK} sobre o casamento com {HERO3.LINK} que eles testemunharam." />
+    <string id="Dramalord401" text="{HERO1.LINK} confrontou {HERO2.LINK} sobre estar grávida de {HERO3.LINK}." />
+    <string id="Dramalord402" text="{HERO1.LINK} confrontou {HERO2.LINK} sobre dar à luz {HERO3.LINK} que não é seu filho." />
+    <string id="Dramalord403" text="{HERO1.LINK} confessou a {HERO2.LINK} que está grávida de {HERO3.LINK}" />
+    <string id="Dramalord404" text="{HERO1.LINK} confessou a {HERO2.LINK} que seu filho {HERO3.LINK} é de {HERO4.LINK}" />
+    <string id="Dramalord405" text="{HERO1.LINK} contou uma fofoca para {HERO2.LINK} sobre {HERO3.LINK} estar grávida de {HERO4.LINK}" />
+    <string id="Dramalord406" text="{HERO1.LINK} contou a fofoca para {HERO2.LINK} que o filho de {HERO3.LINK} é de {HERO4.LINK}" />
+    <string id="Dramalord407" text="{HERO1.LINK} disse a {HERO2.LINK} que eles testemunharam {HERO2.LINK} grávida de {HERO4.LINK}" />
+    <string id="Dramalord408" text="{HERO1.LINK} disse a {HERO2.LINK} que eles testemunharam que o filho de {HERO2.LINK} é de {HERO4.LINK}" />
+    <string id="Dramalord409" text="{HERO.LINK} está carregando seu filho, estou correto?" />
+    <string id="Dramalord410" text="Bom dia, {TITLE}. Como posso ajudá-lo?" />
+    <string id="Dramalord411" text="Gostaria de ampliar minha família e adotar um órfão." />
+    <string id="Dramalord412" text="Oh, isso é ótimo {TITLE}. Atualmente temos {BOYS} meninos e {GIRLS} meninas em nosso orfanato." />
+    <string id="Dramalord413" text="Sinto muito {TITLE}, mas você precisa se casar para adotar uma criança." />
+    <string id="Dramalord414" text="Sinto muito {TITLE}, mas atualmente não há crianças em nosso orfanato." />
+    <string id="Dramalord415" text="Sinto muito {TITLE}, mas você adotou recentemente. Você terá que esperar um pouco antes de poder adotar novamente." />
+    <string id="Dramalord416" text="Gostaria de adotar um menino." />
+    <string id="Dramalord417" text="Eu gostaria de adotar uma menina." />
+    <string id="Dramalord418" text="Quem você gostaria de adotar?" />
+    <string id="Dramalord419" text="{ORPHAN.NAME}, {ORPHANAGE} anos." />
+    <string id="Dramalord420" text="Estou pensando em um órfão diferente." />
+    <string id="Dramalord421" text="Muito bem. Você tem certeza absoluta de que deseja adotar {ORFÃ.NAME}?" />
+    <string id="Dramalord422" text="Parabéns! Tenho certeza que {ORPHAN.NAME} estará em boas mãos." />
+    <string id="Dramalord423" text="Bem, isso é triste. {ORFÃ.NAME} ficará muito desapontado." />
+    <string id="Dramalord424" text="Permitir adoção de IA" />
+    <string id="Dramalord425" text="Permitir que heróis adotem crianças do orfanato" />
+    <string id="Dramalord426" text="O herói quer entrar no seu clã" />
+    <string id="Dramalord427" text="{HERO.LINK} solicita ingressar no seu clã. Você aceitará?" />
+    <string id="Dramalord428" text="Você aceitou {HERO.LINK} ingressar no seu clã." />
   </strings>
 </base>

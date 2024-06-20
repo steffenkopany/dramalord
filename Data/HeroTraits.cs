@@ -93,13 +93,14 @@ namespace Dramalord.Data
                 if (!TraitObject.All.Contains(trait))
                 {
                     TraitObject.All.Add(trait);
+                    trait.IsReady = true;
                 }
             }
         }
 
         internal static void ApplyToHero(Hero hero)
         {
-            if (hero.IsLord || hero.IsWanderer)
+            if (hero.IsDramalordLegit())
             {
                 foreach (TraitObject trait in AllTraits)
                 {

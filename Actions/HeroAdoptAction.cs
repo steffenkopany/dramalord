@@ -15,6 +15,10 @@ namespace Dramalord.Actions
         {
             if (orphan != null && hero.IsDramalordLegit() && target.IsDramalordLegit())
             {
+                DramalordOrphanage.RemoveOrphan(orphan.CharacterObject);
+                DramalordOrphanage.SetLastAdoptionDay(hero, (uint)CampaignTime.Now.ToDays);
+                DramalordOrphanage.SetLastAdoptionDay(target, (uint)CampaignTime.Now.ToDays);
+
                 orphan.Mother = (hero.IsFemale) ? hero : target;
                 orphan.Father = (hero.IsFemale) ? target : hero;
                 orphan.Clan = hero.Clan;

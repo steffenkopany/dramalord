@@ -33,6 +33,15 @@ namespace Dramalord.Patches
                 TextObject hastoy = new TextObject("{=Dramalord232}Has Toy:");
                 TextObject traitscore = new TextObject("{=Dramalord233}Trait Score:");
                 TextObject fertile = new TextObject("{=Dramalord332}Fertile:");
+                TextObject angry = new TextObject("{=Dramalord396}Angry:");
+                TextObject angrydays = new TextObject("{=Dramalord397}{ANGRY} days");
+                int days = 0;
+                hero.GetDramalordMemory().Where(item => item.Event.Hero2 == Hero.MainHero.CharacterObject && item.Event.Type == EventType.Anger).Do( item =>
+                {
+                    int adays = (int)(item.Event.CampaignDay + item.Event.DaysAlive);
+                    days = adays - (int)CampaignTime.Now.ToDays;
+                });
+                angrydays.SetTextVariable("ANGRY", days);
                 /*TextObject Openness = new TextObject("{=Dramalord332}Openness:");
                 TextObject Conscientiousness = new TextObject("{=Dramalord332}Conscientiousness:");
                 TextObject Extroversion = new TextObject("{=Dramalord332}Extroversion:");
@@ -44,6 +53,7 @@ namespace Dramalord.Patches
                 __instance.Stats.Add(new StringPairItemVM(horny.ToString(), __instance.IsInformationHidden ? text : hero.GetDramalordTraits().Horny.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(hastoy.ToString(), __instance.IsInformationHidden ? text : (hero.GetDramalordTraits().HasToy == 1) ? yes : no));
                 __instance.Stats.Add(new StringPairItemVM(fertile.ToString(), __instance.IsInformationHidden ? text : (hero.GetDramalordIsFertile()) ? yes : no));
+                __instance.Stats.Add(new StringPairItemVM(angry.ToString(), __instance.IsInformationHidden ? text : (days > 0) ? angrydays.ToString() : no));
                 /*__instance.Stats.Add(new StringPairItemVM(Openness.ToString(), __instance.IsInformationHidden? text : hero.GetDramalordTraits().Openness.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(Conscientiousness.ToString(), __instance.IsInformationHidden ? text : hero.GetDramalordTraits().Conscientiousness.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(Extroversion.ToString(), __instance.IsInformationHidden ? text : hero.GetDramalordTraits().Extroversion.ToString()));

@@ -1,11 +1,5 @@
 ﻿using Dramalord.Data;
 using Dramalord.Quests;
-using Dramalord.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Encounters;
 
@@ -26,7 +20,7 @@ namespace Dramalord.Conversations
         //CONDITIONS
         internal static bool ConditionNpcHasQuest()
         {
-            if (Hero.OneToOneConversationHero != null && (Hero.OneToOneConversationHero.IsLord || Hero.OneToOneConversationHero.Occupation == Occupation.Wanderer))
+            if (Hero.OneToOneConversationHero != null && Hero.OneToOneConversationHero.IsDramalordLegit())
             {
                 return VisitLoverQuest.HeroList.ContainsKey(Hero.OneToOneConversationHero);
             }

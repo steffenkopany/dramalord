@@ -7,11 +7,11 @@ namespace Dramalord.Actions
 {
     internal static class HeroConfrontationAction
     {
-        internal static void Apply(Hero hero, Hero target, DramalordTraits heroTraits, HeroMemory memory)
+        internal static bool Apply(Hero hero, Hero target, DramalordTraits heroTraits, HeroMemory memory)
         {
             Hero otherHero = (memory.Event.Hero1.HeroObject != target) ? memory.Event.Hero1.HeroObject : memory.Event.Hero2.HeroObject;
 
-            if (target == Hero.MainHero && otherHero != hero)
+            if (target == Hero.MainHero && otherHero != hero && hero.HasMet)
             {
                 // initiate confrontation
                 NPCConfrontation.start(hero, memory);
@@ -20,6 +20,9 @@ namespace Dramalord.Actions
                 {
                     LogEntry.AddLogEntry(new LogConfrontation(hero, target, otherHero, memory.Event));
                 }
+
+                DramalordEventCallbacks.OnHeroesConfrontation(hero, target, otherHero, memory.Event);
+                return true;
             }
             else if (otherHero != hero)
             {
@@ -28,12 +31,12 @@ namespace Dramalord.Actions
                     LogEntry.AddLogEntry(new LogConfrontation(hero, target, otherHero, memory.Event));
                 }
 
-                if(memory.Event.Type == EventType.Birth && memory.Event.Hero2.HeroObject.Father != hero)
+                if(memory.Event.Type == EventType.Birth && memory.Event.Hero2.HeroObject.Father != hero && !memory.Event.Hero2.HeroObject.IsOrphan())
                 {
                     HeroPutInOrphanageAction.Apply(hero, memory.Event.Hero2.HeroObject);
                 }
 
-                if (target.IsSpouse(hero) && hero.GetDramalordFeelings(target).Emotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
+                if (target.IsSpouse(hero) && hero.GetDramalordFeelings(target).Emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && DramalordMCM.Get.AllowDivorces)
                 {
                     HeroDivorceAction.Apply(hero, target);
                     if(heroTraits.IsInstable && DramalordMCM.Get.AllowRageKills)
@@ -71,9 +74,11 @@ namespace Dramalord.Actions
                         }
                     }
                 }
-            }
 
-            DramalordEventCallbacks.OnHeroesConfrontation(hero, target, otherHero, memory.Event);
+                DramalordEventCallbacks.OnHeroesConfrontation(hero, target, otherHero, memory.Event);
+                return true;
+            }
+            return false;
         }
     }
 }

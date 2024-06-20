@@ -28,14 +28,13 @@ namespace Dramalord.Behaviors
             {
                 Hero.MainHero.GetDramalordMemory().ForEach(item =>
                 {
-                    if (item.Type == MemoryType.Witness && (item.Event.Type == EventType.Date || item.Event.Type == EventType.Intercourse || item.Event.Type == EventType.Marriage || item.Event.Type == EventType.Birth))
+                    if (item.Active && item.Type == MemoryType.Witness && (item.Event.Type == EventType.Date || item.Event.Type == EventType.Intercourse || item.Event.Type == EventType.Marriage || item.Event.Type == EventType.Birth || item.Event.Type == EventType.Pregnancy))
                     {
                         if (item.Event.Hero1.HeroObject.IsNearby(Hero.MainHero) && (item.Event.Hero1.HeroObject.IsLover(Hero.MainHero) || item.Event.Hero1.HeroObject.IsSpouse(Hero.MainHero)))
                         {
                             ConversationHelper.PlayerConfrontationPopup(item.Event.Hero1.HeroObject, item, item.Event.Hero2.HeroObject);
                         }
-
-                        if (item.Event.Hero2.HeroObject.IsNearby(Hero.MainHero) && (item.Event.Hero2.HeroObject.IsLover(Hero.MainHero) || item.Event.Hero2.HeroObject.IsSpouse(Hero.MainHero)))
+                        else if (item.Event.Hero2.HeroObject.IsNearby(Hero.MainHero) && (item.Event.Hero2.HeroObject.IsLover(Hero.MainHero) || item.Event.Hero2.HeroObject.IsSpouse(Hero.MainHero)))
                         {
                             ConversationHelper.PlayerConfrontationPopup(item.Event.Hero2.HeroObject, item, item.Event.Hero1.HeroObject);
                         }

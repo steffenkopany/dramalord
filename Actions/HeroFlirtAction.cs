@@ -1,5 +1,4 @@
 ﻿using Dramalord.Data;
-using Dramalord.Data.Deprecated;
 using Helpers;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,6 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Actions
 {
@@ -29,8 +27,13 @@ namespace Dramalord.Actions
                 heroFeelings.Tension += heroAttractionScore;
                 targetFeeling.Tension += targetAttractionScore;
 
-                heroFeelings.Emotion += hero.GetDramalordTraitScore(target);
-                targetFeeling.Emotion += target.GetDramalordTraitScore(hero);
+                int heroTraitScore = hero.GetDramalordTraitScore(target);
+                int targetTraitScore = target.GetDramalordTraitScore(hero);
+
+                heroFeelings.Emotion += heroTraitScore;
+                targetFeeling.Emotion += targetTraitScore;
+
+                target.ChangeRelationTo(hero, (((heroTraitScore > targetTraitScore) ? targetTraitScore : heroTraitScore) / 2));
 
                 heroFeelings.LastInteractionDay = (uint)CampaignTime.Now.ToDays;
                 targetFeeling.LastInteractionDay = (uint)CampaignTime.Now.ToDays;
@@ -78,15 +81,32 @@ namespace Dramalord.Actions
 
                         if(witness.IsSpouse(hero) || witness.IsLover(hero))
                         {
-                            HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
-                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
-                            witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+                            if (!witness.GetDramalordTraits().IsEmotionallyOpen)
+                            {
+                                HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
+                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+                                if(DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    witness.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossCaughtFlirting / 2) * -1);
+                                }
+                                
+                                witness.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysFlirt);
+                            }
+                                
                         }
                         else if (witness.IsSpouse(target) || witness.IsLover(target))
                         {
-                            HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
-                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
-                            witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+                            if (!witness.GetDramalordTraits().IsEmotionallyOpen)
+                            {
+                                HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
+                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    witness.ChangeRelationTo(target, (DramalordMCM.Get.EmotionalLossCaughtFlirting / 2) * -1);
+                                }
+                                    
+                                witness.MakeAngryWith(target, DramalordMCM.Get.AngerDaysFlirt);
+                            }
                         }
                     }
                 }

@@ -50,7 +50,7 @@ namespace Dramalord.Conversations
         //CONDITIONS
         internal static bool ConditionPlayerCanStartInteraction()
         {
-            return Hero.OneToOneConversationHero.IsDramalordLegit();
+            return Hero.OneToOneConversationHero != null && Hero.OneToOneConversationHero.IsDramalordLegit();
         }
 
         internal static bool ConditionPlayerOffersGift()
@@ -70,11 +70,11 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionPlayerWantsBreakup()
         {
-            return Hero.MainHero.IsLover(Hero.OneToOneConversationHero) && (Hero.MainHero.Spouse == null || Hero.MainHero.Spouse != Hero.OneToOneConversationHero);
+            return Hero.MainHero.IsLover(Hero.OneToOneConversationHero) && !Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero);
         }
         internal static bool ConditionPlayerWantsDivorce()
         {
-            return Hero.MainHero.Spouse != null && Hero.MainHero.Spouse == Hero.OneToOneConversationHero;
+            return Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero);
         }
         internal static bool ConditionPlayerWantsPrisonFun()
         {
@@ -126,7 +126,7 @@ namespace Dramalord.Conversations
 
         internal static void ConsequenceNpcGotPresentFromPlayer()
         {
-            TextObject toy = TextObject.Empty;
+            TextObject toy = new TextObject();
             if (Hero.OneToOneConversationHero.IsFemale)
             {
                 ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
@@ -150,7 +150,7 @@ namespace Dramalord.Conversations
 
         internal static void ConsequenceNpcReactsBreakupDoesntCare()
         {
-            //Hero.MainHero.GetDramalordRelation(Hero.OneToOneConversationHero).Status = RelationshipStatus.Acquaintance;
+            HeroBreakupAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
         }
 
         internal static void ConsequenceNpcReactsBreakupSurprised()

@@ -38,17 +38,9 @@ namespace Dramalord.Actions
             int eventID = DramalordEvents.AddHeroEvent(mother, child, EventType.Birth, DramalordMCM.Get.BirthMemoryDuration);
             mother.AddDramalordMemory(eventID, MemoryType.Participant, mother, true);
 
-            if (MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
-            {
-                Hero? witness = closeHeroes.Where(item => item != mother).GetRandomElementInefficiently();
-                if(witness != null && witness != father && (witness.IsLover(mother) || witness.IsSpouse(mother)))
-                {
-                    HeroWitnessAction.Apply(mother, child, witness, EventType.Birth, eventID);
-                }
-            }
-
             DramalordEvents.RemoveHeroEvent(pregnancy.EventID);
             mother.ClearDramalordPregnancy();
+            mother.IsPregnant = false;
 
             if (mother != Hero.MainHero && MBRandom.RandomFloat <= pregnancyModel.MaternalMortalityProbabilityInLabor)
             {
@@ -81,10 +73,23 @@ namespace Dramalord.Actions
                         MBInformationManager.AddQuickInformation(banner, 1000, witness.CharacterObject, "event:/ui/notification/relation");
                     }
 
-                    HeroFeelings witnessFeelings = witness.GetDramalordFeelings(witness);
-                    witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossBastard;
-                    witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossBastard;
+                    if(!witness.GetDramalordTraits().IsEmotionallyOpen)
+                    {
+                        HeroFeelings witnessFeelings = witness.GetDramalordFeelings(mother);
+                        witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossBastard;
+                        if (DramalordMCM.Get.LinkEmotionToRelation)
+                        {
+                            witness.ChangeRelationTo(mother, (DramalordMCM.Get.EmotionalLossBastard / 2) * -1);
+                        }
+
+                        witness.MakeAngryWith(mother, DramalordMCM.Get.AngerDaysBastard);
+                    }
                 }
+            }
+
+            if(!mother.GetHeroSpouses().Contains(father.CharacterObject) && (mother.Clan != Clan.PlayerClan || father != Hero.MainHero))
+            {
+                HeroPutInOrphanageAction.Apply(mother, child);
             }
         }
 

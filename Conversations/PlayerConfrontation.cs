@@ -18,6 +18,7 @@ namespace Dramalord.Conversations
             PlayerConfrontation.CheatingHero = cheater;
             PlayerConfrontation.Memory = memory;
             PlayerConfrontation.LoverOrChild = otherHero;
+            ConversationHelper.ConversationIntention = ConversationType.PlayerConfrontation;
             CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(CheatingHero.CharacterObject, isCivilianEquipmentRequiredForLeader: true));
         }
         internal static void AddDialogs(CampaignGameStarter starter)
@@ -29,6 +30,7 @@ namespace Dramalord.Conversations
             starter.AddPlayerLine("Dramalord307", "player_accusation_list", "npc_accusation_reaction_list", "{=Dramalord307}Looks like you're having a hard time keeping your underpants on.", ConditionPlayerSeesIntercourse, null);
             starter.AddPlayerLine("Dramalord308", "player_accusation_list", "npc_accusation_reaction_list", "{=Dramalord308}{TARGET} is clearly not my child, how dare you to give birth to a bastard?!", ConditionPlayerSeesBastard, null);
             starter.AddPlayerLine("player_accusation_marriage", "player_accusation_list", "npc_accusation_reaction_list", "{=Dramalord336}So you and {TARGET} married behind my back?", ConditionPlayerSeesMarriage, null);
+            starter.AddDialogLine("player_accusation_lostit", "player_accusation_list", "close_window", "{=Dramalord378}Uh... I somehow forgot what I wanted to say. Excuse me.", ConditionPlayerAccusationForgot, null);
 
             starter.AddDialogLine("Dramalord309", "npc_accusation_reaction_list", "player_accusation_action_list", "{=Dramalord309}You are right. So what? I don't care.[if:convo_angry_voice]", ConditionNpcAccusedDoesntCare, null);
             starter.AddDialogLine("Dramalord310", "npc_accusation_reaction_list", "player_accusation_action_list", "{=Dramalord310}What? I have no idea what you are talking about!", ConditionNpcAccusedPlaysInnocent, null);
@@ -43,7 +45,7 @@ namespace Dramalord.Conversations
         //CONDITIONS
         internal static bool ConditionPlayerCanConfrontNpc()
         {
-            if (PlayerConfrontation.CheatingHero != null && PlayerConfrontation.Memory != null)
+            if (PlayerConfrontation.CheatingHero != null && PlayerConfrontation.CheatingHero == Hero.OneToOneConversationHero && PlayerConfrontation.Memory != null && ConversationHelper.ConversationIntention == ConversationType.PlayerConfrontation)
             {
                 MBTextManager.SetTextVariable("TITLE", ConversationHelper.GetHeroGreeting(PlayerConfrontation.CheatingHero, Hero.MainHero, true));
                 return true;
@@ -53,29 +55,33 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionPlayerSeesPregnancy()
         {
-            return PlayerConfrontation.Memory.Event.Type == EventType.Pregnancy;
+            return Memory?.Event?.Type == EventType.Pregnancy;
         }
 
         internal static bool ConditionPlayerSeesDate()
         {
-            return PlayerConfrontation.Memory.Event.Type == EventType.Date;
+            return Memory?.Event?.Type == EventType.Date;
         }
 
         internal static bool ConditionPlayerSeesIntercourse()
         {
-            return PlayerConfrontation.Memory.Event.Type == EventType.Intercourse;
+            return Memory?.Event?.Type == EventType.Intercourse;
         }
 
         internal static bool ConditionPlayerSeesBastard()
         {
-            return PlayerConfrontation.Memory.Event.Type == EventType.Birth;
+            return Memory?.Event?.Type == EventType.Birth;
         }
 
         internal static bool ConditionPlayerSeesMarriage()
         {
-            return PlayerConfrontation.Memory.Event.Type == EventType.Marriage;
+            return Memory?.Event?.Type == EventType.Marriage;
         }
 
+        internal static bool ConditionPlayerAccusationForgot()
+        {
+            return !ConditionPlayerSeesPregnancy() && !ConditionPlayerSeesDate() && !ConditionPlayerSeesIntercourse() && !ConditionPlayerSeesBastard() && !ConditionPlayerSeesMarriage();
+        }
 
         internal static bool ConditionNpcAccusedDoesntCare()
         {
@@ -105,16 +111,16 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionPlayerCanBreakUpOrDivorce()
         {
-            return Hero.MainHero.Spouse == Hero.OneToOneConversationHero || Hero.MainHero.IsLover(Hero.OneToOneConversationHero);
+            return Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero) || Hero.MainHero.IsLover(Hero.OneToOneConversationHero);
         }
 
 
         // CONSEQUENCES
         internal static void ConsequencePlayerKillsNpc()
         {
-            if (PlayerConfrontation.Memory.Event.Type == EventType.Birth && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero)
+            if (PlayerConfrontation.Memory.Event.Type == EventType.Birth && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero && !PlayerConfrontation.LoverOrChild.IsOrphan())
             {
-                HeroPutInOrphanageAction.Apply(PlayerConfrontation.LoverOrChild, Hero.MainHero);
+                HeroPutInOrphanageAction.Apply(Hero.MainHero, PlayerConfrontation.LoverOrChild);
             }
 
             //HeroFightAction.Apply(CheatingHero, Hero.MainHero);
@@ -131,9 +137,9 @@ namespace Dramalord.Conversations
 
         internal static void ConsequencePlayerKicksNpcOut()
         {
-            if (PlayerConfrontation.Memory.Event.Type == EventType.Birth && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero)
+            if (PlayerConfrontation.Memory.Event.Type == EventType.Birth && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero && !PlayerConfrontation.LoverOrChild.IsOrphan() )
             {
-                HeroPutInOrphanageAction.Apply(PlayerConfrontation.LoverOrChild, Hero.MainHero);
+                HeroPutInOrphanageAction.Apply(Hero.MainHero, PlayerConfrontation.LoverOrChild);
             }
 
             HeroLeaveClanAction.Apply(Hero.OneToOneConversationHero, Hero.MainHero);
@@ -148,9 +154,9 @@ namespace Dramalord.Conversations
 
         internal static void ConsequencePlayerBreaksUpWithNpc()
         {
-            if (PlayerConfrontation.Memory.Event.Type == EventType.Birth && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero)
+            if (PlayerConfrontation.Memory.Event.Type == EventType.Birth && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero && !PlayerConfrontation.LoverOrChild.IsOrphan())
             {
-                HeroPutInOrphanageAction.Apply(PlayerConfrontation.LoverOrChild, Hero.MainHero);
+                HeroPutInOrphanageAction.Apply(Hero.MainHero, PlayerConfrontation.LoverOrChild);
             }
 
             if (Hero.OneToOneConversationHero.Spouse == Hero.MainHero)

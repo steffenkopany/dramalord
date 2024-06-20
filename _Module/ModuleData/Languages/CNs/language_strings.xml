@@ -379,8 +379,58 @@
     <string id="Dramalord373" text="英雄记住出生事件的天数" />
     <string id="Dramalord374" text="婚姻记忆持续时间" />
     <string id="Dramalord375" text="英雄记住婚姻事件的时间（以天为单位）" />
-    <string id="Dramalord376" text="最低信任级别" />
-    <string id="Dramalord377" text="让英雄信任另一个英雄需要最低程度的信任" />
-    <string id="Dramalord378" text="呃...我忘了我想说什么了。抱歉。" />
+    <string id="Dramalord376" text="最低关系等级" />
+    <string id="Dramalord377" text="要让英雄信任另一个英雄，需要最低程度的关系" />
+    <string id="Dramalord378" text="呃……我不知怎么忘了我想说什么。不好意思。" />
+    <string id="Dramalord379" text="愤怒持续时间调情" />
+    <string id="Dramalord380" text="如果英雄目睹其伴侣与他人调情，他会生气几天" />
+    <string id="Dramalord381" text="愤怒持续时间日期" />
+    <string id="Dramalord382" text="如果英雄目睹其伴侣与他人约会，他会生气几天" />
+    <string id="Dramalord383" text="愤怒持续时间性交" />
+    <string id="Dramalord384" text="如果英雄目睹其伴侣与他人性交，他会生气几天" />
+    <string id="Dramalord385" text="愤怒持续时间怀孕" />
+    <string id="Dramalord386" text="如果英雄目睹其伴侣怀上某人的孩子，他会生气几天else" />
+    <string id="Dramalord387" text="愤怒持续时间混蛋" />
+    <string id="Dramalord388" text="如果英雄目睹自己的伴侣为他人生孩子，他会生气几天" />
+    <string id="Dramalord389" text="愤怒持续时间婚姻" />
+    <string id="Dramalord390" text="如果英雄目睹自己的伴侣与他人结婚，他会生气几天" />
+    <string id="Dramalord391" text="我对你生气，我不想跟你说话！ [if:convo_angry_voice]" />
+    <string id="Dramalord392" text="{HERO.LINK} 的肚子上明显鼓了起来，经过一番计算，你很清楚这不是你造成的。" />
+    <string id="Dramalord393" text="你看到 {HERO.LINK} 和 {TARGET.LINK} 结婚" />
+    <string id="Dramalord394" text="{HERO.LINK} 看到你和 {TARGET.LINK} 结婚" />
+    <string id="Dramalord395" text="你听到教堂旁边传来欢呼声，当你走近时，你惊讶地发现 {HERO.LINK} 和 {TARGET.LINK} 刚刚结婚。" />
+    <string id="Dramalord396" text="愤怒：" />
+    <string id="Dramalord397" text="{ANGRY} 天" />
+    <string id="Dramalord398" text="{HERO1.LINK} 质问 {HERO2.LINK} 他们目睹了与 {HERO3.LINK} 的约会。" />
+    <string id="Dramalord399" text="{HERO1.LINK} 质问 {HERO2.LINK} 他们目睹了与 {HERO3.LINK} 的性交。" />
+    <string id="Dramalord400" text="{HERO1.LINK} 质问 {HERO2.LINK} 他们目睹了与 {HERO3.LINK} 的结婚。" />
+    <string id="Dramalord401" text="{HERO1.LINK} 质问 {HERO2.LINK} 怀上了 {HERO3.LINK} 的孩子。" />
+    <string id="Dramalord402" text="{HERO1.LINK} 质问 {HERO2.LINK} 生下了不是他们的孩子 {HERO3.LINK}。" />
+    <string id="Dramalord403" text="{HERO1.LINK} 向 {HERO2.LINK} 坦白，他们怀了 {HERO3.LINK} 的孩子" />
+    <string id="Dramalord404" text="{HERO1.LINK} 向 {HERO2.LINK} 坦白，他们的孩子 {HERO3.LINK} 是来自 {HERO4.LINK} 的孩子" />
+    <string id="Dramalord405" text="{HERO1.LINK} 向 {HERO2.LINK} 透露，{HERO3.LINK} 怀了 {HERO4.LINK} 的孩子" />
+    <string id="Dramalord406" text="{HERO1.LINK} 向 {HERO2.LINK} 透露，{HERO3.LINK} 的孩子是来自 {HERO4.LINK} 的孩子" />
+    <string id="Dramalord407" text="{HERO1.LINK} 告诉 {HERO2.LINK}他们亲眼目睹了{HERO2.LINK}怀上了来自{HERO4.LINK}的孩子" />
+    <string id="Dramalord408" text="{HERO1.LINK} 告诉 {HERO2.LINK} 他们亲眼目睹了{HERO2.LINK} 的孩子来自{HERO4.LINK}" />
+    <string id="Dramalord409" text="{HERO.LINK} 怀了你的孩子，我说得对吗？" />
+    <string id="Dramalord410" text="您好，{TITLE}。我能为您做些什么？" />
+    <string id="Dramalord411" text="我想扩大我的家庭，收养一名孤儿。" />
+    <string id="Dramalord412" text="哦，太好了，{TITLE}。我们孤儿院目前有 {BOYS} 名男孩和 {GIRLS} 名女孩。" />
+    <string id="Dramalord413" text="我真的很抱歉，{TITLE}，但您必须结婚才能收养孩子。" />
+    <string id="Dramalord414" text="我真的很抱歉，{TITLE}，但目前我们孤儿院没有孩子。" />
+    <string id="Dramalord415" text="我真的很抱歉，{TITLE}，但您最近收养了孩子。您必须等待一段时间才能再次收养。" />
+    <string id="Dramalord416" text="我想收养一个男孩。" />
+    <string id="Dramalord417" text="我想收养一个女孩。" />
+    <string id="Dramalord418" text="你想收养谁？" />
+    <string id="Dramalord419" text="{ORPHAN.NAME}，{ORPHANAGE} 岁。" />
+    <string id="Dramalord420" text="我想收养另一个孤儿。" />
+    <string id="Dramalord421" text="很好。你确定要收养 {ORPHAN.NAME} 吗？" />
+    <string id="Dramalord422" text="恭喜！我相信 {ORPHAN.NAME} 会得到很好的照顾。" />
+    <string id="Dramalord423" text="哦，好吧，这很可悲。{ORPHAN.NAME} 会非常失望。" />
+    <string id="Dramalord424" text="允许 AI 领养" />
+    <string id="Dramalord425" text="允许英雄领养孤儿院的孩子" />
+    <string id="Dramalord426" text="英雄想加入你的部落" />
+    <string id="Dramalord427" text="{HERO.LINK} 请求加入你的部落。你会接受吗？" />
+    <string id="Dramalord428" text="你已接受 {HERO.LINK} 加入你的部落。" />
   </strings>
 </base>

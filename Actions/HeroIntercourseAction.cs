@@ -80,15 +80,29 @@ namespace Dramalord.Actions
 
                         if (witness.IsSpouse(hero) || witness.IsLover(hero))
                         {
-                            HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
-                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
-                            witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                            if (!witness.GetDramalordTraits().IsSexuallyOpen)
+                            {
+                                HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
+                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    witness.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossCaughtIntercourse / 2) * -1);
+                                }
+                                witness.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysIntercourse);
+                            }
                         }
                         else if (witness.IsSpouse(target) || witness.IsLover(target))
                         {
-                            HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
-                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
-                            witnessFeelings.Trust -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                            if (!witness.GetDramalordTraits().IsSexuallyOpen)
+                            {
+                                HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
+                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    witness.ChangeRelationTo(target, (DramalordMCM.Get.EmotionalLossCaughtIntercourse / 2) * -1);
+                                }
+                                witness.MakeAngryWith(target, DramalordMCM.Get.AngerDaysIntercourse);
+                            } 
                         }
                     }
                 }

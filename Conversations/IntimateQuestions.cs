@@ -1,17 +1,10 @@
-﻿using Dramalord.Behaviors;
-using Dramalord.Data;
-using Dramalord.Data.Deprecated;
-using Dramalord.UI;
+﻿using Dramalord.Data;
 using Helpers;
-using System;
-using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade;
-using static TaleWorlds.CampaignSystem.Actions.KillCharacterAction;
 
 namespace Dramalord.Conversations
 {
@@ -19,6 +12,7 @@ namespace Dramalord.Conversations
     {
         internal static void AddDialogs(CampaignGameStarter starter)
         {
+            starter.AddDialogLine("npc_angry_with_player", "start", "close_window", "{=Dramalord391}I am angry with you and I don't want to talk to you! [if:convo_angry_voice]", ConditionNpcAngryWithPlayer, null, 220);
             starter.AddPlayerLine("player_asks_intimate_questions", "hero_main_options", "npc_intimate_questions_reply", "{=Dramalord001}May I ask you something personal?", ConditionPlayerCanAskIntimateQuestions, null);
 
             starter.AddDialogLine("npc_accepts_intimate_questions", "npc_intimate_questions_reply", "player_intimate_questions_list", "{=Dramalord002}Sure. What do you want to know?", ConditionNpcAcceptsIntimateQuestions, null);
@@ -47,6 +41,12 @@ namespace Dramalord.Conversations
         }
 
         // CONDITIONS
+
+        internal static bool ConditionNpcAngryWithPlayer()
+        {
+            return ConversationHelper.ConversationIntention == ConversationType.PlayerInteraction && Hero.OneToOneConversationHero != null && Hero.OneToOneConversationHero.IsDramalordLegit() &&!Hero.OneToOneConversationHero.IsPrisoner && Hero.OneToOneConversationHero.IsAngryWith(Hero.MainHero);
+        }
+
         internal static bool ConditionPlayerCanAskIntimateQuestions()
         {
             return Hero.OneToOneConversationHero.IsDramalordLegit();
@@ -75,7 +75,7 @@ namespace Dramalord.Conversations
         internal static bool ConditionNpcRepliesAboutLooks()
         {
             int attractionWomen = Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWomen + ((Hero.OneToOneConversationHero.IsFemale) ? -DramalordMCM.Get.OtherSexAttractionModifier : DramalordMCM.Get.OtherSexAttractionModifier);
-            int attractionMen = Hero.OneToOneConversationHero.GetDramalordTraits().AttractionMen + ((!Hero.OneToOneConversationHero.IsFemale) ? -DramalordMCM.Get.OtherSexAttractionModifier : DramalordMCM.Get.OtherSexAttractionModifier);
+            int attractionMen = Hero.OneToOneConversationHero.GetDramalordTraits().AttractionMen + ((Hero.OneToOneConversationHero.IsFemale) ? DramalordMCM.Get.OtherSexAttractionModifier : -DramalordMCM.Get.OtherSexAttractionModifier);
             MBTextManager.SetTextVariable("RATING_WOMEN", new TextObject(attractionWomen > 75 ? "{=Dramalord010}sexy" : attractionWomen > 50 ? "{=Dramalord011}alright" : attractionWomen < 25 ? "{=Dramalord012}disgusting" : "{=Dramalord013}not my thing").ToString());
             MBTextManager.SetTextVariable("RATING_MEN", attractionMen > 75 ? "{=Dramalord010}sexy" : attractionMen > 50 ? "{=Dramalord011}alright" : attractionMen < 25 ? "{=Dramalord012}disgusting" : "{=Dramalord013}not my thing");
             MBTextManager.SetTextVariable("RATING_WEIGHT", Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWeight > 60 ? "{=Dramalord014}chubby" : Hero.OneToOneConversationHero.GetDramalordTraits().AttractionWeight > 30 ? "{=Dramalord015}average" : "{=Dramalord016}slim");

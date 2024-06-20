@@ -1,5 +1,6 @@
 ﻿using Dramalord.Data.Deprecated;
 using Dramalord.Quests;
+using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -72,7 +73,7 @@ namespace Dramalord.Data
             ConstructContainerDefinition(typeof(Dictionary<Hero, HeroInfoData>));
             ConstructContainerDefinition(typeof(Dictionary<HeroTuple, HeroMemoryData>));
             ConstructContainerDefinition(typeof(Dictionary<Hero, HeroOffspringData>));
-            ConstructContainerDefinition(typeof(Dictionary<Hero, VisitLoverQuest>));
+            ConstructContainerDefinition(typeof(Dictionary<Hero, VisitLoverQuest>)); //TODO!
 
             //NEW  
             ConstructContainerDefinition(typeof(Dictionary<string, int>));
@@ -84,7 +85,8 @@ namespace Dramalord.Data
             ConstructContainerDefinition(typeof(Dictionary<string, HeroFeelingsSave>));
             ConstructContainerDefinition(typeof(Dictionary<string,Dictionary<string, HeroFeelingsSave>>));
             ConstructContainerDefinition(typeof(List<HeroMemorySave>));
-            ConstructContainerDefinition(typeof(Dictionary<string, List<HeroMemorySave>>));
+            ConstructContainerDefinition(typeof(Dictionary<string, List<HeroMemorySave>>)); 
+            ConstructContainerDefinition(typeof(List<HeroOrphanSave>));
         }
 
         internal static void SyncData(IDataStore dataStore)
@@ -132,6 +134,7 @@ namespace Dramalord.Data
                 }
 
                 traits.Clear();
+                HeroTraits.AddToAllTraits();
 
                 // EVENTS
                 Dictionary<int, HeroEventSave> events = new();
@@ -181,8 +184,10 @@ namespace Dramalord.Data
                 // ORPHANS
                 List<HeroOrphanSave> orphans = new();
                 Dictionary<string, int> lastAdotions = new();
+                string orphanManager = string.Empty;
                 dataStore.SyncData("DramalordHeroOrphans", ref orphans);
                 dataStore.SyncData("DramalordHeroAdotionDays", ref lastAdotions);
+                dataStore.SyncData("DramalordHeroAdotionManager", ref orphanManager);
 
                 //OLD STUFF
                 if (orphanage != null && orphanage.Count > 0)
@@ -228,6 +233,11 @@ namespace Dramalord.Data
                 }
                 lastAdotions.Clear();
 
+                if(orphanManager.Length > 0)
+                {
+                    DramalordOrphanage.OrphanManager = CharacterObject.Find(orphanManager);
+                }
+                
 
                 // RELATIONS
                 Dictionary<string, List<string>> spouses = new();
@@ -313,9 +323,33 @@ namespace Dramalord.Data
                     }
                 }
                 memory.Clear();
+
+                //GENERAL DATA STUFF
+                Hero.AllAliveHeroes.Where(hero => hero.IsDramalordLegit()).Do(hero =>
+                {
+                    if(hero.Spouse != null && !hero.GetHeroSpouses().Contains(hero.Spouse.CharacterObject))
+                    {
+                        hero.SetSpouse(hero.Spouse);
+                    }
+                });
             }
             else if(dataStore.IsSaving)
             {
+                // TRAITS
+                Dictionary<string, Dictionary<string, int>> traits = new();
+
+                Hero.AllAliveHeroes.Where(item => item.IsDramalordLegit()).Do(item =>
+                {
+                    Dictionary<string, int> heroTraits = new();
+                    HeroTraits.AllTraits.ForEach(trait =>
+                    {
+                        heroTraits.Add(trait.StringId, item.GetHeroTraits().GetPropertyValue(trait));
+                    });
+                    traits.Add(item.CharacterObject.StringId, heroTraits);
+                });
+
+                dataStore.SyncData("DramalordHeroTraits", ref traits);
+
                 //EVENTS
                 Dictionary<int, HeroEventSave> events = new();
                 foreach(KeyValuePair<int, HeroEvent> it in DramalordEvents.Events)
@@ -348,28 +382,33 @@ namespace Dramalord.Data
                     {
                         spouse.Add(obj.StringId);
                     }
-                    spouses.Add(it.Key.StringId, spouse);
+                    if(!spouses.ContainsKey(it.Key.StringId))
+                        spouses.Add(it.Key.StringId, spouse);
 
                     List<string> lover = new();
                     foreach (CharacterObject obj in it.Value.Lovers)
                     {
                         lover.Add(obj.StringId);
                     }
-                    lovers.Add(it.Key.StringId, lover);
+                    if (!lovers.ContainsKey(it.Key.StringId))
+                        lovers.Add(it.Key.StringId, lover);
 
                     List<string> friend = new();
                     foreach (CharacterObject obj in it.Value.FriendsWithBenefits)
                     {
                         friend.Add(obj.StringId);
                     }
-                    friendswithbenefits.Add(it.Key.StringId, friend);
+                    if (!friendswithbenefits.ContainsKey(it.Key.StringId))
+                        friendswithbenefits.Add(it.Key.StringId, friend);
 
                     Dictionary<string, HeroFeelingsSave> feeling = new();
                     foreach(KeyValuePair<CharacterObject, HeroFeelings> fe in it.Value.Feelings)
                     {
-                        feeling.Add(fe.Key.StringId, new HeroFeelingsSave(fe.Value));
+                        if(!feeling.ContainsKey(fe.Key.StringId))
+                            feeling.Add(fe.Key.StringId, new HeroFeelingsSave(fe.Value));
                     }
-                    feelings.Add(it.Key.StringId, feeling);
+                    if (!feelings.ContainsKey(it.Key.StringId))
+                        feelings.Add(it.Key.StringId, feeling);
                 }
 
                 dataStore.SyncData("DramalordHeroSpouses", ref spouses);
@@ -380,17 +419,44 @@ namespace Dramalord.Data
 
                 ///MEMORY
                 Dictionary<string, List<HeroMemorySave>> memory = new();
-                foreach(KeyValuePair<CharacterObject, List<HeroMemory>> mem in DramalordMemories.Memories)
+                foreach(CharacterObject co in DramalordMemories.Memories.Keys)
                 {
                     List<HeroMemorySave> list = new();
-                    foreach(HeroMemory hm in mem.Value)
+                    List<HeroMemory> mems = DramalordMemories.GetHeroMemory(co.HeroObject);
+                    mems.Where(item => item.Source != null).Do(item =>
                     {
-                        list.Add(new HeroMemorySave(hm));
+                        list.Add(new HeroMemorySave(item));
+                    });
+
+                    if (list.Count() > 0)
+                    {
+                        memory.Add(co.StringId, list);
                     }
-                    memory.Add(mem.Key.StringId, list);
                 }
 
                 dataStore.SyncData("DramalordHeroMemories", ref memory);
+
+
+                ///ORPHANS
+                string orphanManager = DramalordOrphanage.OrphanManager?.StringId ?? string.Empty;
+                if(orphanManager != string.Empty)
+                {
+                    dataStore.SyncData("DramalordHeroAdotionManager", ref orphanManager);
+                }
+
+                List<HeroOrphanSave> orphans = new();
+                DramalordOrphanage.Orphans.ForEach(item =>
+                {
+                    orphans.Add(new HeroOrphanSave(item));
+                });
+                dataStore.SyncData("DramalordHeroOrphans", ref orphans);
+
+                Dictionary<string, int> lastAdotions = new();
+                foreach(CharacterObject o in DramalordOrphanage.LastAdoptionDays.Keys)
+                {
+                    lastAdotions.Add(o.StringId, (int)DramalordOrphanage.LastAdoptionDays[o]);
+                }
+                dataStore.SyncData("DramalordHeroAdotionDays", ref lastAdotions);
             }
         }
 
@@ -431,8 +497,8 @@ namespace Dramalord.Data
                 Dictionary<string, HeroFeelingsSave> feelingList1 = (feelings.ContainsKey(tuple.Actor.CharacterObject.StringId)) ? feelings[tuple.Actor.CharacterObject.StringId] : new();
                 Dictionary<string, HeroFeelingsSave> feelingList2 = (feelings.ContainsKey(tuple.Target.CharacterObject.StringId)) ? feelings[tuple.Target.CharacterObject.StringId] : new();
 
-                HeroFeelingsSave feelings1 = (feelingList1.ContainsKey(tuple.Target.CharacterObject.StringId)) ? feelingList1[tuple.Target.CharacterObject.StringId] : new(new HeroFeelings((int)memories[tuple].Emotion, memories[tuple].IsCouple ? 50 : 0, memories[tuple].IsCouple ? 20 : 0, (uint)memories[tuple].LastMet));
-                HeroFeelingsSave feelings2 = (feelingList2.ContainsKey(tuple.Actor.CharacterObject.StringId)) ? feelingList2[tuple.Actor.CharacterObject.StringId] : new(new HeroFeelings((int)memories[tuple].Emotion, memories[tuple].IsCouple ? 50 : 0, memories[tuple].IsCouple ? 20 : 0, (uint)memories[tuple].LastMet));
+                HeroFeelingsSave feelings1 = (feelingList1.ContainsKey(tuple.Target.CharacterObject.StringId)) ? feelingList1[tuple.Target.CharacterObject.StringId] : new(new HeroFeelings((int)memories[tuple].Emotion,  memories[tuple].IsCouple ? 20 : 0, (uint)memories[tuple].LastMet));
+                HeroFeelingsSave feelings2 = (feelingList2.ContainsKey(tuple.Actor.CharacterObject.StringId)) ? feelingList2[tuple.Actor.CharacterObject.StringId] : new(new HeroFeelings((int)memories[tuple].Emotion,  memories[tuple].IsCouple ? 20 : 0, (uint)memories[tuple].LastMet));
 
                 if(tuple.Actor.Spouse == tuple.Target)
                 {

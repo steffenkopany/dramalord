@@ -48,8 +48,8 @@ namespace Dramalord
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
-            base.OnBeforeInitialModuleScreenSetAsRoot();
-            Notification.PrintText("Dramalord loaded");
+            base.OnBeforeInitialModuleScreenSetAsRoot(); 
+            Notification.PrintText("Dramalord " + Assembly.GetExecutingAssembly().GetName().Version.ToString(3) + " loaded");
         }
 
         protected override void OnGameStart(Game game, IGameStarter starter)
