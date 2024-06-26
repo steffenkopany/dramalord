@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
+using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.Settlements;
+using TaleWorlds.Core;
 using TaleWorlds.Library;
 
 namespace Dramalord.Data
@@ -31,6 +33,11 @@ namespace Dramalord.Data
         public static void ChangeRelationTo(this Hero hero, Hero target, int relationChange)
         {
             hero.SetPersonalRelation(target, hero.GetBaseHeroRelation(target) + relationChange);
+        }
+
+        public static HeroPersonality GetDramalordPersonality(this Hero hero)
+        {
+            return new HeroPersonality(hero);
         }
 
         public static List<CharacterObject> GetHeroSpouses(this Hero hero)
@@ -218,11 +225,7 @@ namespace Dramalord.Data
 
         public static int GetDramalordAttractionTo(this Hero hero, Hero target)
         {
-            if(target == Hero.MainHero && DramalordMCM.Get.PlayerAlwaysAttractive)
-            {
-                return 100;
-            }
-            int rating = 0;
+            int rating = DramalordMCM.Get.PlayerBaseAttraction;
             rating += (target.IsFemale) ? hero.GetDramalordTraits().AttractionWomen : hero.GetDramalordTraits().AttractionMen;
             rating += ((hero.IsFemale && !target.IsFemale) ||(!hero.IsFemale && target.IsFemale)) ? DramalordMCM.Get.OtherSexAttractionModifier : -DramalordMCM.Get.OtherSexAttractionModifier;
             rating += (hero.Culture == target.Culture) ? 10 : 0;
@@ -294,6 +297,7 @@ namespace Dramalord.Data
             score += ((heroDramaTraits.Neuroticism < 0 && targetDramaTraits.Neuroticism > 0) || (heroDramaTraits.Neuroticism > 0 && targetDramaTraits.Neuroticism < 0)) ? -1 : 0;
             score += ((heroDramaTraits.Extroversion > 0 && targetDramaTraits.Extroversion > 0) || (heroDramaTraits.Extroversion < 0 && targetDramaTraits.Extroversion < 0)) ? 1 : 0;
             score += ((heroDramaTraits.Extroversion < 0 && targetDramaTraits.Extroversion > 0) || (heroDramaTraits.Extroversion > 0 && targetDramaTraits.Extroversion < 0)) ? -1 : 0;
+            score += (target == Hero.MainHero) ? target.GetSkillValue(DefaultSkills.Charm) / 20 : 0;
 
             return score * DramalordMCM.Get.TraitScoreMultiplyer;
         }
@@ -332,7 +336,7 @@ namespace Dramalord.Data
 
         public static bool IsNearby(this Hero hero, Hero target)
         {
-            return (hero.CurrentSettlement != null && hero.CurrentSettlement == target.CurrentSettlement) ||
+            return target.IsDramalordLegit() && (hero.CurrentSettlement != null && hero.CurrentSettlement == target.CurrentSettlement) ||
                 (hero.PartyBelongedTo != null && hero.PartyBelongedTo == target.PartyBelongedTo) ||
                 (hero.PartyBelongedTo != null && target.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null && hero.PartyBelongedTo.Army == target.PartyBelongedTo.Army);
         }

@@ -316,7 +316,7 @@ namespace Dramalord
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Get.AffairOutput;
+        public bool IsVisibleNotification => DramalordMCM.Get.BirthOutput;
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
 
         public TextObject GetEncyclopediaText()

@@ -42,7 +42,9 @@ namespace Dramalord.Actions
                     MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                 }
 
-                if(DramalordMCM.Get.BirthOutput)
+                //orphan.SetBirthDay(CampaignTime.YearsFromNow(-18)); // testting
+
+                if (DramalordMCM.Get.BirthOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogAdopted(hero, target, orphan));
                 }

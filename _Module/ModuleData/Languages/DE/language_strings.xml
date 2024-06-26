@@ -433,5 +433,16 @@
     <string id="Dramalord426" text="Held möchte deinem Clan beitreten" />
     <string id="Dramalord427" text="{HERO.LINK} bittet um Beitritt zu deinem Clan. Akzeptierst du die Anfrage?" />
     <string id="Dramalord428" text="Du hast {HERO.LINK}s Beitritt zu deinem Clan akzeptiert." />
+    <string id="Dramalord429" text="Gleichgeschlechtliche Ehen der KI erlauben" />
+    <string id="Dramalord430" text="KI erlauben, Helden des gleichen Geschlechts zu heiraten (Immersionsoption)" />
+    <string id="Dramalord431" text="Nur Clan-Logs des Spielers" />
+    <string id="Dramalord432" text="Nur Logs anzeigen, die sich auf den Clan des Spielers beziehen" />
+    <string id="Dramalord433" text="Sexuelle Orientierung:" />
+    <string id="Dramalord434" text="Heterosexuell" />
+    <string id="Dramalord435" text="Homosexuell" />
+    <string id="Dramalord436" text="Bisexuell" />
+    <string id="Dramalord437" text="Asexuell" />
+    <string id="Dramalord438" text="Bonus-Spielerattraktivität" />
+    <string id="Dramalord439" text="Bonuswert für die Attraktivität des Spielers für andere Helden" />
   </strings>
 </base>

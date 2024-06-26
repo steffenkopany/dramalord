@@ -47,7 +47,7 @@ namespace Dramalord.Actions
                     MBInformationManager.AddQuickInformation(banner, 1000, otherHero.CharacterObject, "event:/ui/notification/relation");
                 }
 
-                if(DramalordMCM.Get.FlirtOutput)
+                if(DramalordMCM.Get.FlirtOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new LogFlirt(hero, target));
                 }
@@ -59,7 +59,7 @@ namespace Dramalord.Actions
                     Hero? witness = closeHeroes.Where(item => item != hero && item != target).GetRandomElementInefficiently();
                     if(witness != null)
                     {
-                        if(DramalordMCM.Get.FlirtOutput)
+                        if(DramalordMCM.Get.FlirtOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                         {
                             LogEntry.AddLogEntry(new LogWitnessFlirt(hero, target, witness));
                         }
@@ -81,13 +81,14 @@ namespace Dramalord.Actions
 
                         if(witness.IsSpouse(hero) || witness.IsLover(hero))
                         {
-                            if (!witness.GetDramalordTraits().IsEmotionallyOpen)
+                            if (!witness.GetDramalordPersonality().AcceptsOtherFlirts)
                             {
+                                int emotionChange = witness.GetDramalordPersonality().GetEmotionalChange(EventType.Flirt);
                                 HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
-                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+                                witnessFeelings.Emotion += emotionChange;
                                 if(DramalordMCM.Get.LinkEmotionToRelation)
                                 {
-                                    witness.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossCaughtFlirting / 2) * -1);
+                                    witness.ChangeRelationTo(hero, (emotionChange / 2));
                                 }
                                 
                                 witness.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysFlirt);
@@ -96,13 +97,14 @@ namespace Dramalord.Actions
                         }
                         else if (witness.IsSpouse(target) || witness.IsLover(target))
                         {
-                            if (!witness.GetDramalordTraits().IsEmotionallyOpen)
+                            if (!witness.GetDramalordPersonality().AcceptsOtherFlirts)
                             {
+                                int emotionChange = witness.GetDramalordPersonality().GetEmotionalChange(EventType.Flirt);
                                 HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
-                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+                                witnessFeelings.Emotion += emotionChange;
                                 if (DramalordMCM.Get.LinkEmotionToRelation)
                                 {
-                                    witness.ChangeRelationTo(target, (DramalordMCM.Get.EmotionalLossCaughtFlirting / 2) * -1);
+                                    witness.ChangeRelationTo(target, (emotionChange / 2));
                                 }
                                     
                                 witness.MakeAngryWith(target, DramalordMCM.Get.AngerDaysFlirt);

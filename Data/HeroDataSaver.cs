@@ -2,12 +2,14 @@
 using Dramalord.Quests;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.SaveSystem;
 
@@ -114,13 +116,67 @@ namespace Dramalord.Data
                 Dictionary<string, Dictionary<string, int>> traits = new();
                 dataStore.SyncData("DramalordHeroTraits", ref traits);
 
+                //check if it needs upgrade to new trait values
+                for(int i = 0; i< traits.Count; ++i)
+                {
+                    bool traitsNeedUpgrade = false;
+                    Dictionary<string, int> v = traits.ElementAt(i).Value;
+                    if(v.ContainsKey(HeroTraits.Openness.StringId))
+                    {
+                        if (v[HeroTraits.Openness.StringId] <= 0)
+                        {
+                            traitsNeedUpgrade = true;
+                        }
+                    }
+                    if (v.ContainsKey(HeroTraits.Conscientiousness.StringId))
+                    {
+                        if (v[HeroTraits.Conscientiousness.StringId] <= 0)
+                        {
+                            traitsNeedUpgrade = true;
+                        }
+                    }
+                    if (v.ContainsKey(HeroTraits.Extroversion.StringId))
+                    {
+                        if (v[HeroTraits.Extroversion.StringId] <= 0)
+                        {
+                            traitsNeedUpgrade = true;
+                        }
+                    }
+                    if (v.ContainsKey(HeroTraits.Neuroticism.StringId))
+                    {
+                        if (v[HeroTraits.Neuroticism.StringId] <= 0)
+                        {
+                            traitsNeedUpgrade = true;
+                        }
+                    }
+                    if (v.ContainsKey(HeroTraits.Agreeableness.StringId))
+                    {
+                        if (v[HeroTraits.Agreeableness.StringId] <= 0)
+                        {
+                            traitsNeedUpgrade = true;
+                        }
+                    }
+
+                    if (traitsNeedUpgrade)
+                    {
+                        v.Keys.ToList().ForEach(key =>
+                        {
+                            TraitObject? trait = HeroTraits.GetTraitObject(key);
+                            if (trait != null)
+                            {
+                                v[key] = FixTraitUpdate(trait, v[key]);
+                            }
+                        });
+                    }
+                }
+
                 foreach (string charID in traits.Keys)
                 {
                     CharacterObject? charObj = CharacterObject.Find(charID);
                     if (charObj != null && charObj.IsHero)
                     {
                         Hero h = charObj.HeroObject;
-                        HeroTraits.ApplyToHero(h);
+                        HeroTraits.ApplyToHero(h, false);
                         foreach (string key in traits[charID].Keys)
                         {
                             TraitObject? trait = HeroTraits.GetTraitObject(key);
@@ -343,7 +399,10 @@ namespace Dramalord.Data
                     Dictionary<string, int> heroTraits = new();
                     HeroTraits.AllTraits.ForEach(trait =>
                     {
-                        heroTraits.Add(trait.StringId, item.GetHeroTraits().GetPropertyValue(trait));
+                        if (trait != null)
+                        {
+                            heroTraits.Add(trait.StringId, item.GetHeroTraits().GetPropertyValue(trait));
+                        }
                     });
                     traits.Add(item.CharacterObject.StringId, heroTraits);
                 });
@@ -354,7 +413,10 @@ namespace Dramalord.Data
                 Dictionary<int, HeroEventSave> events = new();
                 foreach(KeyValuePair<int, HeroEvent> it in DramalordEvents.Events)
                 {
-                    events.Add(it.Key, new HeroEventSave(it.Value));
+                    if(it.Value.Hero1 != null && it.Value.Hero2 != null)
+                    {
+                        events.Add(it.Key, new HeroEventSave(it.Value));
+                    }
                 }
                 dataStore.SyncData("DramalordHeroEvents", ref events);
 
@@ -465,7 +527,7 @@ namespace Dramalord.Data
             //convert data
             foreach (Hero h in oldInfo.Keys)
             {
-                HeroTraits.ApplyToHero(h);
+                HeroTraits.ApplyToHero(h, true);
                 HeroInfoData data = oldInfo[h];
 
                 h.GetHeroTraits().SetPropertyValue(HeroTraits.AttractionMen, data.AttractionMen);
@@ -478,6 +540,23 @@ namespace Dramalord.Data
                 h.GetHeroTraits().SetPropertyValue(HeroTraits.IntercourseSkill, (int)data.IntercourseSkill);
                 h.GetHeroTraits().SetPropertyValue(HeroTraits.HasToy, data.HasToy ? 1 : 0);
             }
+        }
+
+        private static int FixTraitUpdate(TraitObject trait, int traitValue)
+        {
+            if(trait == HeroTraits.Openness || trait == HeroTraits.Conscientiousness || trait == HeroTraits.Extroversion || trait == HeroTraits.Agreeableness || trait == HeroTraits.Neuroticism)
+            {
+                return (traitValue * 50) + 101;
+            }
+            if (trait == HeroTraits.AttractionMen || trait == HeroTraits.AttractionWomen || trait == HeroTraits.AttractionWeight || trait == HeroTraits.AttractionBuild || trait == HeroTraits.Horny || trait == HeroTraits.Libido || trait == HeroTraits.IntercourseSkill || trait == HeroTraits.HasToy)
+            {
+                return traitValue + 1;
+            }
+            if(trait == HeroTraits.AttractionAgeDiff)
+            {
+                return traitValue + 21;
+            }
+            return traitValue;
         }
 
         private static void ConvertOldMemories(Dictionary<HeroTuple, HeroMemoryData> memories, Dictionary<string, Dictionary<string, HeroFeelingsSave>> feelings, Dictionary<string, List<string>> spouses, Dictionary<string, List<string>> lovers, Dictionary<string, List<string>> fwb)

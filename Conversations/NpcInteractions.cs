@@ -167,8 +167,8 @@ namespace Dramalord.Conversations
 
         internal static void ConsequencePlayerDeclinesDate()
         {
-            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
-            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+            Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
+            Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion += Hero.OneToOneConversationHero.GetDramalordPersonality().GetEmotionalChange(EventType.Date);
 
             if (PlayerEncounter.Current != null)
             {
@@ -181,8 +181,8 @@ namespace Dramalord.Conversations
 
         internal static void ConsequencePlayerDeclinesFlirt()
         {
-            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
-            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+            Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
+            Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion += Hero.OneToOneConversationHero.GetDramalordPersonality().GetEmotionalChange(EventType.Flirt);
 
             if (PlayerEncounter.Current != null)
             {
@@ -195,8 +195,8 @@ namespace Dramalord.Conversations
 
         internal static void ConsquencePlayerDeclinesMarriage()
         {
-            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
-            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+            Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).LastInteractionDay = (uint)CampaignTime.Now.ToDays;
+            Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion += Hero.OneToOneConversationHero.GetDramalordPersonality().GetEmotionalChange(EventType.Marriage);
 
             if (PlayerEncounter.Current != null)
             {

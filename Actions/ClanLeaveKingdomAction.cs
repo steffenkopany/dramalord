@@ -1,5 +1,4 @@
-﻿using Dramalord.Data;
-using TaleWorlds.CampaignSystem;
+﻿using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
 
@@ -13,7 +12,7 @@ namespace Dramalord.Actions
             {
                 Kingdom kingdom = clan.Kingdom;
                 ChangeKingdomAction.ApplyByLeaveKingdom(clan, false);
-                if(DramalordMCM.Get.KingdomOutput)
+                if(DramalordMCM.Get.KingdomOutput && (clan == Clan.PlayerClan || (Clan.PlayerClan.Kingdom != null && Clan.PlayerClan.Kingdom == kingdom) || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogClanLeftKingdom(clan, kingdom, forced));
                 }

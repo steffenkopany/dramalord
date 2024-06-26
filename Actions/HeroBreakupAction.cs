@@ -37,7 +37,7 @@ namespace Dramalord.Actions
                 MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
             }
 
-            if (DramalordMCM.Get.AffairOutput)
+            if (DramalordMCM.Get.AffairOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
             {
                 LogEntry.AddLogEntry(new EncyclopediaLogBreakup(hero, target));
             }

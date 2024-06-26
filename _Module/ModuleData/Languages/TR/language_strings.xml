@@ -432,5 +432,16 @@
     <string id="Dramalord426" text="Kahraman klanınıza katılmak istiyor" />
     <string id="Dramalord427" text="{HERO.LINK} klanınıza katılma isteğinde bulundu. Kabul edecek misiniz?" />
     <string id="Dramalord428" text="{HERO.LINK}'nin klanınıza katılmasını kabul ettiniz." />
+    <string id="Dramalord429" text="Yapay Zekanın Eşcinsel Evliliğine İzin Ver" />
+    <string id="Dramalord430" text="Yapay zekanın aynı cinsiyetten kahramanlarla evlenmesine izin ver (immersiyon seçeneği)" />
+    <string id="Dramalord431" text="Yalnızca Oyuncu Klan Günlükleri" />
+    <string id="Dramalord432" text="Yalnızca oyuncu klanıyla ilgili günlükleri göster" />
+    <string id="Dramalord433" text="Cinsel Yönelim:" />
+    <string id="Dramalord434" text="Heteroseksüel" />
+    <string id="Dramalord435" text="Eşcinsel" />
+    <string id="Dramalord436" text="Biseksüel" />
+    <string id="Dramalord437" text="Aseksüel" />
+    <string id="Dramalord438" text="Bonus Oyuncu Eğlencesi" />
+    <string id="Dramalord439" text="Oyuncunun diğer kahramanlara olan ilgisinin bonus değeri" />
   </strings>
 </base>

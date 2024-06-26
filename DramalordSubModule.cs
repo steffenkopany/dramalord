@@ -20,9 +20,14 @@ namespace Dramalord
         internal static string ModuleName = "Dramalord";
         internal static string ModuleFolder = "Dramalord";
         internal static bool Patched = false;
+        internal static bool GameLoaded = false;
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
+
+            UIExtender extender = new UIExtender(ModuleName);
+            extender.Register(typeof(DramalordSubModule).Assembly);
+            extender.Enable();
         }
 
         public override void OnGameInitializationFinished(Game game)
@@ -33,12 +38,19 @@ namespace Dramalord
             ItemObject pie = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_pie");
             Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(wurst);
             Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(pie);
-            Hero.AllAliveHeroes.ForEach(item => HeroTraits.ApplyToHero(item));
+            //HeroTraits.AddToAllTraits();
+            Hero.AllAliveHeroes.ForEach(item => HeroTraits.ApplyToHero(item, !GameLoaded));
         }
 
         public override void OnGameLoaded(Game game, object initializerObject)
         {
             HeroTraits.AddToAllTraits();
+            GameLoaded = true;
+        }
+
+        public override void OnCampaignStart(Game game, object starterObject)
+        {
+            Hero.AllAliveHeroes.ForEach(item => HeroTraits.ApplyToHero(item, true));
         }
 
         protected override void OnSubModuleUnloaded()
@@ -75,6 +87,7 @@ namespace Dramalord
                 }
 
                 HeroTraits.InitializeAll();
+                GameLoaded = false;
             }
         }
 

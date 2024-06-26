@@ -3,6 +3,7 @@ using Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
@@ -52,7 +53,11 @@ namespace Dramalord.Actions
                 hero.AddDramalordMemory(eventID, MemoryType.Participant, hero, true);
                 target.AddDramalordMemory(eventID, MemoryType.Participant, target, true);
 
-                LogEntry.AddLogEntry(new LogIntercourse(hero, target));
+                if(DramalordMCM.Get.AffairOutput &&  (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
+                {
+                    LogEntry.AddLogEntry(new LogIntercourse(hero, target));
+                }
+                
                 DramalordEventCallbacks.OnHeroesIntercourse(hero, target);
 
                 if (MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
@@ -61,7 +66,12 @@ namespace Dramalord.Actions
                     if (witness != null)
                     {
                         witness.AddDramalordMemory(eventID, MemoryType.Witness, witness, true);
-                        LogEntry.AddLogEntry(new LogWitnessIntercourse(hero, target, witness));
+
+                        if (DramalordMCM.Get.AffairOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
+                        {
+                            LogEntry.AddLogEntry(new LogWitnessIntercourse(hero, target, witness));
+                        }
+                        
 
                         if (witness == Hero.MainHero)
                         {
@@ -80,26 +90,28 @@ namespace Dramalord.Actions
 
                         if (witness.IsSpouse(hero) || witness.IsLover(hero))
                         {
-                            if (!witness.GetDramalordTraits().IsSexuallyOpen)
+                            if (!witness.GetDramalordPersonality().AcceptsOtherIntercourse)
                             {
+                                int emotionChange = witness.GetDramalordPersonality().GetEmotionalChange(EventType.Intercourse);
                                 HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
-                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                                witnessFeelings.Emotion += emotionChange;
                                 if (DramalordMCM.Get.LinkEmotionToRelation)
                                 {
-                                    witness.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossCaughtIntercourse / 2) * -1);
+                                    witness.ChangeRelationTo(hero, (emotionChange / 2));
                                 }
                                 witness.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysIntercourse);
                             }
                         }
                         else if (witness.IsSpouse(target) || witness.IsLover(target))
                         {
-                            if (!witness.GetDramalordTraits().IsSexuallyOpen)
+                            if (!witness.GetDramalordPersonality().AcceptsOtherIntercourse)
                             {
+                                int emotionChange = witness.GetDramalordPersonality().GetEmotionalChange(EventType.Intercourse);
                                 HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
-                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtIntercourse;
+                                witnessFeelings.Emotion += emotionChange;
                                 if (DramalordMCM.Get.LinkEmotionToRelation)
                                 {
-                                    witness.ChangeRelationTo(target, (DramalordMCM.Get.EmotionalLossCaughtIntercourse / 2) * -1);
+                                    witness.ChangeRelationTo(target, (emotionChange / 2));
                                 }
                                 witness.MakeAngryWith(target, DramalordMCM.Get.AngerDaysIntercourse);
                             } 

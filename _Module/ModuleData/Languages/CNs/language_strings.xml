@@ -432,5 +432,16 @@
     <string id="Dramalord426" text="英雄想加入你的部落" />
     <string id="Dramalord427" text="{HERO.LINK} 请求加入你的部落。你会接受吗？" />
     <string id="Dramalord428" text="你已接受 {HERO.LINK} 加入你的部落。" />
+    <string id="Dramalord429" text="允许 AI 同性结婚" />
+    <string id="Dramalord430" text="允许 AI 与同性英雄结婚（沉浸式选项）" />
+    <string id="Dramalord431" text="仅玩家氏族日志" />
+    <string id="Dramalord432" text="仅显示与玩家氏族相关的日志" />
+    <string id="Dramalord433" text="性取向：" />
+    <string id="Dramalord434" text="异性恋" />
+    <string id="Dramalord435" text="同性恋" />
+    <string id="Dramalord436" text="双性恋" />
+    <string id="Dramalord437" text="无性恋" />
+    <string id="Dramalord438" text="奖励玩家吸引力" />
+    <string id="Dramalord439" text="玩家对其他英雄的吸引力奖励值" />
   </strings>
 </base>

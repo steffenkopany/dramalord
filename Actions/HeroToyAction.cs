@@ -32,7 +32,7 @@ namespace Dramalord.Actions
                     hero.GetDramalordFeelings(hero.Spouse).Emotion -= 1;
                 }
 
-                if (DramalordMCM.Get.AffairOutput)
+                if (DramalordMCM.Get.AffairOutput && (hero.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new LogUsedToy(hero));
                 }

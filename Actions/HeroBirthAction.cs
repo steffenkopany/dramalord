@@ -6,6 +6,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.ComponentInterfaces;
 using TaleWorlds.CampaignSystem.LogEntries;
+using TaleWorlds.CampaignSystem.MapNotificationTypes;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
@@ -29,10 +30,12 @@ namespace Dramalord.Actions
             }
 
             Hero child = createBaby(mother, father);
+            child.UpdateHomeSettlement();
 
             if (father == Hero.MainHero || mother == Hero.MainHero)
             {
-                MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(father, mother, CampaignTime.Now));
+                MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(father, mother, CampaignTime.Now)); //TaleWorlds.CampaignSystem.MapNotificationTypes.ChildBornMapNotification.
+                MBInformationManager.AddNotice(new ChildBornMapNotification(child, new TextObject("A child was born"), CampaignTime.Now));
             }
 
             int eventID = DramalordEvents.AddHeroEvent(mother, child, EventType.Birth, DramalordMCM.Get.BirthMemoryDuration);
@@ -47,7 +50,11 @@ namespace Dramalord.Actions
                 KillCharacterAction.ApplyInLabor(mother);
             }
 
-            LogEntry.AddLogEntry(new EncyclopediaLogBirth(mother, father, child));
+            if(DramalordMCM.Get.BirthOutput && (mother.Clan == Clan.PlayerClan || father.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
+            {
+                LogEntry.AddLogEntry(new EncyclopediaLogBirth(mother, father, child));
+            }
+            
             DramalordEventCallbacks.OnHeroesBorn(mother, father, child);
 
             if (MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ChanceGettingCaught)
@@ -56,7 +63,12 @@ namespace Dramalord.Actions
                 if (witness != null)
                 {
                     witness.AddDramalordMemory(eventID, MemoryType.Witness, witness, true);
-                    LogEntry.AddLogEntry(new LogWitnessBastard(mother, child, witness));
+
+                    if(DramalordMCM.Get.BirthOutput && (father.Clan == Clan.PlayerClan || mother.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
+                    {
+                        LogEntry.AddLogEntry(new LogWitnessBastard(mother, child, witness));
+                    }
+                    
 
                     if (witness == Hero.MainHero)
                     {
@@ -73,13 +85,16 @@ namespace Dramalord.Actions
                         MBInformationManager.AddQuickInformation(banner, 1000, witness.CharacterObject, "event:/ui/notification/relation");
                     }
 
-                    if(!witness.GetDramalordTraits().IsEmotionallyOpen)
+                    if(!witness.GetDramalordPersonality().AcceptsOtherChildren)
                     {
+                        int emotionChange = witness.GetDramalordPersonality().GetEmotionalChange(EventType.Birth);
                         HeroFeelings witnessFeelings = witness.GetDramalordFeelings(mother);
-                        witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossBastard;
+                        witnessFeelings.Emotion += emotionChange;
+                        //witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossBastard; 
                         if (DramalordMCM.Get.LinkEmotionToRelation)
                         {
-                            witness.ChangeRelationTo(mother, (DramalordMCM.Get.EmotionalLossBastard / 2) * -1);
+                            witness.ChangeRelationTo(mother, (emotionChange / 2));
+                            //witness.ChangeRelationTo(mother, (DramalordMCM.Get.EmotionalLossBastard / 2) * -1);
                         }
 
                         witness.MakeAngryWith(mother, DramalordMCM.Get.AngerDaysBastard);
@@ -96,7 +111,7 @@ namespace Dramalord.Actions
         private static Hero createBaby(Hero mother, Hero father)
         {
             CharacterObject template = (MBRandom.RandomInt(1, 100) > 50) ? mother.CharacterObject : father.CharacterObject;
-            Settlement bornSettlement = (mother.CurrentSettlement != null) ? mother.CurrentSettlement : mother.HomeSettlement;
+            Settlement bornSettlement = (mother.CurrentSettlement != null) ? mother.CurrentSettlement : father.HomeSettlement;
             if (bornSettlement == null)
             {
                 bornSettlement = SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Encounters;
+using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
 using TaleWorlds.Core;
@@ -100,8 +101,9 @@ namespace Dramalord.Quests
             CompleteQuestWithFail();
             TextObject banner = new TextObject("{=Dramalord290}{HERO.LINK} is disappointed by your neglection of their matter.");
             StringHelpers.SetCharacterProperties("HERO", QuestGiver.CharacterObject, banner);
-     
-            QuestGiver.GetDramalordFeelings(Hero.MainHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtDate;
+
+            
+            QuestGiver.GetDramalordFeelings(Hero.MainHero).Emotion += QuestGiver.GetDramalordPersonality().GetEmotionalChange(EventType.Date);
             MBInformationManager.AddQuickInformation(banner, 1000, QuestGiver.CharacterObject, "event:/ui/notification/relation");
             HeroList.Remove(QuestGiver);
             if (PlayerEncounter.Current != null)

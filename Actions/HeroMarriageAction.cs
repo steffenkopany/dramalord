@@ -1,6 +1,7 @@
 ﻿using Dramalord.Data;
 using Helpers;
 using System.Collections.Generic;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
@@ -35,31 +36,31 @@ namespace Dramalord.Actions
             {
                 if(firstHero.Clan == null)
                 {
-                    HeroJoinClanAction.Apply(firstHero, secondHero.Clan);
+                    HeroJoinClanAction.Apply(firstHero, secondHero.Clan, true);
                 }
                 else if(secondHero.Clan == null)
                 {
-                    HeroJoinClanAction.Apply(secondHero, firstHero.Clan);
+                    HeroJoinClanAction.Apply(secondHero, firstHero.Clan, true);
                 }
                 else if(firstHero.Clan == Clan.PlayerClan)
                 {
                     HeroLeaveClanAction.Apply(secondHero, secondHero);
-                    HeroJoinClanAction.Apply(secondHero, firstHero.Clan);
+                    HeroJoinClanAction.Apply(secondHero, firstHero.Clan, true);
                 }
                 else if(secondHero.Clan == Clan.PlayerClan)
                 {
                     HeroLeaveClanAction.Apply(firstHero, firstHero);
-                    HeroJoinClanAction.Apply(firstHero, secondHero.Clan);
+                    HeroJoinClanAction.Apply(firstHero, secondHero.Clan, true);
                 }
                 else if(firstHero.IsFemale != secondHero.IsFemale && secondHero.IsFemale)
                 {
                     HeroLeaveClanAction.Apply(secondHero, secondHero);
-                    HeroJoinClanAction.Apply(secondHero, firstHero.Clan);
+                    HeroJoinClanAction.Apply(secondHero, firstHero.Clan, true);
                 }
                 else
                 {
                     HeroLeaveClanAction.Apply(firstHero, firstHero);
-                    HeroJoinClanAction.Apply(firstHero, secondHero.Clan);
+                    HeroJoinClanAction.Apply(firstHero, secondHero.Clan, true);
                 }
             }
 
@@ -139,7 +140,7 @@ namespace Dramalord.Actions
                 }
             }
 
-            foreach (Hero child in firstHero.Children)
+            foreach (Hero child in firstHero.Children.ToList())
             {
                 if (child.IsChild && child.Clan == null)
                 {
@@ -147,7 +148,7 @@ namespace Dramalord.Actions
                 }
             }
 
-            foreach (Hero child in secondHero.Children)
+            foreach (Hero child in secondHero.Children.ToList())
             {
                 if (child.IsChild && child.Clan == null)
                 {
@@ -164,6 +165,7 @@ namespace Dramalord.Actions
                 if(item != firstHero && item != secondHero)
                 {
                     item.AddDramalordMemory(eventID, MemoryType.Witness, item, true);
+                    if(DramalordMCM.Get.MarriageOutput && (firstHero.Clan == Clan.PlayerClan || secondHero.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                     LogEntry.AddLogEntry(new LogWitnessMarriage(firstHero, secondHero, item));
 
                     if (item == Hero.MainHero && (item.IsSpouse(firstHero) || item.IsLover(firstHero) || item.IsSpouse(secondHero) || item.IsLover(secondHero)))
@@ -183,13 +185,14 @@ namespace Dramalord.Actions
 
                     if (item.IsSpouse(firstHero) || item.IsLover(firstHero))
                     {
-                        if (!item.GetDramalordTraits().IsEmotionallyOpen)
+                        if (!item.GetDramalordPersonality().AcceptsOtherMarriages)
                         {
+                            int emotionChange = item.GetDramalordPersonality().GetEmotionalChange(EventType.Marriage);
                             HeroFeelings witnessFeelings = item.GetDramalordFeelings(firstHero);
-                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossMarryOther;
+                            witnessFeelings.Emotion += emotionChange;
                             if (DramalordMCM.Get.LinkEmotionToRelation)
                             {
-                                item.ChangeRelationTo(firstHero, (DramalordMCM.Get.EmotionalLossMarryOther / 2) * -1);
+                                item.ChangeRelationTo(firstHero, (emotionChange / 2));
                             }
                             item.MakeAngryWith(firstHero, DramalordMCM.Get.AngerDaysMarriage);
                         }
@@ -197,13 +200,14 @@ namespace Dramalord.Actions
                     }
                     else if (item.IsSpouse(secondHero) || item.IsLover(secondHero))
                     {
-                        if (!item.GetDramalordTraits().IsEmotionallyOpen)
+                        if (!item.GetDramalordPersonality().AcceptsOtherMarriages)
                         {
+                            int emotionChange = item.GetDramalordPersonality().GetEmotionalChange(EventType.Marriage);
                             HeroFeelings witnessFeelings = item.GetDramalordFeelings(secondHero);
-                            witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossMarryOther;
+                            witnessFeelings.Emotion += emotionChange;
                             if (DramalordMCM.Get.LinkEmotionToRelation)
                             {
-                                item.ChangeRelationTo(secondHero, (DramalordMCM.Get.EmotionalLossMarryOther / 2) * -1);
+                                item.ChangeRelationTo(secondHero, (emotionChange / 2));
                             }
                             item.MakeAngryWith(secondHero, DramalordMCM.Get.AngerDaysMarriage);
                         }

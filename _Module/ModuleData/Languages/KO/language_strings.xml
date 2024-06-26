@@ -432,5 +432,16 @@
     <string id="Dramalord426" text="영웅이 귀하의 클랜에 가입하고 싶어합니다" />
     <string id="Dramalord427" text="{HERO.LINK}님이 클랜 가입을 요청합니다. 수락하시겠습니까?" />
     <string id="Dramalord428" text="{HERO.LINK}님의 클랜 가입을 수락하셨습니다." />
+    <string id="Dramalord429" text="AI 동성결혼 허용" />
+    <string id="Dramalord430" text="AI가 동성 영웅과 결혼하도록 허용(몰입 옵션)" />
+    <string id="Dramalord431" text="플레이어 클랜 로그만 기록됩니다" />
+    <string id="Dramalord432" text="플레이어 클랜과 관련된 로그만 표시" />
+    <string id="Dramalord433" text="성적 지향:" />
+    <string id="Dramalord434" text="이성애자" />
+    <string id="Dramalord435" text="동성애자" />
+    <string id="Dramalord436" text="양성애자" />
+    <string id="Dramalord437" text="무성애자" />
+    <string id="Dramalord438" text="보너스 플레이어 어트랙션" />
+    <string id="Dramalord439" text="플레이어가 다른 영웅에게 매력을 느끼는 보너스 값" />
   </strings>
 </base>

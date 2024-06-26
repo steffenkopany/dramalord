@@ -85,18 +85,18 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionNpcAccusedDoesntCare()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion < DramalordMCM.Get.MinEmotionBeforeDivorce;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion < DramalordMCM.Get.MinEmotionBeforeDivorce;
             
         }
 
         internal static bool ConditionNpcAccusedPlaysInnocent()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion < DramalordMCM.Get.MinEmotionForMarriage;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion < DramalordMCM.Get.MinEmotionForMarriage;
         }
 
         internal static bool ConditionNpcAccusedBegsForgiveness()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion >= DramalordMCM.Get.MinEmotionForMarriage;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion >= DramalordMCM.Get.MinEmotionForMarriage;
         }
 
         internal static bool ConditionPlayerCanKillNpc()
@@ -137,7 +137,7 @@ namespace Dramalord.Conversations
 
         internal static void ConsequencePlayerKicksNpcOut()
         {
-            if (PlayerConfrontation.Memory.Event.Type == EventType.Birth && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero && !PlayerConfrontation.LoverOrChild.IsOrphan() )
+            if (PlayerConfrontation.Memory?.Event?.Type == EventType.Birth && PlayerConfrontation.LoverOrChild != null && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero && !PlayerConfrontation.LoverOrChild.IsOrphan() )
             {
                 HeroPutInOrphanageAction.Apply(Hero.MainHero, PlayerConfrontation.LoverOrChild);
             }
@@ -154,16 +154,16 @@ namespace Dramalord.Conversations
 
         internal static void ConsequencePlayerBreaksUpWithNpc()
         {
-            if (PlayerConfrontation.Memory.Event.Type == EventType.Birth && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero && !PlayerConfrontation.LoverOrChild.IsOrphan())
+            if (PlayerConfrontation.Memory?.Event?.Type == EventType.Birth && PlayerConfrontation.LoverOrChild != null && PlayerConfrontation.LoverOrChild.Father != Hero.MainHero && !PlayerConfrontation.LoverOrChild.IsOrphan())
             {
                 HeroPutInOrphanageAction.Apply(Hero.MainHero, PlayerConfrontation.LoverOrChild);
             }
 
-            if (Hero.OneToOneConversationHero.Spouse == Hero.MainHero)
+            if (Hero.OneToOneConversationHero.IsSpouse(Hero.MainHero))
             {
                 HeroDivorceAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
             }
-            else
+            else if (Hero.OneToOneConversationHero.IsLover(Hero.MainHero))
             {
                 HeroBreakupAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
             }

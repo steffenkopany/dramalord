@@ -176,7 +176,7 @@ namespace Dramalord.Conversations
         internal static bool ConditionNpcWantsKillPlayer()
         {
             return NPCConfrontation.ApproachingHero.GetDramalordFeelings(Hero.MainHero).Emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && 
-                NPCConfrontation.ApproachingHero.GetDramalordTraits().IsInstable && DramalordMCM.Get.AllowRageKills;
+                NPCConfrontation.ApproachingHero.GetDramalordPersonality().IsInstable && DramalordMCM.Get.AllowRageKills;
         }
 
         internal static bool ConditionNpcWantsLeaveClan()
@@ -189,21 +189,21 @@ namespace Dramalord.Conversations
         {
             return NPCConfrontation.ApproachingHero.GetDramalordFeelings(Hero.MainHero).Emotion < DramalordMCM.Get.MinEmotionBeforeDivorce &&
                 NPCConfrontation.ApproachingHero.GetRelationTo(Hero.MainHero) > -50 &&
-                !NPCConfrontation.ApproachingHero.GetDramalordTraits().IsInstable;
+                !NPCConfrontation.ApproachingHero.GetDramalordPersonality().IsInstable;
         }
 
         internal static bool ConditionNpcWantsToJoin()
         {
             return NPCConfrontation.ApproachingHero.GetDramalordFeelings(Hero.MainHero).Emotion > DramalordMCM.Get.MinEmotionBeforeDivorce &&
-                ((NPCConfrontation.ApproachingHero.GetDramalordTraits().IsSexuallyOpen && NPCConfrontation.Memory.Event.Type == EventType.Intercourse) ||
-                (NPCConfrontation.ApproachingHero.GetDramalordTraits().IsEmotionallyOpen && NPCConfrontation.Memory.Event.Type == EventType.Date));
+                ((NPCConfrontation.ApproachingHero.GetDramalordPersonality().AcceptsOtherIntercourse && NPCConfrontation.Memory.Event.Type == EventType.Intercourse) ||
+                (NPCConfrontation.ApproachingHero.GetDramalordPersonality().AcceptsOtherRelationships && NPCConfrontation.Memory.Event.Type == EventType.Date));
         }
 
         internal static bool ConditionNpcForgives()
         {
             return NPCConfrontation.ApproachingHero.GetDramalordFeelings(Hero.MainHero).Emotion > DramalordMCM.Get.MinEmotionBeforeDivorce &&
-                !(NPCConfrontation.ApproachingHero.GetDramalordTraits().IsSexuallyOpen && NPCConfrontation.Memory.Event.Type == EventType.Intercourse) &&
-                !(NPCConfrontation.ApproachingHero.GetDramalordTraits().IsEmotionallyOpen && NPCConfrontation.Memory.Event.Type == EventType.Date);
+                !(NPCConfrontation.ApproachingHero.GetDramalordPersonality().AcceptsOtherIntercourse && NPCConfrontation.Memory.Event.Type == EventType.Intercourse) &&
+                !(NPCConfrontation.ApproachingHero.GetDramalordPersonality().AcceptsOtherRelationships && NPCConfrontation.Memory.Event.Type == EventType.Date);
         }
 
         internal static bool ConditionNpcDoesntCare()

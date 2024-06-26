@@ -15,7 +15,7 @@ namespace Dramalord.Actions
             if (type == EventType.Intercourse || type == EventType.Date)
             {
                 KillCharacterAction.ApplyByMurder(victim, killer, false);
-                if (DramalordMCM.Get.DeathOutput)
+                if (DramalordMCM.Get.DeathOutput && (killer.Clan == Clan.PlayerClan || victim.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenCaught(victim, killer, reason));
                 }
@@ -23,7 +23,7 @@ namespace Dramalord.Actions
             else if (type == EventType.Pregnancy)
             {
                 KillCharacterAction.ApplyByMurder(victim, killer, false);
-                if (DramalordMCM.Get.DeathOutput)
+                if (DramalordMCM.Get.DeathOutput && (killer.Clan == Clan.PlayerClan || victim.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenPregnant(victim, killer));
                 }
@@ -31,7 +31,7 @@ namespace Dramalord.Actions
             else if (type == EventType.Birth)
             {
                 KillCharacterAction.ApplyByMurder(victim, killer, false);
-                if (DramalordMCM.Get.DeathOutput)
+                if (DramalordMCM.Get.DeathOutput && (killer.Clan == Clan.PlayerClan || victim.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogKilledWhenBornBastard(victim, killer, reason));
                 }
