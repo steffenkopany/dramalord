@@ -432,5 +432,16 @@
     <string id="Dramalord426" text="El héroe quiere unirse a tu clan" />
     <string id="Dramalord427" text="{HERO.LINK} solicita unirse a tu clan. ¿Aceptarás?" />
     <string id="Dramalord428" text="Aceptaste que {HERO.LINK} se uniera a tu clan." />
+    <string id="Dramalord429" text="Permitir matrimonio entre personas del mismo sexo mediante IA" />
+    <string id="Dramalord430" text="Permitir que la IA se case con héroes del mismo sexo (opción de inmersión)" />
+    <string id="Dramalord431" text="Solo registros de clanes de jugadores" />
+    <string id="Dramalord432" text="Mostrar solo registros relacionados con el clan de jugadores" />
+    <string id="Dramalord433" text="Orientación sexual:" />
+    <string id="Dramalord434" text="Heterosexual" />
+    <string id="Dramalord435" text="Homosexual" />
+    <string id="Dramalord436" text="Bisexual" />
+    <string id="Dramalord437" text="Asexual" />
+    <string id="Dramalord438" text="Atracción de jugador extra" />
+    <string id="Dramalord439" text="Valor de bonificación por la atracción del jugador hacia otros héroes" />
   </strings>
 </base>

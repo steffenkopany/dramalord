@@ -432,5 +432,16 @@
     <string id="Dramalord426" text="Герой хочет вступить в ваш клан" />
     <string id="Dramalord427" text="{HERO.LINK} просит вступить в ваш клан. Вы примете?" />
     <string id="Dramalord428" text="Вы приняли {HERO.LINK} вступление в ваш клан." />
+    <string id="Dramalord429" text="Разрешить ИИ однополые браки" />
+    <string id="Dramalord430" text="Разрешить ИИ жениться на героях одного пола (опция погружения)" />
+    <string id="Dramalord431" text="Только журналы клана игроков" />
+    <string id="Dramalord432" text="Показывать только журналы, относящиеся к клану игрока" />
+    <string id="Dramalord433" text="Сексуальная ориентация:" />
+    <string id="Dramalord434" text="Гетеросексуал" />
+    <string id="Dramalord435" text="гомосексуал" />
+    <string id="Dramalord436" text="Бисексуал" />
+    <string id="Dramalord437" text="Асексуал" />
+    <string id="Dramalord438" text="Привлечение бонусного игрока" />
+    <string id="Dramalord439" text="Бонус за привлечение игрока к другим героям" />
   </strings>
 </base>

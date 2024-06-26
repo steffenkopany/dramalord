@@ -433,5 +433,16 @@
     <string id="Dramalord426" text="O herói quer entrar no seu clã" />
     <string id="Dramalord427" text="{HERO.LINK} solicita ingressar no seu clã. Você aceitará?" />
     <string id="Dramalord428" text="Você aceitou {HERO.LINK} ingressar no seu clã." />
+    <string id="Dramalord429" text="Permitir casamento entre pessoas do mesmo sexo por IA" />
+    <string id="Dramalord430" text="Permitir que IA se case com heróis do mesmo sexo (opção de imersão)" />
+    <string id="Dramalord431" text="Apenas registros do clã de jogadores" />
+    <string id="Dramalord432" text="Mostrar apenas registros relacionados ao clã do jogador" />
+    <string id="Dramalord433" text="Orientação sexual:" />
+    <string id="Dramalord434" text="Heterossexual" />
+    <string id="Dramalord435" text="Homossexual" />
+    <string id="Dramalord436" text="Bissexual" />
+    <string id="Dramalord437" text="Assexual" />
+    <string id="Dramalord438" text="Atração de jogador bônus" />
+    <string id="Dramalord439" text="Valor bônus pela atração do jogador por outros heróis" />
   </strings>
 </base>

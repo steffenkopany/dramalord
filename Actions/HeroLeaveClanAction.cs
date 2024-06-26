@@ -51,6 +51,10 @@ namespace Dramalord.Actions
                     party.Party.SetCustomOwner(null);
                     DestroyPartyAction.Apply(null, party); // test
                 }
+                else if(party.IsActive)
+                {
+                    party.MemberRoster.RemoveTroop(hero.CharacterObject);
+                }
             }
 
             hero.Clan = null;
@@ -73,7 +77,7 @@ namespace Dramalord.Actions
                 MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
             }
 
-            if (DramalordMCM.Get.ClanOutput)
+            if (DramalordMCM.Get.ClanOutput && (oldClan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
             {
                 LogEntry.AddLogEntry(new EncyclopediaLogLeaveClan(hero, oldClan, causedBy));
             }

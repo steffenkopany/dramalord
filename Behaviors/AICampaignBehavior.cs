@@ -22,6 +22,7 @@ namespace Dramalord.Behaviors
             CampaignEvents.OnHeroUnregisteredEvent.AddNonSerializedListener(this, new Action<Hero>(OnHeroUnregistered));
             CampaignEvents.NewCompanionAdded.AddNonSerializedListener(this, new Action<Hero>(OnNewCompanionAdded));
             CampaignEvents.HeroComesOfAgeEvent.AddNonSerializedListener(this, new Action<Hero>(OnHeroComesOfAge));
+            CampaignEvents.HeroCreated.AddNonSerializedListener(this, new Action<Hero, bool>(OnHeroCreated));
         }
 
         public override void SyncData(IDataStore dataStore)
@@ -117,7 +118,7 @@ namespace Dramalord.Behaviors
                 if(result != null)
                 {
                     //TODO - check if player
-                    HeroJoinClanAction.Apply(hero, result.HeroObject.Clan);
+                    HeroJoinClanAction.Apply(hero, result.HeroObject.Clan, false);
                 }
             }
 
@@ -152,7 +153,7 @@ namespace Dramalord.Behaviors
                         {
                             NpcInteractions.start(hero, EventType.Intercourse);
                         }
-                        else if (item.GetDramalordTraits().Openness > 0)
+                        else if (item.GetDramalordPersonality().IsCheating)
                         {
                             HeroIntercourseAction.Apply(hero, item, new List<Hero>());
                             EndCaptivityAction.ApplyByRansom(item, hero);
@@ -224,6 +225,14 @@ namespace Dramalord.Behaviors
         internal void OnHeroComesOfAge(Hero hero)
         {
             DramalordOrphanage.RemoveOrphan(hero.CharacterObject);
+        }
+
+        internal void OnHeroCreated(Hero hero, bool flag)
+        {
+            if(hero.IsDramalordLegit())
+            {
+                HeroTraits.ApplyToHero(hero, true);
+            }
         }
     }
 }

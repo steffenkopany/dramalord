@@ -19,7 +19,7 @@ namespace Dramalord.Actions
             }
             ChangeKingdomAction.ApplyByJoinToKingdom(clan, kingdom, false);
 
-            if (DramalordMCM.Get.KingdomOutput)
+            if (DramalordMCM.Get.KingdomOutput && (clan == Clan.PlayerClan || (Clan.PlayerClan.Kingdom != null && Clan.PlayerClan.Kingdom == kingdom) || !DramalordMCM.Get.OnlyPlayerClanOutput))
             {
                 LogEntry.AddLogEntry(new EncyclopediaLogClanJoinedKingdom(clan, kingdom));
             }

@@ -85,7 +85,7 @@ namespace Dramalord.Actions
                 hero.AddDramalordMemory(eventID, MemoryType.Participant, hero, true);
                 target.AddDramalordMemory(eventID, MemoryType.Participant, target, true);
 
-                if(DramalordMCM.Get.AffairOutput)
+                if(DramalordMCM.Get.AffairOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new LogAffairMeeting(hero, target));
                 }
@@ -98,7 +98,11 @@ namespace Dramalord.Actions
                     if(pregnancy != null && pregnancy.Father != target.CharacterObject && (uint)CampaignTime.Now.ToDays - pregnancy.Conceived >= DramalordMCM.Get.DaysUntilPregnancyVisible && !target.HasDramalordMemory(pregnancy.EventID))
                     {
                         target.AddDramalordMemory(pregnancy.EventID, MemoryType.Witness, target, true);
-                        LogEntry.AddLogEntry(new LogWitnessPregnancy(hero, target));
+                        if(DramalordMCM.Get.AffairOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
+                        {
+                            LogEntry.AddLogEntry(new LogWitnessPregnancy(hero, target));
+                        }
+                        
 
                         if (target == Hero.MainHero)
                         {
@@ -113,12 +117,15 @@ namespace Dramalord.Actions
                             MBInformationManager.AddQuickInformation(banner, 1000, target.CharacterObject, "event:/ui/notification/relation");
                         }
 
-                        if (!target.GetDramalordTraits().IsEmotionallyOpen)
+                        if (!target.GetDramalordPersonality().AcceptsOtherPregnancies)
                         {
-                            targetFeeling.Emotion -= DramalordMCM.Get.EmotionalLossPregnancy;
+                            int emotionChange = target.GetDramalordPersonality().GetEmotionalChange(EventType.Pregnancy);
+                            targetFeeling.Emotion += emotionChange;
+                            //targetFeeling.Emotion -= DramalordMCM.Get.EmotionalLossPregnancy;
                             if (DramalordMCM.Get.LinkEmotionToRelation)
                             {
-                                target.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossPregnancy / 2) * -1);
+                                target.ChangeRelationTo(hero, (emotionChange / 2));
+                                //target.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossPregnancy / 2) * -1);
                             }
 
                             target.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysPregnancy);
@@ -132,7 +139,11 @@ namespace Dramalord.Actions
                     if (pregnancy != null && pregnancy.Father != hero.CharacterObject && (uint)CampaignTime.Now.ToDays - pregnancy.Conceived >= DramalordMCM.Get.DaysUntilPregnancyVisible && !hero.HasDramalordMemory(pregnancy.EventID))
                     {
                         hero.AddDramalordMemory(pregnancy.EventID, MemoryType.Witness, hero, true);
-                        LogEntry.AddLogEntry(new LogWitnessPregnancy(target, hero));
+                        if(DramalordMCM.Get.AffairOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
+                        {
+                            LogEntry.AddLogEntry(new LogWitnessPregnancy(target, hero));
+                        }
+                        
 
                         if (hero == Hero.MainHero)
                         {
@@ -147,12 +158,15 @@ namespace Dramalord.Actions
                             MBInformationManager.AddQuickInformation(banner, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                         }
 
-                        if (!hero.GetDramalordTraits().IsEmotionallyOpen)
+                        if (!target.GetDramalordPersonality().AcceptsOtherPregnancies)
                         {
-                            heroFeelings.Emotion -= DramalordMCM.Get.EmotionalLossPregnancy;
+                            int emotionChange = hero.GetDramalordPersonality().GetEmotionalChange(EventType.Pregnancy);
+                            heroFeelings.Emotion += emotionChange;
+                            //heroFeelings.Emotion -= DramalordMCM.Get.EmotionalLossPregnancy;
                             if (DramalordMCM.Get.LinkEmotionToRelation)
                             {
-                                hero.ChangeRelationTo(target, (DramalordMCM.Get.EmotionalLossPregnancy / 2) * -1);
+                                hero.ChangeRelationTo(target, (emotionChange / 2));
+                                //hero.ChangeRelationTo(target, (DramalordMCM.Get.EmotionalLossPregnancy / 2) * -1);
                             }
 
                             hero.MakeAngryWith(target, DramalordMCM.Get.AngerDaysPregnancy);
@@ -166,7 +180,12 @@ namespace Dramalord.Actions
                     if (witness != null)
                     {
                         witness.AddDramalordMemory(eventID, MemoryType.Witness, witness, true);
-                        LogEntry.AddLogEntry(new LogWitnessFlirt(hero, target, witness));
+
+                        if(DramalordMCM.Get.AffairOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
+                        {
+                            LogEntry.AddLogEntry(new LogWitnessDate(hero, target, witness));
+                        }
+                        
 
                         if (witness == Hero.MainHero)
                         {
@@ -185,13 +204,14 @@ namespace Dramalord.Actions
 
                         if (witness.IsSpouse(hero) || witness.IsLover(hero))
                         {
-                            if (!witness.GetDramalordTraits().IsEmotionallyOpen)
+                            if (!target.GetDramalordPersonality().AcceptsOtherRelationships)
                             {
+                                int emotionChange = witness.GetDramalordPersonality().GetEmotionalChange(EventType.Marriage);
                                 HeroFeelings witnessFeelings = witness.GetDramalordFeelings(hero);
-                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtDate;
+                                witnessFeelings.Emotion += emotionChange;
                                 if (DramalordMCM.Get.LinkEmotionToRelation)
                                 {
-                                    witness.ChangeRelationTo(hero, (DramalordMCM.Get.EmotionalLossCaughtDate / 2) * -1);
+                                    witness.ChangeRelationTo(hero, (emotionChange / 2));
                                 }
 
                                 witness.MakeAngryWith(hero, DramalordMCM.Get.AngerDaysDate);
@@ -199,13 +219,14 @@ namespace Dramalord.Actions
                         }
                         else if (witness.IsSpouse(target) || witness.IsLover(target))
                         {
-                            if (!witness.GetDramalordTraits().IsEmotionallyOpen)
+                            if (!witness.GetDramalordPersonality().AcceptsOtherRelationships)
                             {
+                                int emotionChange = witness.GetDramalordPersonality().GetEmotionalChange(EventType.Marriage);
                                 HeroFeelings witnessFeelings = witness.GetDramalordFeelings(target);
-                                witnessFeelings.Emotion -= DramalordMCM.Get.EmotionalLossCaughtDate;
+                                witnessFeelings.Emotion += emotionChange;
                                 if (DramalordMCM.Get.LinkEmotionToRelation)
                                 {
-                                    witness.ChangeRelationTo(target, (DramalordMCM.Get.EmotionalLossCaughtDate / 2) * -1);
+                                    witness.ChangeRelationTo(target, (emotionChange / 2));
                                 }
                                 
                                 witness.MakeAngryWith(target, DramalordMCM.Get.AngerDaysDate);

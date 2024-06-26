@@ -1,14 +1,6 @@
 ﻿using Dramalord.Actions;
-using Dramalord.Behaviors;
 using Dramalord.Data;
-using Dramalord.Data.Deprecated;
-using Dramalord.UI;
 using Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Core;
@@ -83,35 +75,35 @@ namespace Dramalord.Conversations
         }
         internal static bool ConditionNpcReactsBreakupDoesntCare()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion <= DramalordMCM.Get.MinEmotionBeforeDivorce;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion <= DramalordMCM.Get.MinEmotionBeforeDivorce;
         }
         internal static bool ConditionNpcReactsBreakupSurprised()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion > DramalordMCM.Get.MinEmotionBeforeDivorce && Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion <= DramalordMCM.Get.MinEmotionForDating;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion > DramalordMCM.Get.MinEmotionBeforeDivorce && Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion <= DramalordMCM.Get.MinEmotionForDating;
         }
         internal static bool ConditionNpcReactsBreakupHeartbroken()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion > DramalordMCM.Get.MinEmotionForDating && Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion <= DramalordMCM.Get.MinEmotionForMarriage;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion > DramalordMCM.Get.MinEmotionForDating && Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion <= DramalordMCM.Get.MinEmotionForMarriage;
         }
         internal static bool ConditionNpcReactsBreakupSuicidal()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion > DramalordMCM.Get.MinEmotionForMarriage;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion > DramalordMCM.Get.MinEmotionForMarriage;
         }
         internal static bool ConditionNpcReactsDivorceDoesntCare()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion <= DramalordMCM.Get.MinEmotionBeforeDivorce;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion <= DramalordMCM.Get.MinEmotionBeforeDivorce;
         }
         internal static bool ConditionNpcReactsDivorceSurprised()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion > DramalordMCM.Get.MinEmotionBeforeDivorce && Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion < DramalordMCM.Get.MinEmotionForMarriage;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion > DramalordMCM.Get.MinEmotionBeforeDivorce && Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion < DramalordMCM.Get.MinEmotionForMarriage;
         }
         internal static bool ConditionNpcReactsDivorceHeartbroken()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion >= DramalordMCM.Get.MinEmotionForMarriage;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion >= DramalordMCM.Get.MinEmotionForMarriage;
         }
         internal static bool ConditionNpcReactsDivorceSuicidal()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion > DramalordMCM.Get.MinEmotionForMarriage;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion > DramalordMCM.Get.MinEmotionForMarriage;
         }
         internal static bool ConditionNpcReactsPrisonFunAgrees()
         {
@@ -131,14 +123,14 @@ namespace Dramalord.Conversations
             {
                 ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
                 Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(wurst, -1);
-                Hero.OneToOneConversationHero.GetHeroTraits().SetPropertyValue(HeroTraits.HasToy, 1);
+                Hero.OneToOneConversationHero.GetHeroTraits().SetPropertyValue(HeroTraits.HasToy, 2);
                 toy = new TextObject("{=Dramalord052}sausage");
             }
             else
             {
                 ItemObject pie = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_pie");
                 Hero.MainHero.PartyBelongedTo.ItemRoster.AddToCounts(pie, -1);
-                Hero.OneToOneConversationHero.GetHeroTraits().SetPropertyValue(HeroTraits.HasToy, 1);
+                Hero.OneToOneConversationHero.GetHeroTraits().SetPropertyValue(HeroTraits.HasToy, 2);
                 toy = new TextObject("{=Dramalord101}pie");
             }
 
@@ -175,9 +167,9 @@ namespace Dramalord.Conversations
 
         internal static void ConsequenceNpcReactsDivorceDoesntCare()
         {
-            int emotion = Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion;
+            int emotion = Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion;
             HeroDivorceAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
-            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion = emotion;
+            Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion = emotion;
         }
 
         internal static void ConsequenceNpcReactsDivorceSurprised()
@@ -212,7 +204,7 @@ namespace Dramalord.Conversations
 
         internal static void ConsequenceNpcReactsPrisonfunDecline()
         {
-            Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion -= DramalordMCM.Get.EmotionalLossCaughtFlirting;
+            Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion += Hero.OneToOneConversationHero.GetDramalordPersonality().GetEmotionalChange(EventType.Flirt);
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;

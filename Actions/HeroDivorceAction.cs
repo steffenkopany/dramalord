@@ -16,10 +16,10 @@ namespace Dramalord.Actions
             {
                 hero.ClearAllRelationships(target);
 
-                hero.GetDramalordFeelings(target).Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
-                target.GetDramalordFeelings(hero).Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
+                //hero.GetDramalordFeelings(target).Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
+                //target.GetDramalordFeelings(hero).Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
 
-                HeroFeelings heroFeelings = hero.GetDramalordFeelings(target);
+                //HeroFeelings heroFeelings = hero.GetDramalordFeelings(target);
                 HeroFeelings targetFeelings = target.GetDramalordFeelings(hero);
 
                 targetFeelings.Emotion -= DramalordMCM.Get.EmotionalLossDivorce;
@@ -73,7 +73,7 @@ namespace Dramalord.Actions
                     MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
                 }
 
-                if (DramalordMCM.Get.MarriageOutput)
+                if (DramalordMCM.Get.MarriageOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogDivorce(hero, target));
                 }

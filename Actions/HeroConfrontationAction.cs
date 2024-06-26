@@ -16,7 +16,7 @@ namespace Dramalord.Actions
                 // initiate confrontation
                 NPCConfrontation.start(hero, memory);
 
-                if (DramalordMCM.Get.ConfrontationOutput)
+                if (DramalordMCM.Get.ConfrontationOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new LogConfrontation(hero, target, otherHero, memory.Event));
                 }
@@ -26,7 +26,7 @@ namespace Dramalord.Actions
             }
             else if (otherHero != hero)
             {
-                if (DramalordMCM.Get.ConfrontationOutput)
+                if (DramalordMCM.Get.ConfrontationOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new LogConfrontation(hero, target, otherHero, memory.Event));
                 }
@@ -39,11 +39,12 @@ namespace Dramalord.Actions
                 if (target.IsSpouse(hero) && hero.GetDramalordFeelings(target).Emotion < DramalordMCM.Get.MinEmotionBeforeDivorce && DramalordMCM.Get.AllowDivorces)
                 {
                     HeroDivorceAction.Apply(hero, target);
-                    if(heroTraits.IsInstable && DramalordMCM.Get.AllowRageKills)
+                    HeroPersonality personality = hero.GetDramalordPersonality();
+                    if (personality.IsInstable && DramalordMCM.Get.AllowRageKills)
                     {
                         HeroKillAction.Apply(hero, target, otherHero, memory.Event.Type);
                     }
-                    else if(heroTraits.IsHotTempered && hero.Clan != null && hero.Clan == target.Clan && DramalordMCM.Get.AllowClanChanges)
+                    else if(personality.IsHotTempered && hero.Clan != null && hero.Clan == target.Clan && DramalordMCM.Get.AllowClanChanges)
                     {
                         if(hero.Clan.Leader == hero)
                         {
@@ -58,11 +59,12 @@ namespace Dramalord.Actions
                 else if (target.IsLover(hero) && hero.GetDramalordFeelings(target).Emotion < DramalordMCM.Get.MinEmotionBeforeDivorce)
                 {
                     HeroBreakupAction.Apply(hero, target);
-                    if (heroTraits.IsInstable && DramalordMCM.Get.AllowRageKills)
+                    HeroPersonality personality = hero.GetDramalordPersonality();
+                    if (personality.IsInstable && DramalordMCM.Get.AllowRageKills)
                     {
                         HeroKillAction.Apply(hero, target, otherHero, memory.Event.Type);
                     }
-                    else if (heroTraits.IsHotTempered && hero.Clan != null && hero.Clan == target.Clan && DramalordMCM.Get.AllowClanChanges)
+                    else if (personality.IsHotTempered && hero.Clan != null && hero.Clan == target.Clan && DramalordMCM.Get.AllowClanChanges)
                     {
                         if (hero.Clan.Leader == hero)
                         {

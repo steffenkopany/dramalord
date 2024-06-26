@@ -1,15 +1,29 @@
-﻿using MCM.Abstractions.Attributes;
+﻿using Dramalord.Data;
+using HarmonyLib;
+using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.Global;
 using MCM.Abstractions.Base.PerCampaign;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using TaleWorlds.CampaignSystem;
+using static TaleWorlds.Engine.MeshBuilder;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
+using TaleWorlds.Core;
+using System;
 
 namespace Dramalord
 {
     internal sealed class DramalordMCM : AttributeGlobalSettings<DramalordMCM>
     {
+        internal static Hero? SelectedHero = null;
+
         [AllowNull]
         internal static DramalordMCM Get => AttributeGlobalSettings<DramalordMCM>.Instance;
+
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord431}Only Player Clan Logs", HintText = "{=Dramalord432}Show only logs related to the player clan", Order = 1, RequireRestart = false)]
+        public bool OnlyPlayerClanOutput { get; set; } = false;
 
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord151}Flirt Logs", HintText = "{=Dramalord152}Show flirt events in logs", Order = 1, RequireRestart = false)]
@@ -62,7 +76,7 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord243}Player Clan AI interaction", HintText = "{=Dramalord244}Allow Members of your clan to participate in AI interactions", Order = 10, RequireRestart = false)]
         public bool AllowPlayerClanAI { get; set; } = true;
-        
+
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord247}Heroes in Army AI interaction", HintText = "{=Dramalord248}Allow Members of an army to interact with each other", Order = 11, RequireRestart = false)]
         public bool AllowArmyInteractionAI { get; set; } = true;
@@ -74,31 +88,31 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyFloatingInteger("{=Dramalord251}NPC Approach Player Chance", 0, 100, HintText = "{=Dramalord252}Chance that heroes approach the player for intimate conversations", Order = 13, RequireRestart = false)]
         public int ChanceNPCApproachPlayer { get; set; } = 20;
-        
+
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord259}Approach Player In Settlements", HintText = "{=Dramalord260}Allow NPCs to approach you while being in the same settlement", Order = 14, RequireRestart = false)]
         public bool AllowApproachInSettlement { get; set; } = true;
-        
+
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord261}Approach Player In Party", HintText = "{=Dramalord262}Allow NPCs to approach you while being in your party", Order = 15, RequireRestart = false)]
         public bool AllowApproachInParty { get; set; } = true;
-      
+
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord284}Approach Player In Army", HintText = "{=Dramalord285}Allow NPCs to approach you while being in the same army", Order = 15, RequireRestart = false)]
         public bool AllowApproachInArmy { get; set; } = true;
-        
+
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord274}Link Emotion Changes to Relation", HintText = "{=Dramalord275}Allow changes to emotion being reflected to relation", Order = 16, RequireRestart = false)]
         public bool LinkEmotionToRelation { get; set; } = true;
-        
+
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord276}Allow Marriages", HintText = "{=Dramalord277}Allow marriages triggered by Dramalord (the original marriage system still works)", Order = 17, RequireRestart = false)]
         public bool AllowMarriages { get; set; } = true;
-   
+
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord278}Allow Divorces", HintText = "{=Dramalord279}Allow marriages being divorced by Dramalord events", Order = 18, RequireRestart = false)]
         public bool AllowDivorces { get; set; } = true;
-   
+
         [SettingPropertyGroup("{=Dramalord147}General")]
         [SettingPropertyBool("{=Dramalord280}Allow Rage Kills", HintText = "{=Dramalord281}Allow enraged heroes to kill if being cheated on", Order = 19, RequireRestart = false)]
         public bool AllowRageKills { get; set; } = true;
@@ -147,6 +161,10 @@ namespace Dramalord
         [SettingPropertyFloatingInteger("{=Dramalord374}Marriage Memory Duration", 1, 100, HintText = "{=Dramalord375}Time in days heroes remember marriage events", Order = 28, RequireRestart = false)]
         public int MarriageMemoryDuration { get; set; } = 10;
 
+        [SettingPropertyGroup("{=Dramalord147}General")]
+        [SettingPropertyBool("{=Dramalord429}Allow AI Same Sex Marriage", HintText = "{=Dramalord430}Allow AI to marry heroes of the same sex (immersion option)", Order = 29, RequireRestart = false)]
+        public bool AllowAISameSexMarriage { get; set; } = true;
+
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord167}Other Sex Attraction Modifier", -50, 50, Order = 1, HintText = "{=Dramalord168}AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)", RequireRestart = false)]
         public int OtherSexAttractionModifier { get; set; } = 0;
@@ -186,23 +204,23 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord183}Chance Getting Caught", 0, 100, Order = 11, HintText = "{=Dramalord184}Chance of getting caught by by partners while interacting wth other heroes", RequireRestart = false)]
         public int ChanceGettingCaught { get; set; } = 10;
+        /*
+                [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
+                [SettingPropertyFloatingInteger("{=Dramalord185}Emotional Loss Flirting Witnessed", 0, 100, Order = 12, HintText = "{=Dramalord186}Loss of emotion of heroes witnessing their partners flirtingwith others", RequireRestart = false)]
+                public int EmotionalLossCaughtFlirting { get; set; } = 5;
 
-        [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord185}Emotional Loss Flirting Witnessed", 0, 100, Order = 12, HintText = "{=Dramalord186}Loss of emotion of heroes witnessing their partners flirtingwith others", RequireRestart = false)]
-        public int EmotionalLossCaughtFlirting { get; set; } = 5;
+                [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
+                [SettingPropertyFloatingInteger("{=Dramalord187}Emotional Loss Meeting Witnessed", 0, 100, Order = 13, HintText = "{=Dramalord188}Loss of emotion of heroes witnessing their partners meeting in secret others", RequireRestart = false)]
+                public int EmotionalLossCaughtDate { get; set; } = 20;
 
-        [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord187}Emotional Loss Meeting Witnessed", 0, 100, Order = 13, HintText = "{=Dramalord188}Loss of emotion of heroes witnessing their partners meeting in secret others", RequireRestart = false)]
-        public int EmotionalLossCaughtDate { get; set; } = 20;
+                [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
+                [SettingPropertyFloatingInteger("{=Dramalord189}Emotional Loss Intercourse Witnessed", 0, 100, Order = 14, HintText = "{=Dramalord190}Loss of emotion of heroes witnessing their partner having intercourse with others", RequireRestart = false)]
+                public int EmotionalLossCaughtIntercourse { get; set; } = 50;
 
-        [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord189}Emotional Loss Intercourse Witnessed", 0, 100, Order = 14, HintText = "{=Dramalord190}Loss of emotion of heroes witnessing their partner having intercourse with others", RequireRestart = false)]
-        public int EmotionalLossCaughtIntercourse { get; set; } = 50;
-
-        [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord191}Emotional Loss Marry Other", 0, 100, Order = 15, HintText = "{=Dramalord192}Loss of emotion of hero if their partner marries someone else", RequireRestart = false)]
-        public int EmotionalLossMarryOther { get; set; } = 60;
-
+                [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
+                [SettingPropertyFloatingInteger("{=Dramalord191}Emotional Loss Marry Other", 0, 100, Order = 15, HintText = "{=Dramalord192}Loss of emotion of hero if their partner marries someone else", RequireRestart = false)]
+                public int EmotionalLossMarryOther { get; set; } = 60;
+                */
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord193}Emotional Loss Breakup", 0, 100, Order = 16, HintText = "{=Dramalord194}Loss of emotion of hero if their partner breaks up with them (affairs)", RequireRestart = false)]
         public int EmotionalLossBreakup { get; set; } = 50;
@@ -210,15 +228,15 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord195}Emotional Loss Divorce", 0, 100, Order = 17, HintText = "{=Dramalord196}Loss of emotion of hero if their partner ends their marriage", RequireRestart = false)]
         public int EmotionalLossDivorce { get; set; } = 80;
-
+        /*
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord197}Emotional Loss Pregnancy", 0, 100, Order = 14, HintText = "{=Dramalord198}Loss of emotion of heroes if their partners are visibly pregnant from someone else", RequireRestart = false)]
         public int EmotionalLossPregnancy { get; set; } = 80;
-
+        
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord199}Emotional Loss Bastard", 0, 100, Order = 15, HintText = "{=Dramalord200}Loss of emotion of partners if heros give birth to children of someone else", RequireRestart = false)]
         public int EmotionalLossBastard { get; set; } = 100;
-
+        */
         [SettingPropertyGroup("{=Dramalord148}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord199}Emotional Loss Gossip", 0, 100, Order = 15, HintText = "{=Dramalord200}Loss of emotion of heroes if they hear gossip about their partners", RequireRestart = false)]
         public int EmotionalLossGossip { get; set; } = 10;
@@ -284,13 +302,13 @@ namespace Dramalord
         public int MinEmotionForConversation { get; set; } = 0;
 
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
-        [SettingPropertyBool("{=Dramalord221}Player Always Attractive", Order = 2, HintText = "{=Dramalord222}Player is always 100% attractive to other heroes (cheat)", RequireRestart = false)]
-        public bool PlayerAlwaysAttractive { get; set; } = false;
-
+        [SettingPropertyFloatingInteger("{=Dramalord438}Bonus Player Attraction", 0, 100, HintText = "{=Dramalord439}Bonus value for player's attraction to other heroes", Order = 2, RequireRestart = false)]
+        public int PlayerBaseAttraction { get; set; } = 10;
+        /*
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
-        [SettingPropertyBool("{=Dramalord223}Player Always Loved", Order = 3, HintText = "{=Dramalord224}Player is always loved by other heroes (cheat)", RequireRestart = false)]
-        public bool PlayerAlwaysLoved { get; set; } = false;
-
+        [SettingPropertyFloatingInteger("{=Dramalord440}Bonus Player Emotion", 0, 100, HintText = "{=Dramalord441}Bonus value for heroes emotion they have for the player", Order = 3, RequireRestart = false)]
+        public int PlayerBaseEmotion { get; set; } = 10;
+        */
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
         [SettingPropertyBool("{=Dramalord253}Individual Relations", Order = 4, HintText = "{=Dramalord254}Use/Show individual relation Lords/Ladies instead of their clan leader relation", RequireRestart = false)]
         public bool IndividualRelation { get; set; } = true;
@@ -306,6 +324,202 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord150}Extra QOL")]
         [SettingPropertyBool("{=Dramalord227}No Relation Change Notification", Order = 2, HintText = "{=Dramalord228}Disable spam of relation increase with notables", RequireRestart = false)]
         public bool NoRelationNotification { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord150}Extra QOL")]
+        [SettingPropertyFloatingInteger("Attraction Generation Weight", -50, 50, HintText = "Negative values generate more homosexual interest, positive values generate more heterosexual interest", Order = 3, RequireRestart = false)]
+        public int TraitGenerationWeight { get; set; } = 10;
+
+        [SettingPropertyGroup("{=Dramalord150}Extra QOL")]
+        [SettingPropertyButton("Regenerate Traits", Order = 4, Content = "Click to generate", HintText = "Set a weight above and press this button to regenerate dramalord traits (only works with running campaign)", RequireRestart = false)]
+        public Action RegenerateTraits { get; set; } = (() =>
+        {
+            if (Campaign.Current != null)
+            {
+                Hero.AllAliveHeroes.Where(hero => hero.IsDramalordLegit()).Do(hero =>
+                {
+                    HeroTraits.ApplyToHero(hero, true);
+                });
+            }
+        });
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyText("Selected Hero:", Order = 1, RequireRestart = false)]
+        public string HeroName
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.Name.ToString() : "None";
+            }
+            set { }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("Openness", -100, 100, HintText = "Represents how willing a person is to try new things", Order = 2, RequireRestart = false)]
+        public int Openness
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().Openness : 0;
+            }
+            set
+            {
+                if(SelectedHero != null) SelectedHero.GetDramalordTraits().Openness = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("Conscientiousness", -100, 100, HintText = "Refers to an individual's desire to be careful and diligent", Order = 3, RequireRestart = false)]
+        public int Conscientiousness
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().Conscientiousness : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().Conscientiousness = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("Extroversion", -100, 100, HintText = "Measures how energetic, outgoing and confident a person is", Order = 4, RequireRestart = false)]
+        public int Extroversion
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().Extroversion : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().Extroversion = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("Agreeableness", -100, 100, HintText = "Refers to how an individual interacts with others", Order = 5, RequireRestart = false)]
+        public int Agreeableness
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().Agreeableness : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().Agreeableness = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("Neuroticism", -100, 100, HintText = "Represents how much someone is inclined to experience negative emotions", Order = 6, RequireRestart = false)]
+        public int Neuroticism
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().Neuroticism : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().Neuroticism = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("AttractionMen", 0, 100, HintText = "Defines whether an individual finds male persons attractive or not", Order = 7, RequireRestart = false)]
+        public int AttractionMen
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().AttractionMen : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().AttractionMen = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("AttractionWomen", 0, 100, HintText = "Defines whether an individual finds female persons attractive or not", Order = 8, RequireRestart = false)]
+        public int AttractionWomen
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().AttractionWomen : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().AttractionWomen = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("AttractionWeight", 0, 100, HintText = "Defines whether an individual has interest in chubby or thin heroes", Order = 9, RequireRestart = false)]
+        public int AttractionWeight
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().AttractionWeight : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().AttractionWeight = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("AttractionBuild", 0, 100, HintText = "Defines whether an individual has interest in muscular or weak heroes", Order = 10, RequireRestart = false)]
+        public int AttractionBuild
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().AttractionBuild : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().AttractionBuild = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("AttractionAgeDiff", -20, 20, HintText = "Defines whether an individual has interest in older or younger heroes in year difference", Order = 11, RequireRestart = false)]
+        public int AttractionAgeDiff
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().AttractionAgeDiff : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().AttractionAgeDiff = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("Libido", 0, 10, HintText = "Defines whether an individual generally develops interest in intercourse or not", Order = 12, RequireRestart = false)]
+        public int Libido
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().Libido : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().Libido = value;
+            }
+        }
+
+        [SettingPropertyGroup("Trait Editor")]
+        [SettingPropertyFloatingInteger("Horny", 0, 100, HintText = "Represents how willing a hero currently is for intercourse due to hormons", Order = 13, RequireRestart = false)]
+        public int Horny
+        {
+            get
+            {
+                return (SelectedHero != null) ? SelectedHero.GetDramalordTraits().Horny : 0;
+            }
+            set
+            {
+                if (SelectedHero != null) SelectedHero.GetDramalordTraits().Horny = value;
+            }
+        }
 
         public override string Id => DramalordSubModule.ModuleName;
 

@@ -9,7 +9,12 @@ namespace Dramalord.Models
     {
         public override bool IsCoupleSuitableForMarriage(Hero firstHero, Hero secondHero)
         {
-            if(!HeroMarriageAction.IsDramalordMarriage)
+            if (!HeroMarriageAction.IsDramalordMarriage && !DramalordMCM.Get.AllowDefaultMarriages)
+            {
+                return false;
+            }
+
+            if (!HeroMarriageAction.IsDramalordMarriage)
             {
                 return base.IsCoupleSuitableForMarriage(firstHero, secondHero);
             }
@@ -31,16 +36,17 @@ namespace Dramalord.Models
                     return true;
                 }
 
-                DramalordTraits firstTraits = firstHero.GetDramalordTraits();
-                DramalordTraits secondTraits = secondHero.GetDramalordTraits();
-
-                return firstTraits.IsEmotionallyOpen && secondTraits.IsEmotionallyOpen;
+                return firstHero.GetDramalordPersonality().AcceptsOtherMarriages && secondHero.GetDramalordPersonality().AcceptsOtherMarriages;
             }
             return false;
         }
 
         public override bool IsClanSuitableForMarriage(Clan clan)
         {
+            if (!HeroMarriageAction.IsDramalordMarriage && !DramalordMCM.Get.AllowDefaultMarriages)
+            {
+                return false;
+            }
             if (!HeroMarriageAction.IsDramalordMarriage)
             {
                 return base.IsClanSuitableForMarriage(clan);
@@ -55,11 +61,15 @@ namespace Dramalord.Models
 
         public override bool IsSuitableForMarriage(Hero maidenOrSuitor)
         {
+            if (!HeroMarriageAction.IsDramalordMarriage && !DramalordMCM.Get.AllowDefaultMarriages)
+            {
+                return false;
+            }
             if (!HeroMarriageAction.IsDramalordMarriage)
             {
                 return base.IsSuitableForMarriage(maidenOrSuitor);
             }
-            return maidenOrSuitor.IsDramalordLegit() && maidenOrSuitor.Age > 18 && ( maidenOrSuitor.Spouse == null || maidenOrSuitor == Hero.MainHero || maidenOrSuitor.GetDramalordTraits().IsEmotionallyOpen);
+            return maidenOrSuitor.IsDramalordLegit() && maidenOrSuitor.Age > 18 && ( maidenOrSuitor.Spouse == null || maidenOrSuitor == Hero.MainHero || maidenOrSuitor.GetDramalordPersonality().AcceptsOtherMarriages);
         }
 
         public override Clan GetClanAfterMarriage(Hero firstHero, Hero secondHero)
@@ -69,12 +79,12 @@ namespace Dramalord.Models
                 return base.GetClanAfterMarriage(firstHero, secondHero);
             }
 
-            if (firstHero.IsHumanPlayerCharacter)
+            if (firstHero == Hero.MainHero)
             {
                 return firstHero.Clan;
             }
 
-            if (secondHero.IsHumanPlayerCharacter)
+            if (secondHero == Hero.MainHero)
             {
                 return secondHero.Clan;
             }

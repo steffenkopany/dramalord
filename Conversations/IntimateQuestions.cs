@@ -54,12 +54,12 @@ namespace Dramalord.Conversations
 
         internal static bool ConditionNpcAcceptsIntimateQuestions()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion >= DramalordMCM.Get.MinEmotionForConversation;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion >= DramalordMCM.Get.MinEmotionForConversation;
         }
 
         internal static bool ConditionNpcDeclinesIntimateQuestions()
         {
-            return Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion < DramalordMCM.Get.MinEmotionForConversation;
+            return Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion < DramalordMCM.Get.MinEmotionForConversation;
         }
 
         internal static bool ConditionPlayerAskFertility()
@@ -135,7 +135,7 @@ namespace Dramalord.Conversations
         internal static bool ConditionNpcRepliesAboutFeelings()
         {
 
-            int emotion = (int)Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion;
+            int emotion = (int)Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.MainHero).Emotion;
 
             if (emotion < -80)
             {
@@ -256,14 +256,14 @@ namespace Dramalord.Conversations
                 if (pregnancy != null && pregnancy.Father != Hero.MainHero.CharacterObject)
                 {
                     Hero.MainHero.AddDramalordMemory(pregnancy.EventID, MemoryType.Witness, Hero.OneToOneConversationHero, true);
+
                     LogEntry.AddLogEntry(new LogWitnessPregnancy(Hero.MainHero, Hero.OneToOneConversationHero));
 
                     TextObject banner = new TextObject("{=Dramalord270}You noticed {HERO.LINK} is pregnant from someone else");
                     StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
                     MBInformationManager.AddQuickInformation(banner, 1000, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
-
-                    return true;
                 }
+                return true;
             }
             return false;
         }

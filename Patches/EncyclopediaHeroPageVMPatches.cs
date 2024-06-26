@@ -22,6 +22,7 @@ namespace Dramalord.Patches
         public static void Refresh(ref EncyclopediaHeroPageVM __instance)
         {
             Hero? hero = __instance.Obj as Hero;
+            DramalordMCM.SelectedHero = hero;
             if(hero != null && hero != Hero.MainHero && hero.IsDramalordLegit() && hero.IsDramalordLegit())
             {
                 string text = GameTexts.FindText("str_missing_info_indicator").ToString();
@@ -42,6 +43,22 @@ namespace Dramalord.Patches
                     days = adays - (int)CampaignTime.Now.ToDays;
                 });
                 angrydays.SetTextVariable("ANGRY", days);
+
+                TextObject sexOrientation = new TextObject("{=Dramalord433}Sexual Orientation:");
+                TextObject orientation = new TextObject("{=Dramalord437}Asexual");
+                if(hero.GetDramalordPersonality().IsBiSexual)
+                {
+                    orientation = new TextObject("{=Dramalord436}Bisexual");
+                }
+                else if (hero.GetDramalordPersonality().IsHeteroSexual)
+                {
+                    orientation = new TextObject("{=Dramalord434}Heterosexual");
+                }
+                else if (hero.GetDramalordPersonality().IsHomoSexual)
+                {
+                    orientation = new TextObject("{=Dramalord435}Homosexual");
+                }
+
                 /*TextObject Openness = new TextObject("{=Dramalord332}Openness:");
                 TextObject Conscientiousness = new TextObject("{=Dramalord332}Conscientiousness:");
                 TextObject Extroversion = new TextObject("{=Dramalord332}Extroversion:");
@@ -49,11 +66,12 @@ namespace Dramalord.Patches
                 TextObject Neuroticism = new TextObject("{=Dramalord332}Neuroticism:");*/
                 __instance.Stats.Add(new StringPairItemVM(attraction.ToString(), __instance.IsInformationHidden ? text : hero.GetDramalordAttractionTo(Hero.MainHero).ToString()));
                 __instance.Stats.Add(new StringPairItemVM(emotion.ToString(), __instance.IsInformationHidden ? text : hero.GetDramalordFeelings(Hero.MainHero).Emotion.ToString()));
-                __instance.Stats.Add(new StringPairItemVM(traitscore.ToString(), __instance.IsInformationHidden ? text : Hero.MainHero.GetDramalordTraitScore(hero).ToString()));
+                __instance.Stats.Add(new StringPairItemVM(traitscore.ToString(), __instance.IsInformationHidden ? text : hero.GetDramalordTraitScore(Hero.MainHero).ToString()));
                 __instance.Stats.Add(new StringPairItemVM(horny.ToString(), __instance.IsInformationHidden ? text : hero.GetDramalordTraits().Horny.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(hastoy.ToString(), __instance.IsInformationHidden ? text : (hero.GetDramalordTraits().HasToy == 1) ? yes : no));
                 __instance.Stats.Add(new StringPairItemVM(fertile.ToString(), __instance.IsInformationHidden ? text : (hero.GetDramalordIsFertile()) ? yes : no));
                 __instance.Stats.Add(new StringPairItemVM(angry.ToString(), __instance.IsInformationHidden ? text : (days > 0) ? angrydays.ToString() : no));
+                __instance.Stats.Add(new StringPairItemVM(sexOrientation.ToString(), __instance.IsInformationHidden ? text : orientation.ToString()));
                 /*__instance.Stats.Add(new StringPairItemVM(Openness.ToString(), __instance.IsInformationHidden? text : hero.GetDramalordTraits().Openness.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(Conscientiousness.ToString(), __instance.IsInformationHidden ? text : hero.GetDramalordTraits().Conscientiousness.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(Extroversion.ToString(), __instance.IsInformationHidden ? text : hero.GetDramalordTraits().Extroversion.ToString()));

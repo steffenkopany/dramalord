@@ -1,16 +1,9 @@
-﻿using Dramalord.Behaviors;
-using Dramalord.Data;
-using Dramalord.Data.Deprecated;
+﻿using Dramalord.Data;
 using System;
-using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.ViewModelCollection;
-using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Crafting;
 
 namespace Dramalord.UI
 {
@@ -39,35 +32,6 @@ namespace Dramalord.UI
         internal static void DrawBanner(TextObject text)
         {
             MBInformationManager.AddQuickInformation(text, 0, null, "event:/ui/notification/relation");
-        }
-
-        /// shortcuts
-
-        internal static void PrintNpcStats()
-        {
-            if (Hero.OneToOneConversationHero != null && Hero.MainHero != null)
-            {
-                
-                PrintText("Attraction: " + Hero.OneToOneConversationHero.GetDramalordAttractionTo(Hero.MainHero));
-                PrintText("Emotion: " + Hero.MainHero.GetDramalordFeelings(Hero.OneToOneConversationHero).Emotion);
-                PrintText("Trait score: " + Hero.OneToOneConversationHero.GetDramalordTraitScore(Hero.MainHero));
-                PrintText("Horny: " + Hero.OneToOneConversationHero.GetDramalordTraits().Horny);
-                if(Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.Spouse.IsDramalordLegit())
-                {
-                    PrintText("Married: " + Hero.OneToOneConversationHero.Spouse);
-                    PrintText(Hero.OneToOneConversationHero.Spouse + " attraction: " + Hero.OneToOneConversationHero.GetDramalordAttractionTo(Hero.OneToOneConversationHero.Spouse));
-                    PrintText(Hero.OneToOneConversationHero.Spouse + " emotion: " + Hero.OneToOneConversationHero.GetDramalordFeelings(Hero.OneToOneConversationHero.Spouse).Emotion);
-                }
-                else
-                {
-                    PrintText("Single " + Hero.OneToOneConversationHero.Spouse);
-                }
-            }
-        }
-
-        internal static void PrintPlayerAttraction()
-        {
-            PrintText("Attracted to player: " + Hero.OneToOneConversationHero.GetDramalordAttractionTo(Hero.MainHero));
         }
     }
 }

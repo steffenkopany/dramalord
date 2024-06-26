@@ -73,51 +73,63 @@ namespace Dramalord.Actions
                     
                     if((memory.Type == MemoryType.Participant))
                     {
-                        if (DramalordMCM.Get.GossipOutput)
+                        if (DramalordMCM.Get.GossipOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                         {
                             LogEntry.AddLogEntry(new LogGossipConversation(hero, target, memory.Event.Hero1.HeroObject, memory.Event.Hero2.HeroObject, memory.Event.Type, MemoryType.Confession));
                         }
 
                         if(target.IsLover(memory.Event.Hero1.HeroObject) || target.IsSpouse(memory.Event.Hero1.HeroObject))
                         {
-                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            if(!hero.GetDramalordPersonality().AcceptsGossip)
                             {
-                                target.ChangeRelationTo(memory.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                target.GetDramalordFeelings(memory.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    target.ChangeRelationTo(memory.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                }
                             }
-                            target.GetDramalordFeelings(memory.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                            
                         }
                         else if (target.IsLover(memory.Event.Hero2.HeroObject) || target.IsSpouse(memory.Event.Hero2.HeroObject))
                         {
-                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            if (!hero.GetDramalordPersonality().AcceptsGossip)
                             {
-                                target.ChangeRelationTo(memory.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                target.GetDramalordFeelings(memory.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    target.ChangeRelationTo(memory.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                }
                             }
-                            target.GetDramalordFeelings(memory.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                     }
                     else
                     {
-                        if (DramalordMCM.Get.GossipOutput)
+                        if (DramalordMCM.Get.GossipOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                         {
                             LogEntry.AddLogEntry(new LogGossipConversation(hero, target, memory.Event.Hero1.HeroObject, memory.Event.Hero2.HeroObject, memory.Event.Type, MemoryType.Gossip));
                         }
 
                         if (target.IsLover(memory.Event.Hero1.HeroObject) || target.IsSpouse(memory.Event.Hero1.HeroObject))
                         {
-                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            if (!hero.GetDramalordPersonality().AcceptsGossip)
                             {
-                                target.ChangeRelationTo(memory.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                target.GetDramalordFeelings(memory.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    target.ChangeRelationTo(memory.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                }
                             }
-                            
-                            target.GetDramalordFeelings(memory.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                         else if (target.IsLover(memory.Event.Hero2.HeroObject) || target.IsSpouse(memory.Event.Hero2.HeroObject))
                         {
-                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            if (!hero.GetDramalordPersonality().AcceptsGossip)
                             {
-                                target.ChangeRelationTo(memory.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
-                            }
-                            target.GetDramalordFeelings(memory.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                                target.GetDramalordFeelings(memory.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    target.ChangeRelationTo(memory.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                }
+                            }   
                         }
                     }
                     
@@ -140,51 +152,62 @@ namespace Dramalord.Actions
 
                     if (item.Type == MemoryType.Witness)
                     {
-                        if (DramalordMCM.Get.GossipOutput)
+                        if (DramalordMCM.Get.GossipOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                         {
                             LogEntry.AddLogEntry(new LogGossipConversation(hero, target, item.Event.Hero1.HeroObject, item.Event.Hero2.HeroObject, item.Event.Type, MemoryType.Witness));
                         }
 
                         if (target.IsLover(item.Event.Hero1.HeroObject) || target.IsSpouse(item.Event.Hero1.HeroObject))
                         {
-                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            if (!hero.GetDramalordPersonality().AcceptsGossip)
                             {
-                                target.ChangeRelationTo(item.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                target.GetDramalordFeelings(item.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    target.ChangeRelationTo(item.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                }
                             }
-                            target.GetDramalordFeelings(item.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                         else if (target.IsLover(item.Event.Hero2.HeroObject) || target.IsSpouse(item.Event.Hero2.HeroObject))
                         {
-                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            if (!hero.GetDramalordPersonality().AcceptsGossip)
                             {
-                                target.ChangeRelationTo(item.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                target.GetDramalordFeelings(item.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    target.ChangeRelationTo(item.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                }
                             }
-                            target.GetDramalordFeelings(item.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                     }
                     else
                     {
-                        if (DramalordMCM.Get.GossipOutput)
+                        if (DramalordMCM.Get.GossipOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                         {
                             LogEntry.AddLogEntry(new LogGossipConversation(hero, target, item.Event.Hero1.HeroObject, item.Event.Hero2.HeroObject, item.Event.Type, MemoryType.Gossip));
                         }
 
                         if (target.IsLover(item.Event.Hero1.HeroObject) || target.IsSpouse(item.Event.Hero1.HeroObject))
                         {
-                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            if (!hero.GetDramalordPersonality().AcceptsGossip)
                             {
-                                target.ChangeRelationTo(item.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                target.GetDramalordFeelings(item.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    target.ChangeRelationTo(item.Event.Hero1.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                }
                             }
-                            target.GetDramalordFeelings(item.Event.Hero1.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                         else if (target.IsLover(item.Event.Hero2.HeroObject) || target.IsSpouse(item.Event.Hero2.HeroObject))
                         {
-                            if (DramalordMCM.Get.LinkEmotionToRelation)
+                            if (!hero.GetDramalordPersonality().AcceptsGossip)
                             {
-                                target.ChangeRelationTo(item.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                target.GetDramalordFeelings(item.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
+                                if (DramalordMCM.Get.LinkEmotionToRelation)
+                                {
+                                    target.ChangeRelationTo(item.Event.Hero2.HeroObject, (DramalordMCM.Get.EmotionalLossGossip / 2) * -1);
+                                }
                             }
-                            
-                            target.GetDramalordFeelings(item.Event.Hero2.HeroObject).Emotion -= DramalordMCM.Get.EmotionalLossGossip;
                         }
                     }
                 });
@@ -215,25 +238,25 @@ namespace Dramalord.Actions
             bool isCoupleLover = target.IsLover(hero);
             bool isCoupleMarried = target.IsSpouse(hero);
 
-            if(isCoupleTension && isCoupleHorny && isCoupleNoHate && !isCoupleLove && !isCoupleFwb && !isCoupleLover && !isCoupleMarried)
+            if(isCoupleTension && isCoupleHorny && isCoupleNoHate && !isCoupleLove && !isCoupleFwb && !isCoupleLover && !isCoupleMarried && ((hero.GetHeroSpouses().Count == 0 && hero.GetHeroLovers().Count == 0) || hero.GetDramalordPersonality().IsCheating))
             {
                 hero.SetFriendWithBenefits(target);
                 isCoupleFwb = true;
-                if(DramalordMCM.Get.AffairOutput)
+                if(DramalordMCM.Get.AffairOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogStartFWB(hero, target));
                 }
             }
-            else if(isCoupleLove && !isCoupleLover && !isCoupleMarried)
+            else if(isCoupleLove && !isCoupleLover && !isCoupleMarried && ((hero.GetHeroSpouses().Count == 0 && hero.GetHeroLovers().Count == 0) || hero.GetDramalordPersonality().IsCheating))
             {
                 hero.SetLover(target);
                 isCoupleLover = true;
-                if (DramalordMCM.Get.AffairOutput)
+                if (DramalordMCM.Get.AffairOutput && (hero.Clan == Clan.PlayerClan || target.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
                 {
                     LogEntry.AddLogEntry(new EncyclopediaLogStartAffair(hero, target));
                 }
             }
-            else if(isCoupleMarryLove && isCoupleTrusty && isCoupleLover && DramalordMCM.Get.AllowMarriages)
+            else if(isCoupleMarryLove && isCoupleTrusty && isCoupleLover && DramalordMCM.Get.AllowMarriages && (hero.IsFemale != target.IsFemale || DramalordMCM.Get.AllowAISameSexMarriage))
             {
                 HeroMarriageAction.Apply(hero, target, potentialWitnesses);
                 isCoupleMarried = true;
