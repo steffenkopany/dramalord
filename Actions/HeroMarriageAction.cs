@@ -26,11 +26,13 @@ namespace Dramalord.Actions
             {
                 firstHero.SetSpouse(firstHero.Spouse);
             }
+            firstHero.Spouse = null;
 
             if (secondHero.Spouse != null && !secondHero.IsSpouse(secondHero.Spouse))
             {
                 secondHero.SetSpouse(secondHero.Spouse);
             }
+            secondHero.Spouse = null;
 
             if(firstHero.Clan != secondHero.Clan)
             {

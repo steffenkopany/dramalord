@@ -443,5 +443,36 @@
     <string id="Dramalord437" text="Asessuale" />
     <string id="Dramalord438" text="Attrazione giocatori bonus" />
     <string id="Dramalord439" text="Valore bonus per l'attrazione del giocatore verso altri eroi" />
+    <string id="Dramalord440" text="Peso della generazione di attrazioni" />
+    <string id="Dramalord441" text="I valori negativi generano più interesse omosessuale, i valori positivi generano più interesse eterosessuale" />
+    <string id="Dramalord442" text="Rigenera tratti" />
+    <string id="Dramalord443" text="Fai clic per generare" />
+    <string id="Dramalord444" text="Imposta un peso sopra e premi questo pulsante per rigenerare i tratti di Dramalord (funziona solo con la campagna in corso)" />
+    <string id="Dramalord445" text="Editor di tratti" />
+    <string id="Dramalord446" text="Eroe selezionato:" />
+    <string id="Dramalord447" text="Apertura" />
+    <string id="Dramalord448" text="Rappresenta quanto una persona è disposta a provare cose nuove" />
+    <string id="Dramalord449" text="Coscienziosità" />
+    <string id="Dramalord450" text="Si riferisce al desiderio di un individuo di essere attento e diligente" />
+    <string id="Dramalord451" text="Extroversion" />
+    <string id="Dramalord452" text="Misura quanto una persona è energica, estroversa e sicura di sé" />
+    <string id="Dramalord453" text="Piacevolezza" />
+    <string id="Dramalord454" text="Si riferisce a come un individuo interagisce con gli altri" />
+    <string id="Dramalord455" text="Neuroticismo" />
+    <string id="Dramalord456" text="Rappresenta quanto qualcuno è incline a provare emozioni negative" />
+    <string id="Dramalord457" text="Attrazione per gli uomini" />
+    <string id="Dramalord458" text="Definisce se un individuo trova attraenti o meno le persone di sesso maschile" />
+    <string id="Dramalord459" text="Attrazione per le donne" />
+    <string id="Dramalord460" text="Definisce se un individuo trova attraenti o meno le persone di sesso femminile" />
+    <string id="Dramalord461" text="Attrazione per il peso" />
+    <string id="Dramalord462" text="Definisce se un individuo ha interesse per gli eroi paffuti o magri" />
+    <string id="Dramalord463" text="Attrazione da costruire" />
+    <string id="Dramalord464" text="Definisce se un individuo ha interesse per eroi muscolosi o deboli" />
+    <string id="Dramalord465" text="Attrazione per la differenza di età" />
+    <string id="Dramalord466" text="Definisce se un individuo ha interesse per gli eroi più anziani o più giovani nella differenza di anno" />
+    <string id="Dramalord467" text="Libido" />
+    <string id="Dramalord468" text="Definisce se un individuo generalmente sviluppa interesse per il rapporto o meno" />
+    <string id="Dramalord469" text="Eccitato" />
+    <string id="Dramalord470" text="Rappresenta quanto un eroe è attualmente disposto al rapporto a causa degli ormoni" />
   </strings>
 </base>

@@ -12,6 +12,7 @@ namespace Dramalord.Conversations
     {
         internal static void AddDialogs(CampaignGameStarter starter)
         {
+            starter.AddDialogLine("dummyid", "start", "close_window", "", ConversationHelper.SetConversationCharacter, null, 1000);
             starter.AddDialogLine("npc_angry_with_player", "start", "close_window", "{=Dramalord391}I am angry with you and I don't want to talk to you! [if:convo_angry_voice]", ConditionNpcAngryWithPlayer, null, 220);
             starter.AddPlayerLine("player_asks_intimate_questions", "hero_main_options", "npc_intimate_questions_reply", "{=Dramalord001}May I ask you something personal?", ConditionPlayerCanAskIntimateQuestions, null);
 

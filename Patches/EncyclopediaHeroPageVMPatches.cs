@@ -1,5 +1,4 @@
 ﻿using Dramalord.Data;
-using Dramalord.Data.Deprecated;
 using HarmonyLib;
 using JetBrains.Annotations;
 using System.Linq;

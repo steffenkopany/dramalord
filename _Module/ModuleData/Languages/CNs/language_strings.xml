@@ -443,5 +443,36 @@
     <string id="Dramalord437" text="无性恋" />
     <string id="Dramalord438" text="奖励玩家吸引力" />
     <string id="Dramalord439" text="玩家对其他英雄的吸引力奖励值" />
+    <string id="Dramalord440" text="吸引力生成权重" />
+    <string id="Dramalord441" text="负值产生更多同性恋兴趣，正值产生更多异性恋兴趣" />
+    <string id="Dramalord442" text="重新生成特质" />
+    <string id="Dramalord443" text="点击生成" />
+    <string id="Dramalord444" text="设置上面的权重并按下此按钮以重新生成 dramalord 特质（仅适用于正在进行的活动）" />
+    <string id="Dramalord445" text="特质编辑器" />
+    <string id="Dramalord446" text="选定的英雄：" />
+    <string id="Dramalord447" text="开放性" />
+    <string id="Dramalord448" text="代表一个人愿意尝试新事物的程度" />
+    <string id="Dramalord449" text="尽责性" />
+    <string id="Dramalord450" text="指个人想要谨慎和勤奋的愿望" />
+    <string id="Dramalord451" text="外向性" />
+    <string id="Dramalord452" text="衡量一个人的精力充沛、外向和自信程度" />
+    <string id="Dramalord453" text="随和性" />
+    <string id="Dramalord454" text="指个人如何与他人互动" />
+    <string id="Dramalord455" text="神经质" />
+    <string id="Dramalord456" text="表示某人倾向于体验负面情绪的程度" />
+    <string id="Dramalord457" text="对男性的吸引力" />
+    <string id="Dramalord458" text="定义个人是否觉得男性有吸引力" />
+    <string id="Dramalord459" text="对女性的吸引力" />
+    <string id="Dramalord460" text="定义个人是否觉得女性有吸引力" />
+    <string id="Dramalord461" text="对体重的吸引力" />
+    <string id="Dramalord462" text="定义个人是否对胖乎乎的英雄或瘦弱的英雄感兴趣" />
+    <string id="Dramalord463" text="对身材的吸引力" />
+    <string id="Dramalord464" text="定义个人是否对肌肉发达的英雄或虚弱的英雄感兴趣" />
+    <string id="Dramalord465" text="对年龄差异的吸引力" />
+    <string id="Dramalord466" text="定义个人是否对年龄差异在年长或年轻英雄中的表现" />
+    <string id="Dramalord467" text="性欲" />
+    <string id="Dramalord468" text="定义个人是否通常对性交产生兴趣" />
+    <string id="Dramalord469" text="性欲旺盛" />
+    <string id="Dramalord470" text="表示英雄目前因荷尔蒙而愿意进行性交的程度" />
   </strings>
 </base>

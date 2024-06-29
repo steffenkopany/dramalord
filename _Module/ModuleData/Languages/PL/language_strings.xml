@@ -444,5 +444,36 @@
     <string id="Dramalord437" text="Aseksualny" />
     <string id="Dramalord438" text="Dodatkowa atrakcja dla gracza" />
     <string id="Dramalord439" text="Dodatkowa wartość za atrakcyjność gracza dla innych bohaterów" />
+    <string id="Dramalord440" text="Waga generowania atrakcji" />
+    <string id="Dramalord441" text="Wartości ujemne generują większe zainteresowanie homoseksualne, wartości pozytywne generują większe zainteresowanie heteroseksualne" />
+    <string id="Dramalord442" text="Regeneruj cechy" />
+    <string id="Dramalord443" text="Kliknij, aby wygenerować" />
+    <string id="Dramalord444" text="Ustaw wagę powyżej i naciśnij ten przycisk, aby zregenerować cechy Dramalorda (działa tylko z uruchomioną kampanią)" />
+    <string id="Dramalord445" text="Edytor cech" />
+    <string id="Dramalord446" text="Wybrany bohater:" />
+    <string id="Dramalord447" text="Otwartość" />
+    <string id="Dramalord448" text="Okazuje, jak dana osoba jest chętna do próbowania nowych rzeczy" />
+    <string id="Dramalord449" text="Sumienność" />
+    <string id="Dramalord450" text="Odnosi się do pragnienia danej osoby, aby zachować ostrożność i pracowitość" />
+    <string id="Dramalord451" text="Ekstrawersja" />
+    <string id="Dramalord452" text="Mierzy, jak energiczna, towarzyska i pewna siebie jest dana osoba" />
+    <string id="Dramalord453" text="Ugodowość" />
+    <string id="Dramalord454" text="Odnosi się do sposobu, w jaki dana osoba wchodzi w interakcję z innymi" />
+    <string id="Dramalord455" text="Neurotyzm" />
+    <string id="Dramalord456" text="Okazuje, jak bardzo ktoś jest skłonny do doświadczania negatywnych emocji" />
+    <string id="Dramalord457" text="Pociąg do mężczyzn" />
+    <string id="Dramalord458" text="Określa, czy dana osoba uważa mężczyzn za atrakcyjnych, czy nie" />
+    <string id="Dramalord459" text="Pociąg do kobiet" />
+    <string id="Dramalord460" text="Określa, czy dana osoba uważa kobiety za atrakcyjne, czy nie" />
+    <string id="Dramalord461" text="Przyciąganie do wagi" />
+    <string id="Dramalord462" text="Określa, czy dana osoba interesuje się pulchnymi, czy szczupłymi bohaterami" />
+    <string id="Dramalord463" text="Atrakcja do zbudowania" />
+    <string id="Dramalord464" text="Określa, czy dana osoba interesuje się umięśnionymi, czy słabymi bohaterami" />
+    <string id="Dramalord465" text="Pociąg ze względu na różnicę wieku" />
+    <string id="Dramalord466" text="Określa, czy dana osoba interesuje się starszymi, czy młodszymi bohaterami ze względu na różnicę lat" />
+    <string id="Dramalord467" text="Libido" />
+    <string id="Dramalord468" text="Określa, czy dana osoba ogólnie wykazuje zainteresowanie stosunkiem płciowym, czy nie" />
+    <string id="Dramalord469" text="Napalony" />
+    <string id="Dramalord470" text="Okazuje, jak bardzo bohater ma obecnie ochotę na stosunek ze względu na hormony" />
   </strings>
 </base>

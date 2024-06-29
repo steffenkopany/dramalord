@@ -443,5 +443,36 @@
     <string id="Dramalord437" text="Aseksüel" />
     <string id="Dramalord438" text="Bonus Oyuncu Eğlencesi" />
     <string id="Dramalord439" text="Oyuncunun diğer kahramanlara olan ilgisinin bonus değeri" />
+    <string id="Dramalord440" text="Cazibe Yaratma Ağırlığı" />
+    <string id="Dramalord441" text="Negatif değerler daha fazla eşcinsel ilgi yaratır, pozitif değerler daha fazla heteroseksüel ilgi yaratır" />
+    <string id="Dramalord442" text="Özellikleri Yenile" />
+    <string id="Dramalord443" text="Oluşturmak için tıklayın" />
+    <string id="Dramalord444" text="Yukarıda bir ağırlık belirleyin ve dramalord özelliklerini yeniden oluşturmak için bu düğmeye basın (yalnızca kampanya yürütülürken çalışır)" />
+    <string id="Dramalord445" text="Özellik Düzenleyici" />
+    <string id="Dramalord446" text="Seçilen Kahraman:" />
+    <string id="Dramalord447" text="Açıklık" />
+    <string id="Dramalord448" text="Bir kişinin yeni şeyler denemeye ne kadar istekli olduğunu temsil eder" />
+    <string id="Dramalord449" text="Vicdanlılık" />
+    <string id="Dramalord450" text="Bireyin dikkatli ve çalışkan olma isteğini ifade eder" />
+    <string id="Dramalord451" text="Dışa dönüklük" />
+    <string id="Dramalord452" text="Bir kişinin ne kadar enerjik, dışa dönük ve kendinden emin olduğunu ölçer" />
+    <string id="Dramalord453" text="Uyumluluk" />
+    <string id="Dramalord454" text="Bir kişinin diğerleriyle nasıl etkileşime girdiğini ifade eder" />
+    <string id="Dramalord455" text="Nevrotiklik" />
+    <string id="Dramalord456" text="Birinin olumsuz duygular yaşamaya ne kadar eğilimli olduğunu temsil eder" />
+    <string id="Dramalord457" text="Erkeklerin Cazibesi" />
+    <string id="Dramalord458" text="Bir kişinin erkekleri çekici bulup bulmadığını tanımlar" />
+    <string id="Dramalord459" text="Kadınların Cazibesi" />
+    <string id="Dramalord460" text="Bir kişinin kadınları çekici bulup bulmadığını tanımlar" />
+    <string id="Dramalord461" text="Ağırlığın Cazibesi" />
+    <string id="Dramalord462" text="Bir kişinin tombul kahramanlara mı yoksa zayıf kahramanlara mı ilgi duyduğunu tanımlar" />
+    <string id="Dramalord463" text="İnşa Edilecek Cazibe" />
+    <string id="Dramalord464" text="Bir kişinin kaslı kahramanlara mı yoksa zayıf kahramanlara mı ilgi duyduğunu tanımlar" />
+    <string id="Dramalord465" text="Yaş Farkının Cazibesi" />
+    <string id="Dramalord466" text="Bir kişinin yaş farkına göre kendinden büyük kahramanlara mı yoksa genç kahramanlara mı ilgi duyduğunu tanımlar" />
+    <string id="Dramalord467" text="Libido" />
+    <string id="Dramalord468" text="Bir kişinin genel olarak cinsel ilişkiye ilgi duyup duymadığını tanımlar" />
+    <string id="Dramalord469" text="Azgın" />
+    <string id="Dramalord470" text="Hormonlar nedeniyle bir kahramanın şu anda cinsel ilişkiye ne kadar istekli olduğunu temsil eder" />
   </strings>
 </base>
