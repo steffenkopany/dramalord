@@ -283,7 +283,7 @@ namespace Dramalord.Conversations
             {
                 HeroDivorceAction.Apply(NPCConfrontation.ApproachingHero, Hero.MainHero);
             }
-
+            //HeroFightAction.Apply(NPCConfrontation.ApproachingHero, Hero.MainHero);
             NPCConfrontation.ApproachingHero = null;
             NPCConfrontation.Memory = null;
             NPCConfrontation.OtherHero = null;
@@ -291,6 +291,7 @@ namespace Dramalord.Conversations
 
         internal static void ConsequenceWhatever()
         {
+            //HeroFightAction.Apply(NPCConfrontation.ApproachingHero, Hero.MainHero);
             NPCConfrontation.ApproachingHero = null;
             NPCConfrontation.Memory = null;
             NPCConfrontation.OtherHero = null;

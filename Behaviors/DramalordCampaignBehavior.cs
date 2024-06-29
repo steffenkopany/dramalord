@@ -1,11 +1,10 @@
-﻿using Dramalord.Conversations;
+﻿using Dramalord.Actions;
+using Dramalord.Conversations;
 using Dramalord.Data;
-using Dramalord.Data.Deprecated;
 using Dramalord.UI;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
-using static TaleWorlds.CampaignSystem.Actions.KillCharacterAction;
 
 namespace Dramalord.Behaviors
 {
@@ -28,6 +27,7 @@ namespace Dramalord.Behaviors
         {
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(GameMenus.AddGameMenus));
             CampaignEvents.ConversationEnded.AddNonSerializedListener(this, new Action<IEnumerable<CharacterObject>>(ConversationHelper.OnConversationEnded));
+            //CampaignEvents.MissionTickEvent.AddNonSerializedListener(this, new Action<float>(HeroFightAction.OnMissionTick));
         }
 
         public override void SyncData(IDataStore dataStore)

@@ -443,5 +443,36 @@
     <string id="Dramalord437" text="무성애자" />
     <string id="Dramalord438" text="보너스 플레이어 어트랙션" />
     <string id="Dramalord439" text="플레이어가 다른 영웅에게 매력을 느끼는 보너스 값" />
+    <string id="Dramalord440" text="매력 생성 가중치" />
+    <string id="Dramalord441" text="음수 값은 동성애에 대한 관심을 더 많이 생성하고, 양수 값은 이성애에 대한 관심을 더 많이 생성합니다." />
+    <string id="Dramalord442" text="특성 재생성" />
+    <string id="Dramalord443" text="생성하려면 클릭하세요" />
+    <string id="Dramalord444" text="위의 가중치를 설정하고 이 버튼을 누르면 드라마로드 특성이 재생성됩니다(런닝 캠페인에서만 작동)" />
+    <string id="Dramalord445" text="특성 편집기" />
+    <string id="Dramalord446" text="선택된 영웅:" />
+    <string id="Dramalord447" text="개방성" />
+    <string id="Dramalord448" text="사람이 새로운 것을 시도하려는 의지를 나타냅니다." />
+    <string id="Dramalord449" text="성실함" />
+    <string id="Dramalord450" text="조심하고 부지런하고자 하는 개인의 욕구를 말합니다" />
+    <string id="Dramalord451" text="외향성" />
+    <string id="Dramalord452" text="사람이 얼마나 활기차고 외향적이며 자신감이 있는지 측정" />
+    <string id="Dramalord453" text="동의성" />
+    <string id="Dramalord454" text="개인이 다른 사람과 상호작용하는 방식을 나타냅니다." />
+    <string id="Dramalord455" text="신경증" />
+    <string id="Dramalord456" text="누군가가 부정적인 감정을 경험하려는 경향이 얼마나 되는지 나타냅니다." />
+    <string id="Dramalord457" text="남자에게 끌리는 매력" />
+    <string id="Dramalord458" text="개인이 남성의 매력을 느끼는지 여부를 정의합니다." />
+    <string id="Dramalord459" text="여성의 매력" />
+    <string id="Dramalord460" text="개인이 여성의 매력을 느끼는지 여부를 정의합니다." />
+    <string id="Dramalord461" text="무게에 대한 매력" />
+    <string id="Dramalord462" text="개인이 통통한 영웅이나 마른 영웅에 관심을 갖는지 정의" />
+    <string id="Dramalord463" text="어트랙션 구축" />
+    <string id="Dramalord464" text="개인이 근육질 영웅이나 약한 영웅에 관심을 갖는지 정의" />
+    <string id="Dramalord465" text="나이차에 대한 매력" />
+    <string id="Dramalord466" text="연령 차이로 나이가 많은 영웅과 어린 영웅에게 개인이 관심을 가질지 여부를 정의합니다." />
+    <string id="Dramalord467" text="리비도" />
+    <string id="Dramalord468" text="개인이 일반적으로 성관계에 관심을 갖게 되는지 여부를 정의합니다." />
+    <string id="Dramalord469" text="흥분" />
+    <string id="Dramalord470" text="호르몬으로 인해 영웅이 현재 얼마나 성관계를 원하는지 나타냅니다." />
   </strings>
 </base>

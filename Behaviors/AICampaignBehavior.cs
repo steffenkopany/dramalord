@@ -172,7 +172,7 @@ namespace Dramalord.Behaviors
         {
             DramalordRelations.Partners.Where(item => item.Key == hero.CharacterObject).ToList().ForEach(item =>
             {
-                item.Value.Spouses.ForEach(it1 =>
+                item.Value.Spouses.ToList().ForEach(it1 =>
                 {
                     if (DramalordRelations.Partners.ContainsKey(it1))
                     {
@@ -180,7 +180,7 @@ namespace Dramalord.Behaviors
                     }
                 });
 
-                item.Value.Lovers.ForEach(it1 =>
+                item.Value.Lovers.ToList().ForEach(it1 =>
                 {
                     if (DramalordRelations.Partners.ContainsKey(it1))
                     {
@@ -188,7 +188,7 @@ namespace Dramalord.Behaviors
                     }
                 });
 
-                item.Value.FriendsWithBenefits.ForEach(it1 =>
+                item.Value.FriendsWithBenefits.ToList().ForEach(it1 =>
                 {
                     if (DramalordRelations.Partners.ContainsKey(it1))
                     {

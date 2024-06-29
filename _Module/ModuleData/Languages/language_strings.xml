@@ -443,5 +443,36 @@
     <string id="Dramalord437" text="Asexual" />
     <string id="Dramalord438" text="Bonus Player Attraction" />
     <string id="Dramalord439" text="Bonus value for player's attraction to other heroes" />
+    <string id="Dramalord440" text="Attraction Generation Weight" />
+    <string id="Dramalord441" text="Negative values generate more homosexual interest, positive values generate more heterosexual interest" />
+    <string id="Dramalord442" text="Regenerate Traits" />
+    <string id="Dramalord443" text="Click to generate" />
+    <string id="Dramalord444" text="Set a weight above and press this button to regenerate dramalord traits (only works with running campaign)" />
+    <string id="Dramalord445" text="Trait Editor" />
+    <string id="Dramalord446" text="Selected Hero:" />
+    <string id="Dramalord447" text="Openness" />
+    <string id="Dramalord448" text="Represents how willing a person is to try new things" />
+    <string id="Dramalord449" text="Conscientiousness" />
+    <string id="Dramalord450" text="Refers to an individual's desire to be careful and diligent" />
+    <string id="Dramalord451" text="Extroversion" />
+    <string id="Dramalord452" text="Measures how energetic, outgoing and confident a person is" />
+    <string id="Dramalord453" text="Agreeableness" />
+    <string id="Dramalord454" text="Refers to how an individual interacts with others" />
+    <string id="Dramalord455" text="Neuroticism" />
+    <string id="Dramalord456" text="Represents how much someone is inclined to experience negative emotions" />
+    <string id="Dramalord457" text="Attraction To Men" />
+    <string id="Dramalord458" text="Defines whether an individual finds male persons attractive or not" />
+    <string id="Dramalord459" text="Attraction To Women" />
+    <string id="Dramalord460" text="Defines whether an individual finds female persons attractive or not" />
+    <string id="Dramalord461" text="Attraction To Weight" />
+    <string id="Dramalord462" text="Defines whether an individual has interest in chubby or thin heroes" />
+    <string id="Dramalord463" text="Attraction To Build" />
+    <string id="Dramalord464" text="Defines whether an individual has interest in muscular or weak heroes" />
+    <string id="Dramalord465" text="Attraction To Age Difference" />
+    <string id="Dramalord466" text="Defines whether an individual has interest in older or younger heroes in year difference" />
+    <string id="Dramalord467" text="Libido" />
+    <string id="Dramalord468" text="Defines whether an individual generally develops interest in intercourse or not" />
+    <string id="Dramalord469" text="Horny" />
+    <string id="Dramalord470" text="Represents how willing a hero currently is for intercourse due to hormons" />
   </strings>
 </base>

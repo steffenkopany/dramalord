@@ -225,6 +225,11 @@ namespace Dramalord.Data
 
         public static int GetDramalordAttractionTo(this Hero hero, Hero target)
         {
+            if(DramalordMCM.Get.PlayerAlwaysAttractive)
+            {
+                return 100;
+            }
+
             int rating = DramalordMCM.Get.PlayerBaseAttraction;
             rating += (target.IsFemale) ? hero.GetDramalordTraits().AttractionWomen : hero.GetDramalordTraits().AttractionMen;
             rating += ((hero.IsFemale && !target.IsFemale) ||(!hero.IsFemale && target.IsFemale)) ? DramalordMCM.Get.OtherSexAttractionModifier : -DramalordMCM.Get.OtherSexAttractionModifier;
@@ -234,7 +239,7 @@ namespace Dramalord.Data
             rating -= Math.Abs(MBMath.ClampInt(hero.GetDramalordTraits().AttractionAgeDiff + (int)hero.Age, 18, 130) - (int)target.Age);
             rating += (target == Hero.MainHero) ? hero.GetDramalordFeelings(target).Emotion / 4 : 0;
 
-            return MBMath.ClampInt((int)rating, 0, 100);
+            return MBMath.ClampInt(rating, 0, 100);
         }
 
         public static bool GetDramalordIsFertile(this Hero hero)

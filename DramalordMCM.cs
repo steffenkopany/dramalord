@@ -304,11 +304,11 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
         [SettingPropertyFloatingInteger("{=Dramalord438}Bonus Player Attraction", 0, 100, HintText = "{=Dramalord439}Bonus value for player's attraction to other heroes", Order = 2, RequireRestart = false)]
         public int PlayerBaseAttraction { get; set; } = 10;
-        /*
+
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
-        [SettingPropertyFloatingInteger("{=Dramalord440}Bonus Player Emotion", 0, 100, HintText = "{=Dramalord441}Bonus value for heroes emotion they have for the player", Order = 3, RequireRestart = false)]
-        public int PlayerBaseEmotion { get; set; } = 10;
-        */
+        [SettingPropertyBool("{=Dramalord221}Player Always Attractive", HintText = "{=Dramalord222}Player is always 100% attractive to other heroes (cheat)", Order = 3, RequireRestart = false)]
+        public bool PlayerAlwaysAttractive { get; set; } = false;
+
         [SettingPropertyGroup("{=Dramalord149}Player Options")]
         [SettingPropertyBool("{=Dramalord253}Individual Relations", Order = 4, HintText = "{=Dramalord254}Use/Show individual relation Lords/Ladies instead of their clan leader relation", RequireRestart = false)]
         public bool IndividualRelation { get; set; } = true;
@@ -326,11 +326,11 @@ namespace Dramalord
         public bool NoRelationNotification { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord150}Extra QOL")]
-        [SettingPropertyFloatingInteger("Attraction Generation Weight", -50, 50, HintText = "Negative values generate more homosexual interest, positive values generate more heterosexual interest", Order = 3, RequireRestart = false)]
-        public int TraitGenerationWeight { get; set; } = 10;
+        [SettingPropertyFloatingInteger("{=Dramalord440}Attraction Generation Weight", -50, 50, HintText = "{=Dramalord441}Negative values generate more homosexual interest, positive values generate more heterosexual interest", Order = 3, RequireRestart = false)]
+        public int TraitGenerationWeight { get; set; } = 50;
 
         [SettingPropertyGroup("{=Dramalord150}Extra QOL")]
-        [SettingPropertyButton("Regenerate Traits", Order = 4, Content = "Click to generate", HintText = "Set a weight above and press this button to regenerate dramalord traits (only works with running campaign)", RequireRestart = false)]
+        [SettingPropertyButton("{=Dramalord442}Regenerate Traits", Order = 4, Content = "{=Dramalord443}Click to generate", HintText = "{=Dramalord444}Set a weight above and press this button to regenerate dramalord traits (only works with running campaign)", RequireRestart = false)]
         public Action RegenerateTraits { get; set; } = (() =>
         {
             if (Campaign.Current != null)
@@ -342,8 +342,8 @@ namespace Dramalord
             }
         });
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyText("Selected Hero:", Order = 1, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyText("{=Dramalord446}Selected Hero:", Order = 1, RequireRestart = false)]
         public string HeroName
         {
             get
@@ -353,8 +353,8 @@ namespace Dramalord
             set { }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("Openness", -100, 100, HintText = "Represents how willing a person is to try new things", Order = 2, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord447}Openness", -100, 100, HintText = "{=Dramalord448}Represents how willing a person is to try new things", Order = 2, RequireRestart = false)]
         public int Openness
         {
             get
@@ -367,8 +367,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("Conscientiousness", -100, 100, HintText = "Refers to an individual's desire to be careful and diligent", Order = 3, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord449}Conscientiousness", -100, 100, HintText = "{=Dramalord450}Refers to an individual's desire to be careful and diligent", Order = 3, RequireRestart = false)]
         public int Conscientiousness
         {
             get
@@ -381,8 +381,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("Extroversion", -100, 100, HintText = "Measures how energetic, outgoing and confident a person is", Order = 4, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord451}Extroversion", -100, 100, HintText = "{=Dramalord452}Measures how energetic, outgoing and confident a person is", Order = 4, RequireRestart = false)]
         public int Extroversion
         {
             get
@@ -395,8 +395,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("Agreeableness", -100, 100, HintText = "Refers to how an individual interacts with others", Order = 5, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord453}Agreeableness", -100, 100, HintText = "{=Dramalord454}Refers to how an individual interacts with others", Order = 5, RequireRestart = false)]
         public int Agreeableness
         {
             get
@@ -409,8 +409,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("Neuroticism", -100, 100, HintText = "Represents how much someone is inclined to experience negative emotions", Order = 6, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord455}Neuroticism", -100, 100, HintText = "{=Dramalord456}Represents how much someone is inclined to experience negative emotions", Order = 6, RequireRestart = false)]
         public int Neuroticism
         {
             get
@@ -423,8 +423,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("AttractionMen", 0, 100, HintText = "Defines whether an individual finds male persons attractive or not", Order = 7, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord457}Attraction To Men", 0, 100, HintText = "{=Dramalord458}Defines whether an individual finds male persons attractive or not", Order = 7, RequireRestart = false)]
         public int AttractionMen
         {
             get
@@ -437,8 +437,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("AttractionWomen", 0, 100, HintText = "Defines whether an individual finds female persons attractive or not", Order = 8, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord459}Attraction To Women", 0, 100, HintText = "{=Dramalord460}Defines whether an individual finds female persons attractive or not", Order = 8, RequireRestart = false)]
         public int AttractionWomen
         {
             get
@@ -451,8 +451,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("AttractionWeight", 0, 100, HintText = "Defines whether an individual has interest in chubby or thin heroes", Order = 9, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord461}Attraction To Weight", 0, 100, HintText = "{=Dramalord462}Defines whether an individual has interest in chubby or thin heroes", Order = 9, RequireRestart = false)]
         public int AttractionWeight
         {
             get
@@ -465,8 +465,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("AttractionBuild", 0, 100, HintText = "Defines whether an individual has interest in muscular or weak heroes", Order = 10, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord463}Attraction To Build", 0, 100, HintText = "{=Dramalord464}Defines whether an individual has interest in muscular or weak heroes", Order = 10, RequireRestart = false)]
         public int AttractionBuild
         {
             get
@@ -479,8 +479,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("AttractionAgeDiff", -20, 20, HintText = "Defines whether an individual has interest in older or younger heroes in year difference", Order = 11, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord465}Attraction To Age Difference", -20, 20, HintText = "{=Dramalord466}Defines whether an individual has interest in older or younger heroes in year difference", Order = 11, RequireRestart = false)]
         public int AttractionAgeDiff
         {
             get
@@ -493,8 +493,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("Libido", 0, 10, HintText = "Defines whether an individual generally develops interest in intercourse or not", Order = 12, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord467}Libido", 0, 10, HintText = "{=Dramalord468}Defines whether an individual generally develops interest in intercourse or not", Order = 12, RequireRestart = false)]
         public int Libido
         {
             get
@@ -507,8 +507,8 @@ namespace Dramalord
             }
         }
 
-        [SettingPropertyGroup("Trait Editor")]
-        [SettingPropertyFloatingInteger("Horny", 0, 100, HintText = "Represents how willing a hero currently is for intercourse due to hormons", Order = 13, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord445}Trait Editor")]
+        [SettingPropertyFloatingInteger("{=Dramalord469}Horny", 0, 100, HintText = "{=Dramalord470}Represents how willing a hero currently is for intercourse due to hormons", Order = 13, RequireRestart = false)]
         public int Horny
         {
             get

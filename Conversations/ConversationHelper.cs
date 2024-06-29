@@ -22,7 +22,14 @@ namespace Dramalord.Conversations
 
     internal static class ConversationHelper
     {
+        internal static CharacterObject? ConversationCharacter = null;
         internal static ConversationType ConversationIntention = ConversationType.PlayerInteraction;
+
+        internal static bool SetConversationCharacter()
+        {
+            ConversationCharacter = Hero.OneToOneConversationHero.CharacterObject;
+            return false;
+        }
 
         internal static TextObject GetHeroGreeting(Hero hero, Hero target, bool capital)
         {
@@ -124,6 +131,14 @@ namespace Dramalord.Conversations
 
         internal static void OnConversationEnded(IEnumerable<CharacterObject> characters)
         {
+            if(ConversationCharacter != null)
+            {
+                PostConversationAction?.Invoke(ConversationCharacter.HeroObject);
+            }
+            
+            PostConversationAction = null;
+            ConversationCharacter = null;
+            /*
             Hero? npc = null;
             foreach (CharacterObject character in characters)
             {
@@ -135,6 +150,7 @@ namespace Dramalord.Conversations
                     return;
                 }
             }
+            */
         }
 
         internal static void PlayerFlirtAction(Hero npc)
@@ -217,6 +233,11 @@ namespace Dramalord.Conversations
                     EndCaptivityAction.ApplyByRansom(Hero.MainHero, npc);
                 }
             }
+        }
+
+        internal static void PlayerKillsNpc(Hero npc)
+        {
+            HeroFightAction.Apply(npc, Hero.MainHero);
         }
     }
 }

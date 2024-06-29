@@ -444,5 +444,36 @@
     <string id="Dramalord437" text="Asexuell" />
     <string id="Dramalord438" text="Bonus-Spielerattraktivität" />
     <string id="Dramalord439" text="Bonuswert für die Attraktivität des Spielers für andere Helden" />
+    <string id="Dramalord440" text="Gewicht der Anziehungskrafterzeugung" />
+    <string id="Dramalord441" text="Negative Werte erzeugen mehr homosexuelles Interesse, positive Werte erzeugen mehr heterosexuelles Interesse" />
+    <string id="Dramalord442" text="Merkmale regenerieren" />
+    <string id="Dramalord443" text="Klicken, um zu generieren" />
+    <string id="Dramalord444" text="Legen Sie oben ein Gewicht fest und drücken Sie diese Taste, um Dramalord-Merkmale zu regenerieren (funktioniert nur bei laufender Kampagne)" />
+    <string id="Dramalord445" text="Merkmalseditor" />
+    <string id="Dramalord446" text="Ausgewählter Held:" />
+    <string id="Dramalord447" text="Offenheit" />
+    <string id="Dramalord448" text="Stellt dar, wie bereitwillig eine Person ist, neue Dinge auszuprobieren" />
+    <string id="Dramalord449" text="Gewissenhaftigkeit" />
+    <string id="Dramalord450" text="Bezieht sich auf den Wunsch einer Person, vorsichtig und gewissenhaft zu sein" />
+    <string id="Dramalord451" text="Extraversion" />
+    <string id="Dramalord452" text="Misst, wie energisch, kontaktfreudig und selbstbewusst eine Person ist" />
+    <string id="Dramalord453" text="Verträglichkeit" />
+    <string id="Dramalord454" text="Bezieht sich darauf, wie eine Person mit anderen interagiert" />
+    <string id="Dramalord455" text="Neurotizismus" />
+    <string id="Dramalord456" text="Stellt dar, wie sehr jemand dazu neigt, negative Emotionen zu erleben" />
+    <string id="Dramalord457" text="Anziehung zu Männern" />
+    <string id="Dramalord458" text="Definiert, ob eine Person männliche Personen attraktiv findet oder nicht" />
+    <string id="Dramalord459" text="Anziehung zu Frauen" />
+    <string id="Dramalord460" text="Definiert, ob eine Person weibliche Personen attraktiv findet oder nicht" />
+    <string id="Dramalord461" text="Anziehung zu Gewicht" />
+    <string id="Dramalord462" text="Definiert, ob eine Person Interesse an molligen oder dünnen Helden hat" />
+    <string id="Dramalord463" text="Anziehung zu Körperbau" />
+    <string id="Dramalord464" text="Definiert, ob eine Person Interesse an muskulösen oder schwachen Helden hat" />
+    <string id="Dramalord465" text="Anziehung zu Altersunterschied" />
+    <string id="Dramalord466" text="Definiert, ob eine Person Interesse an älteren oder jüngeren Helden im Jahresunterschied" />
+    <string id="Dramalord467" text="Libido" />
+    <string id="Dramalord468" text="Definiert, ob eine Person generell Interesse an Geschlechtsverkehr entwickelt oder nicht" />
+    <string id="Dramalord469" text="Erregung" />
+    <string id="Dramalord470" text="Stellt dar, wie bereitwillig ein Held aufgrund von Hormonen derzeit zu Geschlechtsverkehr ist" />
   </strings>
 </base>
