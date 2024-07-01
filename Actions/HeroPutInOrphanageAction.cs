@@ -52,7 +52,7 @@ namespace Dramalord.Actions
                             }
                         );
                 }
-                else
+                else if(hero.Clan != Clan.PlayerClan /*and keep on in MCM!*/)
                 {
                     MakeOrphan(hero, child);
                 }
@@ -73,16 +73,8 @@ namespace Dramalord.Actions
             }
             child.SetNewOccupation(Occupation.Wanderer);
             child.UpdateHomeSettlement();
-            /*
-            if(oldClan != null)
-            {
-                CampaignEventDispatcher.Instance.OnHeroChangedClan(child, oldClan);
-            }
-            */
-            //child.SetBirthDay(CampaignTime.YearsFromNow(-18)); // testting
 
             DramalordOrphanage.AddOrphan(child.CharacterObject);
-            //child.SetBirthDay(CampaignTime.Days((float)CampaignTime.Now.ToDays - (CampaignTime.DaysInYear * 17 + (CampaignTime.DaysInYear-1)))); Testing onherocomesofage
 
             if (DramalordMCM.Get.BirthOutput && (hero.Clan == Clan.PlayerClan || !DramalordMCM.Get.OnlyPlayerClanOutput))
             {

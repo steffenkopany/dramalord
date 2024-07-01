@@ -22,13 +22,14 @@ namespace Dramalord.Actions
             PregnancyModel pregnancyModel = Campaign.Current.Models.PregnancyModel;
             Hero father = pregnancy.Father.HeroObject;
 
+            /*
             if (!(MBRandom.RandomFloat > pregnancyModel.StillbirthProbability))
             {
                 TextObject textObject = new TextObject("{=pw4cUPEn}{MOTHER.LINK} has delivered stillborn.");
                 StringHelpers.SetCharacterProperties("MOTHER", mother.CharacterObject, textObject);
                 InformationManager.DisplayMessage(new InformationMessage(textObject.ToString()));
             }
-
+            */
             Hero child = createBaby(mother, father);
             child.UpdateHomeSettlement();
 
@@ -45,7 +46,7 @@ namespace Dramalord.Actions
             mother.ClearDramalordPregnancy();
             mother.IsPregnant = false;
 
-            if (mother != Hero.MainHero && MBRandom.RandomFloat <= pregnancyModel.MaternalMortalityProbabilityInLabor)
+            if (mother != Hero.MainHero && MBRandom.RandomFloat <= pregnancyModel.MaternalMortalityProbabilityInLabor && mother.Clan != Clan.PlayerClan)
             {
                 KillCharacterAction.ApplyInLabor(mother);
             }

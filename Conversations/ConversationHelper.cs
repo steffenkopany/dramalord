@@ -27,7 +27,11 @@ namespace Dramalord.Conversations
 
         internal static bool SetConversationCharacter()
         {
-            ConversationCharacter = Hero.OneToOneConversationHero.CharacterObject;
+            if(Hero.OneToOneConversationHero != null && Hero.OneToOneConversationHero.IsDramalordLegit())
+            {
+                ConversationCharacter = Hero.OneToOneConversationHero.CharacterObject;
+            }
+            
             return false;
         }
 
