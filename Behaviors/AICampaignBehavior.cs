@@ -225,6 +225,10 @@ namespace Dramalord.Behaviors
         internal void OnHeroComesOfAge(Hero hero)
         {
             DramalordOrphanage.RemoveOrphan(hero.CharacterObject);
+            if (hero.IsDramalordLegit())
+            {
+                HeroTraits.ApplyToHero(hero, true);
+            }
         }
 
         internal void OnHeroCreated(Hero hero, bool flag)

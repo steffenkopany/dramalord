@@ -11,6 +11,10 @@ using static TaleWorlds.Engine.MeshBuilder;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.Core;
 using System;
+using TaleWorlds.CampaignSystem.Settlements;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.ObjectSystem;
+using Dramalord.UI;
 
 namespace Dramalord
 {
@@ -520,6 +524,105 @@ namespace Dramalord
                 if (SelectedHero != null) SelectedHero.GetDramalordTraits().Horny = value;
             }
         }
+
+        [SettingPropertyGroup("Zero Dramalord Data")]
+        [SettingPropertyButton("Remove old leek entities", Order = 1, Content = "Remove", HintText = "Remove all leek entities to prepare your save for Dramalord 2.2.x update (save your game afterwards)", RequireRestart = false)]
+        public Action RemoveAllLeeks { get; set; } = (() =>
+        {
+            if (Campaign.Current != null)
+            {
+                int count = 0;
+                Settlement.All.ToList().ForEach(settlement =>
+                {
+                    settlement.ItemRoster.ToList().ForEach(item =>
+                    {
+                        if(item.EquipmentElement.Item.StringId == "dramalord_leek")
+                        {
+                            settlement.ItemRoster.Remove(item);
+                            count++;
+                        }
+                    });
+                });
+
+                MobileParty.All.ToList().ForEach(party =>
+                {
+                    party.ItemRoster.ToList().ForEach(item =>
+                    {
+                        if (item.EquipmentElement.Item.StringId == "dramalord_leek")
+                        {
+                            party.ItemRoster.Remove(item);
+                            count++;
+                        }
+                    });
+                });
+
+                Notification.PrintText(count + " leek entities removed.");
+            }
+        });
+
+        [SettingPropertyGroup("Zero Dramalord Data")]
+        [SettingPropertyButton("Remove all Dramalord data before deinstall", Order = 2, Content = "Remove", HintText = "Remove all Dramalord productions before removing the mod (save your game afterwards)", RequireRestart = false)]
+        public Action RemoveAllDramalordData { get; set; } = (() =>
+        {
+            if (Campaign.Current != null)
+            {
+                int countLeek = 0;
+                int countSausage = 0;
+                int countPie = 0;
+                Settlement.All.ToList().ForEach(settlement =>
+                {
+                    settlement.ItemRoster.ToList().ForEach(item =>
+                    {
+                        if (item.EquipmentElement.Item.StringId == "dramalord_leek")
+                        {
+                            settlement.ItemRoster.Remove(item);
+                            countLeek++;
+                        }
+                        else if (item.EquipmentElement.Item.StringId == "dramalord_sausage")
+                        {
+                            settlement.ItemRoster.Remove(item);
+                            countSausage++;
+                        }
+                        else if (item.EquipmentElement.Item.StringId == "dramalord_pie")
+                        {
+                            settlement.ItemRoster.Remove(item);
+                            countPie++;
+                        }
+                    });
+                });
+
+                MobileParty.All.ToList().ForEach(party =>
+                {
+                    party.ItemRoster.ToList().ForEach(item =>
+                    {
+                        if (item.EquipmentElement.Item.StringId == "dramalord_leek")
+                        {
+                            party.ItemRoster.Remove(item);
+                            countLeek++;
+                        }
+                        else if (item.EquipmentElement.Item.StringId == "dramalord_sausage")
+                        {
+                            party.ItemRoster.Remove(item);
+                            countSausage++;
+                        }
+                        else if (item.EquipmentElement.Item.StringId == "dramalord_pie")
+                        {
+                            party.ItemRoster.Remove(item);
+                            countPie++;
+                        }
+                    });
+                });
+
+                ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
+                ItemObject pie = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_pie");
+                Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Remove(wurst);
+                Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Remove(pie);
+
+                Notification.PrintText(countLeek + " leek entities removed.");
+                Notification.PrintText(countSausage + " sausage entities removed.");
+                Notification.PrintText(countPie + " pie entities removed.");
+            }
+        });
 
         public override string Id => DramalordSubModule.ModuleName;
 

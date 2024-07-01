@@ -490,7 +490,7 @@ namespace Dramalord.Data
                         list.Add(new HeroMemorySave(item));
                     });
 
-                    if (list.Count() > 0)
+                    if (list.Count() > 0 && !memory.ContainsKey(co.StringId))
                     {
                         memory.Add(co.StringId, list);
                     }
