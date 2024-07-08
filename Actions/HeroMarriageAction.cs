@@ -130,12 +130,12 @@ namespace Dramalord.Actions
 
             if (movingHero != null)
             {
-                if(party != null && party == MobileParty.MainParty)
+                if(party != null && movingHero.PartyBelongedTo == null && party == MobileParty.MainParty)
                 {
                     TeleportHeroAction.ApplyImmediateTeleportToParty(movingHero, MobileParty.MainParty);
                     movingHero.ChangeState(Hero.CharacterStates.Active);
                 }
-                else if(settlement != null)
+                else if(settlement != null && movingHero.CurrentSettlement == null)
                 {
                     TeleportHeroAction.ApplyImmediateTeleportToSettlement(movingHero, settlement);
                     movingHero.ChangeState(Hero.CharacterStates.Active);

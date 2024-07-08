@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
@@ -95,6 +96,14 @@ namespace Dramalord.Data
         {
             if(dataStore.IsLoading)
             {
+                string version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+                dataStore.SyncData("DramalordVersion", ref version);
+                Version saveVersion = new Version(0,0,0);
+                if(version.Length > 0)
+                {
+                    saveVersion = Version.Parse(version);
+                }
+
                 // OLD STUFF
                 Dictionary<Hero, HeroInfoData> info = new();
                 Dictionary<HeroTuple, HeroMemoryData> memories = new();
@@ -391,6 +400,9 @@ namespace Dramalord.Data
             }
             else if(dataStore.IsSaving)
             {
+                string version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+                dataStore.SyncData("DramalordVersion", ref version);
+
                 // TRAITS
                 Dictionary<string, Dictionary<string, int>> traits = new();
 
@@ -399,12 +411,16 @@ namespace Dramalord.Data
                     Dictionary<string, int> heroTraits = new();
                     HeroTraits.AllTraits.ForEach(trait =>
                     {
-                        if (trait != null)
+                        if (trait != null && !heroTraits.ContainsKey(trait.StringId))
                         {
-                            heroTraits.Add(trait.StringId, item.GetHeroTraits().GetPropertyValue(trait));
+                            heroTraits.Add(trait.StringId, item.GetHeroTraits().GetPropertyValue(trait)); 
                         }
                     });
-                    traits.Add(item.CharacterObject.StringId, heroTraits);
+
+                    if(!traits.ContainsKey(item.CharacterObject.StringId))
+                    {
+                        traits.Add(item.CharacterObject.StringId, heroTraits);
+                    }
                 });
 
                 dataStore.SyncData("DramalordHeroTraits", ref traits);
@@ -516,7 +532,10 @@ namespace Dramalord.Data
                 Dictionary<string, int> lastAdotions = new();
                 foreach(CharacterObject o in DramalordOrphanage.LastAdoptionDays.Keys)
                 {
-                    lastAdotions.Add(o.StringId, (int)DramalordOrphanage.LastAdoptionDays[o]);
+                    if(!lastAdotions.ContainsKey(o.StringId))
+                    {
+                        lastAdotions.Add(o.StringId, (int)DramalordOrphanage.LastAdoptionDays[o]);
+                    }
                 }
                 dataStore.SyncData("DramalordHeroAdotionDays", ref lastAdotions);
             }

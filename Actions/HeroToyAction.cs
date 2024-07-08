@@ -16,7 +16,7 @@ namespace Dramalord.Actions
                 bool broke = false;
                 if (MBRandom.RandomInt(1, 100) < DramalordMCM.Get.ToyBreakChance)
                 {
-                    hero.GetHeroTraits().SetPropertyValue(HeroTraits.HasToy, 0);
+                    hero.GetHeroTraits().SetPropertyValue(HeroTraits.HasToy, 1);
                     TextObject textObject = new TextObject("{=Dramalord130}{HERO.LINK}s toy broke!");
                     StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
                     MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");

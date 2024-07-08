@@ -67,9 +67,9 @@ namespace Dramalord.Models
             }
             if (!HeroMarriageAction.IsDramalordMarriage)
             {
-                return base.IsSuitableForMarriage(maidenOrSuitor);
+                return base.IsSuitableForMarriage(maidenOrSuitor) && maidenOrSuitor.GetHeroSpouses().Count == 0;
             }
-            return maidenOrSuitor.IsDramalordLegit() && maidenOrSuitor.Age > 18 && ( maidenOrSuitor.Spouse == null || maidenOrSuitor == Hero.MainHero || maidenOrSuitor.GetDramalordPersonality().AcceptsOtherMarriages);
+            return maidenOrSuitor.IsDramalordLegit() && maidenOrSuitor.Age > 18 && ( maidenOrSuitor.GetHeroSpouses().Count == 0 || maidenOrSuitor == Hero.MainHero || maidenOrSuitor.GetDramalordPersonality().AcceptsOtherMarriages);
         }
 
         public override Clan GetClanAfterMarriage(Hero firstHero, Hero secondHero)
