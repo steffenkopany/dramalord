@@ -1,20 +1,27 @@
-﻿using Dramalord.Actions;
-using Dramalord.Data;
+﻿using Dramalord.Data;
+using Dramalord.Extensions;
 using HarmonyLib;
-using Helpers;
 using JetBrains.Annotations;
 using System;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
-using TaleWorlds.CampaignSystem.LogEntries;
-using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
-using TaleWorlds.Core;
-using TaleWorlds.Localization;
 
 namespace Dramalord.Patches
 {
+    [HarmonyPatch(typeof(PregnancyCampaignBehavior), "CheckOffspringsToDeliver", new Type[] { typeof(Hero) })]
+    public static class CheckOffspringsToDeliverPatch
+    {
+        [UsedImplicitly]
+        [HarmonyPostfix]
+        public static void CheckOffspringsToDeliver(ref Hero hero)
+        {
+            HeroPregnancy? pregnancy = hero.GetPregnancy();
+            if(pregnancy != null)
+            {
+                hero.IsPregnant = true;
+            }
+        }
+    }
 
     [HarmonyPatch(typeof(PregnancyCampaignBehavior), "RefreshSpouseVisit", new Type[] { typeof(Hero) })]
     public static class RefreshSpouseVisitPatch
@@ -23,51 +30,15 @@ namespace Dramalord.Patches
         [HarmonyPrefix]
         public static bool RefreshSpouseVisit(ref Hero hero)
         {
-            if(!DramalordMCM.Get.AllowDefaultPregnancies)
+            if((hero == Hero.MainHero || hero.Spouse == Hero.MainHero) && !DramalordMCM.Instance.AllowDefaultPregnancies)
             {
                 return false;
             }
-
-            if (hero.Spouse != null && hero.IsNearby(hero.Spouse) && MBRandom.RandomInt(1,100) <= DramalordMCM.Get.PregnancyChance)
+            if(hero.Spouse != null && hero.Spouse.IsFemale == hero.IsFemale)
             {
-                HeroConceiveAction.Apply(hero, hero.Spouse);
+                return false;
             }
-
-            return false;
+            return true;
         }
     }
-
-    [HarmonyPatch(typeof(PregnancyCampaignBehavior), "CheckOffspringsToDeliver", new Type[] { typeof(Hero) })]
-    public static class CheckOffspringsToDeliverPatch
-    {
-        [UsedImplicitly]
-        [HarmonyPrefix]
-        public static bool CheckOffspringsToDeliver(ref Hero hero)
-        {
-            HeroPregnancy? pregnancy = hero.GetDramalordPregnancy();
-            if(hero.IsPregnant && pregnancy == null)
-            {
-                hero.IsPregnant = false;
-            }
-            else if(CampaignTime.Now.ToDays - pregnancy.Conceived > DramalordMCM.Get.PregnancyDuration)
-            {
-                HeroBirthAction.Apply(hero, pregnancy, hero.GetCloseHeroes());
-            }
-            return false;
-        }
-    }
-
-    [HarmonyPatch(typeof(PregnancyCampaignBehavior), "ChildConceived", new Type[] { typeof(Hero) })]
-    public static class ChildConceivedPatch
-    {
-        internal static Hero? Father;
-
-        [UsedImplicitly]
-        [HarmonyPrefix]
-        public static bool ChildConceived(ref Hero mother)
-        {
-            HeroConceiveAction.Apply(mother, Father ?? mother.Spouse);
-            return false;
-        }
-    }   
 }

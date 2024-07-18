@@ -1,57 +1,57 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Data;
-using Dramalord.UI;
-using Helpers;
-using System;
+using Dramalord.Extensions;
 using System.Collections.Generic;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
 namespace Dramalord.Conversations
 {
-    internal enum ConversationType
-    {
-        PlayerInteraction,
-        NPCInteraction,
-        PlayerConfrontation,
-        NPCConfrontation,
-        OrphanConversation
-    }
-
     internal static class ConversationHelper
     {
-        internal static CharacterObject? ConversationCharacter = null;
-        internal static ConversationType ConversationIntention = ConversationType.PlayerInteraction;
-
-        internal static bool SetConversationCharacter()
-        {
-            if(Hero.OneToOneConversationHero != null && Hero.OneToOneConversationHero.IsDramalordLegit())
-            {
-                ConversationCharacter = Hero.OneToOneConversationHero.CharacterObject;
-            }
-            
-            return false;
-        }
+        internal static TextObject PlayerTitle(bool capital) => GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, capital);
+        internal static TextObject NpcTitle(bool capital) => GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, capital);
 
         internal static TextObject GetHeroGreeting(Hero hero, Hero target, bool capital)
         {
+            RelationshipType relationship = hero.GetRelationTo(target).Relationship;
             string text;
-            if (hero.IsSpouse(target))
+            if (relationship == RelationshipType.Spouse)
             {
                 text = target.IsFemale ? new TextObject("{=8eHRth3U}my wife").ToString() : new TextObject("{=QuVgluRH}my husband").ToString();
             }
-            else if (hero.IsLover(target))
+            else if (relationship == RelationshipType.Betrothed)
             {
-                text = target.IsFemale ? new TextObject("{=Dramalord097}my love").ToString() : new TextObject("{=Dramalord096}my lover").ToString();
+                text = new TextObject("{=Dramalord025}my betrothed").ToString();
+            }
+            else if (relationship == RelationshipType.Lover)
+            {
+                text = target.IsFemale ? new TextObject("{=Dramalord024}my love").ToString() : new TextObject("{=Dramalord023}my lover").ToString();
+            }
+            else if (relationship == RelationshipType.FriendWithBenefits)
+            {
+                text = new TextObject("{=Dramalord026}my special friend").ToString();
+            }
+            else if (relationship == RelationshipType.Friend)
+            {
+                text = new TextObject("{=Dramalord174}my friend").ToString();
+            }
+            else if(hero.Father == target)
+            {
+                text = target.IsFemale ? GameTexts.FindText("str_mother").ToString() : GameTexts.FindText("str_father").ToString();
+            }
+            else if (hero.Mother == target)
+            {
+                text = target.IsFemale ? GameTexts.FindText("str_mother").ToString() : GameTexts.FindText("str_father").ToString();
             }
             else
             {
                 text = target.IsFemale ? GameTexts.FindText("str_my_lady").ToString() : GameTexts.FindText("str_my_lord").ToString();
             }
 
-            if(capital)
+            if (capital)
             {
                 char[] array = text.ToCharArray();
                 text = array[0].ToString().ToUpper();
@@ -64,184 +64,85 @@ namespace Dramalord.Conversations
             return new TextObject(text);
         }
 
-        internal static void PlayerConfrontationPopup(Hero cheater, HeroMemory memory, Hero otherHero)
+        internal static string FormatNumber(int number)
         {
-            TextObject title = new TextObject();
-            TextObject text = new TextObject();
-            if (memory.Event.Type == EventType.Pregnancy)
-            {
-                title = new TextObject("{=Dramalord270}You noticed {HERO.LINK} is pregnant from someone else");
-                text = new TextObject("{=Dramalord300}While being close to {HERO.LINK} you notice her belly being unusally big and instantly know that not food was causing this.");
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, title);
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, text);
-            }
-            else if(memory.Event.Type == EventType.Date)
-            {
-                title = new TextObject("{=Dramalord266}You saw {HERO.LINK} meeting in secret with {TARGET.LINK}");
-                text = new TextObject("{=Dramalord303}When looking for {HERO.LINK} you found them together with {TARGET.LINK}. They were too close for conversing harmlessly.");
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, title);
-                StringHelpers.SetCharacterProperties("TARGET", otherHero.CharacterObject, title);
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, text);
-                StringHelpers.SetCharacterProperties("TARGET", otherHero.CharacterObject, text);
-            }
-            else if (memory.Event.Type == EventType.Intercourse)
-            {
-                title = new TextObject("{=Dramalord268}You caught {HERO.LINK} being intimate with {TARGET.LINK}");
-                text = new TextObject("{=Dramalord301}When you were going for a stroll you noticed a suspicious sound. When following it you caught {HERO.LINK} and {TARGET.LINK} in an unambiguous situation. {TARGET.LINK} fled the scene.");
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, title);
-                StringHelpers.SetCharacterProperties("TARGET", otherHero.CharacterObject, title);
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, text);
-                StringHelpers.SetCharacterProperties("TARGET", otherHero.CharacterObject, text);
-            }
-            else if (memory.Event.Type == EventType.Birth)
-            {
-                title = new TextObject("{=Dramalord272}You noticed that {TARGET.LINK} born by {HERO.LINK} is not your child");
-                text = new TextObject("{=Dramalord302}The date of birth does not fit and you find no similarities to yourself in the childs face.");
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, title);
-                StringHelpers.SetCharacterProperties("TARGET", otherHero.CharacterObject, title);
-            }
-            else if (memory.Event.Type == EventType.Pregnancy)
-            {
-                title = new TextObject("{=Dramalord270}You noticed {HERO.LINK} is pregnant from someone else");
-                text = new TextObject("{=Dramalord392}There is clearly a bulge on {HERO.LINK}'s belly, and after doing some calculations it becomes clear to you that you are not the cause.");
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, title);
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, text);
-            }
-            else if (memory.Event.Type == EventType.Marriage)
-            {
-                title = new TextObject("{=Dramalord393}You saw {HERO.LINK} marry {TARGET.LINK}");
-                text = new TextObject("{=Dramalord395}You heard cheering next to the church and when you got close you saw to your surprise that {HERO.LINK} and {TARGET.LINK} just got married.");
-                StringHelpers.SetCharacterProperties("HERO", cheater.CharacterObject, title);
-                StringHelpers.SetCharacterProperties("TARGET", otherHero.CharacterObject, text);
-            }
-
-            Campaign.Current.SetTimeSpeed(0);
-            Notification.DrawMessageBox(
-                    title,
-                    text,
-                    false,
-                    () => {
-                        
-                        PlayerConfrontation.start(cheater, memory, otherHero);
-                    },
-                    () => {
-
-                    }
-                );
-
+            return (number > 0) ? "+" + number.ToString() : number.ToString();
         }
 
-        internal static Action<Hero>? PostConversationAction;
-
+        internal static HeroIntention? ConversationEndedIntention = null;
         internal static void OnConversationEnded(IEnumerable<CharacterObject> characters)
         {
-            if(ConversationCharacter != null)
+            if(ConversationEndedIntention != null)
             {
-                PostConversationAction?.Invoke(ConversationCharacter.HeroObject);
-            }
-            
-            PostConversationAction = null;
-            ConversationCharacter = null;
-            /*
-            Hero? npc = null;
-            foreach (CharacterObject character in characters)
-            {
-                if (character.HeroObject != Hero.MainHero)
+                
+                Hero npc = characters.FirstOrDefault(hero => hero.HeroObject != null && hero.HeroObject != Hero.MainHero).HeroObject;
+                Hero player = Hero.MainHero;
+                HeroIntention intention = ConversationEndedIntention;
+                List<Hero> closeHeroes = player.GetCloseHeroes();
+
+                ConversationEndedIntention = null;
+
+                if (intention.Type == IntentionType.SmallTalk)
                 {
-                    npc = character.HeroObject;
-                    PostConversationAction?.Invoke(npc);
-                    PostConversationAction = null;
-                    return;
+                    if(intention.Target == npc) TalkAction.Apply(player, npc);
+                    else if (intention.Target == player) TalkAction.Apply(npc, player);
+
+                    if(!npc.HasAnyRelationshipWith(player) && npc.GetRelationTo(player).Trust >= DramalordMCM.Instance.MinTrust)
+                    {
+                        FriendshipAction.Apply(player, npc);
+                    }
+                }
+                else if(intention.Type == IntentionType.Flirt)
+                {
+                    if (intention.Target == npc) FlirtAction.Apply(player, npc);
+                    else if (intention.Target == player) FlirtAction.Apply(npc, player);
+                }
+                else if(intention.Type == IntentionType.Date)
+                {
+                    if (intention.Target == npc) DateAction.Apply(player, npc, closeHeroes);
+                    else if (intention.Target == player) DateAction.Apply(npc, player, closeHeroes);
+
+                    if(!npc.IsEmotionalWith(player) && npc.GetRelationTo(player).Love >= DramalordMCM.Instance.MinDatingLove)
+                    {
+                        LoverAction.Apply(player, npc);
+                    }
+                }
+                else if (intention.Type == IntentionType.Intercourse)
+                {
+                    if (intention.Target == npc) IntercourseAction.Apply(player, npc, closeHeroes);
+                    else if (intention.Target == player) IntercourseAction.Apply(npc, player, closeHeroes);
+
+                    if (npc.IsFriendOf(player))
+                    {
+                        FriendsWithBenefitsAction.Apply(npc, player);
+                    }
+
+                    if (npc.IsFemale != player.IsFemale && npc.IsFertile() && MBRandom.RandomInt(1,100) < DramalordMCM.Instance.PregnancyChance)
+                    {
+                        ConceiveAction.Apply((npc.IsFemale) ? npc : player, (npc.IsFemale) ? player : npc);
+                    }
+                }
+                else if (intention.Type == IntentionType.Engagement)
+                {
+                    if (intention.Target == npc) EngagementAction.Apply(player, npc, closeHeroes);
+                    else if (intention.Target == player) EngagementAction.Apply(npc, player, closeHeroes);
+                }
+                else if (intention.Type == IntentionType.Marriage)
+                {
+                    if (intention.Target == npc) MarriageAction.Apply(player, npc, closeHeroes);
+                    else if (intention.Target == player) MarriageAction.Apply(npc, player, closeHeroes);
+                }
+                else if(intention.Type == IntentionType.BreakUp)
+                {
+                    if (intention.Target == npc) BreakupAction.Apply(player, npc);
+                    else if (intention.Target == player) BreakupAction.Apply(npc, player);
+                }
+
+                if (npc.IsFriendlyWith(intention.Target) && npc.GetRelationTo(player).Trust <= 0)
+                {
+                    BreakupAction.Apply(npc, player);
                 }
             }
-            */
-        }
-
-        internal static void PlayerFlirtAction(Hero npc)
-        {
-            HeroFlirtAction.Apply(Hero.MainHero, npc, Hero.MainHero.GetCloseHeroes());
-        }
-
-        internal static void PlayerDateAction(Hero npc)
-        {
-            if (!Hero.MainHero.IsLover(npc) && !Hero.MainHero.IsSpouse(npc))
-            {
-                //Hero.MainHero.GetDramalordRelation(npc).Status = RelationshipStatus.Lover;
-                TextObject banner = new TextObject("{=Dramalord258}You and {HERO.LINK} are now a couple.");
-                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
-                MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, "event:/ui/notification/relation");
-                Hero.MainHero.SetLover(npc);
-            }
-
-            HeroDateAction.Apply(Hero.MainHero, npc, Hero.MainHero.GetCloseHeroes());
-
-            if (npc.GetDramalordTraits().Horny >= DramalordMCM.Get.MinHornyForIntercourse)
-            {
-                TextObject title = new TextObject("{=Dramalord245}Intimate Opportunity");
-                TextObject text = new TextObject("{=Dramalord246}{HERO.LINK} has a special spark in their eyes today and you have a feeling they want to go further. Will you let it happen?");
-                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, text);
-
-                Campaign.Current.SetTimeSpeed(0);
-                Notification.DrawMessageBox(
-                        title,
-                        text,
-                        true,
-                        () => {
-
-                            HeroIntercourseAction.Apply(Hero.MainHero, npc, Hero.MainHero.GetCloseHeroes());
-                            if (Hero.MainHero.IsFemale != npc.IsFemale && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
-                            {
-                                Hero father = npc.IsFemale ? Hero.MainHero : npc;
-                                HeroConceiveAction.Apply(npc.IsFemale ? npc : Hero.MainHero, father);
-                            }
-                        },
-                        () => {
-
-                        }
-                    );
-            }
-        }
-
-        internal static void PlayerMarriageAction(Hero npc)
-        {
-            HeroMarriageAction.Apply(Hero.MainHero, npc, Hero.MainHero.GetCloseHeroes());
-        }
-
-        internal static void PlayerBrokeUpNpcLeaveClan(Hero npc)
-        {
-            if (npc.Clan != null && npc.Clan == Hero.MainHero.Clan && DramalordMCM.Get.AllowClanChanges)
-            {
-                HeroLeaveClanAction.Apply(npc, npc);
-            }
-        }
-
-        internal static void PlayerPerformsPrisonerDeal(Hero npc)
-        {
-            if (npc.IsDramalordLegit())
-            {
-                HeroIntercourseAction.Apply(Hero.MainHero, npc, Hero.MainHero.GetCloseHeroes());
-
-                Hero mother = Hero.MainHero.IsFemale ? Hero.MainHero : npc;
-                Hero father = npc.IsFemale ? Hero.MainHero : npc;
-
-                if (mother != father && !mother.IsPregnant && mother.GetDramalordIsFertile() && MBRandom.RandomInt(1, 100) <= DramalordMCM.Get.PregnancyChance)
-                {
-                    HeroConceiveAction.Apply(mother, father);
-                }
-                if(npc.IsPrisoner)
-                {
-                    EndCaptivityAction.ApplyByRansom(npc, Hero.MainHero);
-                }
-                else if(Hero.MainHero.IsPrisoner)
-                {
-                    EndCaptivityAction.ApplyByRansom(Hero.MainHero, npc);
-                }
-            }
-        }
-
-        internal static void PlayerKillsNpc(Hero npc)
-        {
-            HeroFightAction.Apply(npc, Hero.MainHero);
         }
     }
 }
