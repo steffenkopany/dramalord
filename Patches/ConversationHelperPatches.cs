@@ -1,5 +1,4 @@
-﻿using Dramalord.Data;
-using Dramalord.Data.Deprecated;
+﻿using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;
 using System;
@@ -10,7 +9,6 @@ using TaleWorlds.Localization;
 
 namespace Dramalord.Patches
 {
-
     [HarmonyPatch(typeof(ConversationHelper), "GetHeroRelationToHeroTextShort")]
     public static class GetHeroRelationToHeroTextShortPatch
     {
@@ -23,7 +21,7 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if (baseHero.IsSpouse(queriedHero))
+            if (baseHero.IsSpouseOf(queriedHero))
             {
                 string text = GameTexts.FindText("str_spouse").ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)
@@ -39,42 +37,52 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if (Dramalord.DramalordMCM.Get.ShowLoversEncyclopedia)
+            if (baseHero.IsLoverOf(queriedHero))
             {
-                if (baseHero.IsLover(queriedHero))
+                string text = new TextObject("{=Dramalord148}Lover").ToString();
+                if (!char.IsLower(text[0]) != uppercaseFirst)
                 {
-                    string text = new TextObject("{=Dramalord334}Lover").ToString();
-                    if (!char.IsLower(text[0]) != uppercaseFirst)
+                    char[] array = text.ToCharArray();
+                    text = (uppercaseFirst ? array[0].ToString().ToUpper() : array[0].ToString().ToLower());
+                    for (int i = 1; i < array.Length; i++)
                     {
-                        char[] array = text.ToCharArray();
-                        text = (uppercaseFirst ? array[0].ToString().ToUpper() : array[0].ToString().ToLower());
-                        for (int i = 1; i < array.Length; i++)
-                        {
-                            text += array[i];
-                        }
+                        text += array[i];
                     }
-                    __result = text;
-                    return;
                 }
+                __result = text;
+                return;
             }
 
-            if(Dramalord.DramalordMCM.Get.ShowFWBEncyclopedia)
+            if (baseHero.IsFriendWithBenefitsOf(queriedHero))
             {
-                if (baseHero.IsFriendWithBenefits(queriedHero))
+                string text = new TextObject("{=Dramalord146}Friend with Benefits").ToString();
+                if (!char.IsLower(text[0]) != uppercaseFirst)
                 {
-                    string text = new TextObject("{=Dramalord335}Friend with Benefits").ToString();
-                    if (!char.IsLower(text[0]) != uppercaseFirst)
+                    char[] array = text.ToCharArray();
+                    text = (uppercaseFirst ? array[0].ToString().ToUpper() : array[0].ToString().ToLower());
+                    for (int i = 1; i < array.Length; i++)
                     {
-                        char[] array = text.ToCharArray();
-                        text = (uppercaseFirst ? array[0].ToString().ToUpper() : array[0].ToString().ToLower());
-                        for (int i = 1; i < array.Length; i++)
-                        {
-                            text += array[i];
-                        }
+                        text += array[i];
                     }
-                    __result = text;
-                    return;
                 }
+                __result = text;
+                return;
+            }
+
+            if (baseHero.IsBetrothedOf(queriedHero))
+            {
+                string text = new TextObject("{=Dramalord150}Betrothed").ToString();
+                if (!char.IsLower(text[0]) != uppercaseFirst)
+                {
+                    char[] array = text.ToCharArray();
+                    text = (uppercaseFirst ? array[0].ToString().ToUpper() : array[0].ToString().ToLower());
+                    for (int i = 1; i < array.Length; i++)
+                    {
+                        text += array[i];
+                    }
+                }
+                __result = text;
+                return;
             }
 
             if (baseHero.Father == queriedHero && queriedHero.IsFemale)
@@ -105,7 +113,7 @@ namespace Dramalord.Patches
                 }
                 __result = text;
             }
-            else if(baseHero.IsSpouse(queriedHero))
+            else if(baseHero.IsSpouseOf(queriedHero))
             {
                 string text = GameTexts.FindText("str_spouse").ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)
@@ -139,9 +147,9 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if (talkTroop.IsLover(referringTo) && talkTroop.Spouse != referringTo && !referringTo.IsFemale)
+            if (talkTroop.IsLoverOf(referringTo) && talkTroop.Spouse != referringTo && !referringTo.IsFemale)
             {
-                string text = new TextObject("{=Dramalord076}lover").ToString();
+                string text = new TextObject("{=Dramalord148}lover").ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)
                 {
                     char[] array = text.ToCharArray();
@@ -153,9 +161,9 @@ namespace Dramalord.Patches
                 }
                 __result = text;
             }
-            else if (talkTroop.IsLover(referringTo) && talkTroop.Spouse != referringTo && referringTo.IsFemale)
+            else if (talkTroop.IsLoverOf(referringTo) && talkTroop.Spouse != referringTo && referringTo.IsFemale)
             {
-                string text = new TextObject("{=Dramalord077}love").ToString();
+                string text = new TextObject("{=Dramalord138}love").ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)
                 {
                     char[] array = text.ToCharArray();

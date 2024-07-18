@@ -4,475 +4,235 @@
     <tag language="English" />
   </tags>
   <strings>
-    <string id="Dramalord001" text="Can I ask you something personal?" />
-    <string id="Dramalord002" text="Sure. What do you want to know?" />
-    <string id="Dramalord003" text="I do not feel comfortable enough with you for this kind of conversation." />
-    <string id="Dramalord004" text="Let's talk about something else..." />
-    <string id="Dramalord005" text="As you wish." />
-    <string id="Dramalord006" text="Do you like what you see?" />
-    <string id="Dramalord007" text="What looks do you prefer?" />
-    <string id="Dramalord008" text="I think women are {RATING_WOMEN} and men are {RATING_MEN}. I like {RATING_WEIGHT} people of {RATING_BUILD} build. Best from {RATING_CULTURE} around the age of {RATING_AGE}." />
-    <string id="Dramalord009" text="Hmm... I think you look {RATING_TOTAL}!" />
-    <string id="Dramalord010" text="sexy" />
-    <string id="Dramalord011" text="alright" />
-    <string id="Dramalord012" text="disgusting" />
-    <string id="Dramalord013" text="not my thing" />
-    <string id="Dramalord014" text="chubby" />
-    <string id="Dramalord015" text="average" />
-    <string id="Dramalord016" text="slim" />
-    <string id="Dramalord017" text="muscular" />
-    <string id="Dramalord018" text="normal" />
-    <string id="Dramalord019" text="low" />
-    <string id="Dramalord020" text="absolutely disgusting!" />
-    <string id="Dramalord021" text="disgusting!" />
-    <string id="Dramalord022" text="very ugly." />
-    <string id="Dramalord023" text="ugly." />
-    <string id="Dramalord024" text="not pretty." />
-    <string id="Dramalord025" text="average." />
-    <string id="Dramalord026" text="nice." />
-    <string id="Dramalord027" text="pretty." />
-    <string id="Dramalord028" text="stunning!" />
-    <string id="Dramalord029" text="incredibly beautiful!" />
-    <string id="Dramalord030" text="How do you feel about me?" />
-    <string id="Dramalord031" text="I {EMOTION_SCORE} you!" />
-    <string id="Dramalord032" text="absolutely despise" />
-    <string id="Dramalord033" text="hate" />
-    <string id="Dramalord034" text="can't stand" />
-    <string id="Dramalord035" text="dislike" />
-    <string id="Dramalord036" text="am not a fan of" />
-    <string id="Dramalord037" text="respect" />
-    <string id="Dramalord038" text="like" />
-    <string id="Dramalord039" text="think I'm falling for" />
-    <string id="Dramalord040" text="can't stop thinking about" />
-    <string id="Dramalord041" text="love" />
-    <string id="Dramalord042" text="Would you like to..." />
-    <string id="Dramalord043" text="Do what?" />
-    <string id="Dramalord044" text="...retreat to somewhere more silent?" />
-    <string id="Dramalord045" text="Oh... well, I think I would like that." />
-    <string id="Dramalord046" text="No I would not like to do that." />
-    <string id="Dramalord047" text="...come with me for a while?" />
-    <string id="Dramalord048" text="husband" />
-    <string id="Dramalord049" text="wife" />
-    <string id="Dramalord050" text="...get divorced so we can focus on us?" />
-    <string id="Dramalord051" text="...marry me?" />
-    <string id="Dramalord052" text="Sausage" />
-    <string id="Dramalord053" text="Why should I ride with you?" />
-    <string id="Dramalord054" text="I think I will leave my horse in the stable." />
-    <string id="Dramalord055" text="I feel tired. Let's talk about this a other time." />
-    <string id="Dramalord056" text="We will ride fast as the wind!" />
-    <string id="Dramalord057" text="Sitting in a castle all day is boring." />
-    <string id="Dramalord058" text="I will drown you with my attention!" />
-    <string id="Dramalord059" text="I would feel honored by your presence." />
-    <string id="Dramalord060" text="The poor horses do nothing but stand all day." />
-    <string id="Dramalord061" text="Why should I give up my marriage?" />
-    <string id="Dramalord062" text="{HERO1.LINK} and {HERO2.LINK} started an affair." />
-    <string id="Dramalord063" text="{HERO1.LINK} ended their affair with {HERO2.LINK}" />
-    <string id="Dramalord064" text="{HERO1.LINK} ended their marriage with {HERO2.LINK}" />
-    <string id="Dramalord065" text="{HERO1.LINK} put child {CHILD.LINK} into an orphanage." />
-    <string id="Dramalord066" text="{KILLER.LINK} killed {VICTIM.LINK} after catching them with {LOVER.LINK}." />
-    <string id="Dramalord067" text="{HERO.LINK} joined {CLAN}." />
-    <string id="Dramalord068" text="I will not give up my marriage for you!" />
-    <string id="Dramalord069" text="I can't take it seeing you caught in this marriage." />
-    <string id="Dramalord070" text="...go for a walk with me?" />
-    <string id="Dramalord071" text="Let's go!" />
-    <string id="Dramalord072" text="Nevermind." />
-    <string id="Dramalord073" text="That was great!" />
-    <string id="Dramalord074" text="That was boring." />
-    <string id="Dramalord075" text="affair" />
-    <string id="Dramalord076" text="lover" />
-    <string id="Dramalord077" text="love" />
-    <string id="Dramalord078" text="On the long this is the better choice." />
-    <string id="Dramalord079" text="All your investments in this marriage are for nothing!" />
-    <string id="Dramalord080" text="You are being dishonored by this marriage." />
-    <string id="Dramalord081" text="I will not marry someone like you" />
-    <string id="Dramalord082" text="Why should I marry you?" />
-    <string id="Dramalord083" text="Together we will experience new adventures!" />
-    <string id="Dramalord084" text="Imagine how we can build our future together." />
-    <string id="Dramalord085" text="We would share everything with each other." />
-    <string id="Dramalord086" text="It's a honorful thing to do in our situation." />
-    <string id="Dramalord087" text="I can't live without you on my side!" />
-    <string id="Dramalord088" text="Why should I spend time with you?" />
-    <string id="Dramalord089" text="You are boring me." />
-    <string id="Dramalord090" text="I have some exciting stories to tell!" />
-    <string id="Dramalord091" text="Wouldn't you like some entertainment?" />
-    <string id="Dramalord092" text="I will buy you a drink in the local tavern." />
-    <string id="Dramalord093" text="I would be honored to share some time with you." />
-    <string id="Dramalord094" text="I beg you! I am so bored!" />
-    <string id="Dramalord095" text="I am not married..." />
-    <string id="Dramalord096" text="My lover" />
-    <string id="Dramalord097" text="My love" />
-    <string id="Dramalord098" text="I would like to..." />
-    <string id="Dramalord099" text="{KILLER.LINK} killed {VICTIM.LINK} after noticing she is pregnant from someone else." />
-    <string id="Dramalord100" text="Leek" />
-    <string id="Dramalord101" text="Pie" />
-    <string id="Dramalord102" text="What do you want?" />
-    <string id="Dramalord103" text="...give you something." />
-    <string id="Dramalord104" text="...end this love affair." />
-    <string id="Dramalord105" text="...end this marriage." />
-    <string id="Dramalord106" text="Oh! I will put it to good use!" />
-    <string id="Dramalord107" text="Ugh. Finally this is over!" />
-    <string id="Dramalord108" text="Oh. This is a suprise. I.. I have to be alone now..." />
-    <string id="Dramalord109" text="What? You bastard! I never want to see you again!" />
-    <string id="Dramalord110" text="Oh god... my darkes nightmare has come true... I can't live without you..." />
-    <string id="Dramalord111" text="You and I... we're going to have some fun now..." />
-    <string id="Dramalord112" text="Oh god! Please, no! Stay away from me!" />
-    <string id="Dramalord113" text="{HERO1.LINK} married {HERO2.LINK}" />
-    <string id="Dramalord114" text="{HERO1.LINK} had intercourse with {HERO2.LINK}" />
-    <string id="Dramalord115" text="{HERO1.LINK} was impregnated by {HERO2.LINK}" />
-    <string id="Dramalord116" text="{HERO1.LINK} forced themself on {HERO2.LINK}" />
-    <string id="Dramalord117" text="{HERO1.LINK} was forcefully impregnated by {HERO2.LINK}" />
-    <string id="Dramalord118" text="{HERO1.LINK} flirted with {HERO2.LINK}" />
-    <string id="Dramalord119" text="{HERO1.LINK} was meeting in secret with {HERO2.LINK}" />
-    <string id="Dramalord120" text="{HERO1.LINK} and {HERO2.LINK} adopted orphan {CHILD.LINK}" />
-    <string id="Dramalord121" text="{CHILD.LINK} was born to {HERO1.LINK} and {HERO2.LINK}" />
-    <string id="Dramalord122" text="{HERO.LINK} has left {OLDCLAN}" />
-    <string id="Dramalord123" text="{HERO.LINK} was thrown out of {OLDCLAN} by {CAUSEDBY.LINK}" />
-    <string id="Dramalord124" text="{WITNESS.LINK} witnessed {HERO1.LINK} flirting with {HERO2.LINK}" />
-    <string id="Dramalord125" text="{WITNESS.LINK} witnessed {HERO1.LINK} being on a date with {HERO2.LINK}" />
-    <string id="Dramalord126" text="{WITNESS.LINK} caught {HERO1.LINK} in bed with {HERO2.LINK}" />
-    <string id="Dramalord127" text="{WITNESS.LINK} noticed {CHILD.LINK} birthed by {HERO1.LINK} was not theirs." />
-    <string id="Dramalord128" text="{KILLER.LINK} killed {HERO.LINK} for giving birth to bastard {CHILD.LINK}" />
-    <string id="Dramalord129" text="{HERO.LINK} played with their toy while thinking of you." />
-    <string id="Dramalord130" text="{HERO.LINK}s toy broke!" />
-    <string id="Dramalord131" text="{HERO.LINK} divorced from you." />
-    <string id="Dramalord132" text="{HERO.LINK} ended the affair with you." />
-    <string id="Dramalord133" text="{HERO.LINK} adopted {CHILD.LINK}." />
-    <string id="Dramalord134" text="Marriage request" />
-    <string id="Dramalord135" text="{HERO.LINK} says they love you and asks you if you consider marrying them." />
-    <string id="Dramalord136" text="You broke {HERO.LINK}s heart!" />
-    <string id="Dramalord137" text="Take care of your child" />
-    <string id="Dramalord138" text="{HERO.LINK} asks you to take {CHILD.LINK} into your care to protect them from {SPOUSE.LINK}." />
-    <string id="Dramalord139" text="{HERO.LINK} fled from {CLAN} to avoid confrontation with {SPOUSE.LINK}." />
-    <string id="Dramalord140" text="{HERO.LINK} violated you while being their prisoner." />
-    <string id="Dramalord141" text="You were intimate with {HERO.LINK}." />
-    <string id="Dramalord142" text="{HERO.LINK} tricked {SPOUSE.LINK} being the cause of her pregancy." />
-    <string id="Dramalord143" text="You got pregnant from {HERO.LINK}." />
-    <string id="Dramalord144" text="{HERO.LINK} got pregnant from you." />
-    <string id="Dramalord145" text="You took {HERO.LINK} into your care." />
-    <string id="Dramalord146" text="danger" />
-    <string id="Dramalord147" text="General" />
-    <string id="Dramalord148" text="Hero Setup" />
-    <string id="Dramalord149" text="Player Setup" />
-    <string id="Dramalord150" text="Extra QOL" />
-    <string id="Dramalord151" text="Flirt Logs" />
-    <string id="Dramalord152" text="Show flirt events in logs" />
-    <string id="Dramalord153" text="Affair Logs" />
-    <string id="Dramalord154" text="Show affair events in logs" />
-    <string id="Dramalord155" text="Clan Changes Logs" />
-    <string id="Dramalord156" text="Show clan related events in logs" />
-    <string id="Dramalord157" text="Marriage Logs" />
-    <string id="Dramalord158" text="Show marriages events in logs" />
-    <string id="Dramalord159" text="Death Logs" />
-    <string id="Dramalord160" text="Show death events in logs" />
-    <string id="Dramalord161" text="Birth Logs" />
-    <string id="Dramalord162" text="Show birth/orphan events in logs" />
-    <string id="Dramalord163" text="Trait-Score Multiplier" />
-    <string id="Dramalord164" text="Trait score multiplier for AI emotion grow (higher = faster)" />
-    <string id="Dramalord165" text="Protect Family" />
-    <string id="Dramalord166" text="No AI interaction with family members" />
-    <string id="Dramalord167" text="Other Sex Attraction Modifier" />
-    <string id="Dramalord168" text="AI attraction modifier for the other sex (negative = own sex, positive = opposite sex, 0 = neutral)" />
-    <string id="Dramalord169" text="Min. Attraction Score" />
-    <string id="Dramalord170" text="AI minimum attraction score to to start interacting with each other" />
-    <string id="Dramalord171" text="Min. Emotion For Affairs" />
-    <string id="Dramalord172" text="Minimum emotion value for AI to consider starting an affair" />
-    <string id="Dramalord173" text="Days Between Discreet Meetings" />
-    <string id="Dramalord174" text="Days AI will wait before having a discreet meeting with the same hero again" />
-    <string id="Dramalord175" text="Min. Emotion For Marriage" />
-    <string id="Dramalord176" text="Minimum emotion value for AI to consider marriage with a hero" />
-    <string id="Dramalord177" text="Min. Emotion For Divorce" />
-    <string id="Dramalord178" text="Emotion value for AI to consider divorce" />
-    <string id="Dramalord179" text="Min. Horny Value For Intercouse" />
-    <string id="Dramalord180" text="Minimum horniness of AI for interest in intercourse" />
-    <string id="Dramalord181" text="Intercourse Horniness Loss" />
-    <string id="Dramalord182" text="Value of horniness lost by intercourse" />
-    <string id="Dramalord183" text="Chance Getting Caught" />
-    <string id="Dramalord184" text="Chance of getting caught by by partners while interacting wth other heroes" />
-    <string id="Dramalord185" text="Emotional Loss Flirting Witnessed" />
-    <string id="Dramalord186" text="Loss of emotion of heroes witnessing their partners flirting with others" />
-    <string id="Dramalord187" text="Emotional Loss Meeting Witnessed" />
-    <string id="Dramalord188" text="Loss of emotion of heroes witnessing their partners meeting in secret with others" />
-    <string id="Dramalord189" text="Emotional Loss Intercourse Witnessed" />
-    <string id="Dramalord190" text="Loss of emotion of heroes witnessing their partner having intercourse with others" />
-    <string id="Dramalord191" text="Emotional Loss Marry Other" />
-    <string id="Dramalord192" text="Loss of emotion of hero if their partner marries someone else" />
-    <string id="Dramalord193" text="Emotional Loss Breakup" />
-    <string id="Dramalord194" text="Loss of emotion of hero if their partner breaks up with them (affairs)" />
-    <string id="Dramalord195" text="Emotional Loss Divorce" />
-    <string id="Dramalord196" text="Loss of emotion of hero if their partner ends their marriage" />
-    <string id="Dramalord197" text="Emotional Loss Pregnancy" />
-    <string id="Dramalord198" text="Loss of emotion of heroes if their partners are visibly pregnant from someone else" />
-    <string id="Dramalord199" text="Emotional Loss Bastard" />
-    <string id="Dramalord200" text="Loss of emotion of partners if heros give birth to children of someone else" />
-    <string id="Dramalord201" text="Emotional Win Affair" />
-    <string id="Dramalord202" text="Emotional gain of heroes who start an affair" />
-    <string id="Dramalord203" text="Emotional Win Marriage" />
-    <string id="Dramalord204" text="Emotional gain of heroes who are getting married" />
-    <string id="Dramalord205" text="Pregnancy Chance" />
-    <string id="Dramalord206" text="Chance of getting pregnant during intercourse" />
-    <string id="Dramalord207" text="Pregnancy Duration" />
-    <string id="Dramalord208" text="How many days a hero is pregnant before giving birth" />
-    <string id="Dramalord209" text="Days Until Pregnancy Visible" />
-    <string id="Dramalord210" text="How many days a hero is pregnant before the pregnancy is visible to other heroes" />
-    <string id="Dramalord211" text="Wait Between Adopting" />
-    <string id="Dramalord212" text="How many days to wait between adptions (same sex or old couples)" />
-    <string id="Dramalord213" text="Max Fertility Age" />
-    <string id="Dramalord214" text="Maximum age of being fertile" />
-    <string id="Dramalord215" text="Period Duration" />
-    <string id="Dramalord216" text="Duration of period in days for female heroes per season (can't get pregnant)" />
-    <string id="Dramalord217" text="Toy Break Chance" />
-    <string id="Dramalord218" text="Chance a toy will break when being used by a hero" />
-    <string id="Dramalord219" text="Min. Emotion For Conversation" />
-    <string id="Dramalord220" text="Minimum emotion value of AI to accept an intimate conversation with the player" />
-    <string id="Dramalord221" text="Player Always Attractive" />
-    <string id="Dramalord222" text="Player is always 100% attractive to other heroes (cheat)" />
-    <string id="Dramalord223" text="Player Always Loved" />
-    <string id="Dramalord224" text="Player is always loved by other heroes (cheat)" />
-    <string id="Dramalord225" text="No Captivity Messages" />
-    <string id="Dramalord226" text="Disable spam of captured or freed heroes (english only!)" />
-    <string id="Dramalord227" text="No Relation Change Notification" />
-    <string id="Dramalord228" text="Disable spam of relation increase with notables" />
-    <string id="Dramalord229" text="Attraction:" />
-    <string id="Dramalord230" text="Emotion:" />
-    <string id="Dramalord231" text="Horny:" />
-    <string id="Dramalord232" text="Has Toy:" />
-    <string id="Dramalord233" text="Trait Score:" />
-    <string id="Dramalord234" text="Period Start Day:" />
-    <string id="Dramalord235" text="{CLAN} left {KINGDOM}." />
-    <string id="Dramalord236" text="{HERO.LINK} banished {CLAN} from {KINGDOM}." />
-    <string id="Dramalord237" text="{CLAN} joined {KINGDOM}." />
-    <string id="Dramalord238" text="{HERO.LINK} commited suicide." />
-    <string id="Dramalord239" text="Kingdom Changes Logs" />
-    <string id="Dramalord240" text="Show kingdom related events in logs" />
-    <string id="Dramalord241" text="Wanderer AI interaction" />
-    <string id="Dramalord242" text="Allow Wanderers to interact with lords and other wanderers" />
-    <string id="Dramalord243" text="Player Clan AI interaction" />
-    <string id="Dramalord244" text="Allow Members of your clan to participate in AI interactions" />
-    <string id="Dramalord245" text="Intimate Opportunity" />
-    <string id="Dramalord246" text="{HERO.LINK} has a special spark in their eyes today and you have a feeling they want to go further. Will you let it happen?" />
-    <string id="Dramalord247" text="Heroes in Army AI interaction" />
-    <string id="Dramalord248" text="Allow Members of an army to interact with each other" />
-    <string id="Dramalord249" text="Allow Clan banishment" />
-    <string id="Dramalord250" text="Allow Kingdom leaders to banish clans if they're angry on their leader" />
-    <string id="Dramalord251" text="NPC Approach Player Chance" />
-    <string id="Dramalord252" text="Chance that heroes approach the player for intimate conversations" />
-    <string id="Dramalord253" text="Individual Relations" />
-    <string id="Dramalord254" text="Use/Show individual relation Lords/Ladies instead of their clan leader relation" />
-    <string id="Dramalord255" text="{TITLE}, I would like to talk to you." />
-    <string id="Dramalord256" text="You met in private {HERO.LINK}." />
-    <string id="Dramalord257" text="You flirted with {HERO.LINK}." />
-    <string id="Dramalord258" text="You and {HERO.LINK} are now a couple." />
-    <string id="Dramalord259" text="Approach Player In Settlements" />
-    <string id="Dramalord260" text="Allow NPCs to approach you while being in the same settlement" />
-    <string id="Dramalord261" text="Approach Player In Party" />
-    <string id="Dramalord262" text="Allow NPCs to approach you while being in your party" />
-    <string id="Dramalord263" text="You gave {HERO.LINK} a {TOY}." />
-    <string id="Dramalord264" text="You saw {HERO.LINK} flirting with {TARGET.LINK}." />
-    <string id="Dramalord265" text="{HERO.LINK} saw you flirting with {TARGET.LINK}." />
-    <string id="Dramalord266" text="You saw {HERO.LINK} meeting in secret with {TARGET.LINK}" />
-    <string id="Dramalord267" text="{HERO.LINK} saw you meeting in secret with {TARGET.LINK}." />
-    <string id="Dramalord268" text="You caught {HERO.LINK} being intimate with {TARGET.LINK}" />
-    <string id="Dramalord269" text="{HERO.LINK} caught you being intimate with {TARGET.LINK}." />
-    <string id="Dramalord270" text="You noticed {HERO.LINK} is pregnant from someone else" />
-    <string id="Dramalord271" text="{HERO.LINK} noticed you are pregnant from someone else." />
-    <string id="Dramalord272" text="You noticed that {TARGET.LINK} born by {HERO.LINK} is not your child" />
-    <string id="Dramalord273" text="{HERO.LINK} noticed your child {TARGET.LINK} is not theirs." />
-    <string id="Dramalord274" text="Link Emotion Changes to Relation" />
-    <string id="Dramalord275" text="Allow changes to emotion being reflected to relation" />
-    <string id="Dramalord276" text="Allow Marriages" />
-    <string id="Dramalord277" text="Allow marriages triggered by Dramalord (the original marriage system still works)" />
-    <string id="Dramalord278" text="Allow Divorces" />
-    <string id="Dramalord279" text="Allow marriages being divorced by Dramalord events" />
-    <string id="Dramalord280" text="Allow Rage Kills" />
-    <string id="Dramalord281" text="Allow enraged heroes to kill if being cheated on" />
-    <string id="Dramalord282" text="Allow Clan Changes" />
-    <string id="Dramalord283" text="Allow heroes being kicked out of clans or leaving voluntarily" />
-    <string id="Dramalord284" text="Approach Player In Army" />
-    <string id="Dramalord285" text="Allow NPCs to approach you while being in the same army" />
-    <string id="Dramalord286" text="NPC Visit Quest Chance" />
-    <string id="Dramalord287" text="Chance that heroes request the absent player to visit them due to urgent needs" />
-    <string id="Dramalord288" text="{HERO.LINK} requests your presence" />
-    <string id="Dramalord289" text="A messenger delivered a message from {HERO.LINK}. They want to see you as soon as possible, as they have something urgent you need to take care of." />
-    <string id="Dramalord290" text="{HERO.LINK} is disappointed by your neglection of their matter." />
-    <string id="Dramalord291" text="Finally you are here!" />
-    <string id="Dramalord292" text="Here I am. What is the urgent matter you asked me to take care about?" />
-    <string id="Dramalord293" text="The matter... was resolved by someone very skillful meanwhile." />
-    <string id="Dramalord294" text="Follow me. I would like to make use of your resourcefulness..." />
-    <string id="Dramalord295" text="Never! You will not taint my honor with such offers!" />
-    <string id="Dramalord296" text="I would consider letting you go for... some special service from you..." />
-    <string id="Dramalord297" text="Well come here pretty, you got yourself a deal!" />
-    <string id="Dramalord298" text="Interact Being Witness" />
-    <string id="Dramalord299" text="Interact when witnessing your partner doing stuff with others (otherwise you will just get a notification)" />
-    <string id="Dramalord300" text="While being close to {HERO.LINK} you notice her belly being unusally big and instantly know that not food was causing this." />
-    <string id="Dramalord301" text="When you were going for a stroll you noticed a suspicious sound. When following it you caught {HERO.LINK} and {TARGET.LINK} in an unambiguous situation. {TARGET.LINK} fled the scene." />
-    <string id="Dramalord302" text="The date of birth does not fit and you find no similarities to yourself in the childs face." />
-    <string id="Dramalord303" text="When looking for {HERO.LINK} you found them together with {TARGET.LINK}. They were too close for conversing harmlessly." />
-    <string id="Dramalord304" text="{TITLE}, I... I... [if:convo_astonished]" />
-    <string id="Dramalord305" text="You carry no child of mine, am I correct?" />
-    <string id="Dramalord306" text="I guess you and {TARGET} were not talking about politics, eh?" />
-    <string id="Dramalord307" text="Looks like you're having a hard time keeping your underpants on when meeting {TARGET}." />
-    <string id="Dramalord308" text="{TARGET} is clearly not my child, how dare you to give birth to a bastard?!" />
-    <string id="Dramalord309" text="You are right. So what? I don't care.[if:convo_angry_voice]" />
-    <string id="Dramalord310" text="What? I have no idea what you are talking about!" />
-    <string id="Dramalord311" text="{TITLE}, please! This is all a misunderstanding!" />
-    <string id="Dramalord312" text="This is the last breath you take!" />
-    <string id="Dramalord313" text="Get out of my sight! I never want to see you again!" />
-    <string id="Dramalord314" text="That's it! It's over!" />
-    <string id="Dramalord315" text="Whatever..." />
-    <string id="Dramalord316" text="You killed {HERO.LINK}" />
-    <string id="Dramalord317" text="You broke up with {HERO.LINK}" />
-    <string id="Dramalord318" text="You divorced from {HERO.LINK}." />
-    <string id="Dramalord319" text="You banished {HERO.LINK} from your clan." />
-    <string id="Dramalord320" text="Can you currently get pregnant?" />
-    <string id="Dramalord321" text="Do you feel this... special itch?" />
-    <string id="Dramalord322" text="How do you like the way I look?" />
-    <string id="Dramalord323" text="Hmm... I think you look {RATING_TOTAL}!" />
-    <string id="Dramalord324" text="I am currently fertile, my period starts in {PERIOD_DAYS} days." />
-    <string id="Dramalord325" text="I have my period, so I am not fertile for the next {PERIOD_DAYS} days." />
-    <string id="Dramalord326" text="I'm afraid I'm too old to be fertile." />
-    <string id="Dramalord327" text="What a silly question... I am a man." />
-    <string id="Dramalord328" text="Hmm... yes... I'd love it if someone would scratch my itch..." />
-    <string id="Dramalord329" text="No, not really. I'm currently not in the mood." />
-    <string id="Dramalord330" text="I'm sorry, but you're not my type." />
-    <string id="Dramalord331" text="Again? Please, let me rest a little..." />
-    <string id="Dramalord332" text="Fertile:" />
-    <string id="Dramalord333" text="I'm already pregnant, silly!" />
-    <string id="Dramalord334" text="Lover" />
-    <string id="Dramalord335" text="Friend with Benefits" />
-    <string id="Dramalord336" text="So you and {TARGET} married behind my back?" />
-    <string id="Dramalord337" text="{TITLE}, I have to talk to you![if:convo_angry_voice]" />
-    <string id="Dramalord338" text="I saw you and {TARGET.LINK} with my own eyes!" />
-    <string id="Dramalord339" text="I learned that from {SOURCE.LINK}!" />
-    <string id="Dramalord340" text="Intercourse Tension Loss" />
-    <string id="Dramalord341" text="Value of tension lost by intercourse" />
-    <string id="Dramalord342" text="{WITNESS.LINK} saw {HERO1.LINK} and {HERO2.LINK} getting married." />
-    <string id="Dramalord343" text="Confrontation Logs" />
-    <string id="Dramalord344" text="Show confrontation events in logs" />
-    <string id="Dramalord345" text="Gossip Logs" />
-    <string id="Dramalord346" text="Show gossip events in logs" />
-    <string id="Dramalord347" text="{HERO1.LINK} confessed to {HERO2.LINK} that they had a date with {HERO3.LINK}" />
-    <string id="Dramalord348" text="{HERO1.LINK} confessed to {HERO2.LINK} that they had intercourse with {HERO3.LINK}" />
-    <string id="Dramalord349" text="{HERO1.LINK} confessed to {HERO2.LINK} that they married {HERO3.LINK}" />
-    <string id="Dramalord350" text="{HERO1.LINK} told gossip to {HERO2.LINK} about a date of {HERO2.LINK} and {HERO4.LINK}" />
-    <string id="Dramalord351" text="{HERO1.LINK} told gossip to {HERO2.LINK} about {HERO2.LINK} and {HERO4.LINK} having intercourse" />
-    <string id="Dramalord352" text="{HERO1.LINK} told gossip to {HERO2.LINK} about the marriage of {HERO3.LINK} and {HERO4.LINK}" />
-    <string id="Dramalord353" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed a date of {HERO2.LINK} and {HERO4.LINK}" />
-    <string id="Dramalord354" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed {HERO2.LINK} and {HERO4.LINK} having intercourse" />
-    <string id="Dramalord355" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed the marriage of {HERO2.LINK} and {HERO4.LINK}" />
-    <string id="Dramalord356" text="Well, next time invite me too. we could have fun together!" />
-    <string id="Dramalord357" text="I forgive you... But never do that again!" />
-    <string id="Dramalord358" text="I can clearly see that!" />
-    <string id="Dramalord359" text="{HERO1.LINK} and {HERO2.LINK} started being friends with benefits" />
-    <string id="Dramalord360" text="Enable Default Pregnancies" />
-    <string id="Dramalord361" text="Allow default Bannerlord pregnancies to happen" />
-    <string id="Dramalord362" text="Enable Default Marriages" />
-    <string id="Dramalord363" text="Allow default Bannerlord marriages to happen" />
-    <string id="Dramalord364" text="Show lovers in Encyclopedia" />
-    <string id="Dramalord365" text="Show lovers in Encyclopedia (Family section)" />
-    <string id="Dramalord366" text="Show friends with benefits in Encyclopedia" />
-    <string id="Dramalord367" text="Show friends with benefits in Encyclopedia (Family section)" />
-    <string id="Dramalord368" text="Date Memory Duration" />
-    <string id="Dramalord369" text="Time in days heroes remember date events" />
-    <string id="Dramalord370" text="Intercourse Memory Duration" />
-    <string id="Dramalord371" text="Time in days heroes remember intercourse events" />
-    <string id="Dramalord372" text="Birth Memory Duration" />
-    <string id="Dramalord373" text="Time in days heroes remember birth events" />
-    <string id="Dramalord374" text="Marriage Memory Duration" />
-    <string id="Dramalord375" text="Time in days heroes remember marriage events" />
-    <string id="Dramalord376" text="Minimum Relation Level" />
-    <string id="Dramalord377" text="Minimum amount of relation is required making a hero trust another" />
-    <string id="Dramalord378" text="Uh... I somehow forgot what I wanted to say. Excuse me." />
-    <string id="Dramalord379" text="Anger Duration Flirt" />
-    <string id="Dramalord380" text="How long a hero is angry in days if witnessing their partner flirting with someone else" />
-    <string id="Dramalord381" text="Anger Duration Date" />
-    <string id="Dramalord382" text="How long a hero is angry in days if witnessing their partner on a date with someone else" />
-    <string id="Dramalord383" text="Anger Duration Intercourse" />
-    <string id="Dramalord384" text="How long a hero is angry in days if witnessing their partner having intercourse with someone else" />
-    <string id="Dramalord385" text="Anger Duration Pregnancy" />
-    <string id="Dramalord386" text="How long a hero is angry in days if witnessing their partner being pregnant from someone else" />
-    <string id="Dramalord387" text="Anger Duration Bastard" />
-    <string id="Dramalord388" text="How long a hero is angry in days if witnessing their partner birthing a child by someone else" />
-    <string id="Dramalord389" text="Anger Duration Marriage" />
-    <string id="Dramalord390" text="How long a hero is angry in days if witnessing their partner marry someone else" />
-    <string id="Dramalord391" text="I am angry with you and I don't want to talk to you! [if:convo_angry_voice]" />
-    <string id="Dramalord392" text="There is clearly a bulge on {HERO.LINK}'s belly, and after doing some calculations it becomes clear to you that you are not the cause." />
-    <string id="Dramalord393" text="You saw {HERO.LINK} marry {TARGET.LINK}" />
-    <string id="Dramalord394" text="{HERO.LINK} saw you marry {TARGET.LINK}" />
-    <string id="Dramalord395" text="You heard cheering next to the church and when you got close you saw to your surprise that {HERO.LINK} and {TARGET.LINK} just got married." />
-    <string id="Dramalord396" text="Angry:" />
-    <string id="Dramalord397" text="{ANGRY} days" />
-    <string id="Dramalord398" text="{HERO1.LINK} confronted {HERO2.LINK} about the date with {HERO3.LINK} they have witnessed." />
-    <string id="Dramalord399" text="{HERO1.LINK} confronted {HERO2.LINK} about the intercourse with {HERO3.LINK} they have witnessed." />
-    <string id="Dramalord400" text="{HERO1.LINK} confronted {HERO2.LINK} about the marriage with {HERO3.LINK} they have witnessed." />
-    <string id="Dramalord401" text="{HERO1.LINK} confronted {HERO2.LINK} about being pregnant from {HERO3.LINK}." />
-    <string id="Dramalord402" text="{HERO1.LINK} confronted {HERO2.LINK} about giving birth to {HERO3.LINK} who is not their child." />
-    <string id="Dramalord403" text="{HERO1.LINK} confessed to {HERO2.LINK} that they are pregnant from {HERO3.LINK}" />
-    <string id="Dramalord404" text="{HERO1.LINK} confessed to {HERO2.LINK} that their child {HERO3.LINK} is from {HERO4.LINK}" />
-    <string id="Dramalord405" text="{HERO1.LINK} told gossip to {HERO2.LINK} about {HERO3.LINK} being pregnant from {HERO4.LINK}" />
-    <string id="Dramalord406" text="{HERO1.LINK} told gossip to {HERO2.LINK} that {HERO3.LINK}' child is from {HERO4.LINK}" />
-    <string id="Dramalord407" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed {HERO2.LINK} being pregnant from {HERO4.LINK}" />
-    <string id="Dramalord408" text="{HERO1.LINK} told {HERO2.LINK} that they witnessed that {HERO2.LINK}'s child is from {HERO4.LINK}" />
-    <string id="Dramalord409" text="{HERO.LINK} is carrying your child, am I correct?" />
-    <string id="Dramalord410" text="Good day, {TITLE}. How can I help you?" />
-    <string id="Dramalord411" text="I would like to extend my family and adopt an orphan." />
-    <string id="Dramalord412" text="Oh that is great {TITLE}. We have currently {BOYS} boys and {GIRLS} girls in our orphanage." />
-    <string id="Dramalord413" text="I am truly sorry {TITLE}, but you have to be married in order to adopt a child." />
-    <string id="Dramalord414" text="I am truly sorry {TITLE}, but there are currently no children in our orphanage." />
-    <string id="Dramalord415" text="I am truly sorry {TITLE}, but you adopted recently. You have to wait a while before you can adopt again." />
-    <string id="Dramalord416" text="I would like to adopt a boy." />
-    <string id="Dramalord417" text="I would like to adopt a girl." />
-    <string id="Dramalord418" text="Who would you like to adopt?" />
-    <string id="Dramalord419" text="{ORPHAN.NAME}, {ORPHANAGE} years old." />
-    <string id="Dramalord420" text="I am thinking of a different orphan." />
-    <string id="Dramalord421" text="Very well. Are you absolutely sure you want to adopt {ORPHAN.NAME}?" />
-    <string id="Dramalord422" text="Congratulations! I'm sure {ORPHAN.NAME} will be in good hands." />
-    <string id="Dramalord423" text="Oh well, that's sad. {ORPHAN.NAME} will be very disappointed." />
-    <string id="Dramalord424" text="Allow AI Adoption" />
-    <string id="Dramalord425" text="Allow heroes adopting children from the orphanage" />
-    <string id="Dramalord426" text="Hero wants to join your clan" />
-    <string id="Dramalord427" text="{HERO.LINK} requests joining your clan. Will you accept?" />
-    <string id="Dramalord428" text="You accepted {HERO.LINK} joining your clan." />
-    <string id="Dramalord429" text="Allow AI Same Sex Marriage" />
-    <string id="Dramalord430" text="Allow AI to marry heroes of the same sex (immersion option)" />
-    <string id="Dramalord431" text="Only Player Clan Logs" />
-    <string id="Dramalord432" text="Show only logs related to the player clan" />
-    <string id="Dramalord433" text="Sexual Orientation:" />
-    <string id="Dramalord434" text="Heterosexual" />
-    <string id="Dramalord435" text="Homosexual" />
-    <string id="Dramalord436" text="Bisexual" />
-    <string id="Dramalord437" text="Asexual" />
-    <string id="Dramalord438" text="Bonus Player Attraction" />
-    <string id="Dramalord439" text="Bonus value for player's attraction to other heroes" />
-    <string id="Dramalord440" text="Attraction Generation Weight" />
-    <string id="Dramalord441" text="Negative values generate more homosexual interest, positive values generate more heterosexual interest" />
-    <string id="Dramalord442" text="Regenerate Traits" />
-    <string id="Dramalord443" text="Click to generate" />
-    <string id="Dramalord444" text="Set a weight above and press this button to regenerate dramalord traits (only works with running campaign)" />
-    <string id="Dramalord445" text="Trait Editor" />
-    <string id="Dramalord446" text="Selected Hero:" />
-    <string id="Dramalord447" text="Openness" />
-    <string id="Dramalord448" text="Represents how willing a person is to try new things" />
-    <string id="Dramalord449" text="Conscientiousness" />
-    <string id="Dramalord450" text="Refers to an individual's desire to be careful and diligent" />
-    <string id="Dramalord451" text="Extroversion" />
-    <string id="Dramalord452" text="Measures how energetic, outgoing and confident a person is" />
-    <string id="Dramalord453" text="Agreeableness" />
-    <string id="Dramalord454" text="Refers to how an individual interacts with others" />
-    <string id="Dramalord455" text="Neuroticism" />
-    <string id="Dramalord456" text="Represents how much someone is inclined to experience negative emotions" />
-    <string id="Dramalord457" text="Attraction To Men" />
-    <string id="Dramalord458" text="Defines whether an individual finds male persons attractive or not" />
-    <string id="Dramalord459" text="Attraction To Women" />
-    <string id="Dramalord460" text="Defines whether an individual finds female persons attractive or not" />
-    <string id="Dramalord461" text="Attraction To Weight" />
-    <string id="Dramalord462" text="Defines whether an individual has interest in chubby or thin heroes" />
-    <string id="Dramalord463" text="Attraction To Build" />
-    <string id="Dramalord464" text="Defines whether an individual has interest in muscular or weak heroes" />
-    <string id="Dramalord465" text="Attraction To Age Difference" />
-    <string id="Dramalord466" text="Defines whether an individual has interest in older or younger heroes in year difference" />
-    <string id="Dramalord467" text="Libido" />
-    <string id="Dramalord468" text="Defines whether an individual generally develops interest in intercourse or not" />
-    <string id="Dramalord469" text="Horny" />
-    <string id="Dramalord470" text="Represents how willing a hero currently is for intercourse due to hormons" />
+    <string id="Dramalord001" text="Autonomy" />
+    <string id="Dramalord002" text="Wanderer Autonomy" />
+    <string id="Dramalord003" text="Allow clanless Wanderers to interact with lords and other wanderers" />
+    <string id="Dramalord004" text="Hero Setup" />
+    <string id="Dramalord005" text="Minimum Attraction" />
+    <string id="Dramalord006" text="Attraction score required for NPCs to consider others as attractive" />
+    <string id="Dramalord007" text="Logging Setup" />
+    <string id="Dramalord008" text="Relationship Logs" />
+    <string id="Dramalord009" text="Show relationship changes in the logs" />
+    <string id="Dramalord010" text="friends" />
+    <string id="Dramalord011" text="friends with benefits" />
+    <string id="Dramalord012" text="lovers" />
+    <string id="Dramalord013" text="engaged" />
+    <string id="Dramalord014" text="married" />
+    <string id="Dramalord015" text="{HERO1.LINK} and {HERO2.LINK} are now {RELATIONSHIP}" />
+    <string id="Dramalord015" text="{HERO1.LINK} and {HERO2.LINK} or not {RELATIONSHIP} anymore" />
+    <string id="Dramalord016" text="General" />
+    <string id="Dramalord017" text="Chance Getting Caught" />
+    <string id="Dramalord018" text="Chance of getting caught by partners while interacting wth other heroes" />
+    <string id="Dramalord019" text="You flirted with {HERO.LINK}. (Love {NUM})" />
+    <string id="Dramalord020" text="You had a casual conversation with {HERO.LINK}. (Trust {NUM})" />
+    <string id="Dramalord021" text="Show Only Clan Interaction" />
+    <string id="Dramalord022" text="Show only interactions of your clan members in the chatlog" />
+    <string id="Dramalord023" text="my lover" />
+    <string id="Dramalord024" text="my love" />
+    <string id="Dramalord025" text="my betrothed" />
+    <string id="Dramalord026" text="my special friend" />
+    <string id="Dramalord027" text="Excuse me, {TITLE}, we have never met but I couldn not help myself asking you for a few minutes of your time." />
+    <string id="Dramalord028" text="{TITLE}, it is good to see you! May I humbly request to occupy some of your time?" />
+    <string id="Dramalord029" text="Of course {TITLE}. How can I be of service?" />
+    <string id="Dramalord030" text="My apologies, {TITLE}, but I am short of time right now." />
+    <string id="Dramalord031" text="I always like to hear new stories. Tell me about your latest exploits while traveling in the realm." />
+    <string id="Dramalord032" text="I would like to hear your opinion of a certain matter which is occupying my mind for a while." />
+    <string id="Dramalord033" text="I have to say I really like your smile. Would you mind telling me more about yourself?" />
+    <string id="Dramalord034" text="Would you mind going for a walk with me? I want to cause jealousy with your outstanding appearance." />
+    <string id="Dramalord035" text="I must confess, I can not stop thinking of you. I clearly have feelings for you, {TITLE}, and would like to bring our relationship to the next level. What do you say?" />
+    <string id="Dramalord036" text="Your presence makes me blush, {TITLE}. I would love to see you more frequently, just the two of us in private. What do you say, {TITLE}?" />
+    <string id="Dramalord037" text="Oh, {TITLE}, I have been missing you! The servants prepared a meal im my private chambers. Would you care to join me?" />
+    <string id="Dramalord038" text="I was looking forward to see you, {TITLE}. Would you like to retreat somewhere more silent, for a more private conversation?" />
+    <string id="Dramalord039" text="We are in luck, {TITLE}. {SPOUSE} is currently not around and the chambermaid swore to remain silent. Will you come with me?" />
+    <string id="Dramalord040" text="Ugh, {SPOUSE} is finally away. Now we have all the rooms for us! The servants will keep it for themselves, care to join me, {TITLE}?" />
+    <string id="Dramalord041" text="I will be blunt with you, {TITLE}. I have urgent needs which call for satisfaction and you look like a person who can be descreet. Can I ask for your help?" />
+    <string id="Dramalord042" text="This is very embarassing for me, {TITLE}. I have a certain itch which requires attention, and I was hoping you could... scratch... my itch. What do you say?" />
+    <string id="Dramalord043" text="You are {TITLE} and I trust you. I was wondering if we could help each other in terms of... natural urges... on a regular basis. Would you like that?" />
+    <string id="Dramalord044" text="I was thinking if we could help each other, {TITLE}. In terms of pleasure, to be blunt. We could meet sometimes and enjoy each other. What do you say?" />
+    <string id="Dramalord045" text="I was looking forward to see you, {TITLE}. Would you care for a chat and maybe some bed excercise afterwards?" />
+    <string id="Dramalord046" text="Oh, {TITLE}. I was hoping you had some time for a conversation and some anatomical studies later on. Are you interested?" />
+    <string id="Dramalord047" text="{SPOUSE} is not around I need to feel you, {TITLE}. Let's head to the bedchamber and enjoy ourselves. Would you like that?" />
+    <string id="Dramalord048" text="Now that {SPOUSE} is not around, I was thinking that you and I could use the empty bed for ourselves, {TITLE}. Does this tempt you?" />
+    <string id="Dramalord049" text="Come here and kiss me, {TITLE}. I'm craving for your body and want to enjoy you with all the lust and pleasure there is!" />
+    <string id="Dramalord050" text="Let's get rid off that clothes of yours. I show you a different kind of battle in my bedchamber where both sides win!" />
+    <string id="Dramalord051" text="I love you very much, {TITLE}. I think it's time for us to take the next step in our relationship. Will you marry me?" />
+    <string id="Dramalord052" text="You know, {TITLE}, I have deep feelings for you and I think to know that you are the one. Would you like to marry me?" />
+    <string id="Dramalord053" text="Now that we are in a settlement, {TITLE}, let's call a priest and finally get married! What do you say, {TITLE}?" />
+    <string id="Dramalord054" text="We could use the opportunity being in a settlement, {TITLE}. Let's head over to the church and seal the bond for life!" />
+    <string id="Dramalord055" text="Sure, let's have a conversation {TITLE}." />
+    <string id="Dramalord056" text="Of course {TITLE}, I would love to join you." />
+    <string id="Dramalord057" text="Oh {TITLE}, I wish for the same!" />
+    <string id="Dramalord058" text="Sure {TITLE}, I enjoy every minute with you." />
+    <string id="Dramalord059" text="Oh yes, {TITLE}. Let's enjoy the time as long as they're gone." />
+    <string id="Dramalord060" text="Don't worry {TITLE}. I understand how you feel and I will gladly help you." />
+    <string id="Dramalord061" text="Interesting proposition, {TITLE}. I think I like the idea." />
+    <string id="Dramalord062" text="Of course, {TITLE}. I could use some entertainment." />
+    <string id="Dramalord063" text="Well, things we do for excitement... Lead the way {TITLE}!" />
+    <string id="Dramalord064" text="As you wish. I can garantuee you will not sleep much, {TITLE}" />
+    <string id="Dramalord065" text="You make my dream come true, {TITLE}. Yes I would love to marry you!" />
+    <string id="Dramalord066" text="We're at a settlement, {TITLE}. Let's marry right now!" />
+    <string id="Dramalord067" text="I agree, {TITLE}. Let's seal that bond of ours." />
+    <string id="Dramalord068" text="I am sorry {TITLE}, but I have no interest in that right now." />
+    <string id="Dramalord069" text="You had a date with {HERO.LINK}. (Love {NUM}, Trust {NUM2})" />
+    <string id="Dramalord070" text="You saw {HERO.LINK} having a date with {TARGET.LINK}." />
+    <string id="Dramalord071" text="{HERO.LINK} saw you having a date with {TARGET.LINK}." />
+    <string id="Dramalord072" text="You were intimate with {HERO.LINK}." />
+    <string id="Dramalord073" text="You caught {HERO.LINK} being intimate with {TARGET.LINK}." />
+    <string id="Dramalord074" text="{HERO.LINK} caught you being intimate with {TARGET.LINK}." />
+    <string id="Dramalord075" text="You got pregnant from {HERO.LINK}." />
+    <string id="Dramalord076" text="{HERO.LINK} got pregnant from you." />
+    <string id="Dramalord077" text="{HERO.LINK} was born" />
+    <string id="Dramalord078" text="You are engaged to {HERO.LINK}." />
+    <string id="Dramalord079" text="You and {HERO.LINK} are now friends." />
+    <string id="Dramalord080" text="You and {HERO.LINK} are now friends with benefits." />
+    <string id="Dramalord081" text="You banished {HERO.LINK} from your clan." />
+    <string id="Dramalord082" text="{HERO.LINK} has left your clan." />
+    <string id="Dramalord083" text="Clan Changes Logs" />
+    <string id="Dramalord084" text="Show clan changes in the logs" />
+    <string id="Dramalord085" text="{HERO.LINK} has left {OLDCLAN}" />
+    <string id="Dramalord086" text="{HERO.LINK} was thrown out of {OLDCLAN} by {CAUSEDBY.LINK}" />
+    <string id="Dramalord087" text="{HERO.LINK} joined {CLAN}" />
+    <string id="Dramalord088" text="You ended your relationship with {HERO.LINK}." />
+    <string id="Dramalord089" text="{HERO.LINK} ended their relationship with you." />
+    <string id="Dramalord099" text="{HERO.LINK} married {TARGET.LINK}." />
+    <string id="Dramalord100" text="{TITLE}, may I occupy a few minutes of your time?" />
+    <string id="Dramalord101" text="Let's talk about something else, {TITLE}." />
+    <string id="Dramalord102" text="Apologies, {TITLE}, but my spouse is around I we can not risk it." />
+    <string id="Dramalord103" text="Apologies, {TITLE}, but I will not do that with you." />
+    <string id="Dramalord104" text="I am sorry {TITLE}, but I am not ready for this step just yet." />
+    <string id="Dramalord105" text="Again? Give me some rest, {TITLE}. Let's talk about it later." />
+    <string id="Dramalord106" text="You are now the lover of {HERO.LINK}." />
+    <string id="Dramalord107" text="1: Hero Selection" />
+    <string id="Dramalord108" text="Select Hero" />
+    <string id="Dramalord109" text="2: Personality" />
+    <string id="Dramalord110" text="Openness" />
+    <string id="Dramalord111" text="Represents how willing a person is to try new things" />
+    <string id="Dramalord112" text="Conscientiousness" />
+    <string id="Dramalord113" text="Refers to an individual's desire to be careful and diligent" />
+    <string id="Dramalord114" text="Extroversion" />
+    <string id="Dramalord115" text="Measures how energetic, outgoing and confident a person is" />
+    <string id="Dramalord116" text="Agreeableness" />
+    <string id="Dramalord117" text="Refers to how an individual interacts with others" />
+    <string id="Dramalord118" text="Neuroticism" />
+    <string id="Dramalord119" text="Represents how much someone is inclined to experience negative emotions" />
+    <string id="Dramalord120" text="3: Desire" />
+    <string id="Dramalord121" text="Attraction To Men" />
+    <string id="Dramalord122" text="Defines whether an individual finds male persons attractive or not" />
+    <string id="Dramalord123" text="Attraction To Women" />
+    <string id="Dramalord124" text="Defines whether an individual finds female persons attractive or not" />
+    <string id="Dramalord125" text="Attraction To Weight" />
+    <string id="Dramalord126" text="Defines whether an individual has interest in chubby or thin heroes" />
+    <string id="Dramalord127" text="Attraction To Build" />
+    <string id="Dramalord128" text="Defines whether an individual has interest in muscular or weak heroes" />
+    <string id="Dramalord129" text="Attraction To Age Difference" />
+    <string id="Dramalord130" text="Defines whether an individual has interest in older or younger heroes in year difference" />
+    <string id="Dramalord131" text="Libido" />
+    <string id="Dramalord132" text="Defines whether an individual generally develops interest in intercourse or not" />
+    <string id="Dramalord133" text="Horny" />
+    <string id="Dramalord134" text="Represents how willing a hero currently is for intercourse due to hormons" />
+    <string id="Dramalord135" text="4: Relation to Player" />
+    <string id="Dramalord136" text="Trust" />
+    <string id="Dramalord137" text="Trust value to the player" />
+    <string id="Dramalord138" text="Love" />
+    <string id="Dramalord139" text="Love value to the player" />
+    <string id="Dramalord140" text="Tension" />
+    <string id="Dramalord141" text="Tension value to the player" />
+    <string id="Dramalord142" text="No Relationship" />
+    <string id="Dramalord143" text="No relationship with the player" />
+    <string id="Dramalord144" text="Friend" />
+    <string id="Dramalord145" text="Has friendship with the player" />
+    <string id="Dramalord146" text="Friend with benefits" />
+    <string id="Dramalord147" text="Has friendship with benefits with the player" />
+    <string id="Dramalord148" text="Lover" />
+    <string id="Dramalord149" text="Is a couple with the player" />
+    <string id="Dramalord150" text="Betrothed" />
+    <string id="Dramalord151" text="Is engaged with the player" />
+    <string id="Dramalord152" text="Married" />
+    <string id="Dramalord153" text="Is married the player" />
+    <string id="Dramalord154" text="Attraction" />
+    <string id="Dramalord155" text="Sympathy" />
+    <string id="Dramalord156" text="Fertile" />
+    <string id="Dramalord157" text="Sexual orientation" />
+    <string id="Dramalord158" text="Asexual" />
+    <string id="Dramalord159" text="Bisexual" />
+    <string id="Dramalord160" text="Heterosexual" />
+    <string id="Dramalord161" text="Homosexual" />
+    <string id="Dramalord162" text="Children Logs" />
+    <string id="Dramalord163" text="Show birth, conceptions or orphanage events in the logs" />
+    <string id="Dramalord164" text="{HERO1.LINK} was impregnated by {HERO2.LINK}" />
+    <string id="Dramalord165" text="{CHILD.LINK} was born to {HERO1.LINK} and {HERO2.LINK}" />
+    <string id="Dramalord166" text="Greetings, {TITLE}, you don't know me. I am {HERO} of the {CLAN}." />
+    <string id="Dramalord167" text="Good day, {TITLE}. Good that I catch you." />
+    <string id="Dramalord168" text="It looks like you and {HERO} were enjoying some romantic time. Are you aware that their are my {STATUS}?" />
+    <string id="Dramalord169" text="Huh, you and {HERO} were pounding each other in bed. You know they are {STATUS}, do you?" />
+    <string id="Dramalord170" text="So you have given birth to {CHILD}. The child is apparently from {FATHER} and not from me. You are {STATUS}, right?" />
+    <string id="Dramalord171" text="You married {HERO} behind my back. Did you even think about telling me? You are {STATUS}!" />
+    <string id="Dramalord172" text="I heard that you and {HERO} are now engaged. Did you think I won't hear about it?" />
+    <string id="Dramalord173" text="my spouse" />
+    <string id="Dramalord174" text="my friend" />
+    <string id="Dramalord175" text="my acquaintance" />
+    <string id="Dramalord176" text="Apparently you and {HERO.LINK} are meeting privatly sometimes. Have you forgotten that you are {STATUS}?" />
+    <string id="Dramalord177" text="So {HERO} was giving you a good time in bed, eh? You are {STATUS}, do you remember?" />
+    <string id="Dramalord178" text="{HERO} has given birth to {CHILD} and you are apparently the father. I thought you are {STATUS}?" />
+    <string id="Dramalord179" text="Relation loss with {HERO}. (Love {NUM}, Trust {NUM2})" />
+    <string id="Dramalord180" text="I forgive you, {TITLE}. But I will not forget it." />
+    <string id="Dramalord181" text="I will not accept this, {TITLE}. I will end this relationship." />
+    <string id="Dramalord182" text="This won't be forgotton, {TITLE}. Farewell." />
+    <string id="Dramalord183" text="Nevermind, {TITLE}. Farewell." />
+    <string id="Dramalord184" text="Oh {TITLE}, I love you! I beg you, don't do anything you might regret later..." />
+    <string id="Dramalord185" text="Well, oh well, {TITLE}. So what now?" />
+    <string id="Dramalord186" text="As you wish, {TITLE}." />
+    <string id="Dramalord187" text="Pregnancy Duration" />
+    <string id="Dramalord188" text="How many days is a hero pregnant before giving birth" />
+    <string id="Dramalord189" text="Pregnancy Chance" />
+    <string id="Dramalord190" text="Chance a hero gets pregnant (only for Dramalord pregnancies)" />
+    <string id="Dramalord191" text="Minimum Dating Love" />
+    <string id="Dramalord192" text="Love points required to consider dating a hero" />
+    <string id="Dramalord193" text="Select hero from list and press 'Load Hero' (only works with running campaign)" />
+    <string id="Dramalord194" text="Load Hero" />
+    <string id="Dramalord195" text="Current Attraction" />
+    <string id="Dramalord196" text="Current attraction value to player" />
+    <string id="Dramalord197" text="Current Sympathy" />
+    <string id="Dramalord198" text="Current sympathy value to player" />
+    <string id="Dramalord199" text="Bonus Player Attraction" />
+    <string id="Dramalord200" text="Bonus value for player's attraction to other heroes" />
+    <string id="Dramalord201" text="Chance Approaching Player" />
+    <string id="Dramalord202" text="Chance that heroes approach the player for conversations" />
+    <string id="Dramalord203" text="You ended your friendship with {HERO.LINK}." />
+    <string id="Dramalord204" text="{HERO.LINK} ended their friendship with you." />
+    <string id="Dramalord205" text="Minimum Marriage Love" />
+    <string id="Dramalord206" text="Love points required to consider to marry a hero" />
+    <string id="Dramalord207" text="Days Between Interactions" />
+    <string id="Dramalord208" text="Number of days heroes can't interact with the same hero again" />
+    <string id="Dramalord209" text="Married" />
+    <string id="Dramalord210" text="Is married to the player" />
+    <string id="Dramalord211" text="Player Default Pregnancies" />
+    <string id="Dramalord212" text="Allow default pregnancies for the player or their spouse" />
+    <string id="Dramalord213" text="Player Always Witness" />
+    <string id="Dramalord214" text="The player will always be witness of events" />
+    <string id="Dramalord215" text="You saw {HERO.LINK} proposing to {TARGET.LINK}." />
+    <string id="Dramalord216" text="{HERO.LINK} saw you proposing to {TARGET.LINK}." />
+    <string id="Dramalord217" text="Bonus Player Sympathy" />
+    <string id="Dramalord218" text="Bonus value for player's sympathy to other heroes" />
+    <string id="Dramalord219" text="Show Friends With Benefits" />
+    <string id="Dramalord220" text="Show friends with benefits on Encyclopedia page of a hero" />
+    <string id="Dramalord221" text="Show Lovers" />
+    <string id="Dramalord222" text="Show lovers on Encyclopedia page of a hero" />
+    <string id="Dramalord223" text="Of course, {TITLE}. Let me tell you a tale of war and power..." />
+    <string id="Dramalord224" text="Oh {TITLE}, you silly! All eyes will turn on you anyway, and I will enjoy that." />
+    <string id="Dramalord225" text="You know {TITLE}... I dreamed of this moment since I laid eyes on you!" />
+    <string id="Dramalord226" text="Of course {TITLE}. Let us spend some quality time, just the two of us." />
+    <string id="Dramalord227" text="Show Betrotheds" />
+    <string id="Dramalord228" text="Show betrotheds on Encyclopedia page of a hero" />
+    <string id="Dramalord229" text="It hurts me, {TITLE}, but I have to put an end to our relationship." />
+    <string id="Dramalord230" text="Oh no, {TITLE}! You are breaking my heart! But I have no other choice then to accept your decision." />
+    <string id="Dramalord231" text="Well eventually it always comes to that, right {TITLE}. It was nice at long it lasted. Thank you." />
+    <string id="Dramalord232" text="I.. I don't know what to say. This is shocking me. I have to think if I can stay around you..." />
+    <string id="Dramalord233" text="Get out of my sight, {NAME}. Pack your stuff and leave." />
+    <string id="Dramalord234" text="I give you one more chance, {TITLE}, but you will end it with {HERO}." />
+    <string id="Dramalord235" text="I've heard that you married {HERO}. Did they tell you that they are actually {STATUS}?" />
+    <string id="Dramalord236" text="Congratulations to you and {HERO} on your engagement. I just want to mention that they are {STATUS}." />
+    <string id="Dramalord237" text="Player Clan Autonomy" />
+    <string id="Dramalord238" text="Allow heroes of your clan to interact with lords and other wanderers" />
   </strings>
 </base>

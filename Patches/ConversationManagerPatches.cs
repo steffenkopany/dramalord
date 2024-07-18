@@ -1,4 +1,4 @@
-﻿using Dramalord.Data;
+﻿using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;
 using TaleWorlds.CampaignSystem;
@@ -13,7 +13,7 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void IsTagApplicable(string tagId, CharacterObject character, ref bool __result)
         {
-            if(character != null && character.IsHero && tagId == "PlayerIsSpouseTag" && character.HeroObject.IsSpouse(Hero.MainHero))
+            if(character != null && character.IsHero && tagId == "PlayerIsSpouseTag" && character.HeroObject.IsSpouseOf(Hero.MainHero))
             {
                 __result = true;
             }

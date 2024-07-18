@@ -1,10 +1,9 @@
-﻿using Dramalord.Data;
-using Dramalord.Data.Deprecated;
+﻿using Dramalord.Conversations;
+using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
-using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
 namespace Dramalord.Patches
@@ -18,45 +17,14 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void conversation_lord_greets_under_24_hours_on_condition(ref bool __result)
         {
-            if (Hero.MainHero == null || Hero.OneToOneConversationHero == null)
-            {
-                return;
-            }
-
-            if (Hero.OneToOneConversationHero.IsChild || !Hero.OneToOneConversationHero.IsLord || Hero.OneToOneConversationHero.IsDead || Hero.OneToOneConversationHero.IsDisabled)
-            {
-                return;
-            }
-
             if(!Hero.OneToOneConversationHero.IsDramalordLegit())
             {
                 return;
             }
-            
-            if (Hero.OneToOneConversationHero.IsLover(Hero.MainHero) && !Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero) && !Hero.MainHero.IsFemale)
-            {
-                TextObject textObject = new TextObject("{=!}{SALUTATION}...");
-                textObject.SetTextVariable("SALUTATION", new TextObject("{=Dramalord096}My lover"));
-                MBTextManager.SetTextVariable("SHORT_ABSENCE_GREETING", textObject);
-            }
-            else if (Hero.OneToOneConversationHero.IsLover(Hero.MainHero) && !Hero.MainHero.IsSpouse(Hero.OneToOneConversationHero) && Hero.MainHero.IsFemale)
-            {
-                TextObject textObject = new TextObject("{=!}{SALUTATION}...");
-                textObject.SetTextVariable("SALUTATION", new TextObject("{=Dramalord097}My love"));
-                MBTextManager.SetTextVariable("SHORT_ABSENCE_GREETING", textObject);
-            }
-            else if (Hero.OneToOneConversationHero.Father == Hero.MainHero && Hero.MainHero.IsFemale)
-            {
-                TextObject textObject = new TextObject("{=!}{SALUTATION}...");
-                textObject.SetTextVariable("SALUTATION", GameTexts.FindText("str_mother"));
-                MBTextManager.SetTextVariable("SHORT_ABSENCE_GREETING", textObject);
-            }
-            else if (Hero.OneToOneConversationHero.Mother == Hero.MainHero && !Hero.MainHero.IsFemale)
-            {
-                TextObject textObject = new TextObject("{=!}{SALUTATION}...");
-                textObject.SetTextVariable("SALUTATION", GameTexts.FindText("str_father"));
-                MBTextManager.SetTextVariable("SHORT_ABSENCE_GREETING", textObject);
-            }
+
+            TextObject textObject = new TextObject("{=!}{SALUTATION}...");
+            textObject.SetTextVariable("SALUTATION", ConversationHelper.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, true));
+            MBTextManager.SetTextVariable("SHORT_ABSENCE_GREETING", textObject);
         }
     }
 
@@ -68,37 +36,11 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void conversation_lord_greets_over_24_hours_on_condition(ref bool __result)
         {
-            if (Hero.MainHero == null || Hero.OneToOneConversationHero == null)
-            {
-                return;
-            }
-
-            if (Hero.OneToOneConversationHero.IsChild || !Hero.OneToOneConversationHero.IsLord || Hero.OneToOneConversationHero.IsDead || Hero.OneToOneConversationHero.IsDisabled)
-            {
-                return;
-            }
-
             if (!Hero.OneToOneConversationHero.IsDramalordLegit())
             {
                 return;
             }
-
-            if (Hero.OneToOneConversationHero.IsLover(Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && !Hero.MainHero.IsFemale)
-            {
-                MBTextManager.SetTextVariable("STR_SALUTATION", new TextObject("{=Dramalord096}My lover"));
-            }
-            else if (Hero.OneToOneConversationHero.IsLover(Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.MainHero.IsFemale)
-            {
-                MBTextManager.SetTextVariable("STR_SALUTATION", new TextObject("{=Dramalord097}My love"));
-            }
-            else if (Hero.OneToOneConversationHero.Father == Hero.MainHero && Hero.MainHero.IsFemale)
-            {
-                MBTextManager.SetTextVariable("STR_SALUTATION", GameTexts.FindText("str_mother"));
-            }
-            else if (Hero.OneToOneConversationHero.Mother == Hero.MainHero && !Hero.MainHero.IsFemale)
-            {
-                MBTextManager.SetTextVariable("STR_SALUTATION", GameTexts.FindText("str_father"));
-            }
+            MBTextManager.SetTextVariable("STR_SALUTATION", ConversationHelper.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, true));
         }
     }
 }
