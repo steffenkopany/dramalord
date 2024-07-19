@@ -97,8 +97,8 @@ namespace Dramalord.Extensions
         public static bool IsAutonom(this Hero hero)
         {
             if((hero.Occupation == Occupation.Wanderer && hero.Clan == null && !DramalordMCM.Instance.AllowWandererAutonomy) ||
-                (hero.Clan == Clan.PlayerClan && !DramalordMCM.Instance.AllowPlayerClanAutonomy)
-                || hero.IsPrisoner)
+                (hero.Clan == Clan.PlayerClan && !DramalordMCM.Instance.AllowPlayerClanAutonomy) ||
+                hero.IsPrisoner)
             {
                 return false;
             }

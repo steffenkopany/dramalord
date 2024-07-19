@@ -235,5 +235,6 @@
     <string id="Dramalord236" text="Parabéns para você e {HERO} pelo seu noivado. Só quero mencionar que eles são {STATUS}." />
     <string id="Dramalord237" text="Autonomia do clã de jogadores" />
     <string id="Dramalord238" text="Permitir que heróis do seu clã interajam com senhores e outros andarilhos" />
+    <string id="Dramalord239" text="Hoje não, {TITLE}. Não estou com vontade, pergunte-me outra hora." />
   </strings>
 </base>

@@ -52,7 +52,7 @@ namespace Dramalord.Actions
             CharacterObject template = (MBRandom.RandomInt(1, 100) > 50) ? mother.CharacterObject : father.CharacterObject;
             Settlement bornSettlement = mother.CurrentSettlement ?? father.HomeSettlement ?? SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
 
-            Clan faction = mother.Clan;
+            Clan? faction = mother.Clan;
             Hero child = HeroCreator.CreateSpecialHero(template, bornSettlement, faction, null, 0);
             child.Mother = mother;
             child.Father = father;

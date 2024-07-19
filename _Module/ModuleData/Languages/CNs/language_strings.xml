@@ -234,5 +234,6 @@
     <string id="Dramalord236" text="祝贺你和 {HERO} 订婚。我只想说，他们是 {STATUS}。" />
     <string id="Dramalord237" text="玩家部落自治" />
     <string id="Dramalord238" text="允许部落英雄与领主和其他流浪者互动" />
+    <string id="Dramalord239" text="今天不行，{TITLE}。我没心情，改天再问我吧。" />
   </strings>
 </base>

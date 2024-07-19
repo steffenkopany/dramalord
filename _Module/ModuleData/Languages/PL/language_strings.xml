@@ -234,5 +234,6 @@
     <string id="Dramalord236" text="Gratulacje dla Ciebie i {HERO} z okazji zaręczyn. Chcę tylko wspomnieć, że są to {STATUS}." />
     <string id="Dramalord237" text="Autonomia klanu gracza" />
     <string id="Dramalord238" text="Pozwól bohaterom swojego klanu na interakcję z lordami i innymi wędrowcami" />
+    <string id="Dramalord239" text="Nie dzisiaj, {TITLE}. Nie jestem w nastroju, zapytaj mnie kiedy indziej." />
   </strings>
 </base>

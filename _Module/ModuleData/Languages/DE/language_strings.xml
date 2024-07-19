@@ -234,5 +234,6 @@
     <string id="Dramalord236" text="Herzlichen Glückwunsch an dich und {HERO} zu eurer Verlobung. Ich möchte nur erwähnen, dass sie {STATUS} sind." />
     <string id="Dramalord237" text="Autonomie des Spielerclans" />
     <string id="Dramalord238" text="Erlaube Helden deines Clans, mit Lords und anderen Wanderern zu interagieren" />
+    <string id="Dramalord239" text="Heute nicht, {TITLE}. Ich bin nicht in der Stimmung, frag mich ein anderes Mal." />
   </strings>
 </base>

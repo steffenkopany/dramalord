@@ -60,7 +60,7 @@ namespace Dramalord.Conversations
 
         private static bool ConditionConfrontationStartUnknown()
         {
-            if (Hero.OneToOneConversationHero.IsDramalordLegit() && ConfrontingHero == Hero.OneToOneConversationHero && !Hero.OneToOneConversationHero.HasMet)
+            if (Hero.OneToOneConversationHero != Hero.MainHero && Hero.OneToOneConversationHero.IsDramalordLegit() && ConfrontingHero == Hero.OneToOneConversationHero && !Hero.OneToOneConversationHero.HasMet)
             {
                 ConfrontingHero = null;
 

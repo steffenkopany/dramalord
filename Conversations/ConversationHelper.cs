@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Conversations
 {
     internal static class ConversationHelper
     {
+        internal static bool ConversationRunning = false;
+
         internal static TextObject PlayerTitle(bool capital) => GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, capital);
         internal static TextObject NpcTitle(bool capital) => GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, capital);
 
@@ -70,11 +74,13 @@ namespace Dramalord.Conversations
         }
 
         internal static HeroIntention? ConversationEndedIntention = null;
+
         internal static void OnConversationEnded(IEnumerable<CharacterObject> characters)
         {
-            if(ConversationEndedIntention != null)
+            ConversationHelper.ConversationRunning = false;
+            //InformationManager.DisplayMessage(new InformationMessage($"{characters.FirstOrDefault(hero => hero.HeroObject != null && hero.HeroObject != Hero.MainHero).HeroObject.Name} finished {ConversationEndedIntention?.Type}", new Color(1f, 0f, 0f)));
+            if (ConversationEndedIntention != null)
             {
-                
                 Hero npc = characters.FirstOrDefault(hero => hero.HeroObject != null && hero.HeroObject != Hero.MainHero).HeroObject;
                 Hero player = Hero.MainHero;
                 HeroIntention intention = ConversationEndedIntention;
@@ -143,6 +149,7 @@ namespace Dramalord.Conversations
                     BreakupAction.Apply(npc, player);
                 }
             }
+            ConversationRunning = false;
         }
     }
 }

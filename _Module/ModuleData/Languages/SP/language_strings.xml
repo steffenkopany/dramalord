@@ -234,5 +234,6 @@
     <string id="Dramalord236" text="Felicitaciones a usted y a {HERO} por su compromiso. Solo quiero mencionar que son {STATUS}." />
     <string id="Dramalord237" text="Autonomía del clan del jugador" />
     <string id="Dramalord238" text="Permite que los héroes de tu clan interactúen con señores y otros vagabundos" />
+    <string id="Dramalord239" text="Hoy no, {TITLE}. No estoy de humor, pregúntame en otro momento." />
   </strings>
 </base>

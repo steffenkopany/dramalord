@@ -234,5 +234,6 @@
     <string id="Dramalord236" text="Sizi ve {HERO}'yu nişanınız için tebrik ederiz. Sadece şunu belirtmek isterim ki onlar {STATUS}." />
     <string id="Dramalord237" text="Oyuncu Klan Özerkliği" />
     <string id="Dramalord238" text="Klanınızın kahramanlarının lordlar ve diğer gezginlerle etkileşime girmesine izin verin" />
+    <string id="Dramalord239" text="Bugün değil, {TITLE}. Havamda değilim, bana başka zaman sor." />
   </strings>
 </base>

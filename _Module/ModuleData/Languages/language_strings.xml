@@ -234,5 +234,6 @@
     <string id="Dramalord236" text="Congratulations to you and {HERO} on your engagement. I just want to mention that they are {STATUS}." />
     <string id="Dramalord237" text="Player Clan Autonomy" />
     <string id="Dramalord238" text="Allow heroes of your clan to interact with lords and other wanderers" />
+    <string id="Dramalord239" text="Not today, {TITLE}. I'm not in the mood, ask me some other time." />
   </strings>
 </base>

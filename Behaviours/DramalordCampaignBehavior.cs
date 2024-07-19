@@ -3,6 +3,7 @@ using Dramalord.Data;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.Core;
 
 namespace Dramalord.Behavior
 {

@@ -234,5 +234,6 @@
     <string id="Dramalord236" text="당신과 {HERO}의 약혼을 축하합니다. 그들이 {STATUS} 상태라는 점을 말씀드리고 싶습니다." />
     <string id="Dramalord237" text="플레이어 클랜 자율성" />
     <string id="Dramalord238" text="클랜의 영웅이 영주 및 다른 방랑자와 상호 작용할 수 있도록 허용" />
+    <string id="Dramalord239" text="오늘은 안 돼요, {TITLE}. 지금 기분이 안 좋아서 나중에 물어보세요." />
   </strings>
 </base>

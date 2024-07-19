@@ -3,6 +3,7 @@ using Dramalord.Extensions;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace Dramalord.Conversations
@@ -14,8 +15,8 @@ namespace Dramalord.Conversations
 
         internal static bool Start(Hero hero, HeroIntention intention)
         {
-            if (ApproachingHero != null) return false;
-
+            //InformationManager.DisplayMessage(new InformationMessage($"{hero.Name} wants {intention.Type}", new Color(1f, 0f, 0f)));
+            //Campaign.Current.SetTimeSpeed(0);
             ApproachingHero = hero;
             Intention = intention;
             bool civilian = hero.CurrentSettlement != null;
@@ -99,7 +100,7 @@ namespace Dramalord.Conversations
 
         private static bool ConditionInteractionStartUnknown()
         {
-            if(Hero.OneToOneConversationHero.IsDramalordLegit() && ApproachingHero == Hero.OneToOneConversationHero && !ApproachingHero.HasMet)
+            if(Hero.OneToOneConversationHero != Hero.MainHero && Hero.OneToOneConversationHero.IsDramalordLegit() && ApproachingHero == Hero.OneToOneConversationHero && !ApproachingHero.HasMet)
             {
                 ApproachingHero = null;
                 MBTextManager.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));

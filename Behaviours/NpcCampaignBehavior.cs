@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.ViewModelCollection.CharacterDeveloper;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace Dramalord.Behavior
 {
@@ -32,18 +34,24 @@ namespace Dramalord.Behavior
         internal void OnHourlyTick()
         {
             Hero? confronter = DramalordIntentions.Instance.GetIntentionTowardsPlayer().FirstOrDefault(hero => !hero.IsPrisoner && hero.IsCloseTo(Hero.MainHero));
-            
             HeroIntention? intention = confronter?.GetIntentions().Where(intention => intention.Target == Hero.MainHero && intention.Type == IntentionType.Confrontation).FirstOrDefault();
 
-            if (intention != null)
+            if (!ConversationHelper.ConversationRunning && confronter != null && intention != null)
             {
+                ConversationHelper.ConversationRunning = true;
+                //InformationManager.DisplayMessage(new InformationMessage($"{confronter.Name} starts {intention.Type}", new Color(1f, 0f, 0f)));
                 HeroEvent? @event = DramalordEvents.Instance.GetEvent(intention.EventId);
-                if (@event != null && !confronter.IsPrisoner && (confronter.IsEmotionalWith(@event.Actors.Hero1) || confronter.IsEmotionalWith(@event.Actors.Hero2)))
+                if (@event != null && (confronter.IsEmotionalWith(@event.Actors.Hero1) || confronter.IsEmotionalWith(@event.Actors.Hero2)))
                 {
                     NPCConfrontPlayer.Start(confronter, @event);
                 }
+                else
+                {
+                    ConversationHelper.ConversationRunning = false;
+                }
                 DramalordIntentions.Instance.RemoveIntention(confronter, intention.Target, intention.Type, intention.EventId);
             }
+            
         }
 
         private void OnDailyHeroTick(Hero hero)
@@ -140,8 +148,9 @@ namespace Dramalord.Behavior
                 {
                     if(closeHeroes.Contains(intention.Target))
                     {
-                        if (intention.Target == Hero.MainHero && MBRandom.RandomInt(1,100) < DramalordMCM.Instance.ChanceApproachingPlayer && intention.Type != IntentionType.Confrontation)
+                        if (!ConversationHelper.ConversationRunning && intention.Target == Hero.MainHero && MBRandom.RandomInt(1,100) < DramalordMCM.Instance.ChanceApproachingPlayer && intention.Type != IntentionType.Confrontation)
                         {
+                            ConversationHelper.ConversationRunning = true;
                             NPCApproachingPlayer.Start(hero, intention);
                         }
                         else if (intention.Target != Hero.MainHero)

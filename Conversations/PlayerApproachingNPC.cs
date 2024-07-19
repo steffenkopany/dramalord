@@ -59,6 +59,7 @@ namespace Dramalord.Conversations
 
             starter.AddDialogLine("npc_interaction_reply_sex_friend_yes", "npc_interaction_reply_sex", "close_window", "{=Dramalord061}Interesting proposition, {TITLE}. I think I like the idea.", ConditionNpcAcceptsSexFriend, ConsequenceNpcAcceptsSexFriend);
             starter.AddDialogLine("npc_interaction_reply_sex_fwb_yes", "npc_interaction_reply_sex", "close_window", "{=Dramalord062}Of course, {TITLE}. I could use some entertainment.", ConditionNpcAcceptsSexFWB, ConsequenceNpcAcceptsSexFWB);
+            starter.AddDialogLine("npc_interaction_reply_sex_fwb_no", "npc_interaction_reply_sex", "player_interaction_selection", "{=Dramalord239}Not today, {TITLE}. I'm not in the mood, ask me some other time.", ConditionNpcDeclinesSexFWB, null);
             starter.AddDialogLine("npc_interaction_reply_sex_yes", "npc_interaction_reply_sex", "close_window", "{=Dramalord064}As you wish. I can garantuee you will not sleep much, {TITLE}.", ConditionNpcAcceptsSex, ConsequenceNpcAcceptsSex);
             starter.AddDialogLine("npc_interaction_reply_sex_no_husband", "npc_interaction_reply_sex", "player_interaction_selection", "{=Dramalord102}Apologies, {TITLE}, but my spouse is around I we can not risk it.", ConditionNpcDeclinesSexHusband, null);
             starter.AddDialogLine("npc_interaction_reply_sex_no_interest", "npc_interaction_reply_sex", "player_interaction_selection", "{=Dramalord103}Apologies, {TITLE}, but I will not do that with you.", ConditionNpcDeclinesSexInterest, null);
@@ -215,6 +216,12 @@ namespace Dramalord.Conversations
         {
             MBTextManager.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
             return !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendWithBenefitsOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny > 50;
+        }
+
+        private static bool ConditionNpcDeclinesSexFWB()
+        {
+            MBTextManager.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            return !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendWithBenefitsOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny < 50;
         }
 
         private static bool ConditionNpcAcceptsSex()
