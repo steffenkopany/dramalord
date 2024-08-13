@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Items>
   <Item id="dramalord_sausage"
-          name="{=Dramalord052}Sausage"
+          name="{=Dramalord240}Sausage"
           mesh="sausage"
           item_category="dramalord_stuff"
           IsFood="true"
@@ -15,7 +15,7 @@
     <Flags Civilian="true" />
   </Item>
   <Item id="dramalord_pie"
-          name="{=Dramalord101}Pie"
+          name="{=Dramalord241}Pie"
           mesh="kitchen_pie"
           item_category="dramalord_stuff"
           IsFood="true"

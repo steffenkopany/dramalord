@@ -235,5 +235,15 @@
     <string id="Dramalord237" text="Autonomie des Spielerclans" />
     <string id="Dramalord238" text="Erlaube Helden deines Clans, mit Lords und anderen Wanderern zu interagieren" />
     <string id="Dramalord239" text="Heute nicht, {TITLE}. Ich bin nicht in der Stimmung, frag mich ein anderes Mal." />
+    <string id="Dramalord240" text="Wurst" />
+    <string id="Dramalord241" text="Kuchen" />
+    <string id="Dramalord242" text="Inzest zulassen" />
+    <string id="Dramalord243" text="KI erlauben, Familienmitglieder für intime und emotionale Ereignisse anzusprechen" />
+    <string id="Dramalord244" text="Abklingzeit für Spielergespräche" />
+    <string id="Dramalord245" text="Anzahl der Tage, die Helden nach dem Gespräch nicht mit dem Spieler interagieren können" />
+    <string id="Dramalord246" text="Gleichgeschlechtliche Ehe zulassen" />
+    <string id="Dramalord247" text="KI erlauben, andere Helden des gleichen Geschlechts zu heiraten (sonst sind sie nur Liebhaber)" />
+    <string id="Dramalord248" text="Interaktion in der Armee zulassen" />
+    <string id="Dramalord249" text="KIs die Interaktion untereinander erlauben, während sie sich in Armeen befinden" />
   </strings>
 </base>

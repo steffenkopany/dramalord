@@ -235,5 +235,15 @@
     <string id="Dramalord237" text="Oyuncu Klan Özerkliği" />
     <string id="Dramalord238" text="Klanınızın kahramanlarının lordlar ve diğer gezginlerle etkileşime girmesine izin verin" />
     <string id="Dramalord239" text="Bugün değil, {TITLE}. Havamda değilim, bana başka zaman sor." />
+    <string id="Dramalord240" text="Sosis" />
+    <string id="Dramalord241" text="Turta" />
+    <string id="Dramalord242" text="Ensest İlişkiye İzin Ver" />
+    <string id="Dramalord243" text="Yapay zekanın samimi ve duygusal olaylar için aile üyelerine yaklaşmasına izin ver" />
+    <string id="Dramalord244" text="Oyuncu Konuşması Soğuma Süresi" />
+    <string id="Dramalord245" text="Kahramanların oyuncuyla konuştuktan sonra etkileşime giremeyeceği gün sayısı" />
+    <string id="Dramalord246" text="Eşcinsel Evliliğe İzin Ver" />
+    <string id="Dramalord247" text="Yapay zekanın aynı cinsiyetten diğer kahramanlarla evlenmesine izin ver (aksi takdirde sadece sevgili olurlar)" />
+    <string id="Dramalord248" text="Orduda Etkileşime İzin Ver" />
+    <string id="Dramalord249" text="Ordudayken yapay zekanın birbirleriyle etkileşime girmesine izin ver" />
   </strings>
 </base>

@@ -51,7 +51,7 @@ namespace Dramalord.Conversations
             if (relation == RelationshipType.FriendWithBenefits) return new TextObject("{=Dramalord026}my special friend");
             if (relation == RelationshipType.Lover) return new TextObject("{=Dramalord023}my lover");
             if (relation == RelationshipType.Betrothed) return new TextObject("{=Dramalord025}my betrothed");
-            if (relation == RelationshipType.Spouse) return new TextObject("{=Dramalord172}my spouse");
+            if (relation == RelationshipType.Spouse) return new TextObject("{=Dramalord173}my spouse");
             return new TextObject("{=Dramalord175}my acquaintance");
         }
 

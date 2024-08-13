@@ -66,6 +66,16 @@ namespace Dramalord.Actions
                     LeaveClanAction.Apply(firstHero, firstHero, true);
                     JoinClanAction.Apply(firstHero, secondHero.Clan, true);
                 }
+                else if(firstHero.Clan.Leader == firstHero && secondHero.Clan.Leader != secondHero)
+                {
+                    LeaveClanAction.Apply(secondHero, secondHero, true);
+                    JoinClanAction.Apply(secondHero, firstHero.Clan, true);
+                }
+                else if (firstHero.Clan.Leader != firstHero && secondHero.Clan.Leader == secondHero)
+                {
+                    LeaveClanAction.Apply(firstHero, firstHero, true);
+                    JoinClanAction.Apply(firstHero, secondHero.Clan, true);
+                }
                 else if (firstHero.IsFemale != secondHero.IsFemale && secondHero.IsFemale)
                 {
                     LeaveClanAction.Apply(secondHero, secondHero, true);

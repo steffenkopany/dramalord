@@ -235,5 +235,15 @@
     <string id="Dramalord237" text="Autonomía del clan del jugador" />
     <string id="Dramalord238" text="Permite que los héroes de tu clan interactúen con señores y otros vagabundos" />
     <string id="Dramalord239" text="Hoy no, {TITLE}. No estoy de humor, pregúntame en otro momento." />
+    <string id="Dramalord240" text="Salchicha" />
+    <string id="Dramalord241" text="Tarta" />
+    <string id="Dramalord242" text="Permitir incesto" />
+    <string id="Dramalord243" text="Permitir que la IA se acerque a los miembros de la familia para eventos íntimos y emocionales" />
+    <string id="Dramalord244" text="Tiempo de reutilización de la conversación del jugador" />
+    <string id="Dramalord245" text="Número de días que los héroes no pueden interactuar con el jugador después de hablar con él" />
+    <string id="Dramalord246" text="Permitir matrimonio entre personas del mismo sexo" />
+    <string id="Dramalord247" text="Permitir que la IA se case con otros héroes del mismo sexo (de lo contrario, solo son amantes)" />
+    <string id="Dramalord248" text="Permitir interacción en el ejército" />
+    <string id="Dramalord249" text="Permitir que la IA interactúe entre sí mientras están en los ejércitos" />
   </strings>
 </base>

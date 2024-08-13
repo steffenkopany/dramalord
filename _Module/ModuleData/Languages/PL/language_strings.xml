@@ -235,5 +235,15 @@
     <string id="Dramalord237" text="Autonomia klanu gracza" />
     <string id="Dramalord238" text="Pozwól bohaterom swojego klanu na interakcję z lordami i innymi wędrowcami" />
     <string id="Dramalord239" text="Nie dzisiaj, {TITLE}. Nie jestem w nastroju, zapytaj mnie kiedy indziej." />
+    <string id="Dramalord240" text="Kiełbasa" />
+    <string id="Dramalord241" text="Ciasto" />
+    <string id="Dramalord242" text="Zezwól na kazirodztwo" />
+    <string id="Dramalord243" text="Zezwól SI na zbliżanie się do członków rodziny w celu zaistnienia intymnych i emocjonalnych wydarzeń" />
+    <string id="Dramalord244" text="Czas odnowienia rozmowy gracza" />
+    <string id="Dramalord245" text="Liczba dni, w których bohaterowie nie mogą wchodzić w interakcje z graczem po rozmowie z nim" />
+    <string id="Dramalord246" text="Zezwól na małżeństwa osób tej samej płci" />
+    <string id="Dramalord247" text="Zezwól SI na poślubienie innych bohaterów tej samej płci (w przeciwnym razie są oni tylko kochankami)" />
+    <string id="Dramalord248" text="Zezwól na interakcję w armii" />
+    <string id="Dramalord249" text="Zezwól AI na interakcję ze sobą podczas przebywania w armiach" />
   </strings>
 </base>

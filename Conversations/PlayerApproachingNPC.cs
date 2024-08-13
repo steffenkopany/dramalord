@@ -209,13 +209,13 @@ namespace Dramalord.Conversations
         private static bool ConditionNpcAcceptsSexFriend()
         {
             MBTextManager.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
-            return !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny > 75 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= 75;
+            return !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= 75 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= 75;
         }
 
         private static bool ConditionNpcAcceptsSexFWB()
         {
             MBTextManager.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
-            return !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendWithBenefitsOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny > 50;
+            return !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendWithBenefitsOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= 50;
         }
 
         private static bool ConditionNpcDeclinesSexFWB()

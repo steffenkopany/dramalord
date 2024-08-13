@@ -38,6 +38,10 @@ namespace Dramalord.Patches
             {
                 return false;
             }
+            if(hero.Clan == null)
+            {
+                return false;
+            }
             return true;
         }
     }

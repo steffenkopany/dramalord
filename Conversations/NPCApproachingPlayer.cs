@@ -302,6 +302,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceLeaveConversation()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).LastInteraction = CampaignTime.Now.ToDays;
             Intention = null;
             if (PlayerEncounter.Current != null)
             {
@@ -332,6 +333,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceHandlePlayerDeclines()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).LastInteraction = CampaignTime.Now.ToDays;
             Intention = null;
             if (PlayerEncounter.Current != null)
             {

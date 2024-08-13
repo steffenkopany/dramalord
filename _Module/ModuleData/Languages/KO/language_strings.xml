@@ -235,5 +235,15 @@
     <string id="Dramalord237" text="플레이어 클랜 자율성" />
     <string id="Dramalord238" text="클랜의 영웅이 영주 및 다른 방랑자와 상호 작용할 수 있도록 허용" />
     <string id="Dramalord239" text="오늘은 안 돼요, {TITLE}. 지금 기분이 안 좋아서 나중에 물어보세요." />
+    <string id="Dramalord240" text="소시지" />
+    <string id="Dramalord241" text="파이" />
+    <string id="Dramalord242" text="근친상간 허용" />
+    <string id="Dramalord243" text="AI가 친밀하고 감정적인 이벤트를 위해 가족에게 접근하도록 허용" />
+    <string id="Dramalord244" text="플레이어 대화 쿨다운" />
+    <string id="Dramalord245" text="영웅이 플레이어와 대화한 후 상호 작용할 수 없는 일수" />
+    <string id="Dramalord246" text="동성 결혼 허용" />
+    <string id="Dramalord247" text="AI가 다른 동성 영웅과 결혼하도록 허용(그렇지 않으면 그들은 그저 연인일 뿐)" />
+    <string id="Dramalord248" text="군대 내에서 상호 작용 허용" />
+    <string id="Dramalord249" text="군대에 있는 동안 AI가 서로 상호 작용하도록 허용" />
   </strings>
 </base>

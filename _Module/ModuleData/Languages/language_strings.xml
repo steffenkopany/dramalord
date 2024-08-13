@@ -235,5 +235,15 @@
     <string id="Dramalord237" text="Player Clan Autonomy" />
     <string id="Dramalord238" text="Allow heroes of your clan to interact with lords and other wanderers" />
     <string id="Dramalord239" text="Not today, {TITLE}. I'm not in the mood, ask me some other time." />
+    <string id="Dramalord240" text="Sausage" />
+    <string id="Dramalord241" text="Pie" />
+    <string id="Dramalord242" text="Allow Incest" />
+    <string id="Dramalord243" text="Allow AI to approach family members for intimate and emotional events" />
+    <string id="Dramalord244" text="Player Conversation Cooldown" />
+    <string id="Dramalord245" text="Number of days heroes can't interact with the player after speaking to them" />
+    <string id="Dramalord246" text="Allow Same Sex Marriage" />
+    <string id="Dramalord247" text="Allow AI to marry other heroes of the same sex (otherwise they are just lovers)" />
+    <string id="Dramalord248" text="Allow Interaction In Army" />
+    <string id="Dramalord249" text="Allow AI to interact with each other while being in armies" />
   </strings>
 </base>

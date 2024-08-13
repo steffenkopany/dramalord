@@ -235,5 +235,15 @@
     <string id="Dramalord237" text="プレイヤー クランの自治" />
     <string id="Dramalord238" text="クランのヒーローが領主や他の放浪者と交流できるようにします" />
     <string id="Dramalord239" text="今日はだめですよ、{TITLE}。気分じゃないので、また別のときに聞いてください。" />
+    <string id="Dramalord240" text="ソーセージ" />
+    <string id="Dramalord241" text="パイ" />
+    <string id="Dramalord242" text="近親相姦を許可" />
+    <string id="Dramalord243" text="AI が家族に近づき、親密で感情的なイベントを開催することを許可する" />
+    <string id="Dramalord244" text="プレイヤーの会話のクールダウン" />
+    <string id="Dramalord245" text="ヒーローがプレイヤーと話した後、プレイヤーと対話できない日数" />
+    <string id="Dramalord246" text="同性結婚を許可" />
+    <string id="Dramalord247" text="AI が同性のヒーローと結婚することを許可する (そうでない場合は恋人同士)" />
+    <string id="Dramalord248" text="軍隊内でのやり取りを許可する" />
+    <string id="Dramalord249" text="軍隊に所属している AI 同士がやり取りできるようにする" />
   </strings>
 </base>

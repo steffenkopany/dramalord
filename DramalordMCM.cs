@@ -22,6 +22,18 @@ namespace Dramalord
         [SettingPropertyBool("{=Dramalord211}Player Default Pregnancies", HintText = "{=Dramalord212}Allow default pregnancies for the player or their spouse", Order = 4, RequireRestart = false)]
         public bool AllowDefaultPregnancies { get; set; } = true;
 
+        [SettingPropertyGroup("{=Dramalord001}Autonomy")]
+        [SettingPropertyBool("{=Dramalord242}Allow Incest", HintText = "{=Dramalord243}Allow AI to approach family members for intimate and emotional events", Order = 5, RequireRestart = false)]
+        public bool AllowIncest { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord001}Autonomy")]
+        [SettingPropertyBool("{=Dramalord246}Allow Same Sex Marriage", HintText = "{=Dramalord247}Allow AI to marry other heroes of the same sex (otherwise they are just lovers)", Order = 6, RequireRestart = false)]
+        public bool AllowSameSexMarriage { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord001}Autonomy")]
+        [SettingPropertyBool("{=Dramalord248}Allow Interaction In Army", HintText = "{=Dramalord249}Allow AI to interact with each other while being in armies", Order = 7, RequireRestart = false)]
+        public bool AllowArmyInteraction { get; set; } = true;
+
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord005}Minimum Attraction", 0, 100, Order = 1, HintText = "{=Dramalord006}Attraction score required for NPCs to consider others as attractive", RequireRestart = false)]
         public int MinAttraction { get; set; } = 50;
@@ -77,6 +89,10 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord016}General")]
         [SettingPropertyFloatingInteger("{=Dramalord207}Days Between Interactions", 0, 100, HintText = "{=Dramalord208}Number of days heroes can't interact with the same hero again", Order = 4, RequireRestart = false)]
         public int DaysBetweenInteractions { get; set; } = 1;
+
+        [SettingPropertyGroup("{=Dramalord016}General")]
+        [SettingPropertyFloatingInteger("{=Dramalord244}Player Conversation Cooldown", 0, 100, HintText = "{=Dramalord245}Number of days heroes can't interact with the player after speaking to them", Order = 5, RequireRestart = false)]
+        public int DaysBetweenPlayerInteractions { get; set; } = 3;
 
         [SettingPropertyGroup("{=Dramalord016}General")]
         [SettingPropertyBool("{=Dramalord213}Player Always Witness", Order = 5, HintText = "{=Dramalord214}The player will always be witness of events", RequireRestart = false)]

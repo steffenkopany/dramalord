@@ -235,5 +235,15 @@
     <string id="Dramalord237" text="玩家部落自治" />
     <string id="Dramalord238" text="允许部落英雄与领主和其他流浪者互动" />
     <string id="Dramalord239" text="今天不行，{TITLE}。我没心情，改天再问我吧。" />
+    <string id="Dramalord240" text="香肠" />
+    <string id="Dramalord241" text="馅饼" />
+    <string id="Dramalord242" text="允许乱伦" />
+    <string id="Dramalord243" text="允许 AI 接近家庭成员进行亲密和情感活动" />
+    <string id="Dramalord244" text="玩家对话冷却时间" />
+    <string id="Dramalord245" text="英雄与玩家交谈后不能与其互动的天数" />
+    <string id="Dramalord246" text="允许同性婚姻" />
+    <string id="Dramalord247" text="允许 AI 与同性的其他英雄结婚（否则他们只是恋人）" />
+    <string id="Dramalord248" text="允许军队中互动" />
+    <string id="Dramalord249" text="允许 AI 在军队中相互互动" />
   </strings>
 </base>

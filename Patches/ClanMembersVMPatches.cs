@@ -5,6 +5,9 @@ using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection.ClanManagement;
 using TaleWorlds.CampaignSystem.ViewModelCollection.ClanManagement.Categories;
+using TaleWorlds.MountAndBlade.CustomBattle.CustomBattle.SelectionItem;
+using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Crafting;
+using TaleWorlds.MountAndBlade.ViewModelCollection.ProfileSelection;
 
 namespace Dramalord.Patches
 {
