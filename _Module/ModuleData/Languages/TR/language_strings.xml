@@ -245,5 +245,206 @@
     <string id="Dramalord247" text="Yapay zekanın aynı cinsiyetten diğer kahramanlarla evlenmesine izin ver (aksi takdirde sadece sevgili olurlar)" />
     <string id="Dramalord248" text="Orduda Etkileşime İzin Ver" />
     <string id="Dramalord249" text="Ordudayken yapay zekanın birbirleriyle etkileşime girmesine izin ver" />
+    <string id="Dramalord250" text="{HERO1.LINK}, {CHILD.LINK} adlı çocuğu bir yetimhaneye yerleştirdi." />
+    <string id="Dramalord251" text="{HERO1.LINK} evlat edinilen yetim {CHILD.LINK}" />
+    <string id="Dramalord252" text="İyi günler, {TITLE}. Size nasıl yardımcı olabilirim?" />
+    <string id="Dramalord253" text="Ailemi genişletmek ve bir yetimi evlat edinmek istiyorum." />
+    <string id="Dramalord254" text="Klanımdaki bir çocuktan kurtulmak istiyorum." />
+    <string id="Dramalord255" text="Önemli değil." />
+    <string id="Dramalord256" text="Ah, bu harika {TITLE}. Yetimhanemizde şu anda {BOYS} erkek ve {GIRLS} kız çocuğumuz var." />
+    <string id="Dramalord257" text="Gerçekten üzgünüm {TITLE}, ancak bir çocuğu evlat edinmek için evli olmanız gerekiyor." />
+    <string id="Dramalord258" text="Özür dilerim {TITLE}, ancak şu anda yetimhanemizde hiç çocuk yok." />
+    <string id="Dramalord259" text="Bir erkek çocuğu evlat edinmek istiyorum." />
+    <string id="Dramalord260" text="Bir kız çocuğu evlat edinmek istiyorum." />
+    <string id="Dramalord261" text="Kimi evlat edinmek istersiniz?" />
+    <string id="Dramalord262" text="{ORPHAN.NAME}, {ORPHANAGE} yaşında." />
+    <string id="Dramalord263" text="Başka bir çocuk düşünüyorum." />
+    <string id="Dramalord264" text="Pekala. {ORPHAN.NAME}'i evlat edinmek istediğinizden kesinlikle emin misiniz?" />
+    <string id="Dramalord265" text="Tebrikler! {ORPHAN.NAME}'in iyi ellerde olduğundan eminim." />
+    <string id="Dramalord266" text="Ah, bu üzücü. {ORPHAN.NAME} çok hayal kırıklığına uğrayacak." />
+    <string id="Dramalord267" text="Elbette {TITLE}, bunu ayarlayabiliriz." />
+    <string id="Dramalord268" text="Görünüşe göre {TITLE}, klanınızdaki hiç çocuk yok." />
+    <string id="Dramalord269" text="Hangi talihsiz çocuğu gözaltına almamız gerekir?" />
+    <string id="Dramalord270" text="Pekala. {ORPHAN.NAME}'i vermek istediğinizden kesinlikle emin misiniz?" />
+    <string id="Dramalord271" text="Böylece karar verildi! {ORPHAN.NAME}'e bakacağız ve çocuğa yeni bir yuva bulacağız." />
+    <string id="Dramalord272" text="Pekala, {TITLE}. {ORPHAN.NAME} sizin klanınızda kalacak." />
+    <string id="Dramalord273" text="Mahkum, seninle konuşmam gerek." />
+    <string id="Dramalord274" text="Çok fazla seçeneğim yok gibi {TITLE}." />
+    <string id="Dramalord275" text="Seninle konuşmayı reddediyorum." />
+    <string id="Dramalord276" text="Seni yatak odamda... özel bir hizmet için serbest bırakmayı düşünebilirim." />
+    <string id="Dramalord277" text="Bunu bitirmenin zamanı geldi. Varlığın beni rahatsız ediyor." />
+    <string id="Dramalord278" text="Kendine bir anlaşma yaptın! Sanırım bundan zevk bile alacağım." />
+    <string id="Dramalord279" text="Asla! Böyle tekliflerle onurumu lekeleyemezsin!" />
+    <string id="Dramalord280" text="Yapman gerekeni yap, şerefsiz domuz!" />
+    <string id="Dramalord281" text="Aman Tanrım! Lütfen hayır... Yalvarırım!" />
+    <string id="Dramalord282" text="Bekle {TITLE}! Eğer zevk de varsa neden ölümü seçiyorsun?" />
+    <string id="Dramalord283" text="Hmm... Tamam. Kabul ediyorum. İyi performans gösterirsen bu sefer seni bağışlarım." />
+    <string id="Dramalord284" text="Eh, senin ölümün benim en tatlı zevkim." />
+    <string id="Dramalord285" text="{HERO1.LINK}, tutsak {HERO2.LINK}'i ihlal etti" />
+    <string id="Dramalord286" text="Yetimhaneyi ziyaret edin" />
+    <string id="Dramalord287" text="Bir çocuğu evlat edinmek veya klanınızdan birinden kurtulmak için yetimhaneyi ziyaret edin" />
+    <string id="Dramalord288" text="Aşk Kazanımı Çarpanı" />
+    <string id="Dramalord289" text="Flört veya buluşmalar nedeniyle kazanılan aşk bu değerle çarpılır" />
+    <string id="Dramalord290" text="Güven Kazanımı Çarpanı" />
+    <string id="Dramalord291" text="Konuşma veya buluşmalar nedeniyle kazanılan güven bu değerle çarpılır" />
+    <string id="Dramalord292" text="{TITLE}, sana sevgimin bir göstergesi olarak bu olağanüstü {GIFT} yi vereyim." />
+    <string id="Dramalord293" text="Teşekkür ederim {TITLE}! Sevginin bir hatırlatıcısı olarak yatağımın yakınında saklayacağım ve her gün tadını çıkaracağım!" />
+    <string id="Dramalord294" text="{HERO.LINK} adlı kullanıcıya bir {TOY} verdin." />
+    <string id="Dramalord295" text="Oyuncak Kırılma Şansı" />
+    <string id="Dramalord296" text="Bir kahraman tarafından kullanılırken bir oyuncağın kırılma şansı." />
+    <string id="Dramalord297" text="{HERO.LINK}'in oyuncağı kırıldı!" />
+    <string id="Dramalord298" text="Küresel Varsayılan Gebelikler." />
+    <string id="Dramalord299" text="Tüm NPC'ler için varsayılan gebeliklere izin ver" />
+    <string id="Dramalord300" text="Küresel Varsayılan Evlilikler." />
+    <string id="Dramalord301" text="Tüm NPC'ler için varsayılan evliliklere izin ver" />
+    <string id="Dramalord302" text="{HERO.LINK}, onların meselesini ihmal etmenizden dolayı hayal kırıklığına uğradı... (Sevgi {NUM}, Güven {NUM2})" />
+    <string id="Dramalord303" text="{HERO.LINK}, acil bir meseleleri olduğu için onları bulmanızı istiyor. Zamanında yetişebilecek misiniz?" />
+    <string id="Dramalord304" text="{QUESTHERO} sizin varlığınızı istiyor." />
+    <string id="Dramalord305" text="{HERO.LINK} isteğini yerine getirdiğin için çok mutlu... (Sevgi {NUM}, Güven {NUM2})" />
+    <string id="Dramalord306" text="Ah {TITLE} sonunda geldin! Seni umutsuzca bekliyordum!" />
+    <string id="Dramalord307" text="Bak kim geldi. Acele etmiyordun {TITLE}, değil mi?" />
+    <string id="Dramalord308" text="İşte buradayım. Bana ilgilenmemi istediğin acil konu nedir?" />
+    <string id="Dramalord309" text="Giysilerini çıkar {TITLE} ve beni takip et. Çok hassas bir konuda becerikliliğinden faydalanmam gerek!" />
+    <string id="Dramalord310" text="Eh {TITLE}, başka biri benim... sorunumla ilgileniyordu. Çok hoş bir şekilde. Hoşça kal." />
+    <string id="Dramalord311" text="Görev Şansı" />
+    <string id="Dramalord312" text="Oyuncunun bir sevgilisinin bir göreve başlama şansı" />
+    <string id="Dramalord313" text="İsteğe bağlı" />
+    <string id="Dramalord314" text="İlişki Değişikliklerini Göster" />
+    <string id="Dramalord315" text="İlişki değişikliği bildirimlerini görmek istiyorsanız bunu etkinleştirin (Small Talk modu için gereklidir)" />
+    <string id="Dramalord316" text="Esaret Günlüklerini Göster" />
+    <string id="Dramalord317" text="Kahramanlar yakalandığında günlükleri görmek istiyorsanız bunu etkinleştirin" />
+    <string id="Dramalord318" text="{TITLE} Hangi görünümü tercih ettiğinizi hep merak ederdim. (Bilgi)" />
+    <string id="Dramalord319" text="Özür dilerim, {TITLE}, ancak kişisel tercihlerimi size söyleyecek kadar güvenmiyorum." />
+    <string id="Dramalord320" text="Elbette, {TITLE}. Gerçekten bilmek istiyorsan sana söyleyebilirim..." />
+    <string id="Dramalord321" text="Karşı cinse çekiliyorum ve kendi cinsimden insanlara pek ilgi duymuyorum." />
+    <string id="Dramalord322" text="Karşı cinse pek ilgi duymuyorum, kendi cinsimden insanları tercih ediyorum." />
+    <string id="Dramalord323" text="Karşı cinsten insanları çekici buluyorum ama aynı zamanda kendi cinsimden olanlara da çekiliyorum." />
+    <string id="Dramalord324" text="Her iki cinse de karşı bir ilgim yok. Onlar da beni pek ilgilendirmiyor." />
+    <string id="Dramalord325" text="Bence zayıf insanlar diğerlerinden daha narin." />
+    <string id="Dramalord326" text="Zayıf veya şişman insanları sevmem. Orta boy tam istediğim gibi." />
+    <string id="Dramalord327" text="Daha kilolu insanları severim. Benim için daha çok şey var." />
+    <string id="Dramalord328" text="Kaslar abartılıyor. Zayıf olmayı seviyorum ve kemik görmek istiyorum." />
+    <string id="Dramalord329" text="Orta kaslar benim için tam istediğim gibi. Özel bir şeye ihtiyacım yok." />
+    <string id="Dramalord330" text="Güçlü insanları severim. Ne kadar iri olursa o kadar iyi." />
+    <string id="Dramalord331" text="Benden {AGEDIFF} olan insanları severim. En iyisi {AGE} yaş civarında olanlar." />
+    <string id="Dramalord332" text="Sen {TITLE}, bence 100 üzerinden {RATING}'sin." />
+    <string id="Dramalord333" text="younger" />
+    <string id="Dramalord334" text="older" />
+    <string id="Dramalord335" text="daha yaşlı ve daha genç değil" />
+    <string id="Dramalord336" text="{HERO.LINK}'in fiziksel tercihlerini öğrendiniz." />
+    <string id="Dramalord337" text="Asgari Güven" />
+    <string id="Dramalord338" text="Bir kahramanı arkadaş olarak kabul etmek için gereken güven puanları (sadece Dramalord arkadaşı)" />
+    <string id="Dramalord339" text="İyi hikayelerin olduğunu biliyorum, bana birkaçını anlat! (Dostça sohbet)" />
+    <string id="Dramalord340" text="Harika görünüyorsun, ama eminim bunu zaten biliyorsundur... (Flört)" />
+    <string id="Dramalord341" text="Sana karşı hislerim olduğunu itiraf etmeliyim, {TITLE}! (Aşk İlişkisi)" />
+    <string id="Dramalord342" text="Seninle ve sadece seninle olmaktan daha çok istediğim hiçbir şey yok... (Çıkma)" />
+    <string id="Dramalord343" text="Sen de zevk için can atıyor musun, {TITLE}? (Faydalı arkadaşlık)" />
+    <string id="Dramalord344" text="Seni istiyorum. Senin de aynı şekilde hissettiğini biliyorum. Benimle odamda buluş. (Yakınlık)" />
+    <string id="Dramalord345" text="Seni hissetmeye ihtiyacım var, {TITLE}! (Yakınlık)" />
+    <string id="Dramalord346" text="Seni çok seviyorum, {TITLE}. Benimle evlenir misin? (Nişanlı)" />
+    <string id="Dramalord347" text="Bir anlaşmaya vardık, {TITLE}, evlenelim! (Evlilik)" />
+    <string id="Dramalord348" text="Seninle benim aramızda yürümüyor. Bu saçmalık daha da büyümeden bitirelim. (Ayrılmak)" />
+    <string id="Dramalord349" text="karısı" />
+    <string id="Dramalord350" text="kocası" />
+    <string id="Dramalord351" text="{TITLE} sohbeti için teşekkür ederim." />
+    <string id="Dramalord352" text="{TITLE}'ı bana söyle, çok seyahat ediyorsun ve insanlarla tanışıyorsun, {POI.NAME} hakkında ne düşünüyorsun?" />
+    <string id="Dramalord353" text="{POI.NAME} ile tanıştım ve onları arkadaşım olarak görüyorum." />
+    <string id="Dramalord354" text="Öf, bana hatırlatma. {POI.NAME} sinir bozucu ve umarım bir daha karşılaşmam." />
+    <string id="Dramalord355" text="{POI.NAME}, hmm. Aslında onlar hakkında belirli bir fikrim yok." />
+    <string id="Dramalord356" text="Ne yazık ki {POI.NAME} ile tanışma şansım hiç olmadı, ama iyi insanlara benziyorlar?" />
+    <string id="Dramalord357" text="İyi ki {POI.NAME} ile hiç tanışmamışım. Onların korkunç bir varlık olduğunu hayal edebiliyorum." />
+    <string id="Dramalord358" text="{POI.NAME} hakkında hiçbir fikrim yok, çünkü onlarla hiçbir zaman tek kelime etmedim." />
+    <string id="Dramalord359" text="Bunu duyduğuma sevindim! {POI.NAME} benim de iyi bir arkadaşım!" />
+    <string id="Dramalord360" text="Bunu duyduğuma üzüldüm. {POI.NAME} aslında benim de iyi bir arkadaşım." />
+    <string id="Dramalord361" text="Muhtemelen {POI.NAME}'i iyi tanımıyorsundur. Onlar benim arkadaşım." />
+    <string id="Dramalord362" text="Öf, gerçekten mi? {POI.NAME}'i mi seviyorsun? Bu çok hayal kırıklığı." />
+    <string id="Dramalord363" text="Kesinlikle katılıyorum! {POI.NAME} tırnaklarımın altındaki kir gibi." />
+    <string id="Dramalord364" text="Muhtemelen {POI.NAME}'i iyi tanımıyorsundur. Gerçekten sevmiyorum." />
+    <string id="Dramalord365" text="Söylemeliyim ki {POI.NAME} hakkında bir fikir oluşturmakta çok hızlısın." />
+    <string id="Dramalord366" text="Benim de {POI.NAME} hakkında bir fikrim yok. Onları yeterince iyi tanımıyorum." />
+    <string id="Dramalord367" text="Bu mükemmel bir bakış açısı! Katılıyorum." />
+    <string id="Dramalord368" text="Aslında seninle aynı fikirdeyim." />
+    <string id="Dramalord369" text="Oldukça inatçısın, değil mi?" />
+    <string id="Dramalord370" text="Geçen savaşta grubumuz yiyecekleri bittiği için bir düşman köyüne baskın düzenledi. Üzücü ama bence bu daha büyük iyilik için yapılmalıydı. (Onur)" />
+    <string id="Dramalord371" text="Katılmıyorum. Sivil halk siyaset yüzünden acı çekmemeli." />
+    <string id="Dramalord372" text="Doğru. O köylüler mallarını gönüllü olarak vermeliydi." />
+    <string id="Dramalord373" text="Bilmiyorum. Sanırım işler böyle yürüyor." />
+    <string id="Dramalord374" text="Daha güçlü bir düşmanla karşılaştığınız halde yine de savaşa gittiğiniz oldu mu? (Cesaret)" />
+    <string id="Dramalord375" text="Evet ve yine de kazandık. Bu dünya cesurlara ait!" />
+    <string id="Dramalord376" text="Hayır. Kazanamayacağımızı bildiğim halde neden hayatımı riske atayım." />
+    <string id="Dramalord377" text="Söyleyemem. Sanırım bu duruma bağlı." />
+    <string id="Dramalord378" text="Bazı lordların esir alınan birliklerin savaş alanını terk etmesine izin verdiğini duydum. Bu bir risk değil mi? (Merhamet)" />
+    <string id="Dramalord379" text="Onların ailelerine dönmelerine izin veriyorlar. Ben de aynısını yapardım." />
+    <string id="Dramalord380" text="Dikkat et derim! Tekrar savaşa girmelerini zorlaştırır." />
+    <string id="Dramalord381" text="Öldürmek veya öldürülmek için oradalar, bu yüzden kimin umurunda onlar." />
+    <string id="Dramalord382" text="Geçtiğimiz günlerde bir turnuvanın şampiyonu tüm kazancını fakirlere verdi. (Cömertlik)" />
+    <string id="Dramalord383" text="Bu gerçekten cömert bir hareket. Bu tür insanlar maalesef nadir." />
+    <string id="Dramalord384" text="Bah! Ne kadar da para israfı. İlk etapta neden katıldılar?" />
+    <string id="Dramalord385" text="Sanırım bu onların parası, dolayısıyla bu onların seçimi." />
+    <string id="Dramalord386" text="Güney klanlarından biri, liderleri krallarıyla tartıştıktan sonra neredeyse krallıklarını terk edecekti. (Hesaplama)" />
+    <string id="Dramalord387" text="Bu aptalca. Gururları yüzünden korumalarını kaybederlerdi." />
+    <string id="Dramalord388" text="Nasıl hissettiklerini anlayabiliyorum. Ben de arada sırada sinirleniyorum." />
+    <string id="Dramalord389" text="Tartışmanın ne hakkında olduğunu bilmediğim sürece bu hareketi yargılayamam." />
+    <string id="Dramalord390" text="Ohh! Beni utandırıyorsun! Bunu duyduğuma sevindim." />
+    <string id="Dramalord391" text="Yani bu beni çekici bulmadığın anlamına mı geliyor?" />
+    <string id="Dramalord392" text="Bir tür tercihin olduğundan oldukça eminim." />
+    <string id="Dramalord393" text="Bazı lordların ve leydilerin fiziksel cinsiyet konusunda farklı zevkleri olduğunu duydum. Peki ya sen? (Yönelim)" />
+    <string id="Dramalord394" text="Aslında belirli bir tercihim yok." />
+    <string id="Dramalord395" text="Yerel hanın sahibi biraz kilo almış. Şimdi meyhane her gün meraklı müşterilerle dolu.gece. (Ağırlık)" />
+    <string id="Dramalord396" text="Yaylalarda lordlar ve hanımlar genellikle iri ve güçlüdür. Birçok insan güçlü oldukları için onlara hayranlık duyar. (Yapı)" />
+    <string id="Dramalord397" text="Yaşlı insanları tercih eden insanlar vardır ve diğerleri genç insanları tercih eder. Sizin tercihiniz nedir? (Yaş)" />
+    <string id="Dramalord398" text="Benden yaşlı insanları tercih ederim. Olgun meyveden daha iyi hiçbir şey yoktur." />
+    <string id="Dramalord399" text="Genç insanların enerjisini ve dayanıklılığını çok seviyorum." />
+    <string id="Dramalord400" text="Bence kendi yaşlarımdaki insanlar daha çekici." />
+    <string id="Dramalord401" text="Yeni şeyler denemenin bazen heyecan verici olduğunu düşünüyor musunuz? (Açıklık)" />
+    <string id="Dramalord402" text="Yeni şeyler denemeyi severim. Değişim olmadan sıkıcı oluyor." />
+    <string id="Dramalord403" text="Saçmalık. Her şey olduğu gibi iyidir ve değişmeye gerek yoktur." />
+    <string id="Dramalord404" text="Belki de umursamıyorum. Her şey zaten sürekli değişiyor." />
+    <string id="Dramalord405" text="Peki, sen plan yapan biri misin yoksa daha çok kendiliğinden hareket eden biri misin? (Bilinçlilik)" />
+    <string id="Dramalord406" text="Her şeyin düzene ve yapıya ihtiyacı vardır. Planlama her şeydir." />
+    <string id="Dramalord407" text="Hayır, aslında değil. Genellikle bir sonraki macerama tökezleyerek başlarım." />
+    <string id="Dramalord408" text="Eh, bazen planlıyorum, bazen planlamıyorum." />
+    <string id="Dramalord409" text="Şehirde bir turnuva olduğunda, yeni insanlarla tanışmak için heyecanlı mısın? (Dışa dönüklük)" />
+    <string id="Dramalord410" text="Kesinlikle! İnsanların etrafındayken sohbet etmeyi bırakamıyorum." />
+    <string id="Dramalord411" text="Öf. Hayır, kendi halime kalıyorum. Çoğu insan beni rahatsız ediyor." />
+    <string id="Dramalord412" text="Eh, bu duruma bağlı. Muhtemelen birkaç kişiyle tanışırım, ama çok değil." />
+    <string id="Dramalord413" text="Arkadaşlarından biri sana üzücü bir hikaye anlatırsa, nasıl tepki verirsin? (Uyumluluk)" />
+    <string id="Dramalord414" text="Onları rahatlatmaya çalışıyorum veya tabii ki elimden gelirse yardım ediyorum." />
+    <string id="Dramalord415" text="Şey, arkadaşlarım kişisel meseleleriyle beni rahatsız etmemeleri gerektiğini biliyorlar." />
+    <string id="Dramalord416" text="Sanırım bu kendimi nasıl hissettiğime bağlı." />
+    <string id="Dramalord417" text="Bazen bir partiyi yönetmek çok stresli oluyor. Bununla nasıl başa çıkıyorsun? (Nevrotiklik)" />
+    <string id="Dramalord418" text="Ah evet. İyileşmek için genellikle kendimi birkaç gün kilitlerim." />
+    <string id="Dramalord419" text="Aslında hiç stresli değil. Aslında nadiren stresliyim." />
+    <string id="Dramalord420" text="Sanırım sorun değil. Bazen bir veya iki gün izin almam gerekiyor." />
+    <string id="Dramalord391" text="Yani bu beni çekici bulmadığın anlamına mı geliyor?" />
+    <string id="Dramalord392" text="Bir tür tercihin olduğundan oldukça eminim." />
+    <string id="Dramalord393" text="Bazı lordların ve leydilerin fiziksel cinsiyet konusunda farklı zevkleri olduğunu duydum. Peki ya sen? (Yönlendirme)" />
+    <string id="Dramalord394" text="Aslında belirli bir tercihim yok." />
+    <string id="Dramalord395" text="Yerel hanın sahibi biraz kilo almış. Şimdi meyhane her gece meraklı müşterilerle dolu. (Kilo)" />
+    <string id="Dramalord396" text="Yaylalarda lordlar ve hanımlar genellikle iri ve güçlüdür. Birçok insan güçlü oldukları için onlara hayranlık duyar. (Yapı)" />
+    <string id="Dramalord397" text="Yaşlı insanları tercih eden insanlar var ve diğerleri genç insanları tercih ediyor. Sizin tercihiniz nedir? (Yaş)" />
+    <string id="Dramalord398" text="Benden yaşlı insanları tercih ederim. Olgun meyveden daha iyi bir şey yoktur." />
+    <string id="Dramalord399" text="Genç insanların enerjisini ve dayanıklılığını çok seviyorum." />
+    <string id="Dramalord400" text="Bence kendi yaşlarımdaki insanlar daha çekici." />
+    <string id="Dramalord401" text="Yeni şeyler denemenin bazen heyecan verici olduğunu düşünüyor musun? (Açıklık)" />
+    <string id="Dramalord402" text="Yeni şeyler denemeyi severim. Değişiklik olmadan sıkıcı oluyor." />
+    <string id="Dramalord403" text="Saçmalık. Her şey olduğu gibi iyidir ve değişmeye gerek yoktur." />
+    <string id="Dramalord404" text="Belki de umursamıyorum. Her şey zaten her zaman değişiyor." />
+    <string id="Dramalord405" text="Peki, plan yapan biri misin yoksa daha çok kendiliğinden hareket eden biri misin? (Bilinçlilik)" />
+    <string id="Dramalord406" text="Her şeyin düzene ve yapıya ihtiyacı vardır. Planlama her şeydir." />
+    <string id="Dramalord407" text="Hayır, aslında değil. Genellikle bir sonraki macerama tökezleyerek başlarım." />
+    <string id="Dramalord408" text="Eh, bazen planlıyorum, bazen planlamıyorum." />
+    <string id="Dramalord409" text="Şehirde bir turnuva olduğunda, yeni insanlarla tanışmak için heyecanlı mısın? (Dışa dönüklük)" />
+    <string id="Dramalord410" text="Kesinlikle! İnsanların etrafındayken sohbet etmeyi bırakamıyorum." />
+    <string id="Dramalord411" text="Öf. Hayır, kendi halimeyim. Çoğu insan beni rahatsız ediyor." />
+    <string id="Dramalord412" text="Eh, bu duruma bağlı. Muhtemelen birkaç kişiyle tanışırım ama çok değil." />
+    <string id="Dramalord413" text="Arkadaşlarınızdan biri size üzücü bir hikaye anlatırsa, nasıl tepki verirsiniz? (Uyumluluk)" />
+    <string id="Dramalord414" text="Elbette onları rahatlatmaya veya elimden gelirse yardım etmeye çalışırım." />
+    <string id="Dramalord415" text="Şey, arkadaşlarım kişisel meseleleriyle beni rahatsız etmemeleri gerektiğini bilirler." />
+    <string id="Dramalord416" text="Sanırım bu kendimi nasıl hissettiğime bağlı." />
+    <string id="Dramalord417" text="Bazen bir partiyi yönetmek çok stresli olabilir. Bununla nasıl başa çıkıyorsunuz? (Nevrotiklik)" />
+    <string id="Dramalord418" text="Ah evet. İyileşmek için genellikle kendimi birkaç günlüğüne kilitlerim." />
+    <string id="Dramalord419" text="Aslında hiç stresli değil. Aslında nadiren stresliyim." />
+    <string id="Dramalord420" text="Sanırım sorun değil. Bazen bir veya iki gün izin almam gerekiyor." />
   </strings>
 </base>

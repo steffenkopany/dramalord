@@ -10,7 +10,7 @@ namespace Dramalord.Patches
     {
         public static bool Prefix(ref Hero gainedRelationWith, ref int relation, ref bool affectRelatives, ref bool showQuickNotification)
         {
-            showQuickNotification = false;
+            showQuickNotification = DramalordMCM.Instance.ShowRelationChanges;
             return true;
         }
     }
@@ -20,7 +20,7 @@ namespace Dramalord.Patches
     {
         public static bool Prefix(ref Hero hero, ref Hero gainedRelationWith, ref int relationChange, ref bool showQuickNotification)
         {
-            showQuickNotification = false;
+            showQuickNotification = DramalordMCM.Instance.ShowRelationChanges;
             return true;
         }
     }
@@ -30,7 +30,7 @@ namespace Dramalord.Patches
     {
         public static bool Prefix(ref Hero emissary, ref Hero gainedRelationWith, ref bool relationChange, ref bool showQuickNotification)
         {
-            showQuickNotification = false;
+            showQuickNotification = DramalordMCM.Instance.ShowRelationChanges;
             return true;
         }
     }

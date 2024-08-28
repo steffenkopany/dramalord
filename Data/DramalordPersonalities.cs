@@ -149,6 +149,11 @@ namespace Dramalord.Data
             // nothing to do
         }
 
+        protected override void OnNewGameCreated(CampaignGameStarter starter)
+        {
+            _personalities.Clear();
+        }
+
         private int Generate()
         {
             float rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);

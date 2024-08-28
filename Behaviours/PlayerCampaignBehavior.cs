@@ -1,6 +1,7 @@
 ﻿using Dramalord.Conversations;
 using Dramalord.Data;
 using Dramalord.Extensions;
+using SandBox.View.Map;
 using System;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -13,6 +14,9 @@ namespace Dramalord.Behaviours
         {
             PlayerApproachingNPC.AddDialogs(starter);
             PlayerConfrontNPC.AddDialogs(starter);
+            PrisonerConversation.AddDialogs(starter);
+            QuestConversation.AddDialogs(starter);
+            PlayerChallenges.AddDialogs(starter);
         }
 
         public override void RegisterEvents()

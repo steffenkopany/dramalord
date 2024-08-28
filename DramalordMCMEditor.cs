@@ -19,6 +19,27 @@ namespace Dramalord
         private static Dropdown<HeroWrapper> _heroList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
         private string _dummy;
 
+        internal void SetSelected(Hero? hero)
+        {
+            if(hero != null && hero.IsDramalordLegit() && hero.HasMet)
+            {
+                int index = -1;
+                SelectedHero.ForEach(item =>
+                {
+                    if(item.Hero == hero)
+                    {
+                        index = _heroList.IndexOf(item);
+                    }
+                });
+                
+                if(index != -1)
+                {
+                    _heroList.SelectedIndex = index;
+                    _selected = hero;
+                }
+            }
+        }
+
         public class HeroWrapper
         {
             internal Hero Hero { get; }
@@ -26,6 +47,11 @@ namespace Dramalord
             {
                 Hero = hero;
             }
+            public override int GetHashCode()
+            {
+                return Hero.GetHashCode();
+            }
+
             public override string ToString()
             {
                 return Hero.Name.ToString() + ((Hero.Clan != null) ? " of the " + Hero.Clan.Name.ToString() : "");

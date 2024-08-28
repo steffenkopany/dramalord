@@ -15,6 +15,10 @@ namespace Dramalord.Patches
     {
         public static bool Prefix(ref PartyBase party, Hero hero)
         {
+            if(DramalordMCM.Instance.ShowCaptivityEvents)
+            {
+                return true;
+            }
             LogEntry.AddLogEntry(new DramalordTakePrisonerLogEntry(party, hero));
             return false;
         }
@@ -25,6 +29,10 @@ namespace Dramalord.Patches
     {
         public static bool Prefix(ref Hero hero, ref PartyBase party, ref IFaction captuererFaction, ref EndCaptivityDetail detail)
         {
+            if (DramalordMCM.Instance.ShowCaptivityEvents)
+            {
+                return true;
+            }
             LogEntry.AddLogEntry(new DramalordEndCaptivityLogEntry(hero, captuererFaction, detail));
             return false;
         }

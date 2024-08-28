@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -19,7 +18,13 @@ namespace Dramalord.Data
         Engagement,
         Marriage,
         BreakUp,
-        LeaveClan
+        LeaveClan,
+        Adopt,
+        Orphanize,
+        Execute,
+        PrisonIntercourse,
+        EndDate,
+        Duel
     }
 
     internal sealed class HeroIntention
@@ -232,6 +237,12 @@ namespace Dramalord.Data
         {
             _intentions.Remove(hero);
             _intentionsToPlayer.Remove(hero);
+        }
+
+        protected override void OnNewGameCreated(CampaignGameStarter starter)
+        {
+            _intentions.Clear();
+            _intentionsToPlayer.Clear();
         }
     }
 }

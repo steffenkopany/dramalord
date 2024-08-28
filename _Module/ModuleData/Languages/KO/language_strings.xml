@@ -245,5 +245,176 @@
     <string id="Dramalord247" text="AI가 다른 동성 영웅과 결혼하도록 허용(그렇지 않으면 그들은 그저 연인일 뿐)" />
     <string id="Dramalord248" text="군대 내에서 상호 작용 허용" />
     <string id="Dramalord249" text="군대에 있는 동안 AI가 서로 상호 작용하도록 허용" />
+    <string id="Dramalord250" text="{HERO1.LINK}가 {CHILD.LINK} 아이를 고아원에 맡겼습니다." />
+    <string id="Dramalord251" text="{HERO1.LINK}가 고아 {CHILD.LINK}를 입양했습니다." />
+    <string id="Dramalord252" text="좋은 하루 보내세요, {TITLE}. 무엇을 도와드릴까요?" />
+    <string id="Dramalord253" text="저는 가족을 확대하고 고아를 입양하고 싶습니다." />
+    <string id="Dramalord254" text="저는 제 일족의 아이를 없애고 싶습니다." />
+    <string id="Dramalord255" text="신경 쓰지 마세요." />
+    <string id="Dramalord256" text="아, 그거 참 좋네요 {TITLE}. 현재 우리 고아원에는 {BOYS}명의 남자아이와 {GIRLS}명의 여자아이가 있습니다." />
+    <string id="Dramalord257" text="정말 죄송합니다 {TITLE}, 하지만 아이를 입양하려면 결혼해야 합니다." />
+    <string id="Dramalord258" text="죄송합니다 {TITLE}, 하지만 현재 저희 고아원에는 아이가 없습니다." />
+    <string id="Dramalord259" text="남자아이를 입양하고 싶습니다." />
+    <string id="Dramalord260" text="여자아이를 입양하고 싶습니다." />
+    <string id="Dramalord261" text="누구를 입양하고 싶으세요?" />
+    <string id="Dramalord262" text="{ORPHAN.NAME}, {ORPHANAGE}세입니다." />
+    <string id="Dramalord263" text="다른 아이를 생각하고 있습니다." />
+    <string id="Dramalord264" text="좋아요. {ORPHAN.NAME}을 입양하고 싶으신가요?" />
+    <string id="Dramalord265" text="축하합니다! {ORPHAN.NAME}은 좋은 손에 맡겨질 거라고 확신합니다." />
+    <string id="Dramalord266" text="아, 그거 슬픈 일이네요. {ORPHAN.NAME}은 매우 실망할 겁니다." />
+    <string id="Dramalord267" text="물론 {TITLE}, 우리가 그렇게 할 수 있습니다." />
+    <string id="Dramalord268" text="{TITLE}, 당신 일족에는 아이가 없는 것 같습니다." />
+    <string id="Dramalord269" text="우리가 보호해야 할 불행한 아이는 누구일까요?" />
+    <string id="Dramalord270" text="좋습니다. {ORPHAN.NAME}을(를) 포기하시겠습니까?" />
+    <string id="Dramalord271" text="이렇게 결정되었습니다! {ORPHAN.NAME}을(를) 돌보고 아이를 위한 새로운 집을 찾아드리겠습니다." />
+    <string id="Dramalord272" text="좋습니다. {TITLE}. {ORPHAN.NAME}은(는) 당신의 일족에 남을 것입니다." />
+    <string id="Dramalord273" text="죄수, 너와 얘기해야 할 게 있어." />
+    <string id="Dramalord274" text="선택의 여지가 별로 없잖아 {TITLE}." />
+    <string id="Dramalord275" text="나는 너와 대화하는 걸 거부해." />
+    <string id="Dramalord276" text="나는 널 내 침실에서... 특별한 서비스를 위해 내버려두는 걸 고려할 거야." />
+    <string id="Dramalord277" text="이걸 끝낼 때가 됐어. 네 존재가 날 괴롭혀." />
+    <string id="Dramalord278" text="너한테 거래가 성사되었어! 나도 즐길 것 같아." />
+    <string id="Dramalord279" text="절대 안 돼! 그런 제안으로 내 명예를 더럽힐 순 없어!" />
+    <string id="Dramalord280" text="해야 할 일을 해, 명예 없는 돼지들아!" />
+    <string id="Dramalord281" text="맙소사! 제발... 부탁이에요!" />
+    <string id="Dramalord282" text="잠깐만요 {TITLE}! 즐거움도 있는데 왜 죽음을 택해요?" />
+    <string id="Dramalord283" text="음... 알겠어요. 수락할게요. 잘하면 이번에는 살려줄게요." />
+    <string id="Dramalord284" text="음, 당신의 죽음은 제게 가장 달콤한 즐거움이에요." />
+    <string id="Dramalord285" text="{HERO1.LINK}가 포로 {HERO2.LINK}를 강간했습니다" />
+    <string id="Dramalord286" text="고아원 방문" />
+    <string id="Dramalord287" text="고아원을 방문하여 아이를 입양하거나 클랜 중 한 명을 없애세요" />
+    <string id="Dramalord288" text="사랑 획득 배수" />
+    <string id="Dramalord289" text="유혹이나 데이트로 인해 얻은 사랑은 이 값으로 곱해집니다" />
+    <string id="Dramalord290" text="신뢰 획득 배수" />
+    <string id="Dramalord291" text="대화나 데이트로 인해 얻은 신뢰는 이 값으로 곱해집니다" />
+    <string id="Dramalord292" text="{TITLE}, 내 애정의 표시로 이 특별한 {GIFT}를 드리겠습니다." />
+    <string id="Dramalord293" text="감사합니다 {TITLE}! 당신의... 애정을 기억하기 위해 내... 침대 가까이에 두고 매일 즐기겠습니다!" />
+    <string id="Dramalord294" text="당신은 {HERO.LINK}에게 {TOY}를 주었습니다." />
+    <string id="Dramalord295" text="장난감 파손 확률" />
+    <string id="Dramalord296" text="영웅이 사용하는 동안 장난감이 파손될 확률." />
+    <string id="Dramalord297" text="{HERO.LINK}의 장난감이 파손되었습니다!" />
+    <string id="Dramalord298" text="전역 기본 임신." />
+    <string id="Dramalord299" text="모든 NPC에게 기본 임신 허용" />
+    <string id="Dramalord300" text="글로벌 기본 결혼." />
+    <string id="Dramalord301" text="모든 NPC에게 기본 결혼 허용" />
+    <string id="Dramalord302" text="{HERO.LINK}는 당신이 그들의 문제를 소홀히 한 데 실망했습니다... (사랑 {NUM}, 신뢰 {NUM2})" />
+    <string id="Dramalord303" text="{HERO.LINK}는 당신에게 그들을 찾아달라고 부탁했습니다. 그들은 논의할 긴급한 문제가 있습니다. 당신은 제 시간에 도착할 수 있을까요?" />
+    <string id="Dramalord304" text="{QUESTHERO}가 당신의 참석을 요청합니다." />
+    <string id="Dramalord305" text="{HERO.LINK}는 당신이 그녀의 요청을 들어줘서 매우 기쁩니다... (사랑 {NUM}, 신뢰 {NUM2})" />
+    <string id="Dramalord306" text="오, {TITLE} 마침내 왔군요! 당신을 간절히 기다리고 있었어요!" />
+    <string id="Dramalord307" text="누가 나타났는지 보세요. 당신은 서두르지 않았죠 {TITLE}, 그렇죠?" />
+    <string id="Dramalord308" text="여기 있습니다. 당신이 부탁한 시급한 문제는 무엇입니까?" />
+    <string id="Dramalord309" text="옷을 벗고 {TITLE} 나를 따라와. 나는 매우 섬세한 문제에 당신의 수완을 활용해야 합니다!" />
+    <string id="Dramalord310" text="음, {TITLE}, 다른 사람이 내... 문제를 처리하고 있었습니다. 매우 유쾌한 방식으로요. 안녕히 계세요." />
+    <string id="Dramalord311" text="퀘스트 기회" />
+    <string id="Dramalord312" text="플레이어의 연인이 퀘스트를 시작할 확률" />
+    <string id="Dramalord313" text="선택 사항" />
+    <string id="Dramalord314" text="관계 변경 사항 표시" />
+    <string id="Dramalord315" text="관계 변경 알림을 보려면 이 옵션을 활성화하세요(Small Talk 모드에 필요)" />
+    <string id="Dramalord316" text="포로 로그 표시" />
+    <string id="Dramalord317" text="영웅이 포로로 잡혔을 때 로그를 보려면 이 옵션을 활성화하세요" />
+    <string id="Dramalord318" text="{TITLE} 당신이 어떤 모습을 선호하는지 항상 궁금했습니다. (정보)" />
+    <string id="Dramalord319" text="죄송합니다, {TITLE}, 하지만 제 개인적 선호 사항에 대해 말씀드릴 만큼 당신을 신뢰하지 못합니다." />
+    <string id="Dramalord320" text="물론, {TITLE}. 정말 알고 싶으시다면 말씀드릴 수 있어요..." />
+    <string id="Dramalord321" text="나는 이성에게 끌리고, 나와 같은 사람에 대한 관심은 별로 없어요." />
+    <string id="Dramalord322" text="나는 이성에게 별로 관심이 없고, 오히려 나와 같은 사람을 선호해요." />
+    <string id="Dramalord323" text="나는 이성에게 매력을 느끼지만, 나와 같은 사람에게도 끌린다고 생각해요." />
+    <string id="Dramalord324" text="나는 두 성별에 대한 애정이 없어요. 그들은 나에게 별로 흥미롭지 않아요." />
+    <string id="Dramalord325" text="나는 날씬한 사람들이 다른 사람들보다 더 날씬하다고 생각해요." />
+    <string id="Dramalord326" text="저는 마른 체형이나 뚱뚱한 체형을 좋아하지 않습니다. 가운데가 딱 좋습니다." />
+    <string id="Dramalord327" text="저는 살찐 사람을 좋아합니다. 제가 잡을 게 더 많으니까요." />
+    <string id="Dramalord328" text="근육은 과대평가받습니다. 저는 마른 체형을 좋아하고 뼈가 보이길 바랍니다." />
+    <string id="Dramalord329" text="저에게는 중간 정도의 근육이 딱 좋습니다. 특별한 건 필요 없어요." />
+    <string id="Dramalord330" text="저는 강력한 사람을 좋아합니다. 덩치가 클수록 좋습니다." />
+    <string id="Dramalord331" text="저는 저보다 {AGEDIFF}인 사람을 좋아합니다. {AGE} 정도가 가장 좋습니다." />
+    <string id="Dramalord332" text="당신 {TITLE}, 당신은 100점 만점에 {RATING}점이라고 생각합니다." />
+    <string id="Dramalord333" text="더 젊은" />
+    <string id="Dramalord334" text="더 오래된" />
+    <string id="Dramalord335" text="나이가 많지도 않고, 어리지도 않다" />
+    <string id="Dramalord336" text="{HERO.LINK}의 신체적 선호도를 알게 되었습니다." />
+    <string id="Dramalord337" text="최소 신뢰" />
+    <string id="Dramalord338" text="영웅을 친구로 생각하는 데 필요한 신뢰 포인트(Dramalord 친구만)" />
+    <string id="Dramalord339" text="새로운 이야기를 들려주세요!(친근한 채팅)" />
+    <string id="Dramalord340" text="나랑 산책하러 갈래?(연애)" />
+    <string id="Dramalord341" text="자백해야겠어, {TITLE}!(연애)" />
+    <string id="Dramalord342" text="조용한 곳으로 피신하고 싶어?(데이트)" />
+    <string id="Dramalord343" text="{TITLE}, 너도 기분 좋아하니?(친구와 혜택)" />
+    <string id="Dramalord344" text="침대에서 운동할래, {TITLE}? (친밀감)" />
+    <string id="Dramalord345" text="너를 느껴야 해, {TITLE}! (친밀감)" />
+    <string id="Dramalord346" text="나는 너를 정말 사랑해, {TITLE}. 나랑 결혼해줄래? (약혼)" />
+    <string id="Dramalord347" text="우리는 정착해 있어, {TITLE}, 결혼하자! (결혼)" />
+    <string id="Dramalord348" text="나를 아프게 하지만, 우리 관계를 끝내야 해. (이별)" />
+    <string id="Dramalord349" text="아내" />
+    <string id="Dramalord350" text="남편" />
+    <string id="Dramalord351" text="대화해 주셔서 감사합니다 {TITLE}." />
+    <string id="Dramalord352" text="{TITLE}, 여행을 많이 다니고 사람들을 만나시는데, {POI.NAME}에 대한 의견은 어때요?" />
+    <string id="Dramalord353" text="{POI.NAME}을 만났고 친구로 생각합니다." />
+    <string id="Dramalord354" text="으음, 상기시키지 마세요. {POI.NAME}은 성가시고 다시 만나지 않았으면 좋겠어요." />
+    <string id="Dramalord355" text="{POI.NAME}, 음. 사실 저는 그들에 대한 특별한 의견이 없습니다." />
+    <string id="Dramalord356" text="안타깝게도 {POI.NAME}을 만날 기회가 없었지만, 좋은 사람인 것 같아요?" />
+    <string id="Dramalord357" text="{POI.NAME}을 만나지 않아서 다행이야. 그들이 끔찍한 존재라는 걸 상상할 수 있어." />
+    <string id="Dramalord358" text="{POI.NAME}에 대한 의견은 없어. 그들과 한 마디도 나눈 적이 없거든." />
+    <string id="Dramalord359" text="그 소식이 반갑네! {POI.NAME}도 내 절친이야!" />
+    <string id="Dramalord360" text="그 소식이 실망스럽네. {POI.NAME}은 사실 내 절친이야." />
+    <string id="Dramalord361" text="음, 아마 {POI.NAME}을 잘 모르시겠네. 그들은 내 친구야." />
+    <string id="Dramalord362" text="아, 정말이야? {POI.NAME}을 좋아해? 정말 실망스럽네." />
+    <string id="Dramalord363" text="전적으로 동의합니다! {POI.NAME}은 손톱 밑의 흙과 같습니다." />
+    <string id="Dramalord364" text="음, 아마 {POI.NAME}을 잘 모르실 겁니다. 저는 정말 싫어요." />
+    <string id="Dramalord365" text="말씀드려야 할 것은, 당신은 {POI.NAME}에 대한 의견을 빨리 만들어내는군요." />
+    <string id="Dramalord366" text="저도 {POI.NAME}에 대한 의견이 없습니다. 충분히 잘 모르거든요." />
+    <string id="Dramalord367" text="훌륭한 관점입니다! 동의합니다." />
+    <string id="Dramalord368" text="음, 사실 저는 당신과 동의할 수 없습니다." />
+    <string id="Dramalord369" text="당신은 꽤 고집이 세죠, 그렇지 않나요?" />
+    <string id="Dramalord370" text="지난 전쟁에서 우리 진영은 식량이 바닥나서 적의 마을을 습격했습니다. 슬픈 일이지만, 더 큰 선을 위해 그래야 한다고 생각합니다. (명예)" />
+    <string id="Dramalord371" text="저는 동의하지 않습니다. 민간인은 정치 때문에 고통을 받아서는 안 됩니다." />
+    <string id="Dramalord372" text="맞아요. 그 농민들은 자발적으로 물건을 내주어야 했습니다." />
+    <string id="Dramalord373" text="모르겠어요. 세상이 원래 그런 거겠죠." />
+    <string id="Dramalord374" text="더 강한 적을 만났지만 그래도 전투에 나선 적이 있나요? (용맹)" />
+    <string id="Dramalord375" text="그렇죠. 어쨌든 우리는 이겼습니다. 이 세상은 용감한 사람들의 것입니다!" />
+    <string id="Dramalord376" text="아니. 이길 수 없다는 걸 알면서 왜 목숨을 걸겠어." />
+    <string id="Dramalord377" text="말할 수 없어. 상황에 따라 다를 것 같아." />
+    <string id="Dramalord378" text="어떤 영주들은 포로가 된 병사들을 그냥 전장에서 나가게 했다고 들었어. 위험하지 않아? (Mercy)" />
+    <string id="Dramalord379" text="그들은 그들이 가족에게 돌아가게 했어. 나도 똑같이 할 거야." />
+    <string id="Dramalord380" text="그럴 리가 없지! 그들이 다시 전투에 나가기 어렵게 만들 거야." />
+    <string id="Dramalord381" text="그들은 죽이거나 죽임을 당하기 위해 있는 놈들이니까 누가 신경 쓰겠어." />
+    <string id="Dramalord382" text="최근 토너먼트 우승자가 상금을 모두 가난한 사람들에게 주었습니다. (관대함)" />
+    <string id="Dramalord383" text="정말 관대한 움직임입니다. 이런 사람들은 불행히도 드뭅니다." />
+    <string id="Dramalord384" text="어머! 돈 낭비네요. 애초에 왜 참여했을까요?" />
+    <string id="Dramalord385" text="음, 돈이니까 선택이죠." />
+    <string id="Dramalord386" text="남부 일족 중 하나가 지도자가 왕과 말다툼을 한 후 거의 왕국을 떠났습니다. (계산)" />
+    <string id="Dramalord387" text="어리석은 짓입니다. 자존심 때문에 보호를 잃었을 겁니다." />
+    <string id="Dramalord388" text="그들이 어떤 기분인지 이해할 수 있어. 나도 가끔 화를 낸다." />
+    <string id="Dramalord389" text="그 싸움의 이유를 모른다면 그 움직임을 판단할 수 없어." />
+    <string id="Dramalord390" text="오! 얼굴이 붉어지네요! 그 말을 듣고 기쁘네요." />
+    <string id="Dramalord391" text="그럼 당신은 나를 매력적이지 않다고 생각하나요?" />
+    <string id="Dramalord392" text="당신은 어떤 종류의 선호도가 있다고 확신합니다." />
+    <string id="Dramalord393" text="어떤 영주와 숙녀는 신체적 성별에 대한 취향이 다르다고 들었습니다. 당신은 어떻습니까? (성향)" />
+    <string id="Dramalord394" text="사실 저는 특별한 선호도가 없습니다." />
+    <string id="Dramalord395" text="지역 여관 주인이 살이 좀 쪄서요. 이제 선술집은 매일 밤 구경꾼들로 가득 찹니다. (몸무게)" />
+    <string id="Dramalord396" text="고지대의 영주와 부인은 종종 덩치가 크고 힘이 세다. 많은 사람들이 그들이 강하다는 이유로 존경한다. (몸무게)" />
+    <string id="Dramalord397" text="나이 든 사람을 선호하는 사람이 있고, 젊은 사람을 선호하는 사람이 있다. 당신은 어떤 사람을 선호합니까? (나이)" />
+    <string id="Dramalord398" text="저는 저보다 나이 많은 사람을 선호합니다. 익은 과일보다 더 좋은 건 없습니다." />
+    <string id="Dramalord399" text="저는 젊은 사람들의 에너지와 체력을 매우 좋아합니다." />
+    <string id="Dramalord400" text="저는 제 나이 또래의 사람들이 더 매력적이라고 ​​생각합니다." />
+    <string id="Dramalord401" text="새로운 것을 시도하는 것이 때때로 신나는 일이라고 생각하세요? (개방성)" />
+    <string id="Dramalord402" text="새로운 것을 시도하는 것을 좋아해요. 변화가 없으면 지루해지거든요." />
+    <string id="Dramalord403" text="말도 안 돼요. 있는 그대로가 좋고 바꿀 필요가 없어요." />
+    <string id="Dramalord404" text="아마도, 저는 별로 신경 쓰지 않을 거예요. 어차피 항상 바뀌거든요." />
+    <string id="Dramalord405" text="그럼, 당신은 일을 계획하는 사람인가요, 아니면 즉흥적인 사람인가요? (성실성)" />
+    <string id="Dramalord406" text="모든 것에는 질서와 구조가 필요해요. 계획이 전부예요." />
+    <string id="Dramalord407" text="아니, 사실은 그렇지 않아요. 저는 보통 다음 모험을 우연히 시작해요." />
+    <string id="Dramalord408" text="음, 가끔은 계획을 세우고, 가끔은 그렇지 않아요." />
+    <string id="Dramalord409" text="도시에서 토너먼트가 열릴 때, 새로운 사람들을 만나서 설레나요? (외향성)" />
+    <string id="Dramalord410" text="물론이죠! 사람들이 주변에 있으면 채팅을 멈출 수가 없어요." />
+    <string id="Dramalord411" text="으악. 아뇨, 저는 제 자신에 대해 잘 모르겠어요. 대부분 사람들이 저를 귀찮게 해요." />
+    <string id="Dramalord412" text="음, 상황에 따라 다르죠. 아마 몇몇은 만날 수 있겠지만, 많이는 못 만날 거예요." />
+    <string id="Dramalord413" text="친구 중 한 명이 슬픈 이야기를 들려주면 어떤 반응을 보이나요? (동의)" />
+    <string id="Dramalord414" text="물론 위로하거나, 가능하다면 도와주려고 노력해요." />
+    <string id="Dramalord415" text="음, 제 친구들은 개인적인 일로 저를 귀찮게 하지 말라고 알고 있어요." />
+    <string id="Dramalord416" text="그건 제가 어떻게 느끼느냐에 따라 다르겠죠." />
+    <string id="Dramalord417" text="파티를 관리하는 건 가끔 스트레스가 많아요. 어떻게 해결하시나요? (신경증)" />
+    <string id="Dramalord418" text="아, 맞아요. 회복을 위해 보통 며칠 동안은 혼자 갇혀 있어요." />
+    <string id="Dramalord419" text="음, 전혀 스트레스가 없어요. 사실 저는 스트레스를 거의 받지 않아요." />
+    <string id="Dramalord420" text="괜찮은 것 같아요. 가끔은 하루나 이틀 쉬어야 할 때도 있어요." />
   </strings>
 </base>

@@ -23,7 +23,7 @@ namespace Dramalord.Patches
 
             if (baseHero.IsSpouseOf(queriedHero))
             {
-                string text = GameTexts.FindText("str_spouse").ToString();
+                string text = (queriedHero.IsFemale) ? new TextObject("{=Dramalord349}wife").ToString() : new TextObject("{=Dramalord350}husband").ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)
                 {
                     char[] array = text.ToCharArray();
@@ -113,6 +113,7 @@ namespace Dramalord.Patches
                 }
                 __result = text;
             }
+            /*
             else if(baseHero.IsSpouseOf(queriedHero))
             {
                 string text = GameTexts.FindText("str_spouse").ToString();
@@ -127,6 +128,7 @@ namespace Dramalord.Patches
                 }
                 __result = text;
             }
+            */
         }
     }
 

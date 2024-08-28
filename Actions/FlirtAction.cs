@@ -10,7 +10,7 @@ namespace Dramalord.Actions
 {
     internal static class FlirtAction
     {
-        internal static bool Apply(Hero hero, Hero target)
+        internal static bool Apply(Hero hero, Hero target, int changeValue = -1000)
         {
             HeroRelation heroRelation = hero.GetRelationTo(target);
 
@@ -23,7 +23,7 @@ namespace Dramalord.Actions
             int loveGain = 0;
             if((heroAttraction >= DramalordMCM.Instance.MinAttraction && tagetAttraction >= DramalordMCM.Instance.MinAttraction) || hero == Hero.MainHero || target == Hero.MainHero)
             {
-                loveGain = hero.GetSympathyTo(target);
+                loveGain = (changeValue == -1000) ? hero.GetSympathyTo(target) * DramalordMCM.Instance.LoveGainMultiplier : changeValue * DramalordMCM.Instance.LoveGainMultiplier;
                 heroRelation.Love += loveGain;
             }
             

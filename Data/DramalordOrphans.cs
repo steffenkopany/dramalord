@@ -40,6 +40,16 @@ namespace Dramalord.Data
             }
         }
 
+        internal int CountOrphans(bool female)
+        {
+            return _orphans.Where(orphan => orphan.IsFemale == female).Count();
+        }
+
+        internal List<Hero> GetOrphans(bool female)
+        {
+            return _orphans.Where(orphan => orphan.IsFemale == female).ToList();
+        }
+
         internal void RemoveOrphan(Hero hero)
         {
             _orphans.Remove(hero);
@@ -93,6 +103,11 @@ namespace Dramalord.Data
         protected override void OnHeroCreated(Hero hero, bool born)
         {
             // nothing to do
+        }
+
+        protected override void OnNewGameCreated(CampaignGameStarter starter)
+        {
+            _orphans.Clear();
         }
     }
 }

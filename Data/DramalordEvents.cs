@@ -177,5 +177,10 @@ namespace Dramalord.Data
         {
             _events.Where(keypair => keypair.Value.Actors.Contains(hero)).Select(keypair => keypair.Key).ToList().ForEach(key => _events.Remove(key));
         }
+
+        protected override void OnNewGameCreated(CampaignGameStarter starter)
+        {
+            _events.Clear();
+        }
     }
 }

@@ -19,13 +19,14 @@ namespace Dramalord.Actions
             Hero father = pregnancy.Father;
             Hero child = CreateBaby(mother, father);
             child.UpdateHomeSettlement();
+            mother.IsPregnant = false;
 
             if (father.Clan == Clan.PlayerClan || mother.Clan == Clan.PlayerClan)
             {
                 TextObject textObject = new TextObject("{=Dramalord077}{HERO.LINK} was born");
                 StringHelpers.SetCharacterProperties("HERO", child.CharacterObject, textObject);
 
-                MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(father, mother, CampaignTime.Now)); //TaleWorlds.CampaignSystem.MapNotificationTypes.ChildBornMapNotification.
+                MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(father, mother, CampaignTime.Now));
                 MBInformationManager.AddNotice(new ChildBornMapNotification(child, textObject, CampaignTime.Now));
             }
 
@@ -40,6 +41,11 @@ namespace Dramalord.Actions
                     DramalordIntentions.Instance.AddIntention(member, mother, IntentionType.Confrontation, eventID);
                 } 
             });
+
+            if((mother.Spouse == null || mother.Spouse != father) && mother.Clan != Clan.PlayerClan)
+            {
+                DramalordIntentions.Instance.AddIntention(mother, child, IntentionType.Orphanize, eventID);
+            }
 
             if((mother.Clan == Clan.PlayerClan || father.Clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)
             {

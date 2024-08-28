@@ -245,5 +245,176 @@
     <string id="Dramalord247" text="KI erlauben, andere Helden des gleichen Geschlechts zu heiraten (sonst sind sie nur Liebhaber)" />
     <string id="Dramalord248" text="Interaktion in der Armee zulassen" />
     <string id="Dramalord249" text="KIs die Interaktion untereinander erlauben, während sie sich in Armeen befinden" />
+    <string id="Dramalord250" text="{HERO1.LINK} hat {CHILD.LINK} in ein Waisenhaus gebracht." />
+    <string id="Dramalord251" text="{HERO1.LINK} hat Waisenkind {CHILD.LINK} adoptiert" />
+    <string id="Dramalord252" text="Guten Tag, {TITLE}. Wie kann ich Ihnen helfen?" />
+    <string id="Dramalord253" text="Ich möchte meine Familie vergrößern und ein Waisenkind adoptieren." />
+    <string id="Dramalord254" text="Ich möchte ein Kind aus meinem Clan loswerden." />
+    <string id="Dramalord255" text="Egal." />
+    <string id="Dramalord256" text="Oh, das ist großartig, {TITLE}. Wir haben derzeit {BOYS} Jungen und {GIRLS} Mädchen in unserem Waisenhaus." />
+    <string id="Dramalord257" text="Es tut mir wirklich leid, {TITLE}, aber Sie müssen verheiratet sein, um ein Kind adoptieren zu können." />
+    <string id="Dramalord258" text="Es tut mir leid, {TITLE}, aber derzeit sind keine Kinder in unserem Waisenhaus." />
+    <string id="Dramalord259" text="Ich möchte einen Jungen adoptieren." />
+    <string id="Dramalord260" text="Ich möchte ein Mädchen adoptieren." />
+    <string id="Dramalord261" text="Wen möchten Sie adoptieren?" />
+    <string id="Dramalord262" text="{ORPHAN.NAME}, {ORPHANAGE} Jahre alt." />
+    <string id="Dramalord263" text="Ich denke an ein anderes Kind." />
+    <string id="Dramalord264" text="Sehr gut. Sind Sie absolut sicher, dass Sie {ORPHAN.NAME} adoptieren möchten?" />
+    <string id="Dramalord265" text="Herzlichen Glückwunsch! Ich bin sicher, {ORPHAN.NAME} wird in guten Händen sein." />
+    <string id="Dramalord266" text="Oh, das ist traurig. {ORPHAN.NAME} wird sehr enttäuscht sein." />
+    <string id="Dramalord267" text="Natürlich, {TITLE}, wir können das arrangieren." />
+    <string id="Dramalord268" text="Es scheint, {TITLE}, dass es in Ihrem Clan keine Kinder gibt." />
+    <string id="Dramalord269" text="Welches unglückliche Kind sollten wir in Gewahrsam nehmen?" />
+    <string id="Dramalord270" text="Sehr gut. Sind Sie absolut sicher, dass Sie {ORPHAN.NAME} abgeben möchten?" />
+    <string id="Dramalord271" text="Damit ist es entschieden! Wir werden uns um {ORPHAN.NAME} kümmern und ein neues Zuhause für das Kind finden." />
+    <string id="Dramalord272" text="Sehr gut, {TITLE}. {ORPHAN.NAME} wird in Ihrem Clan bleiben." />
+    <string id="Dramalord273" text="Gefangener, ich muss mit Euch sprechen." />
+    <string id="Dramalord274" text="Es ist nicht so, als ob ich eine große Wahl hätte {TITLE}." />
+    <string id="Dramalord275" text="Ich weigere mich, mit Euch zu sprechen." />
+    <string id="Dramalord276" text="Ich würde in Erwägung ziehen, Euch für ... einen besonderen Service in meinem Schlafzimmer gehen zu lassen." />
+    <string id="Dramalord277" text="Es ist Zeit, dem ein Ende zu setzen. Eure Existenz stört mich." />
+    <string id="Dramalord278" text="Ihr habt einen Deal gemacht! Ich glaube, ich werde ihn sogar genießen." />
+    <string id="Dramalord279" text="Niemals! Sie werden meine Ehre mit solchen Angeboten nicht beschmutzen!" />
+    <string id="Dramalord280" text="Tu, was du musst, du ehrloses Schwein!" />
+    <string id="Dramalord281" text="Oh Gott! Nein, bitte... ich flehe dich an!" />
+    <string id="Dramalord282" text="Warte {TITLE}! Warum den Tod wählen, wenn es auch Vergnügen gibt?" />
+    <string id="Dramalord283" text="Hmm... Na gut. Ich akzeptiere. Ich erspare dir dieses Mal, wenn du gut abschneidest." />
+    <string id="Dramalord284" text="Nun, dein Tod ist mein süßestes Vergnügen." />
+    <string id="Dramalord285" text="{HERO1.LINK} hat den Gefangenen {HERO2.LINK} vergewaltigt" />
+    <string id="Dramalord286" text="Waisenhaus besuchen" />
+    <string id="Dramalord287" text="Waisenhaus besuchen, um ein Kind zu adoptieren oder ein Mitglied deines Clans loszuwerden" />
+    <string id="Dramalord288" text="Liebesgewinnmultiplikator" />
+    <string id="Dramalord289" text="Liebesgewinn durch Flirten oder Verabredungen wird mit diesem Wert multipliziert" />
+    <string id="Dramalord290" text="Vertrauensgewinnmultiplikator" />
+    <string id="Dramalord291" text="Vertrauensgewinn durch Reden oder Verabredungen wird mit diesem Wert multipliziert" />
+    <string id="Dramalord292" text="{TITLE}, lass mich dir dieses außergewöhnliche {GIFT} als Zeichen meiner Zuneigung geben." />
+    <string id="Dramalord293" text="Danke {TITLE}! Ich werde es als Erinnerung an deine... Zuneigung neben meinem... Bett aufbewahren und mich jeden Tag daran erfreuen!" />
+    <string id="Dramalord294" text="Du hast {HERO.LINK} ein {TOY} gegeben." />
+    <string id="Dramalord295" text="Chance, dass Spielzeug kaputtgeht" />
+    <string id="Dramalord296" text="Chance, dass ein Spielzeug kaputtgeht, während es von einem Helden benutzt wird." />
+    <string id="Dramalord297" text="{HERO.LINK}s Spielzeug ist kaputtgegangen!" />
+    <string id="Dramalord298" text="Globale Standardschwangerschaften." />
+    <string id="Dramalord299" text="Standardschwangerschaften für alle NPCs zulassen" />
+    <string id="Dramalord300" text="Globale Standardheiraten." />
+    <string id="Dramalord301" text="Standardheiraten für alle NPCs zulassen" />
+    <string id="Dramalord302" text="{HERO.LINK} ist enttäuscht, dass Sie ihre Angelegenheit vernachlässigen... (Liebe {NUM}, Vertrauen {NUM2})" />
+    <string id="Dramalord303" text="{HERO.LINK} bittet Sie, sie zu finden, da sie eine dringende Angelegenheit zu besprechen haben. Schaffen Sie es rechtzeitig?" />
+    <string id="Dramalord304" text="{QUESTHERO} bittet um Ihre Anwesenheit." />
+    <string id="Dramalord305" text="{HERO.LINK} ist sehr glücklich, dass du ihre Bitte erfüllt hast... (Liebe {NUM}, Vertrauen {NUM2})" />
+    <string id="Dramalord306" text="Oh {TITLE}, du bist endlich da! Ich habe verzweifelt auf dich gewartet!" />
+    <string id="Dramalord307" text="Schau mal, wer auftaucht. Du hattest es nicht eilig, {TITLE}, oder?" />
+    <string id="Dramalord308" text="Hier bin ich. Um welche dringende Angelegenheit soll ich mich kümmern?" />
+    <string id="Dramalord309" text="Zieh deine Kleider aus {TITLE} und folge mir. Ich muss deinen Einfallsreichtum in einer sehr heiklen Angelegenheit nutzen!" />
+    <string id="Dramalord310" text="Nun, {TITLE}, jemand anderes hat sich um meine... Angelegenheit gekümmert. Auf sehr angenehme Weise. Auf Wiedersehen." />
+    <string id="Dramalord311" text="Quest-Chance" />
+    <string id="Dramalord312" text="Chance, dass ein Liebhaber des Spielers eine Quest beginnt" />
+    <string id="Dramalord313" text="Optional" />
+    <string id="Dramalord314" text="Beziehungsänderungen anzeigen" />
+    <string id="Dramalord315" text="Aktivieren Sie dies, wenn Sie Benachrichtigungen zu Beziehungsänderungen sehen möchten (erforderlich für das Small Talk-Mod)" />
+    <string id="Dramalord316" text="Gefangenschaftsprotokolle anzeigen" />
+    <string id="Dramalord317" text="Aktivieren Sie dies, wenn Sie Protokolle sehen möchten, wenn Helden gefangen genommen werden" />
+    <string id="Dramalord318" text="{TITLE} Ich habe mich immer gefragt, welches Aussehen Sie bevorzugen. (Information)" />
+    <string id="Dramalord319" text="Entschuldigung, {TITLE}, aber ich vertraue Ihnen nicht genug, um Ihnen meine persönlichen Vorlieben mitzuteilen." />
+    <string id="Dramalord320" text="Sicher, {TITLE}. Wenn du es wirklich wissen willst, kann ich dir sagen..." />
+    <string id="Dramalord321" text="Ich fühle mich zum anderen Geschlecht hingezogen und habe kein großes Interesse an meinen eigenen Personen." />
+    <string id="Dramalord322" text="Ich habe kein großes Interesse am anderen Geschlecht, ich bevorzuge eher meine eigenen Personen." />
+    <string id="Dramalord323" text="Ich finde Menschen des anderen Geschlechts attraktiv, fühle mich aber auch zu meinen eigenen hingezogen." />
+    <string id="Dramalord324" text="Ich empfinde für kein Geschlecht Zuneigung. Sie interessieren mich nicht besonders." />
+    <string id="Dramalord325" text="Ich finde schlanke Menschen graziler als andere." />
+    <string id="Dramalord326" text="Ich mag weder dünn noch dick. Die Mitte ist genau richtig." />
+    <string id="Dramalord327" text="Ich mag Leute mit mehr Gewicht. Da gibt es für mich mehr zu packen." />
+    <string id="Dramalord328" text="Muskeln werden überbewertet. Ich mag es mager und will Knochen sehen." />
+    <string id="Dramalord329" text="Mittlere Muskeln sind genau richtig für mich. Ich brauche nichts Besonderes." />
+    <string id="Dramalord330" text="Ich liebe kräftige Leute. Je stämmiger, desto besser." />
+    <string id="Dramalord331" text="Ich mag Leute, die {AGEDIFF} sind als ich. Am besten im Alter von etwa {AGE}." />
+    <string id="Dramalord332" text="Du {TITLE}, ich glaube, du bist ein {RATING} von 100, würde ich sagen." />
+    <string id="Dramalord333" text="jünger" />
+    <string id="Dramalord334" text="älter" />
+    <string id="Dramalord335" text="nicht älter und nicht jünger" />
+    <string id="Dramalord336" text="Du hast die körperlichen Vorlieben von {HERO.LINK} gelernt." />
+    <string id="Dramalord337" text="Mindestvertrauen" />
+    <string id="Dramalord338" text="Vertrauenspunkte, die erforderlich sind, um einen Helden als Freund zu betrachten (nur Dramalord-Freund)" />
+    <string id="Dramalord339" text="Erzähl mir ein paar neue Geschichten! (Freundlicher Chat)" />
+    <string id="Dramalord340" text="Würde es dir etwas ausmachen, mit mir spazieren zu gehen? (Flirt)" />
+    <string id="Dramalord341" text="Ich muss gestehen, dass ich Gefühle für dich habe, {TITLE}! (Liebesaffäre)" />
+    <string id="Dramalord342" text="Möchtest du dich an einen ruhigeren Ort zurückziehen? (Dating)" />
+    <string id="Dramalord343" text="Verlangst du auch nach Vergnügen, {TITLE}? (Freundschaft mit gewissen Vorzügen)" />
+    <string id="Dramalord344" text="Möchtest du etwas Bettübungen, {TITLE}? (Intimität)" />
+    <string id="Dramalord345" text="Ich muss dich spüren, {TITLE}! (Intimität)" />
+    <string id="Dramalord346" text="Ich liebe dich sehr, {TITLE}. Willst du mich heiraten? (Verlobung)" />
+    <string id="Dramalord347" text="Wir haben uns geeinigt, {TITLE}, lass uns heiraten! (Heirat)" />
+    <string id="Dramalord348" text="Es tut mir weh, aber ich muss unsere Beziehung beenden. (Schluss machen)" />
+    <string id="Dramalord349" text="Ehefrau" />
+    <string id="Dramalord350" text="Ehemann" />
+    <string id="Dramalord351" text="Danke für das Gespräch {TITLE}." />
+    <string id="Dramalord352" text="Sag mir, {TITLE}, da du viel reist und Leute triffst, was ist deine Meinung über {POI.NAME}?" />
+    <string id="Dramalord353" text="Ich habe {POI.NAME} getroffen und betrachte sie als meine Freunde." />
+    <string id="Dramalord354" text="Ugh, erinnere mich nicht daran. {POI.NAME} ist nervig und ich hoffe, ich treffe sie nicht wieder." />
+    <string id="Dramalord355" text="{POI.NAME}, hmm. Ich habe eigentlich keine besondere Meinung über sie." />
+    <string id="Dramalord356" text="Leider hatte ich nie die Gelegenheit, {POI.NAME} zu treffen, aber sie klingen wie nette Menschen?" />
+    <string id="Dramalord357" text="Gut, dass ich {POI.NAME} nie getroffen habe. Ich kann mir vorstellen, dass sie schreckliche Wesen sind." />
+    <string id="Dramalord358" text="Ich habe keine Meinung über {POI.NAME}, da ich nie ein Wort mit ihnen gewechselt habe." />
+    <string id="Dramalord359" text="Das ist gut zu hören! {POI.NAME} ist auch ein guter Freund von mir!" />
+    <string id="Dramalord360" text="Das zu hören, enttäuscht mich. {POI.NAME} ist tatsächlich ein guter Freund von mir." />
+    <string id="Dramalord361" text="Nun, Sie kennen {POI.NAME} wahrscheinlich nicht gut. Sie sind meine Freunde." />
+    <string id="Dramalord362" text="Ugh, wirklich? Sie mögen {POI.NAME}? Das ist sehr enttäuschend." />
+    <string id="Dramalord363" text="Ich stimme vollkommen zu! {POI.NAME} ist wie Dreck unter meinen Fingernägeln." />
+    <string id="Dramalord364" text="Nun, Sie kennen {POI.NAME} wahrscheinlich nicht gut. Ich mag sie wirklich nicht." />
+    <string id="Dramalord365" text="Sie bilden sich schnell eine Meinung über {POI.NAME}, muss ich sagen." />
+    <string id="Dramalord366" text="Ich habe auch keine Meinung über {POI.NAME}. Ich kenne sie nicht gut genug." />
+    <string id="Dramalord367" text="Das ist ein ausgezeichneter Standpunkt! Einverstanden." />
+    <string id="Dramalord368" text="Nun, ich muss Ihnen tatsächlich widersprechen." />
+    <string id="Dramalord369" text="Sie haben eine ziemlich feste Meinung, nicht wahr?" />
+    <string id="Dramalord370" text="Im letzten Krieg überfiel unsere Fraktion ein feindliches Dorf, weil ihnen die Nahrungsmittel ausgegangen waren. Es ist traurig, aber ich denke, es musste zum Wohle der Allgemeinheit getan werden. (Ehre)" />
+    <string id="Dramalord371" text="Ich bin anderer Meinung. Zivilisten sollten nicht wegen der Politik leiden." />
+    <string id="Dramalord372" text="Richtig. Diese Bauern hätten ihre Güter freiwillig hergeben sollen." />
+    <string id="Dramalord373" text="Ich weiß nicht. Ich schätze, so ist das eben." />
+    <string id="Dramalord374" text="Sind Sie jemals einem stärkeren Feind begegnet und trotzdem in die Schlacht gezogen? (Tapferkeit)" />
+    <string id="Dramalord375" text="Ja, und wir haben trotzdem gewonnen. Diese Welt gehört den Mutigen!" />
+    <string id="Dramalord376" text="Nein. Warum sollte ich mein Leben riskieren, wenn ich weiß, dass wir nicht gewinnen können?" />
+    <string id="Dramalord377" text="Das kann ich nicht sagen. Ich denke, das hängt von der Situation ab." />
+    <string id="Dramalord378" text="Ich habe gehört, dass manche Lords gefangene Truppen einfach das Schlachtfeld verlassen lassen. Ist das nicht ein Risiko? (Gnade)" />
+    <string id="Dramalord379" text="Sie lassen sie zu ihren Familien nach Hause gehen. Ich würde dasselbe tun." />
+    <string id="Dramalord380" text="Köpfe ab, würde ich sagen! Das macht es ihnen schwer, wieder in die Schlacht zu ziehen." />
+    <string id="Dramalord381" text="Sie sind da, um zu töten oder getötet zu werden, also wen kümmert das schon." />
+    <string id="Dramalord382" text="Vor kurzem hat der Champion eines Turniers seinen gesamten Gewinn den Armen gespendet. (Großzügigkeit)" />
+    <string id="Dramalord383" text="Das ist wirklich eine großzügige Geste. Solche Leute sind leider selten." />
+    <string id="Dramalord384" text="Pah! Was für eine Geldverschwendung. Warum haben sie überhaupt mitgemacht?" />
+    <string id="Dramalord385" text="Nun, ich schätze, es ist ihr Geld, also ist es ihre Entscheidung." />
+    <string id="Dramalord386" text="Einer der südlichen Clans hätte beinahe sein Königreich verlassen, nachdem sein Anführer einen Streit mit seinem König hatte. (Berechnen)" />
+    <string id="Dramalord387" text="Das ist dumm. Sie hätten ihren Schutz wegen ihres Stolzes verloren." />
+    <string id="Dramalord388" text="Ich kann verstehen, wie sie sich fühlen. Ich verliere auch ab und zu die Fassung." />
+    <string id="Dramalord389" text="Ich kann diesen Schritt nicht beurteilen, solange ich nicht weiß, worum es bei dem Streit ging." />
+    <string id="Dramalord390" text="Ohh! Du bringst mich zum Erröten! Das freut mich zu hören." />
+    <string id="Dramalord391" text="Heißt das, Sie finden mich nicht attraktiv?" />
+    <string id="Dramalord392" text="Ich bin mir ziemlich sicher, dass Sie eine Vorliebe haben." />
+    <string id="Dramalord393" text="Ich habe gehört, dass manche Lords und Ladies einen unterschiedlichen Geschmack in Bezug auf das physische Geschlecht haben. Wie ist es mit Ihnen? (Orientierung)" />
+    <string id="Dramalord394" text="Eigentlich habe ich keine spezielle Vorliebe." />
+    <string id="Dramalord395" text="Der Besitzer des örtlichen Gasthofs hat etwas zugenommen. Jetzt ist die Taverne jeden Abend voll mit gaffenden Gästen. (Gewicht)" />
+    <string id="Dramalord396" text="Im Hochland sind Lords und Ladies oft stämmig und kräftig. Viele Leute bewundern sie für ihre Stärke. (Körperbau)" />
+    <string id="Dramalord397" text="Es gibt Leute, die ältere Leute bevorzugen, und andere, die jüngere Leute bevorzugen. Was bevorzugen Sie? (Alter)" />
+    <string id="Dramalord398" text="Ich bevorzuge Leute, die älter sind als ich. Nichts ist besser als reifes Obst." />
+    <string id="Dramalord399" text="Ich genieße die Energie und Ausdauer jüngerer Leute sehr." />
+    <string id="Dramalord400" text="Ich finde Leute in meinem Alter attraktiver." />
+    <string id="Dramalord401" text="Findest du es manchmal spannend, neue Dinge auszuprobieren? (Offenheit)" />
+    <string id="Dramalord402" text="Ich probiere gerne neue Dinge aus. Ohne Abwechslung wird es langweilig." />
+    <string id="Dramalord403" text="Unsinn. Die Dinge sind gut, wie sie sind und müssen sich nicht ändern." />
+    <string id="Dramalord404" text="Vielleicht, ist mir eigentlich egal. Die Dinge ändern sich sowieso ständig." />
+    <string id="Dramalord405" text="Also, bist du eher ein Mensch, der Dinge plant, oder bist du eher der spontane Typ? (Gewissenhaftigkeit)" />
+    <string id="Dramalord406" text="Alles braucht Ordnung und Struktur. Planung ist alles." />
+    <string id="Dramalord407" text="Nee, nicht wirklich. Normalerweise stolpere ich in mein nächstes Abenteuer hinein." />
+    <string id="Dramalord408" text="Eh, manchmal plane ich, manchmal nicht." />
+    <string id="Dramalord409" text="Freust du dich, wenn in der Stadt ein Turnier stattfindet, neue Leute kennenzulernen? (Extraversion)" />
+    <string id="Dramalord410" text="Oh, absolut! Ich kann kaum aufhören zu quatschen, wenn ich unter Leuten bin." />
+    <string id="Dramalord411" text="Ugh. Nee, ich bin eher für mich. Die meisten Leute gehen mir auf die Nerven." />
+    <string id="Dramalord412" text="Nun, das kommt darauf an. Ich würde wahrscheinlich ein paar treffen, aber nicht viele." />
+    <string id="Dramalord413" text="Wie reagieren Sie, wenn Ihnen einer Ihrer Freunde eine traurige Geschichte erzählt? (Verträglichkeit)" />
+    <string id="Dramalord414" text="Ich versuche, sie zu trösten oder ihnen natürlich zu helfen, wenn ich kann." />
+    <string id="Dramalord415" text="Ähm, meine Freunde wissen, dass sie mich nicht mit ihren persönlichen Sachen belästigen dürfen." />
+    <string id="Dramalord416" text="Das hängt wohl davon ab, wie ich mich fühle." />
+    <string id="Dramalord417" text="Eine Party zu organisieren ist manchmal sehr stressig. Wie gehen Sie damit um? (Neurotizismus)" />
+    <string id="Dramalord418" text="Oh ja. Um mich zu erholen, schließe ich mich normalerweise ein paar Tage lang ein." />
+    <string id="Dramalord419" text="Nun, es ist überhaupt nicht stressig. Ich bin eigentlich selten gestresst." />
+    <string id="Dramalord420" text="Ich denke, es ist ok. Manchmal brauche ich ein oder zwei Tage frei." />
   </strings>
 </base>
