@@ -34,8 +34,8 @@ namespace Dramalord
 
             ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
             ItemObject pie = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_pie");
-            Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(wurst);
-            Campaign.Current.DefaultVillageTypes.ConsumableRawItems.Add(pie);
+            Campaign.Current?.DefaultVillageTypes.ConsumableRawItems.Add(wurst);
+            Campaign.Current?.DefaultVillageTypes.ConsumableRawItems.Add(pie);
         }
 
         protected override void OnGameStart(Game game, IGameStarter starter)

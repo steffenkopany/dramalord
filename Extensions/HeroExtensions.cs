@@ -97,8 +97,9 @@ namespace Dramalord.Extensions
         public static bool IsAutonom(this Hero hero)
         {
             if((hero.Occupation == Occupation.Wanderer && hero.Clan == null && !DramalordMCM.Instance.AllowWandererAutonomy) ||
-                (hero.Clan == Clan.PlayerClan && !DramalordMCM.Instance.AllowPlayerClanAutonomy)
-                || hero.IsPrisoner)
+                (hero != Hero.MainHero && hero.Clan == Clan.PlayerClan && !DramalordMCM.Instance.AllowPlayerClanAutonomy) ||
+                hero.IsPrisoner ||
+                hero.GetDesires().HasToy)
             {
                 return false;
             }
@@ -107,6 +108,10 @@ namespace Dramalord.Extensions
 
         public static bool IsRelativeOf(this Hero hero, Hero target)
         {
+            if(DramalordMCM.Instance.AllowIncest)
+            {
+                return false;
+            }
             if (hero.Children.Contains(target) || target.Children.Contains(hero) || hero.Siblings.Contains(target) || target.Siblings.Contains(hero))
             {
                 return true;
@@ -181,21 +186,6 @@ namespace Dramalord.Extensions
             sympathy += hero.GetHeroTraits().Calculating == target.GetHeroTraits().Calculating ? 1 : 0;
             sympathy += hero.GetHeroTraits().Mercy == target.GetHeroTraits().Mercy ? 1 : 0;
             return sympathy;
-                /*
-            int score = 0;
-            score += ((heroPersonality.Openness > 0 && targetPersonality.Openness > 0) || (heroPersonality.Openness < 0 && targetPersonality.Openness < 0)) ? 1 : 0;
-            score += ((heroPersonality.Openness < 0 && targetPersonality.Openness > 0) || (heroPersonality.Openness > 0 && targetPersonality.Openness < 0)) ? -1 : 0;
-            score += ((heroPersonality.Agreeableness > 0 && targetPersonality.Agreeableness > 0) || (heroPersonality.Agreeableness < 0 && targetPersonality.Agreeableness < 0)) ? 1 : 0;
-            score += ((heroPersonality.Agreeableness < 0 && targetPersonality.Agreeableness > 0) || (heroPersonality.Agreeableness > 0 && targetPersonality.Agreeableness < 0)) ? -1 : 0;
-            score += ((heroPersonality.Conscientiousness > 0 && targetPersonality.Conscientiousness > 0) || (heroPersonality.Conscientiousness < 0 && targetPersonality.Conscientiousness < 0)) ? 1 : 0;
-            score += ((heroPersonality.Conscientiousness < 0 && targetPersonality.Conscientiousness > 0) || (heroPersonality.Conscientiousness > 0 && targetPersonality.Conscientiousness < 0)) ? -1 : 0;
-            score += ((heroPersonality.Neuroticism > 0 && targetPersonality.Neuroticism > 0) || (heroPersonality.Neuroticism < 0 && targetPersonality.Neuroticism < 0)) ? 1 : 0;
-            score += ((heroPersonality.Neuroticism < 0 && targetPersonality.Neuroticism > 0) || (heroPersonality.Neuroticism > 0 && targetPersonality.Neuroticism < 0)) ? -1 : 0;
-            score += ((heroPersonality.Extroversion > 0 && targetPersonality.Extroversion > 0) || (heroPersonality.Extroversion < 0 && targetPersonality.Extroversion < 0)) ? 1 : 0;
-            score += ((heroPersonality.Extroversion < 0 && targetPersonality.Extroversion > 0) || (heroPersonality.Extroversion > 0 && targetPersonality.Extroversion < 0)) ? -1 : 0;
-
-            return score;
-                */
         }
 
         public static int GetAttractionTo(this Hero hero, Hero target)

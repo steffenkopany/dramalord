@@ -19,6 +19,27 @@ namespace Dramalord
         private static Dropdown<HeroWrapper> _heroList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
         private string _dummy;
 
+        internal void SetSelected(Hero? hero)
+        {
+            if(hero != null && hero.IsDramalordLegit() && hero.HasMet)
+            {
+                int index = -1;
+                SelectedHero.ForEach(item =>
+                {
+                    if(item.Hero == hero)
+                    {
+                        index = _heroList.IndexOf(item);
+                    }
+                });
+                
+                if(index != -1)
+                {
+                    _heroList.SelectedIndex = index;
+                    _selected = hero;
+                }
+            }
+        }
+
         public class HeroWrapper
         {
             internal Hero Hero { get; }
@@ -26,6 +47,11 @@ namespace Dramalord
             {
                 Hero = hero;
             }
+            public override int GetHashCode()
+            {
+                return Hero.GetHashCode();
+            }
+
             public override string ToString()
             {
                 return Hero.Name.ToString() + ((Hero.Clan != null) ? " of the " + Hero.Clan.Name.ToString() : "");
@@ -68,7 +94,30 @@ namespace Dramalord
             Instance.OnPropertyChanged();
             InformationManager.DisplayMessage(new InformationMessage("Selected hero: " + Instance.SelectedHero.SelectedValue.ToString() + " at index " + Instance.SelectedHero.SelectedIndex, Color.White));
         };
-          
+
+        [SettingPropertyGroup("{=Dramalord107}1: Hero Selection")]
+        [SettingPropertyButton("Cheat Hero", Order = 5, Content = "Cheat Hero", HintText = "Press this button to make hero love the player", RequireRestart = false)]
+        public Action CheatHeroData { get; set; } = () =>
+        {
+            HeroPersonality personality = _selected.GetPersonality();
+            personality.Agreeableness = Hero.MainHero.GetPersonality().Agreeableness;
+            personality.Conscientiousness = Hero.MainHero.GetPersonality().Conscientiousness;
+            personality.Openness = Hero.MainHero.GetPersonality().Openness;
+            personality.Neuroticism = Hero.MainHero.GetPersonality().Neuroticism;
+            personality.Extroversion = Hero.MainHero.GetPersonality().Extroversion;
+            HeroDesires desires = _selected.GetDesires();
+            desires.AttractionMen = (Hero.MainHero.IsFemale) ? 0 : 100;
+            desires.AttractionWomen = (Hero.MainHero.IsFemale) ? 100 : 0;
+            desires.AttractionAgeDiff = (int)(Hero.MainHero.Age - _selected.Age);
+            desires.AttractionBuild = (int)(Hero.MainHero.Build*100);
+            desires.AttractionWeight = (int)(Hero.MainHero.Weight * 100);
+            desires.Horny = 100;
+            desires.Libido = 10;
+            HeroRelation relation = _selected.GetRelationTo(Hero.MainHero);
+            relation.Trust = 100;
+            relation.Love = 100;
+        };
+
         [SettingPropertyGroup("{=Dramalord107}1: Hero Selection")]
         [SettingProperty("{=Dramalord195}Current Attraction", Order = 2, RequireRestart = false, HintText = "{=Dramalord196}Current attraction value to player")]
         public string CurrentAttraction

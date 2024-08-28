@@ -5,6 +5,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace Dramalord.Conversations
@@ -16,6 +17,7 @@ namespace Dramalord.Conversations
 
         internal static void Start(Hero hero, HeroEvent @event)
         {
+            //InformationManager.DisplayMessage(new InformationMessage($"{Hero.MainHero.Name} confronts {hero.Name}", new Color(1f, 0f, 0f)));
             TargetHero = hero;
             Event = @event;
             bool civilian = hero.CurrentSettlement != null;
@@ -49,7 +51,7 @@ namespace Dramalord.Conversations
             if (relation == RelationshipType.FriendWithBenefits) return new TextObject("{=Dramalord026}my special friend");
             if (relation == RelationshipType.Lover) return new TextObject("{=Dramalord023}my lover");
             if (relation == RelationshipType.Betrothed) return new TextObject("{=Dramalord025}my betrothed");
-            if (relation == RelationshipType.Spouse) return new TextObject("{=Dramalord172}my spouse");
+            if (relation == RelationshipType.Spouse) return new TextObject("{=Dramalord173}my spouse");
             return new TextObject("{=Dramalord175}my acquaintance");
         }
 

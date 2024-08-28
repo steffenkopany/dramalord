@@ -1,16 +1,26 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Data;
 using Dramalord.Extensions;
+using SandBox.Conversation;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Conversation;
+using TaleWorlds.CampaignSystem.Encounters;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
+using TaleWorlds.CampaignSystem.Settlements;
+using TaleWorlds.CampaignSystem.Settlements.Locations;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Conversations
 {
     internal static class ConversationHelper
     {
+        internal static bool ConversationRunning = false;
+
         internal static TextObject PlayerTitle(bool capital) => GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, capital);
         internal static TextObject NpcTitle(bool capital) => GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, capital);
 
@@ -48,7 +58,15 @@ namespace Dramalord.Conversations
             }
             else
             {
-                text = target.IsFemale ? GameTexts.FindText("str_my_lady").ToString() : GameTexts.FindText("str_my_lord").ToString();
+                if(target == Hero.MainHero)
+                {
+                    text = Campaign.Current.ConversationManager.FindMatchingTextOrNull("str_salutation", target.CharacterObject).ToString();// target.IsFemale ? GameTexts.FindText("str_my_lady").ToString() : GameTexts.FindText("str_my_lord").ToString();
+                }
+                else
+                {
+                    text = GameTexts.FindText(CharacterObject.OneToOneConversationCharacter.IsFemale ? "str_player_salutation_my_lady" : "str_player_salutation_my_lord").ToString();
+                }
+                
             }
 
             if (capital)
@@ -70,11 +88,12 @@ namespace Dramalord.Conversations
         }
 
         internal static HeroIntention? ConversationEndedIntention = null;
+
         internal static void OnConversationEnded(IEnumerable<CharacterObject> characters)
         {
-            if(ConversationEndedIntention != null)
+            ConversationRunning = false;
+            if (ConversationEndedIntention != null)
             {
-                
                 Hero npc = characters.FirstOrDefault(hero => hero.HeroObject != null && hero.HeroObject != Hero.MainHero).HeroObject;
                 Hero player = Hero.MainHero;
                 HeroIntention intention = ConversationEndedIntention;
@@ -137,6 +156,10 @@ namespace Dramalord.Conversations
                     if (intention.Target == npc) BreakupAction.Apply(player, npc);
                     else if (intention.Target == player) BreakupAction.Apply(npc, player);
                 }
+                else if(intention.Type == IntentionType.Execute)
+                {
+                    MBInformationManager.ShowSceneNotification(HeroExecutionSceneNotificationData.CreateForPlayerExecutingHero(Hero.OneToOneConversationHero, null));
+                }
 
                 if (npc.IsFriendlyWith(intention.Target) && npc.GetRelationTo(player).Trust <= 0)
                 {
@@ -144,5 +167,64 @@ namespace Dramalord.Conversations
                 }
             }
         }
+        /*
+        private static Location? PreviousLocation = null;
+        internal static bool IsDateEnd { get; set; } = false;
+        internal static void StartDate(Hero toBeDated)
+        {
+            if(toBeDated.CurrentSettlement != null)
+            {
+                LocationCharacter lc = LocationComplex.Current.GetFirstLocationCharacterOfCharacter(toBeDated.CharacterObject);
+                PreviousLocation = LocationComplex.Current.GetLocationOfCharacter(lc);
+                Location? newLocation = null;
+
+                if (toBeDated.CurrentSettlement.IsVillage) //village_center 
+                {
+                    newLocation = LocationComplex.Current.GetLocationWithId("village_center");
+                }
+                else if (toBeDated.CurrentSettlement.IsCastle) //center, lordshall, prison
+                {
+                    if(PreviousLocation.StringId == "center") newLocation = LocationComplex.Current.GetLocationWithId("lordshall");
+                    else newLocation = LocationComplex.Current.GetLocationWithId("center");
+                }
+                else if (toBeDated.CurrentSettlement.IsTown) //lordshall, arena, center, prison, tavern, house_1, house_2
+                {
+                    if (PreviousLocation.StringId == "tavern") newLocation = LocationComplex.Current.GetLocationWithId("center");
+                    else newLocation = LocationComplex.Current.GetLocationWithId("tavern");
+                }
+
+                LocationComplex.Current.ChangeLocation(lc, PreviousLocation, newLocation);
+                PlayerEncounter.LocationEncounter.OnCharacterLocationChanged(lc, PreviousLocation, newLocation);
+                PlayerEncounter.LocationEncounter.CreateAndOpenMissionController(newLocation, null, toBeDated.CharacterObject);
+                IsDateEnd = false;
+            }
+        }
+
+        internal static void EndDate(Hero toBeDated)
+        {
+            
+            LocationCharacter lc = LocationComplex.Current.GetFirstLocationCharacterOfCharacter(toBeDated.CharacterObject);
+            Location dateLocation = LocationComplex.Current.GetLocationOfCharacter(lc);
+            //LocationComplex.Current.ChangeLocation(lc, dateLocation, PreviousLocation);
+            PlayerEncounter.LocationEncounter.CreateAndOpenMissionController(PreviousLocation, null, toBeDated.CharacterObject);
+            PreviousLocation = null;
+            IsDateEnd = true;
+        }
+        */
+        /*
+        internal static void ExecuteOpenConversation(Hero conversationHero)
+        {
+            if (Settlement.CurrentSettlement == null)
+            {
+                CampaignMission.OpenConversationMission(new ConversationCharacterData(CharacterObject.PlayerCharacter, PartyBase.MainParty), new ConversationCharacterData(conversationHero.CharacterObject, PartyBase.MainParty, noHorse: false, noWeapon: false, spawnAfterFight: false, conversationHero.IsPrisoner));
+            }
+            else
+            {
+                PlayerEncounter.LocationEncounter.CreateAndOpenMissionController(LocationComplex.Current.GetLocationOfCharacter(LocationComplex.Current.GetFirstLocationCharacterOfCharacter(conversationHero.CharacterObject)), null, conversationHero.CharacterObject);
+            }
+
+            //IsInConversation = true;
+        }
+        */
     }
 }

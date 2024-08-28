@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -19,7 +18,13 @@ namespace Dramalord.Data
         Engagement,
         Marriage,
         BreakUp,
-        LeaveClan
+        LeaveClan,
+        Adopt,
+        Orphanize,
+        Execute,
+        PrisonIntercourse,
+        EndDate,
+        Duel
     }
 
     internal sealed class HeroIntention
@@ -71,10 +76,12 @@ namespace Dramalord.Data
         }
 
         private readonly Dictionary<Hero, List<HeroIntention>> _intentions;
+        private readonly List<Hero> _intentionsToPlayer;
 
         private DramalordIntentions() : base("DramalordIntentions")
         {
             _intentions = new();
+            _intentionsToPlayer = new();
         }
 
         internal List<HeroIntention> GetIntentions(Hero hero)
@@ -99,13 +106,17 @@ namespace Dramalord.Data
 
         internal List<Hero> GetIntentionTowardsPlayer()
         {
-            return _intentions.Where(keypair => keypair.Value.Any(intention => intention.Target == Hero.MainHero)).Select(keypair => keypair.Key).ToList();
+            return _intentionsToPlayer;
         }
 
         internal void AddIntention(Hero hero, Hero target, IntentionType type, int eventID)
         {
             List<HeroIntention> intentions = GetIntentions(hero);
             intentions.Add(new HeroIntention(type, target, eventID));
+            if(target == Hero.MainHero && !_intentionsToPlayer.Contains(hero))
+            {
+                _intentionsToPlayer.Add(hero);
+            }
         }
 
         internal void RemoveIntention(Hero hero, Hero target, IntentionType type, int eventID)
@@ -115,6 +126,10 @@ namespace Dramalord.Data
             {
                 intentions.Remove(item);
             });
+            if (target == Hero.MainHero)
+            {
+                _intentionsToPlayer.Remove(hero);
+            }
         }
 
         internal void RemoveIntentionsTo(Hero hero, Hero target)
@@ -124,12 +139,17 @@ namespace Dramalord.Data
             {
                 intentions.Remove(item);
             });
+            if (target == Hero.MainHero)
+            {
+                _intentionsToPlayer.RemoveAll(item => item == hero);
+            }
         }
 
         internal void RemoveAllIntentions(Hero hero)
         {
             List<HeroIntention> intentions = GetIntentions(hero);
             intentions.Clear();
+            _intentionsToPlayer.Remove(hero);
         }
 
         public override void LoadData(IDataStore dataStore)
@@ -155,6 +175,18 @@ namespace Dramalord.Data
                 }
 
             });
+
+            _intentionsToPlayer.Clear();
+            List<string> playerData = new();
+            dataStore.SyncData(SaveIdentifier + "Player", ref playerData);
+            playerData.ForEach(heroId =>
+            {
+                Hero? hero = Hero.AllAliveHeroes.FirstOrDefault(item => item.StringId == heroId);
+                if(hero != null)
+                {
+                    _intentionsToPlayer.Add(hero);
+                }
+            });
         }
 
         public override void SaveData(IDataStore dataStore)
@@ -163,15 +195,26 @@ namespace Dramalord.Data
 
             _intentions.Do(keypair =>
             {
-                List<HeroIntentionSave> intentions = new();
-                keypair.Value.ForEach(item =>
+                if(!data.ContainsKey(keypair.Key.StringId))
                 {
-                    intentions.Add(new HeroIntentionSave((int)item.Type, item.Target.StringId, item.EventId));
-                });
-                data.Add(keypair.Key.StringId, intentions);
+                    List<HeroIntentionSave> intentions = new();
+                    keypair.Value.ForEach(item =>
+                    {
+                        intentions.Add(new HeroIntentionSave((int)item.Type, item.Target.StringId, item.EventId));
+                    });
+                    data.Add(keypair.Key.StringId, intentions);
+                }
             });
 
             dataStore.SyncData(SaveIdentifier, ref data);
+
+            List<string> playerData = new();
+            _intentionsToPlayer.ForEach(hero =>
+            {
+                playerData.Add(hero.StringId);
+            });
+
+            dataStore.SyncData(SaveIdentifier + "Player", ref playerData);
         }
 
         protected override void OnHeroComesOfAge(Hero hero)
@@ -187,11 +230,19 @@ namespace Dramalord.Data
         protected override void OnHeroKilled(Hero victim, Hero killer, KillCharacterAction.KillCharacterActionDetail reason, bool showNotifications)
         {
             _intentions.Remove(victim);
+            _intentionsToPlayer.Remove(victim);
         }
 
         protected override void OnHeroUnregistered(Hero hero)
         {
             _intentions.Remove(hero);
+            _intentionsToPlayer.Remove(hero);
+        }
+
+        protected override void OnNewGameCreated(CampaignGameStarter starter)
+        {
+            _intentions.Clear();
+            _intentionsToPlayer.Clear();
         }
     }
 }

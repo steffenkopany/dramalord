@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData id="繁體中文" name="繁體中文" subtitle_extension="zh-HANT" supported_iso="zh-HANT,zh-tw,zh-hk" under_development="false">
+  <LanguageFile xml_path="CNt/language_strings.xml" />
+</LanguageData>

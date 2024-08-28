@@ -30,11 +30,19 @@ namespace Dramalord.Patches
         [HarmonyPrefix]
         public static bool RefreshSpouseVisit(ref Hero hero)
         {
-            if((hero == Hero.MainHero || hero.Spouse == Hero.MainHero) && !DramalordMCM.Instance.AllowDefaultPregnancies)
+            if(!DramalordMCM.Instance.AllowDefaultPregnanciesGlobal)
+            {
+                return false;
+            }
+            if((hero == Hero.MainHero || hero.Spouse == Hero.MainHero) && !DramalordMCM.Instance.AllowDefaultPregnanciesPlayer)
             {
                 return false;
             }
             if(hero.Spouse != null && hero.Spouse.IsFemale == hero.IsFemale)
+            {
+                return false;
+            }
+            if(hero.Clan == null)
             {
                 return false;
             }

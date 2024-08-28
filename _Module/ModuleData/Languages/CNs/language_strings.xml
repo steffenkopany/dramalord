@@ -4,235 +4,417 @@
     <tag language="简体中文" />
   </tags>
   <strings>
-    <string id="Dramalord001" text="自治" />
-    <string id="Dramalord002" text="流浪者自治" />
-    <string id="Dramalord003" text="允许无氏族流浪者与领主和其他流浪者互动" />
-    <string id="Dramalord004" text="英雄设置" />
+    <string id="Dramalord001" text="主动性" />
+    <string id="Dramalord002" text="流浪者主动性" />
+    <string id="Dramalord003" text="允许无氏族的流浪者主动和其他贵族或流浪者互动" />
+    <string id="Dramalord004" text="英雄设定" />
     <string id="Dramalord005" text="最低吸引力" />
-    <string id="Dramalord006" text="NPC 认为其他人具有吸引力所需的吸引力分数" />
-    <string id="Dramalord007" text="日志设置" />
-    <string id="Dramalord008" text="关系日志" />
-    <string id="Dramalord009" text="在日志中显示关系变化" />
+    <string id="Dramalord006" text="NPC认为他人具有吸引力的最低值" />
+    <string id="Dramalord007" text="日志设定" />
+    <string id="Dramalord008" text="关系变化日志" />
+    <string id="Dramalord009" text="在日志中显示人物之间关系的变化纪录" />
     <string id="Dramalord010" text="朋友" />
-    <string id="Dramalord011" text="炮友" />
-    <string id="Dramalord012" text="恋人" />
-    <string id="Dramalord013" text="订婚" />
-    <string id="Dramalord014" text="已婚" />
-    <string id="Dramalord015" text="{HERO1.LINK} 和 {HERO2.LINK} 现在是 {RELATIONSHIP}" />
-    <string id="Dramalord015" text="{HERO1.LINK} 和 {HERO2.LINK} 或不再是 {RELATIONSHIP}" />
-    <string id="Dramalord016" text="常规" />
-    <string id="Dramalord017" text="机会被抓住" />
-    <string id="Dramalord018" text="与其他英雄互动时被伙伴抓住的几率" />
-    <string id="Dramalord019" text="你与 {HERO.LINK} 调情。 (爱 {NUM})" />
-    <string id="Dramalord020" text="您与 {HERO.LINK} 进行了一次随意交谈。 (信任 {NUM})" />
-    <string id="Dramalord021" text="仅显示氏族互动" />
-    <string id="Dramalord022" text="在聊天记录中仅显示您的部落成员的互动" />
+    <string id="Dramalord011" text="性伴侣" />
+    <string id="Dramalord012" text="情人" />
+    <string id="Dramalord013" text="未婚夫(妻)" />
+    <string id="Dramalord014" text="夫妻" />
+    <string id="Dramalord015" text="{HERO1.LINK} 和 {HERO2.LINK} 现在是 {RELATIONSHIP} " />
+    <string id="Dramalord015" text="{HERO1.LINK} 和 {HERO2.LINK} 不再是 {RELATIONSHIP} " />
+    <string id="Dramalord016" text="一般" />
+    <string id="Dramalord017" text="被发现的机率" />
+    <string id="Dramalord018" text="和其他英雄互动时被同伴(或对象)发现的机率" />
+    <string id="Dramalord019" text="你和 {HERO.LINK} 调情了。 (爱慕 {NUM})" />
+    <string id="Dramalord020" text="你和 {HERO.LINK} 闲聊了片刻。 (信赖 {NUM})" />
+    <string id="Dramalord021" text="仅显示玩家家族成员的互动" />
+    <string id="Dramalord022" text="仅显示你的家族成员的互动纪录在日志上" />
     <string id="Dramalord023" text="我的爱人" />
     <string id="Dramalord024" text="我的爱" />
-    <string id="Dramalord025" text="我的未婚夫" />
-    <string id="Dramalord026" text="我的特别朋友" />
-    <string id="Dramalord027" text="抱歉，{TITLE}，我们从未见过面，但我还是忍不住想请您花几分钟时间。" />
-    <string id="Dramalord028" text="{TITLE}，很高兴见到你！我可以谦虚地请求占用你一些时间吗？" />
-    <string id="Dramalord029" text="当然是{TITLE}。我能为您做些什么？" />
-    <string id="Dramalord030" text="很抱歉，{TITLE}，但我现在没时间。" />
-    <string id="Dramalord031" text="我总是喜欢听新故事。告诉我你在王国旅行时的最新经历。" />
-    <string id="Dramalord032" text="我想听听你对一件困扰我一段时间的事情的看法。" />
-    <string id="Dramalord033" text="我不得不说我真的很喜欢你的笑容。你介意告诉我更多关于你自己的事吗？" />
-    <string id="Dramalord034" text="你介意和我一起去散步吗？我想用你出众的外表引起我的嫉妒。" />
-    <string id="Dramalord035" text="我必须承认，我无法停止想你。我显然对你有感觉，{TITLE}，并希望将我们的关系提升到一个新的水平。你说什么？" />
-    <string id="Dramalord036" text="你的出现让我脸红，{TITLE}。我很想经常见到你，只有我们两个人。你说什么，{TITLE}？" />
-    <string id="Dramalord037" text="哦，{TITLE}，我一直很想念你！仆人们在我的私人房间里准备了一顿饭。你愿意和我一起吃吗？" />
-    <string id="Dramalord038" text="我很期待见到你，{TITLE}。你想找个更安静的地方，进行更私密的谈话吗？" />
-    <string id="Dramalord039" text="我们很幸运，{TITLE}。{SPOUSE} 目前不在，女服务员发誓保持沉默。你能跟我一起去吗？" />
-    <string id="Dramalord040" text="呃，{SPOUSE} 终于离开了。现在我们有了所有的房间！仆人们会自己留着，想和我一起吗，{TITLE}？" />
-    <string id="Dramalord041" text="我会对你直言不讳，{TITLE}。我有紧急需求需要满足，你看起来像一个可以谨慎行事的人。我可以寻求你的帮助吗？" />
-    <string id="Dramalord042" text="{TITLE}，这对我来说太尴尬了。我身上有一块痒痒的地方需要注意，我希望你能......挠......我的痒痒。你怎么说？" />
-    <string id="Dramalord043" text="您是{TITLE}，我相信您。我想知道我们是否可以定期在自然冲动方面互相帮助。您愿意吗？" />
-    <string id="Dramalord044" text="我在想我们是否可以互相帮助，{TITLE}。坦率地说，就乐趣而言。我们可以偶尔见面，互相享受。你觉得怎么样？" />
-    <string id="Dramalord045" text="我很期待见到你，{TITLE}。你愿意聊聊吗，然后做些床上运动？" />
-    <string id="Dramalord046" text="哦，{TITLE}。我希望你稍后能有时间聊天和做一些解剖学研究。你有兴趣吗？" />
-    <string id="Dramalord047" text="{SPOUSE} 不在身边，我需要感受你，{TITLE}。我们去卧室好好享受吧。你愿意吗？" />
-    <string id="Dramalord048" text="现在 {SPOUSE} 不在身边，我在想你和我可以用这张空床，{TITLE}。这能诱惑你吗？" />
-    <string id="Dramalord049" text="过来吻我，{TITLE}。我渴望你的身体，想用所有的欲望和快乐来享受你！" />
-    <string id="Dramalord050" text="脱掉你的衣服吧。我会在我的卧室里给你展示一种不同的双方共赢的战斗！" />
-    <string id="Dramalord051" text="我非常爱你，{TITLE}。我觉得我们的关系是时候迈出下一步了。你愿意嫁给我吗？" />
-    <string id="Dramalord052" text="你知道，{TITLE}，我对你怀有深厚的感情，我想你就是那个人。你愿意嫁给我吗？" />
-    <string id="Dramalord053" text="现在我们已经达成和解，{TITLE}，让我们请一位牧师，最后结婚吧！你说什么，{TITLE}？" />
-    <string id="Dramalord054" text="我们可以利用这个机会达成和解，{TITLE}。让我们去教堂，缔结终身契约吧！" />
-    <string id="Dramalord055" text="当然，我们来聊聊{TITLE}。" />
-    <string id="Dramalord056" text="当然{TITLE}，我很乐意加入你们。" />
-    <string id="Dramalord057" text="哦，{TITLE}，我也希望如此！" />
-    <string id="Dramalord058" text="当然了 {TITLE}，我很享受和你在一起的每一分钟。" />
-    <string id="Dramalord059" text="哦，是的，{TITLE}。只要他们不在，我们就可以好好享受这段时光。" />
-    <string id="Dramalord060" text="别担心 {TITLE}。我理解你的感受，我很乐意帮助你。" />
-    <string id="Dramalord061" text="有趣的提议，{TITLE}。我觉得我喜欢这个想法。" />
-    <string id="Dramalord062" text="当然，{TITLE}。我需要一些娱乐。" />
-    <string id="Dramalord063" text="好吧，我们做的事情是为了刺激...引领潮流 {TITLE}！" />
-    <string id="Dramalord064" text="如你所愿。我可以保证你不会睡太多，{TITLE}" />
-    <string id="Dramalord065" text="你让我梦想成真，{TITLE}。是的，我很想嫁给你！" />
-    <string id="Dramalord066" text="我们达成和解了，{TITLE}。我们现在就结婚吧！" />
-    <string id="Dramalord067" text="我同意，{TITLE}。让我们巩固我们的纽带。" />
-    <string id="Dramalord068" text="很抱歉{TITLE}，但我现在对此不感兴趣。" />
-    <string id="Dramalord069" text="你与 {HERO.LINK} 有约会。 (爱 {NUM}，信任 {NUM2})" />
-    <string id="Dramalord070" text="你看到{HERO.LINK}与{TARGET.LINK}约会。" />
-    <string id="Dramalord071" text="{HERO.LINK} 看到你和 {TARGET.LINK} 约会。" />
-    <string id="Dramalord072" text="你与 {HERO.LINK} 关系密切。" />
-    <string id="Dramalord073" text="你发现 {HERO.LINK} 和 {TARGET.LINK} 亲密。" />
-    <string id="Dramalord074" text="{HERO.LINK} 发现你与 {TARGET.LINK} 亲密。" />
-    <string id="Dramalord075" text="你从 {HERO.LINK} 怀孕了。" />
-    <string id="Dramalord076" text="{HERO.LINK} 怀了你的孩子。" />
-    <string id="Dramalord077" text="{HERO.LINK} 诞生" />
-    <string id="Dramalord078" text="您已与 {HERO.LINK} 订婚。" />
-    <string id="Dramalord079" text="您和 {HERO.LINK} 现在是朋友。" />
-    <string id="Dramalord080" text="您和 {HERO.LINK} 现在是互惠好友。" />
-    <string id="Dramalord081" text="你将 {HERO.LINK} 从你的部落中驱逐出去。" />
-    <string id="Dramalord082" text="{HERO.LINK} 已离开你的部落。" />
-    <string id="Dramalord083" text="氏族变更日志" />
-    <string id="Dramalord084" text="在日志中显示氏族变化" />
-    <string id="Dramalord085" text="{HERO.LINK} 已离开 {OLDCLAN}" />
-    <string id="Dramalord086" text="{HERO.LINK} 被 {CAUSEDBY.LINK} 逐出 {OLDCLAN}" />
-    <string id="Dramalord087" text="{HERO.LINK} 加入了 {CLAN}" />
-    <string id="Dramalord088" text="你结束了与 {HERO.LINK} 的关系。" />
-    <string id="Dramalord089" text="{HERO.LINK} 结束了与你的关系。" />
-    <string id="Dramalord099" text="{HERO.LINK} 已与 {TARGET.LINK} 结婚。" />
-    <string id="Dramalord100" text="{TITLE}，我可以占用您几分钟时间吗？" />
-    <string id="Dramalord101" text="我们来谈谈别的事情吧，{TITLE}。" />
-    <string id="Dramalord102" text="抱歉，{TITLE}，但我的配偶就在我身边，我们不能冒这个险。" />
-    <string id="Dramalord103" text="抱歉，{TITLE}，但我不会对你这样做。" />
-    <string id="Dramalord104" text="很抱歉 {TITLE}，但我还没有准备好迈出这一步。" />
-    <string id="Dramalord105" text="又来了？让我休息一下，{TITLE}。我们以后再谈吧。" />
-    <string id="Dramalord106" text="你现在是 {HERO.LINK} 的情人。" />
-    <string id="Dramalord107" text="1：英雄选择" />
+    <string id="Dramalord025" text="我的未婚夫(妻)" />
+    <string id="Dramalord026" text="我特别的朋友" />
+    <string id="Dramalord027" text="打扰了，{TITLE}，我们素未谋面，但我不禁的想占用你一些时间。" />
+    <string id="Dramalord028" text="{TITLE}，见到你真好！我能冒昧的占用你一些时间吗？" />
+    <string id="Dramalord029" text="当然！{TITLE}，有什麽我能效劳的吗？" />
+    <string id="Dramalord030" text="非常抱歉，{TITLE}，我现在正好拨冗不出时间。" />
+    <string id="Dramalord031" text="我总是喜欢听些新鲜故事，和我说说你在最近的旅途上发生的趣闻吧！" />
+    <string id="Dramalord032" text="有件事困扰了我一段时间，我想听听看你的观点。" />
+    <string id="Dramalord033" text="不得不说，我被你的笑容给迷住了，若不介意，愿意和我分享些关於你的趣事吗？" />
+    <string id="Dramalord034" text="你介意陪我去散个步吗？我想借用你出众的外貌，去招惹一些争风吃醋。" />
+    <string id="Dramalord035" text="我必须坦白，我无法停止对你每一刻的思念，我显然是动情了…{TITLE}，我希望我们能有更进一步的关系，你觉得呢？" />
+    <string id="Dramalord036" text="你的出现使我心乱如麻，{TITLE}…我只想要能够更常见到你，就我们两人，你觉得如何{TITLE}？" />
+    <string id="Dramalord037" text="哦！{TITLE}，我好想念你！仆人们正好准备了一顿丰盛佳肴，就在我的房间里，你可以来陪我一起享用吗？" />
+    <string id="Dramalord038" text="我一直期待见到你！{TITLE}，你想不想和我一起远离人群，找个宁静的角落独处呢？" />
+    <string id="Dramalord039" text="我们很走运{TITLE}，{SPOUSE}不在，仆人们什麽也不知道，什麽也不会说，你要和我一起来吗？" />
+    <string id="Dramalord040" text="噢！{SPOUSE}终於走了，现在整个房间都是我们的了，仆人们也会确保不会有人来打扰，和我一起来享受这幽静的时光吧！{TITLE}？" />
+    <string id="Dramalord041" text="我直接坦率地说了{TITLE}，我有些「需求」必须尽快解决，而你看起来像是能保守秘密的人，我能请你帮个忙吗？" />
+    <string id="Dramalord042" text="这真的让我很尴尬…{TITLE}，我身上有个部位一直在发痒，痒到让人难受，我希望你能…帮我挠一下…痒…可以吗？" />
+    <string id="Dramalord043" text="你是{TITLE}，我信任你。我想知道我们是否偶尔能在…生理需求上…互相帮助？如果你愿意的话？" />
+    <string id="Dramalord044" text="我一直在想，也许我们可以互相帮助，纯粹是为了乐子，我们可以偶尔见面并享受彼此，你觉得如何{TITLE}？" />
+    <string id="Dramalord045" text="我一直期待见到你，{TITLE}，你愿意一起来聊聊天，然後…也许到床上做点运动吗？" />
+    <string id="Dramalord046" text="噢！{TITLE}，我希望你待会有时间，我们能做些关於「人体解剖学」的学术研究，你有兴趣吗？" />
+    <string id="Dramalord047" text="{SPOUSE}不在这，我现在需要感受你…{NAME}，我们到卧室去享受彼此吧！可以吗？" />
+    <string id="Dramalord048" text="现在{SPOUSE}不在，所以你和我也许…可以趁机用那张空床，{TITLE}，这对你来说刺激吗？" />
+    <string id="Dramalord049" text="过来亲吻我，{NAME}，我渴望你的肉体，我想要和你一起纵情恣欲的享受一切！" />
+    <string id="Dramalord050" text="让我们褪去衣物吧！然後到我的房间里来一场特别的决斗，双赢的那种！" />
+    <string id="Dramalord051" text="我爱你，我非常爱你！{TITLE}，我觉得是时候让我们修成正果了，{NAME}，你愿意和我共结连理吗？" />
+    <string id="Dramalord052" text="{TITLE}…我相信你也懂，我对你的爱是真诚无瑕的，我也始终相信你就是我的命中注定，{NAME}，你愿意和我共度终生吗？" />
+    <string id="Dramalord053" text="{TITLE}，我们的婚礼都安排妥当了，通知镇上的牧师来替我们完成证婚仪式吧！你觉得如何呢？" />
+    <string id="Dramalord054" text="今天时机很好，{TITLE}，我们通知大家都来到教堂，见证我们共结连理的神圣时刻吧！" />
+    <string id="Dramalord055" text="没问题，我们来聊聊吧！{TITLE}。" />
+    <string id="Dramalord056" text="当然好了！{TITLE}，我很乐意和你一起。" />
+    <string id="Dramalord057" text="噢！{NAME}，很高兴你问了，我也有同样的感觉！" />
+    <string id="Dramalord058" text="没问题，{TITLE}，我很享受和你在一起的时光。" />
+    <string id="Dramalord059" text="噢，是的！{TITLE}，等他们一走，我们就可以好好享受快乐时光了。" />
+    <string id="Dramalord060" text="别担心，{TITLE}，我了解你那种感受，我很乐意帮你！" />
+    <string id="Dramalord061" text="很有趣，{TITLE}，我喜欢这个主意。" />
+    <string id="Dramalord062" text="没问题，{TITLE}，我也想找点乐子。" />
+    <string id="Dramalord063" text="好吧，想想就觉得兴奋…带路吧！{TITLE}。" />
+    <string id="Dramalord064" text="如你所愿！我保证会让你下不了床，{TITLE}。" />
+    <string id="Dramalord065" text="你让我的美梦成真了，{TITLE}，是的！我愿意！" />
+    <string id="Dramalord066" text="我等不及了，{TITLE}，通知大家到镇上的教堂，我们现在就结婚吧！" />
+    <string id="Dramalord067" text="就这麽办！{TITLE}，让我们共结连理吧！" />
+    <string id="Dramalord068" text="我很抱歉{TITLE}，我现在对此提不起兴趣。" />
+    <string id="Dramalord069" text="你和 {HERO.LINK} 约会了。 (爱慕 {NUM}, 信赖 {NUM2})" />
+    <string id="Dramalord070" text="你看见 {HERO.LINK} 在和 {TARGET.LINK} 约会。" />
+    <string id="Dramalord071" text="{HERO.LINK} 看到了你和 {TARGET.LINK} 约会。" />
+    <string id="Dramalord072" text="你和 {HERO.LINK} 发生亲密关系。" />
+    <string id="Dramalord073" text="你发现 {HERO.LINK} 和 {TARGET.LINK} 发生亲密关系。" />
+    <string id="Dramalord074" text="{HERO.LINK} 发现你和 {TARGET.LINK} 发生亲密关系。" />
+    <string id="Dramalord075" text="妳怀上了 {HERO.LINK} 的孩子。" />
+    <string id="Dramalord076" text="{HERO.LINK} 怀上了你的孩子。" />
+    <string id="Dramalord077" text="{HERO.LINK} 出生了。" />
+    <string id="Dramalord078" text="你和 {HERO.LINK} 订婚了。" />
+    <string id="Dramalord079" text="你和 {HERO.LINK} 成为了朋友。" />
+    <string id="Dramalord080" text="你和 {HERO.LINK} 成为了性伴侣。" />
+    <string id="Dramalord081" text="你将 {HERO.LINK} 逐出你的家族。" />
+    <string id="Dramalord082" text="{HERO.LINK} 离开了你的家族。" />
+    <string id="Dramalord083" text="家族变化日志" />
+    <string id="Dramalord084" text="在日志中显示其他家族的变化纪录" />
+    <string id="Dramalord085" text="{HERO.LINK} 离开了 {OLDCLAN}。" />
+    <string id="Dramalord086" text="{HERO.LINK} 因为 {CAUSEDBY.LINK} 被逐出 {OLDCLAN}。" />
+    <string id="Dramalord087" text="{HERO.LINK} 加入了 {CLAN}。" />
+    <string id="Dramalord088" text="你结束了和 {HERO.LINK} 的关系。" />
+    <string id="Dramalord089" text="{HERO.LINK} 结束了和你的关系。" />
+    <string id="Dramalord099" text="{HERO.LINK} 和 {TARGET.LINK} 结婚了。" />
+    <string id="Dramalord100" text="{TITLE}，我可以占用你一些时间吗？" />
+    <string id="Dramalord101" text="让我们聊点别的吧！{TITLE}。" />
+    <string id="Dramalord102" text="抱歉，{TITLE}，但我的另一半就在附近，我们不能冒这个险。" />
+    <string id="Dramalord103" text="抱歉，{TITLE}，我不会和你那麽做的。" />
+    <string id="Dramalord104" text="对不起，{TITLE}，我还没做好准备踏出这一步。" />
+    <string id="Dramalord105" text="先缓缓，给我点时间{TITLE}，我们稍晚点再说。" />
+    <string id="Dramalord106" text="你和 {HERO.LINK} 成为了情人。" />
+    <string id="Dramalord107" text="1: 英雄选择" />
     <string id="Dramalord108" text="选择英雄" />
-    <string id="Dramalord109" text="2：性格" />
+    <string id="Dramalord109" text="2: 性格" />
     <string id="Dramalord110" text="开放性" />
-    <string id="Dramalord111" text="代表一个人愿意尝试新事物的程度" />
-    <string id="Dramalord112" text="尽责" />
-    <string id="Dramalord113" text="指个人希望谨慎和勤奋" />
-    <string id="Dramalord114" text="外向" />
-    <string id="Dramalord115" text="衡量一个人的活力、外向和自信程度" />
-    <string id="Dramalord116" text="宜人性" />
-    <string id="Dramalord117" text="指个人如何与他人互动" />
+    <string id="Dramalord111" text="代表一个人对於新事物的好奇与接受程度" />
+    <string id="Dramalord112" text="严谨性" />
+    <string id="Dramalord113" text="代表一个人对於自律丶责任和勤奋的坚持态度" />
+    <string id="Dramalord114" text="外向性" />
+    <string id="Dramalord115" text="代表一个人善於社交丶主动活跃和自信的程度" />
+    <string id="Dramalord116" text="友善性" />
+    <string id="Dramalord117" text="代表一个人对他人采取亲和行为并保持和谐的倾向" />
     <string id="Dramalord118" text="神经质" />
-    <string id="Dramalord119" text="表示某人倾向于体验负面情绪的程度" />
-    <string id="Dramalord120" text="3：欲望" />
-    <string id="Dramalord121" text="对男人的吸引力" />
-    <string id="Dramalord122" text="定义个人是否认为男性有吸引力" />
-    <string id="Dramalord123" text="对女性的吸引力" />
-    <string id="Dramalord124" text="定义个人是否认为女性有吸引力" />
-    <string id="Dramalord125" text="体重吸引力" />
-    <string id="Dramalord126" text="定义个人是否对胖乎乎的或瘦弱的英雄感兴趣" />
-    <string id="Dramalord127" text="要建造的景点" />
-    <string id="Dramalord128" text="定义个人是否对肌肉发达的英雄或弱小的英雄感兴趣" />
-    <string id="Dramalord129" text="年龄差异的吸引力" />
-    <string id="Dramalord130" text="定义个人是否对年龄差异较大的或较小的英雄感兴趣" />
+    <string id="Dramalord119" text="代表一个人的负面情绪和心理困扰的倾向程度" />
+    <string id="Dramalord120" text="3: 性取向" />
+    <string id="Dramalord121" text="对男性的性取向" />
+    <string id="Dramalord122" text="决定一个人对男性是否有欲望" />
+    <string id="Dramalord123" text="对女性的性取向" />
+    <string id="Dramalord124" text="决定一个人对女性是否有欲望" />
+    <string id="Dramalord125" text="对体重的取向" />
+    <string id="Dramalord126" text="决定一个人对於胖瘦的偏好程度" />
+    <string id="Dramalord127" text="对肌肉的取向" />
+    <string id="Dramalord128" text="决定一个人对於肌肉是否发达的偏好程度" />
+    <string id="Dramalord129" text="对年龄的取向" />
+    <string id="Dramalord130" text="决定一个人对於年轻或年长的偏好程度" />
     <string id="Dramalord131" text="性欲" />
-    <string id="Dramalord132" text="定义个人是否通常对性交产生兴趣" />
-    <string id="Dramalord133" text="好色" />
-    <string id="Dramalord134" text="表示英雄当前因荷尔蒙而愿意进行性交的程度" />
-    <string id="Dramalord135" text="4: 与玩家关系" />
-    <string id="Dramalord136" text="信任" />
-    <string id="Dramalord137" text="对玩家的信任值" />
-    <string id="Dramalord138" text="爱" />
-    <string id="Dramalord139" text="玩家的爱心值" />
-    <string id="Dramalord140" text="紧张" />
-    <string id="Dramalord141" text="对玩家的紧张值" />
+    <string id="Dramalord132" text="代表一个人平常对於性行为的兴趣程度" />
+    <string id="Dramalord133" text="性需求" />
+    <string id="Dramalord134" text="代表一个人在当下因受荷尔蒙影响，而更加渴望发生性行为的倾向" />
+    <string id="Dramalord135" text="4: 与玩家的关系" />
+    <string id="Dramalord136" text="信赖" />
+    <string id="Dramalord137" text="对玩家的信赖程度" />
+    <string id="Dramalord138" text="爱慕" />
+    <string id="Dramalord139" text="对玩家的爱慕程度" />
+    <string id="Dramalord140" text="焦虑" />
+    <string id="Dramalord141" text="对玩家的焦虑程度" />
     <string id="Dramalord142" text="无关系" />
-    <string id="Dramalord143" text="与玩家无关系" />
+    <string id="Dramalord143" text="与玩家没有人际关系（指Dramalord中的关系）" />
     <string id="Dramalord144" text="朋友" />
-    <string id="Dramalord145" text="与玩家有友谊" />
-    <string id="Dramalord146" text="炮友" />
-    <string id="Dramalord147" text="与玩家有互惠友谊" />
+    <string id="Dramalord145" text="与玩家存在友谊关系（指Dramalord中的友谊关系）" />
+    <string id="Dramalord146" text="性伴侣" />
+    <string id="Dramalord147" text="与玩家存在性关系的伴侣，俗称「炮友」" />
     <string id="Dramalord148" text="情人" />
-    <string id="Dramalord149" text="与玩家是情侣" />
+    <string id="Dramalord149" text="与玩家存在爱情关系的交往对象" />
     <string id="Dramalord150" text="订婚" />
-    <string id="Dramalord151" text="正在与玩家互动" />
-    <string id="Dramalord152" text="已婚" />
-    <string id="Dramalord153" text="已与玩家结婚" />
-    <string id="Dramalord154" text="景点" />
-    <string id="Dramalord155" text="同情" />
-    <string id="Dramalord156" text="生育" />
+    <string id="Dramalord151" text="与玩家订下婚约的未婚夫(妻)" />
+    <string id="Dramalord152" text="结婚" />
+    <string id="Dramalord153" text="与玩家结下婚约的人生伴侣" />
+    <string id="Dramalord154" text="吸引力" />
+    <string id="Dramalord155" text="同情心" />
+    <string id="Dramalord156" text="可生育" />
     <string id="Dramalord157" text="性取向" />
     <string id="Dramalord158" text="无性恋" />
     <string id="Dramalord159" text="双性恋" />
     <string id="Dramalord160" text="异性恋" />
     <string id="Dramalord161" text="同性恋" />
     <string id="Dramalord162" text="儿童日志" />
-    <string id="Dramalord163" text="在日志中显示出生、受孕或孤儿院事件" />
-    <string id="Dramalord164" text="{HERO1.LINK} 被 {HERO2.LINK} 受孕" />
-    <string id="Dramalord165" text="{CHILD.LINK} 由 {HERO1.LINK} 和 {HERO2.LINK} 所生" />
-    <string id="Dramalord166" text="您好，{TITLE}，您不认识我。我是 {CLAN} 的 {HERO}。" />
-    <string id="Dramalord167" text="你好，{TITLE}。很高兴见到你。" />
-    <string id="Dramalord168" text="看起来你和 {HERO} 正在享受一段浪漫时光。你知道我的 {STATUS} 吗？" />
-    <string id="Dramalord169" text="嗯，你和 {HERO} 在床上互相猛干。你知道他们是 {STATUS} 吧？" />
-    <string id="Dramalord170" text="所以你生下了{CHILD}。这个孩子显然是{FATHER}的，而不是我的。你是{STATUS}，对吧？" />
-    <string id="Dramalord171" text="你背着我嫁给了{HERO}。你有没有想过告诉我？你是{STATUS}！" />
-    <string id="Dramalord172" text="我听说你和{HERO}订婚了。你以为我不会知道吗？" />
-    <string id="Dramalord173" text="我的配偶" />
+    <string id="Dramalord163" text="在日志中显示有关怀孕丶出生或孤儿院的事件纪录" />
+    <string id="Dramalord164" text="{HERO1.LINK} 怀上了 {HERO2.LINK} 的孩子。" />
+    <string id="Dramalord165" text="{CHILD.LINK} 出生了，是 {HERO1.LINK} 和 {HERO2.LINK} 的孩子。" />
+    <string id="Dramalord166" text="向你问好，{TITLE}，你或许还不认识我，我是{CLAN}的{HERO}。" />
+    <string id="Dramalord167" text="今天好吗？{TITLE}，今天好到让我抓到你了。" />
+    <string id="Dramalord168" text="看起来你正在和{HERO}享受一段欢愉的时光，你是否有意识到他是我的{STATUS}？" />
+    <string id="Dramalord169" text="呵！你和{HERO}在床上快活着，你知不知道他是{STATUS}？" />
+    <string id="Dramalord170" text="所以，你生下了{CHILD}，而这孩子显然是{FATHER}的，而不是我的，但你是{STATUS}，对吧？" />
+    <string id="Dramalord171" text="你背着我和{HERO}结婚了，你甚至没想过通知我一声吗？你是{STATUS}！" />
+    <string id="Dramalord172" text="我听说你和{HERO}订婚了，你觉得我会不知道吗？" />
+    <string id="Dramalord173" text="我的伴侣" />
     <string id="Dramalord174" text="我的朋友" />
-    <string id="Dramalord175" text="我的熟人" />
-    <string id="Dramalord176" text="显然你和 {HERO} 有时会私下会面。你忘记你是 {STATUS} 了吗？" />
-    <string id="Dramalord177" text="所以 {HERO} 让你在床上度过了一段美好时光，是吗？你是 {STATUS}，你还记得吗？" />
-    <string id="Dramalord178" text="{HERO} 生下了 {CHILD}，而你显然是孩子的父亲。我以为你是 {STATUS}？" />
-    <string id="Dramalord179" text="与 {HERO.LINK} 关系破裂。 (爱 {NUM}，信任 {NUM2})" />
-    <string id="Dramalord180" text="我原谅你，{TITLE}。但我不会忘记它。" />
-    <string id="Dramalord181" text="我不会接受这个，{TITLE}。我会结束这段关系。" />
-    <string id="Dramalord182" text="这不会被忘记，{TITLE}。再见。" />
-    <string id="Dramalord183" text="算了，{TITLE}。再见。" />
-    <string id="Dramalord184" text="哦 {TITLE}，我爱你！我求求你，不要做任何你以后可能会后悔的事……" />
-    <string id="Dramalord185" text="好吧，好吧，{TITLE}。那么现在怎么办？" />
+    <string id="Dramalord175" text="我的老相识" />
+    <string id="Dramalord176" text="很明显，你和{HERO.LINK}最近常常在幽会，你是否忘了你是{STATUS}？" />
+    <string id="Dramalord177" text="所以，{HERO}把你在床上弄得欲仙欲死的是吗？嗯？你是{STATUS}，你还记得吗？" />
+    <string id="Dramalord178" text="{HERO}生下了{CHILD}，而孩子的父亲却是你，我以为你应该是{STATUS}？" />
+    <string id="Dramalord179" text="你和 {HERO} 的关系恶化了。 (爱慕 {NUM}, 信赖 {NUM2})" />
+    <string id="Dramalord180" text="我原谅你，{NAME}，但我也会牢牢记住的。" />
+    <string id="Dramalord181" text="我无法接受，{NAME}，一切都到此为止了！" />
+    <string id="Dramalord182" text="这一切都不会被忘记的，{NAME}，再见。" />
+    <string id="Dramalord183" text="无所谓了，{NAME}，再见。" />
+    <string id="Dramalord184" text="噢…{TITLE}，我爱你！我求求你，别做出会让自己後悔的决定…" />
+    <string id="Dramalord185" text="好吧！好吧！{TITLE}，那现在要怎麽办？" />
     <string id="Dramalord186" text="如你所愿，{TITLE}。" />
-    <string id="Dramalord187" text="怀孕时长" />
-    <string id="Dramalord188" text="英雄怀孕几天才能生孩子" />
-    <string id="Dramalord189" text="怀孕机会" />
-    <string id="Dramalord190" text="英雄怀孕的几率（仅适用于 Dramalord 怀孕）" />
-    <string id="Dramalord191" text="最低约会爱情" />
-    <string id="Dramalord192" text="考虑与英雄约会所需的爱情点数" />
-    <string id="Dramalord193" text="从列表中选择英雄并按‘加载英雄’（仅适用于正在进行的活动）" />
-    <string id="Dramalord194" text="加载英雄" />
-    <string id="Dramalord195" text="当前景点" />
-    <string id="Dramalord196" text="当前对玩家的吸引力值" />
-    <string id="Dramalord197" text="当前同情" />
-    <string id="Dramalord198" text="当前对玩家的同情值" />
+    <string id="Dramalord187" text="孕期" />
+    <string id="Dramalord188" text="英雄在怀孕多少天後分娩。" />
+    <string id="Dramalord189" text="怀孕机率" />
+    <string id="Dramalord190" text="英雄怀孕的机率（仅适用於Dramalord的怀孕判定机制）" />
+    <string id="Dramalord191" text="交往的最低爱慕值" />
+    <string id="Dramalord192" text="英雄间考虑开始交往关系的最低爱慕值" />
+    <string id="Dramalord193" text="从列表中选择英雄，并按「读取英雄」（仅适用於正在进行中的单人游戏）" />
+    <string id="Dramalord194" text="读取英雄" />
+    <string id="Dramalord195" text="当前吸引力" />
+    <string id="Dramalord196" text="当前对玩家的吸引力数值" />
+    <string id="Dramalord197" text="当前同情心" />
+    <string id="Dramalord198" text="当前对玩家的同情心数值" />
     <string id="Dramalord199" text="奖励玩家吸引力" />
-    <string id="Dramalord200" text="玩家对其他英雄的吸引力的奖励值" />
-    <string id="Dramalord201" text="机会正在接近玩家" />
-    <string id="Dramalord202" text="英雄接近玩家交谈的几率" />
-    <string id="Dramalord203" text="你结束了与 {HERO.LINK} 的友谊。" />
-    <string id="Dramalord204" text="{HERO.LINK} 结束了与你的友谊。" />
-    <string id="Dramalord205" text="最低婚姻爱情" />
-    <string id="Dramalord206" text="嫁给英雄需要考虑的爱情点数" />
-    <string id="Dramalord207" text="互动间隔天数" />
-    <string id="Dramalord208" text="英雄不能再次与同一英雄互动的天数" />
-    <string id="Dramalord209" text="已婚" />
-    <string id="Dramalord210" text="已与玩家结婚" />
-    <string id="Dramalord211" text="玩家默认怀孕" />
-    <string id="Dramalord212" text="允许玩家或其配偶默认怀孕" />
+    <string id="Dramalord200" text="玩家对其他英雄的吸引力奖励加成" />
+    <string id="Dramalord201" text="接触玩家的机率" />
+    <string id="Dramalord202" text="英雄主动接触玩家进行交流的机率" />
+    <string id="Dramalord203" text="你结束了和 {HERO.LINK} 的友谊关系。" />
+    <string id="Dramalord204" text="{HERO.LINK} 结束了和你的友谊关系。" />
+    <string id="Dramalord205" text="婚姻的最低爱慕值" />
+    <string id="Dramalord206" text="英雄间考虑步入婚姻关系的最低爱慕值" />
+    <string id="Dramalord207" text="互动间隔的天数" />
+    <string id="Dramalord208" text="英雄无法与同一英雄再次互动的最少天数" />
+    <string id="Dramalord209" text="结婚" />
+    <string id="Dramalord210" text="与玩家结下婚约的人生伴侣" />
+    <string id="Dramalord211" text="玩家适用原版怀孕" />
+    <string id="Dramalord212" text="允许玩家或其配偶适用原版的怀孕判定（Dramalord采用独立的怀孕判定机制，若开启此选项，原版和MOD的怀孕判定将同时运作）" />
     <string id="Dramalord213" text="玩家始终见证" />
-    <string id="Dramalord214" text="玩家将永远是事件的见证者" />
-    <string id="Dramalord215" text="你看到 {HERO.LINK} 向 {TARGET.LINK} 求婚。" />
+    <string id="Dramalord214" text="玩家将永远能见证事件的发生" />
+    <string id="Dramalord215" text="你看见 {HERO.LINK} 向 {TARGET.LINK} 求婚。" />
     <string id="Dramalord216" text="{HERO.LINK} 看到你向 {TARGET.LINK} 求婚。" />
-    <string id="Dramalord217" text="额外玩家同情" />
-    <string id="Dramalord218" text="玩家对其他英雄的同情可获得额外价值" />
-    <string id="Dramalord219" text="显示好友福利" />
-    <string id="Dramalord220" text="在英雄百科页面显示好友福利" />
-    <string id="Dramalord221" text="秀恩爱" />
-    <string id="Dramalord222" text="在英雄百科页面显示恋人" />
-    <string id="Dramalord223" text="当然，{TITLE}。让我给你讲一个关于战争和权力的故事..." />
-    <string id="Dramalord224" text="哦，{TITLE}，你这个傻瓜！无论如何，所有人的目光都会转向你，我会很享受的。" />
-    <string id="Dramalord225" text="你知道{TITLE}...自从我见到你，我就梦想着这一刻！" />
-    <string id="Dramalord226" text="当然，{TITLE}。让我们度过一段美好的时光，只有我们两个人。" />
-    <string id="Dramalord227" text="显示未婚夫" />
-    <string id="Dramalord228" text="在英雄百科全书页面上显示未婚夫" />
-    <string id="Dramalord229" text="{TITLE}，这让我很伤心，但我必须结束我们的关系。" />
-    <string id="Dramalord230" text="哦不，{TITLE}！你伤透了我的心！但我别无选择，只能接受你的决定。" />
-    <string id="Dramalord231" text="好吧，最终总会这样，对吧，{TITLE}。这持续的时间很长，这很好。谢谢你。" />
-    <string id="Dramalord232" text="我……我不知道该说什么。这让我很震惊。我不得不想想我是否能留在你身边……" />
-    <string id="Dramalord233" text="离开我的视线，{NAME}。收拾东西走人。" />
-    <string id="Dramalord234" text="我再给你一次机会，{T​​ITLE}，但你会以{HERO}结束这一切。" />
-    <string id="Dramalord235" text="我听说你和 {HERO} 结婚了。他们有没有告诉你他们实际上是 {STATUS}？" />
-    <string id="Dramalord236" text="祝贺你和 {HERO} 订婚。我只想说，他们是 {STATUS}。" />
-    <string id="Dramalord237" text="玩家部落自治" />
-    <string id="Dramalord238" text="允许部落英雄与领主和其他流浪者互动" />
+    <string id="Dramalord217" text="奖励玩家同情心" />
+    <string id="Dramalord218" text="其他英雄对玩家的同情心奖励加成" />
+    <string id="Dramalord219" text="显示性伴侣" />
+    <string id="Dramalord220" text="在英雄的百科页面上显示性伴侣" />
+    <string id="Dramalord221" text="显示情人" />
+    <string id="Dramalord222" text="在英雄的百科页面上显示情人" />
+    <string id="Dramalord223" text="哦当然！{TITLE}，让我来和你讲述一个关於战争与权力的故事…" />
+    <string id="Dramalord224" text="噢{TITLE}！你这小傻瓜，无论如何，所有目光都会投注在你身上，而我会很享受这的。" />
+    <string id="Dramalord225" text="你知道吗？{TITLE}…自从我初次遇见你，我就一直梦想着这一刻！" />
+    <string id="Dramalord226" text="当然，{TITLE}，让我们好好沉浸在这只属於我们两人的美好时光。" />
+    <string id="Dramalord227" text="显示订婚者" />
+    <string id="Dramalord228" text="在英雄的百科页面上显示订婚者" />
+    <string id="Dramalord229" text="这是令人悲痛的决定，{TITLE}，我必须结束我们的关系。" />
+    <string id="Dramalord230" text="噢不…{TITLE}！你让我彻底心碎了！我能说什麽？我只能接受你的决定了…" />
+    <string id="Dramalord231" text="好吧，这总是会来的对吧？{TITLE}，在这段感情中我很幸福，谢谢你给过我的一切！" />
+    <string id="Dramalord232" text="我…我不知道该说些什麽，这让我晴天霹雳，我需要时间冷静，如果…我还能留在你身边…" />
+    <string id="Dramalord233" text="我不想再见到你，{NAME}，收拾好你的东西然後离开！" />
+    <string id="Dramalord234" text="我再给你一次机会，{NAME}，条件是你必须和{HERO}断绝一切关系！" />
+    <string id="Dramalord235" text="我听说你和{HERO}结婚了，有没有人告诉过你，他其实是{STATUS}？" />
+    <string id="Dramalord236" text="恭喜啊！你和{HERO}订婚了！我只是想提醒一下，他是{STATUS}。" />
+    <string id="Dramalord237" text="玩家家族主动性" />
+    <string id="Dramalord238" text="允许你家族中的英雄主动和其他贵族或流浪者互动" />
+    <string id="Dramalord239" text="今天不行，{TITLE}，我现在没心情，改天再问我吧！" />
+    <string id="Dramalord240" text="香肠" />
+    <string id="Dramalord241" text="派" />
+    <string id="Dramalord242" text="允许乱伦" />
+    <string id="Dramalord243" text="允许NPC和其家族内部的成员进行亲密互动和发展感情事件" />
+    <string id="Dramalord244" text="玩家对话冷却" />
+    <string id="Dramalord245" text="英雄与玩家交谈後无法再次与玩家互动的天数" />
+    <string id="Dramalord246" text="允许同性婚姻" />
+    <string id="Dramalord247" text="允许NPC和其他同性的英雄结婚（否则他们最多只能发展为情人）" />
+    <string id="Dramalord248" text="允许军队互动" />
+    <string id="Dramalord249" text="允许NPC在部队中时交流互动" />
+    <string id="Dramalord250" text="{HERO1.LINK} 把孩子 {CHILD.LINK} 送进孤儿院。" />
+    <string id="Dramalord251" text="{HERO1.LINK} 收养了孤儿 {CHILD.LINK} 。" />
+    <string id="Dramalord252" text="你好，{TITLE}，我能如何效劳？" />
+    <string id="Dramalord253" text="我想收养一名孤儿，好为我的家族增添新的成员。" />
+    <string id="Dramalord254" text="我想将家族里的一个孩子送养到孤儿院。" />
+    <string id="Dramalord255" text="没事了。" />
+    <string id="Dramalord256" text="哦好极了！{TITLE}，目前，我们这里有{BOYS}名男孩和{GIRLS}名女孩，都在等待有缘的家庭来收养。" />
+    <string id="Dramalord257" text="真的很抱歉，{TITLE}，你必须结婚了才能收养孩子。" />
+    <string id="Dramalord258" text="很抱歉{TITLE}，我们的孤儿院里目前没有孩子。" />
+    <string id="Dramalord259" text="我想收养一名男孩。" />
+    <string id="Dramalord260" text="我想收养一名女孩。" />
+    <string id="Dramalord261" text="你想收养谁？" />
+    <string id="Dramalord262" text="那{ORPHANAGE}岁的{ORPHAN.NAME}。" />
+    <string id="Dramalord263" text="让我考虑看看其他的孩子。" />
+    <string id="Dramalord264" text="好的，你决定好要收养{ORPHAN.NAME}了吗？" />
+    <string id="Dramalord265" text="恭喜你们！我确信{ORPHAN.NAME}能够健康快乐的长大的！" />
+    <string id="Dramalord266" text="啊好吧，真教人难过，{ORPHAN.NAME}会很失望的。" />
+    <string id="Dramalord267" text="没问题，{TITLE}，我们可以安排。" />
+    <string id="Dramalord268" text="在我看来，{TITLE}，你的家族中并没有孩子。" />
+    <string id="Dramalord269" text="要让我们收留的那个不幸的孩子是谁呢？" />
+    <string id="Dramalord270" text="再次确认，你真的决定要送养{ORPHAN.NAME}了吗？" />
+    <string id="Dramalord271" text="那麽就这样定了！我们会好好照顾{ORPHAN.NAME}，并为孩子找到一个新的家庭。" />
+    <string id="Dramalord272" text="好的{TITLE}，{ORPHAN.NAME}会继续留在你的家族里。" />
+    <string id="Dramalord273" text="我有话要和你说" />
+    <string id="Dramalord274" text="我别无选择，{TITLE}。" />
+    <string id="Dramalord275" text="我拒绝和你对话。" />
+    <string id="Dramalord276" text="我正在考虑…让你到我的房间里给我一些特殊服务。" />
+    <string id="Dramalord277" text="该是时候结束这一切了，你的存在使我心烦。" />
+    <string id="Dramalord278" text="你给自己弄到了交换条件，我想我会爱死这个的。" />
+    <string id="Dramalord279" text="休想！你不能用这种卑鄙的方式玷污我的名誉！" />
+    <string id="Dramalord280" text="做你该做的，你这下贱的猪！" />
+    <string id="Dramalord281" text="噢天啊！拜托不要…我请求你！" />
+    <string id="Dramalord282" text="等等{TITLE}！如果能选择享乐，为何要选择死亡？" />
+    <string id="Dramalord283" text="嗯…好吧！我接受，如果你表现得够好的话，我就放你一马。" />
+    <string id="Dramalord284" text="那麽，你的死就是我最甜蜜的快乐。" />
+    <string id="Dramalord285" text="{HERO1.LINK} 侵犯了他(她)的俘虏 {HERO2.LINK} 。" />
+    <string id="Dramalord286" text="拜访孤儿院" />
+    <string id="Dramalord287" text="拜访孤儿院收养一名孩子或送养你的孩子。" />
+    <string id="Dramalord288" text="爱慕增益倍率" />
+    <string id="Dramalord289" text="透过调情或约会获得的爱慕值乘以该值" />
+    <string id="Dramalord290" text="信赖增益倍率" />
+    <string id="Dramalord291" text="透过交谈或约会获得的信赖值乘以该值" />
+    <string id="Dramalord292" text="{TITLE}，让我送你这份特殊的{GIFT}，作为我对你爱的象徵。" />
+    <string id="Dramalord293" text="谢谢你，{TITLE}！我会把它放在我的…床边，好让我能回味你的…爱，并享受每一天！" />
+    <string id="Dramalord294" text="你给了 {HERO.LINK} 一个 {TOY}。" />
+    <string id="Dramalord295" text="玩具损坏机率" />
+    <string id="Dramalord296" text="英雄使用玩具时弄坏的机率" />
+    <string id="Dramalord297" text="{HERO.LINK} 的玩具弄坏了！" />
+    <string id="Dramalord298" text="全局适用原版怀孕" />
+    <string id="Dramalord299" text="允许所有NPC适用原版的怀孕判定（Dramalord采用独立的怀孕判定机制，若开启此选项，原版和MOD的怀孕判定将同时运作）" />
+    <string id="Dramalord300" text="全局适用原版婚姻" />
+    <string id="Dramalord301" text="允许所有NPC适用原版的婚姻机制（Dramalord采用独立的婚姻机制，若开启此选项，原版和MOD的婚姻机制将同时运作）" />
+    <string id="Dramalord302" text="{HERO.LINK} 对你忽略他们的需求感到失望……（爱慕 {NUM}，信赖 {NUM2}）" />
+    <string id="Dramalord303" text="{HERO.LINK} 有要事请求你去见他，你能及时赶到吗？" />
+    <string id="Dramalord304" text="{QUESTHERO} 请求你出席。" />
+    <string id="Dramalord305" text="{HERO.LINK} 很高兴你满足了他的需求…(爱慕 {NUM}，信赖 {NUM2})" />
+    <string id="Dramalord306" text="噢{TITLE}，你终於来了！我正苦苦地等着你呢！" />
+    <string id="Dramalord307" text="看看是谁出现了，你并不着急对吧？{TITLE}？" />
+    <string id="Dramalord308" text="我这就来了，怎麽了吗？什麽事让你那麽着急？" />
+    <string id="Dramalord309" text="{TITLE}，把衣服扔了，跟我来，有件非常巧妙的活需要你来干！" />
+    <string id="Dramalord310" text="嗯，{TITLE}，已经有人来干…好我的活了，用很愉快的方式，再见。" />
+    <string id="Dramalord311" text="任务机率" />
+    <string id="Dramalord312" text="玩家的爱人发起特殊任务的可能性" />
+    <string id="Dramalord313" text="可选" />
+    <string id="Dramalord314" text="显示关系变化" />
+    <string id="Dramalord315" text="如果你想查看关系变化的消息，请启用此项（适用於「Small Talk」MOD）" />
+    <string id="Dramalord316" text="显示俘虏日志" />
+    <string id="Dramalord317" text="在日志中显示英雄被俘虏时的相关消息" />
+    <string id="Dramalord318" text="{TITLE}，我一直很好奇你喜欢什麽样的类型？（获取讯息）" />
+    <string id="Dramalord319" text="抱歉，{TITLE}，我们还没熟识到能谈论我的个人隐私。" />
+    <string id="Dramalord320" text="当然可以，{TITLE}，如果你真的好奇，那我就告诉你…" />
+    <string id="Dramalord321" text="我喜欢异性，对同性倒没那种感觉。" />
+    <string id="Dramalord322" text="我对异性没什麽感觉，我更喜欢同性。" />
+    <string id="Dramalord323" text="我觉得异性很迷人，但我也会被同性吸引。" />
+    <string id="Dramalord324" text="不论是异性或同性，我都没有那方面的感觉。" />
+    <string id="Dramalord325" text="我喜欢身形苗条的人，那看起来很优美。" />
+    <string id="Dramalord326" text="太胖太瘦都不好，身材匀称才是好。" />
+    <string id="Dramalord327" text="我喜欢肉一点，最好有肚腩的，那对我来说很有吸引力。" />
+    <string id="Dramalord328" text="他们太痴迷於肌肉了，我喜欢精瘦一点，越骨感越好。" />
+    <string id="Dramalord329" text="中等的肌肉对我来说刚刚好，不用太壮，也别太瘦。" />
+    <string id="Dramalord330" text="我崇尚力量，越强壮的人越好！" />
+    <string id="Dramalord331" text="我喜欢比我更{AGEDIFF}的，年龄在{AGE}上下的最好。" />
+    <string id="Dramalord332" text="你的话…{TITLE}，我觉得你是{RATING}分（满分100分）。" />
+    <string id="Dramalord333" text="年轻" />
+    <string id="Dramalord334" text="年长" />
+    <string id="Dramalord335" text="不年轻也不年长" />
+    <string id="Dramalord336" text="你获知了 {HERO.LINK} 的取向偏好。" />
+    <string id="Dramalord337" text="友谊的最低信赖值" />
+    <string id="Dramalord338" text="英雄间建立友谊的最低信赖值（仅限於Dramalord中的友谊）" />
+    <string id="Dramalord339" text="我知道你有些新鲜事，来聊聊吧！（谈天说地）" />
+    <string id="Dramalord340" text="我猜，你早已习惯了大家对你出众面貌的夸赞了…（调情）" />
+    <string id="Dramalord341" text="我必须坦白，我对你动情了…{TITLE}！（爱情）" />
+    <string id="Dramalord342" text="现在我只想暂时抛开一切，好好的陪在你身边，就我们两人…（约会）" />
+    <string id="Dramalord343" text="你是否也渴求着单纯的欢愉？，{TITLE}？（性伴侣）" />
+    <string id="Dramalord344" text="我想要你，我知道你也一样，来我的房间里找我。（亲密关系）" />
+    <string id="Dramalord345" text="我需要感受你的温暖，{TITLE}！（亲密关系）" />
+    <string id="Dramalord346" text="我非常爱你，{TITLE}，你愿意和我共结连理吗？（订婚）" />
+    <string id="Dramalord347" text="通知大家都到教堂，见证我们的婚礼吧！{TITLE}。（结婚）" />
+    <string id="Dramalord348" text="其实我们并不适合，在这错误的关系演变成悲剧之前，让我们结束它吧！（分手）" />
+    <string id="Dramalord349" text="妻子" />
+    <string id="Dramalord350" text="丈夫" />
+    <string id="Dramalord351" text="谢谢你的这段谈话，{TITLE}。" />
+    <string id="Dramalord352" text="告诉我，{TITLE}，有鉴於你丰富的阅历，你对{POI.NAME}有何看法？" />
+    <string id="Dramalord353" text="我认识{POI.NAME}，我认为他是值得结交的朋友。" />
+    <string id="Dramalord354" text="啊！别提起{POI.NAME}，我对他很厌烦，我完全不想和他有任何交集。" />
+    <string id="Dramalord355" text="{POI.NAME}，嗯…其实我对他没什麽特别的看法。" />
+    <string id="Dramalord356" text="不幸的是，我从未见过{POI.NAME}，但听说他人还不错？" />
+    <string id="Dramalord357" text="幸好我从未见过{POI.NAME}，可以想像他是个多糟糕的家伙。" />
+    <string id="Dramalord358" text="我对{POI.NAME}没有任何意见，因为我和他从未有过交流。" />
+    <string id="Dramalord359" text="真高兴听见这个！{POI.NAME}是我的好朋友！" />
+    <string id="Dramalord360" text="听到这让我有些失望，因为{POI.NAME}其实是我的好朋友。" />
+    <string id="Dramalord361" text="嗯…你可能不太了解{POI.NAME}，他是我的朋友。" />
+    <string id="Dramalord362" text="呃…是吗？你喜欢{POI.NAME}？这真令人失望。" />
+    <string id="Dramalord363" text="我完全同意！{POI.NAME}就像我指甲缝里的污垢。" />
+    <string id="Dramalord364" text="好吧，你可能对{POI.NAME}认识得不深，我真的很不喜欢他。" />
+    <string id="Dramalord365" text="我不得不说，你很快就对{POI.NAME}形成了看法。" />
+    <string id="Dramalord366" text="我对{POI.NAME}也没什麽意见，因为我对他还不了解。" />
+    <string id="Dramalord367" text="这是一个非常好的观点！我同意！" />
+    <string id="Dramalord368" text="看来，我必须否定你的看法。" />
+    <string id="Dramalord369" text="你很有主见，不是吗？" />
+    <string id="Dramalord370" text="在上次的战争中，我们的阵营因为粮食耗尽而去袭击敌营的一座村庄，这很悲哀，但是考虑到大局，似乎也只能这麽做。（荣誉）" />
+    <string id="Dramalord371" text="我不同意，平民不应该被卷入权力斗争中而受难，他们是无辜的。" />
+    <string id="Dramalord372" text="没错，那些农民甚至应该主动将物资上缴。" />
+    <string id="Dramalord373" text="我不知道，我想事实也只能是如此。" />
+    <string id="Dramalord374" text="你有没有过经验是，遭遇到了更强大的敌人，但仍然坚持战斗下去？（大胆）" />
+    <string id="Dramalord375" text="有，而且我赢了，这世界属於勇者！" />
+    <string id="Dramalord376" text="没有，当我知道没胜算的时候，为何还要冒险送死？" />
+    <string id="Dramalord377" text="说不上来，我觉得这得看情况。" />
+    <string id="Dramalord378" text="我听说有些大人在战後会直接释放战俘，这不是很有风险吗？（仁慈）" />
+    <string id="Dramalord379" text="那能让生还者早日和家人团聚，换做我也会这麽做。" />
+    <string id="Dramalord380" text="我会说「都斩了」！这样才能确保他们不会再回到战场。" />
+    <string id="Dramalord381" text="他们在那里都是为了杀人或者被杀，所以没什麽好在意的。" />
+    <string id="Dramalord382" text="听说最近，有一位竞技场大赛的冠军把他的奖金都分给了穷人。（慷慨）" />
+    <string id="Dramalord383" text="那真的是慷慨就义之举，只可惜像这样的人并不多见。" />
+    <string id="Dramalord384" text="我呸！糟蹋钱财，那他一开始干麻要参赛？" />
+    <string id="Dramalord385" text="很好，毕竟那是他的第纳尔，怎麽使用是他的选择。" />
+    <string id="Dramalord386" text="在南方有一个家族差点叛离他的王国，因为他们的族长和国王发生了争执。（理性）" />
+    <string id="Dramalord387" text="那太愚蠢了，不管是为了自尊还是自负，他们都可能因此失去庇护。" />
+    <string id="Dramalord388" text="我能理解他们的感受，我偶尔也会有点脾气。" />
+    <string id="Dramalord389" text="我不知道他们争议的点是什麽，所以我无法评断这件事。" />
+    <string id="Dramalord390" text="噢！你让我脸都红了，我很高兴听见这个。" />
+    <string id="Dramalord391" text="那麽，这是否意味着你认为我没有吸引力？" />
+    <string id="Dramalord392" text="我很确定你有某种偏好。" />
+    <string id="Dramalord393" text="我听说那些贵族名流们对身体性别的品味各有不同，那你呢？（性取向）" />
+    <string id="Dramalord394" text="我实际上没有什麽特别的偏好。" />
+    <string id="Dramalord395" text="当地酒馆的主人多长了些肉，现在，每晚酒馆都挤满了好奇的客人。（体重）" />
+    <string id="Dramalord396" text="在高地，那些贵族们通常都身材魁武，许多人都敬佩他们过人的力量。（肌肉）" />
+    <string id="Dramalord397" text="有些人喜欢更年长的，有些人喜欢更年轻的，你的偏好是什麽？（年龄）" />
+    <string id="Dramalord398" text="我喜欢比我年长的，没有什麽比成熟的果实更好的了。" />
+    <string id="Dramalord399" text="我喜欢比我更年轻且活力充沛的人。" />
+    <string id="Dramalord400" text="对我而言更有吸引力的，是和我年纪相仿的人。" />
+    <string id="Dramalord401" text="对於体验新鲜的事物，你会感到好奇或兴奋吗？（开放性）" />
+    <string id="Dramalord402" text="一陈不变的很无趣，我喜欢体验新鲜事！" />
+    <string id="Dramalord403" text="没意义，现有的一切都很好，没什麽好改变的。" />
+    <string id="Dramalord404" text="也许，我没怎麽想过，因为不管怎麽样，世事总在改变。" />
+    <string id="Dramalord405" text="所以，你是个更善於制定规划，还是更善於自发勤奋的人呢？（严谨性）" />
+    <string id="Dramalord406" text="一切都应该井然有序，计划就是一切。" />
+    <string id="Dramalord407" text="不，我不会，我通常莫名其妙就展开一场冒险了。" />
+    <string id="Dramalord408" text="嗯…有时我有计画，有时我没有。" />
+    <string id="Dramalord409" text="当城里举办比武大会时，你会不会很兴奋能够结识到新朋友？（外向性）" />
+    <string id="Dramalord410" text="哦肯定会的！只要身边有人我就停不了话匣子。" />
+    <string id="Dramalord411" text="啊不，我喜欢独自一人，人多就扰人清闲了。" />
+    <string id="Dramalord412" text="嗯…那得看情况，我也许会认识一些人，但不会太多。" />
+    <string id="Dramalord413" text="如果你的朋友向你倾诉了一个悲伤的故事，你会怎麽反应？（友善性）" />
+    <string id="Dramalord414" text="我会尽量安慰他，或者若能提供帮助的话，也义不容辞。" />
+    <string id="Dramalord415" text="嗯，作为我的朋友都会知道，不该拿私事打扰人。" />
+    <string id="Dramalord416" text="我想，这要取决於我当下的感受。" />
+    <string id="Dramalord417" text="有时作为一个管理者会累积很多压力，你通常会怎麽处理？（神经质）" />
+    <string id="Dramalord418" text="哦是的，为了恢复，我通常会闭门静养个几天。" />
+    <string id="Dramalord419" text="一点压力都没有，我其实很少感到压力。" />
+    <string id="Dramalord420" text="我觉得还好，偶尔休息个一两天就好了。" />
   </strings>
 </base>

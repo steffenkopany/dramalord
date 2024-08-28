@@ -19,13 +19,14 @@ namespace Dramalord.Actions
             Hero father = pregnancy.Father;
             Hero child = CreateBaby(mother, father);
             child.UpdateHomeSettlement();
+            mother.IsPregnant = false;
 
             if (father.Clan == Clan.PlayerClan || mother.Clan == Clan.PlayerClan)
             {
                 TextObject textObject = new TextObject("{=Dramalord077}{HERO.LINK} was born");
                 StringHelpers.SetCharacterProperties("HERO", child.CharacterObject, textObject);
 
-                MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(father, mother, CampaignTime.Now)); //TaleWorlds.CampaignSystem.MapNotificationTypes.ChildBornMapNotification.
+                MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(father, mother, CampaignTime.Now));
                 MBInformationManager.AddNotice(new ChildBornMapNotification(child, textObject, CampaignTime.Now));
             }
 
@@ -41,6 +42,11 @@ namespace Dramalord.Actions
                 } 
             });
 
+            if((mother.Spouse == null || mother.Spouse != father) && mother.Clan != Clan.PlayerClan)
+            {
+                DramalordIntentions.Instance.AddIntention(mother, child, IntentionType.Orphanize, eventID);
+            }
+
             if((mother.Clan == Clan.PlayerClan || father.Clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)
             {
                 LogEntry.AddLogEntry(new BirthChildLog(mother, father, child));
@@ -52,7 +58,7 @@ namespace Dramalord.Actions
             CharacterObject template = (MBRandom.RandomInt(1, 100) > 50) ? mother.CharacterObject : father.CharacterObject;
             Settlement bornSettlement = mother.CurrentSettlement ?? father.HomeSettlement ?? SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
 
-            Clan faction = mother.Clan;
+            Clan? faction = mother.Clan;
             Hero child = HeroCreator.CreateSpecialHero(template, bornSettlement, faction, null, 0);
             child.Mother = mother;
             child.Father = father;

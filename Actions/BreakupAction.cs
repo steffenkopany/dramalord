@@ -14,7 +14,7 @@ namespace Dramalord.Actions
 {
     internal static class BreakupAction
     {
-        internal static bool Apply(Hero hero, Hero target)
+        internal static void Apply(Hero hero, Hero target)
         {
             HeroRelation relation = hero.GetRelationTo(target);
 
@@ -41,14 +41,7 @@ namespace Dramalord.Actions
 
             List<HeroIntention> targetIntentions = target.GetIntentions().ToList();
             targetIntentions.Where(intention => intention.Target == hero).Do(intention => DramalordIntentions.Instance.RemoveIntention(target, intention.Target, intention.Type, intention.EventId));
-            /*
-            int eventID = DramalordEvents.Instance.AddEvent(hero, target, EventType.Breakup, 3);
-            
-            target.GetAllRelations().Where(relationship => relationship.Value.Relationship == RelationshipType.Friend || relationship.Value.Relationship == RelationshipType.FriendWithBenefits).Do(relationship =>
-            {
-                DramalordIntentions.Instance.AddIntention(target, (relationship.Key.Hero1 == target) ? relationship.Key.Hero2 : relationship.Key.Hero1, IntentionType.Gossip, eventID);
-            });
-            */
+
             if (hero == Hero.MainHero)
             {
                 if(oldRelationship == RelationshipType.Friend || oldRelationship == RelationshipType.FriendWithBenefits)
@@ -84,8 +77,6 @@ namespace Dramalord.Actions
             {
                 LogEntry.AddLogEntry(new EndRelationshipLog(hero, target, oldRelationship));
             }
-
-            return true;
         }
     }
 }

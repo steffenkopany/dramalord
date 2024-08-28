@@ -1,4 +1,5 @@
 ﻿using Dramalord.LogItems;
+using Dramalord.Quests;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
@@ -29,6 +30,7 @@ namespace Dramalord.Data
             CampaignEvents.OnHeroUnregisteredEvent.AddNonSerializedListener(this, new Action<Hero>(OnHeroUnregistered));
             CampaignEvents.HeroComesOfAgeEvent.AddNonSerializedListener(this, new Action<Hero>(OnHeroComesOfAge));
             CampaignEvents.HeroCreated.AddNonSerializedListener(this, new Action<Hero, bool>(OnHeroCreated));
+            CampaignEvents.OnNewGameCreatedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(OnNewGameCreated));
         }
 
         protected abstract void OnHeroKilled(Hero victim, Hero killer, KillCharacterAction.KillCharacterActionDetail reason, bool showNotifications);
@@ -38,6 +40,8 @@ namespace Dramalord.Data
         protected abstract void OnHeroComesOfAge(Hero hero);
 
         protected abstract void OnHeroCreated(Hero hero, bool born);
+
+        protected abstract void OnNewGameCreated(CampaignGameStarter starter);
     }
 
     internal sealed class DramalordSaveableTypeDefiner : SaveableTypeDefiner
@@ -57,6 +61,9 @@ namespace Dramalord.Data
             AddClassDefinition(typeof(DramalordEndCaptivityLogEntry), 105);  
             AddClassDefinition(typeof(ConceiveChildLog), 106);
             AddClassDefinition(typeof(BirthChildLog), 107);
+            AddClassDefinition(typeof(OrphanizeChildLog), 108);
+            AddClassDefinition(typeof(AdoptChildLog), 109); 
+            AddClassDefinition(typeof(PrisonIntercourseLog), 110);
 
             AddClassDefinition(typeof(HeroPersonality), 1000);
             AddClassDefinition(typeof(HeroRelation), 1001);
@@ -64,7 +71,8 @@ namespace Dramalord.Data
             AddClassDefinition(typeof(HeroDesires), 1003);
             AddClassDefinition(typeof(HeroEventSave), 1004); 
             AddClassDefinition(typeof(HeroIntentionSave), 1005);
-            //AddClassDefinition(typeof(RelationshipType), 1006);
+
+            AddClassDefinition(typeof(VisitQuest), 10000);
         }
 
         protected override void DefineContainerDefinitions()
@@ -77,8 +85,7 @@ namespace Dramalord.Data
             ConstructContainerDefinition(typeof(Dictionary<int, HeroEventSave>));
             ConstructContainerDefinition(typeof(List<HeroIntentionSave>));
             ConstructContainerDefinition(typeof(Dictionary<string, List<HeroIntentionSave>>));
-            //ConstructContainerDefinition(typeof(List<HeroRelationshipSave>));
-            //ConstructContainerDefinition(typeof(Dictionary<string, List<HeroRelationshipSave>>));
+            ConstructContainerDefinition(typeof(Dictionary<string, VisitQuest>));
         }
     }
 }

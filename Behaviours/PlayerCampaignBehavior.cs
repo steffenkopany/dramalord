@@ -1,6 +1,7 @@
 ﻿using Dramalord.Conversations;
 using Dramalord.Data;
 using Dramalord.Extensions;
+using SandBox.View.Map;
 using System;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -13,6 +14,9 @@ namespace Dramalord.Behaviours
         {
             PlayerApproachingNPC.AddDialogs(starter);
             PlayerConfrontNPC.AddDialogs(starter);
+            PrisonerConversation.AddDialogs(starter);
+            QuestConversation.AddDialogs(starter);
+            PlayerChallenges.AddDialogs(starter);
         }
 
         public override void RegisterEvents()
@@ -32,9 +36,14 @@ namespace Dramalord.Behaviours
                 if(intention != null && intention.Target.IsCloseTo(Hero.MainHero))
                 {
                     HeroEvent? @event = DramalordEvents.Instance.GetEvent(intention.EventId);
-                    if (@event != null && intention.Target.IsEmotionalWith(Hero.MainHero))
+                    if (!ConversationHelper.ConversationRunning && @event != null && intention.Target.IsEmotionalWith(Hero.MainHero))
                     {
+                        ConversationHelper.ConversationRunning = true;
                         PlayerConfrontNPC.Start(intention.Target, @event); 
+                    }
+                    else if(@event != null && intention.Target.IsEmotionalWith(Hero.MainHero))
+                    {
+                        return;
                     }
 
                     DramalordIntentions.Instance.RemoveIntention(Hero.MainHero, intention.Target, intention.Type, intention.EventId);

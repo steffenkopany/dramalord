@@ -93,7 +93,10 @@ namespace Dramalord.Data
             set => _hasToy = value;
         }
 
-        internal HeroDesires(int attractionMen, int attractionWomen, int attractionWeight, int attractionBuild, int attractionAgeDiff, int libido, int horny, int periodDayOfSeason, int intercourseSkill, bool hasToy)
+        [SaveableProperty(11)]
+        internal bool InfoKnown { get; set; } = false;
+
+        internal HeroDesires(int attractionMen, int attractionWomen, int attractionWeight, int attractionBuild, int attractionAgeDiff, int libido, int horny, int periodDayOfSeason, int intercourseSkill, bool hasToy, bool infoKnown)
         {
             AttractionMen = attractionMen;
             AttractionWomen = attractionWomen;
@@ -105,6 +108,7 @@ namespace Dramalord.Data
             PeriodDayOfSeason = periodDayOfSeason;
             IntercourseSkill = intercourseSkill;
             HasToy = hasToy;
+            InfoKnown = infoKnown;
         }
     }
 
@@ -159,6 +163,7 @@ namespace Dramalord.Data
                 Generate(50, 75, 0, 100), //MBRandom.RandomInt(0, 100),
                 MBRandom.RandomInt(1, CampaignTime.DaysInSeason),
                 Generate(5, 7, 0, 10), //MBRandom.RandomInt(0, 10),
+                false,
                 false);
 
             float allHeroes = _desires.Count();
@@ -275,6 +280,11 @@ namespace Dramalord.Data
         protected override void OnHeroCreated(Hero hero, bool born)
         {
             //nothing to do
+        }
+
+        protected override void OnNewGameCreated(CampaignGameStarter starter)
+        {
+            _desires.Clear();
         }
 
         private int Generate(int peak, int normal, int min, int max)

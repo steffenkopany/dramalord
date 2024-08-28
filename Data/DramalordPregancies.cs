@@ -147,5 +147,10 @@ namespace Dramalord.Data
         {
             _pregnancies.Remove(hero);
         }
+
+        protected override void OnNewGameCreated(CampaignGameStarter starter)
+        {
+            _pregnancies.Clear();
+        }
     }
 }

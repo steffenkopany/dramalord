@@ -11,7 +11,7 @@ namespace Dramalord.Actions
 {
     internal static class DateAction
     {
-        internal static bool Apply(Hero hero, Hero target, List<Hero> closeHeroes)
+        internal static bool Apply(Hero hero, Hero target, List<Hero> closeHeroes, int changeValue = -1000)
         {
             HeroRelation heroRelation = hero.GetRelationTo(target); 
 
@@ -22,9 +22,10 @@ namespace Dramalord.Actions
             hero.GetDesires().Horny += heroAttraction;
             target.GetDesires().Horny += tagetAttraction;
 
-            //heroRelation.Tension += (heroAttraction + tagetAttraction);
-            heroRelation.Love += sympathy + ((heroAttraction + tagetAttraction) / 20);
-            heroRelation.Trust += sympathy;
+            int loveGain = (changeValue == -1000) ? (sympathy + ((heroAttraction + tagetAttraction) / 20)) * DramalordMCM.Instance.LoveGainMultiplier : (changeValue + ((heroAttraction + tagetAttraction) / 20)) * DramalordMCM.Instance.LoveGainMultiplier;
+            int trustGain = (changeValue == -1000) ? sympathy * DramalordMCM.Instance.TrustGainMultiplier : changeValue * DramalordMCM.Instance.TrustGainMultiplier;
+            heroRelation.Love += loveGain;
+            heroRelation.Trust += trustGain;
             heroRelation.LastInteraction = CampaignTime.Now.ToDays;
 
             if(hero == Hero.MainHero || target == Hero.MainHero)
@@ -32,8 +33,8 @@ namespace Dramalord.Actions
                 Hero otherHero = (hero == Hero.MainHero) ? target : hero;
                 TextObject banner = new TextObject("{=Dramalord069}You had a date with {HERO.LINK}. (Love {NUM}, Trust {NUM2})");
                 StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
-                MBTextManager.SetTextVariable("NUM", ConversationHelper.FormatNumber(sympathy + ((heroAttraction + tagetAttraction) / 20)));
-                MBTextManager.SetTextVariable("NUM2", ConversationHelper.FormatNumber(sympathy));
+                MBTextManager.SetTextVariable("NUM", ConversationHelper.FormatNumber(loveGain));
+                MBTextManager.SetTextVariable("NUM2", ConversationHelper.FormatNumber(trustGain));
                 MBInformationManager.AddQuickInformation(banner, 0, otherHero.CharacterObject, "event:/ui/notification/relation");
             }
 

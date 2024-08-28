@@ -220,5 +220,10 @@ namespace Dramalord.Data
                 _relations.Remove(tuple);
             });
         }
+
+        protected override void OnNewGameCreated(CampaignGameStarter starter)
+        {
+            _relations.Clear();
+        }
     }
 }

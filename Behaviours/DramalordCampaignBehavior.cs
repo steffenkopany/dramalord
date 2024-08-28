@@ -1,5 +1,6 @@
 ﻿using Dramalord.Conversations;
 using Dramalord.Data;
+using Dramalord.UI;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
@@ -10,7 +11,6 @@ namespace Dramalord.Behavior
     {
         internal DramalordCampaignBehavior(CampaignGameStarter starter)
         {
-            
             object o = DramalordPersonalities.Instance;
             o = DramalordRelations.Instance;
             o = DramalordPregancies.Instance;
@@ -18,7 +18,9 @@ namespace Dramalord.Behavior
             o = DramalordOrphans.Instance;
             o = DramalordEvents.Instance;
             o = DramalordIntentions.Instance;
-            
+            o = DramalordQuests.Instance;
+
+            OrphanageConversation.AddDialogs(starter);
         }
 
         public override void RegisterEvents()
@@ -30,9 +32,11 @@ namespace Dramalord.Behavior
             DramalordOrphans.Instance.InitEvents();
             DramalordEvents.Instance.InitEvents();
             DramalordIntentions.Instance.InitEvents();
+            DramalordQuests.Instance.InitEvents();
 
             CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, new Action(DramalordPregancies.Instance.OnHourlyTick));
             CampaignEvents.ConversationEnded.AddNonSerializedListener(this, new Action<IEnumerable<CharacterObject>>(ConversationHelper.OnConversationEnded));
+            CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(AdoptionMenu.AddGameMenus));
         }
 
         public override void SyncData(IDataStore dataStore)
