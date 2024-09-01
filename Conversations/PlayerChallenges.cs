@@ -123,6 +123,10 @@ namespace Dramalord.Conversations
                 if (CurrentChallenge.Context == ChallengeContext.Chat)
                 {
                     TalkAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero, changeValue * ChallengeResult);
+                    if (!Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= DramalordMCM.Instance.MinTrust)
+                    {
+                        FriendshipAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
+                    }
                 }
                 else if (CurrentChallenge.Context == ChallengeContext.Flirt)
                 {

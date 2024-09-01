@@ -280,7 +280,7 @@
     <string id="Dramalord282" text="Wait {TITLE}! Why choose death if there's also pleasure?" />
     <string id="Dramalord283" text="Hmm... Alright. I accept. I spare you this time if you perform well." />
     <string id="Dramalord284" text="Well, your death is my sweetest pleasure." />
-    <string id="Dramalord285" text="{HERO1.LINK} violated their captive {HERO2.LINK}" />
+    <string id="Dramalord285" text="{HERO1.LINK} released their captive {HERO2.LINK} for a special service" />
     <string id="Dramalord286" text="Visit Orphanage" />
     <string id="Dramalord287" text="Visit the orphanage to adopt a child or get rid off one of your clan" />
     <string id="Dramalord288" text="Love Gain Multiplier" />
@@ -416,5 +416,25 @@
     <string id="Dramalord418" text="Oh yes. For recovering I usually lock myself away for a few days." />
     <string id="Dramalord419" text="Well, it's not stressful at all. I am actually rarely stressed." />
     <string id="Dramalord420" text="It's ok I think. Sometimes I need a day off or two." />
+    <string id="Dramalord421" text="Minimum Trust FWB" />
+    <string id="Dramalord422" text="Trust points required to consider a hero being a friend with benefits" />
+    <string id="Dramalord423" text="I... I am not sure about this. I like you, but do I like you enough?" />
+    <string id="Dramalord424" text="If we don't try we never will find out if this could work." />
+    <string id="Dramalord425" text="You think too much. Just let it happen." />
+    <string id="Dramalord426" text="I am convinced we can give each other much love." />
+    <string id="Dramalord427" text="I will feel honored if you would consider it." />
+    <string id="Dramalord428" text="This is overwhelming. I love you, {PLAYER.NAME}, but are we ready for this step?" />
+    <string id="Dramalord429" text="Love is an adventure and this will be our next challenge!" />
+    <string id="Dramalord430" text="If you think about it, this is the logical next step." />
+    <string id="Dramalord431" text="We finally could share everything with each other." />
+    <string id="Dramalord432" text="It's a honorful thing to do in our situation." />
+    <string id="Dramalord433" text="This is a spicy proposal indeed. What if feelings are mixing in?" />
+    <string id="Dramalord434" text="What is a steamy adventure without risks anyway?" />
+    <string id="Dramalord435" text="Then we re-evaluate the situation and draw our conclusions." />
+    <string id="Dramalord436" text="Think about all the pleasure we could give each other." />
+    <string id="Dramalord437" text="Then we release each other and go back to manual work." />
+    <string id="Dramalord438" text="Uh... well..." />
+    <string id="Dramalord439" text="You successfully convinced {HERO.LINK}. (Love {LOVE}, Trust {TRUST})" />
+    <string id="Dramalord440" text="You failed to convince {HERO.LINK}. (Love {LOVE}, Trust {TRUST})" />
   </strings>
 </base>

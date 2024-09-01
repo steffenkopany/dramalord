@@ -280,7 +280,7 @@
     <string id="Dramalord282" text="Czekaj {TITLE}! Po co wybierać śmierć, skoro jest też przyjemność?" />
     <string id="Dramalord283" text="Hmm... Dobrze. Akceptuję. Oszczędzę ci tego czasu, jeśli dobrze się spiszesz." />
     <string id="Dramalord284" text="Cóż, twoja śmierć jest moją najsłodszą przyjemnością." />
-    <string id="Dramalord285" text="{HERO1.LINK} naruszył ich więźnia {HERO2.LINK}" />
+    <string id="Dramalord285" text="{HERO1.LINK} uwolnił swojego jeńca {HERO2.LINK} w celu wykonania specjalnej usługi" />
     <string id="Dramalord286" text="Odwiedź sierociniec" />
     <string id="Dramalord287" text="Odwiedź sierociniec, aby adoptować dziecko lub pozbyć się kogoś ze swojego klanu" />
     <string id="Dramalord288" text="Mnożnik zysku miłości" />
@@ -416,5 +416,25 @@
     <string id="Dramalord418" text="O tak. Aby dojść do siebie, zwykle zamykam się na kilka dni." />
     <string id="Dramalord419" text="Cóż, to wcale nie jest stresujące. Tak naprawdę rzadko się stresuję." />
     <string id="Dramalord420" text="Myślę, że jest ok. Czasami potrzebuję dnia wolnego lub dwóch." />
+    <string id="Dramalord421" text="Minimalne zaufanie FWB" />
+    <string id="Dramalord422" text="Punkty zaufania wymagane, aby uznać bohatera za przyjaciela z korzyściami" />
+    <string id="Dramalord423" text="Nie jestem pewien. Lubię cię, ale czy lubię cię wystarczająco?" />
+    <string id="Dramalord424" text="Jeśli nie spróbujemy, nigdy się nie dowiemy, czy to zadziała." />
+    <string id="Dramalord425" text="Za dużo myślisz. Po prostu pozwól, aby się stało." />
+    <string id="Dramalord426" text="Jestem przekonany, że możemy dać sobie nawzajem dużo miłości." />
+    <string id="Dramalord427" text="Będę zaszczycony, jeśli to rozważysz." />
+    <string id="Dramalord428" text="To przytłaczające. Kocham cię, {PLAYER.NAME}, ale czy jesteśmy gotowi na ten krok?" />
+    <string id="Dramalord429" text="Miłość to przygoda i to będzie nasze kolejne wyzwanie!" />
+    <string id="Dramalord430" text="Jeśli się nad tym zastanowić, to jest logiczny następny krok." />
+    <string id="Dramalord431" text="W końcu mogliśmy się wszystkim ze sobą dzielić." />
+    <string id="Dramalord432" text="To zaszczytne, że tak postępujemy w naszej sytuacji." />
+    <string id="Dramalord433" text="To rzeczywiście pikantna propozycja. A co jeśli wmieszają się w nią uczucia?" />
+    <string id="Dramalord434" text="Czym w ogóle jest gorąca przygoda bez ryzyka?" />
+    <string id="Dramalord435" text="Następnie ponownie oceniamy sytuację i wyciągamy wnioski." />
+    <string id="Dramalord436" text="Pomyśl o całej przyjemności, jaką moglibyśmy sobie nawzajem dać." />
+    <string id="Dramalord437" text="Następnie uwalniamy się od siebie i wracamy do pracy fizycznej." />
+    <string id="Dramalord438" text="Uh... cóż..." />
+    <string id="Dramalord439" text="Pomyślnie przekonałeś {HERO.LINK}. (Kocham {LOVE}, ufam {TRUST})" />
+    <string id="Dramalord440" text="Nie udało Ci się przekonać {HERO.LINK}. (Kocham {LOVE}, ufam {TRUST})" />
   </strings>
 </base>

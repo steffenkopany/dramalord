@@ -280,7 +280,7 @@
     <string id="Dramalord282" text="等等{TITLE}！如果能選擇享樂，為何要選擇死亡？" />
     <string id="Dramalord283" text="嗯…好吧！我接受，如果你表現得夠好的話，我就放你一馬。" />
     <string id="Dramalord284" text="那麼，你的死就是我最甜蜜的快樂。" />
-    <string id="Dramalord285" text="{HERO1.LINK} 侵犯了他(她)的俘虜 {HERO2.LINK} 。" />
+    <string id="Dramalord285" text="{HERO1.LINK} 釋放了他們的俘虜 {HERO2.LINK} 以進行特殊服務" />
     <string id="Dramalord286" text="拜訪孤兒院" />
     <string id="Dramalord287" text="拜訪孤兒院收養一名孩子或送養你的孩子。" />
     <string id="Dramalord288" text="愛慕增益倍率" />
@@ -416,5 +416,25 @@
     <string id="Dramalord418" text="哦是的，為了恢復，我通常會閉門靜養個幾天。" />
     <string id="Dramalord419" text="一點壓力都沒有，我其實很少感到壓力。" />
     <string id="Dramalord420" text="我覺得還好，偶爾休息個一兩天就好了。" />
+    <string id="Dramalord421" text="最小信任 FWB" />
+    <string id="Dramalord422" text="將英雄視為有好處的朋友所需的信任點" />
+    <string id="Dramalord423" text="我...我對此不太確定。我喜歡你，但是我足夠喜歡你嗎？" />
+    <string id="Dramalord424" text="如果我們不嘗試，我們永遠不會知道這是否可行。" />
+    <string id="Dramalord425" text="你想太多了。就讓它發生吧。" />
+    <string id="Dramalord426" text="我相信我們可以給彼此很多愛。" />
+    <string id="Dramalord427" text="如果您能考慮的話，我將感到榮幸。" />
+    <string id="Dramalord428" text="這太難以承受了。我愛你，{PLAYER.NAME}，但是我們準備好踏出這一步了嗎？" />
+    <string id="Dramalord429" text="愛是一場冒險，這將是我們的下一個挑戰！" />
+    <string id="Dramalord430" text="如果你仔細想想，這就是合乎邏輯的下一步。" />
+    <string id="Dramalord431" text="我們終於可以互相分享一切了。" />
+    <string id="Dramalord432" text="在我們的情況下這是一件光榮的事。" />
+    <string id="Dramalord433" text="這確實是個辛辣的提議。如果感情混雜在一起怎麼辦？" />
+    <string id="Dramalord434" text="什麼是沒有風險的蒸氣冒險？" />
+    <string id="Dramalord435" text="然後我們重新評估情況並得出結論。" />
+    <string id="Dramalord436" text="想想我們可以帶給彼此的所有快樂。" />
+    <string id="Dramalord437" text="然後我們釋放彼此，回去做體力活。" />
+    <string id="Dramalord438" text="呃...好..." />
+    <string id="Dramalord439" text="您成功說服了{HERO.LINK}。（愛{LOVE}，信任{TRUST}）" />
+    <string id="Dramalord440" text="你未能說服{HERO.LINK}。（愛{LOVE}，信任{TRUST}）" />
   </strings>
 </base>

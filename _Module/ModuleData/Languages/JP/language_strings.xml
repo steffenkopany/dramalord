@@ -280,7 +280,7 @@
     <string id="Dramalord282" text="待ってください、{TITLE}！快楽もあるのに、なぜ死を選ぶのですか？" />
     <string id="Dramalord283" text="うーん… わかった。受け入れるよ。うまくやれば、今回は許してあげるよ。" />
     <string id="Dramalord284" text="そうだな、君の死は私にとって最高の快楽だ。" />
-    <string id="Dramalord285" text="{HERO1.LINK} は捕虜の {HERO2.LINK} を犯した" />
+    <string id="Dramalord285" text="{HERO1.LINK} は特別な儀式のために捕虜の {HERO2.LINK} を解放しました" />
     <string id="Dramalord286" text="孤児院を訪問" />
     <string id="Dramalord287" text="孤児院を訪問して子供を養子に迎えるか、一族の一人を追い出す" />
     <string id="Dramalord288" text="愛の獲得倍率" />
@@ -416,5 +416,25 @@
     <string id="Dramalord418" text="ああ、そうですね。回復のために、私は通常数日間自分を閉じ込めます。" />
     <string id="Dramalord419" text="ええ、まったくストレスではありません。実際、めったにストレスを感じません。" />
     <string id="Dramalord420" text="大丈夫だと思います。たまには1日か2日休みが必要なこともあります。" />
+    <string id="Dramalord421" text="最低限の信頼度 FWB" />
+    <string id="Dramalord422" text="ヒーローをセフレと見なすために必要な信頼ポイント" />
+    <string id="Dramalord423" text="私は...これについてはよく分かりません。私はあなたが好きですが、十分に好きでしょうか?" />
+    <string id="Dramalord424" text="試してみなければ、これがうまくいくかどうかは決してわかりません。" />
+    <string id="Dramalord425" text="考えすぎです。ただ起こるままにさせてください。" />
+    <string id="Dramalord426" text="私たちはお互いにたくさんの愛を与えることができると確信しています。" />
+    <string id="Dramalord427" text="検討していただければ光栄です。" />
+    <string id="Dramalord428" text="これは圧倒的です。{PLAYER.NAME}さん、あなたを愛していますが、このステップの準備はできていますか？" />
+    <string id="Dramalord429" text="愛は冒険であり、これが私たちの次の挑戦になります！" />
+    <string id="Dramalord430" text="考えてみれば、これが論理的な次のステップです。" />
+    <string id="Dramalord431" text="私たちはついにお互いにすべてを共有することができます。" />
+    <string id="Dramalord432" text="私たちの状況では、それは名誉あることです。" />
+    <string id="Dramalord433" text="これは確かに刺激的な提案です。感情が混ざっていたらどうしますか？" />
+    <string id="Dramalord434" text="そもそもリスクのない刺激的な冒険とは何でしょうか？" />
+    <string id="Dramalord435" text="その後、状況を再評価して結論を​​出します。" />
+    <string id="Dramalord436" text="お互いに与え合える喜びについて考えてみましょう。" />
+    <string id="Dramalord437" text="それからお互いを解放して手作業に戻ります。" />
+    <string id="Dramalord438" text="うーん...そうですね..." />
+    <string id="Dramalord439" text="{HERO.LINK} を説得することに成功しました。(愛 {LOVE}、信頼 {TRUST})" />
+    <string id="Dramalord440" text="{HERO.LINK} を説得できませんでした。(愛 {LOVE}、信頼 {TRUST})" />
   </strings>
 </base>
