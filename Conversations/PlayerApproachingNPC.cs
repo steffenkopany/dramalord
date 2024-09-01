@@ -239,6 +239,9 @@ namespace Dramalord.Conversations
             starter.AddDialogLine("npc_interaction_reply_talk_no", "npc_interaction_reply_flirt", "player_interaction_selection", "{npc_interaction_reply_talk_no}", ConditionNpcDeclinesFlirt, null);
             starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_flirt", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}", ConditionNpcDeclinesFlirtTimeout, null);
 
+
+            
+
             starter.AddDialogLineWithVariation("npc_interaction_reply_date_first_yes", "npc_interaction_reply_date", "player_challenge_start", ConditionNpcAcceptsDateFirst, ConsequenceNpcAcceptsDateFirst)
                 .Variation("{npc_interaction_reply_date_first_yes_1}")
                 .Variation("{npc_interaction_reply_date_first_yes_2}");
@@ -247,11 +250,13 @@ namespace Dramalord.Conversations
                 .Variation("{npc_interaction_reply_date_yes_1}")
                 .Variation("{npc_interaction_reply_date_yes_2}");
 
+            starter.AddDialogLine("npc_interaction_reply_date_first_maybe", "npc_interaction_reply_date", "npc_persuasion_challenge", "{=Dramalord437}Uh... well...", ConditionNpcMaybeDate, ConsequenceNpcMaybeDate);
             starter.AddDialogLine("npc_interaction_reply_date_no", "npc_interaction_reply_date", "player_interaction_selection", "{npc_interaction_reply_talk_no}", ConditionNpcDeclinesDate, null);
             starter.AddDialogLine("npc_interaction_reply_date_husband", "npc_interaction_reply_date", "player_interaction_selection", "{npc_interaction_reply_date_husband}", ConditionNpcDeclinesDateHusband, null);
             starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_date", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}", ConditionNpcDeclinesDateTimeout, null);
 
             starter.AddDialogLine("npc_interaction_reply_sex_friend_yes", "npc_interaction_reply_sex", "close_window", "{npc_interaction_reply_sex_friend_yes}", ConditionNpcAcceptsSexFriend, ConsequenceNpcAcceptsSexFriend);
+            starter.AddDialogLine("npc_interaction_reply_sex_friend_maybe", "npc_interaction_reply_sex", "npc_persuasion_challenge", "{=Dramalord437}Uh... well...", ConditionNpcMaybeSexFriend, ConsequenceNpcMaybeSexFriend);
             starter.AddDialogLine("npc_interaction_reply_sex_fwb_yes", "npc_interaction_reply_sex", "close_window", "{npc_interaction_reply_sex_fwb_yes}", ConditionNpcAcceptsSexFWB, ConsequenceNpcAcceptsSexFWB);
             starter.AddDialogLine("npc_interaction_reply_sex_fwb_no", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_sex_fwb_no}", ConditionNpcDeclinesSexFWB, null);
             starter.AddDialogLine("npc_interaction_reply_sex_yes", "npc_interaction_reply_sex", "close_window", "{npc_interaction_reply_sex_yes}", ConditionNpcAcceptsSex, ConsequenceNpcAcceptsSex);
@@ -260,6 +265,7 @@ namespace Dramalord.Conversations
             starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}", ConditionNpcDeclinesSexTimeout, null);
 
             starter.AddDialogLine("npc_interaction_reply_engage_yes", "npc_interaction_reply_engage", "close_window", "{npc_interaction_reply_engage_yes}", ConditionNpcAcceptsEngagement, ConsequenceNpcAcceptsEngagement);
+            starter.AddDialogLine("npc_interaction_reply_engage_maybe", "npc_interaction_reply_engage", "npc_persuasion_challenge", "{=Dramalord437}Uh... well...", ConditionNpcMaybeEngagement, ConsequenceNpcMaybeEngagement);
             starter.AddDialogLine("npc_interaction_reply_engage_no", "npc_interaction_reply_engage", "player_interaction_selection", "{npc_interaction_reply_engage_no}", ConditionNpcDeclinesEngagement, null);
 
             starter.AddDialogLine("npc_interaction_reply_marry_yes", "npc_interaction_reply_marriage", "close_window", "{npc_interaction_reply_marry_yes}", ConditionNpcAcceptsMarriage, ConsequenceNpcAcceptsMarriage);
@@ -356,17 +362,25 @@ namespace Dramalord.Conversations
 
         private static bool ConditionNpcDeclinesFlirtTimeout() => !NoTimeout();
 
+        private static bool ConditionNpcMaybeDate() => NoTimeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > 0 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove;
+
+        private static void ConsequenceNpcMaybeDate() => Persuasions.CreatePersuasionTaskForDate();
+
         private static bool ConditionNpcAcceptsDateFirst() => !HusbandClose() && NoTimeout() && (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove && !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero));
 
         private static bool ConditionNpcAcceptsDate() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero);
 
-        private static bool ConditionNpcDeclinesDate() => NoTimeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove;
+        private static bool ConditionNpcDeclinesDate() => NoTimeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love <=0;
 
         private static bool ConditionNpcDeclinesDateHusband() => HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero);
 
         private static bool ConditionNpcDeclinesDateTimeout() => !NoTimeout();
 
-        private static bool ConditionNpcAcceptsSexFriend() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= 75 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= 75;
+        private static bool ConditionNpcMaybeSexFriend() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= 25 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= 25;
+
+        private static void ConsequenceNpcMaybeSexFriend() => Persuasions.CreatePersuasionTaskForFWB();
+
+        private static bool ConditionNpcAcceptsSexFriend() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= DramalordMCM.Instance.MinTrustFWB && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= DramalordMCM.Instance.MinTrustFWB;
 
         private static bool ConditionNpcAcceptsSexFWB() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendWithBenefitsOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= 50;
 
@@ -380,9 +394,13 @@ namespace Dramalord.Conversations
 
         private static bool ConditionNpcDeclinesSexInterest() => !Hero.OneToOneConversationHero.IsSexualWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetDesires().Horny < 25;
 
-        private static bool ConditionNpcAcceptsEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= 75;
+        private static bool ConditionNpcAcceptsEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinMarriageLove;
 
-        private static bool ConditionNpcDeclinesEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < 75;
+        private static bool ConditionNpcDeclinesEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < 25;
+
+        private static bool ConditionNpcMaybeEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= 25 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinMarriageLove && Hero.OneToOneConversationHero.IsLoverOf(Hero.MainHero);
+
+        private static void ConsequenceNpcMaybeEngagement() => Persuasions.CreatePersuasionTaskForEngage();
 
         private static bool ConditionNpcAcceptsMarriage() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinMarriageLove;
 

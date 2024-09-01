@@ -280,7 +280,7 @@
     <string id="Dramalord282" text="Bekle {TITLE}! Eğer zevk de varsa neden ölümü seçiyorsun?" />
     <string id="Dramalord283" text="Hmm... Tamam. Kabul ediyorum. İyi performans gösterirsen bu sefer seni bağışlarım." />
     <string id="Dramalord284" text="Eh, senin ölümün benim en tatlı zevkim." />
-    <string id="Dramalord285" text="{HERO1.LINK}, tutsak {HERO2.LINK}'i ihlal etti" />
+    <string id="Dramalord285" text="{HERO1.LINK}, tutsak ettiği {HERO2.LINK}'i özel bir hizmet için serbest bıraktı" />
     <string id="Dramalord286" text="Yetimhaneyi ziyaret edin" />
     <string id="Dramalord287" text="Bir çocuğu evlat edinmek veya klanınızdan birinden kurtulmak için yetimhaneyi ziyaret edin" />
     <string id="Dramalord288" text="Aşk Kazanımı Çarpanı" />
@@ -446,5 +446,25 @@
     <string id="Dramalord418" text="Ah evet. İyileşmek için genellikle kendimi birkaç günlüğüne kilitlerim." />
     <string id="Dramalord419" text="Aslında hiç stresli değil. Aslında nadiren stresliyim." />
     <string id="Dramalord420" text="Sanırım sorun değil. Bazen bir veya iki gün izin almam gerekiyor." />
+    <string id="Dramalord421" text="Asgari Güven FWB" />
+    <string id="Dramalord422" text="Bir kahramanı çıkar amaçlı bir arkadaş olarak değerlendirmek için gereken güven puanları" />
+    <string id="Dramalord423" text="Ben... Bundan emin değilim. Senden hoşlanıyorum ama senden yeterince hoşlanıyor muyum?" />
+    <string id="Dramalord424" text="Denemezsek bunun işe yarayıp yaramayacağını asla öğrenemeyeceğiz." />
+    <string id="Dramalord425" text="Çok fazla düşünüyorsun. Bırak olsun." />
+    <string id="Dramalord426" text="Birbirimize çok fazla sevgi verebileceğimize ikna oldum." />
+    <string id="Dramalord427" text="Bunu düşünürsen onur duyarım." />
+    <string id="Dramalord428" text="Bu çok bunaltıcı. Seni seviyorum, {PLAYER.NAME}, ama bu adıma hazır mıyız?" />
+    <string id="Dramalord429" text="Aşk bir maceradır ve bu bizim bir sonraki mücadelemiz olacak!" />
+    <string id="Dramalord430" text="Bunu düşünürseniz, mantıklı bir sonraki adım budur." />
+    <string id="Dramalord431" text="Sonunda her şeyi birbirimizle paylaşabildik." />
+    <string id="Dramalord432" text="Bu, içinde bulunduğumuz durumda onurlu bir davranış." />
+    <string id="Dramalord433" text="Bu gerçekten de baharatlı bir teklif. Ya duygular karışırsa?" />
+    <string id="Dramalord434" text="Zaten risksiz bir macera nedir ki?" />
+    <string id="Dramalord435" text="Sonra durumu yeniden değerlendiririz ve sonuçlarımızı çıkarırız." />
+    <string id="Dramalord436" text="Birbirimize verebileceğimiz tüm zevkleri düşünürüz." />
+    <string id="Dramalord437" text="Sonra birbirimizi serbest bırakırız ve el işine geri döneriz." />
+    <string id="Dramalord438" text="Şey... peki..." />
+    <string id="Dramalord439" text="{HERO.LINK}'i başarıyla ikna ettiniz. (Sevgi {LOVE}, Güven {TRUST})" />
+    <string id="Dramalord440" text="{HERO.LINK}'i ikna etmeyi başaramadınız. (Sevgi {LOVE}, Güven {TRUST})" />
   </strings>
 </base>

@@ -5,6 +5,7 @@ using SandBox.View.Map;
 using System;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.CampaignBehaviors;
 
 namespace Dramalord.Behaviours
 {
@@ -17,6 +18,7 @@ namespace Dramalord.Behaviours
             PrisonerConversation.AddDialogs(starter);
             QuestConversation.AddDialogs(starter);
             PlayerChallenges.AddDialogs(starter);
+            Persuasions.AddDialogs(starter);
         }
 
         public override void RegisterEvents()

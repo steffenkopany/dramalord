@@ -8,9 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
-using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Behavior
 {
@@ -204,7 +204,7 @@ namespace Dramalord.Behavior
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Date, -1);
                                     }
-                                    else if (isHorny && isOpen && isNotConscientous && desires.Horny == 100)
+                                    else if (isHorny && isOpen && isNotConscientous && isExtrovert && desires.Horny == 100)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Intercourse, -1);
                                     }
@@ -217,7 +217,6 @@ namespace Dramalord.Behavior
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.SmallTalk, -1);
                                     }
                                 }
-
                                 else if (relation.Relationship == RelationshipType.None && (isHorny || isOpen || isExtrovert || isNotConscientous))
                                 {
                                     if (hero.GetAttractionTo(selectedTarget) >= DramalordMCM.Instance.MinAttraction && relation.Love < DramalordMCM.Instance.MinDatingLove)
@@ -227,6 +226,10 @@ namespace Dramalord.Behavior
                                     else if (relation.Love >= DramalordMCM.Instance.MinDatingLove)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Date, -1);
+                                    }
+                                    else if (isHorny && isOpen && isNotConscientous && isExtrovert && desires.Horny == 100 && selectedTarget == Hero.MainHero)
+                                    {
+                                        DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Intercourse, -1);
                                     }
                                     else
                                     {
@@ -252,7 +255,7 @@ namespace Dramalord.Behavior
                         }
                     }
 
-                    if (hero.GetHeroTraits().Mercy < 0 && personality.Agreeableness < 0 && desires.Horny > 50 && hero.PartyBelongedTo?.PrisonRoster.TotalHeroes > 0)
+                    if (hero.GetHeroTraits()?.Mercy < 0 && personality.Agreeableness < 0 && desires.Horny > 50 && hero.PartyBelongedTo?.PrisonRoster?.TotalHeroes > 0)
                     {
                         Hero? victim = hero.PartyBelongedTo.PrisonRoster.GetTroopRoster().Select(h => h.Character).FirstOrDefault(c => c.IsHero && c.HeroObject != Hero.MainHero && hero.GetAttractionTo(c.HeroObject) > DramalordMCM.Instance.MinAttraction)?.HeroObject;
                         if (victim != null)
@@ -317,7 +320,7 @@ namespace Dramalord.Behavior
                                 }
                                 else if (intention.Type == IntentionType.Marriage)
                                 {
-                                    MarriageAction.Apply(hero, intention.Target, closeHeroes);
+                                    Actions.MarriageAction.Apply(hero, intention.Target, closeHeroes);
                                 }
                                 else if (intention.Type == IntentionType.BreakUp)
                                 {
@@ -350,6 +353,7 @@ namespace Dramalord.Behavior
                             {
                                 LogEntry.AddLogEntry(new PrisonIntercourseLog(hero, intention.Target));
                             }
+                            EndCaptivityAction.ApplyByRansom(intention.Target, hero);
                         }
                         else if (intention.Type == IntentionType.LeaveClan)
                         {

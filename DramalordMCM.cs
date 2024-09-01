@@ -59,23 +59,27 @@ namespace Dramalord
         public int MinTrust { get; set; } = 30;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord187}Pregnancy Duration", 2, 100, Order = 5, HintText = "{=Dramalord188}How many days is a hero pregnant before giving birth", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord421}Minimum Trust FWB", 0, 100, Order = 5, HintText = "{=Dramalord422}Trust points required to consider a hero being a friend with benefits", RequireRestart = false)]
+        public int MinTrustFWB { get; set; } = 75;
+
+        [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
+        [SettingPropertyFloatingInteger("{=Dramalord187}Pregnancy Duration", 2, 100, Order = 6, HintText = "{=Dramalord188}How many days is a hero pregnant before giving birth", RequireRestart = false)]
         public int PregnancyDuration { get; set; } = 21;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord189}Pregnancy Chance", 0, 100, Order = 6, HintText = "{=Dramalord190}Chance a hero gets pregnant (only for Dramalord pregnancies)", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord189}Pregnancy Chance", 0, 100, Order = 7, HintText = "{=Dramalord190}Chance a hero gets pregnant (only for Dramalord pregnancies)", RequireRestart = false)]
         public int PregnancyChance { get; set; } = 10;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord288}Love Gain Multiplier", 1, 10, Order = 7, HintText = "{=Dramalord289}Love gained due to flirting or dates is muliplied by this value", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord288}Love Gain Multiplier", 1, 10, Order = 8, HintText = "{=Dramalord289}Love gained due to flirting or dates is muliplied by this value", RequireRestart = false)]
         public int LoveGainMultiplier { get; set; } = 1;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord290}Trust Gain Multiplier", 1, 10, Order = 8, HintText = "{=Dramalord291}Trust gained due to talking or dates is muliplied by this value", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord290}Trust Gain Multiplier", 1, 10, Order = 9, HintText = "{=Dramalord291}Trust gained due to talking or dates is muliplied by this value", RequireRestart = false)]
         public int TrustGainMultiplier { get; set; } = 1;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord295}Toy Break Chance", 0, 100, Order = 9, HintText = "{=Dramalord296}Chance a toy can break while being used by a hero.", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord295}Toy Break Chance", 0, 100, Order = 10, HintText = "{=Dramalord296}Chance a toy can break while being used by a hero.", RequireRestart = false)]
         public int ToyBreakChance { get; set; } = 10;
 
         [SettingPropertyGroup("{=Dramalord007}Logging Setup")]

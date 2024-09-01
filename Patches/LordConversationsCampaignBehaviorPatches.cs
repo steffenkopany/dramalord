@@ -17,7 +17,7 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void conversation_lord_greets_under_24_hours_on_condition(ref bool __result)
         {
-            if(__result && !Hero.OneToOneConversationHero.IsDramalordLegit())
+            if(__result && Hero.OneToOneConversationHero.IsDramalordLegit())
             {
                 TextObject textObject = new TextObject("{=!}{SALUTATION}...");
                 textObject.SetTextVariable("SALUTATION", ConversationHelper.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, true));
@@ -35,7 +35,7 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void conversation_lord_greets_over_24_hours_on_condition(ref bool __result)
         {
-            if (__result && !Hero.OneToOneConversationHero.IsDramalordLegit())
+            if (__result && Hero.OneToOneConversationHero.IsDramalordLegit())
             {
                 MBTextManager.SetTextVariable("STR_SALUTATION", ConversationHelper.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, true));
                 return;
