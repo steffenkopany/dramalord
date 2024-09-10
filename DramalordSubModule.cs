@@ -28,6 +28,7 @@ namespace Dramalord
             base.OnSubModuleUnloaded();
         }
 
+        /*
         public override void OnGameInitializationFinished(Game game)
         {
             base.OnGameInitializationFinished(game);
@@ -37,6 +38,7 @@ namespace Dramalord
             Campaign.Current?.DefaultVillageTypes.ConsumableRawItems.Add(wurst);
             Campaign.Current?.DefaultVillageTypes.ConsumableRawItems.Add(pie);
         }
+        */
 
         protected override void OnGameStart(Game game, IGameStarter starter)
         {

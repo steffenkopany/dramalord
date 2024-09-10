@@ -146,6 +146,10 @@ namespace Dramalord
         [SettingPropertyBool("{=Dramalord316}Show Captivity Logs", Order = 2, HintText = "{=Dramalord317}Enable this if you want to see logs when heroes are captured", RequireRestart = false)]
         public bool ShowCaptivityEvents { get; set; } = true;
 
+        [SettingPropertyGroup("{=Dramalord313}Optional")]
+        [SettingPropertyBool("{=Dramalord473}No Dialogs For Player", Order = 2, HintText = "{=Dramalord474}Enable this if you want dialogs but an auto result when talking/flirting/dating.", RequireRestart = false)]
+        public bool NoPlayerDialogs { get; set; } = false;
+
         public override string Id => DramalordSubModule.ModuleName;
 
         public override string DisplayName => DramalordSubModule.ModuleName;

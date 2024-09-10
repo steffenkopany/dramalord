@@ -19,7 +19,6 @@
     <string id="Dramalord013" text="nişanlı" />
     <string id="Dramalord014" text="evli" />
     <string id="Dramalord015" text="{HERO1.LINK} ve {HERO2.LINK} artık {RELATIONSHIP}" />
-    <string id="Dramalord015" text="{HERO1.LINK} ve {HERO2.LINK} veya artık {RELATIONSHIP} değil" />
     <string id="Dramalord016" text="Genel" />
     <string id="Dramalord017" text="Yakalanma Şansı" />
     <string id="Dramalord018" text="Diğer kahramanlarla etkileşimde bulunurken ortaklar tarafından yakalanma olasılığı" />
@@ -347,7 +346,7 @@
     <string id="Dramalord349" text="karısı" />
     <string id="Dramalord350" text="kocası" />
     <string id="Dramalord351" text="{TITLE} sohbeti için teşekkür ederim." />
-    <string id="Dramalord352" text="{TITLE}'ı bana söyle, çok seyahat ediyorsun ve insanlarla tanışıyorsun, {POI.NAME} hakkında ne düşünüyorsun?" />
+    <string id="Dramalord352" text="{TITLE} bana söyle, çok seyahat ediyorsun ve insanlarla tanışıyorsun, {POI.NAME} hakkında ne düşünüyorsun?" />
     <string id="Dramalord353" text="{POI.NAME} ile tanıştım ve onları arkadaşım olarak görüyorum." />
     <string id="Dramalord354" text="Öf, bana hatırlatma. {POI.NAME} sinir bozucu ve umarım bir daha karşılaşmam." />
     <string id="Dramalord355" text="{POI.NAME}, hmm. Aslında onlar hakkında belirli bir fikrim yok." />
@@ -466,5 +465,44 @@
     <string id="Dramalord438" text="Şey... peki..." />
     <string id="Dramalord439" text="{HERO.LINK}'i başarıyla ikna ettiniz. (Sevgi {LOVE}, Güven {TRUST})" />
     <string id="Dramalord440" text="{HERO.LINK}'i ikna etmeyi başaramadınız. (Sevgi {LOVE}, Güven {TRUST})" />
+    <string id="Dramalord441" text="{TITLE}, çocuklarınızdan birini aileme katmak istiyorum." />
+    <string id="Dramalord442" text="Bu bir onur olurdu, {TITLE}. Ailenize kimi katmak istersiniz?" />
+    <string id="Dramalord443" text="Üzgünüm, {TITLE}. Çocuklarımın reşit olduklarında özgür bir seçim yapmalarını istiyorum." />
+    <string id="Dramalord444" text="Çocuğumu {CHILD} ailenize katmak istediğinizden emin misiniz?" />
+    <string id="Dramalord445" text="{NAME}'in çok fazla yediği ve düzenli olarak egzersiz yaptığı biliniyor." />
+    <string id="Dramalord446" text="{NAME}'in neredeyse hiçbir şey yemediği ve düzenli olarak egzersiz yaptığı biliniyor." />
+    <string id="Dramalord447" text="{NAME} adlı kişinin çok fazla yediği ve nadiren egzersiz yaptığı biliniyor." />
+    <string id="Dramalord448" text="{NAME} adlı kişinin neredeyse hiçbir şey yemediği ve nadiren egzersiz yaptığı biliniyor." />
+    <string id="Dramalord449" text="{NAME} adlı kişinin nadiren egzersiz yaptığı biliniyor." />
+    <string id="Dramalord450" text="{NAME} adlı kişinin neredeyse hiçbir şey yemediği biliniyor." />
+    <string id="Dramalord451" text="Biliyor musun, bir yetimhanede büyüdüğüm için iyi bir çocukluğum olmadı." />
+    <string id="Dramalord452" text="Yerel çete lideri bizi zar zor besledi ve yürüyebildiğimiz anda bizi çalmaya gönderdi. Başarılı olamazsak dövülürdük." />
+    <string id="Dramalord453" text="Memelerim çıkar çıkmaz meyhaneye gönderildim. İğrenç adamları eğlendirmek ve paralarını içkiye harcamalarını sağlamak zorundaydım... ya da bana." />
+    <string id="Dramalord454" text="Bir zamanlar beni sürekli... bilirsin... para ödemeden tutan yaşlı, turuncu yüzlü bir adam vardı. Bu yüzden onu tekmeledim ve şehirden kaçtım." />
+    <string id="Dramalord455" text="Neyse, bıçaklamanın bıçaklanmaktan daha iyi olduğunu düşündüm... ne demek istediğimi anladın mı? Bu yüzden bunu yeni işim haline getirdim." />
+    <string id="Dramalord456" text="Koltuk altı kıllarım uzadığı anda yaşlı hanımların hizmetçisi olarak bir şatoya gönderildim. Kocaları savaşla meşgulken eğlenmek için." />
+    <string id="Dramalord457" text="Bir gün, gümüş ormana... fideler ekerken, ormanın sahibinin kalbi durdu. Kaçmak ve kasabayı terk etmek zorunda kaldım." />
+    <string id="Dramalord458" text="Yani, odunumla çalışma zamanlarım sona erdi, bunun yerine kılıç ve baltaya geçtim. Meğerse bunda da oldukça iyiymişim." />
+    <string id="Dramalord459" text="Sanırım Lord Stickyfinger daha iyisini hak etmiyormuş." />
+    <string id="Dramalord460" text="Aman Tanrım! Bu çok sert bir ceza." />
+    <string id="Dramalord461" text="Kuru toprağı sürmek zor bir iş gibi görünüyor." />
+    <string id="Dramalord462" text="Genç keresteler antik ormanlara ait değil, değil mi?" />
+    <string id="Dramalord463" text="Belirli malları edinmek istiyorum..." />
+    <string id="Dramalord464" text="Tamam. Neyle ilgileniyorsun?" />
+    <string id="Dramalord465" text="Nemli ortamlarla karşılaşmaya dayanabilecek uzun, yuvarlak bir şey." />
+    <string id="Dramalord466" text="Parmağını birkaç kez sokabileceğin yumuşak ve nemli bir şey." />
+    <string id="Dramalord467" text="İstersen sana {GOOD} veya daha fazlasını satabilirim." />
+    <string id="Dramalord468" text="Bir tane yeterli." />
+    <string id="Dramalord469" text="Beş tane yeterli olmalı." />
+    <string id="Dramalord470" text="En az on tane lazım." />
+    <string id="Dramalord471" text="Sorun değil! Bu sizin için {AMOUNT}{GOLD_ICON} olur. Elbette özel fiyat." />
+    <string id="Dramalord472" text="Sizinle iş yapmak güzeldi." />
+    <string id="Dramalord473" text="Oyuncu İçin Diyalog Yok" />
+    <string id="Dramalord474" text="Konuşurken/flört ederken/flört ederken diyaloglar ama otomatik sonuç istiyorsanız bunu etkinleştirin." />
+    <string id="Dramalord475" text="Artık {HERO.LINK} için daha çekicisiniz. ({NUMBER})" />
+    <string id="Dramalord476" text="Artık {HERO.LINK} için daha az çekicisiniz. ({NUMBER})" />
+    <string id="Dramalord477" text="{HERO.LINK} size daha fazla sempati duyuyor. ({NUMBER})" />
+    <string id="Dramalord478" text="{HERO.LINK} size daha az sempati duyuyor. ({NUMBER})" />
+    <string id="Dramalord479" text="{HERO1.LINK} ve {HERO2.LINK} veya artık {RELATIONSHIP} değil" />
   </strings>
 </base>

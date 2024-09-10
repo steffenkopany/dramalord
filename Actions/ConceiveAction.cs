@@ -12,6 +12,11 @@ namespace Dramalord.Actions
     {
         internal static bool Apply(Hero mother, Hero father)
         {
+            if(mother.IsPregnant)
+            {
+                return false;
+            }
+
             int eventId = DramalordEvents.Instance.AddEvent(mother, father, EventType.Pregnancy, 1000);
             DramalordPregancies.Instance.AddPregnancy(mother, father, CampaignTime.Now, eventId);
 

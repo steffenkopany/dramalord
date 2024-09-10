@@ -27,6 +27,8 @@ namespace Dramalord.Patches
             {
                 DramalordMCMEditor.Instance.SetSelected(hero);
                 HeroDesires desires = hero.GetDesires();
+                HeroPersonality personality = hero.GetPersonality();
+
                 string hidden = GameTexts.FindText("str_missing_info_indicator").ToString();
                 string yes = GameTexts.FindText("str_yes").ToString();
                 string no = GameTexts.FindText("str_no").ToString();
@@ -36,6 +38,12 @@ namespace Dramalord.Patches
                 TextObject horny = new TextObject("{=Dramalord133}Horny");
                 TextObject sympathy = new TextObject("{=Dramalord155}Sympathy");
                 TextObject fertile = new TextObject("{=Dramalord156}Fertile");
+
+                TextObject openness = new TextObject("{=Dramalord110}Openness");
+                TextObject conscientiousness = new TextObject("{=Dramalord112}Conscientiousness");
+                TextObject extroversion = new TextObject("{=Dramalord114}Extroversion");
+                TextObject agreeableness = new TextObject("{=Dramalord116}Agreeableness");
+                TextObject neuroticism = new TextObject("{=Dramalord118}Neuroticism");
 
                 TextObject sexOrientation = new TextObject("{=Dramalord157}Sexual orientation");
                 TextObject orientation = GameTexts.FindText("str_missing_info_indicator");
@@ -63,6 +71,11 @@ namespace Dramalord.Patches
                 __instance.Stats.Add(new StringPairItemVM(horny.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetDesires().Horny.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(fertile.ToString() + ":", __instance.IsInformationHidden ? hidden : (hero.IsFertile()) ? yes : no));
                 __instance.Stats.Add(new StringPairItemVM(sexOrientation.ToString() + ":", __instance.IsInformationHidden ? hidden : orientation.ToString()));
+                __instance.Stats.Add(new StringPairItemVM(openness.ToString() + ":", __instance.IsInformationHidden ? hidden : personality.Openness.ToString()));
+                __instance.Stats.Add(new StringPairItemVM(conscientiousness.ToString() + ":", __instance.IsInformationHidden ? hidden : personality.Conscientiousness.ToString()));
+                __instance.Stats.Add(new StringPairItemVM(extroversion.ToString() + ":", __instance.IsInformationHidden ? hidden : personality.Extroversion.ToString()));
+                __instance.Stats.Add(new StringPairItemVM(agreeableness.ToString() + ":", __instance.IsInformationHidden ? hidden : personality.Agreeableness.ToString()));
+                __instance.Stats.Add(new StringPairItemVM(neuroticism.ToString() + ":", __instance.IsInformationHidden ? hidden : personality.Neuroticism.ToString()));
             }
             if(hero != null)
             { 
@@ -130,6 +143,31 @@ namespace Dramalord.Patches
                         }
                     }
                 }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(EncyclopediaHeroPageVM), "UpdateInformationText")]
+    public static class UpdateInformationTextPatch
+    {
+        [UsedImplicitly]
+        [HarmonyPostfix]
+        public static void UpdateInformationText(ref EncyclopediaHeroPageVM __instance)
+        {
+            Hero? hero = __instance.Obj as Hero;
+            if (hero != null && hero.IsDramalordLegit())
+            {
+                TextObject text = new();
+                if (hero.Weight >= 0.66 && hero.Build >= 0.66) text = new("{=Dramalord445}{NAME} is known to eat a lot and doing workouts regularly.");
+                else if (hero.Weight <= 0.33 && hero.Build >= 0.66) text = new("{=Dramalord446}{NAME} is known to barely eat anything and doing workouts regularly.");
+                else if (hero.Weight >= 0.66 && hero.Build <= 0.33) text = new("{=Dramalord447}{NAME} is known to eat a lot and rarely doing workouts.");
+                else if (hero.Weight <= 0.33 && hero.Build <= 0.33) text = new("{=Dramalord448}{NAME} is known to barely eat anything and rarely doing workouts.");
+                else if (hero.Build <= 0.33) text = new("{=Dramalord449}{NAME} is known to rarely doing workouts.");
+                else if (hero.Weight <= 0.33) text = new("{=Dramalord450}{NAME} is known to barely eat anything.");
+
+                
+                text.SetTextVariable("NAME", hero.Name);
+                __instance.InformationText += "\n" + text.ToString();
             }
         }
     }

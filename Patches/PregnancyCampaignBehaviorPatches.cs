@@ -46,6 +46,16 @@ namespace Dramalord.Patches
             {
                 return false;
             }
+            if(hero.IsFemale && (hero.IsPregnant || hero.GetPregnancy() != null))
+            {
+                hero.IsPregnant = true;
+                return false;
+            }
+            if (hero.Spouse != null && hero.Spouse.IsFemale && (hero.Spouse.IsPregnant || hero.Spouse.GetPregnancy() != null))
+            {
+                hero.Spouse.IsPregnant = true;
+                return false;
+            }
             return true;
         }
     }

@@ -136,7 +136,7 @@ namespace Dramalord.Conversations
                         FriendsWithBenefitsAction.Apply(npc, player);
                     }
 
-                    if (npc.IsFemale != player.IsFemale && npc.IsFertile() && MBRandom.RandomInt(1,100) < DramalordMCM.Instance.PregnancyChance)
+                    if (npc.IsFemale != player.IsFemale && npc.IsFertile() && player.IsFertile() && MBRandom.RandomInt(1,100) < DramalordMCM.Instance.PregnancyChance)
                     {
                         ConceiveAction.Apply((npc.IsFemale) ? npc : player, (npc.IsFemale) ? player : npc);
                     }

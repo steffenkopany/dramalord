@@ -15,7 +15,7 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void RefreshMembersList(ref ClanMembersVM __instance)
         {
-            List<ClanLordItemVM> otherChildren = __instance.Family.Where(item => item.IsChild && item.GetHero().Father != Hero.MainHero && item.GetHero().Mother != Hero.MainHero).ToList();
+            List<ClanLordItemVM> otherChildren = __instance.Family.Where(item => item.IsChild && item.GetHero().Occupation == Occupation.Wanderer).ToList();
             foreach(ClanLordItemVM child in otherChildren)
             {
                 __instance.Family.Remove(child);

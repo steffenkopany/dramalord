@@ -1,4 +1,5 @@
 ﻿using Dramalord.Actions;
+using Dramalord.Data;
 using Dramalord.Extensions;
 using Helpers;
 using System.Linq;
@@ -123,21 +124,27 @@ namespace Dramalord.Conversations
                 if (CurrentChallenge.Context == ChallengeContext.Chat)
                 {
                     TalkAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero, changeValue * ChallengeResult);
+                    ChangeSympathy();
                     if (!Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= DramalordMCM.Instance.MinTrust)
                     {
                         FriendshipAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
+                        PlayerApproachingNPC.SetupLines();
                     }
                 }
                 else if (CurrentChallenge.Context == ChallengeContext.Flirt)
                 {
                     FlirtAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero, changeValue * ChallengeResult);
+                    ChangeAttraction();
                 }
                 else if (CurrentChallenge.Context == ChallengeContext.Date)
                 {
                     DateAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero, Hero.MainHero.GetCloseHeroes(), changeValue * ChallengeResult);
+                    ChangeAttraction();
+                    ChangeSympathy();
                     if (!Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove)
                     {
                         LoverAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
+                        PlayerApproachingNPC.SetupLines();
                     }
                 }
             }
@@ -508,6 +515,90 @@ namespace Dramalord.Conversations
                 CurrentChallenge.Reactions[0] = (challenger.GetPersonality().Neuroticism > 33) ? good : bad;
                 CurrentChallenge.Reactions[1] = (challenger.GetPersonality().Neuroticism < -33) ? good : bad;
                 CurrentChallenge.Reactions[2] = (challenger.GetPersonality().Neuroticism <= 33 && challenger.GetPersonality().Neuroticism >= -33) ? good : neutral;
+            }
+        }
+
+        private static void ChangeAttraction()
+        {
+            int result = ChallengeResult;
+            if(result == 0)
+            {
+                return;
+            }
+
+            Hero npc = Hero.OneToOneConversationHero;
+            HeroDesires desires = npc.GetDesires();
+            int oldAttraction = npc.GetAttractionTo(Hero.MainHero);
+
+            if (Hero.MainHero.IsFemale) { desires.AttractionWomen += result; desires.AttractionMen -= result; }
+            else if (!Hero.MainHero.IsFemale) { desires.AttractionWomen -= result; desires.AttractionMen += result; }
+
+            int build = (int)(Hero.MainHero.Build * 100);
+            if(build < desires.AttractionBuild) { desires.AttractionBuild -= result; }
+            else if (build > desires.AttractionBuild) { desires.AttractionBuild += result; }
+
+            int weight = (int)(Hero.MainHero.Weight * 100);
+            if (weight < desires.AttractionWeight) { desires.AttractionWeight -= result; }
+            else if (weight > desires.AttractionWeight) { desires.AttractionWeight += result; }
+
+            int age = (int)Hero.MainHero.Age;
+            int wantedAge = (int)npc.Age + desires.AttractionAgeDiff;
+            if (age < wantedAge) { desires.AttractionAgeDiff -= result; }
+            else if (age > wantedAge) { desires.AttractionAgeDiff += result; }
+
+            int newAttraction = npc.GetAttractionTo(Hero.MainHero);
+
+            if (result > 0 && newAttraction != oldAttraction)
+            {
+                TextObject banner = new TextObject("{=Dramalord475}You are now more attractive to {HERO.LINK}. ({NUMBER})");
+                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
+                banner.SetTextVariable("NUMBER", ConversationHelper.FormatNumber(newAttraction - oldAttraction));
+                MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, "event:/ui/notification/relation");
+            }
+            else if(newAttraction != oldAttraction)
+            {
+                TextObject banner = new TextObject("{=Dramalord476}You are now less attractive to {HERO.LINK}. ({NUMBER})");
+                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
+                banner.SetTextVariable("NUMBER", ConversationHelper.FormatNumber(newAttraction - oldAttraction));
+                MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, "event:/ui/notification/relation");
+            }
+        }
+
+        private static void ChangeSympathy()
+        {
+            int result = ChallengeResult;
+            if (result == 0)
+            {
+                return;
+            }
+
+            Hero npc = Hero.OneToOneConversationHero;
+            HeroPersonality personality = npc.GetPersonality();
+            HeroPersonality playerPersonality = Hero.MainHero.GetPersonality();
+
+            int oldSympathy = npc.GetSympathyTo(Hero.MainHero);
+
+            personality.Openness += (playerPersonality.Openness > personality.Openness) ? result : (playerPersonality.Openness < personality.Openness) ? - result : 0;
+            personality.Extroversion += (playerPersonality.Extroversion > personality.Extroversion) ? result : (playerPersonality.Extroversion < personality.Extroversion) ? -result : 0;
+            personality.Neuroticism += (playerPersonality.Neuroticism > personality.Neuroticism) ? result : (playerPersonality.Neuroticism < personality.Neuroticism) ? -result : 0;
+            personality.Conscientiousness += (playerPersonality.Conscientiousness > personality.Conscientiousness) ? result : (playerPersonality.Conscientiousness < personality.Conscientiousness) ? -result : 0;
+            personality.Agreeableness += (playerPersonality.Agreeableness > personality.Agreeableness) ? result : (playerPersonality.Agreeableness < personality.Agreeableness) ? -result : 0;
+
+            int newSympathy = npc.GetSympathyTo(Hero.MainHero);
+
+            if (result > 0 && newSympathy != oldSympathy)
+            {
+                TextObject banner = new TextObject("{=Dramalord477}{HERO.LINK} has more sympathy for you. ({NUMBER})");
+                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
+                banner.SetTextVariable("NUMBER", ConversationHelper.FormatNumber(newSympathy - oldSympathy));
+                MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, "event:/ui/notification/relation");
+            }
+            else if (newSympathy != oldSympathy)
+            {
+                TextObject banner = new TextObject("{=Dramalord478}{HERO.LINK} has less sympathy for you. ({NUMBER})");
+                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
+                banner.SetTextVariable("NUMBER", ConversationHelper.FormatNumber(newSympathy - oldSympathy));
+                MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, "event:/ui/notification/relation");
             }
         }
     }
