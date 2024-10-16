@@ -1,11 +1,10 @@
-﻿using Dramalord.Conversations;
+﻿using Dramalord.Actions;
+using Dramalord.Conversations;
 using Dramalord.Data;
 using Dramalord.Extensions;
-using SandBox.View.Map;
 using System;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.CampaignBehaviors;
 
 namespace Dramalord.Behaviours
 {
@@ -19,11 +18,13 @@ namespace Dramalord.Behaviours
             QuestConversation.AddDialogs(starter);
             PlayerChallenges.AddDialogs(starter);
             Persuasions.AddDialogs(starter);
+            GoodsConversation.AddDialogs(starter);
         }
 
         public override void RegisterEvents()
         {
             CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, new Action(OnHourlyTick));
+            CampaignEvents.HeroComesOfAgeEvent.AddNonSerializedListener(this, new Action<Hero>(OnHeroComesOfAge));
         }
 
         public override void SyncData(IDataStore dataStore)
@@ -51,6 +52,14 @@ namespace Dramalord.Behaviours
                     DramalordIntentions.Instance.RemoveIntention(Hero.MainHero, intention.Target, intention.Type, intention.EventId);
                     return;
                 }
+            }
+        }
+
+        internal void OnHeroComesOfAge(Hero hero)
+        {
+            if(hero.Clan == Clan.PlayerClan && hero.Occupation == Occupation.Wanderer)
+            {
+                LeaveClanAction.Apply(hero, hero, false);
             }
         }
     }

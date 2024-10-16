@@ -21,8 +21,8 @@ namespace Dramalord.Conversations
     {
         internal static bool ConversationRunning = false;
 
-        internal static TextObject PlayerTitle(bool capital) => GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, capital);
-        internal static TextObject NpcTitle(bool capital) => GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, capital);
+        internal static TextObject PlayerTitle(bool capital, Hero? hero = null) => GetHeroGreeting(hero ?? Hero.OneToOneConversationHero, Hero.MainHero, capital);
+        internal static TextObject NpcTitle(bool capital, Hero? hero = null) => GetHeroGreeting(Hero.MainHero, hero ?? Hero.OneToOneConversationHero, capital);
 
         internal static TextObject GetHeroGreeting(Hero hero, Hero target, bool capital)
         {
@@ -64,7 +64,7 @@ namespace Dramalord.Conversations
                 }
                 else
                 {
-                    text = GameTexts.FindText(CharacterObject.OneToOneConversationCharacter.IsFemale ? "str_player_salutation_my_lady" : "str_player_salutation_my_lord").ToString();
+                    text = GameTexts.FindText(target.IsFemale ? "str_player_salutation_my_lady" : "str_player_salutation_my_lord").ToString();
                 }
                 
             }
@@ -121,7 +121,7 @@ namespace Dramalord.Conversations
                     if (intention.Target == npc) DateAction.Apply(player, npc, closeHeroes);
                     else if (intention.Target == player) DateAction.Apply(npc, player, closeHeroes);
 
-                    if(!npc.IsEmotionalWith(player) && npc.GetRelationTo(player).Love >= DramalordMCM.Instance.MinDatingLove)
+                    if(!npc.IsEmotionalWith(player) && npc.GetRelationTo(player).CurrentLove >= DramalordMCM.Instance.MinDatingLove)
                     {
                         LoverAction.Apply(player, npc);
                     }
@@ -136,7 +136,7 @@ namespace Dramalord.Conversations
                         FriendsWithBenefitsAction.Apply(npc, player);
                     }
 
-                    if (npc.IsFemale != player.IsFemale && npc.IsFertile() && MBRandom.RandomInt(1,100) < DramalordMCM.Instance.PregnancyChance)
+                    if (npc.IsFemale != player.IsFemale && npc.IsFertile() && player.IsFertile() && MBRandom.RandomInt(1,100) < DramalordMCM.Instance.PregnancyChance)
                     {
                         ConceiveAction.Apply((npc.IsFemale) ? npc : player, (npc.IsFemale) ? player : npc);
                     }

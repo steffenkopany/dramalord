@@ -69,9 +69,16 @@ namespace Dramalord.Actions
             string hairTags = (child.IsFemale ? mother.HairTags : father.HairTags);
             string tattooTags = (child.IsFemale ? mother.TattooTags : father.TattooTags);
             child.ModifyPlayersFamilyAppearance(BodyProperties.GetRandomBodyProperties(template.Race, child.IsFemale, bodyProperties, bodyProperties2, 1, seed, hairTags, father.BeardTags, tattooTags).StaticProperties);
-
-            child.SetNewOccupation(mother.Occupation);
-            if(mother.Occupation == Occupation.Lord)
+            if(father != Hero.MainHero && mother != Hero.MainHero)
+            {
+                child.SetNewOccupation(mother.Occupation);
+            }
+            else
+            {
+                child.SetNewOccupation(Occupation.Lord);
+            }
+            
+            if(child.Occupation == Occupation.Lord)
             {
                 child.SetName(child.FirstName, child.FirstName);
             }

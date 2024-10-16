@@ -1,4 +1,5 @@
 ﻿using Dramalord.Actions;
+using Dramalord.Data;
 using Dramalord.Extensions;
 using Helpers;
 using System.Linq;
@@ -50,7 +51,7 @@ namespace Dramalord.Conversations
 
         public static void AddDialogs(CampaignGameStarter starter)
         {
-            starter.AddDialogLine("npc_challenge_start", "player_challenge_start", "player_challenge_reply", "{CHALLENGE_QUESTION}", ConditionNpcChallengeStart, null);
+            starter.AddDialogLine("npc_challenge_start", "player_challenge_start", "player_challenge_reply", "{CHALLENGE_QUESTION}[ib:aggressive][if:convo_undecided_open]", ConditionNpcChallengeStart, null);
 
             starter.AddPlayerLine("player_challenge_reply1", "player_challenge_reply", "npc_challenge_reaction1", "{CHALLENGE_REPLY_1}", null, ConsequencePlayerAnswer1);
             starter.AddPlayerLine("player_challenge_reply2", "player_challenge_reply", "npc_challenge_reaction2", "{CHALLENGE_REPLY_2}", null, ConsequencePlayerAnswer2);
@@ -59,13 +60,13 @@ namespace Dramalord.Conversations
 
             starter.AddDialogLine("npc_challenge_exit", "npc_challenge_exit", "player_interaction_selection", "{npc_challenge_exit}", null, null);
 
-            starter.AddDialogLine("npc_challenge_reaction1", "npc_challenge_reaction1", "npc_challenge_summarize", "{CHALLENGE_REACTION_1}", null, ConsequenceNpcReaction);
-            starter.AddDialogLine("npc_challenge_reaction2", "npc_challenge_reaction2", "npc_challenge_summarize", "{CHALLENGE_REACTION_2}", null, ConsequenceNpcReaction);
-            starter.AddDialogLine("npc_challenge_reaction3", "npc_challenge_reaction3", "npc_challenge_summarize", "{CHALLENGE_REACTION_3}", null, ConsequenceNpcReaction);
+            starter.AddDialogLine("npc_challenge_reaction1", "npc_challenge_reaction1", "npc_challenge_summarize", "{CHALLENGE_REACTION_1}{ANSWER_REACTION}", ConditionNpcReaction, ConsequenceNpcReaction);
+            starter.AddDialogLine("npc_challenge_reaction2", "npc_challenge_reaction2", "npc_challenge_summarize", "{CHALLENGE_REACTION_2}{ANSWER_REACTION}", ConditionNpcReaction, ConsequenceNpcReaction);
+            starter.AddDialogLine("npc_challenge_reaction3", "npc_challenge_reaction3", "npc_challenge_summarize", "{CHALLENGE_REACTION_3}{ANSWER_REACTION}", ConditionNpcReaction, ConsequenceNpcReaction);
 
-            starter.AddDialogLine("npc_challenge_summarize_continue", "npc_challenge_summarize", "player_challenge_start", "{npc_challenge_summarize_continue}", ConditionNpcChallengeContinue, ConsequenceNpcChallengeContinue);
-            starter.AddDialogLine("npc_challenge_summarize_end", "npc_challenge_summarize", "player_interaction_selection", "{npc_challenge_summarize_end}", ConditionNpcChallengeEnd, ConsequenceNpcChallengeEnd);
-            starter.AddDialogLine("npc_challenge_summarize_exit", "npc_challenge_summarize", "close_window", "{npc_challenge_summarize_exit}", ConditionNpcChallengeExit, ConsequenceNpcChallengeExit);
+            starter.AddDialogLine("npc_challenge_summarize_continue", "npc_challenge_summarize", "player_challenge_start", "{npc_challenge_summarize_continue}{SUMMARIZE_REACTION}", ConditionNpcChallengeContinue, ConsequenceNpcChallengeContinue);
+            starter.AddDialogLine("npc_challenge_summarize_end", "npc_challenge_summarize", "player_interaction_selection", "{npc_challenge_summarize_end}{SUMMARIZE_REACTION}", ConditionNpcChallengeEnd, ConsequenceNpcChallengeEnd);
+            starter.AddDialogLine("npc_challenge_summarize_exit", "npc_challenge_summarize", "close_window", "{npc_challenge_summarize_end}", ConditionNpcChallengeExit, ConsequenceNpcChallengeExit);
         }
 
         private static bool ConditionNpcChallengeStart()
@@ -89,12 +90,69 @@ namespace Dramalord.Conversations
             return true;
         }
 
+        private static bool ConditionNpcReaction()
+        {
+            if (CurrentChallenge?.ConsequenceWeights[CurrentChallenge.AnswerIndex] > 0)
+            {
+                MBTextManager.SetTextVariable("ANSWER_REACTION", "[ib:confident][if:convo_delighted]");
+            }
+            else
+            {
+                MBTextManager.SetTextVariable("ANSWER_REACTION", "[ib:nervous][if:convo_grave]");
+            }
+            return true;
+        }
 
-        private static bool ConditionNpcChallengeExit() => ChallengeNumber <= 0 && ExitConversation;
+        private static bool ConditionNpcChallengeExit()
+        {
+            if (ChallengeNumber <= 0 && ExitConversation)
+            {
+                if (ChallengeResult > 0)
+                {
+                    MBTextManager.SetTextVariable("SUMMARIZE_REACTION", "[ib:demure][if:convo_bemused]");
+                }
+                else
+                {
+                    MBTextManager.SetTextVariable("SUMMARIZE_REACTION", "[ib:closed][if:convo_bored]");
+                }
+                return true;
+            }
+            return false;
+        }
 
-        private static bool ConditionNpcChallengeContinue() => ChallengeNumber > 0;
+        private static bool ConditionNpcChallengeContinue()
+        {
+            if (ChallengeNumber > 0)
+            {
+                if(CurrentChallenge?.ConsequenceWeights[CurrentChallenge.AnswerIndex] > 0)
+                {
+                    MBTextManager.SetTextVariable("SUMMARIZE_REACTION", "[ib:confident2][if:convo_focused_happy]");
+                }
+                else
+                {
+                    MBTextManager.SetTextVariable("SUMMARIZE_REACTION", "[ib:nervous][if:convo_shocked]");
+                }
+                return true;
+            }
+            return false;
+        }
 
-        private static bool ConditionNpcChallengeEnd() => ChallengeNumber <= 0 && !ExitConversation;
+        private static bool ConditionNpcChallengeEnd()
+        {
+            if(ChallengeNumber <= 0 && !ExitConversation)
+            {
+                if(ChallengeResult > 0)
+                {
+                    MBTextManager.SetTextVariable("SUMMARIZE_REACTION", "[ib:demure][if:convo_bemused]");
+                }
+                else
+                {
+                    MBTextManager.SetTextVariable("SUMMARIZE_REACTION", "[ib:closed][if:convo_bored]");
+                }
+                return true;
+            }
+            return false;
+        }
 
         private static void ConsequencePlayerAnswer1()
         {
@@ -123,21 +181,27 @@ namespace Dramalord.Conversations
                 if (CurrentChallenge.Context == ChallengeContext.Chat)
                 {
                     TalkAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero, changeValue * ChallengeResult);
+                    ChangeSympathy();
                     if (!Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= DramalordMCM.Instance.MinTrust)
                     {
                         FriendshipAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
+                        PlayerApproachingNPC.SetupLines();
                     }
                 }
                 else if (CurrentChallenge.Context == ChallengeContext.Flirt)
                 {
                     FlirtAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero, changeValue * ChallengeResult);
+                    ChangeAttraction();
                 }
                 else if (CurrentChallenge.Context == ChallengeContext.Date)
                 {
                     DateAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero, Hero.MainHero.GetCloseHeroes(), changeValue * ChallengeResult);
-                    if (!Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove)
+                    ChangeAttraction();
+                    ChangeSympathy();
+                    if (!Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinDatingLove)
                     {
                         LoverAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
+                        PlayerApproachingNPC.SetupLines();
                     }
                 }
             }
@@ -202,8 +266,8 @@ namespace Dramalord.Conversations
 
             CurrentChallenge = new(context);
 
-            Hero? poi = Hero.AllAliveHeroes.Where(h => h != Hero.MainHero && h != challenger && (challenger.GetBaseHeroRelation(h) > 40 || challenger.GetBaseHeroRelation(h) < -30)).GetRandomElementInefficiently();
-            if (poi == null) poi = Hero.AllAliveHeroes.Where(h => h != Hero.MainHero && h != challenger && h.IsDramalordLegit()).GetRandomElementInefficiently();
+            Hero? poi = Hero.AllAliveHeroes.Where(h => h.IsLord && h != Hero.MainHero && h != challenger && (challenger.GetBaseHeroRelation(h) > 40 || challenger.GetBaseHeroRelation(h) < -30)).GetRandomElementInefficiently();
+            if (poi == null) poi = Hero.AllAliveHeroes.Where(h => h.IsLord && h != Hero.MainHero && h != challenger && h.IsDramalordLegit()).GetRandomElementInefficiently();
 
             CurrentChallenge.Question = new TextObject("{=Dramalord352}Tell me {TITLE}, as you travel a lot and meet people, what's your opinion about {POI.NAME}?");
             CurrentChallenge.Question.SetTextVariable("TITLE", challenger.HasAnyRelationshipWith(Hero.MainHero) ? Hero.MainHero.Name : ConversationHelper.PlayerTitle(false));
@@ -508,6 +572,90 @@ namespace Dramalord.Conversations
                 CurrentChallenge.Reactions[0] = (challenger.GetPersonality().Neuroticism > 33) ? good : bad;
                 CurrentChallenge.Reactions[1] = (challenger.GetPersonality().Neuroticism < -33) ? good : bad;
                 CurrentChallenge.Reactions[2] = (challenger.GetPersonality().Neuroticism <= 33 && challenger.GetPersonality().Neuroticism >= -33) ? good : neutral;
+            }
+        }
+
+        private static void ChangeAttraction()
+        {
+            int result = ChallengeResult;
+            if(result == 0)
+            {
+                return;
+            }
+
+            Hero npc = Hero.OneToOneConversationHero;
+            HeroDesires desires = npc.GetDesires();
+            int oldAttraction = npc.GetAttractionTo(Hero.MainHero);
+
+            if (Hero.MainHero.IsFemale) { desires.AttractionWomen += result; desires.AttractionMen -= result; }
+            else if (!Hero.MainHero.IsFemale) { desires.AttractionWomen -= result; desires.AttractionMen += result; }
+
+            int build = (int)(Hero.MainHero.Build * 100);
+            if(build < desires.AttractionBuild) { desires.AttractionBuild -= result; }
+            else if (build > desires.AttractionBuild) { desires.AttractionBuild += result; }
+
+            int weight = (int)(Hero.MainHero.Weight * 100);
+            if (weight < desires.AttractionWeight) { desires.AttractionWeight -= result; }
+            else if (weight > desires.AttractionWeight) { desires.AttractionWeight += result; }
+
+            int age = (int)Hero.MainHero.Age;
+            int wantedAge = (int)npc.Age + desires.AttractionAgeDiff;
+            if (age < wantedAge) { desires.AttractionAgeDiff -= result; }
+            else if (age > wantedAge) { desires.AttractionAgeDiff += result; }
+
+            int newAttraction = npc.GetAttractionTo(Hero.MainHero);
+
+            if (result > 0 && newAttraction != oldAttraction)
+            {
+                TextObject banner = new TextObject("{=Dramalord475}You are now more attractive to {HERO.LINK}. ({NUMBER})");
+                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
+                banner.SetTextVariable("NUMBER", ConversationHelper.FormatNumber(newAttraction - oldAttraction));
+                MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, "event:/ui/notification/relation");
+            }
+            else if(newAttraction != oldAttraction)
+            {
+                TextObject banner = new TextObject("{=Dramalord476}You are now less attractive to {HERO.LINK}. ({NUMBER})");
+                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
+                banner.SetTextVariable("NUMBER", ConversationHelper.FormatNumber(newAttraction - oldAttraction));
+                MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, "event:/ui/notification/relation");
+            }
+        }
+
+        private static void ChangeSympathy()
+        {
+            int result = ChallengeResult;
+            if (result == 0)
+            {
+                return;
+            }
+
+            Hero npc = Hero.OneToOneConversationHero;
+            HeroPersonality personality = npc.GetPersonality();
+            HeroPersonality playerPersonality = Hero.MainHero.GetPersonality();
+
+            int oldSympathy = npc.GetSympathyTo(Hero.MainHero);
+
+            personality.Openness += (playerPersonality.Openness > personality.Openness) ? result : (playerPersonality.Openness < personality.Openness) ? - result : 0;
+            personality.Extroversion += (playerPersonality.Extroversion > personality.Extroversion) ? result : (playerPersonality.Extroversion < personality.Extroversion) ? -result : 0;
+            personality.Neuroticism += (playerPersonality.Neuroticism > personality.Neuroticism) ? result : (playerPersonality.Neuroticism < personality.Neuroticism) ? -result : 0;
+            personality.Conscientiousness += (playerPersonality.Conscientiousness > personality.Conscientiousness) ? result : (playerPersonality.Conscientiousness < personality.Conscientiousness) ? -result : 0;
+            personality.Agreeableness += (playerPersonality.Agreeableness > personality.Agreeableness) ? result : (playerPersonality.Agreeableness < personality.Agreeableness) ? -result : 0;
+
+            int newSympathy = npc.GetSympathyTo(Hero.MainHero);
+
+            if (result > 0 && newSympathy != oldSympathy)
+            {
+                TextObject banner = new TextObject("{=Dramalord477}{HERO.LINK} has more sympathy for you. ({NUMBER})");
+                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
+                banner.SetTextVariable("NUMBER", ConversationHelper.FormatNumber(newSympathy - oldSympathy));
+                MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, "event:/ui/notification/relation");
+            }
+            else if (newSympathy != oldSympathy)
+            {
+                TextObject banner = new TextObject("{=Dramalord478}{HERO.LINK} has less sympathy for you. ({NUMBER})");
+                StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
+                banner.SetTextVariable("NUMBER", ConversationHelper.FormatNumber(newSympathy - oldSympathy));
+                MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, "event:/ui/notification/relation");
             }
         }
     }

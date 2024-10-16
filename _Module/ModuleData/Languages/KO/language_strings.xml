@@ -19,7 +19,6 @@
     <string id="Dramalord013" text="약혼" />
     <string id="Dramalord014" text="결혼했습니다" />
     <string id="Dramalord015" text="{HERO1.LINK} 및 {HERO2.LINK}은(는) 이제 {RELATIONSHIP}" />
-    <string id="Dramalord015" text="{HERO1.LINK} 및 {HERO2.LINK} 또는 더 이상 {RELATIONSHIP}이 아님" />
     <string id="Dramalord016" text="일반" />
     <string id="Dramalord017" text="잡힐 확률" />
     <string id="Dramalord018" text="다른 영웅과 상호작용하는 동안 파트너에게 잡힐 확률" />
@@ -436,5 +435,47 @@
     <string id="Dramalord438" text="음... 글쎄요..." />
     <string id="Dramalord439" text="당신은 {HERO.LINK}를 성공적으로 설득했습니다. (사랑 {LOVE}, 신뢰 {TRUST})" />
     <string id="Dramalord440" text="당신은 {HERO.LINK}를 설득하는 데 실패했습니다. (사랑 {LOVE}, 신뢰 {TRUST})" />
+    <string id="Dramalord441" text="{TITLE}, 저는 당신의 자녀 중 한 명을 제 가족으로 받아들이고 싶습니다." />
+    <string id="Dramalord442" text="{TITLE}, 영광입니다. 누구를 가족으로 받아들이고 싶으신가요?" />
+    <string id="Dramalord443" text="죄송합니다, {TITLE}. 저는 아이들이 성인이 되면 자유롭게 선택할 수 있기를 바랍니다." />
+    <string id="Dramalord444" text="제 자녀 {CHILD}를 당신의 가족으로 받아들이시겠습니까?" />
+    <string id="Dramalord445" text="{NAME}은 많이 먹고 규칙적으로 운동을 하는 것으로 알려져 있습니다." />
+    <string id="Dramalord446" text="{NAME}은 거의 아무것도 먹지 않고 규칙적으로 운동을 하는 것으로 알려져 있습니다." />
+    <string id="Dramalord447" text="{NAME}은 많이 먹고 거의 운동을 하지 않는 것으로 알려져 있습니다." />
+    <string id="Dramalord448" text="{NAME}은 거의 아무것도 먹지 않고 거의 운동을 하지 않는 것으로 알려져 있습니다." />
+    <string id="Dramalord449" text="{NAME}은 거의 운동을 하지 않는 것으로 알려져 있습니다." />
+    <string id="Dramalord450" text="{NAME}은 거의 아무것도 먹지 않는 것으로 알려져 있습니다." />
+    <string id="Dramalord451" text="아시다시피, 저는 고아원에서 자랐기 때문에 좋은 어린 시절을 보내지 못했습니다." />
+    <string id="Dramalord452" text="지역 갱단의 리더는 우리에게 거의 먹을 것을 주지 않았고, 우리가 걸을 수 있게 되자마자 도둑질을 시켰습니다. 성공하지 못하면 구타당했습니다." />
+    <string id="Dramalord453" text="젖이 나자마자 저는 선술집으로 보내졌습니다. 저는 역겨운 남자들을 접대하고 그들이 술값이나 제게 돈을 쓰게 해야 했습니다." />
+    <string id="Dramalord454" text="한때 오렌지색 얼굴을 한 늙은 남자가 끊임없이 저를 붙잡았습니다... 아시죠... 돈도 주지 않고요. 그래서 그 남자의 고환을 발로 차고 도시를 떠났습니다." />
+    <string id="Dramalord455" text="어쨌든, 저는 칼로 찌르는 것이 칼에 찔리는 것보다 낫다고 생각했습니다... 제 말이 이해되시나요? 그래서 저는 그것을 새로운 사업으로 삼았습니다." />
+    <string id="Dramalord456" text="겨드랑이 털이 자라자마자 나는 성으로 보내져 노부인들의 하인으로 일하게 되었다. 그들의 남편들이 전쟁으로 바쁠 때를 즐겁게 해주기 위해서였다." />
+    <string id="Dramalord457" text="어느 날, 내가... 은빛 숲에 묘목을 심고 있을 때, 숲 주인의... 마음이 멈췄다. 나는 도망쳐서 마을을 떠나야 했다." />
+    <string id="Dramalord458" text="그래서, 나무로 일하는 시간은 끝났고, 대신 칼과 도끼로 바꿨다. 나는 그 일도 꽤 잘한다." />
+    <string id="Dramalord459" text="스티키핑거 경은 더 나은 대우를 받을 자격이 없었나 보다." />
+    <string id="Dramalord460" text="아야! 정말 가혹한 처벌이구나." />
+    <string id="Dramalord461" text="마른 땅을 갈기란 힘든 일인가 보다." />
+    <string id="Dramalord462" text="음, 어린 목재는 고대 숲에 속하지 않죠?" />
+    <string id="Dramalord463" text="특정 상품을 구매하고 싶어요..." />
+    <string id="Dramalord464" text="좋아요. 무엇에 관심이 있으신가요?" />
+    <string id="Dramalord465" text="길고 둥글며 습한 환경에서도 견딜 수 있는 것." />
+    <string id="Dramalord466" text="손가락을 여러 번 넣을 수 있는 부드럽고 촉촉한 것." />
+    <string id="Dramalord467" text="원하시면 {GOOD} 하나 이상을 판매해 드릴 수 있습니다." />
+    <string id="Dramalord468" text="하나면 됩니다." />
+    <string id="Dramalord469" text="다섯 개면 충분할 겁니다." />
+    <string id="Dramalord470" text="적어도 10개는 필요할 겁니다." />
+    <string id="Dramalord471" text="문제없습니다! {AMOUNT}{GOLD_ICON}이 될 겁니다. 물론 특별 가격입니다." />
+    <string id="Dramalord472" text="귀하와 거래하게 되어서 반갑습니다." />
+    <string id="Dramalord473" text="플레이어를 위한 대화 없음" />
+    <string id="Dramalord474" text="대화는 원하지만 대화/유혹/데이트 시 자동 결과가 필요한 경우 이 기능을 활성화합니다." />
+    <string id="Dramalord475" text="이제 {HERO.LINK}에게 더 매력적입니다. ({NUMBER})" />
+    <string id="Dramalord476" text="이제 {HERO.LINK}에게 덜 매력적입니다. ({NUMBER})" />
+    <string id="Dramalord477" text="{HERO.LINK}가 당신에게 더 많은 동정심을 가지고 있습니다. ({NUMBER})" />
+    <string id="Dramalord478" text="{HERO.LINK}가 당신에게 덜 동정심을 가지고 있습니다. ({NUMBER})" />
+    <string id="Dramalord479" text="{HERO1.LINK} 및 {HERO2.LINK} 또는 더 이상 {RELATIONSHIP}이 아님" />
+    <string id="Dramalord480" text="사랑의 붕괴 시작일" />
+    <string id="Dramalord481" text="사랑의 붕괴를 일으키는 데 필요한 연인의 서로 보지 못한 날짜 수." />
+    <string id="Dramalord482" text="오, 안녕하세요 {TITLE}. 저는... 예상하지 못했어요..." />
   </strings>
 </base>

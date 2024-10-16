@@ -2,11 +2,14 @@
 using Dramalord.Data;
 using Dramalord.Extensions;
 using Helpers;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade.Network.Gameplay.Perks.Conditions;
 using TaleWorlds.ObjectSystem;
 
 namespace Dramalord.Conversations
@@ -31,6 +34,8 @@ namespace Dramalord.Conversations
         private static TextObject player_interaction_breakup = new("{=Dramalord348}It's just not working between you and I. Let's end this farce before it festers. (Break up)");
         private static TextObject player_interaction_gift = new("{=Dramalord292}{TITLE}, let me give you this exceptional {GIFT} as a token of my affection.");
         private static TextObject player_interaction_abort = new("{=Dramalord101}Let's talk about something else, {TITLE}.");
+        private static TextObject player_interaction_adopt = new("{=Dramalord441}{TITLE}, I would like to add one of your children into my family.");
+
         private static TextObject npc_interaction_abort = new("{=Dramalord186}As you wish, {TITLE}.");
         private static TextObject npc_interaction_reply_talk_1 = new("{=Dramalord055}Sure, let's have a conversation {TITLE}.");
         private static TextObject npc_interaction_reply_talk_2 = new("{=Dramalord223}Of course, {TITLE}. Let me tell you a tale of war and power...");
@@ -70,8 +75,14 @@ namespace Dramalord.Conversations
         private static TextObject npc_interaction_breakup_nolove = new("{=Dramalord231}Well, eventually it always comes to that, right {TITLE}. It was nice at long it lasted. Thank you.");
         private static TextObject npc_interaction_breakup_leave = new("{=Dramalord232}I.. I don't know what to say. This is shocking me. I have to think if I can stay around you...");
         private static TextObject npc_interaction_reply_gift = new("{=Dramalord293}Thank you {TITLE}! I will keep it close to my... bed as a reminder of your... affection and enjoy it every day!");
+        private static TextObject npc_interaction_reply_adopt_yes = new("{=Dramalord442}It would be an honor, {TITLE}. Who would you like to take into your family?");
+        private static TextObject npc_interaction_reply_adopt_no = new("{=Dramalord443}I am sorry, {TITLE}. I want my children to have a free choice when they com of age.");
+        private static TextObject npc_interaction_reply_adopt_verify = new("{=Dramalord444}Are you sure you want to take my child {CHILD} into your family?");
+        private static TextObject npc_interaction_reply_uhwell = new("{=Dramalord437}Uh... well...");
 
-        private static void SetupLines()
+
+
+        internal static void SetupLines()
         {
             player_approach_start.SetTextVariable("TITLE", ConversationHelper.NpcTitle(true));
             npc_approach_reply_yes.SetTextVariable("TITLE", Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) ? Hero.MainHero.Name : ConversationHelper.PlayerTitle(false));
@@ -88,6 +99,7 @@ namespace Dramalord.Conversations
             player_interaction_gift.SetTextVariable("TITLE", ConversationHelper.NpcTitle(true));
             player_interaction_gift.SetTextVariable("GIFT", Hero.OneToOneConversationHero.IsFemale ? new TextObject("{=Dramalord240}Sausage") : new TextObject("{=Dramalord241}Pie"));
             player_interaction_abort.SetTextVariable("TITLE", ConversationHelper.NpcTitle(false));
+            player_interaction_adopt.SetTextVariable("TITLE", ConversationHelper.NpcTitle(true));
             npc_interaction_abort.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
             npc_interaction_reply_talk_1.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
             npc_interaction_reply_talk_2.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
@@ -96,10 +108,10 @@ namespace Dramalord.Conversations
             npc_interaction_reply_ask_accept.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
 
             int diff = Hero.OneToOneConversationHero.GetDesires().AttractionAgeDiff;
-            TextObject ageDiff = (diff < 5) ? new TextObject("{Dramalord333}younger") : (diff > 5) ? new TextObject("{Dramalord334}older") : new TextObject("{Dramalord335}not older and not younger");
+            TextObject ageDiff = (diff < 5) ? new TextObject("{=Dramalord333}younger") : (diff > 5) ? new TextObject("{=Dramalord334}older") : new TextObject("{=Dramalord335}not older and not younger");
             TextObject age = new TextObject(MBMath.ClampInt((int)Hero.OneToOneConversationHero.Age + diff, 18, 120));
             npc_interaction_reply_age.SetTextVariable("AGEDIFF", ageDiff);
-            npc_interaction_reply_age.SetTextVariable("AGED", age);
+            npc_interaction_reply_age.SetTextVariable("AGE", age);
             npc_interaction_reply_summary.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
             npc_interaction_reply_summary.SetTextVariable("RATING", new TextObject(Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero)));
 
@@ -123,7 +135,8 @@ namespace Dramalord.Conversations
             npc_interaction_breakup_nolove.SetTextVariable("TITLE", Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) ? Hero.MainHero.Name : ConversationHelper.PlayerTitle(false));
             npc_interaction_breakup_leave.SetTextVariable("TITLE", Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) ? Hero.MainHero.Name : ConversationHelper.PlayerTitle(false));
             npc_interaction_reply_gift.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
-
+            npc_interaction_reply_adopt_yes.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            npc_interaction_reply_adopt_no.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
 
 
             MBTextManager.SetTextVariable("player_approach_start", player_approach_start);
@@ -142,6 +155,7 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("player_interaction_breakup", player_interaction_breakup);
             MBTextManager.SetTextVariable("player_interaction_gift", player_interaction_gift);
             MBTextManager.SetTextVariable("player_interaction_abort", player_interaction_abort);
+            MBTextManager.SetTextVariable("player_interaction_adopt", player_interaction_adopt);
             MBTextManager.SetTextVariable("npc_interaction_abort", npc_interaction_abort);
             MBTextManager.SetTextVariable("npc_interaction_reply_talk_1", npc_interaction_reply_talk_1);
             MBTextManager.SetTextVariable("npc_interaction_reply_talk_2", npc_interaction_reply_talk_2);
@@ -181,20 +195,24 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("npc_interaction_breakup_nolove", npc_interaction_breakup_nolove);
             MBTextManager.SetTextVariable("npc_interaction_breakup_leave", npc_interaction_breakup_leave);
             MBTextManager.SetTextVariable("npc_interaction_reply_gift", npc_interaction_reply_gift);
+            MBTextManager.SetTextVariable("npc_interaction_reply_adopt_yes", npc_interaction_reply_adopt_yes);
+            MBTextManager.SetTextVariable("npc_interaction_reply_adopt_no", npc_interaction_reply_adopt_no); 
+            MBTextManager.SetTextVariable("npc_interaction_reply_adopt_verify", npc_interaction_reply_adopt_verify);
+            MBTextManager.SetTextVariable("npc_interaction_reply_uhwell", npc_interaction_reply_uhwell);
         }
 
         internal static void AddDialogs(CampaignGameStarter starter)
         {
             starter.AddPlayerLine("player_approach_start", "hero_main_options", "npc_approach_reply", "{player_approach_start}", ConditionPlayerCanApproach, null);
 
-            starter.AddDialogLine("npc_approach_reply_yes", "npc_approach_reply", "player_interaction_selection", "{npc_approach_reply_yes}", ConditionNpcAcceptsApproach, null);
-            starter.AddDialogLine("npc_approach_reply_no", "npc_approach_reply", "close_window", "{npc_approach_reply_no}", ConditionNpcDeclinesApproach, null);
+            starter.AddDialogLine("npc_approach_reply_yes", "npc_approach_reply", "player_interaction_selection", "{npc_approach_reply_yes}[ib:normal2][if:convo_calm_friendly]", ConditionNpcAcceptsApproach, null);
+            starter.AddDialogLine("npc_approach_reply_no", "npc_approach_reply", "close_window", "{npc_approach_reply_no}[ib:closed][if:convo_bored]", ConditionNpcDeclinesApproach, null);
 
             starter.AddPlayerLine("player_interaction_talk", "player_interaction_selection", "npc_interaction_reply_talk", "{player_interaction_talk}", null, null);
             starter.AddPlayerLine("player_interaction_ask", "player_interaction_selection", "npc_interaction_reply_ask", "{player_interaction_ask}", ConditionPersonalInfoUnknown, null);
             starter.AddPlayerLine("player_interaction_flirt", "player_interaction_selection", "npc_interaction_reply_flirt", "{player_interaction_flirt}", null, null);
             starter.AddPlayerLine("player_interaction_date_first", "player_interaction_selection", "npc_interaction_reply_date", "{player_interaction_date_first}", ConditionPlayerCanAskDateFirst, null);
-            starter.AddPlayerLine("player_interaction_date", "player_interaction_selection", "npc_interaction_reply_date", "{player_interaction_date}", null, null);
+            starter.AddPlayerLine("player_interaction_date", "player_interaction_selection", "npc_interaction_reply_date", "{player_interaction_date}", ConditionPlayerCanAskDate, null);
             starter.AddPlayerLine("player_interaction_sex_friend", "player_interaction_selection", "npc_interaction_reply_sex", "{player_interaction_sex_friend}", ConditionPlayerCanAskSexFriend, null);
             starter.AddPlayerLine("player_interaction_sex_fwb", "player_interaction_selection", "npc_interaction_reply_sex", "{player_interaction_sex_fwb}", ConditionPlayerCanAskSexFWB, null);
             starter.AddPlayerLine("player_interaction_sex", "player_interaction_selection", "npc_interaction_reply_sex", "{player_interaction_sex}", ConditionPlayerCanAskSexElse, null);
@@ -202,87 +220,112 @@ namespace Dramalord.Conversations
             starter.AddPlayerLine("player_interaction_marry", "player_interaction_selection", "npc_interaction_reply_marriage", "{player_interaction_marry}", ConditionPlayerCanAskMarriage, null);
             starter.AddPlayerLine("player_interaction_breakup", "player_interaction_selection", "npc_interaction_reply_breakup", "{player_interaction_breakup}", ConditionPlayerCanAskBreakup, null);
             starter.AddPlayerLine("player_interaction_gift", "player_interaction_selection", "npc_interaction_reply_gift", "{player_interaction_gift}", ConditionPlayerCanGiveGift, null);
+            starter.AddPlayerLine("player_interaction_adopt", "player_interaction_selection", "npc_interaction_reply_adopt", "{player_interaction_adopt}", ConditionPlayerCanAdopt, null);
             starter.AddPlayerLine("player_interaction_abort", "player_interaction_selection", "npc_interaction_abort", "{player_interaction_abort}", null, null);
 
             starter.AddDialogLine("npc_interaction_abort", "npc_interaction_abort", "hero_main_options", "{npc_interaction_abort}", null, null);
 
             starter.AddDialogLineWithVariation("npc_interaction_reply_talk", "npc_interaction_reply_talk", "player_challenge_start", ConditionNpcAcceptsTalk, ConsequenceNpcAcceptsTalk)
+                .Variation("{npc_interaction_reply_talk_1}[ib:normal][if:convo_calm_friendly]")
+                .Variation("{npc_interaction_reply_talk_2}[ib:normal][if:convo_calm_friendly]");
+
+            starter.AddDialogLineWithVariation("npc_interaction_reply_talk_nochallenge", "npc_interaction_reply_talk", "close_window", ConditionNpcAcceptsTalkNoChallenge, ConsequenceNpcAcceptsTalkNoChallenge)
                 .Variation("{npc_interaction_reply_talk_1}")
                 .Variation("{npc_interaction_reply_talk_2}");
 
-            starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_talk", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}", ConditionNpcDeclinesTalkTimeout, null);
+            starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_talk", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}[ib:closed][if:convo_bored]", ConditionNpcDeclinesTalkTimeout, null);
 
-            starter.AddDialogLine("npc_interaction_reply_ask_deny", "npc_interaction_reply_ask", "player_interaction_selection", "{npc_interaction_reply_ask_deny}", ConditionNpcDeclinesAsk, null);
-            starter.AddDialogLine("npc_interaction_reply_ask_accept", "npc_interaction_reply_ask", "npc_interaction_reply_orientation", "{npc_interaction_reply_ask_accept}", ConditionNpcAcceptsAsk, ConsequenceNpcAcceptsAsk);
+            starter.AddDialogLine("npc_interaction_reply_ask_deny", "npc_interaction_reply_ask", "player_interaction_selection", "{npc_interaction_reply_ask_deny}[ib:hip][if:convo_annoyed]", ConditionNpcDeclinesAsk, null);
+            starter.AddDialogLine("npc_interaction_reply_ask_accept", "npc_interaction_reply_ask", "npc_interaction_reply_orientation", "{npc_interaction_reply_ask_accept}[ib:normal2][if:convo_calm_friendly]", ConditionNpcAcceptsAsk, ConsequenceNpcAcceptsAsk);
 
-            starter.AddDialogLine("npc_interaction_reply_orientation_hetero", "npc_interaction_reply_orientation", "npc_interaction_reply_weight", "{npc_interaction_reply_orientation_hetero}", ConditionNpcAcceptsAskHetero, null);
-            starter.AddDialogLine("npc_interaction_reply_orientation_gay", "npc_interaction_reply_orientation", "npc_interaction_reply_weight", "{npc_interaction_reply_orientation_gay}", ConditionNpcAcceptsAskGay, null);
-            starter.AddDialogLine("npc_interaction_reply_orientation_bi", "npc_interaction_reply_orientation", "npc_interaction_reply_weight", "{npc_interaction_reply_orientation_bi}", ConditionNpcAcceptsAskBi, null);
-            starter.AddDialogLine("npc_interaction_reply_orientation_none", "npc_interaction_reply_orientation", "npc_interaction_reply_weight", "{npc_interaction_reply_orientation_none}", ConditionNpcAcceptsAskNone, null);
+            starter.AddDialogLine("npc_interaction_reply_orientation_hetero", "npc_interaction_reply_orientation", "npc_interaction_reply_weight", "{npc_interaction_reply_orientation_hetero}[ib:demure][if:convo_approving]", ConditionNpcAcceptsAskHetero, null);
+            starter.AddDialogLine("npc_interaction_reply_orientation_gay", "npc_interaction_reply_orientation", "npc_interaction_reply_weight", "{npc_interaction_reply_orientation_gay}[ib:demure][if:convo_approving]", ConditionNpcAcceptsAskGay, null);
+            starter.AddDialogLine("npc_interaction_reply_orientation_bi", "npc_interaction_reply_orientation", "npc_interaction_reply_weight", "{npc_interaction_reply_orientation_bi}[ib:demure][if:convo_approving]", ConditionNpcAcceptsAskBi, null);
+            starter.AddDialogLine("npc_interaction_reply_orientation_none", "npc_interaction_reply_orientation", "npc_interaction_reply_weight", "{npc_interaction_reply_orientation_none}[ib:demure][if:convo_approving]", ConditionNpcAcceptsAskNone, null);
 
-            starter.AddDialogLine("npc_interaction_reply_weight_thin", "npc_interaction_reply_weight", "npc_interaction_reply_build", "{npc_interaction_reply_weight_thin}", ConditionNpcAcceptsAskThin, null);
-            starter.AddDialogLine("npc_interaction_reply_weight_normal", "npc_interaction_reply_weight", "npc_interaction_reply_build", "{npc_interaction_reply_weight_normal}", ConditionNpcAcceptsAskNormal, null);
-            starter.AddDialogLine("npc_interaction_reply_weight_fat", "npc_interaction_reply_weight", "npc_interaction_reply_build", "{npc_interaction_reply_weight_fat}", ConditionNpcAcceptsAskFat, null);
+            starter.AddDialogLine("npc_interaction_reply_weight_thin", "npc_interaction_reply_weight", "npc_interaction_reply_build", "{npc_interaction_reply_weight_thin}[ib:demure][if:happy]", ConditionNpcAcceptsAskThin, null);
+            starter.AddDialogLine("npc_interaction_reply_weight_normal", "npc_interaction_reply_weight", "npc_interaction_reply_build", "{npc_interaction_reply_weight_normal}[ib:normal][if:happy]", ConditionNpcAcceptsAskNormal, null);
+            starter.AddDialogLine("npc_interaction_reply_weight_fat", "npc_interaction_reply_weight", "npc_interaction_reply_build", "{npc_interaction_reply_weight_fat}[ib:aggressive][if:happy]", ConditionNpcAcceptsAskFat, null);
 
-            starter.AddDialogLine("npc_interaction_reply_build_low", "npc_interaction_reply_build", "npc_interaction_reply_age", "{npc_interaction_reply_build_low}", ConditionNpcAcceptsAskLow, null);
-            starter.AddDialogLine("npc_interaction_reply_build_average", "npc_interaction_reply_build", "npc_interaction_reply_age", "{npc_interaction_reply_build_average}", ConditionNpcAcceptsAskAverage, null);
-            starter.AddDialogLine("npc_interaction_reply_build_high", "npc_interaction_reply_build", "npc_interaction_reply_age", "{npc_interaction_reply_build_high}", ConditionNpcAcceptsAskHigh, null);
+            starter.AddDialogLine("npc_interaction_reply_build_low", "npc_interaction_reply_build", "npc_interaction_reply_age", "{npc_interaction_reply_build_low}[ib:confident][if:convo_excited]", ConditionNpcAcceptsAskLow, null);
+            starter.AddDialogLine("npc_interaction_reply_build_average", "npc_interaction_reply_build", "npc_interaction_reply_age", "{npc_interaction_reply_build_average}[ib:confident2][if:convo_excited]", ConditionNpcAcceptsAskAverage, null);
+            starter.AddDialogLine("npc_interaction_reply_build_high", "npc_interaction_reply_build", "npc_interaction_reply_age", "{npc_interaction_reply_build_high}[ib:confident3][if:convo_excited]", ConditionNpcAcceptsAskHigh, null);
 
-            starter.AddDialogLine("npc_interaction_reply_age", "npc_interaction_reply_age", "npc_interaction_reply_summary", "{npc_interaction_reply_age}", null, null);
+            starter.AddDialogLine("npc_interaction_reply_age", "npc_interaction_reply_age", "npc_interaction_reply_summary", "{npc_interaction_reply_age}[ib:normal2][if:convo_calm_friendly]", null, null);
 
-            starter.AddDialogLine("npc_interaction_reply_summary", "npc_interaction_reply_summary", "player_interaction_selection", "{npc_interaction_reply_summary}", null, null);
+            starter.AddDialogLine("npc_interaction_reply_summary", "npc_interaction_reply_summary", "player_interaction_selection", "{npc_interaction_reply_summary}[ib:demure][if:convo_bemused]", null, null);
 
             starter.AddDialogLineWithVariation("npc_interaction_reply_flirt_yes", "npc_interaction_reply_flirt", "player_challenge_start", ConditionNpcAcceptsFlirt, ConsequenceNpcAcceptsFlirt)
+                .Variation("{npc_interaction_reply_flirt_yes_1}[ib:normal2][if:convo_mocking_teasing]")
+                .Variation("{npc_interaction_reply_flirt_yes_2}[ib:normal2][if:convo_mocking_teasing]");
+
+            starter.AddDialogLineWithVariation("npc_interaction_reply_flirt_yes_nochallenge", "npc_interaction_reply_flirt", "close_window", ConditionNpcAcceptsFlirtNoChallenge, ConsequenceNpcAcceptsFlirtNoChallenge)
                 .Variation("{npc_interaction_reply_flirt_yes_1}")
                 .Variation("{npc_interaction_reply_flirt_yes_2}");
 
-            starter.AddDialogLine("npc_interaction_reply_talk_no", "npc_interaction_reply_flirt", "player_interaction_selection", "{npc_interaction_reply_talk_no}", ConditionNpcDeclinesFlirt, null);
-            starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_flirt", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}", ConditionNpcDeclinesFlirtTimeout, null);
-
-
-            
+            starter.AddDialogLine("npc_interaction_reply_flirt_no", "npc_interaction_reply_flirt", "player_interaction_selection", "{npc_interaction_reply_talk_no}[ib:closed][if:convo_bored]", ConditionNpcDeclinesFlirt, null);
+            starter.AddDialogLine("npc_interaction_reply_flirt_timeout", "npc_interaction_reply_flirt", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}[ib:closed][if:convo_bored]", ConditionNpcDeclinesFlirtTimeout, null);
 
             starter.AddDialogLineWithVariation("npc_interaction_reply_date_first_yes", "npc_interaction_reply_date", "player_challenge_start", ConditionNpcAcceptsDateFirst, ConsequenceNpcAcceptsDateFirst)
+                .Variation("{npc_interaction_reply_date_first_yes_1}[ib:confident3][if:convo_excited]")
+                .Variation("{npc_interaction_reply_date_first_yes_2}[ib:confident3][if:convo_excited]");
+
+            starter.AddDialogLineWithVariation("npc_interaction_reply_date_first_yes_nochallenge", "npc_interaction_reply_date", "close_window", ConditionNpcAcceptsDateFirstNoChallenge, ConsequenceNpcAcceptsDateFirstNoChallenge)
                 .Variation("{npc_interaction_reply_date_first_yes_1}")
                 .Variation("{npc_interaction_reply_date_first_yes_2}");
 
             starter.AddDialogLineWithVariation("npc_interaction_reply_date_yes", "npc_interaction_reply_date", "player_challenge_start", ConditionNpcAcceptsDate, ConsequenceNpcAcceptsDate)
+                .Variation("{npc_interaction_reply_date_yes_1}[ib:demure2][if:convo_merry]")
+                .Variation("{npc_interaction_reply_date_yes_2}[ib:demure2][if:convo_merry]");
+
+            starter.AddDialogLineWithVariation("npc_interaction_reply_date_yes_nochallenge", "npc_interaction_reply_date", "close_window", ConditionNpcAcceptsDateNoChallenge, ConsequenceNpcAcceptsDateNoChallenge)
                 .Variation("{npc_interaction_reply_date_yes_1}")
                 .Variation("{npc_interaction_reply_date_yes_2}");
 
-            starter.AddDialogLine("npc_interaction_reply_date_first_maybe", "npc_interaction_reply_date", "npc_persuasion_challenge", "{=Dramalord437}Uh... well...", ConditionNpcMaybeDate, ConsequenceNpcMaybeDate);
-            starter.AddDialogLine("npc_interaction_reply_date_no", "npc_interaction_reply_date", "player_interaction_selection", "{npc_interaction_reply_talk_no}", ConditionNpcDeclinesDate, null);
-            starter.AddDialogLine("npc_interaction_reply_date_husband", "npc_interaction_reply_date", "player_interaction_selection", "{npc_interaction_reply_date_husband}", ConditionNpcDeclinesDateHusband, null);
-            starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_date", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}", ConditionNpcDeclinesDateTimeout, null);
+            starter.AddDialogLine("npc_interaction_reply_date_first_maybe", "npc_interaction_reply_date", "npc_persuasion_challenge", "{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", ConditionNpcMaybeDate, ConsequenceNpcMaybeDate);
+            starter.AddDialogLine("npc_interaction_reply_date_no", "npc_interaction_reply_date", "player_interaction_selection", "{npc_interaction_reply_talk_no}[ib:normal2][if:convo_confused_annoyed]", ConditionNpcDeclinesDate, null);
+            starter.AddDialogLine("npc_interaction_reply_date_husband", "npc_interaction_reply_date", "player_interaction_selection", "{npc_interaction_reply_date_husband}[ib:nervous][if:convo_shocked]", ConditionNpcDeclinesDateHusband, null);
+            starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_date", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}[ib:closed][if:convo_bored]", ConditionNpcDeclinesDateTimeout, null);
 
-            starter.AddDialogLine("npc_interaction_reply_sex_friend_yes", "npc_interaction_reply_sex", "close_window", "{npc_interaction_reply_sex_friend_yes}", ConditionNpcAcceptsSexFriend, ConsequenceNpcAcceptsSexFriend);
-            starter.AddDialogLine("npc_interaction_reply_sex_friend_maybe", "npc_interaction_reply_sex", "npc_persuasion_challenge", "{=Dramalord437}Uh... well...", ConditionNpcMaybeSexFriend, ConsequenceNpcMaybeSexFriend);
-            starter.AddDialogLine("npc_interaction_reply_sex_fwb_yes", "npc_interaction_reply_sex", "close_window", "{npc_interaction_reply_sex_fwb_yes}", ConditionNpcAcceptsSexFWB, ConsequenceNpcAcceptsSexFWB);
-            starter.AddDialogLine("npc_interaction_reply_sex_fwb_no", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_sex_fwb_no}", ConditionNpcDeclinesSexFWB, null);
-            starter.AddDialogLine("npc_interaction_reply_sex_yes", "npc_interaction_reply_sex", "close_window", "{npc_interaction_reply_sex_yes}", ConditionNpcAcceptsSex, ConsequenceNpcAcceptsSex);
-            starter.AddDialogLine("npc_interaction_reply_date_husband", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_date_husband}", ConditionNpcDeclinesSexHusband, null);
-            starter.AddDialogLine("npc_interaction_reply_sex_no_interest", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_sex_no_interest}", ConditionNpcDeclinesSexInterest, null);
-            starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}", ConditionNpcDeclinesSexTimeout, null);
+            starter.AddDialogLine("npc_interaction_reply_sex_friend_yes", "npc_interaction_reply_sex", "close_window", "{npc_interaction_reply_sex_friend_yes}[ib:confident3][if:convo_excited]", ConditionNpcAcceptsSexFriend, ConsequenceNpcAcceptsSexFriend);
+            starter.AddDialogLine("npc_interaction_reply_sex_friend_maybe", "npc_interaction_reply_sex", "npc_persuasion_challenge", "{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", ConditionNpcMaybeSexFriend, ConsequenceNpcMaybeSexFriend);
+            starter.AddDialogLine("npc_interaction_reply_sex_fwb_yes", "npc_interaction_reply_sex", "close_window", "{npc_interaction_reply_sex_fwb_yes}[ib:confident2][if:convo_focused_happy]", ConditionNpcAcceptsSexFWB, ConsequenceNpcAcceptsSexFWB);
+            starter.AddDialogLine("npc_interaction_reply_sex_fwb_no", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_sex_fwb_no}[ib:normal2][if:convo_confused_annoyed]", ConditionNpcDeclinesSexFWB, null);
+            starter.AddDialogLine("npc_interaction_reply_sex_yes", "npc_interaction_reply_sex", "close_window", "{npc_interaction_reply_sex_yes}[ib:confident3][if:convo_excited]", ConditionNpcAcceptsSex, ConsequenceNpcAcceptsSex);
+            starter.AddDialogLine("npc_interaction_reply_date_husband", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_date_husband}[ib:nervous][if:convo_shocked]", ConditionNpcDeclinesSexHusband, null);
+            starter.AddDialogLine("npc_interaction_reply_sex_no_interest", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_sex_no_interest}[ib:normal2][if:convo_confused_annoyed]", ConditionNpcDeclinesSexInterest, null);
+            starter.AddDialogLine("npc_interaction_reply_talk_timeout", "npc_interaction_reply_sex", "player_interaction_selection", "{npc_interaction_reply_talk_timeout}[ib:closed][if:convo_bored]", ConditionNpcDeclinesSexTimeout, null);
 
-            starter.AddDialogLine("npc_interaction_reply_engage_yes", "npc_interaction_reply_engage", "close_window", "{npc_interaction_reply_engage_yes}", ConditionNpcAcceptsEngagement, ConsequenceNpcAcceptsEngagement);
-            starter.AddDialogLine("npc_interaction_reply_engage_maybe", "npc_interaction_reply_engage", "npc_persuasion_challenge", "{=Dramalord437}Uh... well...", ConditionNpcMaybeEngagement, ConsequenceNpcMaybeEngagement);
-            starter.AddDialogLine("npc_interaction_reply_engage_no", "npc_interaction_reply_engage", "player_interaction_selection", "{npc_interaction_reply_engage_no}", ConditionNpcDeclinesEngagement, null);
+            starter.AddDialogLine("npc_interaction_reply_engage_yes", "npc_interaction_reply_engage", "close_window", "{npc_interaction_reply_engage_yes}[ib:aggressive][if:convo_delighted]", ConditionNpcAcceptsEngagement, ConsequenceNpcAcceptsEngagement);
+            starter.AddDialogLine("npc_interaction_reply_engage_maybe", "npc_interaction_reply_engage", "npc_persuasion_challenge", "{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", ConditionNpcMaybeEngagement, ConsequenceNpcMaybeEngagement);
+            starter.AddDialogLine("npc_interaction_reply_engage_no", "npc_interaction_reply_engage", "player_interaction_selection", "{npc_interaction_reply_engage_no}[ib:normal2][if:convo_confused_annoyed]", ConditionNpcDeclinesEngagement, null);
 
-            starter.AddDialogLine("npc_interaction_reply_marry_yes", "npc_interaction_reply_marriage", "close_window", "{npc_interaction_reply_marry_yes}", ConditionNpcAcceptsMarriage, ConsequenceNpcAcceptsMarriage);
-            starter.AddDialogLine("npc_interaction_reply_engage_no", "npc_interaction_reply_marriage", "player_interaction_selection", "{npc_interaction_reply_engage_no}", ConditionNpcDeclinesMarriage, null);
+            starter.AddDialogLine("npc_interaction_reply_marry_yes", "npc_interaction_reply_marriage", "close_window", "{npc_interaction_reply_marry_yes}[ib:aggressive][if:convo_delighted]", ConditionNpcAcceptsMarriage, ConsequenceNpcAcceptsMarriage);
+            starter.AddDialogLine("npc_interaction_reply_engage_no", "npc_interaction_reply_marriage", "player_interaction_selection", "{npc_interaction_reply_engage_no}[ib:normal2][if:convo_confused_annoyed]", ConditionNpcDeclinesMarriage, null);
 
-            starter.AddDialogLine("npc_interaction_breakup_love", "npc_interaction_reply_breakup", "close_window", "{npc_interaction_breakup_love}", ConditionNpcAcceptsBreakupLove, ConsequenceNpcAcceptsBreakup);
-            starter.AddDialogLine("npc_interaction_breakup_nolove", "npc_interaction_reply_breakup", "close_window", "{npc_interaction_breakup_nolove}", ConditionNpcAcceptsBreakupNoLove, ConsequenceNpcAcceptsBreakup);
-            starter.AddDialogLine("npc_interaction_breakup_leave", "npc_interaction_reply_breakup", "close_window", "{npc_interaction_breakup_leave}", ConditionNpcAcceptsBreakupLeave, ConsequenceNpcAcceptsBreakupLeave);
-
-
-            starter.AddDialogLine("npc_interaction_reply_gift", "npc_interaction_reply_gift", "player_interaction_selection", "{npc_interaction_reply_gift}", null, ConsequencNpceAcceptsGift);
+            starter.AddDialogLine("npc_interaction_breakup_love", "npc_interaction_reply_breakup", "close_window", "{npc_interaction_breakup_love}[ib:nervous][if:convo_shocked]", ConditionNpcAcceptsBreakupLove, ConsequenceNpcAcceptsBreakup);
+            starter.AddDialogLine("npc_interaction_breakup_nolove", "npc_interaction_reply_breakup", "close_window", "{npc_interaction_breakup_nolove}[ib:closed2][if:convo_bored2]", ConditionNpcAcceptsBreakupNoLove, ConsequenceNpcAcceptsBreakup);
+            starter.AddDialogLine("npc_interaction_breakup_leave", "npc_interaction_reply_breakup", "close_window", "{npc_interaction_breakup_leave}[ib:warrior][if:convo_grave]", ConditionNpcAcceptsBreakupLeave, ConsequenceNpcAcceptsBreakupLeave);
 
 
-            //starter.AddPlayerLine("player_duel", "hero_main_options", "close_window", "Lets duel to death", null, ConsequenceDuel);
+            starter.AddDialogLine("npc_interaction_reply_gift", "npc_interaction_reply_gift", "player_interaction_selection", "{npc_interaction_reply_gift}[ib:normal2][if:convo_mocking_teasing]", null, ConsequencNpceAcceptsGift);
+
+            starter.AddDialogLine("npc_interaction_reply_adopt_yes", "npc_interaction_reply_adopt", "player_interaction_select_child", "{npc_interaction_reply_adopt_yes}[ib:confident2][if:convo_focused_happy]", ConditionNpcAcceptsAdoption, ConsequenceNpcAcceptsAdoption);
+            starter.AddDialogLine("npc_interaction_reply_adopt_no", "npc_interaction_reply_adopt", "player_interaction_selection", "{npc_interaction_reply_adopt_no}[ib:weary2][if:convo_nervous]", ConditionNpcDeclinesAdoption, null);
+
+            starter.AddRepeatablePlayerLine("player_interaction_select_child", "player_interaction_select_child", "npc_interaction_reply_adopt_verify", "{=Dramalord262}{ORPHAN.NAME}, {ORPHANAGE} years old.", "{=Dramalord263}I am thinking of a different child.", "orphanage_child_selection", ConditionListAvailableChildren, ConsequenceChildSelected);
+
+            starter.AddDialogLine("npc_interaction_reply_adopt_verify", "npc_interaction_reply_adopt_verify", "npc_interaction_reply_adopt_confirm", "{npc_interaction_reply_adopt_verify}[ib:normal2][if:convo_calm_friendly]", ConditionNpcVerifyAdoption, null);
+
+            starter.AddPlayerLine("npc_interaction_reply_adopt_confirm_yes", "npc_interaction_reply_adopt_confirm", "npc_interaction_do_adopt_finalize", "{=str_yes}Yes.", null, ConsequencePlayerAdoptsChild);
+            starter.AddPlayerLine("npc_interaction_reply_adopt_confirm_no", "npc_interaction_reply_adopt_confirm", "npc_interaction_do_adopt_finalize", "{=str_no}No.", null, null);
+
+            starter.AddDialogLine("npc_interaction_do_adopt_finalize", "npc_interaction_do_adopt_finalize", "player_interaction_selection", "{npc_interaction_abort}[ib:aggressive2][if:convo_approving]", null, null);
+
+            //starter.AddPlayerLine("player_duel", "hero_main_options", "close_window", "Lets duel to death", null, ConsequenceDuel); 
         }
 
-        private static bool NoTimeout() => CampaignTime.Now.ToDays - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).LastInteraction > DramalordMCM.Instance.DaysBetweenInteractions;
+        private static bool NoTimeout() => CampaignTime.Now.ToDays - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).LastInteraction >= DramalordMCM.Instance.DaysBetweenInteractions;
         private static bool HusbandClose() => Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.OneToOneConversationHero.IsCloseTo(Hero.OneToOneConversationHero.Spouse) && _randomChance*-1 < Hero.OneToOneConversationHero.GetPersonality().Conscientiousness;
 
         private static bool ConditionPlayerCanApproach() 
@@ -336,7 +379,7 @@ namespace Dramalord.Conversations
 
         private static bool ConditionNpcAcceptsAskAverage() => !ConditionNpcAcceptsAskLow() && !ConditionNpcAcceptsAskHigh();
 
-        private static bool ConditionPlayerCanAskDateFirst() => Hero.MainHero.GetRelationTo(Hero.OneToOneConversationHero).Love >= DramalordMCM.Instance.MinDatingLove && !Hero.MainHero.IsEmotionalWith(Hero.OneToOneConversationHero);
+        private static bool ConditionPlayerCanAskDateFirst() => Hero.MainHero.IsFriendOf(Hero.OneToOneConversationHero);
 
         private static bool ConditionPlayerCanAskDate() => Hero.MainHero.IsEmotionalWith(Hero.OneToOneConversationHero);
 
@@ -352,9 +395,13 @@ namespace Dramalord.Conversations
 
         private static bool ConditionPlayerCanAskBreakup() => Hero.MainHero.IsEmotionalWith(Hero.OneToOneConversationHero);
 
-        private static bool ConditionNpcAcceptsFlirt() => (Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) >= DramalordMCM.Instance.MinAttraction) && NoTimeout();
+        private static bool ConditionNpcAcceptsFlirt() => (Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) >= DramalordMCM.Instance.MinAttraction) && NoTimeout() && !DramalordMCM.Instance.NoPlayerDialogs;
 
-        private static bool ConditionNpcAcceptsTalk() => NoTimeout();
+        private static bool ConditionNpcAcceptsFlirtNoChallenge() => (Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) >= DramalordMCM.Instance.MinAttraction) && NoTimeout() && DramalordMCM.Instance.NoPlayerDialogs;
+
+        private static bool ConditionNpcAcceptsTalk() => NoTimeout() && !DramalordMCM.Instance.NoPlayerDialogs;
+
+        private static bool ConditionNpcAcceptsTalkNoChallenge() => NoTimeout() && DramalordMCM.Instance.NoPlayerDialogs;
 
         private static bool ConditionNpcDeclinesTalkTimeout() => !NoTimeout();
 
@@ -362,21 +409,48 @@ namespace Dramalord.Conversations
 
         private static bool ConditionNpcDeclinesFlirtTimeout() => !NoTimeout();
 
-        private static bool ConditionNpcMaybeDate() => NoTimeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > 0 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove;
+        private static bool ConditionNpcMaybeDate() => NoTimeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove > 0 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove < DramalordMCM.Instance.MinDatingLove;
 
         private static void ConsequenceNpcMaybeDate() => Persuasions.CreatePersuasionTaskForDate();
 
-        private static bool ConditionNpcAcceptsDateFirst() => !HusbandClose() && NoTimeout() && (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove && !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero));
+        private static bool ConditionNpcAcceptsDateFirst() => !HusbandClose() && NoTimeout() && !DramalordMCM.Instance.NoPlayerDialogs && (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinDatingLove && !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero));
 
-        private static bool ConditionNpcAcceptsDate() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero);
+        private static bool ConditionNpcAcceptsDateFirstNoChallenge() => !HusbandClose() && NoTimeout() && DramalordMCM.Instance.NoPlayerDialogs && (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinDatingLove && !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero));
 
-        private static bool ConditionNpcDeclinesDate() => NoTimeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love <=0;
+        private static bool ConditionNpcAcceptsDate() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && !DramalordMCM.Instance.NoPlayerDialogs;
+
+        private static bool ConditionNpcAcceptsDateNoChallenge() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && DramalordMCM.Instance.NoPlayerDialogs;
+
+        private static bool ConditionNpcDeclinesDate() => NoTimeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove <= 0;
 
         private static bool ConditionNpcDeclinesDateHusband() => HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero);
 
         private static bool ConditionNpcDeclinesDateTimeout() => !NoTimeout();
 
         private static bool ConditionNpcMaybeSexFriend() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= 25 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= 25;
+
+        private static bool ConditionNpcAcceptsAdoption() => Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero);
+
+        private static bool ConditionNpcDeclinesAdoption() => !Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero);
+
+        private static bool ConditionListAvailableChildren()
+        {
+            Hero? child = ConversationSentence.CurrentProcessedRepeatObject as Hero;
+            if (child != null)
+            {
+                StringHelpers.SetRepeatableCharacterProperties("ORPHAN", child.CharacterObject);
+                MBTextManager.SetTextVariable("ORPHANAGE", (int)child.Age);
+                return true;
+            }
+
+            return false;
+        }
+
+        private static bool ConditionNpcVerifyAdoption()
+        {
+            MBTextManager.SetTextVariable("CHILD", ConversationSentence.SelectedRepeatObject as Hero);
+            return true;
+        }
 
         private static void ConsequenceNpcMaybeSexFriend() => Persuasions.CreatePersuasionTaskForFWB();
 
@@ -394,23 +468,23 @@ namespace Dramalord.Conversations
 
         private static bool ConditionNpcDeclinesSexInterest() => !Hero.OneToOneConversationHero.IsSexualWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetDesires().Horny < 25;
 
-        private static bool ConditionNpcAcceptsEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinMarriageLove;
+        private static bool ConditionNpcAcceptsEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinMarriageLove;
 
-        private static bool ConditionNpcDeclinesEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < 25;
+        private static bool ConditionNpcDeclinesEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove < 25;
 
-        private static bool ConditionNpcMaybeEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= 25 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinMarriageLove && Hero.OneToOneConversationHero.IsLoverOf(Hero.MainHero);
+        private static bool ConditionNpcMaybeEngagement() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= 25 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove < DramalordMCM.Instance.MinMarriageLove && Hero.OneToOneConversationHero.IsLoverOf(Hero.MainHero);
 
         private static void ConsequenceNpcMaybeEngagement() => Persuasions.CreatePersuasionTaskForEngage();
 
-        private static bool ConditionNpcAcceptsMarriage() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinMarriageLove;
+        private static bool ConditionNpcAcceptsMarriage() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinMarriageLove;
 
-        private static bool ConditionNpcDeclinesMarriage() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinMarriageLove;
+        private static bool ConditionNpcDeclinesMarriage() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove < DramalordMCM.Instance.MinMarriageLove;
 
-        private static bool ConditionNpcAcceptsBreakupLove() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove && Hero.OneToOneConversationHero.GetPersonality().Neuroticism < _randomChance;
+        private static bool ConditionNpcAcceptsBreakupLove() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinDatingLove && Hero.OneToOneConversationHero.GetPersonality().Neuroticism < _randomChance;
 
-        private static bool ConditionNpcAcceptsBreakupNoLove() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove;
+        private static bool ConditionNpcAcceptsBreakupNoLove() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove < DramalordMCM.Instance.MinDatingLove;
 
-        private static bool ConditionNpcAcceptsBreakupLeave() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove && Hero.OneToOneConversationHero.GetPersonality().Neuroticism >= _randomChance;
+        private static bool ConditionNpcAcceptsBreakupLeave() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinDatingLove && Hero.OneToOneConversationHero.GetPersonality().Neuroticism >= _randomChance;
 
         private static bool ConditionPlayerCanGiveGift()
         {
@@ -435,42 +509,93 @@ namespace Dramalord.Conversations
             return false;
         }
 
+        private static bool ConditionPlayerCanAdopt()
+        {
+            Hero result = Hero.OneToOneConversationHero.Children.FirstOrDefault(child => child.Clan == Clan.PlayerClan && child.Occupation == Occupation.Wanderer);
+            return result != null;
+        }
+
 
         //CONSEQUENCE
         private static void ConsequenceNpcAcceptsTalk()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             PlayerChallenges.ChallengeNumber = 1;
             PlayerChallenges.ChallengeResult = 0;
             PlayerChallenges.ExitConversation = false;
             PlayerChallenges.GenerateRandomChatChallenge();
         }
 
+        private static void ConsequenceNpcAcceptsTalkNoChallenge()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+            ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.SmallTalk, Hero.OneToOneConversationHero, -1);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
         private static void ConsequenceNpcAcceptsFlirt()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             PlayerChallenges.ChallengeNumber = 1;
             PlayerChallenges.ChallengeResult = 0;
             PlayerChallenges.ExitConversation = false;
             PlayerChallenges.GenerateRandomFlirtChallenge();
         }
 
+        private static void ConsequenceNpcAcceptsFlirtNoChallenge()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+            ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.Flirt, Hero.OneToOneConversationHero, -1);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
         private static void ConsequenceNpcAcceptsDateFirst()
         {
-            PlayerChallenges.ChallengeNumber = 3;
-            PlayerChallenges.ChallengeResult = 0;
-            PlayerChallenges.ExitConversation = false;
-            PlayerChallenges.GenerateRandomDateChallenge();
-        }
-        private static void ConsequenceNpcAcceptsDate()
-        {
-            
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             PlayerChallenges.ChallengeNumber = 3;
             PlayerChallenges.ChallengeResult = 0;
             PlayerChallenges.ExitConversation = false;
             PlayerChallenges.GenerateRandomDateChallenge();
         }
 
+        private static void ConsequenceNpcAcceptsDateFirstNoChallenge()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+            ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.Date, Hero.OneToOneConversationHero, -1);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        private static void ConsequenceNpcAcceptsDate()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+            PlayerChallenges.ChallengeNumber = 3;
+            PlayerChallenges.ChallengeResult = 0;
+            PlayerChallenges.ExitConversation = false;
+            PlayerChallenges.GenerateRandomDateChallenge();
+        }
+
+        private static void ConsequenceNpcAcceptsDateNoChallenge()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+            ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.Date, Hero.OneToOneConversationHero, -1);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
         private static void ConsequenceNpcAcceptsSexFriend()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             FriendsWithBenefitsAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.Intercourse, Hero.OneToOneConversationHero, -1);
             if (PlayerEncounter.Current != null)
@@ -481,6 +606,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceNpcAcceptsSexFWB()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.Intercourse, Hero.OneToOneConversationHero, -1);
             if (PlayerEncounter.Current != null)
             {
@@ -490,6 +616,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceNpcAcceptsSex()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.Intercourse, Hero.OneToOneConversationHero, -1);
             if (PlayerEncounter.Current != null)
             {
@@ -499,6 +626,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceNpcAcceptsEngagement()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.Engagement, Hero.OneToOneConversationHero, -1);
             if (PlayerEncounter.Current != null)
             {
@@ -508,6 +636,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceNpcAcceptsMarriage()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.Marriage, Hero.OneToOneConversationHero, -1);
             if (PlayerEncounter.Current != null)
             {
@@ -517,6 +646,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceNpcAcceptsBreakup()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.BreakUp, Hero.OneToOneConversationHero, -1);
             if (PlayerEncounter.Current != null)
             {
@@ -526,6 +656,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceNpcAcceptsBreakupLeave()
         {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.BreakUp, Hero.OneToOneConversationHero, -1);
             DramalordIntentions.Instance.AddIntention(Hero.OneToOneConversationHero, Hero.MainHero, IntentionType.LeaveClan, -1);
             if (PlayerEncounter.Current != null)
@@ -564,6 +695,24 @@ namespace Dramalord.Conversations
             TextObject banner = new TextObject("{=Dramalord336}You learned the physical preferences of {HERO.LINK}.");
             StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
             MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
+        }
+
+        private static void ConsequenceNpcAcceptsAdoption()
+        {
+            ConversationSentence.SetObjectsToRepeatOver(Hero.OneToOneConversationHero.Children.Where(child => child.Clan == Clan.PlayerClan && child.Occupation == Occupation.Wanderer).ToList());
+        }
+
+        private static void ConsequenceChildSelected()
+        {
+            //_selectedOrphan = ConversationSentence.SelectedRepeatObject as Hero;
+        }
+
+        private static void ConsequencePlayerAdoptsChild()
+        {
+            Hero child = ConversationSentence.SelectedRepeatObject as Hero;
+            child.SetNewOccupation(Occupation.Lord);
+            child.SetName(child.FirstName, child.FirstName);
+            // notification!
         }
 
         private static void ConsequenceDuel()

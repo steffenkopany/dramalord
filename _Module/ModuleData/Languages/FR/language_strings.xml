@@ -19,7 +19,6 @@
     <string id="Dramalord013" text="engageé" />
     <string id="Dramalord014" text="marié" />
     <string id="Dramalord015" text="{HERO1.LINK} et {HERO2.LINK} sont désormais {RELATIONSHIP}" />
-    <string id="Dramalord015" text="{HERO1.LINK} et {HERO2.LINK} ou plus {RELATIONHIP}" />
     <string id="Dramalord016" text="Général" />
     <string id="Dramalord017" text="Chance de se faire prendre" />
     <string id="Dramalord018" text="Chance de se faire attraper par des partenaires tout en interagissant avec d'autres héros" />
@@ -436,5 +435,47 @@
     <string id="Dramalord438" text="Euh... eh bien..." />
     <string id="Dramalord439" text="Vous avez réussi à convaincre {HERO.LINK}. (Amour {LOVE}, Confiance {TRUST})" />
     <string id="Dramalord440" text="Vous n'avez pas réussi à convaincre {HERO.LINK}. (Amour {LOVE}, Confiance {TRUST})" />
+    <string id="Dramalord441" text="{TITLE}, j'aimerais accueillir l'un de vos enfants dans ma famille." />
+    <string id="Dramalord442" text="Ce serait un honneur, {TITLE}. Qui souhaiteriez-vous accueillir dans votre famille ?" />
+    <string id="Dramalord443" text="Je suis désolé, {TITLE}. Je veux que mes enfants aient le libre choix lorsqu'ils seront majeurs." />
+    <string id="Dramalord444" text="Êtes-vous sûr de vouloir accueillir mon enfant {CHILD} dans votre famille ?" />
+    <string id="Dramalord445" text="{NAME} est connu pour manger beaucoup et faire régulièrement de l'exercice." />
+    <string id="Dramalord446" text="{NAME} est connu pour ne presque rien manger et faire régulièrement de l'exercice." />
+    <string id="Dramalord447" text="{NAME} est connu pour manger beaucoup et faire rarement des exercices." />
+    <string id="Dramalord448" text="{NAME} est connu pour manger à peine et faire rarement des exercices." />
+    <string id="Dramalord449" text="{NAME} est connu pour faire rarement des exercices." />
+    <string id="Dramalord450" text="{NAME} est connu pour manger à peine." />
+    <string id="Dramalord451" text="Vous savez, je n'ai pas eu une enfance agréable car j'ai grandi dans un orphelinat." />
+    <string id="Dramalord452" text="Le chef du gang local nous nourrissait à peine et nous envoyait voler dès que nous étions capables de marcher. Si nous n'y parvenions pas, nous étions battus." />
+    <string id="Dramalord453" text="Dès que j'ai eu des tétons, j'ai été envoyé à la taverne. Je devais divertir des hommes dégoûtants et les faire dépenser leur argent en boissons... ou pour moi." />
+    <string id="Dramalord454" text="Il était une fois un vieux type au visage orange qui m'attrapait constamment par les... vous savez... sans payer. Alors il lui donnait un coup de pied dans les noix et s'enfuyait de la ville." />
+    <string id="Dramalord455" text="Enfin, j'ai pensé que poignarder était mieux que de se faire poignarder... si vous voyez ce que je veux dire. Alors j'en ai fait mon nouveau métier." />
+    <string id="Dramalord456" text="Dès que mes poils sous les aisselles ont poussé, j'ai été envoyée au château comme servante pour les dames âgées. Pour me divertir pendant que leurs maris étaient occupés par la guerre." />
+    <string id="Dramalord457" text="Un jour, alors que je... plantais des semis dans la forêt d'argent, le cœur du... propriétaire de la forêt s'est arrêté. J'ai dû fuir et quitter la ville." />
+    <string id="Dramalord458" text="Donc, le temps où je travaillais avec mon bois est révolu, je suis passée à l'épée et à la hache à la place. Il s'avère que je suis plutôt douée pour ça aussi." />
+    <string id="Dramalord459" text="Le Seigneur Stickyfinger ne méritait pas mieux, je suppose." />
+    <string id="Dramalord460" text="Aïe ! C'est une punition sévère." />
+    <string id="Dramalord461" text="Labourer un sol sec semble être un travail difficile." />
+    <string id="Dramalord462" text="Eh bien, le jeune bois n'a pas sa place dans les forêts anciennes, n'est-ce pas ?" />
+    <string id="Dramalord463" text="Je souhaite acquérir certains biens..." />
+    <string id="Dramalord464" text="D'accord. Qu'est-ce qui t'intéresse ?" />
+    <string id="Dramalord465" text="Quelque chose de long et de rond qui puisse résister aux confrontations avec des environnements humides." />
+    <string id="Dramalord466" text="Quelque chose de doux et humide dans lequel tu peux enfoncer ton doigt plusieurs fois." />
+    <string id="Dramalord467" text="Je peux te vendre un {BIEN} ou plus si tu veux." />
+    <string id="Dramalord468" text="Un seul suffira." />
+    <string id="Dramalord469" text="Cinq devraient suffire." />
+    <string id="Dramalord470" text="Il m'en faudrait au moins dix." />
+    <string id="Dramalord471" text="Pas de problème ! Cela vous coûterait {AMOUNT}{GOLD_ICON}. Prix spécial bien sûr." />
+    <string id="Dramalord472" text="Ravi de faire affaire avec vous." />
+    <string id="Dramalord473" text="Aucun dialogue pour le joueur" />
+    <string id="Dramalord474" text="Activez cette option si vous souhaitez des dialogues mais un résultat automatique lorsque vous parlez/flirtez/sortez avec quelqu'un." />
+    <string id="Dramalord475" text="Vous êtes désormais plus attirant pour {HERO.LINK}. ({NUMBER})" />
+    <string id="Dramalord476" text="Vous êtes désormais moins attirant pour {HERO.LINK}. ({NUMBER})" />
+    <string id="Dramalord477" text="{HERO.LINK} a plus de sympathie pour vous. ({NUMBER})" />
+    <string id="Dramalord478" text="{HERO.LINK} a moins de sympathie pour vous. ({NUMBER})" />
+    <string id="Dramalord479" text="{HERO1.LINK} et {HERO2.LINK} ou plus {RELATIONHIP}" />
+    <string id="Dramalord480" text="Jour de début de la décomposition de l'amour" />
+    <string id="Dramalord481" text="Nombre de jours pendant lesquels les amoureux ne se sont pas vus nécessaires pour que l'amour se décompose." />
+    <string id="Dramalord482" text="Oh, bonjour {TITLE}. Je... ne t'attendais pas..." />
   </strings>
 </base>

@@ -77,11 +77,11 @@ namespace Dramalord.Quests
             QuestGiver.GetDesires().Horny += heroAttraction;
             Hero.MainHero.GetDesires().Horny += tagetAttraction;
 
+            heroRelation.UpdateLove();
             int loveGain = (sympathy + ((heroAttraction + tagetAttraction) / 20)) * DramalordMCM.Instance.LoveGainMultiplier;
             int trustGain = sympathy * DramalordMCM.Instance.TrustGainMultiplier;
             heroRelation.Love += loveGain;
             heroRelation.Trust += trustGain;
-            heroRelation.LastInteraction = CampaignTime.Now.ToDays;
 
             TextObject banner = new TextObject("{=Dramalord305}{HERO.LINK} is very happy you fullfilled her request... (Love {NUM}, Trust {NUM2})");
             StringHelpers.SetCharacterProperties("HERO", QuestGiver.CharacterObject, banner);
@@ -119,6 +119,7 @@ namespace Dramalord.Quests
             trustDamage += trustDamage * neuroFactor;
             trustDamage += trustDamage * conscFactor;
 
+            QuestGiver.GetRelationTo(Hero.MainHero).UpdateLove();
             QuestGiver.GetRelationTo(Hero.MainHero).Trust += (int)trustDamage;
             QuestGiver.GetRelationTo(Hero.MainHero).Love += (int)loveDamage;
 

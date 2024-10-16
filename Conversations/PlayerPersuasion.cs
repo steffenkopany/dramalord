@@ -107,7 +107,7 @@ namespace Dramalord.Conversations
             {
                 TextObject banner = new TextObject("{=Dramalord439}You successfully convinced {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
                 StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int loveGain = DramalordMCM.Instance.MinDatingLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love;
+                int loveGain = DramalordMCM.Instance.MinDatingLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove;
                 MBTextManager.SetTextVariable("LOVE", ConversationHelper.FormatNumber(loveGain));
                 MBTextManager.SetTextVariable("TRUST", ConversationHelper.FormatNumber(0));
                 MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
@@ -117,7 +117,7 @@ namespace Dramalord.Conversations
             {
                 TextObject banner = new TextObject("{=Dramalord440}You failed to convince {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
                 StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int loveGain = Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love * -1;
+                int loveGain = Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove * -1;
                 MBTextManager.SetTextVariable("LOVE", ConversationHelper.FormatNumber(loveGain));
                 MBTextManager.SetTextVariable("TRUST", ConversationHelper.FormatNumber(0));
                 MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
@@ -132,7 +132,7 @@ namespace Dramalord.Conversations
             {
                 TextObject banner = new TextObject("{=Dramalord439}You successfully convinced {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
                 StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int loveGain = DramalordMCM.Instance.MinMarriageLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love;
+                int loveGain = DramalordMCM.Instance.MinMarriageLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove;
                 MBTextManager.SetTextVariable("LOVE", ConversationHelper.FormatNumber(loveGain));
                 MBTextManager.SetTextVariable("TRUST", ConversationHelper.FormatNumber(0));
                 MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
@@ -142,7 +142,7 @@ namespace Dramalord.Conversations
             {
                 TextObject banner = new TextObject("{=Dramalord440}You failed to convince {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
                 StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int loveGain = 24 - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love;
+                int loveGain = 24 - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove;
                 MBTextManager.SetTextVariable("LOVE", ConversationHelper.FormatNumber(loveGain));
                 MBTextManager.SetTextVariable("TRUST", ConversationHelper.FormatNumber(0));
                 MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
@@ -183,7 +183,7 @@ namespace Dramalord.Conversations
             PersuasionTask persuasionTask = new PersuasionTask(3);
             persuasionTask.SpokenLine = new TextObject("{=Dramalord423}I... I am not sure about this. I like you, but do I like you enough?");
             persuasionTask.TryLaterLine = Date;
-            int loveDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinDatingLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love) * -1) / 10, -3, 3);
+            int loveDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinDatingLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)loveDiff;
 
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord424}If we don't try we never will find out if this could work."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
@@ -198,7 +198,7 @@ namespace Dramalord.Conversations
             PersuasionTask persuasionTask = new PersuasionTask(3);
             persuasionTask.SpokenLine = new TextObject("{=Dramalord428}This is overwhelming. I love you, {PLAYER.NAME}, but are we ready for this step?");
             persuasionTask.TryLaterLine = Engage;
-            int loveDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinMarriageLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love) * -1) / 10, -3, 3);
+            int loveDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinMarriageLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)loveDiff;
 
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord429}Love is an adventure and this will be our next challenge!"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));

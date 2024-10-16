@@ -55,6 +55,7 @@ namespace Dramalord.Actions
                 trustDamage += trustDamage * neuroFactor;
                 trustDamage += trustDamage * conscFactor;
 
+                hero.GetRelationTo(intention.Target).UpdateLove();
                 hero.GetRelationTo(intention.Target).Trust += (int)trustDamage;
                 hero.GetRelationTo(intention.Target).Love += (int)loveDamage;
             }

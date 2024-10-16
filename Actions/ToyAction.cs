@@ -1,4 +1,5 @@
-﻿using Dramalord.Extensions;
+﻿using Dramalord.Data;
+using Dramalord.Extensions;
 using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
@@ -19,7 +20,9 @@ namespace Dramalord.Actions
             }
             else
             {
-                hero.GetRelationTo(Hero.MainHero).Love += 1;
+                HeroRelation relation = hero.GetRelationTo(Hero.MainHero);
+                //relation.UpdateLove();
+                relation.Love += 1;
                 hero.GetDesires().Horny += 1;
             }
         }

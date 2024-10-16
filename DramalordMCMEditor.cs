@@ -224,7 +224,7 @@ namespace Dramalord
         }
 
         [SettingPropertyGroup("{=Dramalord120}3: Desire")]
-        [SettingPropertyFloatingInteger("{=Dramalord133}Horny", 0, 100, HintText = "{=Dramalord134}Represents how willing a hero currently is for intercourse due to hormons", Order = 7, RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord133}Horny", 0, 100, HintText = "{=Dramalord134}Represents how willing a hero currently is for intercourse due to hormones", Order = 7, RequireRestart = false)]
         public int Horny
         {
             get => _selected.GetDesires().Horny;

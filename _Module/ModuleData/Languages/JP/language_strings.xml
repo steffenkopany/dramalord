@@ -19,7 +19,6 @@
     <string id="Dramalord013" text="婚約者" />
     <string id="Dramalord014" text="結婚" />
     <string id="Dramalord015" text="{HERO1.LINK} と {HERO2.LINK} は今 {RELATIONSHIP} です" />
-    <string id="Dramalord015" text="{HERO1.LINK} と {HERO2.LINK} はもう {RELATIONSHIP} ではありません" />
     <string id="Dramalord016" text="一般" />
     <string id="Dramalord017" text="発覚の確率" />
     <string id="Dramalord018" text="他の英雄と交流している時にパートナーに発覚する確率" />
@@ -436,5 +435,47 @@
     <string id="Dramalord438" text="うーん...そうですね..." />
     <string id="Dramalord439" text="{HERO.LINK} を説得することに成功しました。(愛 {LOVE}、信頼 {TRUST})" />
     <string id="Dramalord440" text="{HERO.LINK} を説得できませんでした。(愛 {LOVE}、信頼 {TRUST})" />
+    <string id="Dramalord441" text="{TITLE}さん、あなたのお子様の1人を私の家族に迎え入れたいです。" />
+    <string id="Dramalord442" text="{TITLE}さん、光栄です。あなたの家族に誰を迎え入れたいですか？" />
+    <string id="Dramalord443" text="申し訳ありません、{TITLE}さん。私は、子供が成人したときに自由に選択できるようにしたいと思っています。" />
+    <string id="Dramalord444" text="私の子供{CHILD}をあなたの家族に迎え入れてもよろしいですか？" />
+    <string id="Dramalord445" text="{NAME}さんはよく食べ、定期的に運動していることで知られています。" />
+    <string id="Dramalord446" text="{NAME}さんは、ほとんど何も食べず、定期的に運動していることで知られています。" />
+    <string id="Dramalord447" text="{NAME} さんはたくさん食べるのに、トレーニングをほとんどしないことで知られています。" />
+    <string id="Dramalord448" text="{NAME} さんは何もほとんど食べず、トレーニングをほとんどしないことで知られています。" />
+    <string id="Dramalord449" text="{NAME} さんはトレーニングをほとんどしないことで知られています。" />
+    <string id="Dramalord450" text="{NAME} さんは何もほとんど食べないことで知られています。" />
+    <string id="Dramalord451" text="私は孤児院で育ったので、良い子供時代を過ごしたわけではありません。" />
+    <string id="Dramalord452" text="地元のギャング団のリーダーは私たちにほとんど食事を与えず、歩けるようになるとすぐに盗みを働かせました。うまくいかなければ殴られました。" />
+    <string id="Dramalord453" text="乳首が生えるとすぐに私は酒場に送られました。私は嫌な男たちをもてなして、飲み物や私にお金を使わせなければなりませんでした。" />
+    <string id="Dramalord454" text="かつて、オレンジ色の顔をした老人がいて、お金を払わずに私をつかみ続けました。それで私は彼を蹴飛ばして街から逃げました。" />
+    <string id="Dramalord455" text="とにかく、刺す方が刺されるよりいいと思ったんだ... 言いたいことは分かるだろう。だからそれを新しい仕事にしたんだ。" />
+    <string id="Dramalord456" text="脇毛が生えるとすぐに、私は城に送られて年配の女性たちの召使になった。夫たちが戦争で忙しい間の娯楽のためだ。" />
+    <string id="Dramalord457" text="ある日、私が銀の森に苗木を植えていたとき... 森の所有者の心が止まった。私は逃げて町を去らなければならなかった。" />
+    <string id="Dramalord458" text="それで、木を扱う時代は終わり、代わりに剣と斧に切り替えた。結局、私もそれでかなり上手いことが分かった。" />
+    <string id="Dramalord459" text="スティッキーフィンガー卿はもっと良い扱いを受けるに値しなかったと思う。" />
+    <string id="Dramalord460" text="痛い！それは厳しい罰だ。" />
+    <string id="Dramalord461" text="乾いた土を耕すのは大変な仕事のようだ。" />
+    <string id="Dramalord462" text="まあ、若い木は古代の森には属さないよね？" />
+    <string id="Dramalord463" text="ある品物を手に入れたいのですが…" />
+    <string id="Dramalord464" text="わかりました。何に興味がありますか？" />
+    <string id="Dramalord465" text="湿った環境に耐えられる、長くて丸いもの。" />
+    <string id="Dramalord466" text="指を何度も入れられる柔らかくて湿ったもの。" />
+    <string id="Dramalord467" text="ご希望であれば、{GOOD} かそれ以上をお売りできます。" />
+    <string id="Dramalord468" text="1 個で十分です。" />
+    <string id="Dramalord469" text="5 個あれば十分です。" />
+    <string id="Dramalord470" text="少なくとも 10 個必要です。" />
+    <string id="Dramalord471" text="問題ありません! あなたには {AMOUNT}{GOLD_ICON} になります。もちろん特別価格です。" />
+    <string id="Dramalord472" text="あなたと取引できて嬉しいです。" />
+    <string id="Dramalord473" text="プレイヤーのダイアログなし" />
+    <string id="Dramalord474" text="会話/いちゃつく/デートのときにダイアログは必要だが自動結果が必要な場合はこれを有効にします。" />
+    <string id="Dramalord475" text="あなたは現在 {HERO.LINK} にとってより魅力的です。({NUMBER})" />
+    <string id="Dramalord476" text="あなたは現在 {HERO.LINK} にとってより魅力的ではありません。({NUMBER})" />
+    <string id="Dramalord477" text="{HERO.LINK} はあなたにもっと共感しています。({NUMBER})" />
+    <string id="Dramalord478" text="{HERO.LINK} はあなたにあまり共感していません。({NUMBER})" />
+    <string id="Dramalord479" text="{HERO1.LINK} と {HERO2.LINK} はもう {RELATIONSHIP} ではありません" />
+    <string id="Dramalord480" text="愛の衰退開始日" />
+    <string id="Dramalord481" text="愛が衰退するのに必要な、恋人同士が会っていない日数。" />
+    <string id="Dramalord482" text="ああ、こんにちは {TITLE}。まさか... 来るとは思っていませんでした..." />
   </strings>
 </base>

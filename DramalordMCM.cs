@@ -72,7 +72,7 @@ namespace Dramalord
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord288}Love Gain Multiplier", 1, 10, Order = 8, HintText = "{=Dramalord289}Love gained due to flirting or dates is muliplied by this value", RequireRestart = false)]
-        public int LoveGainMultiplier { get; set; } = 1;
+        public int LoveGainMultiplier { get; set; } = 2;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord290}Trust Gain Multiplier", 1, 10, Order = 9, HintText = "{=Dramalord291}Trust gained due to talking or dates is muliplied by this value", RequireRestart = false)]
@@ -81,6 +81,10 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord295}Toy Break Chance", 0, 100, Order = 10, HintText = "{=Dramalord296}Chance a toy can break while being used by a hero.", RequireRestart = false)]
         public int ToyBreakChance { get; set; } = 10;
+
+        [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
+        [SettingPropertyFloatingInteger("{=Dramalord480}Love Decay Start Day", 0, 100, Order = 10, HintText = "{=Dramalord481}Number of days lovers havent seen each others needed to make love decay.", RequireRestart = false)]
+        public int LoveDecayStartDay { get; set; } = 10;
 
         [SettingPropertyGroup("{=Dramalord007}Logging Setup")]
         [SettingPropertyBool("{=Dramalord008}Relationship Logs", Order = 1, HintText = "{=Dramalord009}Show relationship changes in the logs", RequireRestart = false)]
@@ -99,7 +103,7 @@ namespace Dramalord
         public bool ShowOnlyClanInteractions { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord016}General")]
-        [SettingPropertyFloatingInteger("{=Dramalord017}Chance Getting Caught", 0, 100, Order = 1, HintText = "{=Dramalord018}Chance of getting caught by partners while interacting wth other heroes", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord017}Chance Getting Caught", 0, 100, Order = 1, HintText = "{=Dramalord018}Chance of getting caught by partners while interacting with other heroes", RequireRestart = false)]
         public int ChanceGettingCaught { get; set; } = 30;
 
         [SettingPropertyGroup("{=Dramalord016}General")]
@@ -145,6 +149,10 @@ namespace Dramalord
         [SettingPropertyGroup("{=Dramalord313}Optional")]
         [SettingPropertyBool("{=Dramalord316}Show Captivity Logs", Order = 2, HintText = "{=Dramalord317}Enable this if you want to see logs when heroes are captured", RequireRestart = false)]
         public bool ShowCaptivityEvents { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord313}Optional")]
+        [SettingPropertyBool("{=Dramalord473}No Dialogs For Player", Order = 2, HintText = "{=Dramalord474}Enable this if you want dialogs but an auto result when talking/flirting/dating.", RequireRestart = false)]
+        public bool NoPlayerDialogs { get; set; } = false;
 
         public override string Id => DramalordSubModule.ModuleName;
 

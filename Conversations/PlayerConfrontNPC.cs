@@ -15,33 +15,95 @@ namespace Dramalord.Conversations
         private static Hero? TargetHero = null;
         private static HeroEvent? Event = null;
 
+        private static TextObject npc_starts_confrontation = new("{=Dramalord482}Oh, hello {TITLE}. I... didn't expect you...");
+        private static TextObject player_confrontation_date_player = new("{=Dramalord176}Apparently you and {HERO} are meeting privatly sometimes. Have you forgotten that you are {STATUS}?");
+        private static TextObject player_confrontation_intercourse = new("{=Dramalord177}So {HERO} was giving you a good time in bed, eh? You are {STATUS}, do you remember?");
+        private static TextObject player_confrontation_birth = new("{=Dramalord170}So you have given birth to {CHILD}. The child is apparently from {FATHER} and not from me. You are {STATUS}, right?");
+        private static TextObject player_confrontation_marriage = new("{=Dramalord171}You married {HERO} behind my back. Did you even think about telling me? You are {STATUS}!");
+        private static TextObject player_confrontation_engagement = new("{=Dramalord172}I heard that you and {HERO} are now engaged. Did you think I won't hear about it, {STATUS}?");
+        private static TextObject player_confrontation_abort = new("{=Dramalord183}Nevermind, {TITLE}. Farewell.");
+        private static TextObject npc_reply_confrontation_love = new("{=Dramalord184}Oh {TITLE}, I love you! I beg you, don't do anything you might regret later...");
+        private static TextObject npc_reply_confrontation_nocare = new("{=Dramalord185}Well, oh well, {TITLE}. So what now?");
+        private static TextObject npc_confrontation_result_ok = new("{=Dramalord180}I forgive you, {TITLE}. But I will not forget it.");
+        private static TextObject npc_confrontation_result_break = new("{=Dramalord181}I will not accept this, {TITLE}. I will end this relationship.");
+        private static TextObject npc_confrontation_result_break_other = new("{=Dramalord234}I give you one more chance, {TITLE}, but you will end it with {HERO}.");
+        private static TextObject npc_confrontation_result_leave = new("{=Dramalord233}Get out of my sight, {NAME}. Pack your stuff and leave.");
+
         internal static void Start(Hero hero, HeroEvent @event)
         {
-            //InformationManager.DisplayMessage(new InformationMessage($"{Hero.MainHero.Name} confronts {hero.Name}", new Color(1f, 0f, 0f)));
+            hero.GetRelationTo(Hero.MainHero).UpdateLove();
             TargetHero = hero;
             Event = @event;
             bool civilian = hero.CurrentSettlement != null;
+            SetupLines();
             CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(hero.CharacterObject, isCivilianEquipmentRequiredForLeader: civilian, noBodyguards: true, noHorse: true, noWeapon: true));
+        }
+
+        private static void SetupLines()
+        {
+            npc_starts_confrontation.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false, TargetHero));
+
+            Hero other = (Event.Actors.Hero1 == TargetHero) ? Event.Actors.Hero2 : Event.Actors.Hero1;
+            player_confrontation_date_player.SetTextVariable("HERO", other.Name);
+            player_confrontation_date_player.SetTextVariable("STATUS", RelationName(Hero.MainHero, TargetHero));
+            player_confrontation_intercourse.SetTextVariable("HERO", other.Name);
+            player_confrontation_intercourse.SetTextVariable("STATUS", RelationName(Hero.MainHero, TargetHero));
+
+            player_confrontation_birth.SetTextVariable("FATHER", Event.Actors.Hero2.Father?.Name ?? new TextObject("someone else"));
+            player_confrontation_birth.SetTextVariable("CHILD", Event.Actors.Hero2.Name);
+            player_confrontation_birth.SetTextVariable("STATUS", RelationName(Hero.MainHero, TargetHero));
+
+            player_confrontation_marriage.SetTextVariable("HERO", other.Name);
+            player_confrontation_marriage.SetTextVariable("STATUS", RelationName(Hero.MainHero, TargetHero));
+
+            player_confrontation_engagement.SetTextVariable("HERO", other.Name);
+            player_confrontation_engagement.SetTextVariable("STATUS", RelationName(Hero.MainHero, TargetHero));
+
+            player_confrontation_abort.SetTextVariable("TITLE", ConversationHelper.NpcTitle(false, TargetHero));
+
+            npc_reply_confrontation_love.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false, TargetHero));
+            npc_reply_confrontation_nocare.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false, TargetHero));
+
+            npc_confrontation_result_ok.SetTextVariable("TITLE", ConversationHelper.NpcTitle(false, TargetHero));
+            npc_confrontation_result_break.SetTextVariable("TITLE", ConversationHelper.NpcTitle(false, TargetHero));
+            npc_confrontation_result_break_other.SetTextVariable("TITLE", ConversationHelper.NpcTitle(false, TargetHero));
+            npc_confrontation_result_break_other.SetTextVariable("HERO", other.Name);
+
+            npc_confrontation_result_leave.SetTextVariable("TITLE", ConversationHelper.NpcTitle(false, TargetHero));
+
+            MBTextManager.SetTextVariable("npc_starts_confrontation", npc_starts_confrontation);
+            MBTextManager.SetTextVariable("player_confrontation_date_player", player_confrontation_date_player);
+            MBTextManager.SetTextVariable("player_confrontation_intercourse", player_confrontation_intercourse);
+            MBTextManager.SetTextVariable("player_confrontation_birth", player_confrontation_birth);
+            MBTextManager.SetTextVariable("player_confrontation_marriage", player_confrontation_marriage);
+            MBTextManager.SetTextVariable("player_confrontation_engagement", player_confrontation_engagement);
+            MBTextManager.SetTextVariable("player_confrontation_abort", player_confrontation_abort);
+            MBTextManager.SetTextVariable("npc_reply_confrontation_love", npc_reply_confrontation_love);
+            MBTextManager.SetTextVariable("npc_reply_confrontation_nocare", npc_reply_confrontation_nocare);
+            MBTextManager.SetTextVariable("npc_confrontation_result_ok", npc_confrontation_result_ok);
+            MBTextManager.SetTextVariable("npc_confrontation_result_break", npc_confrontation_result_break);
+            MBTextManager.SetTextVariable("npc_confrontation_result_break_other", npc_confrontation_result_break_other);
+            MBTextManager.SetTextVariable("npc_confrontation_result_leave", npc_confrontation_result_leave);
         }
 
         internal static void AddDialogs(CampaignGameStarter starter)
         {
-            starter.AddDialogLine("npc_starts_confrontation", "start", "player_declares_confrontation", "{=Dramalord166}Oh, hello {TITLE}. I... didn't expect you...", ConditionConfrontationStart, null, 120);
+            starter.AddDialogLine("npc_starts_confrontation", "start", "player_declares_confrontation", "{npc_starts_confrontation}[ib:nervous][if:convo_shocked]", ConditionConfrontationStart, null, 120);
 
-            starter.AddPlayerLine("player_confrontation_date_player", "player_declares_confrontation", "npc_reply_confrontation", "{=Dramalord176}Apparently you and {HERO} are meeting privatly sometimes. Have you forgotten that you are {STATUS}?", ConditionConfrontationDatePlayer, null);
-            starter.AddPlayerLine("player_confrontation_intercourse", "player_declares_confrontation", "npc_reply_confrontation", "{=Dramalord177}So {HERO} was giving you a good time in bed, eh? You are {STATUS}, do you remember?", ConditionConfrontationIntercoursePlayer, null);
-            starter.AddPlayerLine("player_confrontation_birth", "player_declares_confrontation", "npc_reply_confrontation", "{=Dramalord170}So you have given birth to {CHILD}. The child is apparently from {FATHER} and not from me. You are {STATUS}, right?", ConditionConfrontationBirthPlayer, null);
-            starter.AddPlayerLine("player_confrontation_marriage", "player_declares_confrontation", "npc_reply_confrontation", "{=Dramalord171}You married {HERO} behind my back. Did you even think about telling me? You are {STATUS}!", ConditionConfrontationMarriage, null);
-            starter.AddPlayerLine("player_confrontation_engagement", "player_declares_confrontation", "npc_reply_confrontation", "{=Dramalord172}I heard that you and {HERO} are now engaged. Did you think I won't hear about it, {STATUS}?", ConditionConfrontationEngagement, null);
-            starter.AddPlayerLine("player_confrontation_abort", "player_declares_confrontation", "close_window", "{=Dramalord183}Nevermind, {TITLE}. Farewell.", ConditionExitConversation, ConsequenceEndConversation);
+            starter.AddPlayerLine("player_confrontation_date_player", "player_declares_confrontation", "npc_reply_confrontation", "{player_confrontation_date_player}", ConditionConfrontationDatePlayer, null);
+            starter.AddPlayerLine("player_confrontation_intercourse", "player_declares_confrontation", "npc_reply_confrontation", "{player_confrontation_intercourse}", ConditionConfrontationIntercoursePlayer, null);
+            starter.AddPlayerLine("player_confrontation_birth", "player_declares_confrontation", "npc_reply_confrontation", "{player_confrontation_birth}", ConditionConfrontationBirthPlayer, null);
+            starter.AddPlayerLine("player_confrontation_marriage", "player_declares_confrontation", "npc_reply_confrontation", "{player_confrontation_marriage}", ConditionConfrontationMarriage, null);
+            starter.AddPlayerLine("player_confrontation_engagement", "player_declares_confrontation", "npc_reply_confrontation", "{player_confrontation_engagement}", ConditionConfrontationEngagement, null);
+            starter.AddPlayerLine("player_confrontation_abort", "player_declares_confrontation", "close_window", "{player_confrontation_abort}", ConditionExitConversation, ConsequenceEndConversation);
 
-            starter.AddDialogLine("npc_reply_confrontation_love", "npc_reply_confrontation", "player_summarize_confrontations", "{=Dramalord184}Oh {TITLE}, I love you! I beg you, don't do anything you might regret later...", ConditionReplyLove, null);
-            starter.AddDialogLine("npc_reply_confrontation_nocare", "npc_reply_confrontation", "player_summarize_confrontations", "{=Dramalord185}Well, oh well, {TITLE}. So what now?", ConditionReplyNoCare, null);
+            starter.AddDialogLine("npc_reply_confrontation_love", "npc_reply_confrontation", "player_summarize_confrontations", "{npc_reply_confrontation_love}[ib:nervous][if:convo_shocked]", ConditionReplyLove, null);
+            starter.AddDialogLine("npc_reply_confrontation_nocare", "npc_reply_confrontation", "player_summarize_confrontations", "{npc_reply_confrontation_nocare}[ib:normal2][if:convo_mocking_teasing]", ConditionReplyNoCare, null);
 
-            starter.AddPlayerLine("npc_confrontation_result_ok", "player_summarize_confrontations", "close_window", "{=Dramalord180}I forgive you, {TITLE}. But I will not forget it.", ConditionExitConversation, ConsequenceConfrontationResultOk);
-            starter.AddPlayerLine("npc_confrontation_result_break", "player_summarize_confrontations", "close_window", "{=Dramalord181}I will not accept this, {TITLE}. I will end this relationship.", ConditionExitConversation, ConsequenceConfrontationResultBreak);
-            starter.AddPlayerLine("npc_confrontation_result_break_other", "player_summarize_confrontations", "close_window", "{=Dramalord234}I give you one more chance, {TITLE}, but you will end it with {HERO}.", ConditionExitConversationLover, ConsequenceConfrontationResultBreakOther);
-            starter.AddPlayerLine("npc_confrontation_result_leave", "player_summarize_confrontations", "close_window", "{=Dramalord233}Get out of my sight, {NAME}. Pack your stuff and leave.", ConditionExitConversationLeave, ConsequenceConfrontationResultLeave);
+            starter.AddPlayerLine("npc_confrontation_result_ok", "player_summarize_confrontations", "close_window", "{npc_confrontation_result_ok}", ConditionExitConversation, ConsequenceConfrontationResultOk);
+            starter.AddPlayerLine("npc_confrontation_result_break", "player_summarize_confrontations", "close_window", "{npc_confrontation_result_break}", ConditionExitConversation, ConsequenceConfrontationResultBreak);
+            starter.AddPlayerLine("npc_confrontation_result_break_other", "player_summarize_confrontations", "close_window", "{npc_confrontation_result_break_other}", ConditionExitConversationLover, ConsequenceConfrontationResultBreakOther);
+            starter.AddPlayerLine("npc_confrontation_result_leave", "player_summarize_confrontations", "close_window", "{npc_confrontation_result_leave}", ConditionExitConversationLeave, ConsequenceConfrontationResultLeave);
         }
 
         private static TextObject RelationName(Hero hero, Hero partner)
@@ -60,108 +122,33 @@ namespace Dramalord.Conversations
             if (Hero.OneToOneConversationHero.IsDramalordLegit() && TargetHero == Hero.OneToOneConversationHero && Event != null)
             {
                 TargetHero = null;
-                MBTextManager.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
                 return true;
             }
             return false;
         }
 
-        private static bool ConditionConfrontationDatePlayer()
-        {
-            if (Event.Type == EventType.Date && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
-            {
-                Hero other = (Event.Actors.Hero1 == Hero.OneToOneConversationHero) ? Event.Actors.Hero2 : Event.Actors.Hero1;
-                MBTextManager.SetTextVariable("HERO", other.Name);
-                MBTextManager.SetTextVariable("STATUS", RelationName(Hero.MainHero, Hero.OneToOneConversationHero));
-                return true;
-            }
-            return false;
-        }
+        private static bool ConditionConfrontationDatePlayer() => Event.Type == EventType.Date && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero);
 
-        private static bool ConditionConfrontationIntercoursePlayer()
-        {
-            if (Event.Type == EventType.Intercourse && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
-            {
-                Hero other = (Event.Actors.Hero1 == Hero.OneToOneConversationHero) ? Event.Actors.Hero2 : Event.Actors.Hero1;
-                MBTextManager.SetTextVariable("HERO", other.Name);
-                MBTextManager.SetTextVariable("STATUS", RelationName(Hero.MainHero, Hero.OneToOneConversationHero));
-                return true;
-            }
-            return false;
-        }
+        private static bool ConditionConfrontationIntercoursePlayer() => Event.Type == EventType.Intercourse && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero);
 
-        private static bool ConditionConfrontationBirthPlayer()
-        {
-            if (Event.Type == EventType.Birth && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Event.Actors.Hero1 == Hero.OneToOneConversationHero)
-            {
-                MBTextManager.SetTextVariable("FATHER", Event.Actors.Hero2.Father.Name);
-                MBTextManager.SetTextVariable("CHILD", Event.Actors.Hero2.Name);
-                MBTextManager.SetTextVariable("STATUS", RelationName(Hero.MainHero, Hero.OneToOneConversationHero));
-                return true;
-            }
-            return false;
-        }
+        private static bool ConditionConfrontationBirthPlayer() => Event.Type == EventType.Birth && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Event.Actors.Hero1 == Hero.OneToOneConversationHero;
 
-        private static bool ConditionConfrontationMarriage()
-        {
-            if (Event.Type == EventType.Marriage && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
-            {
-                Hero other = (Event.Actors.Hero1 == Hero.OneToOneConversationHero) ? Event.Actors.Hero2 : Event.Actors.Hero1;
-                MBTextManager.SetTextVariable("HERO", other.Name);
-                MBTextManager.SetTextVariable("STATUS", RelationName(Hero.MainHero, Hero.OneToOneConversationHero));
-                return true;
-            }
-            return false;
-        }
+        private static bool ConditionConfrontationMarriage() => Event.Type == EventType.Marriage && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero);
 
-        private static bool ConditionConfrontationEngagement()
-        {
-            if (Event.Type == EventType.Betrothed && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
-            {
-                Hero other = (Event.Actors.Hero1 == Hero.OneToOneConversationHero) ? Event.Actors.Hero2 : Event.Actors.Hero1;
-                MBTextManager.SetTextVariable("HERO", other.Name);
-                MBTextManager.SetTextVariable("STATUS", RelationName(Hero.MainHero, Hero.OneToOneConversationHero));
-                return true;
-            }
-            return false;
-        }
+        private static bool ConditionConfrontationEngagement() => Event.Type == EventType.Betrothed && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero);
 
         private static bool ConditionExitConversation()
         {
-            MBTextManager.SetTextVariable("TITLE", RelationName(Hero.MainHero, Hero.OneToOneConversationHero)); 
-            Hero other = (Event.Actors.Hero1 == Hero.OneToOneConversationHero) ? Event.Actors.Hero2 : Event.Actors.Hero1;
             return true;
         }
 
-        private static bool ConditionExitConversationLover()
-        {
-            if(Event.Type == EventType.Intercourse || Event.Type == EventType.Date || Event.Type == EventType.Betrothed || Event.Type == EventType.Marriage)
-            {
-                MBTextManager.SetTextVariable("TITLE", RelationName(Hero.MainHero, Hero.OneToOneConversationHero));
-                Hero other = (Event.Actors.Hero1 == Hero.OneToOneConversationHero) ? Event.Actors.Hero2 : Event.Actors.Hero1;
-                MBTextManager.SetTextVariable("HERO", other.Name);
-                return true;
-            }
-            return false;
-        }
+        private static bool ConditionExitConversationLover() => Event.Type == EventType.Intercourse || Event.Type == EventType.Date || Event.Type == EventType.Betrothed || Event.Type == EventType.Marriage;
 
-        private static bool ConditionExitConversationLeave()
-        {
-            MBTextManager.SetTextVariable("NAME", Hero.OneToOneConversationHero.Name);
-            return Hero.OneToOneConversationHero.Clan == Hero.MainHero.Clan;
-        }
+        private static bool ConditionExitConversationLeave() => Hero.OneToOneConversationHero.Clan == Hero.MainHero.Clan;
 
-        private static bool ConditionReplyLove()
-        {
-            MBTextManager.SetTextVariable("TITLE", RelationName(Hero.OneToOneConversationHero, Hero.MainHero));
-            return Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove;
-        }
+        private static bool ConditionReplyLove() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinDatingLove;
 
-        private static bool ConditionReplyNoCare()
-        {
-            MBTextManager.SetTextVariable("TITLE", RelationName(Hero.OneToOneConversationHero, Hero.MainHero));
-            return Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove;
-        }
+        private static bool ConditionReplyNoCare() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove < DramalordMCM.Instance.MinDatingLove;
 
         private static void ConsequenceEndConversation()
         {

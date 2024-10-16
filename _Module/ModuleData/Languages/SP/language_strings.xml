@@ -19,7 +19,6 @@
     <string id="Dramalord013" text="comprometido" />
     <string id="Dramalord014" text="casado" />
     <string id="Dramalord015" text="{HERO1.LINK} y {HERO2.LINK} ahora son {RELATIONSHIP}" />
-    <string id="Dramalord015" text="{HERO1.LINK} y {HERO2.LINK} o ya no {RELATIONSHIP}" />
     <cadena id="Dramalord016" texto="General" />
     <string id="Dramalord017" text="Posibilidad de ser atrapado" />
     <string id="Dramalord018" text="Posibilidad de ser atrapado por compañeros mientras interactúas con otros héroes" />
@@ -436,5 +435,47 @@
     <string id="Dramalord438" text="Uh... bueno..." />
     <string id="Dramalord439" text="Convenciste exitosamente a {HERO.LINK}. (Ama {LOVE}, Confía {TRUST})" />
     <string id="Dramalord440" text="No lograste convencer a {HERO.LINK}. (Ama {LOVE}, Confía {TRUST})" />
+    <string id="Dramalord441" text="{TITLE}, me gustaría incorporar a uno de tus hijos a mi familia." />
+    <string id="Dramalord442" text="Sería un honor, {TITLE}. ¿A quién te gustaría incorporar a tu familia?" />
+    <string id="Dramalord443" text="Lo siento, {TITLE}. Quiero que mis hijos tengan la libertad de elegir cuando sean mayores de edad." />
+    <string id="Dramalord444" text="¿Estás seguro de que quieres incorporar a mi hijo {CHILD} a tu familia?" />
+    <string id="Dramalord445" text="Se sabe que {NAME} come mucho y hace ejercicio con regularidad." />
+    <string id="Dramalord446" text="Se sabe que {NAME} apenas come y hace ejercicio con regularidad." />
+    <string id="Dramalord447" text="Se sabe que {NAME} come mucho y rara vez hace ejercicio." />
+    <string id="Dramalord448" text="Se sabe que {NAME} apenas come y rara vez hace ejercicio." />
+    <string id="Dramalord449" text="Se sabe que {NAME} rara vez hace ejercicio." />
+    <string id="Dramalord450" text="Se sabe que {NAME} apenas come." />
+    <string id="Dramalord451" text="Sabes, no tuve una infancia agradable, crecí en un orfanato." />
+    <string id="Dramalord452" text="El líder de la banda local nos alimentaba a duras penas y nos mandaba a robar en cuanto éramos capaces de caminar. Si no lo hacíamos bien, nos pegaban." />
+    <string id="Dramalord453" text="En cuanto me crecieron las tetas, me mandaban a la taberna. Tenía que entretener a hombres repugnantes y hacerles gastar su dinero en bebidas... o en mí." />
+    <string id="Dramalord454" text="Una vez había un tipo viejo de cara naranja que me agarraba constantemente de los... ya sabes... sin pagar. Así que le di una patada en los huevos y huí de la ciudad." />
+    <string id="Dramalord455" text="De todos modos, pensé que apuñalar era mejor que ser apuñalado... si me entiendes. Así que lo convertí en mi nuevo negocio." />
+    <string id="Dramalord456" text="En cuanto me creció el vello de las axilas, me enviaron al castillo como sirviente de señoras mayores. Para entretenerme mientras sus maridos estaban ocupados con la guerra." />
+    <string id="Dramalord457" text="Un día, mientras estaba... plantando plántulas en el bosque plateado, el corazón del... dueño del bosque se detuvo. Tuve que huir y abandonar la ciudad." />
+    <string id="Dramalord458" text="Así que, los tiempos en que trabajaba con mi madera se acabaron, cambié a la espada y el hacha. Resulta que también soy bastante bueno con eso." />
+    <string id="Dramalord459" text="Supongo que Lord Stickyfinger no merecía algo mejor." />
+    <string id="Dramalord460" text="¡Ay! Ese es un castigo severo." />
+    <string id="Dramalord461" text="Arar la tierra seca parece un trabajo duro." />
+    <string id="Dramalord462" text="Bueno, la madera joven no pertenece a los bosques antiguos, ¿verdad?" />
+    <string id="Dramalord463" text="Deseo adquirir ciertos bienes..." />
+    <string id="Dramalord464" text="Muy bien. ¿En qué estás interesado?" />
+    <string id="Dramalord465" text="Algo largo y redondeado que pueda soportar enfrentamientos con ambientes húmedos." />
+    <string id="Dramalord466" text="Algo suave y húmedo en lo que puedas meter el dedo varias veces." />
+    <string id="Dramalord467" text="Puedo venderte un {BIEN} o más si quieres." />
+    <string id="Dramalord468" text="Uno servirá." />
+    <string id="Dramalord469" text="Cinco deberían ser suficientes." />
+    <string id="Dramalord470" text="Necesitaría al menos diez." />
+    <string id="Dramalord471" text="¡No hay problema! Te costaría {AMOUNT}{GOLD_ICON}. Por supuesto, a un precio especial." />
+    <string id="Dramalord472" text="Fue un placer hacer negocios contigo." />
+    <string id="Dramalord473" text="Sin diálogos para el jugador" />
+    <string id="Dramalord474" text="Habilita esto si quieres diálogos pero un resultado automático al hablar/coquetear/salir con alguien." />
+    <string id="Dramalord475" text="Ahora eres más atractivo para {HERO.LINK}. ({NUMBER})" />
+    <string id="Dramalord476" text="Ahora eres menos atractivo para {HERO.LINK}. ({NUMBER})" />
+    <string id="Dramalord477" text="{HERO.LINK} siente más simpatía por ti. ({NUMBER})" />
+    <string id="Dramalord478" text="{HERO.LINK} siente menos simpatía por ti. ({NUMBER})" />
+    <string id="Dramalord479" text="{HERO1.LINK} y {HERO2.LINK} o ya no {RELATIONSHIP}" />
+    <string id="Dramalord480" text="Día de inicio de la decadencia del amor" />
+    <string id="Dramalord481" text="Número de días que los amantes no se han visto necesarios para que el amor decaiga." />
+    <string id="Dramalord482" text="Oh, hola {TITLE}. No te esperaba..." />
   </strings>
 </base>
