@@ -66,7 +66,7 @@ namespace Dramalord.Patches
 
                 __instance.Stats.Add(new StringPairItemVM(attraction.ToString() + ":", (__instance.IsInformationHidden || !desires.InfoKnown) ? hidden : hero.GetAttractionTo(Hero.MainHero).ToString()));
                 __instance.Stats.Add(new StringPairItemVM(friendship.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetRelationTo(Hero.MainHero).Trust.ToString()));
-                __instance.Stats.Add(new StringPairItemVM(love.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetRelationTo(Hero.MainHero).Love.ToString()));
+                __instance.Stats.Add(new StringPairItemVM(love.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetRelationTo(Hero.MainHero).CurrentLove.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(sympathy.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetSympathyTo(Hero.MainHero).ToString()));
                 __instance.Stats.Add(new StringPairItemVM(horny.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetDesires().Horny.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(fertile.ToString() + ":", __instance.IsInformationHidden ? hidden : (hero.IsFertile()) ? yes : no));

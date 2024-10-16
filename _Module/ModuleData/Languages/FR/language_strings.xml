@@ -474,5 +474,8 @@
     <string id="Dramalord477" text="{HERO.LINK} a plus de sympathie pour vous. ({NUMBER})" />
     <string id="Dramalord478" text="{HERO.LINK} a moins de sympathie pour vous. ({NUMBER})" />
     <string id="Dramalord479" text="{HERO1.LINK} et {HERO2.LINK} ou plus {RELATIONHIP}" />
+    <string id="Dramalord480" text="Jour de début de la décomposition de l'amour" />
+    <string id="Dramalord481" text="Nombre de jours pendant lesquels les amoureux ne se sont pas vus nécessaires pour que l'amour se décompose." />
+    <string id="Dramalord482" text="Oh, bonjour {TITLE}. Je... ne t'attendais pas..." />
   </strings>
 </base>

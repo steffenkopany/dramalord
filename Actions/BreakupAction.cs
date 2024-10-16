@@ -18,9 +18,10 @@ namespace Dramalord.Actions
         {
             HeroRelation relation = hero.GetRelationTo(target);
 
+            relation.UpdateLove();
             RelationshipType oldRelationship = relation.Relationship;
             relation.Relationship = RelationshipType.None;
-            relation.Love = (relation.Love > 0) ? 0 : relation.Love;
+            relation.Love = (relation.CurrentLove > 0) ? 0 : relation.CurrentLove;
             relation.Trust = (relation.Trust > 0) ? 0 : relation.Trust;
 
             if(hero.Spouse == target)

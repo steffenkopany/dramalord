@@ -124,7 +124,7 @@ namespace Dramalord.Behavior
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Marriage, -1);
                                     }
-                                    if (!isHorny && relation.Love >= DramalordMCM.Instance.MinDatingLove)
+                                    if (!isHorny && relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Date, -1);
                                     }
@@ -139,11 +139,11 @@ namespace Dramalord.Behavior
                                 }
                                 else if (relation.Relationship == RelationshipType.Lover)
                                 {
-                                    if (!isHorny && (!isMarried || selectedTarget == Hero.MainHero) && relation.Love >= DramalordMCM.Instance.MinMarriageLove && (hero.IsFemale != selectedTarget.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage))
+                                    if (!isHorny && (!isMarried || selectedTarget == Hero.MainHero) && relation.CurrentLove >= DramalordMCM.Instance.MinMarriageLove && (hero.IsFemale != selectedTarget.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage))
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Engagement, -1);
                                     }
-                                    if (!isHorny && relation.Love >= DramalordMCM.Instance.MinDatingLove)
+                                    if (!isHorny && relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Date, -1);
                                     }
@@ -158,7 +158,7 @@ namespace Dramalord.Behavior
                                 }
                                 else if (relation.Relationship == RelationshipType.Spouse)
                                 {
-                                    if (!isHorny && relation.Love >= DramalordMCM.Instance.MinDatingLove)
+                                    if (!isHorny && relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Date, -1);
                                     }
@@ -166,18 +166,18 @@ namespace Dramalord.Behavior
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Intercourse, -1);
                                     }
-                                    else if(relation.Love <= 0)
+                                    else if(relation.CurrentLove <= 0)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.BreakUp, -1);
                                     }
                                 }
                                 else if (relation.Relationship == RelationshipType.FriendWithBenefits)
                                 {
-                                    if(!isHorny && !isOpen && hero.GetAttractionTo(selectedTarget) >= DramalordMCM.Instance.MinAttraction && relation.Love < DramalordMCM.Instance.MinDatingLove)
+                                    if(!isHorny && !isOpen && hero.GetAttractionTo(selectedTarget) >= DramalordMCM.Instance.MinAttraction && relation.CurrentLove < DramalordMCM.Instance.MinDatingLove)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Flirt, -1);
                                     }
-                                    else if (!isHorny && !isOpen && relation.Love >= DramalordMCM.Instance.MinDatingLove)
+                                    else if (!isHorny && !isOpen && relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Date, -1);
                                     }
@@ -196,15 +196,15 @@ namespace Dramalord.Behavior
                                 }
                                 else if (relation.Relationship == RelationshipType.Friend)
                                 {
-                                    if (!isHorny && !isOpen && hero.GetAttractionTo(selectedTarget) >= DramalordMCM.Instance.MinAttraction && relation.Love < DramalordMCM.Instance.MinDatingLove)
+                                    if (!isHorny && !isOpen && hero.GetAttractionTo(selectedTarget) >= DramalordMCM.Instance.MinAttraction && relation.CurrentLove < DramalordMCM.Instance.MinDatingLove && !hero.IsRelativeOf(selectedTarget))
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Flirt, -1);
                                     }
-                                    else if (!isHorny && !isOpen && relation.Love >= DramalordMCM.Instance.MinDatingLove)
+                                    else if (!isHorny && !isOpen && relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Date, -1);
                                     }
-                                    else if (isHorny && isOpen && isNotConscientous && isExtrovert && desires.Horny == 100)
+                                    else if (isHorny && isOpen && isNotConscientous && isExtrovert && desires.Horny == 100 && !hero.IsRelativeOf(selectedTarget))
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Intercourse, -1);
                                     }
@@ -219,15 +219,15 @@ namespace Dramalord.Behavior
                                 }
                                 else if (relation.Relationship == RelationshipType.None && (isHorny || isOpen || isExtrovert || isNotConscientous))
                                 {
-                                    if (hero.GetAttractionTo(selectedTarget) >= DramalordMCM.Instance.MinAttraction && relation.Love < DramalordMCM.Instance.MinDatingLove)
+                                    if (hero.GetAttractionTo(selectedTarget) >= DramalordMCM.Instance.MinAttraction && relation.CurrentLove < DramalordMCM.Instance.MinDatingLove && !hero.IsRelativeOf(selectedTarget))
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Flirt, -1);
                                     }
-                                    else if (relation.Love >= DramalordMCM.Instance.MinDatingLove)
+                                    else if (relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove)
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Date, -1);
                                     }
-                                    else if (isHorny && isOpen && isNotConscientous && isExtrovert && desires.Horny == 100 && selectedTarget == Hero.MainHero)
+                                    else if (isHorny && isOpen && isNotConscientous && isExtrovert && desires.Horny == 100 && selectedTarget == Hero.MainHero && !hero.IsRelativeOf(selectedTarget))
                                     {
                                         DramalordIntentions.Instance.AddIntention(hero, selectedTarget, IntentionType.Intercourse, -1);
                                     }
@@ -292,7 +292,7 @@ namespace Dramalord.Behavior
                                 {
                                     DateAction.Apply(hero, intention.Target, closeHeroes);
 
-                                    if (!hero.IsEmotionalWith(intention.Target) && hero.GetRelationTo(intention.Target).Love >= DramalordMCM.Instance.MinDatingLove)
+                                    if (!hero.IsEmotionalWith(intention.Target) && hero.GetRelationTo(intention.Target).CurrentLove >= DramalordMCM.Instance.MinDatingLove)
                                     {
                                         LoverAction.Apply(hero, intention.Target);
                                     }
@@ -407,7 +407,7 @@ namespace Dramalord.Behavior
             Hero target = targets.GetRandomElement();
             double daysPassed = CampaignTime.Now.ToDays - hero.GetRelationTo(target).LastInteraction;
             double daysNecessary = (hero == Hero.MainHero) ? DramalordMCM.Instance.DaysBetweenPlayerInteractions : DramalordMCM.Instance.DaysBetweenInteractions;
-            if (daysPassed > daysNecessary)
+            if (daysPassed >= daysNecessary)
             {
                 return target;
             }

@@ -20,14 +20,14 @@ namespace Dramalord.Actions
             hero.GetDesires().Horny += heroAttraction / 10;
             target.GetDesires().Horny += tagetAttraction / 10;
 
+            int attractionBonus = ((heroAttraction / 20) + (tagetAttraction / 20)) / 2;
             int loveGain = 0;
-            if((heroAttraction >= DramalordMCM.Instance.MinAttraction && tagetAttraction >= DramalordMCM.Instance.MinAttraction) || hero == Hero.MainHero || target == Hero.MainHero)
+            heroRelation.UpdateLove();
+            if ((heroAttraction >= DramalordMCM.Instance.MinAttraction && tagetAttraction >= DramalordMCM.Instance.MinAttraction) || hero == Hero.MainHero || target == Hero.MainHero)
             {
-                loveGain = (changeValue == -1000) ? hero.GetSympathyTo(target) * DramalordMCM.Instance.LoveGainMultiplier : changeValue * DramalordMCM.Instance.LoveGainMultiplier;
+                loveGain = (changeValue == -1000) ? (hero.GetSympathyTo(target) + attractionBonus) * DramalordMCM.Instance.LoveGainMultiplier : changeValue * DramalordMCM.Instance.LoveGainMultiplier;
                 heroRelation.Love += loveGain;
             }
-            
-            heroRelation.LastInteraction = CampaignTime.Now.ToDays;
 
             if(hero == Hero.MainHero || target == Hero.MainHero)
             {

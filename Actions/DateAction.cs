@@ -16,17 +16,20 @@ namespace Dramalord.Actions
             HeroRelation heroRelation = hero.GetRelationTo(target); 
 
             int sympathy = hero.GetSympathyTo(target);
-            int heroAttraction = hero.GetAttractionTo(target) / 10;
-            int tagetAttraction = target.GetAttractionTo(hero) / 10;
+            int heroAttraction = hero.GetAttractionTo(target);
+            int tagetAttraction = target.GetAttractionTo(hero);
 
-            hero.GetDesires().Horny += heroAttraction;
-            target.GetDesires().Horny += tagetAttraction;
+            hero.GetDesires().Horny += heroAttraction / 10;
+            target.GetDesires().Horny += tagetAttraction / 10;
 
-            int loveGain = (changeValue == -1000) ? (sympathy + ((heroAttraction + tagetAttraction) / 20)) * DramalordMCM.Instance.LoveGainMultiplier : (changeValue + ((heroAttraction + tagetAttraction) / 20)) * DramalordMCM.Instance.LoveGainMultiplier;
+            int attractionBonus = ((heroAttraction / 20) + (tagetAttraction / 20)) / 2;
+
+            int loveGain = (changeValue == -1000) ? (hero.GetSympathyTo(target) + attractionBonus) * DramalordMCM.Instance.LoveGainMultiplier : changeValue * DramalordMCM.Instance.LoveGainMultiplier;
             int trustGain = (changeValue == -1000) ? sympathy * DramalordMCM.Instance.TrustGainMultiplier : changeValue * DramalordMCM.Instance.TrustGainMultiplier;
+
+            heroRelation.UpdateLove();
             heroRelation.Love += loveGain;
             heroRelation.Trust += trustGain;
-            heroRelation.LastInteraction = CampaignTime.Now.ToDays;
 
             if(hero == Hero.MainHero || target == Hero.MainHero)
             {

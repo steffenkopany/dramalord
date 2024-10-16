@@ -21,8 +21,12 @@ namespace Dramalord.Actions
             heroDesires.Horny -= targetDesires.IntercourseSkill * heroDesires.Libido;
             targetDesires.Horny -= heroDesires.IntercourseSkill * targetDesires.Libido;
 
-            //heroRelation.Tension -= 100 - ((targetDesires.IntercourseSkill + heroDesires.IntercourseSkill) / 2);
-            heroRelation.LastInteraction = CampaignTime.Now.ToDays;
+            heroRelation.UpdateLove();
+
+            heroRelation.Love += (heroDesires.IntercourseSkill + targetDesires.IntercourseSkill) /20;
+
+            heroDesires.IntercourseSkill += (targetDesires.IntercourseSkill > heroDesires.IntercourseSkill) ? 2 : 1;
+            targetDesires.IntercourseSkill += (targetDesires.IntercourseSkill < heroDesires.IntercourseSkill) ? 2 : 1;
 
             if (target == Hero.MainHero || hero == Hero.MainHero)
             {

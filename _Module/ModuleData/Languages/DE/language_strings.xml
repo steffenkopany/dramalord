@@ -474,5 +474,8 @@
     <string id="Dramalord477" text="{HERO.LINK} hat mehr Sympathie für Sie. ({NUMBER})" />
     <string id="Dramalord478" text="{HERO.LINK} hat weniger Sympathie für Sie. ({NUMBER})" />
     <string id="Dramalord479" text="{HERO1.LINK} und {HERO2.LINK} oder nicht mehr {RELATIONSHIP}" />
+    <string id="Dramalord480" text="Tag des Beginns des Liebesverfalls" />
+    <string id="Dramalord481" text="Anzahl der Tage, die Liebende einander nicht gesehen haben, bis die Liebe vergeht." />
+    <string id="Dramalord482" text="Oh, hallo {TITLE}. Ich... habe dich nicht erwartet..." />
   </strings>
 </base>

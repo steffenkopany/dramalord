@@ -102,6 +102,7 @@ namespace Dramalord.Actions
             secondHero.ExSpouses.Clear();
             secondHero.ExSpouses.AddRange(ex2);
 
+            firstHero.GetRelationTo(secondHero).UpdateLove();
             firstHero.GetRelationTo(secondHero).Relationship = RelationshipType.Spouse;
 
 

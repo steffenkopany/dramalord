@@ -15,6 +15,7 @@ namespace Dramalord.Actions
     {
         internal static bool Apply(Hero hero, Hero target, List<Hero> closeHeroes)
         {
+            hero.GetRelationTo(target).UpdateLove();
             hero.GetRelationTo(target).Relationship = RelationshipType.Betrothed;
 
             if (hero == Hero.MainHero || target == Hero.MainHero)

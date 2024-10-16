@@ -474,5 +474,8 @@
     <string id="Dramalord477" text="{HERO.LINK}가 당신에게 더 많은 동정심을 가지고 있습니다. ({NUMBER})" />
     <string id="Dramalord478" text="{HERO.LINK}가 당신에게 덜 동정심을 가지고 있습니다. ({NUMBER})" />
     <string id="Dramalord479" text="{HERO1.LINK} 및 {HERO2.LINK} 또는 더 이상 {RELATIONSHIP}이 아님" />
+    <string id="Dramalord480" text="사랑의 붕괴 시작일" />
+    <string id="Dramalord481" text="사랑의 붕괴를 일으키는 데 필요한 연인의 서로 보지 못한 날짜 수." />
+    <string id="Dramalord482" text="오, 안녕하세요 {TITLE}. 저는... 예상하지 못했어요..." />
   </strings>
 </base>

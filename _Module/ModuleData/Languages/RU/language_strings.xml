@@ -474,5 +474,8 @@
     <string id="Dramalord477" text="{HERO.LINK} испытывает к вам больше симпатии. ({NUMBER})" />
     <string id="Dramalord478" text="{HERO.LINK} испытывает к вам меньше симпатии. ({NUMBER})" />
     <string id="Dramalord479" text="{HERO1.LINK} и {HERO2.LINK} или больше не {RELATIONSHIP}" />
+    <string id="Dramalord480" text="День начала распада любви" />
+    <string id="Dramalord481" text="Количество дней, в течение которых влюбленные не виделись, необходимое для распада любви." />
+    <string id="Dramalord482" text="О, привет {TITLE}. Я... не ожидал тебя..." />
   </strings>
 </base>

@@ -158,7 +158,7 @@
     <string id="Dramalord161" text="Eşcinsel" />
     <string id="Dramalord162" text="Çocuk Günlükleri" />
     <string id="Dramalord163" text="Günlüklerde doğum, gebelik veya yetimhane olaylarını göster" />
-    <string id="Dramalord164" text="{HERO1.LINK}, {HERO2.LINK} tarafından emprenye edildi" />
+    <string id="Dramalord164" text="{HERO1.LINK}, {HERO2.LINK} tarafından döllendi" />
     <string id="Dramalord165" text="{CHILD.LINK}, {HERO1.LINK} ve {HERO2.LINK}'nin çocuğu olarak doğdu" />
     <string id="Dramalord166" text="Selamlar, {TITLE}, beni tanımıyorsun. Ben {CLAN}'ın {HERO.LINK}'uyum." />
     <string id="Dramalord167" text="İyi günler {TITLE}. İyi ki seni yakaladım." />
@@ -504,5 +504,8 @@
     <string id="Dramalord477" text="{HERO.LINK} size daha fazla sempati duyuyor. ({NUMBER})" />
     <string id="Dramalord478" text="{HERO.LINK} size daha az sempati duyuyor. ({NUMBER})" />
     <string id="Dramalord479" text="{HERO1.LINK} ve {HERO2.LINK} veya artık {RELATIONSHIP} değil" />
+    <string id="Dramalord480" text="Aşkın Çürümesinin Başladığı Gün" />
+    <string id="Dramalord481" text="Aşkın çürümesi için aşıkların birbirlerini görmediği gün sayısı." />
+    <string id="Dramalord482" text="Ah, merhaba {TITLE}. Ben... seni beklemiyordum..." />
   </strings>
 </base>

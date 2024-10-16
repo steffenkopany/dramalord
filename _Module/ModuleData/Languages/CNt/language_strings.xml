@@ -474,5 +474,8 @@
     <string id="Dramalord477" text="{HERO.LINK}對你的認同感提升了。({NUMBER})" />
     <string id="Dramalord478" text="{HERO.LINK}對你的認同感下降了。({NUMBER})" />
     <string id="Dramalord479" text="{HERO1.LINK}和{HERO2.LINK}不再是{RELATIONSHIP}" />
+    <string id="Dramalord480" text="愛情保質期" />
+    <string id="Dramalord481" text="當英雄間超過一定天數未見面，愛慕值將會依天數衰減。（例：若10天未見將衰減10點愛慕值）" />
+    <string id="Dramalord482" text="哦，你好{TITLE}。我...沒想到你..." />
   </strings>
 </base>

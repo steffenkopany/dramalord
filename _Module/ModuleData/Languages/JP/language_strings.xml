@@ -474,5 +474,8 @@
     <string id="Dramalord477" text="{HERO.LINK} はあなたにもっと共感しています。({NUMBER})" />
     <string id="Dramalord478" text="{HERO.LINK} はあなたにあまり共感していません。({NUMBER})" />
     <string id="Dramalord479" text="{HERO1.LINK} と {HERO2.LINK} はもう {RELATIONSHIP} ではありません" />
+    <string id="Dramalord480" text="愛の衰退開始日" />
+    <string id="Dramalord481" text="愛が衰退するのに必要な、恋人同士が会っていない日数。" />
+    <string id="Dramalord482" text="ああ、こんにちは {TITLE}。まさか... 来るとは思っていませんでした..." />
   </strings>
 </base>

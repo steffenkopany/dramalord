@@ -81,7 +81,6 @@ namespace Dramalord.Data
     {
         private int _trust;
         private int _love;
-        //private int _tension;
         private double _lastInteraction;
         private RelationshipType _relationship;
 
@@ -99,14 +98,20 @@ namespace Dramalord.Data
             set => _love = MBMath.ClampInt(value, -100, 100);
         }
 
-        /*
-        [SaveableProperty(3)]
-        internal int Tension
+        internal int CurrentLove
         {
-            get => _tension;
-            set => _tension = MBMath.ClampInt(value, -100, 100);
+            get => (_lastInteraction != 0 && CampaignTime.Now.ToDays - _lastInteraction > DramalordMCM.Instance.LoveDecayStartDay) ? MBMath.ClampInt(_love - (int)(CampaignTime.Now.ToDays - (_lastInteraction + DramalordMCM.Instance.LoveDecayStartDay)), 0, 100) : _love;
         }
-        */
+
+        internal void UpdateLove()
+        {
+            if(_lastInteraction != 0 && CampaignTime.Now.ToDays - _lastInteraction > DramalordMCM.Instance.LoveDecayStartDay)
+            {
+                int result = Love - (int)(CampaignTime.Now.ToDays - (_lastInteraction + DramalordMCM.Instance.LoveDecayStartDay));
+                Love = (Love > 0 && result >= 0) ? result : (Love > 0) ? 0 : Love;
+            }
+            _lastInteraction = CampaignTime.Now.ToDays;
+        }
 
         [SaveableProperty(4)]
         internal double LastInteraction { get => _lastInteraction; set => _lastInteraction = value; }
@@ -116,11 +121,10 @@ namespace Dramalord.Data
         [SaveableProperty(5)]
         internal int RelationshipAsInt { get => (int)_relationship; set => _relationship = (RelationshipType) value; }
 
-        internal HeroRelation(int friendship, int love, /*int tension,*/ RelationshipType relationship)
+        internal HeroRelation(int friendship, int love, RelationshipType relationship)
         {
             Trust = friendship;
             Love = love;
-            //Tension = tension;
             LastInteraction = 0;
             Relationship = relationship;
         }
