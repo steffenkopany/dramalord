@@ -86,6 +86,7 @@ namespace Dramalord.Data
             ConstructContainerDefinition(typeof(List<HeroIntentionSave>));
             ConstructContainerDefinition(typeof(Dictionary<string, List<HeroIntentionSave>>));
             ConstructContainerDefinition(typeof(Dictionary<string, VisitQuest>));
+            ConstructContainerDefinition(typeof(Dictionary<string,Dictionary<string, HeroRelation>>));
         }
     }
 }

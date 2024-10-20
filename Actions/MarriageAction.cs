@@ -33,8 +33,8 @@ namespace Dramalord.Actions
 
             if (firstHero.Clan == null && secondHero.Clan == null)
             {
-                Clan? targetClan = firstHero.GetAllRelations().Where(keyvalue => keyvalue.Value.Relationship == RelationshipType.Friend).Select(keyvalue => (keyvalue.Key.Hero1 == firstHero) ? keyvalue.Key.Hero2 : keyvalue.Key.Hero1).FirstOrDefault(selected => selected.Clan != null && selected.Clan != Clan.PlayerClan)?.Clan
-                    ?? secondHero.GetAllRelations().Where(keyvalue => keyvalue.Value.Relationship == RelationshipType.Friend).Select(keyvalue => (keyvalue.Key.Hero1 == secondHero) ? keyvalue.Key.Hero2 : keyvalue.Key.Hero1).FirstOrDefault(selected => selected.Clan != null && selected.Clan != Clan.PlayerClan)?.Clan;
+                Clan? targetClan = firstHero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Friend).Select(keyvalue => keyvalue.Key).FirstOrDefault(relation => relation.Clan != null && relation.Clan != Clan.PlayerClan)?.Clan
+                    ?? secondHero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Friend).Select(keyvalue => keyvalue.Key).FirstOrDefault(selected => selected.Clan != null && selected.Clan != Clan.PlayerClan)?.Clan;
 
                 if (targetClan != null)
                 {

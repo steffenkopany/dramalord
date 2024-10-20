@@ -511,7 +511,7 @@ namespace Dramalord.Conversations
 
         private static bool ConditionPlayerCanAdopt()
         {
-            Hero result = Hero.OneToOneConversationHero.Children.FirstOrDefault(child => child.Clan == Clan.PlayerClan && child.Occupation == Occupation.Wanderer);
+            Hero? result = Hero.OneToOneConversationHero.Children.FirstOrDefault(child => child.Clan == Clan.PlayerClan && child.Occupation == Occupation.Wanderer);
             return result != null;
         }
 

@@ -36,7 +36,7 @@ namespace Dramalord.Extensions
             return DramalordRelations.Instance.GetRelation(hero, target);
         }
 
-        public static IEnumerable<KeyValuePair<HeroTuple, HeroRelation>> GetAllRelations(this Hero hero)
+        public static Dictionary<Hero, HeroRelation> GetAllRelations(this Hero hero)
         {
             return DramalordRelations.Instance.GetAllRelations(hero);
         }

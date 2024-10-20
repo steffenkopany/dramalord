@@ -79,7 +79,7 @@ namespace Dramalord.Patches
             }
             if(hero != null)
             { 
-                foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Spouse).Select(relation => (relation.Key.Hero1 == hero) ? relation.Key.Hero2.CharacterObject : relation.Key.Hero1.CharacterObject).ToList().Distinct())
+                foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Spouse).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                 {
                     if (charObj.IsHero && charObj.HeroObject != hero)
                     {
@@ -95,7 +95,7 @@ namespace Dramalord.Patches
 
                 if (DramalordMCM.Instance.ShowLovers)
                 {
-                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Lover).Select(relation => (relation.Key.Hero1 == hero) ? relation.Key.Hero2.CharacterObject : relation.Key.Hero1.CharacterObject).ToList().Distinct())
+                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Lover).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                     {
                         if (charObj.IsHero)
                         {
@@ -112,7 +112,7 @@ namespace Dramalord.Patches
 
                 if (DramalordMCM.Instance.ShowFriendsWithBenefits)
                 {
-                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.FriendWithBenefits).Select(relation => (relation.Key.Hero1 == hero) ? relation.Key.Hero2.CharacterObject : relation.Key.Hero1.CharacterObject).ToList().Distinct())
+                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.FriendWithBenefits).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                     {
                         if (charObj.IsHero)
                         {
@@ -129,7 +129,7 @@ namespace Dramalord.Patches
 
                 if (DramalordMCM.Instance.ShowBetrotheds)
                 {
-                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Betrothed).Select(relation => (relation.Key.Hero1 == hero) ? relation.Key.Hero2.CharacterObject : relation.Key.Hero1.CharacterObject).ToList().Distinct())
+                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Betrothed).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                     {
                         if (charObj.IsHero)
                         {

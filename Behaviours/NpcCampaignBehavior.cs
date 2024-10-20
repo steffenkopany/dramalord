@@ -361,7 +361,7 @@ namespace Dramalord.Behavior
                             {
                                 LeaveClanAction.Apply(hero, hero, false);
                                 Clan? targetClan = hero.GetAllRelations().Where(keyvalue => keyvalue.Value.Relationship == RelationshipType.Friend)
-                                            .Select(keyvalue => (keyvalue.Key.Hero1 == hero) ? keyvalue.Key.Hero2 : keyvalue.Key.Hero1)
+                                            .Select(keyvalue => keyvalue.Key)
                                             .FirstOrDefault(selected => selected.Clan != null && selected.Clan != intention.Target.Clan && selected.Clan != Clan.PlayerClan)?.Clan;
 
 
