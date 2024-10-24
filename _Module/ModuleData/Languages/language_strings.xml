@@ -477,5 +477,8 @@
     <string id="Dramalord480" text="Love Decay Start Day" />
     <string id="Dramalord481" text="Number of days lovers haven't seen each other needed to make love decay." />
     <string id="Dramalord482" text="Oh, hello {TITLE}. I... didn't expect you..." />
+    <string id="Dramalord483" text="{HERO1} was intimate with {HERO2}." />
+    <string id="Dramalord484" text="Intimate Logs" />
+    <string id="Dramalord485" text="Show intimate events in the logs" />
   </strings>
 </base>

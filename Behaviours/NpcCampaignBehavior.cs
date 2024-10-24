@@ -255,7 +255,7 @@ namespace Dramalord.Behavior
                         }
                     }
 
-                    if (hero.GetHeroTraits()?.Mercy < 0 && personality.Agreeableness < 0 && desires.Horny > 50 && hero.PartyBelongedTo?.PrisonRoster?.TotalHeroes > 0)
+                    if (hero.GetHeroTraits()?.Mercy < 0 && personality.Agreeableness < 0 && desires.Horny > 50 && hero.PartyBelongedTo?.LeaderHero == hero && hero.PartyBelongedTo?.PrisonRoster?.TotalHeroes > 0)
                     {
                         Hero? victim = hero.PartyBelongedTo.PrisonRoster.GetTroopRoster().Select(h => h.Character).FirstOrDefault(c => c.IsHero && c.HeroObject != Hero.MainHero && hero.GetAttractionTo(c.HeroObject) > DramalordMCM.Instance.MinAttraction)?.HeroObject;
                         if (victim != null)

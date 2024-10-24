@@ -21,7 +21,7 @@ namespace Dramalord.LogItems
             Hero2 = hero2;
         }
 
-        public bool IsVisibleNotification => DramalordMCM.Instance?.RelationshipLogs ?? true;
+        public bool IsVisibleNotification => DramalordMCM.Instance?.IntimateLogs ?? true;
         public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionNegative;
 
         public TextObject GetEncyclopediaText()
@@ -30,6 +30,43 @@ namespace Dramalord.LogItems
             StringHelpers.SetCharacterProperties("HERO1", Hero1.CharacterObject, textObject);
             StringHelpers.SetCharacterProperties("HERO2", Hero2.CharacterObject, textObject);
             
+            return textObject;
+        }
+
+        public TextObject GetNotificationText()
+        {
+            return GetEncyclopediaText();
+        }
+
+        public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase
+        {
+            return obj == Hero1 || obj == Hero2;
+        }
+    }
+
+    internal class IntercourseLog : LogEntry, IEncyclopediaLog, IChatNotification
+    {
+        [SaveableField(1)]
+        public readonly Hero Hero1;
+
+        [SaveableField(2)]
+        public readonly Hero Hero2;
+
+        public IntercourseLog(Hero hero1, Hero hero2)
+        {
+            Hero1 = hero1;
+            Hero2 = hero2;
+        }
+
+        public bool IsVisibleNotification => DramalordMCM.Instance?.IntimateLogs ?? true;
+        public override ChatNotificationType NotificationType => ChatNotificationType.PlayerFactionNegative;
+
+        public TextObject GetEncyclopediaText()
+        {
+            TextObject textObject = new TextObject("{=Dramalord483}{HERO1} was intimate with {HERO2}.");
+            StringHelpers.SetCharacterProperties("HERO1", Hero1.CharacterObject, textObject);
+            StringHelpers.SetCharacterProperties("HERO2", Hero2.CharacterObject, textObject);
+
             return textObject;
         }
 

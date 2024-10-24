@@ -1,9 +1,11 @@
 ﻿using Dramalord.Data;
 using Dramalord.Extensions;
+using Dramalord.LogItems;
 using Dramalord.Notifications;
 using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
@@ -27,6 +29,11 @@ namespace Dramalord.Actions
 
             heroDesires.IntercourseSkill += (targetDesires.IntercourseSkill > heroDesires.IntercourseSkill) ? 2 : 1;
             targetDesires.IntercourseSkill += (targetDesires.IntercourseSkill < heroDesires.IntercourseSkill) ? 2 : 1;
+
+            if(DramalordMCM.Instance.IntimateLogs)
+            {
+                LogEntry.AddLogEntry(new IntercourseLog(hero, target));
+            }
 
             if (target == Hero.MainHero || hero == Hero.MainHero)
             {

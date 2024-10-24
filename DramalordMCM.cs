@@ -87,6 +87,10 @@ namespace Dramalord
         public int LoveDecayStartDay { get; set; } = 10;
 
         [SettingPropertyGroup("{=Dramalord007}Logging Setup")]
+        [SettingPropertyBool("{=Dramalord484}Intimate Logs", Order = 0, HintText = "{=Dramalord485}Show intimate events in the logs", RequireRestart = false)]
+        public bool IntimateLogs { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord007}Logging Setup")]
         [SettingPropertyBool("{=Dramalord008}Relationship Logs", Order = 1, HintText = "{=Dramalord009}Show relationship changes in the logs", RequireRestart = false)]
         public bool RelationshipLogs { get; set; } = false;
 
