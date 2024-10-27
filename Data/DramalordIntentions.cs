@@ -108,7 +108,7 @@ namespace Dramalord.Data
         {
             return _intentionsToPlayer;
         }
-
+        /*
         internal void AddIntention(Hero hero, Hero target, IntentionType type, int eventID)
         {
             List<HeroIntention> intentions = GetIntentions(hero);
@@ -118,6 +118,7 @@ namespace Dramalord.Data
                 _intentionsToPlayer.Add(hero);
             }
         }
+        
 
         internal void RemoveIntention(Hero hero, Hero target, IntentionType type, int eventID)
         {
@@ -131,7 +132,7 @@ namespace Dramalord.Data
                 _intentionsToPlayer.Remove(hero);
             }
         }
-
+        
         internal void RemoveIntentionsTo(Hero hero, Hero target)
         {
             List<HeroIntention> intentions = GetIntentions(hero);
@@ -151,7 +152,7 @@ namespace Dramalord.Data
             intentions.Clear();
             _intentionsToPlayer.Remove(hero);
         }
-
+        */
         public override void LoadData(IDataStore dataStore)
         {
             _intentions.Clear();

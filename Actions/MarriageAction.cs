@@ -146,10 +146,10 @@ namespace Dramalord.Actions
             int eventID = DramalordEvents.Instance.AddEvent(firstHero, secondHero, EventType.Marriage, 10);
             closeHeroes.Where(closeHero => closeHero != firstHero && closeHero != secondHero && (closeHero.IsEmotionalWith(firstHero) || closeHero.IsEmotionalWith(secondHero))).ToList().ForEach(closeHero => 
             {
-                DramalordIntentions.Instance.RemoveIntentionsTo(closeHero, firstHero);
-                DramalordIntentions.Instance.RemoveIntentionsTo(closeHero, secondHero);
-                DramalordIntentions.Instance.AddIntention(closeHero, firstHero, IntentionType.Confrontation, eventID); 
-                DramalordIntentions.Instance.AddIntention(closeHero, secondHero, IntentionType.Confrontation, eventID); 
+                closeHero.RemoveIntentionsTo(firstHero);
+                closeHero.RemoveIntentionsTo(secondHero);
+                closeHero.AddIntention(firstHero, IntentionType.Confrontation, eventID);
+                closeHero.AddIntention(secondHero, IntentionType.Confrontation, eventID); 
             });
 
             if ((firstHero.Clan == Clan.PlayerClan || secondHero.Clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)

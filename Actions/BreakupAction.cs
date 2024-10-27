@@ -38,10 +38,10 @@ namespace Dramalord.Actions
             }
 
             List<HeroIntention> heroIntentions = hero.GetIntentions().ToList();
-            heroIntentions.Where(intention => intention.Target == target).Do(intention => DramalordIntentions.Instance.RemoveIntention(hero, intention.Target, intention.Type, intention.EventId));
+            heroIntentions.Where(intention => intention.Target == target).Do(intention => hero.RemoveIntention(intention));
 
             List<HeroIntention> targetIntentions = target.GetIntentions().ToList();
-            targetIntentions.Where(intention => intention.Target == hero).Do(intention => DramalordIntentions.Instance.RemoveIntention(target, intention.Target, intention.Type, intention.EventId));
+            targetIntentions.Where(intention => intention.Target == hero).Do(intention => target.RemoveIntention(intention));
 
             if (hero == Hero.MainHero)
             {

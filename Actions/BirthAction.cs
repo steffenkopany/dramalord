@@ -38,13 +38,13 @@ namespace Dramalord.Actions
             { 
                 if(member.IsEmotionalWith(mother) && member != child.Father)
                 {
-                    DramalordIntentions.Instance.AddIntention(member, mother, IntentionType.Confrontation, eventID);
+                    member.AddIntention(mother, IntentionType.Confrontation, eventID);
                 } 
             });
 
             if((mother.Spouse == null || mother.Spouse != father) && mother.Clan != Clan.PlayerClan)
             {
-                DramalordIntentions.Instance.AddIntention(mother, child, IntentionType.Orphanize, eventID);
+                mother.AddIntention(child, IntentionType.Orphanize, eventID);
             }
 
             if((mother.Clan == Clan.PlayerClan || father.Clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)

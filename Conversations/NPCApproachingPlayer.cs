@@ -429,7 +429,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceHandleBreakupLeave()
         {
-            DramalordIntentions.Instance.AddIntention(Hero.OneToOneConversationHero, Hero.OneToOneConversationHero, IntentionType.LeaveClan, -1);
+            Hero.OneToOneConversationHero.AddIntention(Hero.OneToOneConversationHero, IntentionType.LeaveClan, -1);
             ConversationHelper.ConversationEndedIntention = Intention;
             Intention = null;
             if (PlayerEncounter.Current != null)

@@ -191,7 +191,7 @@ namespace Dramalord.Conversations
         private static void ConsequenceConfrontationResultBreakOther()
         {
             Hero other = (Event.Actors.Hero1 == Hero.OneToOneConversationHero) ? Event.Actors.Hero2 : Event.Actors.Hero1;
-            DramalordIntentions.Instance.AddIntention(Hero.OneToOneConversationHero, other, IntentionType.BreakUp, -1);
+            Hero.OneToOneConversationHero.AddIntention(other, IntentionType.BreakUp, -1);
             Event = null;
             if (PlayerEncounter.Current != null)
             {
@@ -202,7 +202,7 @@ namespace Dramalord.Conversations
         private static void ConsequenceConfrontationResultLeave()
         {
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.BreakUp, Hero.OneToOneConversationHero, -1);
-            DramalordIntentions.Instance.AddIntention(Hero.OneToOneConversationHero, Hero.MainHero, IntentionType.LeaveClan, -1);
+            Hero.OneToOneConversationHero.AddIntention(Hero.MainHero, IntentionType.LeaveClan, -1);
             Event = null;
             if (PlayerEncounter.Current != null)
             {

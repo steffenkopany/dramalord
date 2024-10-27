@@ -49,7 +49,7 @@ namespace Dramalord.Behaviours
                         return;
                     }
 
-                    DramalordIntentions.Instance.RemoveIntention(Hero.MainHero, intention.Target, intention.Type, intention.EventId);
+                    Hero.MainHero.RemoveIntention(intention);
                     return;
                 }
             }

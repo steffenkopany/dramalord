@@ -58,10 +58,10 @@ namespace Dramalord.Actions
                 {
                     if (witness.IsEmotionalWith(hero) || witness.IsEmotionalWith(target))
                     {
-                        DramalordIntentions.Instance.RemoveIntentionsTo(witness, hero);
-                        DramalordIntentions.Instance.RemoveIntentionsTo(witness, target);
-                        DramalordIntentions.Instance.AddIntention(witness, hero, IntentionType.Confrontation, eventid);
-                        DramalordIntentions.Instance.AddIntention(witness, target, IntentionType.Confrontation, eventid);
+                        witness.RemoveIntentionsTo(hero);
+                        witness.RemoveIntentionsTo(target);
+                        witness.AddIntention(hero, IntentionType.Confrontation, eventid);
+                        witness.AddIntention(target, IntentionType.Confrontation, eventid);
                     }
 
                     if (witness == Hero.MainHero)

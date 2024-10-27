@@ -658,7 +658,7 @@ namespace Dramalord.Conversations
         {
             Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.BreakUp, Hero.OneToOneConversationHero, -1);
-            DramalordIntentions.Instance.AddIntention(Hero.OneToOneConversationHero, Hero.MainHero, IntentionType.LeaveClan, -1);
+            Hero.OneToOneConversationHero.AddIntention(Hero.MainHero, IntentionType.LeaveClan, -1);
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
