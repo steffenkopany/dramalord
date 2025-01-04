@@ -2,12 +2,15 @@
 using Dramalord.Extensions;
 using Dramalord.LogItems;
 using Helpers;
+using Messages.FromClient.ToLobbyServer;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.MapNotificationTypes;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace Dramalord.Actions
@@ -42,12 +45,51 @@ namespace Dramalord.Actions
                 } 
             });
 
-            if((mother.Spouse == null || mother.Spouse != father) && mother.Clan != Clan.PlayerClan)
+            if((mother.Spouse == null || (mother.Spouse != father && mother.GetRelationTo(father).Relationship != RelationshipType.Spouse)) && (father == Hero.MainHero || mother.Clan == Clan.PlayerClan || father.Clan == Clan.PlayerClan))
+            {
+                TextObject title = new TextObject("{=Dramalord524}{CHILD} was born.");
+                TextObject text = new TextObject("{=Dramalord525}{MOTHER} has given birth to {CHILD}. {FATHER} is the father. Would urge the mother to keep the child or get rid of them?");
+                title.SetTextVariable("CHILD", child.Name);
+                text.SetTextVariable("MOTHER", mother.Name);
+                text.SetTextVariable("CHILD", child.Name);
+                text.SetTextVariable("FATHER", father.Name);
+                InformationManager.ShowInquiry(
+                        new InquiryData(
+                            title.ToString(),
+                            text.ToString(),
+                            true,
+                            true,
+                            new TextObject("{=Dramalord526}Get rid of the child").ToString(),
+                            new TextObject("{=Dramalord527}Keep the child").ToString(),
+                            () => { mother.AddIntention(child, IntentionType.Orphanize, eventID); },
+                            () => { return; }), true);
+            }
+            else if((mother.Spouse == null || (mother.Spouse != father && mother.GetRelationTo(father).Relationship != RelationshipType.Spouse)) && ((mother.Clan != null && mother.Clan != Clan.PlayerClan && !DramalordMCM.Instance.KeepClanChildren) || (mother.Clan == null && !DramalordMCM.Instance.KeepNotableChildren)))
             {
                 mother.AddIntention(child, IntentionType.Orphanize, eventID);
             }
+            else if (child.Clan == Clan.PlayerClan && child.Occupation == Occupation.Wanderer)
+            {
+                if (father == Hero.MainHero || mother == Hero.MainHero)
+                {
+                    child.SetNewOccupation(Occupation.Lord);
+                    Clan.PlayerClan.Companions.Remove(child);
+                }
+                else if (Clan.PlayerClan.Companions.Count >= Campaign.Current.Models.ClanTierModel.GetCompanionLimit(Clan.PlayerClan))
+                {
+                    child.SetNewOccupation(Occupation.Lord);
+                    Clan.PlayerClan.Companions.Remove(child);
+                    mother.AddIntention(child, IntentionType.Orphanize, eventID);
+                }
+            }
+            /*
+            else if(mother.Clan == null && DramalordMCM.Instance.KeepNotableChildren)
+            {
+                child.SetNewOccupation(Occupation.Wanderer);
+            }
+            */
 
-            if((mother.Clan == Clan.PlayerClan || father.Clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)
+            if ((mother.Clan == Clan.PlayerClan || father.Clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)
             {
                 LogEntry.AddLogEntry(new BirthChildLog(mother, father, child));
             }
@@ -69,15 +111,8 @@ namespace Dramalord.Actions
             string hairTags = (child.IsFemale ? mother.HairTags : father.HairTags);
             string tattooTags = (child.IsFemale ? mother.TattooTags : father.TattooTags);
             child.ModifyPlayersFamilyAppearance(BodyProperties.GetRandomBodyProperties(template.Race, child.IsFemale, bodyProperties, bodyProperties2, 1, seed, hairTags, father.BeardTags, tattooTags).StaticProperties);
-            if(father != Hero.MainHero && mother != Hero.MainHero)
-            {
-                child.SetNewOccupation(mother.Occupation);
-            }
-            else
-            {
-                child.SetNewOccupation(Occupation.Lord);
-            }
-            
+            child.SetNewOccupation(mother.Occupation);
+
             if(child.Occupation == Occupation.Lord)
             {
                 child.SetName(child.FirstName, child.FirstName);

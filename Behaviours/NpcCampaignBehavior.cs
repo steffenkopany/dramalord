@@ -35,6 +35,7 @@ namespace Dramalord.Behavior
         {
             CampaignEvents.DailyTickHeroEvent.AddNonSerializedListener(this, new Action<Hero>(OnDailyHeroTick));
             CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, new Action(OnHourlyTick));
+            CampaignEvents.KingdomDestroyedEvent.AddNonSerializedListener(this, new Action<Kingdom>(KingdomDestroyedEvent));
         }
 
         public override void SyncData(IDataStore dataStore)
@@ -61,10 +62,12 @@ namespace Dramalord.Behavior
                 }
                 confronter.RemoveIntention(intention);
             }
+            /*
             if(confronter != null && intention == null)
             {
                 confronter.RemoveIntentionsTo(Hero.MainHero);
             }
+            */
         }
 
         private void OnDailyHeroTick(Hero hero)
@@ -101,10 +104,10 @@ namespace Dramalord.Behavior
 
                     if (availableHeroes.Count > 0)
                     {
-                        int randomHorny = Decide(100, 150, 0, 100);
-                        int randomOpenness = Decide(100, 150, -100, 100);
+                        int randomHorny = Decide(100, 125, 0, 100);
+                        int randomOpenness = Decide(100, 125, -100, 100);
                         int randomConscientiousness = Decide(-100, -50, -100, 0);
-                        int randomExtroversion = Decide(100, 150, -100, 100);
+                        int randomExtroversion = Decide(100, 125, -100, 100);
                         bool isMarried = hero.Spouse != null;
 
                         if (personality.Extroversion >= randomExtroversion)
@@ -133,7 +136,11 @@ namespace Dramalord.Behavior
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.Intercourse, -1);
                                     }
-                                    else
+                                    else if(relation.CurrentLove < DramalordMCM.Instance.MinDatingLove && selectedTarget != Hero.MainHero)
+                                    {
+                                        hero.AddIntention(selectedTarget, IntentionType.BreakUp, -1);
+                                    }
+                                    else if(relation.CurrentLove <= 0 && selectedTarget == Hero.MainHero)
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.BreakUp, -1);
                                     }
@@ -152,7 +159,11 @@ namespace Dramalord.Behavior
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.Intercourse, -1);
                                     }
-                                    else
+                                    else if (relation.CurrentLove < DramalordMCM.Instance.MinDatingLove && selectedTarget != Hero.MainHero)
+                                    {
+                                        hero.AddIntention(selectedTarget, IntentionType.BreakUp, -1);
+                                    }
+                                    else if (relation.CurrentLove <= 0 && selectedTarget == Hero.MainHero)
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.BreakUp, -1);
                                     }
@@ -186,7 +197,7 @@ namespace Dramalord.Behavior
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.Intercourse, -1);
                                     }
-                                    else if (relation.Trust <= 0)
+                                    else if (hero.GetTrust(selectedTarget) <= 0)
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.BreakUp, -1);
                                     }
@@ -201,7 +212,7 @@ namespace Dramalord.Behavior
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.Flirt, -1);
                                     }
-                                    else if (!isHorny && !isOpen && relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove)
+                                    else if (!isHorny && !isOpen && relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove && !hero.IsRelativeOf(selectedTarget))
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.Date, -1);
                                     }
@@ -209,7 +220,7 @@ namespace Dramalord.Behavior
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.Intercourse, -1);
                                     }
-                                    else if (relation.Trust <= 0)
+                                    else if (hero.GetTrust(selectedTarget) <= 0)
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.BreakUp, -1);
                                     }
@@ -224,7 +235,7 @@ namespace Dramalord.Behavior
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.Flirt, -1);
                                     }
-                                    else if (relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove)
+                                    else if (relation.CurrentLove >= DramalordMCM.Instance.MinDatingLove && !hero.IsRelativeOf(selectedTarget))
                                     {
                                         hero.AddIntention(selectedTarget, IntentionType.Date, -1);
                                     }
@@ -258,162 +269,225 @@ namespace Dramalord.Behavior
 
                     if (hero.GetHeroTraits()?.Mercy < 0 && personality.Agreeableness < 0 && desires.Horny > 50 && hero.PartyBelongedTo?.LeaderHero == hero && hero.PartyBelongedTo?.PrisonRoster?.TotalHeroes > 0)
                     {
-                        Hero? victim = hero.PartyBelongedTo.PrisonRoster.GetTroopRoster().Select(h => h.Character).FirstOrDefault(c => c.IsHero && c.HeroObject != Hero.MainHero && hero.GetAttractionTo(c.HeroObject) > DramalordMCM.Instance.MinAttraction)?.HeroObject;
+                        Hero? victim = hero.PartyBelongedTo.PrisonRoster.GetTroopRoster().Select(h => h.Character).FirstOrDefault(c => c.IsHero /*&& c.HeroObject != Hero.MainHero*/ && hero.GetAttractionTo(c.HeroObject) > DramalordMCM.Instance.MinAttraction)?.HeroObject;
                         if (victim != null)
                         {
                             hero.AddIntention(victim, IntentionType.PrisonIntercourse, -1);
+                            Hero.SetHeroEncyclopediaTextAndLinks(hero);
                         }
                     }
-
-                    List<HeroIntention> intentions = hero.GetIntentions().ToList();
-                    intentions.ForEach(intention =>
-                    {
-                        if (closeHeroes.Contains(intention.Target))
-                        {
-                            if (!ConversationHelper.ConversationRunning && intention.Target == Hero.MainHero && MBRandom.RandomInt(1, 100) < DramalordMCM.Instance.ChanceApproachingPlayer && intention.Type != IntentionType.Confrontation && CampaignTime.Now.ToDays - hero.GetRelationTo(Hero.MainHero).LastInteraction > DramalordMCM.Instance.DaysBetweenPlayerInteractions)
-                            {
-                                ConversationHelper.ConversationRunning = true;
-                                NPCApproachingPlayer.Start(hero, intention);
-                            }
-                            else if (intention.Target != Hero.MainHero)
-                            {
-                                if (intention.Type == IntentionType.Confrontation)
-                                {
-                                    ConfrontationAction.Apply(hero, intention);
-                                }
-                                else if (intention.Type == IntentionType.SmallTalk)
-                                {
-                                    TalkAction.Apply(hero, intention.Target);
-                                }
-                                else if (intention.Type == IntentionType.Flirt)
-                                {
-                                    FlirtAction.Apply(hero, intention.Target);
-                                }
-                                else if (intention.Type == IntentionType.Date)
-                                {
-                                    DateAction.Apply(hero, intention.Target, closeHeroes);
-
-                                    if (!hero.IsEmotionalWith(intention.Target) && hero.GetRelationTo(intention.Target).CurrentLove >= DramalordMCM.Instance.MinDatingLove)
-                                    {
-                                        Dictionary<Hero, HeroRelation> lovers = hero.GetAllRelations().Where(item => item.Value.Relationship == RelationshipType.Lover).ToDictionary(item => item.Key, item => item.Value);
-                                        int lcount = lovers.Count;
-                                        if(lovers.Count > 0)
-                                        {
-                                            lovers.Do(pair =>
-                                            {
-                                                if(pair.Value.Love >= 0 && pair.Key != Hero.MainHero)
-                                                {
-                                                    BreakupAction.Apply(hero, pair.Key);
-                                                    lcount--;
-                                                }
-                                            });
-                                        }
-                                        if(lcount == 0)
-                                        {
-                                            LoverAction.Apply(hero, intention.Target);
-                                        }
-                                    }
-                                }
-                                else if (intention.Type == IntentionType.Intercourse)
-                                {
-                                    IntercourseAction.Apply(hero, intention.Target, closeHeroes);
-                                    if (hero.IsFemale != intention.Target.IsFemale && MBRandom.RandomInt(1, 100) < DramalordMCM.Instance.PregnancyChance)
-                                    {
-                                        Hero female = (hero.IsFemale) ? hero : intention.Target;
-                                        if (female.IsFertile())
-                                        {
-                                            ConceiveAction.Apply((hero.IsFemale) ? hero : intention.Target, (hero.IsFemale) ? intention.Target : hero);
-                                        }
-                                    }
-
-                                    if (hero.IsFriendOf(intention.Target))
-                                    {
-                                        FriendsWithBenefitsAction.Apply(hero, intention.Target);
-                                    }
-                                }
-                                else if (intention.Type == IntentionType.Engagement)
-                                {
-                                    EngagementAction.Apply(hero, intention.Target, closeHeroes);
-                                }
-                                else if (intention.Type == IntentionType.Marriage)
-                                {
-                                    Actions.MarriageAction.Apply(hero, intention.Target, closeHeroes);
-                                }
-                                else if (intention.Type == IntentionType.BreakUp)
-                                {
-                                    BreakupAction.Apply(hero, intention.Target);
-                                }
-                                
-
-                                if (hero.GetRelationTo(intention.Target).Relationship == RelationshipType.None && hero.GetRelationTo(intention.Target).Trust >= DramalordMCM.Instance.MinTrust)
-                                {
-                                    FriendshipAction.Apply(hero, intention.Target);
-                                }
-                                else if (hero.IsFriendlyWith(intention.Target) && hero.GetRelationTo(intention.Target).Trust <= 0)
-                                {
-                                    BreakupAction.Apply(hero, intention.Target);
-                                }
-                            }
-                        }
-                        else if (intention.Type == IntentionType.PrisonIntercourse)
-                        {
-                            IntercourseAction.Apply(hero, intention.Target, closeHeroes);
-                            if (hero.IsFemale != intention.Target.IsFemale && MBRandom.RandomInt(1, 100) < DramalordMCM.Instance.PregnancyChance)
-                            {
-                                Hero female = (hero.IsFemale) ? hero : intention.Target;
-                                if (female.IsFertile())
-                                {
-                                    ConceiveAction.Apply((hero.IsFemale) ? hero : intention.Target, (hero.IsFemale) ? intention.Target : hero);
-                                }
-                            }
-                            if ((hero.Clan == Clan.PlayerClan || intention.Target.Clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)
-                            {
-                                LogEntry.AddLogEntry(new PrisonIntercourseLog(hero, intention.Target));
-                            }
-                            EndCaptivityAction.ApplyByRansom(intention.Target, hero);
-                        }
-                        else if (intention.Type == IntentionType.LeaveClan)
-                        {
-                            if (hero.Clan != null && hero.Clan == intention.Target.Clan)
-                            {
-                                LeaveClanAction.Apply(hero, hero, false);
-                                Clan? targetClan = hero.GetAllRelations().Where(keyvalue => keyvalue.Value.Relationship == RelationshipType.Friend)
-                                            .Select(keyvalue => keyvalue.Key)
-                                            .FirstOrDefault(selected => selected.Clan != null && selected.Clan != intention.Target.Clan && selected.Clan != Clan.PlayerClan)?.Clan;
-
-
-                                if (targetClan != null)
-                                {
-                                    JoinClanAction.Apply(hero, targetClan, true);
-                                }
-                            }
-                        }
-                        else if (intention.Type == IntentionType.Orphanize)
-                        {
-                            if (intention.Target.IsChild)
-                            {
-                                OrphanizeAction.Apply(hero, intention.Target);
-                            }
-                        }
-                        else if (intention.Type == IntentionType.Adopt && hero.Spouse != null && DramalordOrphans.Instance.CountOrphans(false) + DramalordOrphans.Instance.CountOrphans(true) > 0)
-                        {
-                            Hero? child = DramalordOrphans.Instance.GetRandomOrphan();
-                            if (child != null)
-                            {
-                                AdoptAction.Apply(hero, hero.Spouse, child);
-                            }
-                        }
-
-                        hero.RemoveIntention(intention);
-                        
-                    });
                 }
+                
+                hero.GetDesires().Horny += hero.GetDesires().Libido; // test
+                
             }
             else if (hero.IsDramalordLegit() && hero != Hero.MainHero && hero.GetDesires().HasToy)
             {
                 hero.RemoveAllIntentions();
                 ToyAction.Apply(hero);
             }
+
+            List<HeroIntention> intentions = hero.GetIntentions().ToList();
+            if(intentions.Count > 0)
+            {
+                List<Hero> closeHeroes = hero.GetCloseHeroes();
+                for(int i = 0; i < intentions.Count; i++)
+                { 
+                    HeroIntention intention = intentions[i];
+                    if (closeHeroes.Contains(intention.Target))
+                    {
+                        if (!ConversationHelper.ConversationRunning && intention.Target == Hero.MainHero && MBRandom.RandomInt(1, 100) < DramalordMCM.Instance.ChanceApproachingPlayer && intention.Type != IntentionType.Confrontation && CampaignTime.Now.ToDays - hero.GetRelationTo(Hero.MainHero).LastInteraction > DramalordMCM.Instance.DaysBetweenPlayerInteractions)
+                        {
+                            ConversationHelper.ConversationRunning = true;
+                            NPCApproachingPlayer.Start(hero, intention);
+                        }
+                        else if (intention.Target != Hero.MainHero)
+                        {
+                            if (intention.Type == IntentionType.Confrontation)
+                            {
+                                ConfrontationAction.Apply(hero, intention);
+                            }
+                            else if (intention.Type == IntentionType.SmallTalk)
+                            {
+                                TalkAction.Apply(hero, intention.Target);
+                            }
+                            else if (intention.Type == IntentionType.Flirt)
+                            {
+                                FlirtAction.Apply(hero, intention.Target);
+                            }
+                            else if (intention.Type == IntentionType.Date)
+                            {
+                                DateAction.Apply(hero, intention.Target, closeHeroes);
+
+                                if (!hero.IsEmotionalWith(intention.Target) && hero.GetRelationTo(intention.Target).CurrentLove >= DramalordMCM.Instance.MinDatingLove)
+                                {
+                                    Dictionary<Hero, HeroRelation> lovers = hero.GetAllRelations().Where(item => item.Value.Relationship == RelationshipType.Lover).ToDictionary(item => item.Key, item => item.Value);
+                                    int lcount = lovers.Count;
+                                    if (lovers.Count > 0)
+                                    {
+                                        lovers.Do(pair =>
+                                        {
+                                            if (pair.Value.Love >= 0 && pair.Key != Hero.MainHero)
+                                            {
+                                                BreakupAction.Apply(hero, pair.Key);
+                                                lcount--;
+                                            }
+                                        });
+                                    }
+                                    if (lcount == 0)
+                                    {
+                                        LoverAction.Apply(hero, intention.Target);
+                                    }
+                                }
+                            }
+                            else if (intention.Type == IntentionType.Intercourse)
+                            {
+                                IntercourseAction.Apply(hero, intention.Target, closeHeroes);
+                                if (hero.IsFemale != intention.Target.IsFemale && MBRandom.RandomInt(1, 100) < DramalordMCM.Instance.PregnancyChance)
+                                {
+                                    Hero female = (hero.IsFemale) ? hero : intention.Target;
+                                    if (female.IsFertile())
+                                    {
+                                        ConceiveAction.Apply((hero.IsFemale) ? hero : intention.Target, (hero.IsFemale) ? intention.Target : hero);
+                                    }
+                                }
+
+                                if (hero.IsFriendOf(intention.Target))
+                                {
+                                    FriendsWithBenefitsAction.Apply(hero, intention.Target);
+                                }
+                            }
+                            else if (intention.Type == IntentionType.Engagement)
+                            {
+                                EngagementAction.Apply(hero, intention.Target, closeHeroes);
+                            }
+                            else if (intention.Type == IntentionType.Marriage)
+                            {
+                                Actions.MarriageAction.Apply(hero, intention.Target, closeHeroes);
+                            }
+                            else if (intention.Type == IntentionType.BreakUp)
+                            {
+                                BreakupAction.Apply(hero, intention.Target);
+                            }
+
+
+                            if (hero.GetRelationTo(intention.Target).Relationship == RelationshipType.None && hero.GetTrust(intention.Target) >= DramalordMCM.Instance.MinTrust)
+                            {
+                                List<Hero> noFriends = hero.GetAllRelations().Where(item => item.Value.Relationship == RelationshipType.Friend && hero.GetTrust(item.Key) <= 0).Select(item => item.Key).ToList();
+                                noFriends.ForEach(item =>
+                                {
+                                    BreakupAction.Apply(hero, item);
+                                });
+
+                                FriendshipAction.Apply(hero, intention.Target);
+                            }
+                            else if (hero.IsFriendlyWith(intention.Target) && hero.GetTrust(intention.Target) <= 0)
+                            {
+                                BreakupAction.Apply(hero, intention.Target);
+                            }
+                        }
+                    }
+   
+                    if (intention.Type == IntentionType.PrisonIntercourse && intention.Target != Hero.MainHero)
+                    {
+                        IntercourseAction.Apply(hero, intention.Target, closeHeroes);
+                        if (hero.IsFemale != intention.Target.IsFemale && MBRandom.RandomInt(1, 100) < DramalordMCM.Instance.PregnancyChance)
+                        {
+                            Hero female = (hero.IsFemale) ? hero : intention.Target;
+                            if (female.IsFertile())
+                            {
+                                ConceiveAction.Apply((hero.IsFemale) ? hero : intention.Target, (hero.IsFemale) ? intention.Target : hero);
+                            }
+                        }
+                        if ((hero.Clan == Clan.PlayerClan || intention.Target.Clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)
+                        {
+                            LogEntry.AddLogEntry(new PrisonIntercourseLog(hero, intention.Target));
+                        }
+                        EndCaptivityAction.ApplyByRansom(intention.Target, hero);
+                    }
+                    else if (intention.Type == IntentionType.LeaveClan)
+                    {
+                        if (hero.Clan != null && hero.Clan == intention.Target.Clan)
+                        {
+                            LeaveClanAction.Apply(hero, hero, false);
+
+                            Clan? targetClan = hero.GetAllRelations().Where(keyvalue => keyvalue.Key == hero.Father || keyvalue.Key == hero.Mother )
+                                .Select(keyvalue => keyvalue.Key)
+                                .FirstOrDefault(selected => selected.Clan != null && selected.Clan != intention.Target.Clan && selected.Clan != Clan.PlayerClan)?.Clan;
+
+                            if(targetClan == null)
+                            {
+                                targetClan = hero.GetAllRelations().Where(keyvalue => keyvalue.Value.Relationship == RelationshipType.Friend)
+                                        .Select(keyvalue => keyvalue.Key)
+                                        .FirstOrDefault(selected => selected.Clan != null && selected.Clan != intention.Target.Clan && selected.Clan != Clan.PlayerClan)?.Clan;
+                            }
+
+                            if (targetClan != null)
+                            {
+                                JoinClanAction.Apply(hero, targetClan, true);
+                            }
+                        }
+                    }
+                    else if (intention.Type == IntentionType.LeaveKingdom)
+                    {
+                        if (hero.Clan != null && hero.Clan.Kingdom != null && intention.Target.Clan != null && intention.Target.Clan.Kingdom != null && hero.Clan.Kingdom == intention.Target.Clan.Kingdom)
+                        {
+                            LeaveKingdomAction.Apply(hero.Clan);
+                            int love = 0;
+                            Kingdom? target = null;
+                            hero.GetAllRelations().Do(item =>
+                            {
+                                if ((item.Value.Relationship == RelationshipType.Lover || item.Value.Relationship == RelationshipType.Betrothed) && item.Value.Love > love && item.Key.Clan.Kingdom != null && item.Key.Clan.Kingdom != intention.Target.Clan.Kingdom)
+                                {
+                                    love = item.Value.Love;
+                                    target = item.Key.Clan.Kingdom;
+                                }
+                            });
+
+                            if (target == null)
+                            {
+                                hero.GetAllRelations().Do(item =>
+                                {
+                                    if ((item.Value.Relationship == RelationshipType.Friend || item.Value.Relationship == RelationshipType.FriendWithBenefits) && hero.GetTrust(item.Key) > love && item.Key.Clan.Kingdom != null && item.Key.Clan.Kingdom != intention.Target.Clan.Kingdom)
+                                    {
+                                        love = hero.GetTrust(item.Key);
+                                        target = item.Key.Clan.Kingdom;
+                                    }
+                                });
+                            }
+
+                            if (target != null)
+                            {
+                                JoinKingdomAction.Apply(hero.Clan, target);
+                            }
+                        }
+                    }
+                    else if (intention.Type == IntentionType.Orphanize)
+                    {
+                        if (intention.Target.IsChild)
+                        {
+                            OrphanizeAction.Apply(hero, intention.Target);
+                        }
+                    }
+                    else if (intention.Type == IntentionType.Adopt && hero.Spouse != null && DramalordOrphans.Instance.CountOrphans(false) + DramalordOrphans.Instance.CountOrphans(true) > 0)
+                    {
+                        Hero? child = DramalordOrphans.Instance.GetRandomOrphan();
+                        if (child != null)
+                        {
+                            AdoptAction.Apply(hero, hero.Spouse, child);
+                        }
+                    }
+                    else if (intention.Type == IntentionType.Abortion)
+                    {
+                        AbortionAction.Apply(hero);
+                    }
+                    
+                    
+                    hero.RemoveIntention(intention);
+
+                }
+            }
+            
         }
 
         private Hero? GetAvailableTarget(Hero hero, List<Hero> targets)
@@ -446,6 +520,51 @@ namespace Dramalord.Behavior
             }
 
             return result;
+        }
+
+        private void KingdomDestroyedEvent(Kingdom kingdom)
+        {
+            if(DramalordMCM.Instance.AllowClansChangingKingdoms)
+            {
+                Dictionary<Clan, Kingdom> targetList = new();
+                kingdom.Clans.ForEach(clan =>
+                {
+                    Hero leader = clan.Leader;
+                    int love = 0;
+                    Kingdom? target = null;
+                    leader.GetAllRelations().Do(item =>
+                    {
+                        if ((item.Value.Relationship == RelationshipType.Lover || item.Value.Relationship == RelationshipType.Betrothed) && item.Value.Love > love && item.Key.Clan.Kingdom != null && item.Key.Clan.Kingdom != kingdom)
+                        {
+                            love = item.Value.Love;
+                            target = item.Key.Clan.Kingdom;
+                        }
+                    });
+
+                    if (target == null)
+                    {
+                        leader.GetAllRelations().Do(item =>
+                        {
+                            if ((item.Value.Relationship == RelationshipType.Friend || item.Value.Relationship == RelationshipType.FriendWithBenefits) && leader.GetTrust(item.Key) > love && item.Key.Clan.Kingdom != null && item.Key.Clan.Kingdom != kingdom)
+                            {
+                                love = leader.GetTrust(item.Key);
+                                target = item.Key.Clan.Kingdom;
+                            }
+                        });
+                    }
+
+                    if (target != null)
+                    {
+                        targetList.Add(clan, target);
+                    }
+                });
+
+                targetList.Do(item =>
+                {
+                    LeaveKingdomAction.Apply(item.Key);
+                    JoinKingdomAction.Apply(item.Key, item.Value);
+                });
+            }
         }
     }
 }

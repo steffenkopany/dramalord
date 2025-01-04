@@ -507,5 +507,50 @@
     <string id="Dramalord480" text="Aşkın Çürümesinin Başladığı Gün" />
     <string id="Dramalord481" text="Aşkın çürümesi için aşıkların birbirlerini görmediği gün sayısı." />
     <string id="Dramalord482" text="Ah, merhaba {TITLE}. Ben... seni beklemiyordum..." />
+    <string id="Dramalord483" text="{HERO1.LINK}, {HERO2.LINK} ile yakın ilişki içindeydi." />
+    <string id="Dramalord484" text="Yakın Günlükler" />
+    <string id="Dramalord485" text="Yakın olayları günlüklerde göster" />
+    <string id="Dramalord486" text="kardeş" />
+    <string id="Dramalord487" text="kız kardeş" />
+    <string id="Dramalord488" text="oğul" />
+    <string id="Dramalord489" text="kızı" />
+    <string id="Dramalord490" text="Klanların Krallık Değiştirmesine İzin Ver" />
+    <string id="Dramalord491" text="Yapay zeka klanlarının yenilgi veya evlilik durumunda krallık değiştirmesine izin ver" />
+    <string id="Dramalord492" text="{CLAN} {KINGDOM}'a katıldı." />
+    <string id="Dramalord493" text="{CLAN} {KINGDOM}'dan ayrıldı." />
+    <string id="Dramalord494" text="Oyuncu Eşi Sadık" />
+    <string id="Dramalord495" text="Oyuncunun eşi başka hiç kimseyle etkileşime girmeyecek" />
+    <string id="Dramalord496" text="{HERO} bir gün içinde {FACTION}'dan ayrılacak." />
+    <string id="Dramalord497" text="Klanıma uymadığına karar verdim. Eşyalarını topla ve git." />
+    <string id="Dramalord498" text="Klanınız için krallığımda yer yok. Defolun ve geri dönmeyin!" />
+    <string id="Dramalord499" text="Dostluğunuzun ne kadar değerli olduğunu bilmek güzel. Ne hayal kırıklığı! İstediğinizi yapacağım." />
+    <string id="Dramalord500" text="Çocukları Klanlarda Tutun" />
+    <string id="Dramalord501" text="Klanlarda doğan gayri meşru çocuklar yetimhaneye gitmeyecek" />
+    <string id="Dramalord502" text="Doğmamış çocuğumuzdan kurtulmanızı istiyorum." />
+    <string id="Dramalord503" text="Sen ve {HERO}'nun doğmamış çocuğundan kurtulmanızı istiyorum." />
+    <string id="Dramalord504" text="Çocuğumuzu doğurmak istemiyorum." />
+    <string id="Dramalord505" text="Önemli Kişileri Dahil Et" />
+    <string id="Dramalord506" text="Dramalord AI'daki Çete Liderleri Gibi Önemli Kişileri Dahil Et (deneysel, performans etkisi)" />
+    <string id="Dramalord507" text="Bunu gerekli görüyorsanız, o zaman bununla ilgileneceğim {TITLE}." />
+    <string id="Dramalord508" text="Bunu kabul etmeyeceğim, {TITLE}. Tekrar düşünmenizi rica ediyorum, yoksa sonuçları olur!" />
+    <string id="Dramalord509" text="Eğer bu sizin isteğinizse, o zaman bunu yapın {TITLE}. Bunu saklamanız için sizi zorlamayacağım." />
+    <string id="Dramalord510" text="Sen deli misin, {TITLE}? Bu çocuk bizim aşkımızın tezahürü!" />
+    <string id="Dramalord511" text="Haklısın. {HERO}'nun çocuğunu doğurmak uygun olmazdı." />
+    <string id="Dramalord512" text="Asla, {TITLE}! Bu çocuk {HERO}'ya olan sevgimin sonucudur!" />
+    <string id="Dramalord513" text="başka biri" />
+    <string id="Dramalord514" text="{HERO} bir gün içinde kürtaj yapacak." />
+    <string id="Dramalord515" text="{HERO.LINK} sana karşı daha az sevgi besliyor. ({NUMBER})" />
+    <string id="Dramalord516" text="Bir gün içinde kürtaj yapacaksın." />
+    <string id="Dramalord517" text="{HERO.LINK}'dan doğmamış çocuğunu aldırdın." />
+    <string id="Dramalord518" text="{HERO.LINK} sizin doğmamış çocuğunuzu aldırdı." />
+    <string id="Dramalord519" text="{HERO.LINK} {HERO2.LINK} adlı çocuğunun doğmamış çocuğunu aldırdı." />
+    <string id="Dramalord520" text="Maksimum Doğurganlık Yaşı" />
+    <string id="Dramalord521" text="Bir kahramanın hamile kalabileceği maksimum yaş (sadece Dramalord gebelikleri için)" />
+    <string id="Dramalord522" text="Ünlülerin Çocuklarını Tut" />
+    <string id="Dramalord523" text="Ünlülerin gayri meşru çocukları yetimhaneye gitmeyecek" />
+    <string id="Dramalord524" text="{CHILD} doğdu." />
+    <string id="Dramalord525" text="{MOTHER}, {CHILD} adlı çocuğu doğurdu. {FATHER} babadır. Anneye çocuğu tutmasını mı yoksa ondan kurtulmasını mı tavsiye ederdi?" />
+    <string id="Dramalord526" text="Çocuktan kurtul" />
+    <string id="Dramalord527" text="Çocuğu tut" />
   </strings>
 </base>

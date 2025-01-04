@@ -63,7 +63,7 @@ namespace Dramalord.LogItems
 
         public TextObject GetEncyclopediaText()
         {
-            TextObject textObject = new TextObject("{=Dramalord483}{HERO1.NAME} was intimate with {HERO2.NAME}.");
+            TextObject textObject = new TextObject("{=Dramalord483}{HERO1.LINK} was intimate with {HERO2.LINK}.");
             StringHelpers.SetCharacterProperties("HERO1", Hero1.CharacterObject, textObject);
             StringHelpers.SetCharacterProperties("HERO2", Hero2.CharacterObject, textObject);
 

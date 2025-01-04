@@ -34,6 +34,7 @@ namespace Dramalord.Actions
             {
                 TextObject textObject = new TextObject("{=Dramalord250}{HERO1.LINK} put child {CHILD.LINK} into an orphanage.");
                 StringHelpers.SetCharacterProperties("HERO1", hero.CharacterObject, textObject);
+                StringHelpers.SetCharacterProperties("CHILD", child.CharacterObject, textObject);
                 MBInformationManager.AddQuickInformation(textObject, 0, hero.CharacterObject, "event:/ui/notification/relation");
             }
 

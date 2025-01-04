@@ -29,9 +29,10 @@ namespace Dramalord.Actions
 
             heroRelation.UpdateLove();
             heroRelation.Love += loveGain;
-            heroRelation.Trust += trustGain;
+            //heroRelation.Trust += trustGain;
+            hero.SetTrust(target, hero.GetTrust(target) + trustGain);
 
-            if(hero == Hero.MainHero || target == Hero.MainHero)
+            if (hero == Hero.MainHero || target == Hero.MainHero)
             {
                 Hero otherHero = (hero == Hero.MainHero) ? target : hero;
                 TextObject banner = new TextObject("{=Dramalord069}You had a date with {HERO.LINK}. (Love {NUM}, Trust {NUM2})");

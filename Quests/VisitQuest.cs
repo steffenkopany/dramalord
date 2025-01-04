@@ -81,7 +81,8 @@ namespace Dramalord.Quests
             int loveGain = (sympathy + ((heroAttraction + tagetAttraction) / 20)) * DramalordMCM.Instance.LoveGainMultiplier;
             int trustGain = sympathy * DramalordMCM.Instance.TrustGainMultiplier;
             heroRelation.Love += loveGain;
-            heroRelation.Trust += trustGain;
+            //heroRelation.Trust += trustGain;
+            QuestGiver.SetTrust(Hero.MainHero, QuestGiver.GetTrust(Hero.MainHero) + trustGain);
 
             TextObject banner = new TextObject("{=Dramalord305}{HERO.LINK} is very happy you fullfilled her request... (Love {NUM}, Trust {NUM2})");
             StringHelpers.SetCharacterProperties("HERO", QuestGiver.CharacterObject, banner);
@@ -120,7 +121,8 @@ namespace Dramalord.Quests
             trustDamage += trustDamage * conscFactor;
 
             QuestGiver.GetRelationTo(Hero.MainHero).UpdateLove();
-            QuestGiver.GetRelationTo(Hero.MainHero).Trust += (int)trustDamage;
+            //QuestGiver.GetRelationTo(Hero.MainHero).Trust += (int)trustDamage;
+            QuestGiver.SetTrust(Hero.MainHero, QuestGiver.GetTrust(Hero.MainHero) + (int)trustDamage);
             QuestGiver.GetRelationTo(Hero.MainHero).Love += (int)loveDamage;
 
             TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed by your neglection of their matter.. (Love {NUM}, Trust {NUM2})");

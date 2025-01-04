@@ -30,9 +30,13 @@ namespace Dramalord.Extensions
             }
         }
 
+        public static int GetTrust(this Hero hero, Hero other) => CharacterRelationManager.GetHeroRelation(hero, other);
+
+        public static void SetTrust(this Hero hero, Hero other, int value) => CharacterRelationManager.SetHeroRelation(hero, other, value);
+
         public static bool IsDramalordLegit(this Hero hero)
         {
-            return hero != null && !hero.IsChild && (hero.IsLord || hero.IsPlayerCompanion || hero.IsWanderer) && hero.IsAlive && !hero.IsDisabled;
+            return hero != null && !hero.IsChild && (hero.IsLord || hero.IsPlayerCompanion || hero.IsWanderer ||(hero.IsNotable && DramalordMCM.Instance.IncludeNotables)) && hero.IsAlive && !hero.IsDisabled;
         }
 
         public static List<HeroIntention> GetIntentions(this Hero hero)
@@ -174,7 +178,8 @@ namespace Dramalord.Extensions
             if((hero.Occupation == Occupation.Wanderer && hero.Clan == null && !DramalordMCM.Instance.AllowWandererAutonomy) ||
                 (hero != Hero.MainHero && hero.Clan == Clan.PlayerClan && !DramalordMCM.Instance.AllowPlayerClanAutonomy) ||
                 hero.IsPrisoner ||
-                hero.GetDesires().HasToy)
+                hero.GetDesires().HasToy ||
+                (DramalordMCM.Instance.PlayerSpouseFaithful && hero != Hero.MainHero && (hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero))))
             {
                 return false;
             }
@@ -235,7 +240,7 @@ namespace Dramalord.Extensions
 
             bool inPeriod = (today >= startPeriod && today <= endPeriod) || (nextToday >= startPeriod && nextToday <= endPeriod);
 
-            if (hero.IsFemale && hero.Age <= 45 && !inPeriod)
+            if (hero.IsFemale && hero.Age <= DramalordMCM.Instance.MaxFertilityAge && !inPeriod)
             {
                 return true;
             }

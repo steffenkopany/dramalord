@@ -11,6 +11,7 @@ using TaleWorlds.CampaignSystem.MapNotificationTypes;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 
 namespace Dramalord.Actions
@@ -29,6 +30,32 @@ namespace Dramalord.Actions
             if (secondHero != Hero.MainHero && secondHero.Spouse != null)
             {
                 BreakupAction.Apply(secondHero, secondHero.Spouse);
+            }
+
+            if (firstHero.Occupation != Occupation.Lord)
+            {
+                firstHero.SetName(firstHero.FirstName, firstHero.FirstName);
+                firstHero.SetNewOccupation(Occupation.Lord);
+
+                if (firstHero.IsPlayerCompanion)
+                {
+                    Clan.PlayerClan.Companions.Remove(firstHero);
+                    firstHero.CompanionOf = null;
+                    firstHero.Clan = Clan.PlayerClan;
+                }
+            }
+
+            if (secondHero.Occupation != Occupation.Lord)
+            {
+                secondHero.SetName(secondHero.FirstName, secondHero.FirstName);
+                secondHero.SetNewOccupation(Occupation.Lord);
+
+                if (secondHero.IsPlayerCompanion)
+                {
+                    Clan.PlayerClan.Companions.Remove(secondHero);
+                    secondHero.CompanionOf = null;
+                    secondHero.Clan = Clan.PlayerClan;
+                }
             }
 
             if (firstHero.Clan == null && secondHero.Clan == null)
@@ -58,11 +85,19 @@ namespace Dramalord.Actions
                 }
                 else if (firstHero.Clan == Clan.PlayerClan)
                 {
+                    if (DramalordMCM.Instance.AllowClansChangingKingdoms && firstHero.Clan.Kingdom != null && firstHero.Clan.Kingdom != secondHero.Clan.Kingdom && secondHero.IsClanLeader && !secondHero.IsKingdomLeader)
+                    {
+                        JoinKingdomAction.Apply(secondHero.Clan, firstHero.Clan.Kingdom);
+                    }
                     LeaveClanAction.Apply(secondHero, secondHero, true);
                     JoinClanAction.Apply(secondHero, firstHero.Clan, true);
                 }
                 else if (secondHero.Clan == Clan.PlayerClan)
                 {
+                    if (DramalordMCM.Instance.AllowClansChangingKingdoms && secondHero.Clan.Kingdom != null && firstHero.Clan.Kingdom != secondHero.Clan.Kingdom && firstHero.IsClanLeader && !firstHero.IsKingdomLeader)
+                    {
+                        JoinKingdomAction.Apply(firstHero.Clan, secondHero.Clan.Kingdom);
+                    }
                     LeaveClanAction.Apply(firstHero, firstHero, true);
                     JoinClanAction.Apply(firstHero, secondHero.Clan, true);
                 }
@@ -73,6 +108,24 @@ namespace Dramalord.Actions
                 }
                 else if (firstHero.Clan.Leader != firstHero && secondHero.Clan.Leader == secondHero)
                 {
+                    LeaveClanAction.Apply(firstHero, firstHero, true);
+                    JoinClanAction.Apply(firstHero, secondHero.Clan, true);
+                }
+                else if(firstHero.IsClanLeader && secondHero.IsClanLeader && firstHero.IsKingdomLeader && !secondHero.IsKingdomLeader && firstHero.Clan.Kingdom != secondHero.Clan.Kingdom)
+                {
+                    if (DramalordMCM.Instance.AllowClansChangingKingdoms && firstHero.Clan.Kingdom != null && firstHero.Clan.Kingdom != secondHero.Clan.Kingdom && secondHero.IsClanLeader)
+                    {
+                        JoinKingdomAction.Apply(secondHero.Clan, firstHero.Clan.Kingdom);
+                    }
+                    LeaveClanAction.Apply(secondHero, secondHero, true);
+                    JoinClanAction.Apply(secondHero, firstHero.Clan, true);
+                }
+                else if(firstHero.IsClanLeader && secondHero.IsClanLeader && !firstHero.IsKingdomLeader && secondHero.IsKingdomLeader && firstHero.Clan.Kingdom != secondHero.Clan.Kingdom)
+                {
+                    if (DramalordMCM.Instance.AllowClansChangingKingdoms && secondHero.Clan.Kingdom != null && firstHero.Clan.Kingdom != secondHero.Clan.Kingdom && firstHero.IsClanLeader)
+                    {
+                        JoinKingdomAction.Apply(firstHero.Clan, secondHero.Clan.Kingdom);
+                    }
                     LeaveClanAction.Apply(firstHero, firstHero, true);
                     JoinClanAction.Apply(firstHero, secondHero.Clan, true);
                 }
@@ -93,6 +146,7 @@ namespace Dramalord.Actions
             if (secondHero.Spouse != null && !secondHero.ExSpouses.Contains(secondHero.Spouse)) secondHero.ExSpouses.Add(firstHero.Spouse);
             firstHero.ExSpouses.Remove(secondHero);
             secondHero.ExSpouses.Remove(firstHero);
+
             firstHero.Spouse = secondHero;
             secondHero.Spouse = firstHero;
             var ex1 = firstHero.ExSpouses.Distinct().Where(h => h != null).ToList();
@@ -105,6 +159,7 @@ namespace Dramalord.Actions
             firstHero.GetRelationTo(secondHero).UpdateLove();
             firstHero.GetRelationTo(secondHero).Relationship = RelationshipType.Spouse;
 
+            
 
             //CampaignEventDispatcher.Instance.OnHeroesMarried(firstHero, secondHero, false);
             if(currentSettlement != null)

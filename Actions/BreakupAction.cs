@@ -22,9 +22,11 @@ namespace Dramalord.Actions
             RelationshipType oldRelationship = relation.Relationship;
             relation.Relationship = RelationshipType.None;
             relation.Love = (relation.CurrentLove > 0) ? 0 : relation.CurrentLove;
-            relation.Trust = (relation.Trust > 0) ? 0 : relation.Trust;
+            //relation.Trust = (relation.Trust > 0) ? 0 : relation.Trust;
+            int trust = hero.GetTrust(target);
+            hero.SetTrust(target, (trust > 0) ? 0 : trust);
 
-            if(hero.Spouse == target)
+            if (hero.Spouse == target)
             {
                 foreach (Romance.RomanticState romanticState in Romance.RomanticStateList.ToList())
                 {

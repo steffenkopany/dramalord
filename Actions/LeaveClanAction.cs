@@ -1,5 +1,6 @@
 ﻿using Dramalord.LogItems;
 using Helpers;
+using Newtonsoft.Json.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
@@ -57,15 +58,22 @@ namespace Dramalord.Actions
                 }
             }
 
+            if (hero.IsPlayerCompanion)
+            {
+                Clan.PlayerClan.Companions.Remove(hero);
+                hero.CompanionOf = null;
+            }
+
             hero.Clan = null;
             if (hero.BornSettlement == null)
             {
                 hero.BornSettlement = SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
             }
 
-            hero.CompanionOf = null;
             hero.SetNewOccupation(Occupation.Wanderer);
-            //hero.SetHasMet();
+            TextObject newName = new TextObject("{=28tWEFNi}{FIRSTNAME} the Wanderer");
+            newName.SetTextVariable("FIRSTNAME", hero.FirstName);
+            hero.SetName(newName, hero.FirstName);
             hero.UpdateHomeSettlement();
             CampaignEventDispatcher.Instance.OnHeroChangedClan(hero, oldClan);
             if(!forMarriage)

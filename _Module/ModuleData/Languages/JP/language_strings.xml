@@ -477,5 +477,50 @@
     <string id="Dramalord480" text="愛の衰退開始日" />
     <string id="Dramalord481" text="愛が衰退するのに必要な、恋人同士が会っていない日数。" />
     <string id="Dramalord482" text="ああ、こんにちは {TITLE}。まさか... 来るとは思っていませんでした..." />
+    <string id="Dramalord483" text="{HERO1.LINK} は {HERO2.LINK} と親密でした。" />
+    <string id="Dramalord484" text="親密なログ" />
+    <string id="Dramalord485" text="親密なイベントをログに表示" />
+    <string id="Dramalord486" text="兄弟" />
+    <string id="Dramalord487" text="姉妹" />
+    <string id="Dramalord488" text="息子" />
+    <string id="Dramalord489" text="娘" />
+    <string id="Dramalord490" text="クランによる王国の変更を許可する" />
+    <string id="Dramalord491" text="AI クランが敗北または結婚時に王国を変更できるようにする" />
+    <string id="Dramalord492" text="{CLAN} が {KINGDOM} に参加しました。" />
+    <string id="Dramalord493" text="{CLAN} が {KINGDOM} を離れました。" />
+    <string id="Dramalord494" text="プレイヤーの配偶者は忠実です" />
+    <string id="Dramalord495" text="プレイヤーの配偶者は他の誰とも交流しません。" />
+    <string id="Dramalord496" text="{HERO} は 1 日以内に {FACTION} を離れます。" />
+    <string id="Dramalord497" text="あなたは私のクランに合わないと判断しました。荷物をまとめて出て行ってください。" />
+    <string id="Dramalord498" text="私の王国にあなたの一族の居場所はありません。出て行ってください、そして二度と戻ってきません！" />
+    <string id="Dramalord499" text="あなたの友情がどれほど価値があるかを知ることができてよかったです。残念です！あなたの言うとおりにします。" />
+    <string id="Dramalord500" text="子供は氏族内に留めておく" />
+    <string id="Dramalord501" text="氏族に生まれた非嫡出子は孤児院に送られることはありません" />
+    <string id="Dramalord502" text="私たちのまだ生まれていない子供を処分してほしい。" />
+    <string id="Dramalord503" text="あなたと {HERO} のまだ生まれていない子供を処分してほしい。" />
+    <string id="Dramalord504" text="私たちの子供を産みたくない。" />
+    <string id="Dramalord505" text="著名人を含める" />
+    <string id="Dramalord506" text="ギャングリーダーなどの著名人をDramalord AIに含める（実験的、パフォーマンスへの影響）" />
+    <string id="Dramalord507" text="必要と思われる場合は、私が対処します {TITLE}。" />
+    <string id="Dramalord508" text="私はこれを受け入れません、{TITLE}。再考を強くお勧めします。さもないと、結果が伴います!" />
+    <string id="Dramalord509" text="これがあなたの望みなら、そうしてください {TITLE}。私はあなたにそれを保つよう強制しません。" />
+    <string id="Dramalord510" text="あなたは正気ですか、{TITLE}？この子は私たちの愛の現れです！" />
+    <string id="Dramalord511" text="その通りです。{HERO} の子供を産むのは不適切です。" />
+    <string id="Dramalord512" text="絶対にだめですよ、{TITLE}！この子供は私が {HERO} に抱く愛の結果です！" />
+    <string id="Dramalord513" text="他の誰か" />
+    <string id="Dramalord514" text="{HERO} は 1 日以内に中絶手術を行います。" />
+    <string id="Dramalord515" text="{HERO.LINK} はあなたに対してあまり愛情を持っていません。({NUMBER})" />
+    <string id="Dramalord516" text="あなたは 1 日以内に中絶手術を行います。" />
+    <string id="Dramalord517" text="あなたは {HERO.LINK} の胎児を中絶しました。" />
+    <string id="Dramalord518" text="{HERO.LINK} はあなたの胎児を中絶しました。" />
+    <string id="Dramalord519" text="{HERO.LINK} は {HERO2.LINK} の胎児を中絶しました。" />
+    <string id="Dramalord520" text="最大妊娠可能年齢" />
+    <string id="Dramalord521" text="ヒーローが妊娠できる最大年齢（Dramalord の妊娠のみ）" />
+    <string id="Dramalord522" text="名士の子供を残す" />
+    <string id="Dramalord523" text="名士の非嫡出子は孤児院に送られない" />
+    <string id="Dramalord524" text="{CHILD} が生まれました。" />
+    <string id="Dramalord525" text="{MOTHER} が {CHILD} を出産しました。{FATHER} が父親です。母親に子供を引き取るように勧めますか、それとも捨てるように勧めますか?" />
+    <string id="Dramalord526" text="子供を追い出す" />
+    <string id="Dramalord527" text="子供を引き取る" />
   </strings>
 </base>

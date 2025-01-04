@@ -477,5 +477,50 @@
     <string id="Dramalord480" text="Dzień rozpoczęcia rozpadu miłości" />
     <string id="Dramalord481" text="Ilość dni, przez które kochankowie nie widzieli się nawzajem, aby miłość zanikła." />
     <string id="Dramalord482" text="O, cześć {TITLE}. Nie spodziewałem się... ciebie..." />
+    <string id="Dramalord483" text="{HERO1.LINK} był w intymnej relacji z {HERO2.LINK}." />
+    <string id="Dramalord484" text="Intymne dzienniki" />
+    <string id="Dramalord485" text="Pokaż intymne wydarzenia w dziennikach" />
+    <string id="Dramalord486" text="brat" />
+    <string id="Dramalord487" text="siostra" />
+    <string id="Dramalord488" text="syn" />
+    <string id="Dramalord489" text="córka" />
+    <string id="Dramalord490" text="Zezwól klanom na zmianę królestw" />
+    <string id="Dramalord491" text="Zezwól klanom AI na zmianę królestw po porażce lub małżeństwie" />
+    <string id="Dramalord492" text="{KLAN} dołączył do {KRÓLESTWA}." />
+    <string id="Dramalord493" text="{KLAN} opuścił {KRÓLESTWO}." />
+    <string id="Dramalord494" text="Wierzchnik gracza" />
+    <string id="Dramalord495" text="Wspólnik gracza nie będzie wchodził w interakcje z nikim innym" />
+    <string id="Dramalord496" text="{BOHATER} opuści {FRAKCJĘ} w ciągu jednego dnia." />
+    <string id="Dramalord497" text="Postanowiłem, że nie pasujesz do mojego klanu. Spakuj swoje rzeczy i odejdź." />
+    <string id="Dramalord498" text="Nie ma miejsca dla twojego klanu w moim królestwie. Odejdź i nie wracaj!" />
+    <string id="Dramalord499" text="Dobrze wiedzieć, ile warta jest twoja przyjaźń. Jakie rozczarowanie! Zrobię, o co prosisz." />
+    <string id="Dramalord500" text="Trzymaj dzieci w klanach" />
+    <string id="Dramalord501" text="Nieprawowite dzieci urodzone w klanach nie trafią do sierocińca" />
+    <string id="Dramalord502" text="Chcę, żebyś pozbył się naszego nienarodzonego dziecka." />
+    <string id="Dramalord503" text="Chcę, żebyś pozbył się nienarodzonego dziecka ciebie i {HERO}." />
+    <string id="Dramalord504" text="Nie chcę urodzić naszego dziecka." />
+    <string id="Dramalord505" text="Dołącz Znane Osoby" />
+    <string id="Dramalord506" text="Dołącz Znane Osoby, takie jak Gang Leaders w Dramalord AI (eksperymentalne, wpływ na wydajność)" />
+    <string id="Dramalord507" text="Jeśli uważasz to za konieczne, to się tym zajmę {TITLE}." />
+    <string id="Dramalord508" text="Nie zaakceptuję tego, {TITLE}. Namawiam cię do ponownego rozważenia, w przeciwnym razie będą konsekwencje!" />
+    <string id="Dramalord509" text="Jeśli takie jest twoje życzenie, to zrób to {TITLE}. Nie będę cię zmuszał do jego zachowania." />
+    <string id="Dramalord510" text="Czy ty oszalałeś, {TITLE}? To dziecko jest przejawem naszej miłości!" />
+    <string id="Dramalord511" text="Masz rację. Nie wypadałoby urodzić dziecka {HERO}." />
+    <string id="Dramalord512" text="Nigdy, {TITLE}! To dziecko jest wynikiem miłości, jaką mam do {HERO}!" />
+    <string id="Dramalord513" text="ktoś inny" />
+    <string id="Dramalord514" text="{HERO} dokona aborcji w ciągu jednego dnia." />
+    <string id="Dramalord515" text="{HERO.LINK} ma dla ciebie mniej miłości. ({NUMBER})" />
+    <string id="Dramalord516" text="Wykonasz aborcję w ciągu jednego dnia." />
+    <string id="Dramalord517" text="Dokonałeś aborcji nienarodzonego dziecka {HERO.LINK}." />
+    <string id="Dramalord518" text="{HERO.LINK} dokonał aborcji nienarodzonego dziecka twojego." />
+    <string id="Dramalord519" text="{HERO.LINK} dokonał aborcji swojego nienarodzonego dziecka {HERO2.LINK}." />
+    <string id="Dramalord520" text="Maksymalny wiek płodności" />
+    <string id="Dramalord521" text="Maksymalny wiek, w którym bohater może zajść w ciążę (tylko w przypadku ciąż Dramalord)" />
+    <string id="Dramalord522" text="Zachowaj dzieci notable" />
+    <string id="Dramalord523" text="Nieprawowite dzieci notable nie trafią do sierocińca" />
+    <string id="Dramalord524" text="{CHILD} się urodziło." />
+    <string id="Dramalord525" text="{MOTHER} urodziła {CHILD}. {FATHER} jest ojcem. Czy namawiałby matkę, żeby zatrzymała dziecko, czy pozbyła się go?" />
+    <string id="Dramalord526" text="Pozbądź się dziecka" />
+    <string id="Dramalord527" text="Zachowaj dziecko" />
   </strings>
 </base>

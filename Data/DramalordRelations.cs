@@ -83,14 +83,14 @@ namespace Dramalord.Data
         private int _love;
         private double _lastInteraction;
         private RelationshipType _relationship;
-
+/*
         [SaveableProperty(1)]
         internal int Trust
         {
             get => _trust;
             set => _trust = MBMath.ClampInt(value, -100, 100);
         }
-
+*/
         [SaveableProperty(2)]
         internal int Love
         {
@@ -123,7 +123,7 @@ namespace Dramalord.Data
 
         internal HeroRelation(int friendship, int love, RelationshipType relationship)
         {
-            Trust = friendship;
+            //Trust = friendship;
             Love = love;
             LastInteraction = 0;
             Relationship = relationship;

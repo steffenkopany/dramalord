@@ -35,6 +35,11 @@ namespace Dramalord.Conversations
         private static TextObject player_interaction_gift = new("{=Dramalord292}{TITLE}, let me give you this exceptional {GIFT} as a token of my affection.");
         private static TextObject player_interaction_abort = new("{=Dramalord101}Let's talk about something else, {TITLE}.");
         private static TextObject player_interaction_adopt = new("{=Dramalord441}{TITLE}, I would like to add one of your children into my family.");
+        private static TextObject player_interaction_kick_clan = new("{=Dramalord497}I have decided that you dot fit into my clan. Pack your stuff and leave.");
+        private static TextObject player_interaction_kick_kingdom = new("{=Dramalord498}There is no place for your clan in my kingdom. Be gone and don't return!");
+        private static TextObject player_interaction_abort_own = new("{=Dramalord502}I want you to get rid of our unborn child.");
+        private static TextObject player_interaction_abort_self = new("{=Dramalord504}I do not want to give birth to our child.");
+        private static TextObject player_interaction_abort_other = new("{=Dramalord503}I want you to get rid of the unborn child of you and {HERO}.");
 
         private static TextObject npc_interaction_abort = new("{=Dramalord186}As you wish, {TITLE}.");
         private static TextObject npc_interaction_reply_talk_1 = new("{=Dramalord055}Sure, let's have a conversation {TITLE}.");
@@ -76,10 +81,19 @@ namespace Dramalord.Conversations
         private static TextObject npc_interaction_breakup_leave = new("{=Dramalord232}I.. I don't know what to say. This is shocking me. I have to think if I can stay around you...");
         private static TextObject npc_interaction_reply_gift = new("{=Dramalord293}Thank you {TITLE}! I will keep it close to my... bed as a reminder of your... affection and enjoy it every day!");
         private static TextObject npc_interaction_reply_adopt_yes = new("{=Dramalord442}It would be an honor, {TITLE}. Who would you like to take into your family?");
-        private static TextObject npc_interaction_reply_adopt_no = new("{=Dramalord443}I am sorry, {TITLE}. I want my children to have a free choice when they com of age.");
+        private static TextObject npc_interaction_reply_adopt_no = new("{=Dramalord443}I am sorry, {TITLE}. I want my children to have a free choice when they come of age.");
         private static TextObject npc_interaction_reply_adopt_verify = new("{=Dramalord444}Are you sure you want to take my child {CHILD} into your family?");
         private static TextObject npc_interaction_reply_uhwell = new("{=Dramalord437}Uh... well...");
+        private static TextObject npc_interaction_kick_love = new("{=Dramalord230}Oh no, {TITLE}! You are breaking my heart! But I have no other choice then to accept your decision.");
+        private static TextObject npc_interaction_kick_friend = new("{=Dramalord499}Good to know how much your friendship is worth. What a disappointment! I will do as you ask.");
+        private static TextObject npc_interaction_kick_neutral = new("{=Dramalord231}Well, eventually it always comes to that, right {TITLE}. It was nice at long it lasted. Thank you.");
 
+        private static TextObject npc_interaction_abort_own_accept = new("{=Dramalord507}If you consider this necessary, then I will take care about it {TITLE}.");
+        private static TextObject npc_interaction_abort_own_decline = new("{=Dramalord508}I will not accept this, {TITLE}. I urge you to reconsider or there are consequences!");
+        private static TextObject npc_interaction_abort_self_accept = new("{=Dramalord509}If this is your wish, then do so {TITLE}. I will not force you to keep it.");
+        private static TextObject npc_interaction_abort_self_decline = new("{=Dramalord510}Are you insane, {TITLE}? This child is the manifestation of our love!");
+        private static TextObject npc_interaction_abort_other_accept = new("{=Dramalord511}You are right. It wouldn't be proper to give birth to a child of {HERO}.");
+        private static TextObject npc_interaction_abort_other_decline = new("{=Dramalord512}Never, {TITLE}! This child is the result of the love I have for {HERO}!");
 
 
         internal static void SetupLines()
@@ -100,6 +114,7 @@ namespace Dramalord.Conversations
             player_interaction_gift.SetTextVariable("GIFT", Hero.OneToOneConversationHero.IsFemale ? new TextObject("{=Dramalord240}Sausage") : new TextObject("{=Dramalord241}Pie"));
             player_interaction_abort.SetTextVariable("TITLE", ConversationHelper.NpcTitle(false));
             player_interaction_adopt.SetTextVariable("TITLE", ConversationHelper.NpcTitle(true));
+            player_interaction_abort_other.SetTextVariable("HERO", DramalordPregancies.Instance.GetPregnancy(Hero.OneToOneConversationHero)?.Father.Name ?? new TextObject("{=Dramalord513}someone else"));
             npc_interaction_abort.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
             npc_interaction_reply_talk_1.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
             npc_interaction_reply_talk_2.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
@@ -137,6 +152,15 @@ namespace Dramalord.Conversations
             npc_interaction_reply_gift.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
             npc_interaction_reply_adopt_yes.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
             npc_interaction_reply_adopt_no.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            npc_interaction_kick_love.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            npc_interaction_kick_neutral.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            npc_interaction_abort_own_accept.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            npc_interaction_abort_own_decline.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            npc_interaction_abort_self_accept.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            npc_interaction_abort_self_decline.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            npc_interaction_abort_other_accept.SetTextVariable("HERO", DramalordPregancies.Instance.GetPregnancy(Hero.OneToOneConversationHero)?.Father.Name ?? new TextObject("{=Dramalord513}someone else"));
+            npc_interaction_abort_other_decline.SetTextVariable("TITLE", ConversationHelper.PlayerTitle(false));
+            npc_interaction_abort_other_decline.SetTextVariable("HERO", DramalordPregancies.Instance.GetPregnancy(Hero.OneToOneConversationHero)?.Father.Name ?? new TextObject("{=Dramalord513}someone else"));
 
 
             MBTextManager.SetTextVariable("player_approach_start", player_approach_start);
@@ -156,6 +180,12 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("player_interaction_gift", player_interaction_gift);
             MBTextManager.SetTextVariable("player_interaction_abort", player_interaction_abort);
             MBTextManager.SetTextVariable("player_interaction_adopt", player_interaction_adopt);
+            MBTextManager.SetTextVariable("player_interaction_kick_clan", player_interaction_kick_clan);
+            MBTextManager.SetTextVariable("player_interaction_kick_kingdom", player_interaction_kick_kingdom);
+            MBTextManager.SetTextVariable("player_interaction_abort_own", player_interaction_abort_own);
+            MBTextManager.SetTextVariable("player_interaction_abort_self", player_interaction_abort_self);
+            MBTextManager.SetTextVariable("player_interaction_abort_other", player_interaction_abort_other);
+
             MBTextManager.SetTextVariable("npc_interaction_abort", npc_interaction_abort);
             MBTextManager.SetTextVariable("npc_interaction_reply_talk_1", npc_interaction_reply_talk_1);
             MBTextManager.SetTextVariable("npc_interaction_reply_talk_2", npc_interaction_reply_talk_2);
@@ -199,6 +229,16 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("npc_interaction_reply_adopt_no", npc_interaction_reply_adopt_no); 
             MBTextManager.SetTextVariable("npc_interaction_reply_adopt_verify", npc_interaction_reply_adopt_verify);
             MBTextManager.SetTextVariable("npc_interaction_reply_uhwell", npc_interaction_reply_uhwell);
+            MBTextManager.SetTextVariable("npc_interaction_kick_love", npc_interaction_kick_love);
+            MBTextManager.SetTextVariable("npc_interaction_kick_friend", npc_interaction_kick_friend);
+            MBTextManager.SetTextVariable("npc_interaction_kick_neutral", npc_interaction_kick_neutral);
+
+            MBTextManager.SetTextVariable("npc_interaction_abort_own_accept", npc_interaction_abort_own_accept);
+            MBTextManager.SetTextVariable("npc_interaction_abort_own_decline", npc_interaction_abort_own_decline);
+            MBTextManager.SetTextVariable("npc_interaction_abort_self_accept", npc_interaction_abort_self_accept);
+            MBTextManager.SetTextVariable("npc_interaction_abort_self_decline", npc_interaction_abort_self_decline);
+            MBTextManager.SetTextVariable("npc_interaction_abort_other_accept", npc_interaction_abort_other_accept);
+            MBTextManager.SetTextVariable("npc_interaction_abort_other_decline", npc_interaction_abort_other_decline);
         }
 
         internal static void AddDialogs(CampaignGameStarter starter)
@@ -221,6 +261,13 @@ namespace Dramalord.Conversations
             starter.AddPlayerLine("player_interaction_breakup", "player_interaction_selection", "npc_interaction_reply_breakup", "{player_interaction_breakup}", ConditionPlayerCanAskBreakup, null);
             starter.AddPlayerLine("player_interaction_gift", "player_interaction_selection", "npc_interaction_reply_gift", "{player_interaction_gift}", ConditionPlayerCanGiveGift, null);
             starter.AddPlayerLine("player_interaction_adopt", "player_interaction_selection", "npc_interaction_reply_adopt", "{player_interaction_adopt}", ConditionPlayerCanAdopt, null);
+            starter.AddPlayerLine("player_interaction_kick_clan", "player_interaction_selection", "npc_interaction_reply_kick_clan", "{player_interaction_kick_clan}", ConditionPlayerCanKickClan, null);
+            starter.AddPlayerLine("player_interaction_kick_kingdom", "player_interaction_selection", "npc_interaction_reply_kick_kingdom", "{player_interaction_kick_kingdom}", ConditionPlayerCanKickKingdom, null);
+
+            starter.AddPlayerLine("player_interaction_abort_own", "player_interaction_selection", "npc_interaction_reply_abort_own", "{player_interaction_abort_own}", ConditionPlayerCanAbortOwn, null);
+            starter.AddPlayerLine("player_interaction_abort_self", "player_interaction_selection", "npc_interaction_reply_abort_self", "{player_interaction_abort_self}", ConditionPlayerCanAbortSelf, null);
+            starter.AddPlayerLine("player_interaction_abort_other", "player_interaction_selection", "npc_interaction_reply_abort_other", "{player_interaction_abort_other}", ConditionPlayerCanAbortOther, null);
+
             starter.AddPlayerLine("player_interaction_abort", "player_interaction_selection", "npc_interaction_abort", "{player_interaction_abort}", null, null);
 
             starter.AddDialogLine("npc_interaction_abort", "npc_interaction_abort", "hero_main_options", "{npc_interaction_abort}", null, null);
@@ -307,6 +354,20 @@ namespace Dramalord.Conversations
             starter.AddDialogLine("npc_interaction_breakup_nolove", "npc_interaction_reply_breakup", "close_window", "{npc_interaction_breakup_nolove}[ib:closed2][if:convo_bored2]", ConditionNpcAcceptsBreakupNoLove, ConsequenceNpcAcceptsBreakup);
             starter.AddDialogLine("npc_interaction_breakup_leave", "npc_interaction_reply_breakup", "close_window", "{npc_interaction_breakup_leave}[ib:warrior][if:convo_grave]", ConditionNpcAcceptsBreakupLeave, ConsequenceNpcAcceptsBreakupLeave);
 
+            starter.AddDialogLine("npc_interaction_kick_clan_love", "npc_interaction_reply_kick_clan", "close_window", "{npc_interaction_kick_love}[ib:nervous][if:convo_shocked]", ConditionNpcAcceptsKickClanLove, ConsequenceNpcAcceptsKickClan);
+            starter.AddDialogLine("npc_interaction_kick_clan_friend", "npc_interaction_reply_kick_clan", "close_window", "{npc_interaction_kick_friend}[ib:closed2][if:convo_confused_annoyed]", ConditionNpcAcceptsKickClanFriend, ConsequenceNpcAcceptsKickClan);
+            starter.AddDialogLine("npc_interaction_kick_clan_neutral", "npc_interaction_reply_kick_clan", "close_window", "{npc_interaction_kick_neutral}[ib:warrior][if:convo_grave]", ConditionNpcAcceptsKickClanNeutral, ConsequenceNpcAcceptsKickClan);
+
+            starter.AddDialogLine("npc_interaction_kick_kingdom_love", "npc_interaction_reply_kick_kingdom", "close_window", "{npc_interaction_kick_love}[ib:nervous][if:convo_shocked]", ConditionNpcAcceptsKickClanLove, ConsequenceNpcAcceptsKickKingdom);
+            starter.AddDialogLine("npc_interaction_kick_kingdom_friend", "npc_interaction_reply_kick_kingdom", "close_window", "{npc_interaction_kick_friend}[ib:closed2][if:convo_confused_annoyed]", ConditionNpcAcceptsKickClanFriend, ConsequenceNpcAcceptsKickKingdom);
+            starter.AddDialogLine("npc_interaction_kick_kingdom_neutral", "npc_interaction_reply_kick_kingdom", "close_window", "{npc_interaction_kick_neutral}[ib:warrior][if:convo_grave]", ConditionNpcAcceptsKickClanNeutral, ConsequenceNpcAcceptsKickKingdom);
+            ///
+            starter.AddDialogLine("npc_interaction_abort_own_accept", "npc_interaction_reply_abort_own", "close_window", "{npc_interaction_abort_own_accept}[ib:warrior][if:convo_grave]", ConditionNpcAcceptsAbortOwn, ConsequenceNpcAcceptsAbortOwn);
+            starter.AddDialogLine("npc_interaction_abort_own_decline", "npc_interaction_reply_abort_own", "close_window", "{npc_interaction_abort_own_decline}[ib:nervous][if:convo_shocked]", ConditionNpcDeclinesAbortOwn, ConsequenceNpcDeclinesAbortOwn);
+            starter.AddDialogLine("npc_interaction_abort_self_accept", "npc_interaction_reply_abort_self", "close_window", "{npc_interaction_abort_self_accept}[ib:warrior][if:convo_grave]", ConditionNpcAcceptsAbortSelf, ConsequenceNpcAcceptsAbortSelf);
+            starter.AddDialogLine("npc_interaction_abort_self_decline", "npc_interaction_reply_abort_self", "close_window", "{npc_interaction_abort_self_decline}[ib:nervous][if:convo_shocked]", ConditionNpcDeclinesAbortSelf, ConsequenceNpcDeclinesAbortSelf);
+            starter.AddDialogLine("npc_interaction_abort_other_accept", "npc_interaction_reply_abort_other", "close_window", "{npc_interaction_abort_other_accept}[ib:warrior][if:convo_grave]", ConditionNpcAcceptsAbortOther, ConsequenceNpcAcceptsAbortOther);
+            starter.AddDialogLine("npc_interaction_abort_other_decline", "npc_interaction_reply_abort_other", "close_window", "{npc_interaction_abort_other_decline}[ib:nervous][if:convo_shocked]", ConditionNpcDeclinesAbortOther, ConsequenceNpcDeclinesAbortOther);
 
             starter.AddDialogLine("npc_interaction_reply_gift", "npc_interaction_reply_gift", "player_interaction_selection", "{npc_interaction_reply_gift}[ib:normal2][if:convo_mocking_teasing]", null, ConsequencNpceAcceptsGift);
 
@@ -346,9 +407,9 @@ namespace Dramalord.Conversations
 
         private static bool ConditionPersonalInfoUnknown() => Hero.OneToOneConversationHero.GetDesires().InfoKnown == false;
 
-        private static bool ConditionNpcDeclinesAsk() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust < DramalordMCM.Instance.MinTrust;
+        private static bool ConditionNpcDeclinesAsk() => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) < DramalordMCM.Instance.MinTrust;
 
-        private static bool ConditionNpcAcceptsAsk() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= DramalordMCM.Instance.MinTrust;
+        private static bool ConditionNpcAcceptsAsk() => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrust;
 
         private static bool ConditionNpcAcceptsAskBi() => Hero.OneToOneConversationHero.GetDesires().AttractionMen >= DramalordMCM.Instance.MinAttraction && Hero.OneToOneConversationHero.GetDesires().AttractionWomen >= DramalordMCM.Instance.MinAttraction;
 
@@ -423,11 +484,11 @@ namespace Dramalord.Conversations
 
         private static bool ConditionNpcDeclinesDate() => NoTimeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove <= 0;
 
-        private static bool ConditionNpcDeclinesDateHusband() => HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero);
+        private static bool ConditionNpcDeclinesDateHusband() => HusbandClose() && NoTimeout() && (Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinDatingLove);
 
         private static bool ConditionNpcDeclinesDateTimeout() => !NoTimeout();
 
-        private static bool ConditionNpcMaybeSexFriend() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= 25 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= 25;
+        private static bool ConditionNpcMaybeSexFriend() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= 25 && Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) >= 25;
 
         private static bool ConditionNpcAcceptsAdoption() => Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero);
 
@@ -454,7 +515,7 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceNpcMaybeSexFriend() => Persuasions.CreatePersuasionTaskForFWB();
 
-        private static bool ConditionNpcAcceptsSexFriend() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= DramalordMCM.Instance.MinTrustFWB && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= DramalordMCM.Instance.MinTrustFWB;
+        private static bool ConditionNpcAcceptsSexFriend() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= DramalordMCM.Instance.MinTrustFWB && Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrustFWB;
 
         private static bool ConditionNpcAcceptsSexFWB() => !HusbandClose() && NoTimeout() && Hero.OneToOneConversationHero.IsFriendWithBenefitsOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetDesires().Horny >= 50;
 
@@ -486,6 +547,12 @@ namespace Dramalord.Conversations
 
         private static bool ConditionNpcAcceptsBreakupLeave() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinDatingLove && Hero.OneToOneConversationHero.GetPersonality().Neuroticism >= _randomChance;
 
+        private static bool ConditionNpcAcceptsKickClanLove() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove >= DramalordMCM.Instance.MinDatingLove;
+
+        private static bool ConditionNpcAcceptsKickClanFriend() => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrust;
+
+        private static bool ConditionNpcAcceptsKickClanNeutral() => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) < DramalordMCM.Instance.MinTrust && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).CurrentLove < DramalordMCM.Instance.MinDatingLove;
+
         private static bool ConditionPlayerCanGiveGift()
         {
             ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
@@ -515,6 +582,69 @@ namespace Dramalord.Conversations
             return result != null;
         }
 
+        private static bool ConditionPlayerCanKickClan()
+        {
+            return Hero.OneToOneConversationHero.Clan == Hero.MainHero.Clan;
+        }
+
+        private static bool ConditionPlayerCanKickKingdom()
+        {
+            return Hero.OneToOneConversationHero.Clan != null && Hero.MainHero.Clan.Kingdom != null && Hero.MainHero.IsKingdomLeader && Hero.OneToOneConversationHero.Clan.Kingdom == Hero.MainHero.Clan.Kingdom && Hero.OneToOneConversationHero.Clan != Hero.MainHero.Clan;
+        }
+
+        private static bool ConditionPlayerCanAbortOwn()
+        {
+            Hero? father = DramalordPregancies.Instance.GetPregnancy(Hero.OneToOneConversationHero)?.Father;
+            return father != null && father == Hero.MainHero;
+        }
+
+        private static bool ConditionPlayerCanAbortSelf()
+        {
+            Hero? father = DramalordPregancies.Instance.GetPregnancy(Hero.MainHero)?.Father;
+            return father != null && father == Hero.OneToOneConversationHero;
+        }
+
+        private static bool ConditionPlayerCanAbortOther()
+        {
+            Hero? father = DramalordPregancies.Instance.GetPregnancy(Hero.OneToOneConversationHero)?.Father;
+            return Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && father != null && father != Hero.MainHero;
+        }
+
+        private static bool ConditionNpcAcceptsAbortOwn()
+        {
+            return !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove;
+        }
+
+        private static bool ConditionNpcDeclinesAbortOwn()
+        {
+            return Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove;
+        }
+
+        private static bool ConditionNpcAcceptsAbortSelf()
+        {
+            return !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove;
+        }
+
+        private static bool ConditionNpcDeclinesAbortSelf()
+        {
+            return Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove;
+        }
+
+        private static bool ConditionNpcAcceptsAbortOther()
+        {
+            Hero father = DramalordPregancies.Instance.GetPregnancy(Hero.OneToOneConversationHero)?.Father;
+            return father != null && ((!Hero.OneToOneConversationHero.IsEmotionalWith(father) && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero)) || 
+                (Hero.OneToOneConversationHero.IsEmotionalWith(father) && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > Hero.OneToOneConversationHero.GetRelationTo(father).Love) ||
+                (Hero.OneToOneConversationHero.Clan != null && Hero.OneToOneConversationHero.Clan == Clan.PlayerClan && !Hero.OneToOneConversationHero.IsSpouseOf(father)));
+        }
+
+        private static bool ConditionNpcDeclinesAbortOther()
+        {
+            Hero father = DramalordPregancies.Instance.GetPregnancy(Hero.OneToOneConversationHero)?.Father;
+            return father != null && ((Hero.OneToOneConversationHero.IsEmotionalWith(father) && !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero)) ||
+                (Hero.OneToOneConversationHero.IsEmotionalWith(father) && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love <= Hero.OneToOneConversationHero.GetRelationTo(father).Love) ||
+                (Hero.OneToOneConversationHero.Clan != Clan.PlayerClan));
+        }
 
         //CONSEQUENCE
         private static void ConsequenceNpcAcceptsTalk()
@@ -648,6 +778,10 @@ namespace Dramalord.Conversations
         {
             Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.BreakUp, Hero.OneToOneConversationHero, -1);
+            if (Hero.OneToOneConversationHero.GetDesires().HasToy)
+            {
+                Hero.OneToOneConversationHero.GetDesires().HasToy = false;
+            }
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
@@ -659,11 +793,144 @@ namespace Dramalord.Conversations
             Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.BreakUp, Hero.OneToOneConversationHero, -1);
             Hero.OneToOneConversationHero.AddIntention(Hero.MainHero, IntentionType.LeaveClan, -1);
+
+            if (Hero.OneToOneConversationHero.GetDesires().HasToy)
+            {
+                Hero.OneToOneConversationHero.GetDesires().HasToy = false;
+            }
+
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;
             }
         }
+
+        private static void ConsequenceNpcAcceptsKickClan()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+            if(Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero))
+            {
+                BreakupAction.Apply(Hero.OneToOneConversationHero, Hero.MainHero);
+            }
+
+            if(Hero.OneToOneConversationHero.GetDesires().HasToy)
+            {
+                Hero.OneToOneConversationHero.GetDesires().HasToy = false;
+            }
+
+            TextObject banner = new TextObject("{=Dramalord496}{HERO} will leave {FACTION} within one day.");
+            banner.SetTextVariable("HERO", Hero.OneToOneConversationHero.Name);
+            banner.SetTextVariable("FACTION", Hero.MainHero.Clan.Name);
+            MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
+
+            Hero.OneToOneConversationHero.AddIntention(Hero.MainHero, IntentionType.LeaveClan, -1);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        private static void ConsequenceNpcAcceptsKickKingdom()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+            if (Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero))
+            {
+                BreakupAction.Apply(Hero.OneToOneConversationHero, Hero.MainHero);
+            }
+
+            if (Hero.OneToOneConversationHero.GetDesires().HasToy)
+            {
+                Hero.OneToOneConversationHero.GetDesires().HasToy = false;
+            }
+
+            TextObject banner = new TextObject("{=Dramalord496}{HERO} will leave {FACTION} within one day.");
+            banner.SetTextVariable("HERO", Hero.OneToOneConversationHero.Clan.Name);
+            banner.SetTextVariable("FACTION", Hero.MainHero.Clan.Kingdom.Name);
+            MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
+
+            Hero.OneToOneConversationHero.AddIntention(Hero.MainHero, IntentionType.LeaveKingdom, -1);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        private static void ConsequenceNpcAcceptsAbortOwn()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+
+            TextObject banner = new TextObject("{=Dramalord514}{HERO} will perform an abortion within one day.");
+            banner.SetTextVariable("HERO", Hero.OneToOneConversationHero.Name);
+            MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
+
+            Hero.OneToOneConversationHero.AddIntention(Hero.MainHero, IntentionType.Abortion, -1);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        private static void ConsequenceNpcDeclinesAbortOwn()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love -= 50;
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+
+            TextObject banner = new TextObject("{=Dramalord515}{HERO} has less love for you. ({NUMBER})");
+            banner.SetTextVariable("HERO", Hero.OneToOneConversationHero.Name);
+            banner.SetTextVariable("NUMBER", -50);
+            MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
+
+            if (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove)
+            {
+                ConsequenceNpcAcceptsKickClan();
+            }
+            else
+            {
+                if (PlayerEncounter.Current != null)
+                {
+                    PlayerEncounter.LeaveEncounter = true;
+                }
+            }
+        }
+
+        private static void ConsequenceNpcAcceptsAbortSelf()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+
+            AbortionAction.Apply(Hero.MainHero);
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        private static void ConsequenceNpcDeclinesAbortSelf()
+        {
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love -= 50;
+            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).UpdateLove();
+
+            TextObject banner = new TextObject("{=Dramalord515}{HERO} has less love for you. ({NUMBER})");
+            banner.SetTextVariable("HERO", Hero.OneToOneConversationHero.Name);
+            banner.SetTextVariable("NUMBER", -50);
+            MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
+
+            AbortionAction.Apply(Hero.MainHero);
+            if (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove)
+            {
+                ConsequenceNpcAcceptsKickClan();
+            }
+            else
+            {
+                if (PlayerEncounter.Current != null)
+                {
+                    PlayerEncounter.LeaveEncounter = true;
+                }
+            }
+        }
+
+        private static void ConsequenceNpcAcceptsAbortOther() => ConsequenceNpcAcceptsAbortOwn();
+
+        private static void ConsequenceNpcDeclinesAbortOther() => ConsequenceNpcDeclinesAbortOwn();
 
         private static void ConsequencNpceAcceptsGift()
         {

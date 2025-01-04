@@ -477,8 +477,50 @@
     <string id="Dramalord480" text="Love Decay Start Day" />
     <string id="Dramalord481" text="Number of days lovers haven't seen each other needed to make love decay." />
     <string id="Dramalord482" text="Oh, hello {TITLE}. I... didn't expect you..." />
-    <string id="Dramalord483" text="{HERO1} was intimate with {HERO2}." />
+    <string id="Dramalord483" text="{HERO1.LINK} was intimate with {HERO2.LINK}." />
     <string id="Dramalord484" text="Intimate Logs" />
     <string id="Dramalord485" text="Show intimate events in the logs" />
+    <string id="Dramalord486" text="brother" />
+    <string id="Dramalord487" text="sister" />
+    <string id="Dramalord488" text="son" />
+    <string id="Dramalord489" text="daughter" />
+    <string id="Dramalord490" text="Allow Clans Changing Kingdoms" />
+    <string id="Dramalord491" text="Allow AI clans to switch kingdoms on defeat or marriage" />
+    <string id="Dramalord492" text="{CLAN} joined {KINGDOM}." />
+    <string id="Dramalord493" text="{CLAN} has left {KINGDOM}." />
+    <string id="Dramalord494" text="Player Spouse Faithful" />
+    <string id="Dramalord495" text="The spouse of the player will not interact with anyone else" />
+    <string id="Dramalord496" text="{HERO} will leave {FACTION} within one day." />
+    <string id="Dramalord497" text="I have decided that you dot fit into my clan. Pack your stuff and leave." />
+    <string id="Dramalord498" text="There is no place for your clan in my kingdom. Be gone and don't return!" />
+    <string id="Dramalord499" text="Good to know how much your friendship is worth. What a disappointment! I will do as you ask." />
+    <string id="Dramalord500" text="Keep Children in Clans" />
+    <string id="Dramalord501" text="Non legitimate children born into clans will not end up in the orphanage" />
+    <string id="Dramalord502" text="I want you to get rid of our unborn child." />
+    <string id="Dramalord503" text="I want you to get rid of the unborn child of you and {HERO}." />
+    <string id="Dramalord504" text="I do not want to give birth to our child." />
+    <string id="Dramalord505" text="Include Notables" />
+    <string id="Dramalord506" text="Include Notables like Gang leaders in Dramalord AI (experimental, performance impact)" />
+    <string id="Dramalord507" text="If you consider this necessary, then I will take care about it {TITLE}." />
+    <string id="Dramalord508" text="I will not accept this, {TITLE}. I urge you to reconsider or there are consequences!" />
+    <string id="Dramalord509" text="If this is your wish, then do so {TITLE}. I will not force you to keep it." />
+    <string id="Dramalord510" text="Are you insane, {TITLE}? This child is the manifestation of our love!" />
+    <string id="Dramalord511" text="You are right. It wouldn't be proper to give birth to a child of {HERO}." />
+    <string id="Dramalord512" text="Never, {TITLE}! This child is the result of the love I have for {HERO}!" />
+    <string id="Dramalord513" text="someone else" />
+    <string id="Dramalord514" text="{HERO} will perform an abortion within one day." />
+    <string id="Dramalord515" text="{HERO.LINK} has less love for you. ({NUMBER})" />
+    <string id="Dramalord516" text="You will perform an abortion within one day." />
+    <string id="Dramalord517" text="You aborted your unborn child of {HERO.LINK}." />
+    <string id="Dramalord518" text="{HERO.LINK} aborted the unborn child of you." />
+    <string id="Dramalord519" text="{HERO.LINK} aborted their unborn child of {HERO2.LINK}." />
+    <string id="Dramalord520" text="Maximum Fertility Age" />
+    <string id="Dramalord521" text="Maximum age a hero can get pregnant (only for Dramalord pregnancies)" />
+    <string id="Dramalord522" text="Keep Children of Notables" />
+    <string id="Dramalord523" text="Non legitimate children born to notables will not end up in the orphanage" />
+    <string id="Dramalord524" text="{CHILD} was born." />
+    <string id="Dramalord525" text="{MOTHER} has given birth to {CHILD}. {FATHER} is the father. Would urge the mother to keep the child or get rid of them?" />
+    <string id="Dramalord526" text="Get rid of the child" />
+    <string id="Dramalord527" text="Keep the child" />
   </strings>
 </base>

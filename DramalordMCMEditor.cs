@@ -114,7 +114,7 @@ namespace Dramalord
             desires.Horny = 100;
             desires.Libido = 10;
             HeroRelation relation = _selected.GetRelationTo(Hero.MainHero);
-            relation.Trust = 100;
+            _selected.SetTrust(Hero.MainHero, 100);
             relation.Love = 100;
         };
 
@@ -235,8 +235,8 @@ namespace Dramalord
         [SettingPropertyFloatingInteger("{=Dramalord136}Trust", -100, 100, HintText = "{=Dramalord137}Trust value to the player", Order = 1, RequireRestart = false)]
         public int Trust
         {
-            get => (Hero.MainHero == _selected) ? 0 : _selected.GetRelationTo(Hero.MainHero).Trust;
-            set { if (Hero.MainHero != _selected) _selected.GetRelationTo(Hero.MainHero).Trust = value; }
+            get => (Hero.MainHero == _selected) ? 0 : _selected.GetTrust(Hero.MainHero);
+            set { if (Hero.MainHero != _selected) _selected.SetTrust(Hero.MainHero, value); }
         }
 
         [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]

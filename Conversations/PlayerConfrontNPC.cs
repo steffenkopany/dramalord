@@ -167,7 +167,7 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("NUM2", ConversationHelper.FormatNumber(10));
             MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
 
-            Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust += 10;
+            Hero.OneToOneConversationHero.SetTrust(Hero.MainHero, Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) + 10);
             Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love += 5;
 
             Event = null;

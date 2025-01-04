@@ -477,5 +477,50 @@
     <string id="Dramalord480" text="사랑의 붕괴 시작일" />
     <string id="Dramalord481" text="사랑의 붕괴를 일으키는 데 필요한 연인의 서로 보지 못한 날짜 수." />
     <string id="Dramalord482" text="오, 안녕하세요 {TITLE}. 저는... 예상하지 못했어요..." />
+    <string id="Dramalord483" text="{HERO1.LINK}은 {HERO2.LINK}와 친밀했습니다." />
+    <string id="Dramalord484" text="친밀한 로그" />
+    <string id="Dramalord485" text="로그에서 친밀한 이벤트 표시" />
+    <string id="Dramalord486" text="형제" />
+    <string id="Dramalord487" text="자매" />
+    <string id="Dramalord488" text="아들" />
+    <string id="Dramalord489" text="딸" />
+    <string id="Dramalord490" text="클랜이 왕국을 변경하도록 허용" />
+    <string id="Dramalord491" text="AI 클랜이 패배 또는 결혼 시 왕국을 변경하도록 허용" />
+    <string id="Dramalord492" text="{클랜}이 {KINGDOM}에 가입했습니다." />
+    <string id="Dramalord493" text="{클랜}이 {KINGDOM}을 떠났습니다." />
+    <string id="Dramalord494" text="플레이어 배우자 충실" />
+    <string id="Dramalord495" text="플레이어의 배우자는 다른 사람과 상호 작용하지 않습니다." />
+    <string id="Dramalord496" text="{HERO}가 하루 이내에 {FACTION}을 떠날 것입니다." />
+    <string id="Dramalord497" text="당신이 내 클랜에 맞지 않는다고 결정했습니다. 짐을 챙겨 떠나세요." />
+    <string id="Dramalord498" text="내 왕국에는 네 일족이 있을 자리가 없어. 떠나서 돌아오지 마!" />
+    <string id="Dramalord499" text="너의 우정이 얼마나 소중한지 알게 되어 기쁘다. 얼마나 실망스러운 일인가! 네가 부탁한 대로 할게." />
+    <string id="Dramalord500" text="클랜에서 아이를 키우세요" />
+    <string id="Dramalord501" text="클랜에서 태어난 적법하지 않은 아이는 고아원에 가지 않을 것입니다" />
+    <string id="Dramalord502" text="우리의 태어나지 않은 아이를 없애주세요." />
+    <string id="Dramalord503" text="당신과 {HERO}의 태어나지 않은 아이를 없애주세요." />
+    <string id="Dramalord504" text="우리 아이를 낳고 싶지 않습니다." />
+    <string id="Dramalord505" text="주요 인물 포함" />
+    <string id="Dramalord506" text="Dramalord AI의 갱단 리더와 같은 주요 인물 포함(실험적, 성과 영향)" />
+    <string id="Dramalord507" text="필요하다고 생각된다면, 제가 처리하겠습니다 {TITLE}." />
+    <string id="Dramalord508" text="{TITLE}, 저는 이것을 받아들이지 않을 것입니다. 재고하지 않으면 결과가 따를 것입니다!" />
+    <string id="Dramalord509" text="이것이 당신의 바람이라면, 그렇게 하세요 {TITLE}. 저는 당신이 그것을 유지하도록 강요하지 않을 것입니다." />
+    <string id="Dramalord510" text="미친 거야, {TITLE}? 이 아이는 우리 사랑의 표현이야!" />
+    <string id="Dramalord511" text="맞아요. {HERO}의 아이를 낳는 건 적절하지 않을 거예요." />
+    <string id="Dramalord512" text="절대 안 돼, {TITLE}! 이 아이는 내가 {HERO}에 대한 사랑의 결과야!" />
+    <string id="Dramalord513" text="다른 사람" />
+    <string id="Dramalord514" text="{HERO}는 하루 안에 낙태를 할 거야." />
+    <string id="Dramalord515" text="{HERO.LINK}는 당신에 대한 사랑이 덜해. ({NUMBER})" />
+    <string id="Dramalord516" text="당신은 하루 안에 낙태를 할 거야." />
+    <string id="Dramalord517" text="당신은 {HERO.LINK}의 태아를 낙태했어." />
+    <string id="Dramalord518" text="{HERO.LINK}가 당신의 태아를 유산했습니다." />
+    <string id="Dramalord519" text="{HERO.LINK}가 {HERO2.LINK}의 태아를 유산했습니다." />
+    <string id="Dramalord520" text="최대 생식 연령" />
+    <string id="Dramalord521" text="영웅이 임신할 수 있는 최대 연령(Dramalord 임신에만 해당)" />
+    <string id="Dramalord522" text="유명인의 자녀 유지" />
+    <string id="Dramalord523" text="유명인에게 태어난 적법하지 않은 자녀는 고아원에 보내지지 않습니다" />
+    <string id="Dramalord524" text="{CHILD}가 태어났습니다." />
+    <string id="Dramalord525" text="{MOTHER}가 {CHILD}를 낳았습니다. {FATHER}가 아버지입니다. 어머니에게 아이를 키우라고 권할 것인가, 아니면 없애라고 권할 것인가?" />
+    <string id="Dramalord526" text="아이를 없애세요" />
+    <string id="Dramalord527" text="아이를 키우세요" />
   </strings>
 </base>

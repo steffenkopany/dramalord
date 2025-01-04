@@ -476,6 +476,51 @@
     <string id="Dramalord479" text="{HERO1.LINK}和{HERO2.LINK}不再是{RELATIONSHIP}" />
     <string id="Dramalord480" text="愛情保質期" />
     <string id="Dramalord481" text="當英雄間超過一定天數未見面，愛慕值將會依天數衰減。（例：若10天未見將衰減10點愛慕值）" />
-    <string id="Dramalord482" text="哦，你好{TITLE}。我...沒想到你..." />
+    <string id="Dramalord482" text="哦，你好{TITLE}。我…沒想到你…" />
+    <string id="Dramalord483" text="{HERO1.LINK}與{HERO2.LINK}發生親密關係。" />
+    <string id="Dramalord484" text="親密日誌" />
+    <string id="Dramalord485" text="在日誌中顯示親密事件" />
+    <string id="Dramalord486" text="兄弟" />
+    <string id="Dramalord487" text="姊妹" />
+    <string id="Dramalord488" text="兒子" />
+    <string id="Dramalord489" text="女兒" />
+    <string id="Dramalord490" text="允許部落改變王國" />
+    <string id="Dramalord491" text="讓人工智慧氏族在失敗或聯姻時切換王國" />
+    <string id="Dramalord492" text="{CLAN} 加入了 {KINGDOM}。" />
+    <string id="Dramalord493" text="{CLAN} 已離開 {KINGDOM}。" />
+    <string id="Dramalord494" text="忠實玩家配偶" />
+    <string id="Dramalord495" text="玩家的配偶不會與其他人互動" />
+    <string id="Dramalord496" text="{HERO} 將在一天內離開 {FACTION}。" />
+    <string id="Dramalord497" text="我決定你不適合我的部落。收拾好你的東西然後離開。" />
+    <string id="Dramalord498" text="我的王國裡沒有你的氏族的容身之地。走開，不要回來！" />
+    <string id="Dramalord499" text="很高興知道你們的友誼值多少錢。真令人失望！我會照你的要求去做。" />
+    <string id="Dramalord500" text="讓孩子留在部落中" />
+    <string id="Dramalord501" text="氏族出生的非婚生子女不會最後進入孤兒院" />
+    <string id="Dramalord502" text="我希望你除掉我們未出生的孩子。" />
+    <string id="Dramalord503" text="我希望你除掉你和{HERO}未出生的孩子。" />
+    <string id="Dramalord504" text="我不想生下我們的孩子。" />
+    <string id="Dramalord505" text="包括名人" />
+    <string id="Dramalord506" text="在 Dramalord AI 中包含幫派領袖等名人（實驗，性能影響）" />
+    <string id="Dramalord507" text="如果您認為有必要，那麼我會處理它{TITLE}。" />
+    <string id="Dramalord508" text="我不會接受這個，{TITLE}。我強烈建議您重新考慮，否則後果自負！" />
+    <string id="Dramalord509" text="如果這是你的願望，那就這麼做吧{TITLE}。我不會強迫你遵守它。" />
+    <string id="Dramalord510" text="你瘋了嗎，{TITLE}？這個孩子是我們愛的體現！" />
+    <string id="Dramalord511" text="你說得對。生下{HERO}的孩子是不合適的。" />
+    <string id="Dramalord512" text="永遠不會，{TITLE}！這個孩子是我對{HERO}的愛的結果！" />
+    <string id="Dramalord513" text="其他人" />
+    <string id="Dramalord514" text="{HERO} 將在一天內墮胎。" />
+    <string id="Dramalord515" text="{HERO.LINK} 對你的愛減少了。({NUMBER})" />
+    <string id="Dramalord516" text="您將在一天內進行墮胎。" />
+    <string id="Dramalord517" text="您流產了 {HERO.LINK} 未出生的孩子。" />
+    <string id="Dramalord518" text="{HERO.LINK} 流產了你未出生的孩子。" />
+    <string id="Dramalord519" text="{HERO.LINK} 流產了 {HERO2.LINK} 未出生的孩子。" />
+    <string id="Dramalord520" text="最大生育年齡" />
+    <string id="Dramalord521" text="英雄可以懷孕的最大年齡（只適用於戲劇領主懷孕）" />
+    <string id="Dramalord522" text="保留名人的孩子" />
+    <string id="Dramalord523" text="名人所生的非婚生子女不會終於進入孤兒院" />
+    <string id="Dramalord524" text="{CHILD} 出生了。" />
+    <string id="Dramalord525" text="{MOTHER} 生下了 {CHILD}。{FATHER} 是孩子的父親。會敦促母親留下孩子還是擺脫孩子？" />
+    <string id="Dramalord526" text="擺脫孩子" />
+    <string id="Dramalord527" text="留下孩子" />
   </strings>
 </base>

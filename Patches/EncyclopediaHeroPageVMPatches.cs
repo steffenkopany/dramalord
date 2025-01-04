@@ -33,7 +33,7 @@ namespace Dramalord.Patches
                 string yes = GameTexts.FindText("str_yes").ToString();
                 string no = GameTexts.FindText("str_no").ToString();
                 TextObject attraction = new TextObject("{=Dramalord154}Attraction");
-                TextObject friendship = new TextObject("{=Dramalord136}Trust");
+                //TextObject friendship = new TextObject("{=Dramalord136}Trust");
                 TextObject love = new TextObject("{=Dramalord138}Love");
                 TextObject horny = new TextObject("{=Dramalord133}Horny");
                 TextObject sympathy = new TextObject("{=Dramalord155}Sympathy");
@@ -65,7 +65,7 @@ namespace Dramalord.Patches
                 }
 
                 __instance.Stats.Add(new StringPairItemVM(attraction.ToString() + ":", (__instance.IsInformationHidden || !desires.InfoKnown) ? hidden : hero.GetAttractionTo(Hero.MainHero).ToString()));
-                __instance.Stats.Add(new StringPairItemVM(friendship.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetRelationTo(Hero.MainHero).Trust.ToString()));
+                //__instance.Stats.Add(new StringPairItemVM(friendship.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetRelationTo(Hero.MainHero).Trust.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(love.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetRelationTo(Hero.MainHero).CurrentLove.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(sympathy.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetSympathyTo(Hero.MainHero).ToString()));
                 __instance.Stats.Add(new StringPairItemVM(horny.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetDesires().Horny.ToString()));
@@ -150,6 +150,23 @@ namespace Dramalord.Patches
     [HarmonyPatch(typeof(EncyclopediaHeroPageVM), "UpdateInformationText")]
     public static class UpdateInformationTextPatch
     {
+        [UsedImplicitly]
+        [HarmonyPrefix]
+        public static bool UpdateInformationTextPrefix(ref EncyclopediaHeroPageVM __instance)
+        {
+            Hero? hero = __instance.Obj as Hero;
+            __instance.InformationText = "";
+            if (!TextObject.IsNullOrEmpty(hero.EncyclopediaText))
+            {
+                __instance.InformationText = hero.EncyclopediaText.ToString();
+            }
+            else if (hero.CharacterObject.Occupation == Occupation.Lord && hero.Clan != null)
+            {
+                __instance.InformationText = Hero.SetHeroEncyclopediaTextAndLinks(hero).ToString();
+            }
+            return false;
+        }
+
         [UsedImplicitly]
         [HarmonyPostfix]
         public static void UpdateInformationText(ref EncyclopediaHeroPageVM __instance)

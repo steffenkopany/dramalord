@@ -182,7 +182,7 @@ namespace Dramalord.Conversations
                 {
                     TalkAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero, changeValue * ChallengeResult);
                     ChangeSympathy();
-                    if (!Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust >= DramalordMCM.Instance.MinTrust)
+                    if (!Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrust)
                     {
                         FriendshipAction.Apply(Hero.MainHero, Hero.OneToOneConversationHero);
                         PlayerApproachingNPC.SetupLines();

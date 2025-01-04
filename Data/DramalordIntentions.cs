@@ -24,7 +24,9 @@ namespace Dramalord.Data
         Execute,
         PrisonIntercourse,
         EndDate,
-        Duel
+        Duel,
+        LeaveKingdom,
+        Abortion
     }
 
     internal sealed class HeroIntention

@@ -178,7 +178,7 @@
     <string id="Dramalord180" text="Eu te perdôo, {TITLE}. Mas não vou esquecer." />
     <string id="Dramalord181" text="Não aceitarei isso, {TITLE}. Vou encerrar esse relacionamento." />
     <string id="Dramalord182" text="Isso não será esquecido, {TITLE}. Adeus." />
-    <string id="Dramalord183" text="Deixa pra lá, {TÍTULO}. Adeus." />
+    <string id="Dramalord183" text="Deixa pra lá, {TITLE}. Adeus." />
     <string id="Dramalord184" text="Oh {TITLE}, eu te amo! Eu imploro, não faça nada de que possa se arrepender mais tarde..." />
     <string id="Dramalord185" text="Bem, tudo bem, {TITLE}. E agora?" />
     <string id="Dramalord186" text="Como desejar, {TITLE}." />
@@ -462,7 +462,7 @@
     <string id="Dramalord464" text="Certo. No que você está interessado?" />
     <string id="Dramalord465" text="Algo longo e arredondado que possa suportar confrontos com ambientes úmidos." />
     <string id="Dramalord466" text="Algo macio e úmido em que você possa enfiar o dedo várias vezes." />
-    <string id="Dramalord467" text="Posso lhe vender um {BEM} ou mais, se quiser." />
+    <string id="Dramalord467" text="Posso lhe vender um {GOOD} ou mais, se quiser." />
     <string id="Dramalord468" text="Um serve." />
     <string id="Dramalord469" text="Cinco devem ser suficientes." />
     <string id="Dramalord470" text="Eu precisaria de pelo menos dez." />
@@ -478,5 +478,50 @@
     <string id="Dramalord480" text="Dia de início da decadência do amor" />
     <string id="Dramalord481" text="Número de dias que os amantes não se veem necessários para que o amor decaia." />
     <string id="Dramalord482" text="Oh, olá {TITLE}. Eu... não esperava você..." />
+    <string id="Dramalord483" text="{HERO1.LINK} era íntimo de {HERO2.LINK}." />
+    <string id="Dramalord484" text="Registros íntimos" />
+    <string id="Dramalord485" text="Mostrar eventos íntimos nos registros" />
+    <string id="Dramalord486" text="irmão" />
+    <string id="Dramalord487" text="irmã" />
+    <string id="Dramalord488" text="filho" />
+    <string id="Dramalord489" text="filha" />
+    <string id="Dramalord490" text="Permitir que clãs troquem de reino" />
+    <string id="Dramalord491" text="Permitir que clãs de IA troquem de reino em derrota ou casamento" />
+    <string id="Dramalord492" text="{CLAN} entrou em {KINGDOM}." />
+    <string id="Dramalord493" text="{CLAN} deixou {KINGDOM}." />
+    <string id="Dramalord494" text="Jogador Esposo Fiel" />
+    <string id="Dramalord495" text="O cônjuge do jogador não interagirá com mais ninguém" />
+    <string id="Dramalord496" text="{HERO} deixará {FACTION} em um dia." />
+    <string id="Dramalord497" text="Decidi que você não se encaixa no meu clã. Arrume suas coisas e vá embora." />
+    <string id="Dramalord498" text="Não há lugar para seu clã em meu reino. Vá embora e não volte!" />
+    <string id="Dramalord499" text="É bom saber o quanto sua amizade vale. Que decepção! Farei o que você pediu." />
+    <string id="Dramalord500" text="Mantenha as crianças em clãs" />
+    <string id="Dramalord501" text="Crianças não legítimas nascidas em clãs não acabarão no orfanato" />
+    <string id="Dramalord502" text="Quero que você se livre do nosso filho que ainda não nasceu." />
+    <string id="Dramalord503" text="Quero que você se livre do filho que ainda não nasceu de você e {HERO}." />
+    <string id="Dramalord504" text="Não quero dar à luz nosso filho." />
+    <string id="Dramalord505" text="Incluir Notáveis" />
+    <string id="Dramalord506" text="Incluir Notáveis ​​como Líderes de Gangue na IA Dramalord (experimental, impacto no desempenho)" />
+    <string id="Dramalord507" text="Se você considerar isso necessário, então eu cuidarei disso {TITLE}." />
+    <string id="Dramalord508" text="Eu não aceitarei isso, {TITLE}. Peço que você reconsidere ou haverá consequências!" />
+    <string id="Dramalord509" text="Se esse é seu desejo, então faça {TITLE}. Eu não vou forçá-lo a mantê-lo." />
+    <string id="Dramalord510" text="Você é louco, {TITLE}? Esta criança é a manifestação do nosso amor!" />
+    <string id="Dramalord511" text="Você está certo. Não seria apropriado dar à luz um filho de {HERO}." />
+    <string id="Dramalord512" text="Nunca, {TITLE}! Esta criança é o resultado do amor que tenho por {HERO}!" />
+    <string id="Dramalord513" text="outra pessoa" />
+    <string id="Dramalord514" text="{HERO} fará um aborto em um dia." />
+    <string id="Dramalord515" text="{HERO.LINK} tem menos amor por você. ({NUMBER})" />
+    <string id="Dramalord516" text="Você fará um aborto em um dia." />
+    <string id="Dramalord517" text="Você abortou seu filho não nascido de {HERO.LINK}." />
+    <string id="Dramalord518" text="{HERO.LINK} abortou o filho que você ainda não nasceu." />
+    <string id="Dramalord519" text="{HERO.LINK} abortou o filho que você ainda não nasceu, {HERO2.LINK}." />
+    <string id="Dramalord520" text="Idade Máxima de Fertilidade" />
+    <string id="Dramalord521" text="Idade máxima em que um herói pode engravidar (apenas para gestações de Dramalord)" />
+    <string id="Dramalord522" text="Fique com os Filhos dos Notáveis" />
+    <string id="Dramalord523" text="Filhos ilegítimos nascidos de notáveis ​​não acabarão no orfanato" />
+    <string id="Dramalord524" text="{CHILD} nasceu." />
+    <string id="Dramalord525" text="{MOTHER} deu à luz {CHILD}. {FATHER} é o pai. Você recomendaria que a mãe ficasse com a criança ou se livrasse dela?" />
+    <string id="Dramalord526" text="Livre-se da criança" />
+    <string id="Dramalord527" text="Fique com a criança" />
   </strings>
 </base>
