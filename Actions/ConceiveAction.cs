@@ -12,7 +12,7 @@ namespace Dramalord.Actions
     {
         internal static bool Apply(Hero mother, Hero father)
         {
-            if(mother.IsPregnant)
+            if(mother.IsPregnant || DramalordPregancies.Instance.GetPregnancy(mother) != null)
             {
                 return false;
             }

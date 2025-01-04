@@ -1,19 +1,12 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Data;
 using Dramalord.Extensions;
-using SandBox.Conversation;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Conversation;
-using TaleWorlds.CampaignSystem.Encounters;
-using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
-using TaleWorlds.CampaignSystem.Settlements;
-using TaleWorlds.CampaignSystem.Settlements.Locations;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Conversations
 {
@@ -28,7 +21,7 @@ namespace Dramalord.Conversations
         {
             RelationshipType relationship = hero.GetRelationTo(target).Relationship;
             string text;
-            if (relationship == RelationshipType.Spouse)
+            if (relationship == RelationshipType.Spouse || hero.Spouse == target)
             {
                 text = target.IsFemale ? new TextObject("{=8eHRth3U}my wife").ToString() : new TextObject("{=QuVgluRH}my husband").ToString();
             }
@@ -40,15 +33,7 @@ namespace Dramalord.Conversations
             {
                 text = target.IsFemale ? new TextObject("{=Dramalord024}my love").ToString() : new TextObject("{=Dramalord023}my lover").ToString();
             }
-            else if (relationship == RelationshipType.FriendWithBenefits)
-            {
-                text = new TextObject("{=Dramalord026}my special friend").ToString();
-            }
-            else if (relationship == RelationshipType.Friend)
-            {
-                text = new TextObject("{=Dramalord174}my friend").ToString();
-            }
-            else if(hero.Father == target)
+            else if (hero.Father == target)
             {
                 text = target.IsFemale ? GameTexts.FindText("str_mother").ToString() : GameTexts.FindText("str_father").ToString();
             }
@@ -56,17 +41,44 @@ namespace Dramalord.Conversations
             {
                 text = target.IsFemale ? GameTexts.FindText("str_mother").ToString() : GameTexts.FindText("str_father").ToString();
             }
-            else
+            else if(hero.Siblings.Contains(target))
             {
-                if(target == Hero.MainHero)
+                text = target.IsFemale ? new TextObject("{=Dramalord487}sister").ToString() : new TextObject("{=Dramalord486}brother").ToString();
+            }
+            else if (target.Father == hero || target.Mother == hero)
+            {
+                text = target.IsFemale ? new TextObject("{=Dramalord489}daughter").ToString() : new TextObject("{=Dramalord488}son").ToString();
+            }
+            else if (relationship == RelationshipType.FriendWithBenefits)
+            {
+                text = new TextObject("{=Dramalord026}my special friend").ToString();
+            }
+            else if (relationship == RelationshipType.Friend)
+            {
+                text = new TextObject("{=edRggEQ4}my friend").ToString();
+            }
+            else 
+            {
+                if (hero.IsLord && target.IsLord)
                 {
-                    text = Campaign.Current.ConversationManager.FindMatchingTextOrNull("str_salutation", target.CharacterObject).ToString();// target.IsFemale ? GameTexts.FindText("str_my_lady").ToString() : GameTexts.FindText("str_my_lord").ToString();
+                    text = target.Name.ToString();
                 }
-                else
+                else if((!hero.IsLord && target.IsLord) || target.MapFaction.Leader == target )
                 {
                     text = GameTexts.FindText(target.IsFemale ? "str_player_salutation_my_lady" : "str_player_salutation_my_lord").ToString();
                 }
-                
+                else if (hero.IsPlayerCompanion)
+                {
+                    text = Campaign.Current.ConversationManager.FindMatchingTextOrNull("str_player_salutation_captain", target.CharacterObject).ToString();
+                }
+                else if (target.IsFemale)
+                {
+                    text = Campaign.Current.ConversationManager.FindMatchingTextOrNull("str_player_salutation_madame", target.CharacterObject).ToString();
+                }
+                else
+                {
+                    text = Campaign.Current.ConversationManager.FindMatchingTextOrNull("str_player_salutation_sir", target.CharacterObject).ToString();
+                }
             }
 
             if (capital)
@@ -106,7 +118,7 @@ namespace Dramalord.Conversations
                     if(intention.Target == npc) TalkAction.Apply(player, npc);
                     else if (intention.Target == player) TalkAction.Apply(npc, player);
 
-                    if(!npc.HasAnyRelationshipWith(player) && npc.GetRelationTo(player).Trust >= DramalordMCM.Instance.MinTrust)
+                    if(!npc.HasAnyRelationshipWith(player) && npc.GetTrust(player) >= DramalordMCM.Instance.MinTrust)
                     {
                         FriendshipAction.Apply(player, npc);
                     }
@@ -161,7 +173,7 @@ namespace Dramalord.Conversations
                     MBInformationManager.ShowSceneNotification(HeroExecutionSceneNotificationData.CreateForPlayerExecutingHero(Hero.OneToOneConversationHero, null));
                 }
 
-                if (npc.IsFriendlyWith(intention.Target) && npc.GetRelationTo(player).Trust <= 0)
+                if (npc.IsFriendlyWith(intention.Target) && npc.GetTrust(player) <= 0)
                 {
                     BreakupAction.Apply(npc, player);
                 }
@@ -211,20 +223,20 @@ namespace Dramalord.Conversations
             IsDateEnd = true;
         }
         */
-        /*
-        internal static void ExecuteOpenConversation(Hero conversationHero)
-        {
-            if (Settlement.CurrentSettlement == null)
-            {
-                CampaignMission.OpenConversationMission(new ConversationCharacterData(CharacterObject.PlayerCharacter, PartyBase.MainParty), new ConversationCharacterData(conversationHero.CharacterObject, PartyBase.MainParty, noHorse: false, noWeapon: false, spawnAfterFight: false, conversationHero.IsPrisoner));
-            }
-            else
-            {
-                PlayerEncounter.LocationEncounter.CreateAndOpenMissionController(LocationComplex.Current.GetLocationOfCharacter(LocationComplex.Current.GetFirstLocationCharacterOfCharacter(conversationHero.CharacterObject)), null, conversationHero.CharacterObject);
-            }
+                /*
+                internal static void ExecuteOpenConversation(Hero conversationHero)
+                {
+                    if (Settlement.CurrentSettlement == null)
+                    {
+                        CampaignMission.OpenConversationMission(new ConversationCharacterData(CharacterObject.PlayerCharacter, PartyBase.MainParty), new ConversationCharacterData(conversationHero.CharacterObject, PartyBase.MainParty, noHorse: false, noWeapon: false, spawnAfterFight: false, conversationHero.IsPrisoner));
+                    }
+                    else
+                    {
+                        PlayerEncounter.LocationEncounter.CreateAndOpenMissionController(LocationComplex.Current.GetLocationOfCharacter(LocationComplex.Current.GetFirstLocationCharacterOfCharacter(conversationHero.CharacterObject)), null, conversationHero.CharacterObject);
+                    }
 
-            //IsInConversation = true;
+                    //IsInConversation = true;
+                }
+                */
+            }
         }
-        */
-    }
-}

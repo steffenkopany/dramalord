@@ -1,6 +1,7 @@
 ﻿using Dramalord.Data;
 using Dramalord.Extensions;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Localization;
@@ -41,7 +42,9 @@ namespace Dramalord.Conversations
         private static TextObject npc_interaction_marriage_1 = new("{=Dramalord053}Now that we are in a settlement, {TITLE}, let's call a priest and finally get married! What do you say, {TITLE}?");
         private static TextObject npc_interaction_marriage_2 = new("{=Dramalord054}We could use the opportunity being in a settlement, {TITLE}. Let's head over to the church and seal this bond for life!");
         private static TextObject npc_interaction_breakup = new("{=Dramalord229}It hurts me, {TITLE}, but I have to put an end to our relationship.");
-
+        private static TextObject npc_interaction_prisonfun_start = new("{=Dramalord273}Prisoner, I need to have a word with you.");
+        private static TextObject npc_interaction_prisonfun_request = new("{=Dramalord276}I would consider letting you go for... some special service in my bedroom.");
+        private static TextObject npc_interaction_prisonfun_end = new("{=Dramalord186}As you wish, {TITLE}.");
         private static TextObject player_reaction_talk_yes = new("{=Dramalord055}Sure, let's have a conversation {TITLE}.");
         private static TextObject player_reaction_flirt_yes = new("{=Dramalord056}Of course {TITLE}, I would love to join you.");
         private static TextObject player_reaction_date_first_yes = new("{=Dramalord057}Oh {TITLE}, I wish for the same!");
@@ -58,6 +61,9 @@ namespace Dramalord.Conversations
         private static TextObject player_reaction_breakup_accept = new("{=Dramalord231}Well, eventually it always comes to this, right {TITLE}? It was nice while it lasted, truly. Thank you.");
         private static TextObject player_reaction_breakup_leave = new("{=Dramalord233}Get out of my sight, {NAME}. Pack your belongings and leave.");
         private static TextObject player_reaction_no = new("{=Dramalord068}I am sorry {TITLE}, but I have no interest in that right now.");
+        private static TextObject player_reaction_prisonfun_yes = new("{=Dramalord278}You got yourself a deal! I think I will even enjoy it.");
+        private static TextObject player_reaction_prisonfun_no = new("{=Dramalord279}Never! You will not taint my honor with such offers!");
+
 
         private static void SetupLines()
         {
@@ -90,6 +96,7 @@ namespace Dramalord.Conversations
             npc_interaction_marriage_1.SetTextVariable("TITLE", Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) ? Hero.MainHero.Name : ConversationHelper.PlayerTitle(false));
             npc_interaction_marriage_2.SetTextVariable("TITLE", Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) ? Hero.MainHero.Name : ConversationHelper.PlayerTitle(false));
             npc_interaction_breakup.SetTextVariable("TITLE", Hero.MainHero.Name);
+            npc_interaction_prisonfun_end.SetTextVariable("TITLE", Hero.MainHero.Name);
 
             player_reaction_talk_yes.SetTextVariable("TITLE", Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) ? Hero.OneToOneConversationHero.Name : ConversationHelper.NpcTitle(false));
             player_reaction_flirt_yes.SetTextVariable("TITLE", Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) ? Hero.OneToOneConversationHero.Name : ConversationHelper.NpcTitle(false));
@@ -138,6 +145,9 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("npc_interaction_marriage_1", npc_interaction_marriage_1);
             MBTextManager.SetTextVariable("npc_interaction_marriage_2", npc_interaction_marriage_2);
             MBTextManager.SetTextVariable("npc_interaction_breakup", npc_interaction_breakup);
+            MBTextManager.SetTextVariable("npc_interaction_prisonfun_start", npc_interaction_prisonfun_start);
+            MBTextManager.SetTextVariable("npc_interaction_prisonfun_request", npc_interaction_prisonfun_request);
+            MBTextManager.SetTextVariable("npc_interaction_prisonfun_end", npc_interaction_prisonfun_end);
 
             MBTextManager.SetTextVariable("player_reaction_talk_yes", player_reaction_talk_yes);
             MBTextManager.SetTextVariable("player_reaction_flirt_yes", player_reaction_flirt_yes);
@@ -156,6 +166,8 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("player_reaction_breakup_accept", player_reaction_breakup_accept);
             MBTextManager.SetTextVariable("player_reaction_breakup_leave", player_reaction_breakup_leave);
             MBTextManager.SetTextVariable("player_reaction_no", player_reaction_no);
+            MBTextManager.SetTextVariable("player_reaction_prisonfun_yes", player_reaction_prisonfun_yes);
+            MBTextManager.SetTextVariable("player_reaction_prisonfun_no", player_reaction_prisonfun_no);
         }
 
         internal static bool Start(Hero hero, HeroIntention intention)
@@ -172,6 +184,7 @@ namespace Dramalord.Conversations
         {
             starter.AddDialogLine("npc_starts_interaction_unknown", "start", "player_interaction_start_react", "{npc_starts_interaction_unknown}[ib:nervous][if:convo_nervous]", ConditionInteractionStartUnknown, ConsequenceInteractionStart, 120);
             starter.AddDialogLine("npc_starts_interaction_known", "start", "player_interaction_start_react", "{npc_starts_interaction_known}[ib:nervous2][if:convo_confused_normal]", ConditionInteractionStartKnown, null, 120);
+            starter.AddDialogLine("npc_interaction_prisonfun_start", "start", "npc_interaction_prisonfun_request", "{npc_interaction_prisonfun_start}[ib:confident2][if:convo_mocking_teasing]", ConditionInteractionStartPrisonFun, null, 120);
 
             starter.AddPlayerLine("player_interaction_start_react_yes", "player_interaction_start_react", "npc_interaction_choice", "{player_interaction_start_react_yes}", null, null);
             starter.AddPlayerLine("player_interaction_start_react_no", "player_interaction_start_react", "close_window", "{player_interaction_start_react_no}", null, ConsequenceLeaveConversation);
@@ -227,6 +240,8 @@ namespace Dramalord.Conversations
 
             starter.AddDialogLine("npc_interaction_breakup", "npc_interaction_choice", "player_interaction_react", "{npc_interaction_breakup}", ConditionInteractionBreakup, null);
 
+            starter.AddDialogLine("npc_interaction_prisonfun_request", "npc_interaction_choice", "player_interaction_react", "{npc_interaction_prisonfun_request}", null, null);
+
             starter.AddPlayerLine("player_reaction_talk_yes", "player_interaction_react", "player_challenge_start", "{player_reaction_talk_yes}", ConditionPlayerTalk, ConsequencePlayerAgreesTalk);
             starter.AddPlayerLine("player_reaction_talk_yes_no_challenge", "player_interaction_react", "close_window", "{player_reaction_talk_yes}", ConditionPlayerTalkNoChallenge, ConsequencePlayerAgreesTalkNoChallenge);
             starter.AddPlayerLine("player_reaction_flirt_yes", "player_interaction_react", "player_challenge_start", "{player_reaction_flirt_yes}", ConditionPlayerFlirt, ConsequencePlayerAgreesFlirt);
@@ -247,7 +262,8 @@ namespace Dramalord.Conversations
             starter.AddPlayerLine("player_reaction_marry_yes", "player_interaction_react", "close_window", "{player_reaction_marry_yes}", ConditionPlayerMarriage, ConsequenceHandlePlayerAgrees);
             starter.AddPlayerLine("player_reaction_breakup_accept", "player_interaction_react", "close_window", "{player_reaction_breakup_accept}", ConditionPlayerBreakupAccept, ConsequenceHandleBreakupAccept);
             starter.AddPlayerLine("player_reaction_breakup_leave", "player_interaction_react", "close_window", "{player_reaction_breakup_leave}", ConditionPlayerBreakupLeave, ConsequenceHandleBreakupLeave);
-
+            starter.AddPlayerLine("player_reaction_prisonfun_yes", "player_interaction_react", "close_window", "{player_reaction_prisonfun_yes}", ConditionPlayerPrisonFunAccept, ConsequenceHandlePrisonFunAccept);
+            starter.AddPlayerLine("player_reaction_prisonfun_no", "player_interaction_react", "close_window", "{player_reaction_prisonfun_no}", ConditionPlayerPrisonFunLeave, ConsequenceHandlePrisonFunLeave);
 
             starter.AddPlayerLine("player_reaction_no", "player_interaction_react", "close_window", "{player_reaction_no}", ConditionPlayerCanDecline, ConsequenceHandlePlayerDeclines);
         }
@@ -266,6 +282,17 @@ namespace Dramalord.Conversations
         private static bool ConditionInteractionStartKnown()
         {
             if (Hero.OneToOneConversationHero.IsDramalordLegit() && ApproachingHero == Hero.OneToOneConversationHero && ApproachingHero.HasMet)
+            {
+                ApproachingHero = null;
+                SetupLines();
+                return true;
+            }
+            return false;
+        }
+
+        private static bool ConditionInteractionStartPrisonFun()
+        {
+            if (Hero.OneToOneConversationHero.IsDramalordLegit() && ApproachingHero == Hero.OneToOneConversationHero && Intention?.Type == IntentionType.PrisonIntercourse)
             {
                 ApproachingHero = null;
                 SetupLines();
@@ -320,7 +347,7 @@ namespace Dramalord.Conversations
 
         private static bool ConditionPlayerDateMarriedNoChallenge() => Intention?.Type == IntentionType.Date && Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.Spouse != Hero.MainHero && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && !DramalordMCM.Instance.NoPlayerDialogs;
 
-        private static bool ConditionPlayerSexNoFriend() => Intention?.Type == IntentionType.Intercourse && !Hero.MainHero.IsFriendOf(Hero.OneToOneConversationHero) && !Hero.MainHero.IsEmotionalWith(Hero.OneToOneConversationHero);
+        private static bool ConditionPlayerSexNoFriend() => Intention?.Type == IntentionType.Intercourse && !Hero.MainHero.HasAnyRelationshipWith(Hero.OneToOneConversationHero);
 
         private static bool ConditionPlayerSexFriend() => Intention?.Type == IntentionType.Intercourse && Hero.OneToOneConversationHero.IsFriendOf(Hero.MainHero);
 
@@ -339,6 +366,10 @@ namespace Dramalord.Conversations
         private static bool ConditionPlayerBreakupAccept() => Intention?.Type == IntentionType.BreakUp;
 
         private static bool ConditionPlayerBreakupLeave() => Intention?.Type == IntentionType.BreakUp;
+
+        private static bool ConditionPlayerPrisonFunAccept() => Intention?.Type == IntentionType.PrisonIntercourse;
+
+        private static bool ConditionPlayerPrisonFunLeave() => Intention?.Type == IntentionType.PrisonIntercourse;
 
         private static bool ConditionPlayerCanDecline() => Intention?.Type != IntentionType.BreakUp;
 
@@ -429,8 +460,28 @@ namespace Dramalord.Conversations
 
         private static void ConsequenceHandleBreakupLeave()
         {
-            DramalordIntentions.Instance.AddIntention(Hero.OneToOneConversationHero, Hero.OneToOneConversationHero, IntentionType.LeaveClan, -1);
+            Hero.OneToOneConversationHero.AddIntention(Hero.OneToOneConversationHero, IntentionType.LeaveClan, -1);
             ConversationHelper.ConversationEndedIntention = Intention;
+            Intention = null;
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+        }
+
+        private static void ConsequenceHandlePrisonFunAccept()
+        {
+            ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.Intercourse, Hero.OneToOneConversationHero, -1);
+            Intention = null;
+            if (PlayerEncounter.Current != null)
+            {
+                PlayerEncounter.LeaveEncounter = true;
+            }
+            EndCaptivityAction.ApplyByRansom(Hero.MainHero, Hero.OneToOneConversationHero);
+        }
+
+        private static void ConsequenceHandlePrisonFunLeave()
+        {
             Intention = null;
             if (PlayerEncounter.Current != null)
             {

@@ -29,9 +29,10 @@ namespace Dramalord.Actions
 
             heroRelation.UpdateLove();
             heroRelation.Love += loveGain;
-            heroRelation.Trust += trustGain;
+            //heroRelation.Trust += trustGain;
+            hero.SetTrust(target, hero.GetTrust(target) + trustGain);
 
-            if(hero == Hero.MainHero || target == Hero.MainHero)
+            if (hero == Hero.MainHero || target == Hero.MainHero)
             {
                 Hero otherHero = (hero == Hero.MainHero) ? target : hero;
                 TextObject banner = new TextObject("{=Dramalord069}You had a date with {HERO.LINK}. (Love {NUM}, Trust {NUM2})");
@@ -55,10 +56,10 @@ namespace Dramalord.Actions
                 {
                     if (witness.IsEmotionalWith(hero) || witness.IsEmotionalWith(target))
                     {
-                        DramalordIntentions.Instance.RemoveIntentionsTo(witness, hero);
-                        DramalordIntentions.Instance.RemoveIntentionsTo(witness, target);
-                        DramalordIntentions.Instance.AddIntention(witness, hero, IntentionType.Confrontation, eventid);
-                        DramalordIntentions.Instance.AddIntention(witness, target, IntentionType.Confrontation, eventid);
+                        witness.RemoveIntentionsTo(hero);
+                        witness.RemoveIntentionsTo(target);
+                        witness.AddIntention(hero, IntentionType.Confrontation, eventid);
+                        witness.AddIntention(target, IntentionType.Confrontation, eventid);
                     }
 
                     if (witness == Hero.MainHero)

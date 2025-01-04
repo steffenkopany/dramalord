@@ -42,6 +42,10 @@ namespace Dramalord
         [SettingPropertyBool("{=Dramalord248}Allow Interaction In Army", HintText = "{=Dramalord249}Allow AI to interact with each other while being in armies", Order = 9, RequireRestart = false)]
         public bool AllowArmyInteraction { get; set; } = true;
 
+        [SettingPropertyGroup("{=Dramalord001}Autonomy")]
+        [SettingPropertyBool("{=Dramalord490}Allow Clans Changing Kingdoms", HintText = "{=Dramalord491}Allow AI clans to switch kingdoms on defeat or marriage", Order = 10, RequireRestart = false)]
+        public bool AllowClansChangingKingdoms { get; set; } = true;
+
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord005}Minimum Attraction", 0, 100, Order = 1, HintText = "{=Dramalord006}Attraction score required for NPCs to consider others as attractive", RequireRestart = false)]
         public int MinAttraction { get; set; } = 50;
@@ -71,20 +75,28 @@ namespace Dramalord
         public int PregnancyChance { get; set; } = 10;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord288}Love Gain Multiplier", 1, 10, Order = 8, HintText = "{=Dramalord289}Love gained due to flirting or dates is muliplied by this value", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord520}Maximum Fertility Age", 0, 100, Order = 8, HintText = "{=Dramalord521}Maximum age a hero can get pregnant (only for Dramalord pregnancies)", RequireRestart = false)]
+        public int MaxFertilityAge { get; set; } = 45;
+
+        [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
+        [SettingPropertyFloatingInteger("{=Dramalord288}Love Gain Multiplier", 1, 10, Order = 9, HintText = "{=Dramalord289}Love gained due to flirting or dates is muliplied by this value", RequireRestart = false)]
         public int LoveGainMultiplier { get; set; } = 2;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord290}Trust Gain Multiplier", 1, 10, Order = 9, HintText = "{=Dramalord291}Trust gained due to talking or dates is muliplied by this value", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord290}Trust Gain Multiplier", 1, 10, Order = 10, HintText = "{=Dramalord291}Trust gained due to talking or dates is muliplied by this value", RequireRestart = false)]
         public int TrustGainMultiplier { get; set; } = 1;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord295}Toy Break Chance", 0, 100, Order = 10, HintText = "{=Dramalord296}Chance a toy can break while being used by a hero.", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord295}Toy Break Chance", 0, 100, Order = 11, HintText = "{=Dramalord296}Chance a toy can break while being used by a hero.", RequireRestart = false)]
         public int ToyBreakChance { get; set; } = 10;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyFloatingInteger("{=Dramalord480}Love Decay Start Day", 0, 100, Order = 10, HintText = "{=Dramalord481}Number of days lovers havent seen each others needed to make love decay.", RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord480}Love Decay Start Day", 0, 100, Order = 12, HintText = "{=Dramalord481}Number of days lovers havent seen each others needed to make love decay.", RequireRestart = false)]
         public int LoveDecayStartDay { get; set; } = 10;
+
+        [SettingPropertyGroup("{=Dramalord007}Logging Setup")]
+        [SettingPropertyBool("{=Dramalord484}Intimate Logs", Order = 0, HintText = "{=Dramalord485}Show intimate events in the logs", RequireRestart = false)]
+        public bool IntimateLogs { get; set; } = false;
 
         [SettingPropertyGroup("{=Dramalord007}Logging Setup")]
         [SettingPropertyBool("{=Dramalord008}Relationship Logs", Order = 1, HintText = "{=Dramalord009}Show relationship changes in the logs", RequireRestart = false)]
@@ -123,24 +135,46 @@ namespace Dramalord
         public int DaysBetweenPlayerInteractions { get; set; } = 3;
 
         [SettingPropertyGroup("{=Dramalord016}General")]
-        [SettingPropertyBool("{=Dramalord213}Player Always Witness", Order = 5, HintText = "{=Dramalord214}The player will always be witness of events", RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord213}Player Always Witness", Order = 6, HintText = "{=Dramalord214}The player will always be witness of events", RequireRestart = false)]
         public bool PlayerAlwaysWitness { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord016}General")]
-        [SettingPropertyBool("{=Dramalord219}Show Friends With Benefits", Order = 5, HintText = "{=Dramalord220}Show friends with benefits on Encyclopedia page of a hero", RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord219}Show Friends With Benefits", Order = 7, HintText = "{=Dramalord220}Show friends with benefits on Encyclopedia page of a hero", RequireRestart = false)]
         public bool ShowFriendsWithBenefits { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord016}General")]
-        [SettingPropertyBool("{=Dramalord221}Show Lovers", Order = 5, HintText = "{=Dramalord222}Show lovers on Encyclopedia page of a hero", RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord221}Show Lovers", Order = 8, HintText = "{=Dramalord222}Show lovers on Encyclopedia page of a hero", RequireRestart = false)]
         public bool ShowLovers { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord016}General")]
-        [SettingPropertyBool("{=Dramalord227}Show Betrotheds", Order = 5, HintText = "{=Dramalord228}Show betrotheds on Encyclopedia page of a hero", RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord227}Show Betrotheds", Order = 9, HintText = "{=Dramalord228}Show betrotheds on Encyclopedia page of a hero", RequireRestart = false)]
         public bool ShowBetrotheds { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord016}General")]
-        [SettingPropertyFloatingInteger("{=Dramalord311}Quest Chance", 0, 100, Order = 5, HintText = "{=Dramalord312}Chance that a lover of the player starts a quest", RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord494}Player Spouse Faithful", Order = 10, HintText = "{=Dramalord495}The spouse of the player will not interact with anyone else", RequireRestart = false)]
+        public bool PlayerSpouseFaithful { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord016}General")]
+        [SettingPropertyFloatingInteger("{=Dramalord311}Quest Chance", 0, 100, Order = 11, HintText = "{=Dramalord312}Chance that a lover of the player starts a quest", RequireRestart = false)]
         public int QuestChance { get; set; } = 30;
+
+        [SettingPropertyGroup("{=Dramalord016}General")]
+        [SettingPropertyBool("{=Dramalord500}Keep Children in Clans", Order = 12, HintText = "{=Dramalord501}Non legitimate children born into clans will not end up in the orphanage", RequireRestart = false)]
+        public bool KeepClanChildren { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord016}General")]
+        [SettingPropertyBool("{=Dramalord522}Keep Children of Notables", Order = 13, HintText = "{=Dramalord523}Non legitimate children born to notables will not end up in the orphanage", RequireRestart = false)]
+        public bool KeepNotableChildren { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord016}General")]
+        [SettingPropertyBool("{=Dramalord505}Include Notables", Order = 14, HintText = "{=Dramalord506}Include Notables like Gang leaders in Dramalord AI (experimental, performance impact)", RequireRestart = false)]
+        public bool IncludeNotables { get; set; } = false;
+
+        /*
+        [SettingPropertyGroup("{=Dramalord016}General")]
+        [SettingPropertyBool("{=Dramalord524}Player Captivity Events", Order = 14, HintText = "{=Dramalord525}Allow player being approched by their captor", RequireRestart = false)]
+        public bool PlayerCaptivityEvents { get; set; } = true;
+        */
 
         [SettingPropertyGroup("{=Dramalord313}Optional")]
         [SettingPropertyBool("{=Dramalord314}Show Relation Changes", Order = 1, HintText = "{=Dramalord315}Enable this if you want to see relation change notifications (required for the Small Talk mod)", RequireRestart = false)]
@@ -151,8 +185,12 @@ namespace Dramalord
         public bool ShowCaptivityEvents { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord313}Optional")]
-        [SettingPropertyBool("{=Dramalord473}No Dialogs For Player", Order = 2, HintText = "{=Dramalord474}Enable this if you want dialogs but an auto result when talking/flirting/dating.", RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord473}No Dialogs For Player", Order = 3, HintText = "{=Dramalord474}Enable this if you want dialogs but an auto result when talking/flirting/dating.", RequireRestart = false)]
         public bool NoPlayerDialogs { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord313}Optional")]
+        [SettingPropertyBool("Native Birth Debug Log", Order = 4, HintText = "Only for debugging crashes on native births - will print info to the logs", RequireRestart = false)]
+        public bool NativeBirthDebug { get; set; } = false;
 
         public override string Id => DramalordSubModule.ModuleName;
 

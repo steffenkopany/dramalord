@@ -64,6 +64,10 @@ namespace Dramalord.Data
             AddClassDefinition(typeof(OrphanizeChildLog), 108);
             AddClassDefinition(typeof(AdoptChildLog), 109); 
             AddClassDefinition(typeof(PrisonIntercourseLog), 110);
+            AddClassDefinition(typeof(IntercourseLog), 111);
+            AddClassDefinition(typeof(LeaveKingdomLog), 112);
+            AddClassDefinition(typeof(JoinKingdomLog), 113);
+            AddClassDefinition(typeof(AbortChildLog), 114);
 
             AddClassDefinition(typeof(HeroPersonality), 1000);
             AddClassDefinition(typeof(HeroRelation), 1001);
@@ -86,6 +90,7 @@ namespace Dramalord.Data
             ConstructContainerDefinition(typeof(List<HeroIntentionSave>));
             ConstructContainerDefinition(typeof(Dictionary<string, List<HeroIntentionSave>>));
             ConstructContainerDefinition(typeof(Dictionary<string, VisitQuest>));
+            ConstructContainerDefinition(typeof(Dictionary<string,Dictionary<string, HeroRelation>>));
         }
     }
 }

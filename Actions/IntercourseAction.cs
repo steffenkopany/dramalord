@@ -1,9 +1,11 @@
 ﻿using Dramalord.Data;
 using Dramalord.Extensions;
+using Dramalord.LogItems;
 using Dramalord.Notifications;
 using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
@@ -28,6 +30,11 @@ namespace Dramalord.Actions
             heroDesires.IntercourseSkill += (targetDesires.IntercourseSkill > heroDesires.IntercourseSkill) ? 2 : 1;
             targetDesires.IntercourseSkill += (targetDesires.IntercourseSkill < heroDesires.IntercourseSkill) ? 2 : 1;
 
+            if(DramalordMCM.Instance.IntimateLogs)
+            {
+                LogEntry.AddLogEntry(new IntercourseLog(hero, target));
+            }
+
             if (target == Hero.MainHero || hero == Hero.MainHero)
             {
                 Hero otherHero = (hero == Hero.MainHero) ? target : hero;
@@ -51,10 +58,10 @@ namespace Dramalord.Actions
                 {
                     if (witness.IsEmotionalWith(hero) || witness.IsEmotionalWith(target))
                     {
-                        DramalordIntentions.Instance.RemoveIntentionsTo(witness, hero);
-                        DramalordIntentions.Instance.RemoveIntentionsTo(witness, target);
-                        DramalordIntentions.Instance.AddIntention(witness, hero, IntentionType.Confrontation, eventid);
-                        DramalordIntentions.Instance.AddIntention(witness, target, IntentionType.Confrontation, eventid);
+                        witness.RemoveIntentionsTo(hero);
+                        witness.RemoveIntentionsTo(target);
+                        witness.AddIntention(hero, IntentionType.Confrontation, eventid);
+                        witness.AddIntention(target, IntentionType.Confrontation, eventid);
                     }
 
                     if (witness == Hero.MainHero)

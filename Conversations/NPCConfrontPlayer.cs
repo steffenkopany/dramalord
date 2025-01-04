@@ -154,7 +154,7 @@ namespace Dramalord.Conversations
                 if(intention != null && heroEvent != null)
                 {
                     Event = heroEvent;
-                    DramalordIntentions.Instance.RemoveIntention(Hero.OneToOneConversationHero, Hero.MainHero, IntentionType.Confrontation, intention.EventId);
+                    Hero.OneToOneConversationHero.RemoveIntention(intention);
                     return true;
                 }
             }
@@ -179,7 +179,7 @@ namespace Dramalord.Conversations
                 if (intention != null && heroEvent != null)
                 {
                     Event = heroEvent;
-                    DramalordIntentions.Instance.RemoveIntention(Hero.OneToOneConversationHero, Hero.MainHero, IntentionType.Confrontation, intention.EventId);
+                    Hero.OneToOneConversationHero.RemoveIntention(intention);
                     return true;
                 }
             }
@@ -264,7 +264,8 @@ namespace Dramalord.Conversations
             trustDamage += trustDamage * neuroFactor;
             trustDamage += trustDamage * conscFactor;
 
-            relation.Trust += (int)trustDamage;
+            //relation.Trust += (int)trustDamage;
+            hero.SetTrust(Hero.MainHero, hero.GetTrust(Hero.MainHero) + (int)trustDamage);
             relation.Love += (int)loveDamage;
 
             TextObject banner = new TextObject("{=Dramalord179}Relation loss with {HERO.LINK}. (Love {NUM}, Trust {NUM2})");
@@ -297,7 +298,7 @@ namespace Dramalord.Conversations
         {
             Event = null;
             ConversationHelper.ConversationEndedIntention = new HeroIntention(IntentionType.BreakUp, Hero.MainHero, -1);
-            DramalordIntentions.Instance.AddIntention(Hero.OneToOneConversationHero, Hero.MainHero, IntentionType.LeaveClan, -1);
+            Hero.OneToOneConversationHero.AddIntention(Hero.MainHero, IntentionType.LeaveClan, -1);
             if (PlayerEncounter.Current != null)
             {
                 PlayerEncounter.LeaveEncounter = true;

@@ -477,5 +477,50 @@
     <string id="Dramalord480" text="Tag des Beginns des Liebesverfalls" />
     <string id="Dramalord481" text="Anzahl der Tage, die Liebende einander nicht gesehen haben, bis die Liebe vergeht." />
     <string id="Dramalord482" text="Oh, hallo {TITLE}. Ich... habe dich nicht erwartet..." />
+    <string id="Dramalord483" text="{HERO1.LINK} war intim mit {HERO2.LINK}." />
+    <string id="Dramalord484" text="Intime Protokolle" />
+    <string id="Dramalord485" text="Intime Ereignisse in den Protokollen anzeigen" />
+    <string id="Dramalord486" text="Bruder" />
+    <string id="Dramalord487" text="Schwester" />
+    <string id="Dramalord488" text="Sohn" />
+    <string id="Dramalord489" text="Tochter" />
+    <string id="Dramalord490" text="Clans dürfen Königreiche wechseln" />
+    <string id="Dramalord491" text="KI-Clans dürfen Königreiche bei Niederlage oder Heirat wechseln" />
+    <string id="Dramalord492" text="{CLAN} ist {KINGDOM} beigetreten." />
+    <string id="Dramalord493" text="{CLAN} hat {KINGDOM} verlassen." />
+    <string id="Dramalord494" text="Ehepartner des Spielers treu" />
+    <string id="Dramalord495" text="Der Ehepartner des Spielers wird mit niemand anderem interagieren" />
+    <string id="Dramalord496" text="{HERO} wird {FACTION} innerhalb eines Tages verlassen." />
+    <string id="Dramalord497" text="Ich habe entschieden, dass du nicht in meinen Clan passt. Pack deine Sachen und geh." />
+    <string id="Dramalord498" text="In meinem Königreich ist kein Platz für deinen Clan. Verschwinde und kehre nicht zurück!" />
+    <string id="Dramalord499" text="Gut zu wissen, wie viel deine Freundschaft wert ist. Was für eine Enttäuschung! Ich werde tun, was du verlangst." />
+    <string id="Dramalord500" text="Kinder in Clans halten" />
+    <string id="Dramalord501" text="Nicht eheliche Kinder, die in Clans geboren werden, landen nicht im Waisenhaus" />
+    <string id="Dramalord502" text="Ich möchte, dass du unser ungeborenes Kind loswirst." />
+    <string id="Dramalord503" text="Ich möchte, dass du das ungeborene Kind von dir und {HERO} loswirst." />
+    <string id="Dramalord504" text="Ich möchte unser Kind nicht zur Welt bringen." />
+    <string id="Dramalord505" text="Bemerkenswerte Personen einbeziehen" />
+    <string id="Dramalord506" text="Bemerkenswerte Personen wie Bandenführer in Dramalord AI einbeziehen (experimentell, Auswirkungen auf die Leistung)" />
+    <string id="Dramalord507" text="Wenn Sie dies für notwendig erachten, werde ich mich darum kümmern {TITLE}." />
+    <string id="Dramalord508" text="Ich werde dies nicht akzeptieren, {TITLE}. Ich fordere Sie auf, es sich noch einmal zu überlegen, sonst gibt es Konsequenzen!" />
+    <string id="Dramalord509" text="Wenn dies Ihr Wunsch ist, dann tun Sie es, {TITLE}. Ich werde Sie nicht zwingen, ihn einzuhalten." />
+    <string id="Dramalord510" text="Sind Sie verrückt, {TITLE}? Dieses Kind ist die Manifestation unserer Liebe!" />
+    <string id="Dramalord511" text="Du hast recht. Es wäre nicht angemessen, ein Kind von {HERO} zur Welt zu bringen." />
+    <string id="Dramalord512" text="Niemals, {TITLE}! Dieses Kind ist das Ergebnis der Liebe, die ich für {HERO} empfinde!" />
+    <string id="Dramalord513" text="jemand anderes" />
+    <string id="Dramalord514" text="{HERO} wird innerhalb eines Tages eine Abtreibung vornehmen." />
+    <string id="Dramalord515" text="{HERO.LINK} liebt dich weniger. ({NUMBER})" />
+    <string id="Dramalord516" text="Du wirst innerhalb eines Tages eine Abtreibung vornehmen." />
+    <string id="Dramalord517" text="Du hast dein ungeborenes Kind von {HERO.LINK} abgetrieben." />
+    <string id="Dramalord518" text="{HERO.LINK} hat dein ungeborenes Kind abgetrieben." />
+    <string id="Dramalord519" text="{HERO.LINK} hat ihr ungeborenes Kind von {HERO2.LINK} abgetrieben." />
+    <string id="Dramalord520" text="Maximales Fruchtbarkeitsalter" />
+    <string id="Dramalord521" text="Maximales Alter, in dem ein Held schwanger werden kann (nur für Dramalord-Schwangerschaften)" />
+    <string id="Dramalord522" text="Kinder von Prominenten behalten" />
+    <string id="Dramalord523" text="Nicht eheliche Kinder von Prominenten landen nicht im Waisenhaus" />
+    <string id="Dramalord524" text="{CHILD} wurde geboren." />
+    <string id="Dramalord525" text="{MOTHER} hat {CHILD} geboren. {FATHER} ist der Vater. Würdet Ihr die Mutter drängen, das Kind zu behalten oder es wegzugeben?" />
+    <string id="Dramalord526" text="Das Kind weggeben" />
+    <string id="Dramalord527" text="Das Kind behalten" />
   </strings>
 </base>

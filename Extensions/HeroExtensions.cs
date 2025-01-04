@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.Library;
 
@@ -11,34 +12,112 @@ namespace Dramalord.Extensions
 {
     internal static class HeroExtensions
     {
+        private static Hero? CachedHero = null;
+        private static HeroPersonality? CachedPersonality = null;
+        private static HeroDesires? CachedDesires = null;
+        private static List<HeroIntention>? CachedIntention = null;
+        private static Dictionary<Hero, HeroRelation>? CachedRelation = null;
+
+        private static void UpdateCachedData(Hero hero)
+        {
+            if(CachedHero != hero)
+            {
+                CachedHero = hero;
+                CachedPersonality = DramalordPersonalities.Instance.GetPersonality(hero);
+                CachedDesires = DramalordDesires.Instance.GetDesires(hero);
+                CachedIntention = DramalordIntentions.Instance.GetIntentions(hero);
+                CachedRelation = DramalordRelations.Instance.GetAllRelations(hero);
+            }
+        }
+
+        public static int GetTrust(this Hero hero, Hero other) => CharacterRelationManager.GetHeroRelation(hero, other);
+
+        public static void SetTrust(this Hero hero, Hero other, int value) => CharacterRelationManager.SetHeroRelation(hero, other, value);
+
         public static bool IsDramalordLegit(this Hero hero)
         {
-            return hero != null && !hero.IsChild && (hero.IsLord || hero.IsPlayerCompanion || hero.IsWanderer) && hero.IsAlive && !hero.IsDisabled;
+            return hero != null && !hero.IsChild && (hero.IsLord || hero.IsPlayerCompanion || hero.IsWanderer ||(hero.IsNotable && DramalordMCM.Instance.IncludeNotables)) && hero.IsAlive && !hero.IsDisabled;
         }
 
         public static List<HeroIntention> GetIntentions(this Hero hero)
         {
-            return DramalordIntentions.Instance.GetIntentions(hero);
+            UpdateCachedData(hero);
+            return CachedIntention;
+        }
+
+        public static void AddIntention(this Hero hero, Hero target, IntentionType type, int eventID)
+        {
+            UpdateCachedData(hero);
+            CachedIntention.Add(new HeroIntention(type, target, eventID));
+            if (target == Hero.MainHero)
+            {
+                List<Hero> toPlayer = DramalordIntentions.Instance.GetIntentionTowardsPlayer();
+                if(!toPlayer.Contains(hero))
+                {
+                    toPlayer.Add(hero);
+                }
+            }
+        }
+
+        public static void RemoveIntention(this Hero hero, HeroIntention intention)
+        {
+            UpdateCachedData(hero);
+            CachedIntention.Remove(intention);
+            if (intention.Target == Hero.MainHero)
+            {
+                DramalordIntentions.Instance.GetIntentionTowardsPlayer().Remove(hero);
+            }
+        }
+
+        public static void RemoveIntentionsTo(this Hero hero, Hero target)
+        {
+            UpdateCachedData(hero);
+            CachedIntention.Where(item => item.Target == target).ToList().ForEach(item =>
+            {
+                CachedIntention.Remove(item);
+            });
+            if (target == Hero.MainHero)
+            {
+                DramalordIntentions.Instance.GetIntentionTowardsPlayer().RemoveAll(item => item == hero);
+            }
+        }
+
+        public static void RemoveAllIntentions(this Hero hero)
+        {
+            UpdateCachedData(hero);
+            CachedIntention.Clear();
+            DramalordIntentions.Instance.GetIntentionTowardsPlayer().RemoveAll(item => item == hero);
         }
 
         public static HeroDesires GetDesires(this Hero hero)
         {
-            return DramalordDesires.Instance.GetDesires(hero);
+            UpdateCachedData(hero);
+            return CachedDesires;
         }
 
         public static HeroPersonality GetPersonality(this Hero hero)
         {
-            return DramalordPersonalities.Instance.GetPersonality(hero);
+            UpdateCachedData(hero);
+            return CachedPersonality;
         }
 
         public static HeroRelation GetRelationTo(this Hero hero, Hero target)
         {
-            return DramalordRelations.Instance.GetRelation(hero, target);
+            UpdateCachedData(hero);
+            if(CachedRelation.ContainsKey(target))
+            {
+                return CachedRelation[target];
+            }
+            else
+            {
+                return DramalordRelations.Instance.GetRelation(hero, target);
+            }
         }
 
-        public static IEnumerable<KeyValuePair<HeroTuple, HeroRelation>> GetAllRelations(this Hero hero)
+        public static Dictionary<Hero, HeroRelation> GetAllRelations(this Hero hero)
         {
-            return DramalordRelations.Instance.GetAllRelations(hero);
+            UpdateCachedData(hero);
+            return CachedRelation;
         }
 
         public static HeroPregnancy? GetPregnancy(this Hero hero)
@@ -48,50 +127,50 @@ namespace Dramalord.Extensions
 
         public static bool IsSpouseOf(this Hero hero, Hero target)
         {
-            return hero.Spouse == target || DramalordRelations.Instance.GetRelation(hero, target).Relationship == RelationshipType.Spouse;
+            return hero.Spouse == target || GetRelationTo(hero, target).Relationship == RelationshipType.Spouse;
         }
 
         public static bool IsBetrothedOf(this Hero hero, Hero target)
         {
-            return DramalordRelations.Instance.GetRelation(hero, target).Relationship == RelationshipType.Betrothed;
+            return GetRelationTo(hero, target).Relationship == RelationshipType.Betrothed;
         }
 
         public static bool IsLoverOf(this Hero hero, Hero target)
         {
-            return DramalordRelations.Instance.GetRelation(hero, target).Relationship == RelationshipType.Lover;
+            return GetRelationTo(hero, target).Relationship == RelationshipType.Lover;
         }
 
         public static bool IsFriendWithBenefitsOf(this Hero hero, Hero target)
         {
-            return DramalordRelations.Instance.GetRelation(hero, target).Relationship == RelationshipType.FriendWithBenefits;
+            return GetRelationTo(hero, target).Relationship == RelationshipType.FriendWithBenefits;
         }
 
         public static bool IsFriendOf(this Hero hero, Hero target)
         {
-            return DramalordRelations.Instance.GetRelation(hero, target).Relationship == RelationshipType.Friend;
+            return GetRelationTo(hero, target).Relationship == RelationshipType.Friend;
         }
 
         public static bool IsEmotionalWith(this Hero hero, Hero target)
         {
-            HeroRelation relation = DramalordRelations.Instance.GetRelation(hero, target);
+            HeroRelation relation = GetRelationTo(hero, target);
             return hero.Spouse == target || relation.Relationship == RelationshipType.Lover || relation.Relationship == RelationshipType.Betrothed || relation.Relationship == RelationshipType.Spouse;
         }
 
         public static bool IsSexualWith(this Hero hero, Hero target)
         {
-            HeroRelation relation = DramalordRelations.Instance.GetRelation(hero, target);
+            HeroRelation relation = GetRelationTo(hero, target);
             return hero.Spouse == target || relation.Relationship == RelationshipType.FriendWithBenefits || relation.Relationship == RelationshipType.Lover || relation.Relationship == RelationshipType.Betrothed || relation.Relationship == RelationshipType.Spouse;
         }
 
         public static bool IsFriendlyWith(this Hero hero, Hero target)
         {
-            HeroRelation relation = DramalordRelations.Instance.GetRelation(hero, target);
+            HeroRelation relation = GetRelationTo(hero, target);
             return relation.Relationship == RelationshipType.Friend || relation.Relationship == RelationshipType.FriendWithBenefits;
         }
 
         public static bool HasAnyRelationshipWith(this Hero hero, Hero target)
         {
-            return hero.Spouse == target || DramalordRelations.Instance.GetRelation(hero, target).Relationship != RelationshipType.None;
+            return hero.Spouse == target || GetRelationTo(hero, target).Relationship != RelationshipType.None;
         }
 
         public static bool IsAutonom(this Hero hero)
@@ -99,7 +178,8 @@ namespace Dramalord.Extensions
             if((hero.Occupation == Occupation.Wanderer && hero.Clan == null && !DramalordMCM.Instance.AllowWandererAutonomy) ||
                 (hero != Hero.MainHero && hero.Clan == Clan.PlayerClan && !DramalordMCM.Instance.AllowPlayerClanAutonomy) ||
                 hero.IsPrisoner ||
-                hero.GetDesires().HasToy)
+                hero.GetDesires().HasToy ||
+                (DramalordMCM.Instance.PlayerSpouseFaithful && hero != Hero.MainHero && (hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero))))
             {
                 return false;
             }
@@ -160,7 +240,7 @@ namespace Dramalord.Extensions
 
             bool inPeriod = (today >= startPeriod && today <= endPeriod) || (nextToday >= startPeriod && nextToday <= endPeriod);
 
-            if (hero.IsFemale && hero.Age <= 45 && !inPeriod)
+            if (hero.IsFemale && hero.Age <= DramalordMCM.Instance.MaxFertilityAge && !inPeriod)
             {
                 return true;
             }

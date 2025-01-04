@@ -22,7 +22,7 @@ namespace Dramalord.Actions
 
             int trustGain = (changeValue == -1000) ? hero.GetSympathyTo(target) * DramalordMCM.Instance.TrustGainMultiplier : changeValue * DramalordMCM.Instance.TrustGainMultiplier;
 
-            heroRelation.Trust += trustGain;
+            hero.SetTrust(target, hero.GetTrust(target) + trustGain);
             heroRelation.UpdateLove();
 
             if (hero == Hero.MainHero || target == Hero.MainHero)

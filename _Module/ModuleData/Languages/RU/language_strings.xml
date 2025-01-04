@@ -477,5 +477,50 @@
     <string id="Dramalord480" text="День начала распада любви" />
     <string id="Dramalord481" text="Количество дней, в течение которых влюбленные не виделись, необходимое для распада любви." />
     <string id="Dramalord482" text="О, привет {TITLE}. Я... не ожидал тебя..." />
+    <string id="Dramalord483" text="{HERO1.LINK} был близок с {HERO2.LINK}." />
+    <string id="Dramalord484" text="Интимные журналы" />
+    <string id="Dramalord485" text="Показывать интимные события в журналах" />
+    <string id="Dramalord486" text="брат" />
+    <string id="Dramalord487" text="сестра" />
+    <string id="Dramalord488" text="сын" />
+    <string id="Dramalord489" text="дочь" />
+    <string id="Dramalord490" text="Разрешить кланам менять королевства" />
+    <string id="Dramalord491" text="Разрешить кланам ИИ менять королевства при поражении или браке" />
+    <string id="Dramalord492" text="{CLAN} присоединился к {KINGDOM}." />
+    <string id="Dramalord493" text="{CLAN} покинул {KINGDOM}." />
+    <string id="Dramalord494" text="Супруга игрока Верная" />
+    <string id="Dramalord495" text="Супруга игрока не будет взаимодействовать ни с кем другим" />
+    <string id="Dramalord496" text="{HERO} покинет {FACTION} в течение одного дня." />
+    <string id="Dramalord497" text="Я решил, что ты не вписываешься в мой клан. Собирай свои вещи и уходи." />
+    <string id="Dramalord498" text="В моем королевстве нет места твоему клану. Уходи и не возвращайся!" />
+    <string id="Dramalord499" text="Приятно узнать, сколько стоит твоя дружба. Какое разочарование! Я сделаю так, как ты просишь." />
+    <string id="Dramalord500" text="Держите детей в кланах" />
+    <string id="Dramalord501" text="Незаконнорожденные дети, рожденные в кланах, не попадут в приют" />
+    <string id="Dramalord502" text="Я хочу, чтобы ты избавился от нашего нерожденного ребенка." />
+    <string id="Dramalord503" text="Я хочу, чтобы ты избавился от нерожденного ребенка от тебя и {HERO}." />
+    <string id="Dramalord504" text="Я не хочу рожать нашего ребенка." />
+    <string id="Dramalord505" text="Включить Знаменитые" />
+    <string id="Dramalord506" text="Включить Знаменитые, такие как лидеры банд, в ИИ Dramalord (экспериментально, влияет на производительность)" />
+    <string id="Dramalord507" text="Если вы считаете это необходимым, то я позабочусь об этом {TITLE}." />
+    <string id="Dramalord508" text="Я не приму это, {TITLE}. Я призываю вас передумать, иначе будут последствия!" />
+    <string id="Dramalord509" text="Если это ваше желание, то сделайте это {TITLE}. Я не буду заставлять вас его соблюдать." />
+    <string id="Dramalord510" text="Вы с ума сошли, {TITLE}? Этот ребенок — проявление нашей любви!" />
+    <string id="Dramalord511" text="Вы правы. Было бы неправильно рожать ребенка от {HERO}." />
+    <string id="Dramalord512" text="Никогда, {TITLE}! Этот ребенок — результат моей любви к {HERO}!" />
+    <string id="Dramalord513" text="кто-то другой" />
+    <string id="Dramalord514" text="{HERO} сделает аборт в течение одного дня." />
+    <string id="Dramalord515" text="{HERO.LINK} любит вас меньше. ({NUMBER})" />
+    <string id="Dramalord516" text="Вы сделаете аборт в течение одного дня." />
+    <string id="Dramalord517" text="Вы сделали аборт своему нерожденному ребенку от {HERO.LINK}." />
+    <string id="Dramalord518" text="{HERO.LINK} сделал аборт нерожденного ребенка от вас." />
+    <string id="Dramalord519" text="{HERO.LINK} сделал аборт нерожденного ребенка от {HERO2.LINK}." />
+    <string id="Dramalord520" text="Максимальный возраст фертильности" />
+    <string id="Dramalord521" text="Максимальный возраст, в котором герой может забеременеть (только для беременностей Драмалорда)" />
+    <string id="Dramalord522" text="Оставить детей знатных особ" />
+    <string id="Dramalord523" text="Незаконнорожденные дети знатных особ не попадут в приют" />
+    <string id="Dramalord524" text="{CHILD} родился." />
+    <string id="Dramalord525" text="{MOTHER} родила {CHILD}. {FATHER} — отец. Посоветовал бы матери оставить ребенка или избавиться от него?" />
+    <string id="Dramalord526" text="Избавиться от ребенка" />
+    <string id="Dramalord527" text="Оставить ребенка" />
   </strings>
 </base>

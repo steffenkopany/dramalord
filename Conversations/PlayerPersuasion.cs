@@ -157,23 +157,23 @@ namespace Dramalord.Conversations
             {
                 TextObject banner = new TextObject("{=Dramalord439}You successfully convinced {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
                 StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int trustGain = 75 - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust;
+                int trustGain = 75 - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero);
                 MBTextManager.SetTextVariable("LOVE", ConversationHelper.FormatNumber(0));
                 MBTextManager.SetTextVariable("TRUST", ConversationHelper.FormatNumber(trustGain));
                 MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
                 Hero.OneToOneConversationHero.GetDesires().Horny = 75;
-                Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust = 75;
+                Hero.OneToOneConversationHero.SetTrust(Hero.MainHero, 75);
             }
             else
             {
                 TextObject banner = new TextObject("{=Dramalord440}You failed to convince {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
                 StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int trustGain = 24 - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust;
+                int trustGain = 24 - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero);
                 MBTextManager.SetTextVariable("LOVE", ConversationHelper.FormatNumber(0));
                 MBTextManager.SetTextVariable("TRUST", ConversationHelper.FormatNumber(trustGain));
                 MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
                 Hero.OneToOneConversationHero.GetDesires().Horny = 24;
-                Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust = 24;
+                Hero.OneToOneConversationHero.SetTrust(Hero.MainHero, 24);
             }
             ConversationManager.EndPersuasion();
         }
@@ -213,7 +213,7 @@ namespace Dramalord.Conversations
             PersuasionTask persuasionTask = new PersuasionTask(3);
             persuasionTask.SpokenLine = new TextObject("{=Dramalord433}This is a spicy proposal indeed. What if feelings are mixing in?");
             persuasionTask.TryLaterLine = FWB;
-            int trustDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinTrustFWB - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Trust) * -1) / 10, -3, 3);
+            int trustDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinTrustFWB - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero)) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)trustDiff;
 
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Roguery, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord434}What is a steamy adventure without risks anyway?"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));

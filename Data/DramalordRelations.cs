@@ -83,14 +83,14 @@ namespace Dramalord.Data
         private int _love;
         private double _lastInteraction;
         private RelationshipType _relationship;
-
+/*
         [SaveableProperty(1)]
         internal int Trust
         {
             get => _trust;
             set => _trust = MBMath.ClampInt(value, -100, 100);
         }
-
+*/
         [SaveableProperty(2)]
         internal int Love
         {
@@ -123,7 +123,7 @@ namespace Dramalord.Data
 
         internal HeroRelation(int friendship, int love, RelationshipType relationship)
         {
-            Trust = friendship;
+            //Trust = friendship;
             Love = love;
             LastInteraction = 0;
             Relationship = relationship;
@@ -143,7 +143,8 @@ namespace Dramalord.Data
             }
         }
 
-        private readonly Dictionary<HeroTuple, HeroRelation> _relations;
+        //private readonly Dictionary<HeroTuple, HeroRelation> _relations;
+        private readonly Dictionary<Hero, Dictionary<Hero, HeroRelation>> _relations;
 
         private DramalordRelations() : base("DramalordRelations")
         {
@@ -152,48 +153,137 @@ namespace Dramalord.Data
 
         internal HeroRelation GetRelation(Hero hero1, Hero hero2)
         {
-            if(_relations.Where(item => item.Key.Contains(hero1, hero2)).Count() == 0)
+            if(!_relations.ContainsKey(hero1))
             {
-                _relations.Add(new HeroTuple(hero1, hero2), 
-                    new HeroRelation((hero1.IsFriend(hero2) ? MBRandom.RandomInt(20, 50) : 0),
-                    (hero1.Spouse == hero2) ? MBRandom.RandomInt(50, 100) : 0,
-                     //0,
-                     hero1.IsFriend(hero2) ? RelationshipType.Friend : (hero1.Spouse == hero2) ? RelationshipType.Spouse : RelationshipType.None));
+                _relations.Add(hero1, new());
             }
-            return _relations.Where(item => item.Key.Contains(hero1, hero2)).First().Value;
+
+            if (!_relations.ContainsKey(hero2))
+            {
+                _relations.Add(hero2, new());
+            }
+
+            if (!_relations[hero1].ContainsKey(hero2))
+            {
+                _relations[hero1].Add(hero2, new HeroRelation(
+                    hero1.IsFriend(hero2) ? MBRandom.RandomInt(20, 50) : 0,
+                    (hero1.Spouse == hero2) ? MBRandom.RandomInt(50, 100) : 0,
+                     hero1.IsFriend(hero2) ? RelationshipType.Friend : (hero1.Spouse == hero2) ? RelationshipType.Spouse : RelationshipType.None)
+                    );
+            }
+
+            if (!_relations[hero2].ContainsKey(hero1))
+            {
+                _relations[hero2].Add(hero1, _relations[hero1][hero2]);
+            }
+
+            return _relations[hero1][hero2];
         }
 
-        internal IEnumerable<KeyValuePair<HeroTuple, HeroRelation>> GetAllRelations(Hero hero)
+        internal Dictionary<Hero, HeroRelation> GetAllRelations(Hero hero)
         {
-            return _relations.Where(keypair => keypair.Key.Contains(hero) && keypair.Value.Relationship != RelationshipType.None);
+            if(!_relations.ContainsKey(hero))
+            {
+                _relations.Add(hero, new());
+            }
+            return _relations[hero];
         }
 
         public override void LoadData(IDataStore dataStore)
         {
             _relations.Clear();
-            Dictionary<string, HeroRelation> data = new();
-            dataStore.SyncData(SaveIdentifier, ref data);
 
-            data.Do(keypair =>
+            bool newRelationStructure = false;
+            dataStore.SyncData("NewRelationStructure", ref newRelationStructure);
+
+            if(newRelationStructure)
             {
-                HeroTuple heroTuple = new(keypair.Key);
-                if(heroTuple.IsNotNull() && !_relations.ContainsKey(heroTuple))
+                Dictionary<string, Dictionary<string, HeroRelation>> data = new();
+                dataStore.SyncData(SaveIdentifier, ref data);
+
+                data.Do(firstpair =>
                 {
-                    _relations.Add(heroTuple, keypair.Value);
-                }
-            });
+                    Hero? hero1 = Hero.AllAliveHeroes.Where(hero => hero.StringId == firstpair.Key).FirstOrDefault();
+                    if(hero1 != null)
+                    {
+                        if (!_relations.ContainsKey(hero1))
+                        {
+                            _relations.Add(hero1, new());
+                        }
+
+                        firstpair.Value.Do(secondpair =>
+                        {
+                            Hero? hero2 = Hero.AllAliveHeroes.Where(hero => hero.StringId == secondpair.Key).FirstOrDefault();
+                            if(hero2 != null && hero2 != hero1)
+                            {
+                                if (!_relations[hero1].ContainsKey(hero2))
+                                {
+                                    if(_relations.ContainsKey(hero2) && _relations[hero2].ContainsKey(hero1))
+                                    {
+                                        _relations[hero1].Add(hero2, _relations[hero2][hero1]);
+                                    }
+                                    else
+                                    {
+                                        _relations[hero1].Add(hero2, secondpair.Value);
+                                    }
+                                }
+                            }
+                        });
+                    } 
+                });
+            }
+            else
+            {
+                Dictionary<string, HeroRelation> data = new();
+                dataStore.SyncData(SaveIdentifier, ref data);
+
+                data.Do(keypair =>
+                {
+                    HeroTuple heroTuple = new(keypair.Key);
+                    if (heroTuple.IsNotNull())
+                    {
+                        if(!_relations.ContainsKey(heroTuple.Hero1))
+                        {
+                            _relations.Add(heroTuple.Hero1, new());
+                        }
+                        if (!_relations.ContainsKey(heroTuple.Hero2))
+                        {
+                            _relations.Add(heroTuple.Hero2, new());
+                        }
+                        if (heroTuple.Hero1 != heroTuple.Hero2 && !_relations[heroTuple.Hero1].ContainsKey(heroTuple.Hero2))
+                        {
+                            _relations[heroTuple.Hero1].Add(heroTuple.Hero2, keypair.Value);
+                        }
+                        if (heroTuple.Hero1 != heroTuple.Hero2 && !_relations[heroTuple.Hero2].ContainsKey(heroTuple.Hero1))
+                        {
+                            _relations[heroTuple.Hero2].Add(heroTuple.Hero1, keypair.Value);
+                        }
+                    }
+                });
+            }
         }
 
         public override void SaveData(IDataStore dataStore)
         {
-            Dictionary<string, HeroRelation> data = new();
+            bool newRelationStructure = true;
+            dataStore.SyncData("NewRelationStructure", ref newRelationStructure);
+
+            Dictionary<string,Dictionary<string, HeroRelation>> data = new();
 
             _relations.Do(keypair =>
             {
-                if (!data.ContainsKey(keypair.Key.SaveString))
+                if (!data.ContainsKey(keypair.Key.StringId))
                 {
-                    data.Add(keypair.Key.SaveString, keypair.Value);
+                    data.Add(keypair.Key.StringId, new());
                 }
+
+                keypair.Value.Do(secondpair =>
+                {
+                    if (!data[keypair.Key.StringId].ContainsKey(secondpair.Key.StringId))
+                    {
+                        data[keypair.Key.StringId].Add(secondpair.Key.StringId, secondpair.Value);
+                    }
+                });
             });
 
             dataStore.SyncData(SaveIdentifier, ref data);
@@ -211,17 +301,21 @@ namespace Dramalord.Data
 
         protected override void OnHeroKilled(Hero victim, Hero killer, KillCharacterAction.KillCharacterActionDetail reason, bool showNotifications)
         {
-            _relations.Where(item => item.Key.Contains(victim)).Select(item => item.Key).ToList().ForEach(tuple =>
+            _relations.Remove(victim);
+
+            _relations.Where(item => item.Value.ContainsKey(victim)).Select(item => item.Value).Do(item =>
             {
-                _relations.Remove(tuple);
+                item.Remove(victim);
             });
         }
 
         protected override void OnHeroUnregistered(Hero hero)
         {
-            _relations.Where(item => item.Key.Contains(hero)).Select(item => item.Key).ToList().ForEach(tuple =>
+            _relations.Remove(hero);
+
+            _relations.Where(item => item.Value.ContainsKey(hero)).Select(item => item.Value).Do(item =>
             {
-                _relations.Remove(tuple);
+                item.Remove(hero);
             });
         }
 

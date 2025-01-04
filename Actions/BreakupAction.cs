@@ -22,9 +22,11 @@ namespace Dramalord.Actions
             RelationshipType oldRelationship = relation.Relationship;
             relation.Relationship = RelationshipType.None;
             relation.Love = (relation.CurrentLove > 0) ? 0 : relation.CurrentLove;
-            relation.Trust = (relation.Trust > 0) ? 0 : relation.Trust;
+            //relation.Trust = (relation.Trust > 0) ? 0 : relation.Trust;
+            int trust = hero.GetTrust(target);
+            hero.SetTrust(target, (trust > 0) ? 0 : trust);
 
-            if(hero.Spouse == target)
+            if (hero.Spouse == target)
             {
                 foreach (Romance.RomanticState romanticState in Romance.RomanticStateList.ToList())
                 {
@@ -38,10 +40,10 @@ namespace Dramalord.Actions
             }
 
             List<HeroIntention> heroIntentions = hero.GetIntentions().ToList();
-            heroIntentions.Where(intention => intention.Target == target).Do(intention => DramalordIntentions.Instance.RemoveIntention(hero, intention.Target, intention.Type, intention.EventId));
+            heroIntentions.Where(intention => intention.Target == target).Do(intention => hero.RemoveIntention(intention));
 
             List<HeroIntention> targetIntentions = target.GetIntentions().ToList();
-            targetIntentions.Where(intention => intention.Target == hero).Do(intention => DramalordIntentions.Instance.RemoveIntention(target, intention.Target, intention.Type, intention.EventId));
+            targetIntentions.Where(intention => intention.Target == hero).Do(intention => target.RemoveIntention(intention));
 
             if (hero == Hero.MainHero)
             {

@@ -71,7 +71,7 @@ namespace Dramalord.Missions
                 ViewCreator.CreateMissionAgentStatusUIHandler(a),
                 ViewCreator.CreateMissionMainAgentEquipmentController(a),
                 (MissionView) new MissionSingleplayerViewHandler(),
-                isInsideSettlement ? new MissionAudienceHandler(0.4f + MBRandom.RandomFloat * 0.3f) : null,
+                //isInsideSettlement ? new MissionAudienceHandler(0.4f + MBRandom.RandomFloat * 0.3f) : null,
                 //(MissionView) new MusicBattleMissionView(false),
                 new MissionBoundaryWallView(),
                 new MissionItemContourControllerView(),
