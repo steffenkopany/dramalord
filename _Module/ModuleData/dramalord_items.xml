@@ -2,10 +2,10 @@
 <Items>
   <Item id="dramalord_sausage"
           name="{=Dramalord240}Sausage"
-          mesh="sausage"
+          mesh="kitchen_sausage_c"
           item_category="dramalord_stuff"
-          IsFood="true"
-          value="5"
+          IsFood="false"
+          value="10"
           weight="1"
           Type="Goods">
     <ItemComponent>
@@ -18,7 +18,7 @@
           name="{=Dramalord241}Pie"
           mesh="kitchen_pie"
           item_category="dramalord_stuff"
-          IsFood="true"
+          IsFood="false"
           value="10"
           weight="1"
           Type="Goods">

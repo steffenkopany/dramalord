@@ -1,39 +1,63 @@
-﻿using Dramalord.Extensions;
-using HarmonyLib;
+﻿using HarmonyLib;
+using Helpers;
 using JetBrains.Annotations;
-using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Map;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
 
 namespace Dramalord.Patches
 {
-    [HarmonyPatch(typeof(HeroCreator), "DeliverOffSpring")]
-    internal static class DeliverOffSpringPatch
+    [HarmonyPatch(typeof(HeroCreator), "DecideBornSettlement")]
+    internal class DecideBornSettlementPatch
     {
         [UsedImplicitly]
         [HarmonyPrefix]
-        public static void DeliverOffSpring(ref Hero mother, ref Hero father, ref bool isOffspringFemale)
+        public static bool DecideBornSettlement(ref Hero child, ref Settlement __result)
         {
-            if(father == null)
+            Settlement settlement;
+            if (child.Mother.CurrentSettlement != null && (child.Mother.CurrentSettlement.IsTown || child.Mother.CurrentSettlement.IsVillage))
             {
-                father = mother;
-                /*
-                if(mother.ExSpouses?.Count() > 0)
+                settlement = child.Mother.CurrentSettlement;
+            }
+            else if (child.Mother.PartyBelongedTo != null || child.Mother.PartyBelongedToAsPrisoner != null)
+            {
+                IMapPoint? toMapPoint;
+                if (child.Mother.PartyBelongedToAsPrisoner != null)
                 {
-                    father = mother.ExSpouses.GetRandomElement();
+                    IMapPoint? mapPoint;
+                    if (!child.Mother.PartyBelongedToAsPrisoner.IsMobile)
+                    {
+                        IMapPoint settlement2 = child.Mother.PartyBelongedToAsPrisoner.Settlement;
+                        mapPoint = settlement2;
+                    }
+                    else
+                    {
+                        IMapPoint settlement2 = child.Mother.PartyBelongedToAsPrisoner.MobileParty;
+                        mapPoint = settlement2;
+                    }
+
+                    toMapPoint = mapPoint;
                 }
                 else
                 {
-                    father = Hero.AllAliveHeroes.GetRandomElementWithPredicate(h => !h.IsFemale && h.IsDramalordLegit() && h.Clan != Clan.PlayerClan);
+                    toMapPoint = child.Mother.PartyBelongedTo;
                 }
-                */
+
+                settlement = SettlementHelper.FindNearestTown(null, toMapPoint);
             }
-            if(DramalordMCM.Instance.NativeBirthDebug)
+            else
             {
-                string sex = isOffspringFemale ? "female" : "male";
-                InformationManager.DisplayMessage(new InformationMessage($"[Native birth] Mother:{mother.Name}, Father:{father.Name}, Child will be {sex}", new Color(1f, 0.08f, 0.58f)));
+                settlement = child.Mother.HomeSettlement;
             }
+
+            if (settlement == null)
+            {
+                settlement = ((child.Mother.Clan?.Settlements.Count > 0) ? child.Mother.Clan.Settlements.GetRandomElement() : Town.AllTowns.GetRandomElement().Settlement);
+            }
+
+            __result =  settlement;
+            return false;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Dramalord.Notifications
         private readonly Hero _female;
         private readonly Hero? _spectator;
 
-        internal HotButterNotification(Hero hero1, Hero hero2, Settlement? location, Hero? spectator)
+        internal HotButterNotification(Hero hero1, Hero hero2, Settlement? location, Hero? spectator = null)
         {
             _male = hero1.IsFemale ? hero2 : hero1;
             _female = hero1.IsFemale ? hero1 : hero2;

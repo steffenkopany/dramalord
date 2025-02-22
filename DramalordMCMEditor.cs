@@ -1,46 +1,22 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Data;
+using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
 using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v1;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.PerCampaign;
+using MCM.Abstractions.Base.PerSave;
 using MCM.Common;
-using System;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace Dramalord
 {
-    internal sealed class DramalordMCMEditor : AttributePerCampaignSettings<DramalordMCMEditor>
+    internal sealed class DramalordMCMEditor : AttributePerSaveSettings<DramalordMCMEditor>
     {
-        private static Hero _selected = Hero.MainHero;
-        private static Dropdown<HeroWrapper> _heroList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
-        private string _dummy;
-
-        internal void SetSelected(Hero? hero)
-        {
-            if(hero != null && hero.IsDramalordLegit() && hero.HasMet)
-            {
-                int index = -1;
-                SelectedHero.ForEach(item =>
-                {
-                    if(item.Hero == hero)
-                    {
-                        index = _heroList.IndexOf(item);
-                    }
-                });
-                
-                if(index != -1)
-                {
-                    _heroList.SelectedIndex = index;
-                    _selected = hero;
-                }
-            }
-        }
-
-        public class HeroWrapper
+        internal class HeroWrapper
         {
             internal Hero Hero { get; }
             public HeroWrapper(Hero hero)
@@ -58,121 +34,114 @@ namespace Dramalord
             }
         }
 
+        private static Hero _selected = null;
+        private static Hero _target = Hero.MainHero;
+        private static Dropdown<HeroWrapper> _heroList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
+        private static Dropdown<HeroWrapper> _targetList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
+        private string _dummy;
+
+        internal void SetSelected(Hero? hero)
+        {
+            if(hero != null && (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero)
+            {
+                _heroList.ForEach(item =>
+                {
+                    if(item.Hero == hero)
+                    {
+                        _heroList.SelectedIndex = _heroList.IndexOf(item);
+                        _selected = hero;
+                        return;
+                    }
+                }); 
+            }
+        }
+
+        internal void SetTarget(Hero? hero)
+        {
+            if (hero != null && (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero)
+            {
+                _targetList.ForEach(item =>
+                {
+                    if (item.Hero == hero)
+                    {
+                        _targetList.SelectedIndex = _targetList.IndexOf(item);
+                        _selected = hero;
+                        return;
+                    }
+                });
+            }
+        }
+
         public DramalordMCMEditor()
         {
-            _selected = Hero.MainHero;
+            _heroList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
+            _targetList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
+            if (_selected == null)
+            {
+                _selected = Hero.MainHero;
+            }
+            SetSelected(_selected);
+            _target = Hero.MainHero;
+            SetTarget(_target);
+            _dummy = "";
+            OnPropertyChanged();
         }
 
         [SettingPropertyGroup("{=Dramalord107}1: Hero Selection")]
-        [SettingPropertyDropdown("{=Dramalord108}Select Hero", Order = 1, RequireRestart = false, HintText = "{=Dramalord193}Select hero from list and press 'Load Hero' (only works with running campaign)")]
+        [SettingPropertyDropdown("{=Dramalord108}Select Hero", Order = 1, RequireRestart = false, HintText = "{=Dramalord193}Select hero from list (only works with running campaign)")]
         public Dropdown<HeroWrapper> SelectedHero
         {
             get
             {
-                _heroList.Clear();
-                _heroList.AddRange(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList());
+                if(_selected != _heroList.SelectedValue.Hero)
+                {
+                    _selected = _heroList.SelectedValue.Hero;
+                    OnPropertyChanged();
+                }
+
                 return _heroList;
-                //Instance.OnPropertyChanged("SelectedHero");
-            }
-            set
-            {
-                _heroList = value;
-                _selected = value.SelectedValue.Hero;
-                Instance.OnPropertyChanged();
             }
         }
 
-
-        [SettingPropertyGroup("{=Dramalord107}1: Hero Selection")]
-        [SettingPropertyButton("{=Dramalord194}Load Hero", Order = 4, Content = "{=Dramalord194}Load Hero", HintText = "Press this button to load Dramalord data of selected hero (only works with running campaign)", RequireRestart = false)]
-        public Action LoadHeroData { get; set; } = () =>
-        {
-            _selected = Instance.SelectedHero.SelectedValue.Hero;
-            //_heroList.Clear();
-            //_heroList.AddRange(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList());
-            //_heroList.SelectedIndex = _heroList.FindIndex(wrapper => wrapper.Hero == _selected);
-            Instance.OnPropertyChanged();
-            InformationManager.DisplayMessage(new InformationMessage("Selected hero: " + Instance.SelectedHero.SelectedValue.ToString() + " at index " + Instance.SelectedHero.SelectedIndex, Color.White));
-        };
-
-        [SettingPropertyGroup("{=Dramalord107}1: Hero Selection")]
-        [SettingPropertyButton("Cheat Hero", Order = 5, Content = "Cheat Hero", HintText = "Press this button to make hero love the player", RequireRestart = false)]
-        public Action CheatHeroData { get; set; } = () =>
-        {
-            HeroPersonality personality = _selected.GetPersonality();
-            personality.Agreeableness = Hero.MainHero.GetPersonality().Agreeableness;
-            personality.Conscientiousness = Hero.MainHero.GetPersonality().Conscientiousness;
-            personality.Openness = Hero.MainHero.GetPersonality().Openness;
-            personality.Neuroticism = Hero.MainHero.GetPersonality().Neuroticism;
-            personality.Extroversion = Hero.MainHero.GetPersonality().Extroversion;
-            HeroDesires desires = _selected.GetDesires();
-            desires.AttractionMen = (Hero.MainHero.IsFemale) ? 0 : 100;
-            desires.AttractionWomen = (Hero.MainHero.IsFemale) ? 100 : 0;
-            desires.AttractionAgeDiff = (int)(Hero.MainHero.Age - _selected.Age);
-            desires.AttractionBuild = (int)(Hero.MainHero.Build*100);
-            desires.AttractionWeight = (int)(Hero.MainHero.Weight * 100);
-            desires.Horny = 100;
-            desires.Libido = 10;
-            HeroRelation relation = _selected.GetRelationTo(Hero.MainHero);
-            _selected.SetTrust(Hero.MainHero, 100);
-            relation.Love = 100;
-        };
-
-        [SettingPropertyGroup("{=Dramalord107}1: Hero Selection")]
-        [SettingProperty("{=Dramalord195}Current Attraction", Order = 2, RequireRestart = false, HintText = "{=Dramalord196}Current attraction value to player")]
-        public string CurrentAttraction
-        {
-            get => _selected.GetAttractionTo(Hero.MainHero).ToString();
-            set => _dummy = value;
-        }
-
-
-        [SettingPropertyGroup("{=Dramalord107}1: Hero Selection")]
-        [SettingProperty("{=Dramalord197}Current Sympathy", Order = 3, RequireRestart = false, HintText = "{=Dramalord198}Current sympathy value to player")]
-        public string CurrentTraitScore
-        {
-            get => _selected.GetSympathyTo(Hero.MainHero).ToString();
-            set => _dummy = value;
-        }
                
         [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord110}Openness", -100, 100, HintText = "{=Dramalord111}Represents how willing a person is to try new things", Order = 1, RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord110}Openness", -50, 50, HintText = "{=Dramalord111}Represents how willing a person is to try new things", Order = 1, RequireRestart = false)]
         public int Openness
         {
             get => _selected.GetPersonality().Openness;
-            set => _selected.GetPersonality().Openness = value;
+            set { _selected.GetPersonality().Openness = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord112}Conscientiousness", -100, 100, HintText = "{=Dramalord113}Refers to an individual's desire to be careful and diligent", Order = 2, RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord112}Conscientiousness", -50, 50, HintText = "{=Dramalord113}Refers to an individual's desire to be careful and diligent", Order = 2, RequireRestart = false)]
         public int Conscientiousness
         {
             get => _selected.GetPersonality().Conscientiousness;
-            set => _selected.GetPersonality().Conscientiousness = value;
+            set { _selected.GetPersonality().Conscientiousness = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord114}Extroversion", -100, 100, HintText = "{=Dramalord115}Measures how energetic, outgoing and confident a person is", Order = 3, RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord114}Extroversion", -50, 50, HintText = "{=Dramalord115}Measures how energetic, outgoing and confident a person is", Order = 3, RequireRestart = false)]
         public int Extroversion
         {
             get => _selected.GetPersonality().Extroversion;
-            set => _selected.GetPersonality().Extroversion = value;
+            set { _selected.GetPersonality().Extroversion = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord116}Agreeableness", -100, 100, HintText = "{=Dramalord117}Refers to how an individual interacts with others", Order = 4, RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord116}Agreeableness", -50, 50, HintText = "{=Dramalord117}Refers to how an individual interacts with others", Order = 4, RequireRestart = false)]
         public int Agreeableness
         {
             get => _selected.GetPersonality().Agreeableness;
-            set => _selected.GetPersonality().Agreeableness = value;
+            set { _selected.GetPersonality().Agreeableness = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord118}Neuroticism", -100, 100, HintText = "{=Dramalord119}Represents how much someone is inclined to experience negative emotions", Order = 5, RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord118}Neuroticism", -50, 50, HintText = "{=Dramalord119}Represents how much someone is inclined to experience negative emotions", Order = 5, RequireRestart = false)]
         public int Neuroticism
         {
             get => _selected.GetPersonality().Neuroticism;
-            set => _selected.GetPersonality().Neuroticism = value;
+            set { _selected.GetPersonality().Neuroticism = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord120}3: Desire")]
@@ -180,7 +149,7 @@ namespace Dramalord
         public int AttractionMen
         {
             get => _selected.GetDesires().AttractionMen;
-            set => _selected.GetDesires().AttractionMen = value;
+            set { _selected.GetDesires().AttractionMen = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord120}3: Desire")]
@@ -188,7 +157,7 @@ namespace Dramalord
         public int AttractionWomen
         {
             get => _selected.GetDesires().AttractionWomen;
-            set => _selected.GetDesires().AttractionWomen = value;
+            set { _selected.GetDesires().AttractionWomen = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord120}3: Desire")]
@@ -196,7 +165,7 @@ namespace Dramalord
         public int AttractionWeight
         {
             get => _selected.GetDesires().AttractionWeight;
-            set => _selected.GetDesires().AttractionWeight = value;
+            set { _selected.GetDesires().AttractionWeight = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord120}3: Desire")]
@@ -204,7 +173,7 @@ namespace Dramalord
         public int AttractionBuild
         {
             get => _selected.GetDesires().AttractionBuild;
-            set => _selected.GetDesires().AttractionBuild = value;
+            set { _selected.GetDesires().AttractionBuild = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord120}3: Desire")]
@@ -212,7 +181,7 @@ namespace Dramalord
         public int AttractionAgeDiff
         {
             get => _selected.GetDesires().AttractionAgeDiff;
-            set => _selected.GetDesires().AttractionAgeDiff = value;
+            set { _selected.GetDesires().AttractionAgeDiff = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord120}3: Desire")]
@@ -220,7 +189,7 @@ namespace Dramalord
         public int Libido
         {
             get => _selected.GetDesires().Libido;
-            set => _selected.GetDesires().Libido = value;
+            set { _selected.GetDesires().Libido = value; OnPropertyChanged(); }
         }
 
         [SettingPropertyGroup("{=Dramalord120}3: Desire")]
@@ -228,79 +197,105 @@ namespace Dramalord
         public int Horny
         {
             get => _selected.GetDesires().Horny;
-            set => _selected.GetDesires().Horny = value;
+            set { _selected.GetDesires().Horny = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]
-        [SettingPropertyFloatingInteger("{=Dramalord136}Trust", -100, 100, HintText = "{=Dramalord137}Trust value to the player", Order = 1, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingPropertyDropdown("{=Dramalord570}Select Target", Order = 1, RequireRestart = false, HintText = "{=Dramalord193}Select hero from list (only works with running campaign)")]
+        public Dropdown<HeroWrapper> SelectedTarget
+        {
+            get
+            {
+                if (_target != _targetList.SelectedValue.Hero)
+                {
+                    _target = _targetList.SelectedValue.Hero;
+                    OnPropertyChanged();
+                }
+
+                return _targetList;
+            }
+        }
+
+
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingProperty("{=Dramalord195}Current Attraction", Order = 2, RequireRestart = false, HintText = "{=Dramalord196}Current attraction value to player")]
+        public string CurrentAttraction
+        {
+            get => (_selected == _target) ? 0.ToString() : _selected.GetAttractionTo(_target).ToString();
+            set => _dummy = value;
+        }
+
+
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingProperty("{=Dramalord197}Current Sympathy", Order = 3, RequireRestart = false, HintText = "{=Dramalord198}Current sympathy value to player")]
+        public string CurrentTraitScore
+        {
+            get => (_selected == _target) ? 0.ToString() : _selected.GetSympathyTo(_target).ToString();
+            set => _dummy = value;
+        }
+
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingPropertyFloatingInteger("{=Dramalord136}Trust", -100, 100, HintText = "{=Dramalord137}Trust value to the player", Order = 4, RequireRestart = false)]
         public int Trust
         {
-            get => (Hero.MainHero == _selected) ? 0 : _selected.GetTrust(Hero.MainHero);
-            set { if (Hero.MainHero != _selected) _selected.SetTrust(Hero.MainHero, value); }
+            get => (_selected == _target) ? 0 : _selected.GetTrust(_target);
+            set { if (_selected != _target) _selected.SetTrust(_target, value); OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]
-        [SettingPropertyFloatingInteger("{=Dramalord138}Love", -100, 100, HintText = "{=Dramalord139}Love value to the player", Order = 2, RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingPropertyFloatingInteger("{=Dramalord138}Love", -100, 100, HintText = "{=Dramalord139}Love value to the player", Order = 5, RequireRestart = false)]
         public int Love
         {
-            get => (Hero.MainHero == _selected) ? 0 : _selected.GetRelationTo(Hero.MainHero).Love;
-            set { if (Hero.MainHero != _selected) _selected.GetRelationTo(Hero.MainHero).Love = value; }
+            get => (_selected == _target) ? 0 : _selected.GetRelationTo(_target).Love;
+            set { if (_selected != _target) _selected.GetRelationTo(_target).Love = value; OnPropertyChanged(); }
         }
-        /*
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]
-        [SettingPropertyFloatingInteger("{=Dramalord140}Tension", -100, 100, HintText = "{=Dramalord141}Tension value to the player", Order = 3, RequireRestart = false)]
-        public int Tension
-        {
-            get => (Hero.MainHero == _selected) ? 0 : _selected.GetRelationTo(Hero.MainHero).Tension;
-            set { if (Hero.MainHero != _selected) _selected.GetRelationTo(Hero.MainHero).Tension = value; }
-        }
-        */
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]
-        [SettingPropertyBool("{=Dramalord142}No Relationship", Order = 4, HintText = "{=Dramalord143}No relationship with the player", RequireRestart = false)]
+
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingPropertyBool("{=Dramalord142}No Relationship", Order = 6, HintText = "{=Dramalord143}No relationship with the player", RequireRestart = false)]
         public bool RelationshipNone
         {
-            get => _selected.GetRelationTo(Hero.MainHero).Relationship == RelationshipType.None;
-            set { if(_selected != Hero.MainHero) BreakupAction.Apply(Hero.MainHero, _selected); Instance.OnPropertyChanged(); }
+            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.None;
+            set { if(_selected != Hero.MainHero) EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]
-        [SettingPropertyBool("{=Dramalord144}Friendship", Order = 5, HintText = "{=Dramalord145}Has friendship with the player", RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingPropertyBool("{=Dramalord144}Friendship", Order = 7, HintText = "{=Dramalord145}Has friendship with the player", RequireRestart = false)]
         public bool RelationshipFriend
         {
-            get => _selected.GetRelationTo(Hero.MainHero).Relationship == RelationshipType.Friend;
-            set { if (_selected != Hero.MainHero) { if (_selected.Spouse == Hero.MainHero) { BreakupAction.Apply(Hero.MainHero, _selected); } FriendshipAction.Apply(Hero.MainHero, _selected); Instance.OnPropertyChanged(); } }
+            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Friend;
+            set { if (_selected != _target) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Friend); OnPropertyChanged(); } }
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]
-        [SettingPropertyBool("{=Dramalord146}Friend with benefits", Order = 6, HintText = "{=Dramalord147}Has friendship with benefits with the player", RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingPropertyBool("{=Dramalord146}Friend with benefits", Order = 8, HintText = "{=Dramalord147}Has friendship with benefits with the player", RequireRestart = false)]
         public bool RelationshipFriendWithBenefits
         {
-            get => _selected.GetRelationTo(Hero.MainHero).Relationship == RelationshipType.FriendWithBenefits;
-            set { if (_selected != Hero.MainHero) { if (_selected.Spouse == Hero.MainHero) { BreakupAction.Apply(Hero.MainHero, _selected); } FriendsWithBenefitsAction.Apply(Hero.MainHero, _selected); Instance.OnPropertyChanged(); } }
+            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.FriendWithBenefits;
+            set { if (_selected != _target) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.FriendWithBenefits); OnPropertyChanged(); } }
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]
-        [SettingPropertyBool("{=Dramalord148}Lover", Order = 7, HintText = "{=Dramalord149}Is a couple with the player", RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingPropertyBool("{=Dramalord148}Lover", Order = 9, HintText = "{=Dramalord149}Is a couple with the player", RequireRestart = false)]
         public bool RelationshipLove
         {
-            get => _selected.GetRelationTo(Hero.MainHero).Relationship == RelationshipType.Lover;
-            set { if (_selected != Hero.MainHero) { if (_selected.Spouse == Hero.MainHero) { BreakupAction.Apply(Hero.MainHero, _selected); } LoverAction.Apply(Hero.MainHero, _selected); Instance.OnPropertyChanged(); } }
+            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Lover;
+            set { if (_selected != _target) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Lover); OnPropertyChanged(); } }
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]
-        [SettingPropertyBool("{=Dramalord150}Betrothed", Order = 8, HintText = "{=Dramalord151}Is engaged with the player", RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingPropertyBool("{=Dramalord150}Betrothed", Order = 10, HintText = "{=Dramalord151}Is engaged with the player", RequireRestart = false)]
         public bool RelationshipEngaged
         {
-            get => _selected.GetRelationTo(Hero.MainHero).Relationship == RelationshipType.Betrothed;
-            set { if (_selected != Hero.MainHero) { if (_selected.Spouse == Hero.MainHero) { BreakupAction.Apply(Hero.MainHero, _selected); } EngagementAction.Apply(Hero.MainHero, _selected, _selected.GetCloseHeroes()); Instance.OnPropertyChanged(); } }
+            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Betrothed;
+            set { if (_selected != _target && !BethrothIntention.OtherMarriageModFound) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Betrothed); OnPropertyChanged(); } }
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Player")]
-        [SettingPropertyBool("{=Dramalord209}Married", Order = 8, HintText = "{=Dramalord210}Is married to the player", RequireRestart = false)]
+        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
+        [SettingPropertyBool("{=Dramalord209}Married", Order = 11, HintText = "{=Dramalord210}Is married to the player", RequireRestart = false)]
         public bool RelationshipMarried
         {
-            get => _selected.GetRelationTo(Hero.MainHero).Relationship == RelationshipType.Spouse || _selected.Spouse == Hero.MainHero;
-            set { if (_selected != Hero.MainHero) { if (_selected.Spouse == Hero.MainHero) { BreakupAction.Apply(Hero.MainHero, _selected); } MarriageAction.Apply(Hero.MainHero, _selected, _selected.GetCloseHeroes()); Instance.OnPropertyChanged(); } }
+            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Spouse || _selected.Spouse == _target;
+            set { if (_selected != _target && !BethrothIntention.OtherMarriageModFound) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Spouse); OnPropertyChanged(); } }
         }
 
         public override string Id => "DramalordEditor";

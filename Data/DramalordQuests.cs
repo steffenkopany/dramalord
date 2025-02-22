@@ -1,5 +1,6 @@
 ﻿using Dramalord.Quests;
 using HarmonyLib;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -7,7 +8,7 @@ using TaleWorlds.CampaignSystem.Actions;
 
 namespace Dramalord.Data
 {
-    internal class DramalordQuests : DramalordDataHandler
+    internal class DramalordQuests : DramalordData
     {
         private static DramalordQuests? _instance;
 
@@ -20,66 +21,62 @@ namespace Dramalord.Data
             }
         }
 
-        private readonly Dictionary<Hero, VisitQuest> _loverQuests;
+        private readonly Dictionary<Hero, DramalordQuest> _dramalordQuests;
 
         public DramalordQuests() : base("DramalordQuests")
         {
-            _loverQuests = new();
+            _dramalordQuests = new();
         }
 
-        internal VisitQuest? GetLoverQuest(Hero hero)
+        internal Dictionary<Hero, DramalordQuest> GetAllQuests() => _dramalordQuests;
+
+        internal DramalordQuest? GetQuest(Hero hero)
         {
-            if(_loverQuests.ContainsKey(hero))
+            if(_dramalordQuests.ContainsKey(hero))
             {
-                return _loverQuests[hero];
+                return _dramalordQuests[hero];
             }
             return null;
         }
 
-        internal VisitQuest? CreateLoverQuest(Hero hero)
+        public void AddQuest(Hero hero, DramalordQuest quest)
         {
-            if(!_loverQuests.ContainsKey(hero))
+            if (!_dramalordQuests.ContainsKey(hero))
             {
-                VisitQuest newQuest = new VisitQuest(hero);
-                _loverQuests.Add(hero, newQuest);
-                return newQuest;
+                _dramalordQuests.Add(hero, quest);
             }
-            return null;
         }
 
-        internal void RemoveLoverQuest(Hero hero)
+        public void RemoveQuest(Hero hero)
         {
-            _loverQuests.Remove(hero);
+            _dramalordQuests.Remove(hero);
         }
 
-        public override void LoadData(IDataStore dataStore)
+        internal override void LoadData(IDataStore dataStore)
         {
-            _loverQuests.Clear();
-            Dictionary<string, VisitQuest> data = new();
-            dataStore.SyncData(SaveIdentifier + "_lover", ref data);
+            _dramalordQuests.Clear();
 
-            data.Do(keypair =>
+            if(!IsOldData)
             {
-                Hero? questGiver = Hero.AllAliveHeroes.Where(hero => hero.StringId == keypair.Key).FirstOrDefault();
-                if (questGiver != null && !_loverQuests.ContainsKey(questGiver))
+                Dictionary<Hero, DramalordQuest> data = new();
+                dataStore.SyncData(SaveIdentifier, ref data);
+
+                data.Do(keypair =>
                 {
-                    _loverQuests.Add(questGiver, keypair.Value);
-                }
-            });
+                    _dramalordQuests.Add(keypair.Key, keypair.Value);
+                });
+            }
         }
 
-        public override void SaveData(IDataStore dataStore)
+        internal override void SaveData(IDataStore dataStore)
         {
-            Dictionary<string, VisitQuest> data = new();
-            _loverQuests.Do(keypair =>
+            Dictionary<Hero, DramalordQuest> data = new();
+            _dramalordQuests.Do(keypair =>
             {
-                if (!data.ContainsKey(keypair.Key.StringId))
-                {
-                    data.Add(keypair.Key.StringId, keypair.Value);
-                }
+                data.Add(keypair.Key, keypair.Value);
             });
 
-            dataStore.SyncData(SaveIdentifier + "_lover", ref data);
+            dataStore.SyncData(SaveIdentifier, ref data);
         }
 
         protected override void OnHeroComesOfAge(Hero hero)
@@ -94,25 +91,25 @@ namespace Dramalord.Data
 
         protected override void OnHeroKilled(Hero victim, Hero killer, KillCharacterAction.KillCharacterActionDetail reason, bool showNotifications)
         {
-            if(_loverQuests.ContainsKey(victim))
+            if(_dramalordQuests.ContainsKey(victim))
             {
-                _loverQuests[victim].QuestFail();
-                _loverQuests.Remove(victim);
+                _dramalordQuests[victim].QuestTimeout();
+                _dramalordQuests.Remove(victim);
             }
         }
 
         protected override void OnHeroUnregistered(Hero hero)
         {
-            if (_loverQuests.ContainsKey(hero))
+            if (_dramalordQuests.ContainsKey(hero))
             {
-                _loverQuests[hero].QuestFail();
-                _loverQuests.Remove(hero);
+                _dramalordQuests[hero].QuestTimeout();
+                _dramalordQuests.Remove(hero);
             }
         }
 
         protected override void OnNewGameCreated(CampaignGameStarter starter)
         {
-            _loverQuests.Clear();
+            _dramalordQuests.Clear();
         }
     }
 }

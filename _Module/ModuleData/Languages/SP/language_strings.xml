@@ -129,7 +129,7 @@
     <string id="Dramalord132" text="Define si un individuo generalmente desarrolla interés en las relaciones sexuales o no" />
     <string id="Dramalord133" text="Cachonda" />
     <string id="Dramalord134" text="Representa qué tan dispuesto está actualmente un héroe a tener relaciones sexuales debido a las hormonas" />
-    <string id="Dramalord135" text="4: Relación con el jugador" />
+    <string id="Dramalord135" text="4: Relación con el objetivo" />
     <string id="Dramalord136" text="Confianza" />
     <string id="Dramalord137" text="Valor de confianza para el jugador" />
     <string id="Dramalord138" text="Amor" />
@@ -187,7 +187,7 @@
     <string id="Dramalord190" text="Probabilidad de que una heroína quede embarazada (solo para embarazos de Dramalord)" />
     <string id="Dramalord191" text="Amor mínimo en las citas" />
     <string id="Dramalord192" text="Se requieren puntos de amor para considerar salir con un héroe" />
-    <string id="Dramalord193" text="Selecciona héroe de la lista y presiona 'Cargar héroe' (solo funciona con la campaña en ejecución)" />
+    <string id="Dramalord193" text="Selecciona un héroe de la lista (solo funciona con una campaña en curso)" />
     <string id="Dramalord194" text="Cargar héroe" />
     <string id="Dramalord195" text="Atracción actual" />
     <string id="Dramalord196" text="Valor de atracción actual para el jugador" />
@@ -296,10 +296,10 @@
     <string id="Dramalord299" text="Permitir embarazos predeterminados para todos los NPC" />
     <string id="Dramalord300" text="Matrimonios predeterminados globales." />
     <string id="Dramalord301" text="Permitir matrimonios predeterminados para todos los NPC" />
-    <string id="Dramalord302" text="{HERO.LINK} está decepcionado por tu descuido de su asunto... (Amor {NUM}, Confianza {NUM2})" />
+    <string id="Dramalord302" text="{HERO.LINK} está decepcionado(a) por tu negligencia hacia su asunto urgente..." />
     <string id="Dramalord303" text="{HERO.LINK} te pide que los encuentres, ya que tienen un asunto urgente que discutir. ¿Llegarás a tiempo?" />
     <string id="Dramalord304" text="{QUESTHERO} solicita tu presencia." />
-    <string id="Dramalord305" text="{HERO.LINK} está muy feliz de que hayas cumplido con su pedido... (Amor {NUM}, Confianza {NUM2})" />
+    <string id="Dramalord305" text="{HERO.LINK} está muy feliz de que hayas cumplido su petición..." />
     <string id="Dramalord306" text="¡Oh, {TITLE} finalmente estás aquí! ¡Te estaba esperando desesperadamente!" />
     <string id="Dramalord307" text="Mira quién aparece. No tenías prisa {TITLE}, ¿verdad?" />
     <string id="Dramalord308" text="Aquí estoy. ¿Cuál es el asunto urgente del que me pediste que me ocupara?" />
@@ -331,7 +331,7 @@
     <string id="Dramalord334" text="más viejo" />
     <string id="Dramalord335" text="ni más viejo ni más joven" />
     <string id="Dramalord336" text="Aprendiste las preferencias físicas de {HERO.LINK}." />
-    <string id="Dramalord337" text="Confianza mínima" />
+    <string id="Dramalord337" text="Confianza mínima para amigos" />
     <string id="Dramalord338" text="Puntos de confianza necesarios para considerar a un héroe como amigo (solo amigos de Dramalord)" />
     <string id="Dramalord339" text="¡Cuéntame algunas historias nuevas! (Charla amistosa)" />
     <string id="Dramalord340" text="¿Te importaría ir a caminar conmigo? (Coqueteo)" />
@@ -522,5 +522,69 @@
     <string id="Dramalord525" text="{MOTHER} ha dado a luz a {CHILD}. {FATHER} es el padre. ¿Instaría a la madre a quedarse con el niño o deshacerse de él?" />
     <string id="Dramalord526" text="Deshacerse del niño" />
     <string id="Dramalord527" text="Quedarse con el niño" />
+    <string id="Dramalord528" text="Has sido testigo de cómo {HERO.LINK} dio a luz a un hijo de {FATHER.LINK}." />
+    <string id="Dramalord529" text="{HERO.LINK} te vio dar a luz al hijo de {FATHER.LINK}." />
+    <string id="Dramalord530" text="{HERO.LINK} te vio casándote con {OTHER.LINK}." />
+    <string id="Dramalord531" text="Fuiste testigo de cómo {HERO.LINK} se casó con {OTHER.LINK}." />
+    <string id="Dramalord532" text="¿Has oído? {HERO} y {OTHER} van a casarse, ¿quién lo hubiera pensado, después de todos esos rumores susurrados sobre sus affaires en la corte?" />
+    <string id="Dramalord533" text="¿Oíste? {HERO} y {OTHER} ahora son marido y mujer, aunque después de todo lo que se ha dicho, uno se pregunta si solo los votos callarán los rumores." />
+    <string id="Dramalord534" text="Las noticias viajan rápido: {HERO} y {OTHER} se han estado encontrando en secreto, aunque si quieren mantenerlo oculto, deberían ser menos propensos a los miradas furtivas." />
+    <string id="Dramalord535" text="¡Vaya, el castillo está lleno de rumores! {HERO} y {OTHER} fueron encontrados en la cama juntos, y ni siquiera el amanecer pudo deshacer el escándalo." />
+    <string id="Dramalord536" text="Los susurros abundan: {HERO} y {OTHER} han dado la bienvenida a un hijo, aunque algunos dicen que el momento levanta más de una ceja." />
+    <string id="Dramalord537" text="En tu ausencia, {OTHER} cuidó de {HERO} y su descendencia..." />
+    <string id="Dramalord538" text="No prestes atención a los rumores, {TITLE}. Son solo chismes que pronto serán olvidados." />
+    <string id="Dramalord539" text="Quizás tengas razón, {TITLE}. Pronto tendrán otro nombre de qué susurrar, y esto será olvidado." />
+    <string id="Dramalord540" text="Has aprendido que {HERO} y {TARGET} son {RELATION}." />
+    <string id="Dramalord541" text="{QUESTHERO} se une a tu grupo por un tiempo." />
+    <string id="Dramalord542" text="{HERO.LINK} quiere pasar un tiempo de calidad contigo y se une a tu viaje por un tiempo." />
+    <string id="Dramalord543" text="{HERO.LINK} está muy decepcionado de quedarse solo y regresó a {TOWN.LINK}." />
+    <string id="Dramalord544" text="{HERO.LINK} disfrutó pasar tiempo contigo y regresó a {TOWN.LINK}." />
+    <string id="Dramalord545" text="Dime, {TITLE}, ¿te gustaría unirte a mi grupo por un tiempo?" />
+    <string id="Dramalord546" text="Estos últimos días a tu lado han sido un regalo, {TITLE}, y estoy agradecido por cada momento que compartimos. Aunque nos separemos por ahora, nuestros caminos se cruzarán nuevamente pronto, no tengo dudas de ello." />
+    <string id="Dramalord547" text="Si realmente deseas ser mío(a), debes ir a {HERO} y pedir su bendición, porque aunque mi corazón ya es tuyo, es su permiso lo que nos otorgará el futuro que ambos anhelamos." />
+    <string id="Dramalord548" text="Pide la mano de {QUESTHERO} en matrimonio." />
+    <string id="Dramalord549" text="{QUESTHERO} te dijo que necesitas el permiso de {TARGET.LINK} para casarte con él/ella." />
+    <string id="Dramalord550" text="{TITLE}, humildemente te pido tu bendición para tomar la mano de {HERO} en matrimonio." />
+    <string id="Dramalord551" text="Has demostrado ser honorable y fiel, y puedo ver el amor que {HERO} siente por ti en sus ojos. Con eso, te doy mi bendición. Que tu matrimonio sea fuerte, tus días alegres y tus corazones siempre firmes." />
+    <string id="Dramalord552" text="Hablas bien, y no dudo de tus sentimientos, pero uno debe demostrar que es digno de la vida que desea construir. Gana tu lugar, muestra tu fuerza y honor, y entonces hablaremos de matrimonio." />
+    <string id="Dramalord553" text="¿Tú, casarte con mi hija? ¿Un vagabundo sin dinero y sin nada? {HERO} merece a alguien de valor, no a un tonto que cree que el amor solo llenará una casa." />
+    <string id="Dramalord554" text="Asegúrate de que tu clan sea de nivel 3+ y que a {HERO} le gustes." />
+    <string id="Dramalord555" text="Pero {TITLE}, sabes que ya estoy casado(a)..." />
+    <string id="Dramalord556" text="Tu relación con {HERO.LINK} ha cambiado. (Amor {LOVE}, Confianza {TRUST})" />
+    <string id="Dramalord557" text="Responder a los rumores" />
+    <string id="Dramalord558" text="Has oído algunos rumores perturbadores sobre {HERO1} y {HERO2}. ¿Cómo vas a reaccionar?" />
+    <string id="Dramalord559" text="¡Enfréntalos!" />
+    <string id="Dramalord560" text="Ignóralos" />
+    <string id="Dramalord561" text="Encuentra a {HERO.LINK} y enfréntalos con los perturbadores rumores que has escuchado." />
+    <string id="Dramalord562" text="Mostrar relación real" />
+    <string id="Dramalord563" text="Habilita esto si deseas ver la relación real con un héroe (desactívalo si usas Opinión Noble Verdadera)" />
+    <string id="Dramalord564" text="Confianza máxima en enemigos" />
+    <string id="Dramalord565" text="Puntos de confianza negativos necesarios para considerar a un héroe como enemigo" />
+    <string id="Dramalord566" text="Solicitud de matrimonio" />
+    <string id="Dramalord567" text="{HERO1} y {HERO2} quieren casarse. ¿Les das tu bendición?" />
+    <string id="Dramalord568" text="Oportunidad para intimidad" />
+    <string id="Dramalord569" text="Ves un brillo especial en los ojos de {HERO1} mientras sonríe de manera lasciva... ¿Aprovecharás esta oportunidad?" />
+    <string id="Dramalord570" text="Seleccionar objetivo" />
+    <string id="Dramalord571" text="Le dijiste a {HERO1.LINK} que rompiera con {HERO2.LINK}." />
+    <string id="Dramalord572" text="Lograste terminar la relación de {HERO1.LINK} y {HERO2.LINK}." />
+    <string id="Dramalord573" text="Enfrentar a {HERO} con los rumores" />
+    <string id="Dramalord574" text="Unirse al clan al casarse" />
+    <string id="Dramalord575" text="Permitir que la IA se una al clan de su cónyuge (de lo contrario, solo están casados)" />
+    <string id="Dramalord576" text="Permitir mezclar clases sociales" />
+    <string id="Dramalord577" text="Permitir interacciones entre nobles y plebeyos (Lores y Notables/Brujos)" />
+    <string id="Dramalord578" text="{HERO1} y {HERO2} acaban de casarse. ¿Quieres que se queden en tu clan?" />
+    <string id="Dramalord579" text="Interrumpir a {HERO1} y {HERO2} en el acto" />
+    <string id="Dramalord580" text="Has atrapado a {HERO1} y {HERO2} en el acto. ¿Quieres interrumpirlos?" />
+    <string id="Dramalord581" text="{TITLE}! ¡Te desafío por el amor de {HERO}!" />
+    <string id="Dramalord582" text="Muy bien. ¡Desenvaina tu arma!" />
+    <string id="Dramalord583" text="Cuando quieras, {TITLE}! (Visita al héroe para el duelo)" />
+    <string id="Dramalord584" text="¡No tengo tiempo para esas tonterías ahora! Visítame cuando esté en una ciudad o un castillo." />
+    <string id="Dramalord585" text="Siempre duelo a muerte" />
+    <string id="Dramalord586" text="Los duelos con otros héroes siempre son hasta la muerte" />
+    <string id="Dramalord587" text="{HERO} pide unirse a tu clan" />
+    <string id="Dramalord588" text="{HERO} ha dejado {OLDCLAN} y pide unirse a tu clan. ¿Lo aceptarás?" />
+    <string id="Dramalord589" text="¿Ha pasado algo interesante recientemente?" />
+    <string id="Dramalord590" text="No se me ocurre nada ahora mismo." />
+    <string id="Dramalord591" text="¿Algo más?" />
   </strings>
 </base>

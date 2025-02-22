@@ -23,7 +23,7 @@ namespace Dramalord.Patches
             if(__result && Hero.OneToOneConversationHero.IsDramalordLegit())
             {
                 TextObject textObject = new TextObject("{=!}{SALUTATION}...");
-                textObject.SetTextVariable("SALUTATION", ConversationHelper.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, true));
+                textObject.SetTextVariable("SALUTATION", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, true));
                 MBTextManager.SetTextVariable("SHORT_ABSENCE_GREETING", textObject);
                 return;
             }
@@ -40,7 +40,7 @@ namespace Dramalord.Patches
         {
             if (__result && Hero.OneToOneConversationHero.IsDramalordLegit())
             {
-                MBTextManager.SetTextVariable("STR_SALUTATION", ConversationHelper.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, true));
+                MBTextManager.SetTextVariable("STR_SALUTATION", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, true));
                 return;
             }
         }

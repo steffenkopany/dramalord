@@ -1,35 +1,19 @@
-﻿using Dramalord.LogItems;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.LogEntries;
+﻿using TaleWorlds.CampaignSystem;
 
 namespace Dramalord.Actions
 {
     internal static class JoinClanAction
     {
-        internal static bool Apply(Hero hero, Clan clan, bool forMarriage)
+        internal static void Apply(Hero hero, Clan clan)
         {
-            if (hero.Occupation == Occupation.Wanderer)
+            if (hero.Occupation != Occupation.Lord)
             {
                 hero.SetName(hero.FirstName, hero.FirstName);
             }
 
-            Clan oldClan = hero.Clan;
+            hero.SetNewOccupation(Occupation.Lord);
             hero.Clan = clan;
             hero.UpdateHomeSettlement();
-            hero.SetNewOccupation(Occupation.Lord);
-            //MakeHeroFugitiveAction.Apply(hero);
-            if(!forMarriage)
-            {
-                TeleportHeroAction.ApplyDelayedTeleportToSettlement(hero, hero.HomeSettlement);
-            }
-
-            if ((clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)
-            {
-                LogEntry.AddLogEntry(new JoinClanLog(hero, clan));
-            }
-
-            return true;
         }
     }
 }

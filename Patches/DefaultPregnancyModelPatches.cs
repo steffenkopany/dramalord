@@ -15,6 +15,12 @@ namespace Dramalord.Patches
         [HarmonyPrefix]
         public static bool GetDailyChanceOfPregnancyForHero(ref Hero hero, ref float __result)
         {
+            if(!DramalordMCM.Instance.AllowDefaultPregnancies)
+            {
+                __result = 0;
+                return false;
+            }
+
             if(hero.Clan == null)
             {
                 int num = hero.Children.Count + 1;

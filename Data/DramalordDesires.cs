@@ -12,89 +12,104 @@ namespace Dramalord.Data
 {
     internal sealed class HeroDesires
     {
+        [SaveableField(1)]
         private int _attractionMen;
+
+        [SaveableField(2)]
         private int _attractionWomen;
+
+        [SaveableField(3)]
         private int _attractionWeight;
+
+        [SaveableField(4)]
         private int _attractionBuild;
+
+        [SaveableField(5)]
         private int _attractionAgeDiff;
+
+        [SaveableField(6)]
         private int _libido;
+
+        [SaveableField(7)]
         private int _horny;
+
+        [SaveableField(8)]
         private int _periodDayOfSeason;
+
+        [SaveableField(9)]
         private int _intercourseSkill;
+
+        [SaveableField(10)]
         private bool _hasToy;
 
-        [SaveableProperty(1)]
+        [SaveableField(11)]
+        private bool _isKnownToPlayer;
+
         internal int AttractionMen
         {
             get => _attractionMen;
             set => _attractionMen = MBMath.ClampInt(value, 0, 100);
         }
 
-        [SaveableProperty(2)]
         internal int AttractionWomen
         {
             get => _attractionWomen;
             set => _attractionWomen = MBMath.ClampInt(value, 0, 100);
         }
 
-        [SaveableProperty(3)]
         internal int AttractionWeight
         {
             get => _attractionWeight;
             set => _attractionWeight = MBMath.ClampInt(value, 0, 100);
         }
 
-        [SaveableProperty(4)]
         internal int AttractionBuild
         {
             get => _attractionBuild;
             set => _attractionBuild = MBMath.ClampInt(value, 0, 100);
         }
 
-        [SaveableProperty(5)]
         internal int AttractionAgeDiff
         {
             get => _attractionAgeDiff;
             set => _attractionAgeDiff = MBMath.ClampInt(value, -20, 20);
         }
 
-        [SaveableProperty(6)]
         internal int Libido
         {
             get => _libido;
             set => _libido = MBMath.ClampInt(value, 0, 10);
         }
 
-        [SaveableProperty(7)]
         internal int Horny
         {
             get => _horny;
             set => _horny = MBMath.ClampInt(value, 0, 100);
         }
 
-        [SaveableProperty(8)]
         internal int PeriodDayOfSeason
         {
             get => _periodDayOfSeason;
             set => _periodDayOfSeason = MBMath.ClampInt(value, 1, CampaignTime.DaysInSeason);
         }
 
-        [SaveableProperty(9)]
         internal int IntercourseSkill
         {
             get => _intercourseSkill;
             set => _intercourseSkill = MBMath.ClampInt(value, 0, 100);
         }
 
-        [SaveableProperty(10)]
         internal bool HasToy
         {
             get => _hasToy;
             set => _hasToy = value;
         }
 
-        [SaveableProperty(11)]
-        internal bool InfoKnown { get; set; } = false;
+        internal bool IsKnowToPlayer 
+        {
+            get => _isKnownToPlayer;
+            set => _isKnownToPlayer = value; 
+        }
 
         internal HeroDesires(int attractionMen, int attractionWomen, int attractionWeight, int attractionBuild, int attractionAgeDiff, int libido, int horny, int periodDayOfSeason, int intercourseSkill, bool hasToy, bool infoKnown)
         {
@@ -108,11 +123,11 @@ namespace Dramalord.Data
             PeriodDayOfSeason = periodDayOfSeason;
             IntercourseSkill = intercourseSkill;
             HasToy = hasToy;
-            InfoKnown = infoKnown;
+            IsKnowToPlayer = infoKnown;
         }
     }
 
-    internal class DramalordDesires : DramalordDataHandler
+    internal class DramalordDesires : DramalordData
     {
         private static float _heterosexualRate = 0.75f;
         private static float _homosexualRate = 0.1f;
@@ -156,13 +171,13 @@ namespace Dramalord.Data
             HeroDesires desires = new HeroDesires(
                 MBRandom.RandomInt(0, 100),
                 MBRandom.RandomInt(0, 100),
-                Generate(25, 50, 0, 100), //MBRandom.RandomInt(0, 100),
-                (hero.IsFemale) ? Generate(75, 100, 0, 100) : Generate(25, 50, 0, 100), //MBRandom.RandomInt(0, 100),
-                Generate(0, 10, -20, 20), //MBRandom.RandomInt(-20, 20),
-                Generate(7, 10, 1, 10), //MBRandom.RandomInt(0, 10),
-                Generate(50, 75, 0, 100), //MBRandom.RandomInt(0, 100),
+                Generate(25, 50, 0, 100),
+                (hero.IsFemale) ? Generate(75, 100, 0, 100) : Generate(25, 50, 0, 100),
+                Generate(0, 10, -20, 20),
+                Generate(7, 10, 1, 10),
+                Generate(50, 75, 0, 100), 
                 MBRandom.RandomInt(1, CampaignTime.DaysInSeason),
-                Generate(5, 7, 0, 10), //MBRandom.RandomInt(0, 10),
+                Generate(5, 7, 0, 10),
                 false,
                 false);
 
@@ -199,25 +214,29 @@ namespace Dramalord.Data
             return desires;
         }
 
-        public override void LoadData(IDataStore dataStore)
+        internal override void LoadData(IDataStore dataStore)
         {
             _desires.Clear();
             Heterosexual = 0;
             Homosexual = 0;
             Bisexual = 0;
             Asexual = 0;
-            Dictionary<string, HeroDesires> data = new();
-            dataStore.SyncData(SaveIdentifier, ref data);
 
-            data.Do(keypair =>
+            if (!IsOldData)
             {
-                Hero hero = Hero.AllAliveHeroes.Where(item => item.StringId == keypair.Key).FirstOrDefault();
-                if (hero != null && !_desires.ContainsKey(hero))
-                {
-                    _desires.Add(hero, keypair.Value);
-                }
-            });
+                Dictionary<Hero, HeroDesires> data = new();
+                dataStore.SyncData(SaveIdentifier, ref data);
 
+                data.Do(keypair =>
+                {
+                    _desires.Add(keypair.Key, keypair.Value);
+                });
+            }
+            else
+            {
+                LegacySave.LoadLegacyDesires(_desires, dataStore);
+            }
+            
             _desires.Do(keypair =>
             {
                 if (keypair.Value.AttractionMen < 50 && keypair.Value.AttractionWomen < 50)
@@ -247,16 +266,13 @@ namespace Dramalord.Data
             });
         }
 
-        public override void SaveData(IDataStore dataStore)
+        internal override void SaveData(IDataStore dataStore)
         {
-            Dictionary<string, HeroDesires> data = new();
+            Dictionary<Hero, HeroDesires> data = new();
 
             _desires.Do(keypair =>
             {
-                if (!data.ContainsKey(keypair.Key.StringId))
-                {
-                    data.Add(keypair.Key.StringId, keypair.Value);
-                }
+                data.Add(keypair.Key, keypair.Value);
             });
 
             dataStore.SyncData(SaveIdentifier, ref data);

@@ -12,45 +12,49 @@ namespace Dramalord.Data
 {
     internal sealed class HeroPersonality
     {
+        [SaveableField(1)]
         private int _openness;
+
+        [SaveableField(2)]
         private int _conscientiousness;
+
+        [SaveableField(3)]
         private int _extroversion;
+
+        [SaveableField(4)]
         private int _agreeableness;
+
+        [SaveableField(5)]
         private int _neuroticism;
 
-        [SaveableProperty(1)]
         internal int Openness
         {
             get => _openness;
-            set => _openness = MBMath.ClampInt(value, -100, 100);
+            set => _openness = MBMath.ClampInt(value, -50, 50);
         }
 
-        [SaveableProperty(2)]
         internal int Conscientiousness
         {
             get => _conscientiousness;
-            set => _conscientiousness = MBMath.ClampInt(value, -100, 100);
+            set => _conscientiousness = MBMath.ClampInt(value, -50, 50);
         }
 
-        [SaveableProperty(3)]
         internal int Extroversion
         {
             get => _extroversion;
-            set =>_extroversion = MBMath.ClampInt(value, -100, 100);
+            set =>_extroversion = MBMath.ClampInt(value, -50, 50);
         }
 
-        [SaveableProperty(4)]
         internal int Agreeableness
         {
             get => _agreeableness;
-            set => _agreeableness = MBMath.ClampInt(value, -100, 100);
+            set => _agreeableness = MBMath.ClampInt(value, -50, 50);
         }
 
-        [SaveableProperty(5)]
         internal int Neuroticism
         {
             get => _neuroticism;
-            set => _neuroticism = MBMath.ClampInt(value, -100, 100);
+            set => _neuroticism = MBMath.ClampInt(value, -50, 50);
         }
 
         internal HeroPersonality(int openness, int conscientiousness, int extroversion, int agreeableness, int neuroticism)
@@ -63,7 +67,7 @@ namespace Dramalord.Data
         }
     }
 
-    internal class DramalordPersonalities : DramalordDataHandler
+    internal class DramalordPersonalities : DramalordData
     {
         private static DramalordPersonalities? _instance; 
 
@@ -98,31 +102,35 @@ namespace Dramalord.Data
             return _personalities[hero];
         }
 
-        public override void LoadData(IDataStore dataStore)
+        internal override void LoadData(IDataStore dataStore)
         {
             _personalities.Clear();
-            Dictionary<string, HeroPersonality> data = new();
-            dataStore.SyncData(SaveIdentifier, ref data);
 
-            data.Do(keypair =>
+            if(!IsOldData)
             {
-                Hero? hero = Hero.AllAliveHeroes.Where(item => item.StringId == keypair.Key).FirstOrDefault();
-                if(hero != null && !_personalities.ContainsKey(hero))
+                Dictionary<Hero, HeroPersonality> data = new();
+                dataStore.SyncData(SaveIdentifier, ref data);
+
+                data.Do(keypair =>
                 {
-                    _personalities.Add(hero, keypair.Value);
-                }
-            });
+                    _personalities.Add(keypair.Key, keypair.Value);
+                });
+            }
+            else
+            {
+                LegacySave.LoadLegacyPersonality(_personalities, dataStore);
+            }
         }
 
-        public override void SaveData(IDataStore dataStore)
+        internal override void SaveData(IDataStore dataStore)
         {
-            Dictionary<string, HeroPersonality> data = new();
+            Dictionary<Hero, HeroPersonality> data = new();
 
             _personalities.Do(keypair =>
             {
-                if(!data.ContainsKey(keypair.Key.StringId))
+                if(!data.ContainsKey(keypair.Key))
                 {
-                    data.Add(keypair.Key.StringId, keypair.Value);
+                    data.Add(keypair.Key, keypair.Value);
                 }
             });
 
@@ -157,11 +165,11 @@ namespace Dramalord.Data
         private int Generate()
         {
             float rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);
-            int result = (int)(50 * rand_std_normal);
-            while(result < -100 || result > 100)
+            int result = (int)(25 * rand_std_normal);
+            while(result < -50 || result > 50)
             {
                 rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);
-                result = (int)(50 * rand_std_normal);
+                result = (int)(25 * rand_std_normal);
             }
             return result;
         }

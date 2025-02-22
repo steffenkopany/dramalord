@@ -16,7 +16,7 @@ namespace Dramalord.Patches
         public static void RefreshMembersList(ref ClanMembersVM __instance)
         {
             List<ClanLordItemVM> otherChildren = __instance.Family.Where(item => item.IsChild && item.GetHero().Occupation == Occupation.Wanderer).ToList();
-            foreach(ClanLordItemVM child in otherChildren)
+            foreach (ClanLordItemVM child in otherChildren)
             {
                 __instance.Family.Remove(child);
                 __instance.Companions.Add(child);
