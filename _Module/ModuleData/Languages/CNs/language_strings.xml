@@ -129,7 +129,7 @@
     <string id="Dramalord132" text="代表一个人平常对於性行为的兴趣程度" />
     <string id="Dramalord133" text="性需求" />
     <string id="Dramalord134" text="代表一个人在当下因受荷尔蒙影响，而更加渴望发生性行为的倾向" />
-    <string id="Dramalord135" text="4: 与玩家的关系" />
+    <string id="Dramalord135" text="4: 与目标的关系" />
     <string id="Dramalord136" text="信赖" />
     <string id="Dramalord137" text="对玩家的信赖程度" />
     <string id="Dramalord138" text="爱慕" />
@@ -187,7 +187,7 @@
     <string id="Dramalord190" text="英雄怀孕的机率（仅适用於Dramalord的怀孕判定机制）" />
     <string id="Dramalord191" text="交往的最低爱慕值" />
     <string id="Dramalord192" text="英雄间考虑开始交往关系的最低爱慕值" />
-    <string id="Dramalord193" text="从列表中选择英雄，并按「读取英雄」（仅适用於正在进行中的单人游戏）" />
+    <string id="Dramalord193" text="从列表中选择英雄（仅适用于正在运行的战役）" />
     <string id="Dramalord194" text="读取英雄" />
     <string id="Dramalord195" text="当前吸引力" />
     <string id="Dramalord196" text="当前对玩家的吸引力数值" />
@@ -296,10 +296,10 @@
     <string id="Dramalord299" text="允许所有NPC适用原版的怀孕判定（Dramalord采用独立的怀孕判定机制，若开启此选项，原版和MOD的怀孕判定将同时运作）" />
     <string id="Dramalord300" text="全局适用原版婚姻" />
     <string id="Dramalord301" text="允许所有NPC适用原版的婚姻机制（Dramalord采用独立的婚姻机制，若开启此选项，原版和MOD的婚姻机制将同时运作）" />
-    <string id="Dramalord302" text="{HERO.LINK}对你忽略他的「紧急要务」感到失望……（爱慕{NUM}，信赖{NUM2}）" />
+    <string id="Dramalord302" text="{HERO.LINK} 对你忽视他们的紧急事务感到失望..." />
     <string id="Dramalord303" text="{HERO.LINK}有「紧急要务」请求你去见他，你能及时赶到吗？" />
     <string id="Dramalord304" text="{QUESTHERO}请求你见他。" />
-    <string id="Dramalord305" text="{HERO.LINK}很高兴你满足了他的「紧急要务」…（爱慕{NUM}，信赖{NUM2}）" />
+    <string id="Dramalord305" text="{HERO.LINK} 对你满足了他们的请求感到非常高兴..." />
     <string id="Dramalord306" text="噢{TITLE}，你终於来了！我正苦苦地等着你呢！" />
     <string id="Dramalord307" text="看看是谁出现了，你并不着急对吧？{TITLE}？" />
     <string id="Dramalord308" text="我这就来了，怎麽了吗？什麽事让你那麽着急？" />
@@ -331,7 +331,7 @@
     <string id="Dramalord334" text="年长" />
     <string id="Dramalord335" text="不年轻也不年长" />
     <string id="Dramalord336" text="你获知了{HERO.LINK}的取向偏好。" />
-    <string id="Dramalord337" text="友谊的最低信赖值" />
+    <string id="Dramalord337" text="朋友的最低信任度" />
     <string id="Dramalord338" text="英雄间建立友谊的最低信赖值（仅限於Dramalord中的友谊）" />
     <string id="Dramalord339" text="我知道你有些新鲜事，来聊聊吧！（谈天说地）" />
     <string id="Dramalord340" text="我想不用说你也知道，你有很出众的外貌…（调情）" />
@@ -522,5 +522,69 @@
     <string id="Dramalord525" text="{MOTHER} 生下了 {CHILD}。{FATHER} 是孩子的父亲。您会敦促孩子的母亲留下孩子还是将其处理掉？" />
     <string id="Dramalord526" text="处理掉孩子" />
     <string id="Dramalord527" text="留下孩子" />
+    <string id="Dramalord528" text="{HERO.LINK}目睹了{FATHER.LINK}的孩子出生。" />
+    <string id="Dramalord529" text="{HERO.LINK}看到你生下了{FATHER.LINK}的孩子。" />
+    <string id="Dramalord530" text="{HERO.LINK}看到你和{OTHER.LINK}结婚了。" />
+    <string id="Dramalord531" text="你目睹了{HERO.LINK}和{OTHER.LINK}的婚礼。" />
+    <string id="Dramalord532" text="你听说了吗？{HERO}和{OTHER}要结婚了 — 谁能想到，在那些关于他们在宫廷里偷情的低语之后，居然会有这样的消息？" />
+    <string id="Dramalord533" text="你听说了吗？{HERO}和{OTHER}已经是夫妻了 — 尽管有那么多传闻，人们还是怀疑，誓言能不能平息这些流言。" />
+    <string id="Dramalord534" text="消息传播得可真快 — {HERO}和{OTHER}一直在秘密见面，如果他们想要隐藏起来，可能该少一点偷看了。" />
+    <string id="Dramalord535" text="嘿，城堡里热闹非凡！{HERO}和{OTHER}被发现躺在一起，甚至连黎明也无法消除这场丑闻。" />
+    <string id="Dramalord536" text="流言四起 — {HERO}和{OTHER}迎来了一个孩子，尽管有些人说时机的巧合让人怀疑。" />
+    <string id="Dramalord537" text="在你不在的时候，{OTHER}照顾了{HERO}和他们的事情..." />
+    <string id="Dramalord538" text="别理那些闲话，{TITLE}。那不过是些八卦，很快就会被遗忘的。" />
+    <string id="Dramalord539" text="也许你说得对，{TITLE}。不久后，他们会有新的名字让人议论，这一切都会被遗忘。" />
+    <string id="Dramalord540" text="你得知了{HERO}和{TARGET}是{RELATION}的关系。" />
+    <string id="Dramalord541" text="{QUESTHERO}暂时加入了你的队伍。" />
+    <string id="Dramalord542" text="{HERO.LINK}想和你共度一段时光，并暂时加入了你的旅程。" />
+    <string id="Dramalord543" text="{HERO.LINK}对被独自留下感到非常失望，返回了{TOWN.LINK}。" />
+    <string id="Dramalord544" text="{HERO.LINK}很享受和你共度的时光，并返回了{TOWN.LINK}。" />
+    <string id="Dramalord545" text="告诉我，{TITLE}，你想加入我的队伍吗？" />
+    <string id="Dramalord546" text="和你在一起的这几天，{TITLE}，是一次宝贵的礼物，我感激我们共享的每一刻。尽管我们暂时分开，但我相信我们的道路很快会再次交汇。" />
+    <string id="Dramalord547" text="如果你真心想让我成为你的人，那么你必须去找{HERO}并请求他们的祝福，因为虽然我的心已经属于你，但只有他们的许可才能为我们带来我们都渴望的未来。" />
+    <string id="Dramalord548" text="向{QUESTHERO}求婚。" />
+    <string id="Dramalord549" text="{QUESTHERO}告诉你，你需要得到{TARGET.LINK}的许可才能娶他们。" />
+    <string id="Dramalord550" text="{TITLE}，我恭敬地请求你的祝福，能否娶{HERO}为妻。" />
+    <string id="Dramalord551" text="你已经证明了自己是值得尊敬和忠诚的人，我能从{HERO}的眼中看到她对你满满的爱。因此，我给予你我的祝福。愿你们的婚姻坚固，生活愉快，心永不动摇。" />
+    <string id="Dramalord552" text="你说得很好，我不怀疑你的感情，但一个人必须证明自己配得上他们所想建立的生活。赢得你的地位，展示你的力量和荣耀，然后我们可以讨论婚姻。" />
+    <string id="Dramalord553" text="你，娶我的女儿？一个一无所有的穷小子？{HERO}值得拥有一个有价值的人，而不是一个只会幻想爱情的傻瓜，认为光有爱就能维持家庭。" />
+    <string id="Dramalord554" text="确保你的家族等级达到3以上，并且{HERO}喜欢你。" />
+    <string id="Dramalord555" text="但{TITLE}，你知道我已经结婚了..." />
+    <string id="Dramalord556" text="你和{HERO.LINK}的关系发生了变化。（爱情 {LOVE}，信任 {TRUST}）" />
+    <string id="Dramalord557" text="回应流言" />
+    <string id="Dramalord558" text="你听到了关于{HERO1}和{HERO2}的令人不安的流言。你打算怎么回应？" />
+    <string id="Dramalord559" text="对峙他们！" />
+    <string id="Dramalord560" text="忽略它" />
+    <string id="Dramalord561" text="找到{HERO.LINK}并对他们说出你听到的不安流言。" />
+    <string id="Dramalord562" text="显示真实关系" />
+    <string id="Dramalord563" text="如果你希望看到和英雄之间的真实关系，请启用此选项（如果你使用‘真实贵族观点’请关闭它）" />
+    <string id="Dramalord564" text="最大信任敌人" />
+    <string id="Dramalord565" text="成为敌人所需的负面信任点数" />
+    <string id="Dramalord566" text="结婚请求" />
+    <string id="Dramalord567" text="{HERO1}和{HERO2}想要结婚。你愿意给他们祝福吗？" />
+    <string id="Dramalord568" text="亲密的机会" />
+    <string id="Dramalord569" text="你看到{HERO1}眼中闪烁着调皮的光芒，他们带着淫荡的笑容看着你…你会把握这个机会吗？" />
+    <string id="Dramalord570" text="选择目标" />
+    <string id="Dramalord571" text="你告诉{HERO1.LINK}和{HERO2.LINK}分手。" />
+    <string id="Dramalord572" text="你成功地结束了{HERO1.LINK}和{HERO2.LINK}的关系。" />
+    <string id="Dramalord573" text="用流言对{HERO}对峙" />
+    <string id="Dramalord574" text="婚姻时加入家族" />
+    <string id="Dramalord575" text="允许AI加入配偶的家族（否则他们只是结婚了）" />
+    <string id="Dramalord576" text="允许社会阶级混合" />
+    <string id="Dramalord577" text="允许贵族和平民之间（领主和名士/流浪者）的AI互动" />
+    <string id="Dramalord578" text="{HERO1}和{HERO2}刚刚结婚。你想让他们留在你的家族里吗？" />
+    <string id="Dramalord579" text="打断{HERO1}和{HERO2}的行为" />
+    <string id="Dramalord580" text="你发现{HERO1}和{HERO2}的行为。你想打断他们吗？" />
+    <string id="Dramalord581" text="{TITLE}! 我为{HERO}的爱挑战你！" />
+    <string id="Dramalord582" text="好吧，拔出你的武器！" />
+    <string id="Dramalord583" text="随时，{TITLE}！（访问英雄进行决斗）" />
+    <string id="Dramalord584" text="现在没有时间浪费在这种无聊的事上！当我在城镇或城堡时再来找我。" />
+    <string id="Dramalord585" text="始终死斗" />
+    <string id="Dramalord586" text="和其他英雄的决斗总是生死决斗" />
+    <string id="Dramalord587" text="{HERO}请求加入你的家族" />
+    <string id="Dramalord588" text="{HERO}已经离开了{OLDCLAN}并请求加入你的家族。你接受他们吗？" />
+    <string id="Dramalord589" text="最近发生了什么有趣的事情吗？" />
+    <string id="Dramalord590" text="我现在想不出什么。" />
+    <string id="Dramalord591" text="还有别的事情吗？" />
   </strings>
 </base>

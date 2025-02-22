@@ -22,6 +22,34 @@ namespace Dramalord.Patches
             }
         }
     }
+    /*
+    [HarmonyPatch(typeof(PregnancyCampaignBehavior), "CheckOffspringsToDeliver")]
+    public static class CheckOffspringsToDeliverPatch2
+    {
+        [UsedImplicitly]
+        [HarmonyPrefix]
+        public static bool CheckOffspringsToDeliver(ref object pregnancy)
+        {
+            Type? pregType = AccessTools.TypeByName("PregnancyCampaignBehavior.Pregnancy");
+            if(pregnancy.GetType() == pregType)
+            {
+                FieldInfo? mom = pregType.GetField("Mother");
+                FieldInfo? dad = pregType.GetField("Father");
+                
+                if(mom.GetValue(pregnancy) == null)
+                {
+                    mom.SetValue(pregnancy, Hero.AllAliveHeroes.GetRandomElementWithPredicate(s => s.IsFemale && !s.IsChild && s.IsLord && !s.IsPregnant && s.Clan != Clan.PlayerClan));
+                }
+
+                if(dad.GetValue(pregnancy) == null)
+                {
+                    dad.SetValue(pregnancy, Hero.AllAliveHeroes.GetRandomElementWithPredicate(s => !s.IsFemale && !s.IsChild && s.IsLord && s.Clan != Clan.PlayerClan));
+                }
+            }
+            return true;
+        }
+    }
+    */
 
     [HarmonyPatch(typeof(PregnancyCampaignBehavior), "RefreshSpouseVisit", new Type[] { typeof(Hero) })]
     public static class RefreshSpouseVisitPatch
@@ -30,11 +58,7 @@ namespace Dramalord.Patches
         [HarmonyPrefix]
         public static bool RefreshSpouseVisit(ref Hero hero)
         {
-            if(!DramalordMCM.Instance.AllowDefaultPregnanciesGlobal)
-            {
-                return false;
-            }
-            if((hero == Hero.MainHero || hero.Spouse == Hero.MainHero) && !DramalordMCM.Instance.AllowDefaultPregnanciesPlayer)
+            if(!DramalordMCM.Instance.AllowDefaultPregnancies)
             {
                 return false;
             }

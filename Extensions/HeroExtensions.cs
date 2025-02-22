@@ -4,9 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Extensions;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
+using TaleWorlds.CampaignSystem.ComponentInterfaces;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Library;
+using TaleWorlds.TwoDimension;
 
 namespace Dramalord.Extensions
 {
@@ -15,7 +19,6 @@ namespace Dramalord.Extensions
         private static Hero? CachedHero = null;
         private static HeroPersonality? CachedPersonality = null;
         private static HeroDesires? CachedDesires = null;
-        private static List<HeroIntention>? CachedIntention = null;
         private static Dictionary<Hero, HeroRelation>? CachedRelation = null;
 
         private static void UpdateCachedData(Hero hero)
@@ -25,68 +28,17 @@ namespace Dramalord.Extensions
                 CachedHero = hero;
                 CachedPersonality = DramalordPersonalities.Instance.GetPersonality(hero);
                 CachedDesires = DramalordDesires.Instance.GetDesires(hero);
-                CachedIntention = DramalordIntentions.Instance.GetIntentions(hero);
                 CachedRelation = DramalordRelations.Instance.GetAllRelations(hero);
             }
         }
 
         public static int GetTrust(this Hero hero, Hero other) => CharacterRelationManager.GetHeroRelation(hero, other);
 
-        public static void SetTrust(this Hero hero, Hero other, int value) => CharacterRelationManager.SetHeroRelation(hero, other, value);
+        public static void SetTrust(this Hero hero, Hero other, int value) => CharacterRelationManager.SetHeroRelation(hero, other, (int)Mathf.Min(100,Mathf.Max(value, -100)));
 
         public static bool IsDramalordLegit(this Hero hero)
         {
-            return hero != null && !hero.IsChild && (hero.IsLord || hero.IsPlayerCompanion || hero.IsWanderer ||(hero.IsNotable && DramalordMCM.Instance.IncludeNotables)) && hero.IsAlive && !hero.IsDisabled;
-        }
-
-        public static List<HeroIntention> GetIntentions(this Hero hero)
-        {
-            UpdateCachedData(hero);
-            return CachedIntention;
-        }
-
-        public static void AddIntention(this Hero hero, Hero target, IntentionType type, int eventID)
-        {
-            UpdateCachedData(hero);
-            CachedIntention.Add(new HeroIntention(type, target, eventID));
-            if (target == Hero.MainHero)
-            {
-                List<Hero> toPlayer = DramalordIntentions.Instance.GetIntentionTowardsPlayer();
-                if(!toPlayer.Contains(hero))
-                {
-                    toPlayer.Add(hero);
-                }
-            }
-        }
-
-        public static void RemoveIntention(this Hero hero, HeroIntention intention)
-        {
-            UpdateCachedData(hero);
-            CachedIntention.Remove(intention);
-            if (intention.Target == Hero.MainHero)
-            {
-                DramalordIntentions.Instance.GetIntentionTowardsPlayer().Remove(hero);
-            }
-        }
-
-        public static void RemoveIntentionsTo(this Hero hero, Hero target)
-        {
-            UpdateCachedData(hero);
-            CachedIntention.Where(item => item.Target == target).ToList().ForEach(item =>
-            {
-                CachedIntention.Remove(item);
-            });
-            if (target == Hero.MainHero)
-            {
-                DramalordIntentions.Instance.GetIntentionTowardsPlayer().RemoveAll(item => item == hero);
-            }
-        }
-
-        public static void RemoveAllIntentions(this Hero hero)
-        {
-            UpdateCachedData(hero);
-            CachedIntention.Clear();
-            DramalordIntentions.Instance.GetIntentionTowardsPlayer().RemoveAll(item => item == hero);
+            return hero != null && !hero.IsChild && (hero.IsLord || hero.IsPlayerCompanion || hero.IsWanderer || hero.IsNotable) && hero.IsAlive && !hero.IsDisabled;
         }
 
         public static HeroDesires GetDesires(this Hero hero)
@@ -122,7 +74,7 @@ namespace Dramalord.Extensions
 
         public static HeroPregnancy? GetPregnancy(this Hero hero)
         {
-            return DramalordPregancies.Instance.GetPregnancy(hero);
+            return DramalordPregnancies.Instance.GetPregnancy(hero);
         }
 
         public static bool IsSpouseOf(this Hero hero, Hero target)
@@ -176,10 +128,18 @@ namespace Dramalord.Extensions
         public static bool IsAutonom(this Hero hero)
         {
             if((hero.Occupation == Occupation.Wanderer && hero.Clan == null && !DramalordMCM.Instance.AllowWandererAutonomy) ||
+                (hero.IsNotable && hero.Clan == null && !DramalordMCM.Instance.AllowNotablesAutonomy) ||
                 (hero != Hero.MainHero && hero.Clan == Clan.PlayerClan && !DramalordMCM.Instance.AllowPlayerClanAutonomy) ||
-                hero.IsPrisoner ||
-                hero.GetDesires().HasToy ||
-                (DramalordMCM.Instance.PlayerSpouseFaithful && hero != Hero.MainHero && (hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero))))
+                hero.IsPrisoner)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool IsFaithful(this Hero hero)
+        {
+            if (DramalordMCM.Instance.PlayerSpouseFaithful && hero != Hero.MainHero && (hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero)))
             {
                 return false;
             }
@@ -254,17 +214,18 @@ namespace Dramalord.Extensions
 
             int sympathy = 10;
             if (target == Hero.MainHero || hero == Hero.MainHero) sympathy += DramalordMCM.Instance.PlayerBaseSympathy;
-            sympathy -= Math.Abs(heroPersonality.Openness - targetPersonality.Openness) / 20;
-            sympathy -= Math.Abs(heroPersonality.Agreeableness - targetPersonality.Agreeableness) / 20;
-            sympathy -= Math.Abs(heroPersonality.Conscientiousness - targetPersonality.Conscientiousness) / 20;
-            sympathy -= Math.Abs(heroPersonality.Neuroticism - targetPersonality.Neuroticism) / 20;
-            sympathy -= Math.Abs(heroPersonality.Extroversion - targetPersonality.Extroversion) / 20;
+            sympathy -= Math.Abs(heroPersonality.Openness - targetPersonality.Openness) / 25;
+            sympathy -= Math.Abs(heroPersonality.Agreeableness - targetPersonality.Agreeableness) / 25;
+            sympathy -= Math.Abs(heroPersonality.Conscientiousness - targetPersonality.Conscientiousness) / 25;
+            sympathy -= Math.Abs(heroPersonality.Neuroticism - targetPersonality.Neuroticism) / 25;
+            sympathy -= Math.Abs(heroPersonality.Extroversion - targetPersonality.Extroversion) / 25;
 
             //bonus
-            sympathy += hero.GetHeroTraits().Honor == target.GetHeroTraits().Honor ? 1 : 0;
+            sympathy += hero.GetHeroTraits().Honor == target.GetHeroTraits().Honor ? 1 : 0; 
             sympathy += hero.GetHeroTraits().Valor == target.GetHeroTraits().Valor ? 1 : 0;
             sympathy += hero.GetHeroTraits().Calculating == target.GetHeroTraits().Calculating ? 1 : 0;
             sympathy += hero.GetHeroTraits().Mercy == target.GetHeroTraits().Mercy ? 1 : 0;
+            sympathy += hero.GetHeroTraits().Generosity == target.GetHeroTraits().Generosity ? 1 : 0;
             return sympathy;
         }
 
@@ -277,11 +238,15 @@ namespace Dramalord.Extensions
             rating -= (int)(Math.Abs(desires.AttractionWeight - (int)(target.BodyProperties.Weight))/3);
             rating -= (int)(Math.Abs(desires.AttractionBuild - (int)(target.BodyProperties.Build))/3);
             rating -= (int)(Math.Abs((MBMath.ClampInt(desires.AttractionAgeDiff + (int)hero.Age, 18, 130) - (int)target.Age)) /2);
-            rating += hero.GetRelationTo(target).CurrentLove / 10;
+            rating += hero.GetRelationTo(target).Love / 10;
             rating += desires.Horny / 10;
 
             return MBMath.ClampInt(rating, 0, 100);
         }
+
+        public static bool HasMutualAttractionWith(this Hero hero, Hero target) => hero.GetAttractionTo(target) >= DramalordMCM.Instance.MinAttraction && target.GetAttractionTo(hero) >= DramalordMCM.Instance.MinAttraction;
+
+        public static bool HasMetRecently(this Hero hero, Hero target) => hero.GetRelationTo(target).LastInteraction.ElapsedDaysUntilNow < DramalordMCM.Instance.DaysBetweenInteractions;
 
         public static bool IsCloseTo(this Hero hero, Hero target)
         {
@@ -303,6 +268,10 @@ namespace Dramalord.Extensions
                 hero.CurrentSettlement.Parties.ForEach(item =>
                 {
                     if (item.LeaderHero != null && item.LeaderHero != hero && !item.LeaderHero.IsPrisoner && item.LeaderHero.IsDramalordLegit()) list.Add(item.LeaderHero);
+                    if(item == MobileParty.MainParty && !Hero.MainHero.IsPrisoner && item.MemberRoster.TotalHeroes > 1)
+                    {
+                        item.MemberRoster.GetTroopRoster().Where(troop => troop.Character.HeroObject != null && troop.Character.HeroObject != hero).Do(troop => list.Add(troop.Character.HeroObject));
+                    }
                 });
             }
             if (hero.PartyBelongedTo != null)
@@ -318,6 +287,42 @@ namespace Dramalord.Extensions
                 {
                     FlattenedTroopRoster flat = hero.PartyBelongedTo.MemberRoster.ToFlattenedRoster();
                     flat.Troops.Where(item => item.HeroObject != null && item.HeroObject != hero && !item.HeroObject.IsPrisoner && item.HeroObject.IsDramalordLegit()).Do(item => list.Add(item.HeroObject));
+                }
+            }
+            return list.Distinct().ToList();
+        }
+
+        public static List<Hero> GetClosePrisoners(this Hero hero)
+        {
+            List<Hero> list = new();
+            if (hero.CurrentSettlement != null && hero.CurrentSettlement.Town != null)
+            {
+                Town town = hero.CurrentSettlement.Town;
+                list.AddRange(town.GetPrisonerHeroes().Where(h => h.HeroObject.IsDramalordLegit()).Select(h => h.HeroObject));
+
+                hero.CurrentSettlement.Parties.ForEach(party =>
+                {
+                    if(party.PrisonRoster.TotalHeroes > 0)
+                    {
+                        list.AddRange(party.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject));
+                    }
+                });
+            }
+            if (hero.PartyBelongedTo != null)
+            {
+                if (hero.PartyBelongedTo.Army != null)
+                {
+                    hero.PartyBelongedTo.Army?.Parties.ForEach(party =>
+                    {
+                        if (party.PrisonRoster.TotalHeroes > 0)
+                        {
+                            list.AddRange(party.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject));
+                        }
+                    });
+                }
+                if (hero.PartyBelongedTo.PrisonRoster != null && hero.PartyBelongedTo.PrisonRoster.TotalHeroes > 0)
+                {
+                    list.AddRange(hero.PartyBelongedTo.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject));
                 }
             }
             return list.Distinct().ToList();

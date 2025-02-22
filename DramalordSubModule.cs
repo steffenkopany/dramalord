@@ -1,6 +1,7 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Behavior;
 using Dramalord.Behaviours;
+using Dramalord.Data.Intentions;
 using HarmonyLib;
 using System;
 using System.Reflection;
@@ -8,7 +9,6 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
-using TaleWorlds.ObjectSystem;
 
 namespace Dramalord
 {
@@ -28,18 +28,6 @@ namespace Dramalord
             base.OnSubModuleUnloaded();
         }
 
-        /*
-        public override void OnGameInitializationFinished(Game game)
-        {
-            base.OnGameInitializationFinished(game);
-
-            ItemObject wurst = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_sausage");
-            ItemObject pie = MBObjectManager.Instance.GetObject<ItemObject>("dramalord_pie");
-            Campaign.Current?.DefaultVillageTypes.ConsumableRawItems.Add(wurst);
-            Campaign.Current?.DefaultVillageTypes.ConsumableRawItems.Add(pie);
-        }
-        */
-
         protected override void OnGameStart(Game game, IGameStarter starter)
         {
             base.OnGameStart(game, starter);
@@ -49,7 +37,7 @@ namespace Dramalord
             {
                 campaignGameStarter.AddBehavior(new DramalordCampaignBehavior(campaignGameStarter));
                 campaignGameStarter.AddBehavior(new NpcCampaignBehavior(campaignGameStarter));
-                campaignGameStarter.AddBehavior(new PlayerCampaignBehavior(campaignGameStarter));
+                //campaignGameStarter.AddBehavior(new PlayerCampaignBehavior(campaignGameStarter));
 
                 if (!Patched && game.GameType is Campaign)
                 {
@@ -80,10 +68,51 @@ namespace Dramalord
             Type? pompaType = AccessTools.TypeByName("PompaSceneNotificationItem");
             if(pompaType != null)
             {
-                IntercourseAction.HotButterFound = true;
+                IntercourseIntention.HotButterFound = true;
                 InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: HotButter detected", new Color(1f, 0.08f, 0.58f)));
             }
-            
+
+            Type? AMType = AccessTools.TypeByName("MAMarriageAction");
+            if (AMType != null)
+            {
+                BethrothIntention.OtherMarriageModFound = true;
+                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: MarryAnyone detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
+            }
+
+            Type? SEType = AccessTools.TypeByName("SpousesExpandedUtil");
+            if (SEType != null)
+            {
+                BethrothIntention.OtherMarriageModFound = true;
+                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Spouses Expanded detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
+            }
+
+            Type? BKType = AccessTools.TypeByName("BannerKingsSettings");
+            if (BKType != null)
+            {
+                BethrothIntention.OtherMarriageModFound = true;
+                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Banner Kings detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
+            }
+
+            Type? BastardType = AccessTools.TypeByName("BastardCampaignEvents");
+            if (BastardType != null)
+            {
+                IntercourseIntention.OtherPregnancyModFound = true;
+                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Bastard Children detected (Disabling Pregnancy)", new Color(1f, 0.08f, 0.58f)));
+            }
+
+            Type? CheyronCheatsType = AccessTools.TypeByName("CheyronSubModule");
+            if (CheyronCheatsType != null)
+            {
+                IntercourseIntention.OtherPregnancyModFound = true;
+                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Bannerlord Trainer Plus detected (Disabling Pregnancy)", new Color(1f, 0.08f, 0.58f)));
+            }
+
+            Type? MoreSpousesType = AccessTools.TypeByName("MoreSpouseSetting");
+            if (MoreSpousesType != null)
+            {
+                BethrothIntention.OtherMarriageModFound = true;
+                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: MoreSpouses Pro detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
+            }
         }
     }
 }

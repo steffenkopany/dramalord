@@ -1,33 +1,20 @@
-﻿using Dramalord.LogItems;
-using Helpers;
-using Newtonsoft.Json.Linq;
-using TaleWorlds.CampaignSystem;
+﻿using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
-using TaleWorlds.Core;
-using TaleWorlds.Localization;
 
 namespace Dramalord.Actions
 {
     internal static class LeaveClanAction
     {
-        internal static bool Apply(Hero hero, Hero cause, bool forMarriage)
+        internal static void Apply(Hero hero)
         {
-            Clan oldClan = hero.Clan;
-            if (oldClan == null)
-            {
-                return false;
-            }
-
             Kingdom? kingdom = hero.MapFaction as Kingdom;
             if (kingdom != null && kingdom.RulingClan != null && kingdom.RulingClan.Leader == hero)
             {
                 Campaign.Current.KingdomManager.AbdicateTheThrone(kingdom);
             }
 
-            if (hero.Clan.Leader == hero)
+            if (hero.Clan != null && hero.Clan.Leader == hero)
             {
                 ChangeClanLeaderAction.ApplyWithoutSelectedNewLeader(hero.Clan);
             }
@@ -65,41 +52,6 @@ namespace Dramalord.Actions
             }
 
             hero.Clan = null;
-            if (hero.BornSettlement == null)
-            {
-                hero.BornSettlement = SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
-            }
-
-            hero.SetNewOccupation(Occupation.Wanderer);
-            TextObject newName = new TextObject("{=28tWEFNi}{FIRSTNAME} the Wanderer");
-            newName.SetTextVariable("FIRSTNAME", hero.FirstName);
-            hero.SetName(newName, hero.FirstName);
-            hero.UpdateHomeSettlement();
-            CampaignEventDispatcher.Instance.OnHeroChangedClan(hero, oldClan);
-            if(!forMarriage)
-            {
-                TeleportHeroAction.ApplyDelayedTeleportToSettlement(hero, hero.HomeSettlement);
-            }
-
-            if (oldClan == Clan.PlayerClan && hero != Hero.MainHero && cause == Hero.MainHero)
-            {
-                TextObject textObject = new TextObject("{=Dramalord081}You banished {HERO.LINK} from your clan.");
-                StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
-                MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
-            }
-            else if (oldClan == Clan.PlayerClan && hero != Hero.MainHero && cause == hero)
-            {
-                TextObject textObject = new TextObject("{=Dramalord082}{HERO.LINK} has left your clan.");
-                StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, textObject);
-                MBInformationManager.AddQuickInformation(textObject, 1000, hero.CharacterObject, "event:/ui/notification/relation");
-            }
-
-            if ((oldClan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)
-            {
-                LogEntry.AddLogEntry(new LeaveClanLog(hero, oldClan, cause));
-            }
-
-            return true;
         }
     }
 }

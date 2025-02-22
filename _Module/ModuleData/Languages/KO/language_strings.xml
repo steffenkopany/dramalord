@@ -129,7 +129,7 @@
     <string id="Dramalord132" text="개인이 일반적으로 성관계에 관심을 갖게 되는지 여부를 정의합니다." />
     <string id="Dramalord133" text="흥분" />
     <string id="Dramalord134" text="호르몬으로 인해 영웅이 현재 얼마나 성관계를 원하는지 나타냅니다." />
-    <string id="Dramalord135" text="4: 플레이어와의 관계" />
+    <string id="Dramalord135" text="4: 대상과의 관계" />
     <string id="Dramalord136" text="신뢰" />
     <string id="Dramalord137" text="플레이어에게 신뢰의 가치" />
     <string id="Dramalord138" text="사랑" />
@@ -187,7 +187,7 @@
     <string id="Dramalord190" text="영웅이 임신할 확률(드라마로드 임신에만 해당)" />
     <string id="Dramalord191" text="최소 연애 사랑" />
     <string id="Dramalord192" text="영웅과의 연애를 고려할 때 필요한 연애 포인트" />
-    <string id="Dramalord193" text="목록에서 영웅을 선택하고 '영웅 로드'를 누르세요(실행 중인 캠페인에서만 작동)" />
+    <string id="Dramalord193" text="목록에서 영웅 선택 (진행 중인 캠페인에서만 작동)" />
     <string id="Dramalord194" text="영웅 불러오기" />
     <string id="Dramalord195" text="현재 명소" />
     <string id="Dramalord196" text="현재 플레이어의 어트랙션 값" />
@@ -296,10 +296,10 @@
     <string id="Dramalord299" text="모든 NPC에게 기본 임신 허용" />
     <string id="Dramalord300" text="글로벌 기본 결혼." />
     <string id="Dramalord301" text="모든 NPC에게 기본 결혼 허용" />
-    <string id="Dramalord302" text="{HERO.LINK}는 당신이 그들의 문제를 소홀히 한 데 실망했습니다... (사랑 {NUM}, 신뢰 {NUM2})" />
+    <string id="Dramalord302" text="{HERO.LINK} 는 자신의 긴급한 문제를 무시한 것에 실망하고 있다..." />
     <string id="Dramalord303" text="{HERO.LINK}는 당신에게 그들을 찾아달라고 부탁했습니다. 그들은 논의할 긴급한 문제가 있습니다. 당신은 제 시간에 도착할 수 있을까요?" />
     <string id="Dramalord304" text="{QUESTHERO}가 당신의 참석을 요청합니다." />
-    <string id="Dramalord305" text="{HERO.LINK}는 당신이 그녀의 요청을 들어줘서 매우 기쁩니다... (사랑 {NUM}, 신뢰 {NUM2})" />
+    <string id="Dramalord305" text="{HERO.LINK} 는 당신이 자신의 요청을 들어줘서 매우 기뻐하고 있다..." />
     <string id="Dramalord306" text="오, {TITLE} 마침내 왔군요! 당신을 간절히 기다리고 있었어요!" />
     <string id="Dramalord307" text="누가 나타났는지 보세요. 당신은 서두르지 않았죠 {TITLE}, 그렇죠?" />
     <string id="Dramalord308" text="여기 있습니다. 당신이 부탁한 시급한 문제는 무엇입니까?" />
@@ -331,7 +331,7 @@
     <string id="Dramalord334" text="더 오래된" />
     <string id="Dramalord335" text="나이가 많지도 않고, 어리지도 않다" />
     <string id="Dramalord336" text="{HERO.LINK}의 신체적 선호도를 알게 되었습니다." />
-    <string id="Dramalord337" text="최소 신뢰" />
+    <string id="Dramalord337" text="친구를 위한 최소한의 신뢰" />
     <string id="Dramalord338" text="영웅을 친구로 생각하는 데 필요한 신뢰 포인트(Dramalord 친구만)" />
     <string id="Dramalord339" text="새로운 이야기를 들려주세요!(친근한 채팅)" />
     <string id="Dramalord340" text="나랑 산책하러 갈래?(연애)" />
@@ -522,5 +522,69 @@
     <string id="Dramalord525" text="{MOTHER}가 {CHILD}를 낳았습니다. {FATHER}가 아버지입니다. 어머니에게 아이를 키우라고 권할 것인가, 아니면 없애라고 권할 것인가?" />
     <string id="Dramalord526" text="아이를 없애세요" />
     <string id="Dramalord527" text="아이를 키우세요" />
+    <string id="Dramalord528" text="{HERO.LINK}는 {FATHER.LINK}의 자식을 출산하는 모습을 목격했습니다." />
+    <string id="Dramalord529" text="{HERO.LINK}는 당신이 {FATHER.LINK}의 자식을 출산하는 모습을 보았습니다." />
+    <string id="Dramalord530" text="{HERO.LINK}는 당신이 {OTHER.LINK}와 결혼하는 모습을 보았습니다." />
+    <string id="Dramalord531" text="당신은 {HERO.LINK}가 {OTHER.LINK}와 결혼하는 모습을 목격했습니다." />
+    <string id="Dramalord532" text="듣자했어요? {HERO}와 {OTHER}가 결혼한다고 — 그런 소문이 떠돌았던 걸 보면 누가 생각했겠어요?" />
+    <string id="Dramalord533" text="듣자했어요? {HERO}와 {OTHER}가 이제 부부가 되었다고 — 하지만 이제까지 있었던 일들을 생각해보면, 과연 서약만으로 소문을 잠재울 수 있을지 궁금하네요." />
+    <string id="Dramalord534" text="소문은 빠르게 퍼지네요 — {HERO}와 {OTHER}는 비밀리에 만남을 가졌는데, 그들이 그것을 숨기고 싶다면 은밀한 시선을 덜 좋아해야 할 텐데요." />
+    <string id="Dramalord535" text="성은 떠들썩하네요! {HERO}와 {OTHER}가 함께 침대에 있었다는 사실이 밝혀졌고, 새벽이 와도 스캔들은 사라지지 않았어요." />
+    <string id="Dramalord536" text="소문이 돌고 있어요 - {HERO}와 {OTHER}는 자식을 낳았다고 하지만, 그 시점이 의문을 불러일으킨다는 말이 있어요." />
+    <string id="Dramalord537" text="당신이 없는 동안 {OTHER}가 {HERO}와 그들의 문제를 돌봤습니다..." />
+    <string id="Dramalord538" text="{TITLE}, 그 소문에 신경 쓰지 마세요. 그냥 헛소문일 뿐이고 곧 잊혀질 거예요." />
+    <string id="Dramalord539" text="아마도 당신 말이 맞아요, {TITLE}. 곧 또 다른 이름이 떠돌게 될 것이고, 이것은 잊혀질 거예요." />
+    <string id="Dramalord540" text="당신은 {HERO}와 {TARGET}이 {RELATION}임을 알게 되었습니다." />
+    <string id="Dramalord541" text="{QUESTHERO}가 잠시 당신의 파티에 합류했습니다." />
+    <string id="Dramalord542" text="{HERO.LINK}는 당신과 함께 시간을 보내고 싶어하며, 잠시 당신의 여행에 동참합니다." />
+    <string id="Dramalord543" text="{HERO.LINK}는 혼자 남겨져 매우 실망하며 {TOWN.LINK}로 돌아갔습니다." />
+    <string id="Dramalord544" text="{HERO.LINK}는 당신과 함께 시간을 보내는 것을 즐기며 {TOWN.LINK}로 돌아갔습니다." />
+    <string id="Dramalord545" text="{TITLE}, 잠시 제 파티에 합류하시겠어요?" />
+    <string id="Dramalord546" text="지난 며칠 동안 당신과 함께한 시간이 선물이었어요, {TITLE}, 함께한 모든 순간에 감사드려요. 비록 지금은 헤어지지만, 우리의 길은 다시 만날 것임을 확신해요." />
+    <string id="Dramalord547" text="당신이 진심으로 나를 내 사람으로 만들고 싶다면, {HERO}에게 가서 그들의 축복을 받아야 합니다. 내 마음은 이미 당신의 것이지만, 우리의 미래는 그들의 허락에 달려있어요." />
+    <string id="Dramalord548" text="{QUESTHERO}에게 그들의 손을 청혼하세요." />
+    <string id="Dramalord549" text="{QUESTHERO}는 결혼을 위해서는 {TARGET.LINK}의 허락이 필요하다고 말했습니다." />
+    <string id="Dramalord550" text="{TITLE}, 저는 {HERO}와 결혼을 허락해 주실 것을 겸손히 부탁드립니다." />
+    <string id="Dramalord551" text="당신은 정직하고 진실된 사람임을 증명했고, {HERO}가 당신을 얼마나 사랑하는지 그들의 눈에 보입니다. 그래서 저는 당신에게 축복을 드립니다. 당신의 결혼이 강하고, 하루하루 기쁘고, 두 사람의 마음이 영원히 변치 않기를 기원합니다." />
+    <string id="Dramalord552" text="당신은 잘 말하고, 저는 당신의 감정을 의심하지 않지만, 원하는 삶을 얻으려면 그에 걸맞은 자격을 갖추어야 합니다. 당신의 위치를 얻고, 나에게 당신의 강함과 명예를 보여준 후, 우리는 결혼에 대해 이야기할 것입니다." />
+    <string id="Dramalord553" text="당신이 내 딸과 결혼한다고? 이름도 없이 가난한 자가? {HERO}는 가치 있는 사람과 결혼해야지, 사랑만으로 가정을 채울 수 있다고 믿는 어리석은 사람이 아니에요." />
+    <string id="Dramalord554" text="당신의 클랜이 3단계 이상이고 {HERO}가 당신을 좋아하는지 확인하세요." />
+    <string id="Dramalord555" text="하지만 {TITLE}, 당신도 알겠지만 저는 이미 결혼했어요..." />
+    <string id="Dramalord556" text="당신의 {HERO.LINK}와의 관계가 변했습니다. (사랑 {LOVE}, 신뢰 {TRUST})" />
+    <string id="Dramalord557" text="소문에 반응하기" />
+    <string id="Dramalord558" text="{HERO1}과 {HERO2}에 관한 불안한 소문을 들었어요. 당신은 어떻게 반응할 건가요?" />
+    <string id="Dramalord559" text="그들을 직면시키세요!" />
+    <string id="Dramalord560" text="무시하세요" />
+    <string id="Dramalord561" text="{HERO.LINK}를 찾아가 들은 불안한 소문을 그들에게 전하세요." />
+    <string id="Dramalord562" text="진짜 관계 보기" />
+    <string id="Dramalord563" text="영웅과의 실제 관계를 보고 싶다면 이 옵션을 켜세요. (True Noble Opinion을 사용 중이라면 끄세요)" />
+    <string id="Dramalord564" text="최대 신뢰 적대자" />
+    <string id="Dramalord565" text="영웅을 적으로 간주하려면 필요한 부정적인 신뢰 점수" />
+    <string id="Dramalord566" text="결혼 요청" />
+    <string id="Dramalord567" text="{HERO1}와 {HERO2}가 결혼하고자 합니다. 그들의 결혼을 승인하시겠습니까?" />
+    <string id="Dramalord568" text="친밀감의 기회" />
+    <string id="Dramalord569" text="{HERO1}의 눈에 번쩍이는 불순한 미소가 보입니다... 이 기회를 잡으시겠어요?" />
+    <string id="Dramalord570" text="대상 선택" />
+    <string id="Dramalord571" text="{HERO1.LINK}에게 {HERO2.LINK}와 헤어지라고 말했습니다." />
+    <string id="Dramalord572" text="{HERO1.LINK}와 {HERO2.LINK}의 관계를 성공적으로 끝냈습니다." />
+    <string id="Dramalord573" text="소문으로 {HERO}와 대면하기" />
+    <string id="Dramalord574" text="결혼 시 클랜 합류" />
+    <string id="Dramalord575" text="AI가 배우자의 클랜에 합류하도록 허용합니다 (그렇지 않으면 그저 결혼한 상태만 유지)" />
+    <string id="Dramalord576" text="사회 계층 혼합 허용" />
+    <string id="Dramalord577" text="AI가 귀족과 평민(영주와 저명한 인물/방랑자) 사이에서 상호작용하도록 허용합니다." />
+    <string id="Dramalord578" text="{HERO1}과 {HERO2}가 결혼했습니다. 그들이 당신의 클랜에 머무는 것을 원하시나요?" />
+    <string id="Dramalord579" text="{HERO1}과 {HERO2}를 그들의 행위에서 방해하기" />
+    <string id="Dramalord580" text="{HERO1}과 {HERO2}를 방해했어요. 그들을 방해하시겠어요?" />
+    <string id="Dramalord581" text="{TITLE}! 나는 {HERO}의 사랑을 두고 당신에게 도전합니다!" />
+    <string id="Dramalord582" text="좋아요. 무기를 뽑으세요!" />
+    <string id="Dramalord583" text="언제든지, {TITLE}! (결투를 위해 영웅을 방문하세요)" />
+    <string id="Dramalord584" text="지금은 그런 소란에 신경 쓸 시간이 없습니다! 제가 마을이나 성에 있을 때 방문하세요." />
+    <string id="Dramalord585" text="언제나 죽음을 위한 결투" />
+    <string id="Dramalord586" text="다른 영웅들과의 결투는 항상 죽음까지 이어집니다." />
+    <string id="Dramalord587" text="{HERO}가 당신의 클랜에 합류하고자 합니다." />
+    <string id="Dramalord588" text="{HERO}는 {OLDCLAN}을 떠나 당신의 클랜에 합류하고자 합니다. 그들을 받아들이시겠어요?" />
+    <string id="Dramalord589" text="최근에 재미있는 일이 있었나요?" />
+    <string id="Dramalord590" text="지금은 딱히 생각나는 것이 없네요." />
+    <string id="Dramalord591" text="또 다른 소식은 없나요?" />
   </strings>
 </base>

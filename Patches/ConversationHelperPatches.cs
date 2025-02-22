@@ -113,22 +113,6 @@ namespace Dramalord.Patches
                 }
                 __result = text;
             }
-            /*
-            else if(baseHero.IsSpouseOf(queriedHero))
-            {
-                string text = GameTexts.FindText("str_spouse").ToString();
-                if (!char.IsLower(text[0]) != uppercaseFirst)
-                {
-                    char[] array = text.ToCharArray();
-                    text = (uppercaseFirst ? array[0].ToString().ToUpper() : array[0].ToString().ToLower());
-                    for (int i = 1; i < array.Length; i++)
-                    {
-                        text += array[i];
-                    }
-                }
-                __result = text;
-            }
-            */
         }
     }
 

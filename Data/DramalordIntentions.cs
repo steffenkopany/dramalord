@@ -1,70 +1,13 @@
-﻿using HarmonyLib;
+﻿using Dramalord.Data.Intentions;
+using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Data
 {
-    internal enum IntentionType
-    {
-        SmallTalk,
-        Gossip,
-        Confrontation,
-        Flirt,
-        Date,
-        Intercourse,
-        Engagement,
-        Marriage,
-        BreakUp,
-        LeaveClan,
-        Adopt,
-        Orphanize,
-        Execute,
-        PrisonIntercourse,
-        EndDate,
-        Duel,
-        LeaveKingdom,
-        Abortion
-    }
-
-    internal sealed class HeroIntention
-    {
-        internal IntentionType Type { get; set; }
-
-        internal Hero Target { get; set; }
-
-        internal int EventId { get; set; }
-
-        internal HeroIntention(IntentionType type, Hero target, int eventId)
-        {
-            Type = type;
-            Target = target;
-            EventId = eventId;
-        }
-    }
-
-    internal sealed class HeroIntentionSave
-    {
-        [SaveableProperty(1)]
-        internal int Type { get; set; }
-
-        [SaveableProperty(2)]
-        internal string Target { get; set; }
-
-        [SaveableProperty(3)]
-        internal int EventId { get; set; }
-
-        internal HeroIntentionSave(int type, string target, int eventId)
-        {
-            Type = type;
-            Target = target;
-            EventId = eventId;
-        }
-    }
-
-    internal class DramalordIntentions : DramalordDataHandler
+    internal class DramalordIntentions : DramalordData
     {
         private static DramalordIntentions? _instance;
 
@@ -76,148 +19,57 @@ namespace Dramalord.Data
                 return _instance;
             }
         }
-
-        private readonly Dictionary<Hero, List<HeroIntention>> _intentions;
-        private readonly List<Hero> _intentionsToPlayer;
+ 
+        private readonly List<Intention> _intentions;
 
         private DramalordIntentions() : base("DramalordIntentions")
         {
             _intentions = new();
-            _intentionsToPlayer = new();
         }
 
-        internal List<HeroIntention> GetIntentions(Hero hero)
+        internal List<Intention> GetIntentions()
         {
-            if (_intentions.ContainsKey(hero))
+            _intentions.RemoveAll(intention => intention.ValidUntil.IsPast);
+            return _intentions;
+        }
+
+        internal void OnHourlyTick()
+        {
+            List<Hero> heroList = new();
+            List<Intention> garbage = new();
+
+            List<Intention> intentions = GetIntentions().ToList();
+            intentions.ForEach(intention =>
             {
-                _intentions[hero].ToList().ForEach(intention =>
+                if(!heroList.Contains(intention.IntentionHero) && intention.Action())
                 {
-                    HeroEvent? @event = DramalordEvents.Instance.GetEvent(intention.EventId);
-                    if (intention.EventId >= 0 && @event == null)
-                    {
-                        _intentions[hero].Remove(intention);
-                    }
-                });
-            }
-            else
-            {
-                _intentions.Add(hero, new List<HeroIntention>());
-            }
-            return _intentions[hero];
-        }
-
-        internal List<Hero> GetIntentionTowardsPlayer()
-        {
-            return _intentionsToPlayer;
-        }
-        /*
-        internal void AddIntention(Hero hero, Hero target, IntentionType type, int eventID)
-        {
-            List<HeroIntention> intentions = GetIntentions(hero);
-            intentions.Add(new HeroIntention(type, target, eventID));
-            if(target == Hero.MainHero && !_intentionsToPlayer.Contains(hero))
-            {
-                _intentionsToPlayer.Add(hero);
-            }
-        }
-        
-
-        internal void RemoveIntention(Hero hero, Hero target, IntentionType type, int eventID)
-        {
-            List<HeroIntention> intentions = GetIntentions(hero);
-            intentions.Where(item => item.Type == type && item.Target == target && item.EventId == eventID).ToList().ForEach(item => 
-            {
-                intentions.Remove(item);
+                    heroList.Add(intention.IntentionHero);
+                    garbage.Add(intention);
+                }
             });
-            if (target == Hero.MainHero)
-            {
-                _intentionsToPlayer.Remove(hero);
-            }
-        }
-        
-        internal void RemoveIntentionsTo(Hero hero, Hero target)
-        {
-            List<HeroIntention> intentions = GetIntentions(hero);
-            intentions.Where(item => item.Target == target).ToList().ForEach(item =>
-            {
-                intentions.Remove(item);
-            });
-            if (target == Hero.MainHero)
-            {
-                _intentionsToPlayer.RemoveAll(item => item == hero);
-            }
+
+            garbage.ForEach(g => _intentions.Remove(g));
         }
 
-        internal void RemoveAllIntentions(Hero hero)
-        {
-            List<HeroIntention> intentions = GetIntentions(hero);
-            intentions.Clear();
-            _intentionsToPlayer.Remove(hero);
-        }
-        */
-        public override void LoadData(IDataStore dataStore)
+        internal override void LoadData(IDataStore dataStore)
         {
             _intentions.Clear();
-            Dictionary<string, List<HeroIntentionSave>> data = new();
-            dataStore.SyncData(SaveIdentifier, ref data);
 
-            data.Do(keypair =>
+            if(!IsOldData)
             {
-                Hero? hero = Hero.AllAliveHeroes.FirstOrDefault(item => item.StringId == keypair.Key);
-                if (hero != null)
-                {
-                    List<HeroIntention> intentions = GetIntentions(hero);
-                    keypair.Value.ForEach(save =>
-                    {
-                        Hero? target = Hero.AllAliveHeroes.FirstOrDefault(item => item.StringId == save.Target);
-                        if (target != null)
-                        {
-                            intentions.Add(new HeroIntention((IntentionType)save.Type, target, save.EventId));
-                        }
-                    });
-                }
-
-            });
-
-            _intentionsToPlayer.Clear();
-            List<string> playerData = new();
-            dataStore.SyncData(SaveIdentifier + "Player", ref playerData);
-            playerData.ForEach(heroId =>
-            {
-                Hero? hero = Hero.AllAliveHeroes.FirstOrDefault(item => item.StringId == heroId);
-                if(hero != null)
-                {
-                    _intentionsToPlayer.Add(hero);
-                }
-            });
+                List<Intention> data = new();
+                dataStore.SyncData(SaveIdentifier, ref data);
+                _intentions.AddRange(data);
+            }
         }
 
-        public override void SaveData(IDataStore dataStore)
+        internal override void SaveData(IDataStore dataStore)
         {
-            Dictionary<string, List<HeroIntentionSave>> data = new();
+            List<Intention> data = new();
 
-            _intentions.Do(keypair =>
-            {
-                if(!data.ContainsKey(keypair.Key.StringId))
-                {
-                    List<HeroIntentionSave> intentions = new();
-                    keypair.Value.ForEach(item =>
-                    {
-                        intentions.Add(new HeroIntentionSave((int)item.Type, item.Target.StringId, item.EventId));
-                    });
-                    data.Add(keypair.Key.StringId, intentions);
-                }
-            });
+            data.AddRange(_intentions);
 
             dataStore.SyncData(SaveIdentifier, ref data);
-
-            List<string> playerData = new();
-            _intentionsToPlayer.ForEach(hero =>
-            {
-                playerData.Add(hero.StringId);
-            });
-
-            dataStore.SyncData(SaveIdentifier + "Player", ref playerData);
         }
 
         protected override void OnHeroComesOfAge(Hero hero)
@@ -232,20 +84,17 @@ namespace Dramalord.Data
 
         protected override void OnHeroKilled(Hero victim, Hero killer, KillCharacterAction.KillCharacterActionDetail reason, bool showNotifications)
         {
-            _intentions.Remove(victim);
-            _intentionsToPlayer.Remove(victim);
+            _intentions.RemoveAll(intention => intention.IntentionHero == victim);
         }
 
         protected override void OnHeroUnregistered(Hero hero)
         {
-            _intentions.Remove(hero);
-            _intentionsToPlayer.Remove(hero);
+            _intentions.RemoveAll(intention => intention.IntentionHero == hero);
         }
 
         protected override void OnNewGameCreated(CampaignGameStarter starter)
         {
             _intentions.Clear();
-            _intentionsToPlayer.Clear();
         }
     }
 }

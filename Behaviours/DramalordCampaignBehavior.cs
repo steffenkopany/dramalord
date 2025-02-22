@@ -1,9 +1,11 @@
 ﻿using Dramalord.Conversations;
 using Dramalord.Data;
-using Dramalord.UI;
+using Dramalord.Data.Intentions;
+using Dramalord.Quests;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.Core;
 
 namespace Dramalord.Behavior
 {
@@ -13,41 +15,66 @@ namespace Dramalord.Behavior
         {
             object o = DramalordPersonalities.Instance;
             o = DramalordRelations.Instance;
-            o = DramalordPregancies.Instance;
+            o = DramalordPregnancies.Instance;
             o = DramalordDesires.Instance;
             o = DramalordOrphans.Instance;
-            o = DramalordEvents.Instance;
             o = DramalordIntentions.Instance;
             o = DramalordQuests.Instance;
 
-            OrphanageConversation.AddDialogs(starter);
+            ConversationLines.Init();
+            ConversationQuestions.AddDialogs(starter);
+            ConversationRelationship.AddDialogs(starter);
+            ConversationPersuasions.AddDialogs(starter);
+            ConversationTrade.AddDialogs(starter);
+            ConversationRealm.AddDialogs(starter);
+            ConversationFamily.AddDialogs(starter);
+
+            TalkIntention.AddDialogs(starter);
+            FlirtIntention.AddDialogs(starter);
+            IntercourseIntention.AddDialogs(starter);
+            DateIntention.AddDialogs(starter);
+            BethrothIntention.AddDialogs(starter);
+            MarriageIntention.AddDialogs(starter);
+            ConfrontIntercourseIntention.AddDialogs(starter);
+            ConfrontDateIntention.AddDialogs(starter);
+            ConfrontBethrothedIntention.AddDialogs(starter);
+            ConfrontMarriageIntention.AddDialogs(starter);
+            ConfrontBirthIntention.AddDialogs(starter);
+            GossipBethrothedIntention.AddDialogs(starter);
+            GossipBirthIntention.AddDialogs(starter);
+            GossipDateIntention.AddDialogs(starter);
+            GossipIntercourseIntention.AddDialogs(starter);
+            GossipMarriageIntention.AddDialogs(starter);
+            PrisonIntercourseIntention.AddDialogs(starter);
+            FinishJoinPartyQuestIntention.AddDialogs(starter);
+            ConfrontationPlayerIntention.AddDialogs(starter);
+            DuelIntention.AddDialogs(starter);
         }
 
         public override void RegisterEvents()
         {
             DramalordPersonalities.Instance.InitEvents();
             DramalordRelations.Instance.InitEvents();
-            DramalordPregancies.Instance.InitEvents();
+            DramalordPregnancies.Instance.InitEvents();
             DramalordDesires.Instance.InitEvents();
             DramalordOrphans.Instance.InitEvents();
-            DramalordEvents.Instance.InitEvents();
             DramalordIntentions.Instance.InitEvents();
             DramalordQuests.Instance.InitEvents();
 
-            CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, new Action(DramalordPregancies.Instance.OnHourlyTick));
-            CampaignEvents.ConversationEnded.AddNonSerializedListener(this, new Action<IEnumerable<CharacterObject>>(ConversationHelper.OnConversationEnded));
-            CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(AdoptionMenu.AddGameMenus));
+            CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, new Action(DramalordIntentions.Instance.OnHourlyTick));
+            CampaignEvents.ConversationEnded.AddNonSerializedListener(this, new Action<IEnumerable<CharacterObject>>(ConversationTools.OnConversationEnded));
+            CampaignEvents.OnAgentJoinedConversationEvent.AddNonSerializedListener(this, new Action<IAgent>(ConversationTools.OnConversationStart));
         }
 
         public override void SyncData(IDataStore dataStore)
         {
             if(dataStore.IsSaving)
             {
-                DramalordDataHandler.All.ForEach(saver => saver.SaveData(dataStore));
+                DramalordData.SaveAllData(dataStore);
             }
             else if(dataStore.IsLoading)
             {
-                DramalordDataHandler.All.ForEach(loader => loader.LoadData(dataStore));
+                DramalordData.LoadAllData(dataStore);
             }
         }
     }

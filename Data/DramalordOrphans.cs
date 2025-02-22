@@ -7,7 +7,7 @@ using TaleWorlds.Core;
 
 namespace Dramalord.Data
 {
-    internal class DramalordOrphans : DramalordDataHandler
+    internal class DramalordOrphans : DramalordData
     {
         private static DramalordOrphans? _instance;
 
@@ -55,32 +55,26 @@ namespace Dramalord.Data
             _orphans.Remove(hero);
         }
 
-        public override void LoadData(IDataStore dataStore)
+        internal override void LoadData(IDataStore dataStore)
         {
             _orphans.Clear();
-            List<string> data = new();
-            dataStore.SyncData(SaveIdentifier, ref data);
 
-            data.Do(heroid =>
+            if(!IsOldData)
             {
-                Hero? orphan = Hero.AllAliveHeroes.Where(hero => hero.StringId == heroid).FirstOrDefault();
-                if(orphan != null && !_orphans.Contains(orphan))
-                {
-                    _orphans.Add(orphan);
-                }
-            });
+                List<Hero> data = new();
+                dataStore.SyncData(SaveIdentifier, ref data);
+                _orphans.AddRange(data);
+            }
+            else
+            {
+                LegacySave.LoadLegacyOrphans(_orphans, dataStore);
+            }   
         }
 
-        public override void SaveData(IDataStore dataStore)
+        internal override void SaveData(IDataStore dataStore)
         {
-            List<string> data = new();
-            _orphans.ForEach(orphan =>
-            {
-                if(!data.Contains(orphan.StringId))
-                {
-                    data.Add(orphan.StringId);
-                }
-            });
+            List<Hero> data = new();
+            data.AddRange(_orphans);
 
             dataStore.SyncData(SaveIdentifier, ref data);
         }
@@ -97,6 +91,10 @@ namespace Dramalord.Data
 
         protected override void OnHeroComesOfAge(Hero hero)
         {
+            if(_orphans.Contains(hero))
+            {
+                hero.SetNewOccupation(Occupation.Wanderer);
+            }
             _orphans.Remove(hero);
         }
 

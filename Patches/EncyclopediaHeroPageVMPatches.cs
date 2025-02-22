@@ -14,6 +14,29 @@ using TaleWorlds.Localization;
 
 namespace Dramalord.Patches
 {
+    [HarmonyPatch(typeof(EncyclopediaHeroPageVM), "IsFriend")]
+    public static class EncyclopediaHeroPageVMIsFriendPatch
+    {
+        [UsedImplicitly]
+        [HarmonyPostfix]
+        private static void IsFriend(ref Hero h1, ref Hero h2, ref bool __result)
+        {
+            __result =  CharacterRelationManager.GetHeroRelation(h1, h2) >= DramalordMCM.Instance.MinTrustFriends;
+        }
+    }
+
+    [HarmonyPatch(typeof(EncyclopediaHeroPageVM), "IsEnemy")]
+    public static class EncyclopediaHeroPageVMIsEnemyPatch
+    {
+        [UsedImplicitly]
+        [HarmonyPostfix]
+        public static void IsEnemy(ref Hero h1, ref Hero h2, ref bool __result)
+        {
+            __result = CharacterRelationManager.GetHeroRelation(h1, h2) <= DramalordMCM.Instance.MaxTrustEnemies;
+        }
+    }
+
+
     [HarmonyPatch(typeof(EncyclopediaHeroPageVM), "Refresh")]
     public static class RefreshPatch
     {
@@ -33,7 +56,6 @@ namespace Dramalord.Patches
                 string yes = GameTexts.FindText("str_yes").ToString();
                 string no = GameTexts.FindText("str_no").ToString();
                 TextObject attraction = new TextObject("{=Dramalord154}Attraction");
-                //TextObject friendship = new TextObject("{=Dramalord136}Trust");
                 TextObject love = new TextObject("{=Dramalord138}Love");
                 TextObject horny = new TextObject("{=Dramalord133}Horny");
                 TextObject sympathy = new TextObject("{=Dramalord155}Sympathy");
@@ -47,28 +69,27 @@ namespace Dramalord.Patches
 
                 TextObject sexOrientation = new TextObject("{=Dramalord157}Sexual orientation");
                 TextObject orientation = GameTexts.FindText("str_missing_info_indicator");
-                if (desires.InfoKnown && desires.AttractionMen >= DramalordMCM.Instance.MinAttraction && desires.AttractionWomen >= DramalordMCM.Instance.MinAttraction)
+                if (desires.IsKnowToPlayer && desires.AttractionMen >= DramalordMCM.Instance.MinAttraction && desires.AttractionWomen >= DramalordMCM.Instance.MinAttraction)
                 {
                     orientation = new TextObject("{=Dramalord159}Bisexual");
                 }
-                else if (desires.InfoKnown && ((hero.IsFemale && desires.AttractionMen >= DramalordMCM.Instance.MinAttraction) || (!hero.IsFemale && desires.AttractionWomen >= DramalordMCM.Instance.MinAttraction)))
+                else if (desires.IsKnowToPlayer && ((hero.IsFemale && desires.AttractionMen >= DramalordMCM.Instance.MinAttraction) || (!hero.IsFemale && desires.AttractionWomen >= DramalordMCM.Instance.MinAttraction)))
                 {
                     orientation = new TextObject("{=Dramalord160}Heterosexual");
                 }
-                else if (desires.InfoKnown && ((hero.IsFemale && desires.AttractionWomen >= DramalordMCM.Instance.MinAttraction) || (!hero.IsFemale && desires.AttractionMen >= DramalordMCM.Instance.MinAttraction)))
+                else if (desires.IsKnowToPlayer && ((hero.IsFemale && desires.AttractionWomen >= DramalordMCM.Instance.MinAttraction) || (!hero.IsFemale && desires.AttractionMen >= DramalordMCM.Instance.MinAttraction)))
                 {
                     orientation = new TextObject("{=Dramalord161}Homosexual");
                 }
-                else if(desires.InfoKnown)
+                else if(desires.IsKnowToPlayer)
                 {
                     orientation = new TextObject("{=Dramalord158}Asexual");
                 }
 
-                __instance.Stats.Add(new StringPairItemVM(attraction.ToString() + ":", (__instance.IsInformationHidden || !desires.InfoKnown) ? hidden : hero.GetAttractionTo(Hero.MainHero).ToString()));
-                //__instance.Stats.Add(new StringPairItemVM(friendship.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetRelationTo(Hero.MainHero).Trust.ToString()));
-                __instance.Stats.Add(new StringPairItemVM(love.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetRelationTo(Hero.MainHero).CurrentLove.ToString()));
+                __instance.Stats.Add(new StringPairItemVM(attraction.ToString() + ":", (__instance.IsInformationHidden || !desires.IsKnowToPlayer) ? hidden : hero.GetAttractionTo(Hero.MainHero).ToString()));
+                __instance.Stats.Add(new StringPairItemVM(love.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetRelationTo(Hero.MainHero).Love.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(sympathy.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetSympathyTo(Hero.MainHero).ToString()));
-                __instance.Stats.Add(new StringPairItemVM(horny.ToString() + ":", __instance.IsInformationHidden ? hidden : hero.GetDesires().Horny.ToString()));
+                __instance.Stats.Add(new StringPairItemVM(horny.ToString() + ":", (__instance.IsInformationHidden || !hero.IsSpouseOf(Hero.MainHero))? hidden : hero.GetDesires().Horny.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(fertile.ToString() + ":", __instance.IsInformationHidden ? hidden : (hero.IsFertile()) ? yes : no));
                 __instance.Stats.Add(new StringPairItemVM(sexOrientation.ToString() + ":", __instance.IsInformationHidden ? hidden : orientation.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(openness.ToString() + ":", __instance.IsInformationHidden ? hidden : personality.Openness.ToString()));
@@ -93,54 +114,46 @@ namespace Dramalord.Patches
                     }
                 }
 
-                if (DramalordMCM.Instance.ShowLovers)
+                foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Lover && relation.Value.IsKnownToPlayer).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                 {
-                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Lover).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
+                    if (charObj.IsHero)
                     {
-                        if (charObj.IsHero)
-                        {
-                            MBBindingList<HeroVM> companions = __instance.Companions;
-                            companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
+                        MBBindingList<HeroVM> companions = __instance.Companions;
+                        companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
 
-                            MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
-                            family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
+                        MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
+                        family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
 
-                            __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
-                        }
+                        __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
                     }
                 }
-
-                if (DramalordMCM.Instance.ShowFriendsWithBenefits)
+                
+                foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.FriendWithBenefits && relation.Value.IsKnownToPlayer).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                 {
-                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.FriendWithBenefits).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
+                    if (charObj.IsHero)
                     {
-                        if (charObj.IsHero)
-                        {
-                            MBBindingList<HeroVM> companions = __instance.Companions;
-                            companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
+                        MBBindingList<HeroVM> companions = __instance.Companions;
+                        companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
 
-                            MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
-                            family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
+                        MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
+                        family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
 
-                            __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
-                        }
+                        __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
                     }
                 }
+                
 
-                if (DramalordMCM.Instance.ShowBetrotheds)
+                foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Betrothed && relation.Value.IsKnownToPlayer).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                 {
-                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Betrothed).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
+                    if (charObj.IsHero)
                     {
-                        if (charObj.IsHero)
-                        {
-                            MBBindingList<HeroVM> companions = __instance.Companions;
-                            companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
+                        MBBindingList<HeroVM> companions = __instance.Companions;
+                        companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
 
-                            MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
-                            family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
+                        MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
+                        family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
 
-                            __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
-                        }
+                        __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
                     }
                 }
             }

@@ -14,7 +14,7 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void IsSuitableForMarriage(ref Hero maidenOrSuitor, ref bool __result)
         {
-            if(!DramalordMCM.Instance.AllowDefaultMarriagesGlobal)
+            if(!DramalordMCM.Instance.AllowDefaultMarriages)
             {
                 __result = false;
             }
