@@ -32,7 +32,7 @@ namespace Dramalord.Actions
                 BreakupAction.Apply(secondHero, secondHero.Spouse);
             }
 
-            if (firstHero.Occupation != Occupation.Lord)
+            if (firstHero.Occupation != Occupation.Lord && firstHero.Clan != null)
             {
                 firstHero.SetName(firstHero.FirstName, firstHero.FirstName);
                 firstHero.SetNewOccupation(Occupation.Lord);
@@ -45,7 +45,7 @@ namespace Dramalord.Actions
                 }
             }
 
-            if (secondHero.Occupation != Occupation.Lord)
+            if (secondHero.Occupation != Occupation.Lord && secondHero.Clan != null)
             {
                 secondHero.SetName(secondHero.FirstName, secondHero.FirstName);
                 secondHero.SetNewOccupation(Occupation.Lord);
@@ -60,6 +60,7 @@ namespace Dramalord.Actions
 
             if (firstHero.Clan == null && secondHero.Clan == null)
             {
+                /*
                 Clan? targetClan = firstHero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Friend).Select(keyvalue => keyvalue.Key).FirstOrDefault(relation => relation.Clan != null && relation.Clan != Clan.PlayerClan)?.Clan
                     ?? secondHero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Friend).Select(keyvalue => keyvalue.Key).FirstOrDefault(selected => selected.Clan != null && selected.Clan != Clan.PlayerClan)?.Clan;
 
@@ -72,6 +73,7 @@ namespace Dramalord.Actions
                 {
                     return false;
                 }
+                */
             }
             else if (firstHero.Clan != secondHero.Clan)
             {

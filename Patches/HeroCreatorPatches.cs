@@ -29,7 +29,7 @@ namespace Dramalord.Patches
                 }
                 */
             }
-            if(DramalordMCM.Instance.NativeBirthDebug)
+            if(DramalordMCM.Instance.BirthDebugOutput)
             {
                 string sex = isOffspringFemale ? "female" : "male";
                 InformationManager.DisplayMessage(new InformationMessage($"[Native birth] Mother:{mother.Name}, Father:{father.Name}, Child will be {sex}", new Color(1f, 0.08f, 0.58f)));

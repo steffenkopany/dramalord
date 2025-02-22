@@ -26,6 +26,7 @@ namespace Dramalord.Missions
           bool spawnBothSidesWithHorse,
           bool friendlyDuel)
         {
+            TaleWorlds.CampaignSystem.Encounters.CastleEncounter
             List<string> forbiddenScenes = new List<string>()
             {
                 "battle_terrain_biome_030",

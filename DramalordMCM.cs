@@ -189,8 +189,8 @@ namespace Dramalord
         public bool NoPlayerDialogs { get; set; } = false;
 
         [SettingPropertyGroup("{=Dramalord313}Optional")]
-        [SettingPropertyBool("Native Birth Debug Log", Order = 4, HintText = "Only for debugging crashes on native births - will print info to the logs", RequireRestart = false)]
-        public bool NativeBirthDebug { get; set; } = false;
+        [SettingPropertyBool("Birth Debug Log", Order = 4, HintText = "Only for debugging crashes on native births - will print info to the logs", RequireRestart = false)]
+        public bool BirthDebugOutput { get; set; } = false;
 
         public override string Id => DramalordSubModule.ModuleName;
 

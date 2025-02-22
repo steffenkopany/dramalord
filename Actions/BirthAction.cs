@@ -2,9 +2,7 @@
 using Dramalord.Extensions;
 using Dramalord.LogItems;
 using Helpers;
-using Messages.FromClient.ToLobbyServer;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.MapNotificationTypes;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
@@ -20,6 +18,12 @@ namespace Dramalord.Actions
         internal static void Apply(Hero mother, HeroPregnancy pregnancy)
         {
             Hero father = pregnancy.Father;
+
+            if (DramalordMCM.Instance.BirthDebugOutput)
+            {
+                InformationManager.DisplayMessage(new InformationMessage($"[Dramalord birth] Mother:{mother.Name}, Father:{father.Name}", new Color(1f, 0.08f, 0.58f)));
+            }
+
             Hero child = CreateBaby(mother, father);
             child.UpdateHomeSettlement();
             mother.IsPregnant = false;
@@ -82,12 +86,6 @@ namespace Dramalord.Actions
                     mother.AddIntention(child, IntentionType.Orphanize, eventID);
                 }
             }
-            /*
-            else if(mother.Clan == null && DramalordMCM.Instance.KeepNotableChildren)
-            {
-                child.SetNewOccupation(Occupation.Wanderer);
-            }
-            */
 
             if ((mother.Clan == Clan.PlayerClan || father.Clan == Clan.PlayerClan) || !DramalordMCM.Instance.ShowOnlyClanInteractions)
             {
@@ -97,7 +95,16 @@ namespace Dramalord.Actions
 
         private static Hero CreateBaby(Hero mother, Hero father)
         {
-            CharacterObject template = (MBRandom.RandomInt(1, 100) > 50) ? mother.CharacterObject : father.CharacterObject;
+            CharacterObject? template = null;
+            if (mother.IsLord && father.IsLord)
+            {
+                template = (MBRandom.RandomInt(1, 100) > 50) ? mother.CharacterObject : father.CharacterObject;
+            }
+            else
+            {
+                template = mother.IsLord ? mother.CharacterObject : father.IsLord ? father.CharacterObject : Hero.AllAliveHeroes.GetRandomElementWithPredicate(h => h.IsLord && h.Clan != Clan.PlayerClan).CharacterObject;
+            }
+
             Settlement bornSettlement = mother.CurrentSettlement ?? father.HomeSettlement ?? SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
 
             Clan? faction = mother.Clan;
