@@ -43,7 +43,7 @@ namespace Dramalord.Data
             {
                 if (_lastUpdate.ElapsedDaysUntilNow > DramalordMCM.Instance.LoveDecayStartDay)
                 {
-                    _love = MBMath.ClampInt(_love - (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), -100, 100);
+                    _love = MBMath.ClampInt(_love - (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), (_love >= 0 && _lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay < 0) ? 0 : -100, 100);
                 }
                 _lastInteraction = value;
                 _lastUpdate = value;
@@ -56,7 +56,7 @@ namespace Dramalord.Data
             {
                 if (_lastUpdate.ElapsedDaysUntilNow > DramalordMCM.Instance.LoveDecayStartDay)
                 {
-                    _love = MBMath.ClampInt(_love - (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), -100, 100);
+                    _love = MBMath.ClampInt(_love - (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), (_love >= 0 && _lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay < 0) ? 0 : -100, 100);
                     _lastUpdate = CampaignTime.DaysFromNow(DramalordMCM.Instance.LoveDecayStartDay);
                 }
                 return _love;
