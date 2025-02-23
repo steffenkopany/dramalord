@@ -146,7 +146,7 @@ namespace Dramalord.Data.Intentions
         {
             ConversationLines.npc_gossip_child.SetTextVariable("HERO", EventIntention.IntentionHero.Name);
             ConversationLines.npc_gossip_child.SetTextVariable("OTHER", EventIntention.Pregnancy.Father.Name);
-            ConversationLines.npc_starts_confrontation_known.SetTextVariable("OTHER", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
+            ConversationLines.npc_starts_confrontation_known.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Hero.MainHero, false));
         }
     }
 }

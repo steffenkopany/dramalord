@@ -90,7 +90,7 @@ namespace Dramalord.Data
             {
                 Dictionary<Hero, HeroPregnancy> data = new();
                 dataStore.SyncData(SaveIdentifier, ref data);
-                _pregnancies.AddRange(data);
+                data.Do(pair => _pregnancies.Add(pair.Key, pair.Value));
             }
             else
             {
@@ -104,7 +104,7 @@ namespace Dramalord.Data
         {
             Dictionary<Hero, HeroPregnancy> data = new();
 
-            data.AddRange(_pregnancies);
+            _pregnancies.Do(pair => data.Add(pair.Key, pair.Value));
 
             dataStore.SyncData(SaveIdentifier, ref data);
         }
