@@ -6,6 +6,7 @@ using Dramalord.Notifications.Logs;
 using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
@@ -14,8 +15,6 @@ namespace Dramalord.Data.Intentions
 {
     internal class PrisonIntercourseIntention : Intention
     {
-        internal static bool HotButterFound = false;
-
         private static bool _accepted = false;
 
         public PrisonIntercourseIntention(Hero target, Hero intentionHero, CampaignTime validUntil, bool alwaysExecute = false) : base(intentionHero, target, validUntil)
@@ -48,11 +47,11 @@ namespace Dramalord.Data.Intentions
 
             if (_accepted)
             {
-                IntercourseAction.Apply(IntentionHero, Target);
+                IntercourseAction.Apply(IntentionHero, Target, out int loveGain);
 
                 if (Target == Hero.MainHero || IntentionHero == Hero.MainHero)
                 {
-                    if (HotButterFound)
+                    if (IntercourseIntention.HotButterFound)
                     {
                         MBInformationManager.ShowSceneNotification(new HotButterNotification(IntentionHero, Target, IntentionHero.CurrentSettlement));
                     }
@@ -72,18 +71,7 @@ namespace Dramalord.Data.Intentions
 
 
                 RelationshipLossAction.Apply(IntentionHero, Target, out int loveDamage, out int trustDamage, 50, 50);
-                new ChangeOpinionIntention(IntentionHero, Target, loveDamage, trustDamage, CampaignTime.Now).Action();
-
-                if ((IntentionHero == Hero.MainHero || Target == Hero.MainHero) && (loveDamage != 0 || trustDamage != 0))
-                {
-                    Hero other = (IntentionHero == Hero.MainHero) ? Target : IntentionHero;
-                    TextObject banner = new TextObject("{=Dramalord179}Relation loss with {HERO.LINK}. (Love {NUM}, Trust {NUM2})");
-                    StringHelpers.SetCharacterProperties("HERO", other.CharacterObject, banner);
-                    MBTextManager.SetTextVariable("NUM", ConversationTools.FormatNumber((int)loveDamage));
-                    MBTextManager.SetTextVariable("NUM2", ConversationTools.FormatNumber((int)trustDamage));
-                    MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
-                }
-                
+                new ChangeOpinionIntention(IntentionHero, Target, loveDamage, trustDamage, CampaignTime.Now).Action();     
 
                 if (IntentionHero.IsFemale != Target.IsFemale && MBRandom.RandomInt(1, 100) < DramalordMCM.Instance.PregnancyChance)
                 {
@@ -113,6 +101,8 @@ namespace Dramalord.Data.Intentions
                         }
                     }
                 }
+
+                EndCaptivityAction.ApplyByRansom(Target, IntentionHero);
             }
 
             _accepted = false;

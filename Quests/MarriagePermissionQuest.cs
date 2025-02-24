@@ -85,7 +85,8 @@ namespace Dramalord.Quests
         protected override void InitializeQuestOnGameLoad()
         {
             DialogFlow permitterFlow = DialogFlow.CreateDialogFlow("hero_main_options")
-                .PlayerLine("{player_quest_marriage_ask}")
+                .BeginPlayerOptions()
+                .PlayerOption("{player_quest_marriage_ask}")
                 .Condition(() => { SetDialogs(); return Permitter != null && Permitter == Hero.OneToOneConversationHero; })
                 .BeginNpcOptions()
                     .NpcOption("{player_quest_marriage_agree}", () => Clan.PlayerClan.Tier >= 3 && Permitter?.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrustFriends)
@@ -103,7 +104,8 @@ namespace Dramalord.Quests
                     .NpcOption("{player_quest_marriage_decline}", () => Clan.PlayerClan.Tier < 3 && Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) < 0)
                         .Consequence(() => { QuestFail(Hero.MainHero); ConversationTools.EndConversation(); })
                         .CloseDialog()
-                .EndNpcOptions();
+                .EndNpcOptions()
+                .EndPlayerOptions();
 
             Campaign.Current.ConversationManager.AddDialogFlow(permitterFlow, this);
         }

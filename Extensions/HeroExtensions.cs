@@ -141,9 +141,9 @@ namespace Dramalord.Extensions
         {
             if (DramalordMCM.Instance.PlayerSpouseFaithful && hero != Hero.MainHero && (hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero)))
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
 
         public static bool IsRelativeOf(this Hero hero, Hero target)

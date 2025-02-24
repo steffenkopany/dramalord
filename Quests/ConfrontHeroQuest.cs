@@ -118,7 +118,7 @@ namespace Dramalord.Quests
         {
 
             DialogFlow playerFlow = DialogFlow.CreateDialogFlow("start", 200)
-                .NpcLine("{npc_starts_confrontation_surprised}")
+                .NpcLine("{npc_starts_confrontation_surprised}[ib:nervous][if:convo_nervous]")
                     .Condition(() => 
                     { 
                         if (Hero.OneToOneConversationHero == QuestGiver) 
