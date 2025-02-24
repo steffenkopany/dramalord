@@ -27,25 +27,23 @@ namespace Dramalord.Conversations
         internal static void AddDialogs(CampaignGameStarter starter)
         {
             DialogFlow startFlow = DialogFlow.CreateDialogFlow("hero_main_options")
-                .BeginPlayerOptions()
-                    .PlayerOption("{player_approach_start}")
-                        .Condition(() =>
+                .PlayerLine("{player_approach_start}")
+                    .Condition(() =>
+                    {
+                        if (Hero.OneToOneConversationHero.IsDramalordLegit() && !Hero.OneToOneConversationHero.IsPrisoner && !Hero.MainHero.IsPrisoner)
                         {
-                            if (Hero.OneToOneConversationHero.IsDramalordLegit() && !Hero.OneToOneConversationHero.IsPrisoner && !Hero.MainHero.IsPrisoner)
-                            {
-                                SetupLines();
-                                return true;
-                            }
-                            return false;
-                        })
-                    .BeginNpcOptions()
-                        .NpcOption("{player_interaction_start_react_yes}[ib:normal2][if:convo_calm_friendly]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() > -30)
-                            .GotoDialogState("player_interaction_selection")
-                        .NpcOption("{player_interaction_start_react_no}[ib:closed][if:convo_bored]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() <= -30)
-                            .Consequence(() => ConversationTools.EndConversation())
-                            .CloseDialog()
-                    .EndNpcOptions()
-                .EndPlayerOptions();
+                            SetupLines();
+                            return true;
+                        }
+                        return false;
+                    })
+                .BeginNpcOptions()
+                    .NpcOption("{player_interaction_start_react_yes}[ib:normal2][if:convo_calm_friendly]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() > -30)
+                        .GotoDialogState("player_interaction_selection")
+                    .NpcOption("{player_interaction_start_react_no}[ib:closed][if:convo_bored]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() <= -30)
+                        .Consequence(() => ConversationTools.EndConversation())
+                        .CloseDialog()
+                .EndNpcOptions();
 
             DialogFlow playerSelectionFlow = DialogFlow.CreateDialogFlow("player_interaction_selection")
                 .BeginPlayerOptions()
