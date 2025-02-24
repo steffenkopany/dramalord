@@ -52,7 +52,7 @@ namespace Dramalord.Data.Intentions
 
             if (_accepted)
             {
-                IntercourseAction.Apply(IntentionHero, Target);
+                IntercourseAction.Apply(IntentionHero, Target, out int loveGain);
 
                 if (Target == Hero.MainHero || IntentionHero == Hero.MainHero)
                 {
@@ -68,6 +68,8 @@ namespace Dramalord.Data.Intentions
                         MBInformationManager.AddQuickInformation(banner, 1000, otherHero.CharacterObject, "event:/ui/notification/relation");
                     }
                 }
+
+                new ChangeOpinionIntention(IntentionHero, Target, loveGain, 0, CampaignTime.Now).Action();
 
                 if (DramalordMCM.Instance.IntimateLogs)
                 {

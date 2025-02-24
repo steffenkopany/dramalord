@@ -16,7 +16,8 @@ namespace Dramalord.Conversations
         internal static void AddDialogs(CampaignGameStarter starter)
         {
             DialogFlow goodsFlow = DialogFlow.CreateDialogFlow("hero_main_options")
-                .PlayerLine("{player_goods_greeting}")
+                .BeginPlayerOptions()
+                .PlayerOption("{player_goods_greeting}")
                     .Condition(() => { if (Hero.OneToOneConversationHero.IsDramalordLegit()) SetupLines(); return Hero.OneToOneConversationHero.IsDramalordLegit() && Hero.OneToOneConversationHero.Occupation == Occupation.GangLeader; })
                     .NpcLine("{npc_goods_offer}")
                         .BeginPlayerOptions()
@@ -189,7 +190,8 @@ namespace Dramalord.Conversations
                             .PlayerOption("{nevermind}")
                                 .NpcLine("{npc_as_you_wish_reply}")
                                 .GotoDialogState("hero_main_options")
-                        .EndPlayerOptions();
+                        .EndPlayerOptions()
+                .EndPlayerOptions();
 
             Campaign.Current.ConversationManager.AddDialogFlow(goodsFlow);
         }

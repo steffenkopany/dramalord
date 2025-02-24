@@ -1,11 +1,15 @@
-﻿using Dramalord.Data;
+﻿using Dramalord.Actions;
+using Dramalord.Data;
 using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
 using Dramalord.Quests;
+using Helpers;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace Dramalord.Behaviours
 {
@@ -30,11 +34,13 @@ namespace Dramalord.Behaviours
                 bool isAgreeable = personality.Agreeableness >= WeightedRandom(100, 75, 0, 100);
                 bool isNeurotic = personality.Neuroticism >= WeightedRandom(100, 75, 0, 100);
 
-                if(isExtrovert)
+                bool playerClose = false;
+                int randomNumber = MBRandom.RandomInt(1, 100);
+
+                if (isExtrovert)
                 {
-                    int randomNumber = MBRandom.RandomInt(1, 100);
                     List<Hero> closeHeroes = hero.GetCloseHeroes();
-                    bool playerClose = closeHeroes.Contains(Hero.MainHero) && hero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow >= DramalordMCM.Instance.DaysBetweenInteractions;
+                    playerClose = closeHeroes.Contains(Hero.MainHero) && hero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow >= DramalordMCM.Instance.DaysBetweenInteractions;
                     if(closeHeroes.Count > 0)
                     {
                         Hero? target = null;
@@ -55,10 +61,10 @@ namespace Dramalord.Behaviours
                                 }
                             }
 
-                            if(!isAgreeable)
+                            if(hero.GetHeroTraits().Honor <= 0)
                             {
-                                target = hero.GetClosePrisoners().GetRandomElementWithPredicate(h => h.IsAutonom() && hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction && !hero.HasMetRecently(h));
-                                if (target != null && (target == Hero.MainHero || !desires.HasToy || !target.IsFaithful()) && new PrisonIntercourseIntention(target, hero, CampaignTime.Now).Action())
+                                target = hero.GetClosePrisoners().GetRandomElementWithPredicate(h => hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction && !hero.HasMetRecently(h));
+                                if (target != null && (target == Hero.MainHero || !desires.HasToy || !hero.IsFaithful()) && new PrisonIntercourseIntention(target, hero, CampaignTime.Now).Action())
                                 {
                                     return;
                                 }
@@ -66,9 +72,39 @@ namespace Dramalord.Behaviours
 
                             if (!playerClose && hero.IsLoverOf(Hero.MainHero) && randomNumber <= DramalordMCM.Instance.QuestChance && DramalordQuests.Instance.GetQuest(hero) == null)
                             {
-                                VisitLoverQuest quest = new VisitLoverQuest(hero);
-                                quest.StartQuest();
-                                DramalordQuests.Instance.AddQuest(hero, quest);
+
+                                int speed = (int)Campaign.Current.TimeControlMode;
+                                Campaign.Current.SetTimeSpeed(0);
+                                TextObject title = new TextObject("{=Dramalord304}{QUESTHERO} requests your presence.");
+                                TextObject text = new TextObject("{=Dramalord303}{HERO.LINK} asks you to find them, as they have an urgent matter to discuss. Will you make it in time?");
+                                title.SetTextVariable("HERO1", hero.Name);
+                                StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, text);
+                                InformationManager.ShowInquiry(
+                                        new InquiryData(
+                                            title.ToString(),
+                                            text.ToString(),
+                                            true,
+                                            true,
+                                            GameTexts.FindText("str_yes").ToString(),
+                                            GameTexts.FindText("str_no").ToString(),
+                                            () => {
+                                                VisitLoverQuest quest = new VisitLoverQuest(hero);
+                                                quest.StartQuest();
+                                                DramalordQuests.Instance.AddQuest(hero, quest);
+                                                Campaign.Current.SetTimeSpeed(speed);
+                                            },
+                                            () => {
+                                                Campaign.Current.SetTimeSpeed(speed);
+
+                                                TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed by your neglection of their matter...");
+                                                StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+                                                MBInformationManager.AddQuickInformation(banner, 0, hero.CharacterObject, "event:/ui/notification/relation");
+
+                                                RelationshipLossAction.Apply(hero, Hero.MainHero, out int loveDamage, out int trustDamage, 10, 17);
+                                                new ChangeOpinionIntention(hero, Hero.MainHero, loveDamage, trustDamage, CampaignTime.Now).Action();
+                                            }), true);
+
+                                
                                 return;
                             }
                         }
@@ -91,22 +127,19 @@ namespace Dramalord.Behaviours
                             }
                         }
 
-                        //if (isOpen)
-                        //{
-                            target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero)) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.HasMutualAttractionWith(h) && !hero.IsRelativeOf(h) && !hero.HasMetRecently(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
-                            if (target != null)
+                        target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero)) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.HasMutualAttractionWith(h) && !hero.IsRelativeOf(h) && !hero.HasMetRecently(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
+                        if (target != null)
+                        {
+                            HeroRelation targetRelation = hero.GetRelationTo(target);
+                            if (targetRelation.Love >= DramalordMCM.Instance.MinDatingLove && (target == Hero.MainHero || !desires.HasToy || !target.IsFaithful() || hero.Spouse == target) && new DateIntention(target, hero, CampaignTime.Now).Action())
                             {
-                                HeroRelation targetRelation = hero.GetRelationTo(target);
-                                if (targetRelation.Love >= DramalordMCM.Instance.MinDatingLove && (target == Hero.MainHero || !desires.HasToy || !target.IsFaithful() || hero.Spouse == target) && new DateIntention(target, hero, CampaignTime.Now).Action())
-                                {
-                                    return;
-                                }
-                                else if (new FlirtIntention(target, hero, CampaignTime.Now).Action())
-                                {
-                                    return;
-                                }
+                                return;
                             }
-                        //}
+                            else if (new FlirtIntention(target, hero, CampaignTime.Now).Action())
+                            {
+                                return;
+                            }
+                        }
 
                         target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && !hero.HasMetRecently(h));
                         if (target != null && new TalkIntention(target, hero, CampaignTime.Now).Action())
@@ -116,7 +149,45 @@ namespace Dramalord.Behaviours
                     }
                 }
 
-                if(desires.HasToy)
+                //twice, if there's noone around we gotta check for the quest again
+                if (isHorny && !playerClose && hero.IsLoverOf(Hero.MainHero) && randomNumber <= DramalordMCM.Instance.QuestChance && DramalordQuests.Instance.GetQuest(hero) == null)
+                {
+                    int speed = (int)Campaign.Current.TimeControlMode;
+                    Campaign.Current.SetTimeSpeed(0);
+                    TextObject title = new TextObject("{=Dramalord304}{QUESTHERO} requests your presence.");
+                    TextObject text = new TextObject("{=Dramalord303}{HERO.LINK} asks you to find them, as they have an urgent matter to discuss. Will you make it in time?");
+                    title.SetTextVariable("QUESTHERO", hero.Name);
+                    StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, text);
+                    InformationManager.ShowInquiry(
+                            new InquiryData(
+                                title.ToString(),
+                                text.ToString(),
+                                true,
+                                true,
+                                GameTexts.FindText("str_yes").ToString(),
+                                GameTexts.FindText("str_no").ToString(),
+                                () => {
+                                    VisitLoverQuest quest = new VisitLoverQuest(hero);
+                                    quest.StartQuest();
+                                    DramalordQuests.Instance.AddQuest(hero, quest);
+                                    Campaign.Current.SetTimeSpeed(speed);
+                                },
+                                () => {
+                                    Campaign.Current.SetTimeSpeed(speed);
+
+                                    TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed by your neglection of their matter...");
+                                    StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+                                    MBInformationManager.AddQuickInformation(banner, 0, hero.CharacterObject, "event:/ui/notification/relation");
+
+                                    RelationshipLossAction.Apply(hero, Hero.MainHero, out int loveDamage, out int trustDamage, 10, 17);
+                                    new ChangeOpinionIntention(hero, Hero.MainHero, loveDamage, trustDamage, CampaignTime.Now).Action();
+                                }), true);
+
+
+                    return;
+                }
+
+                if (desires.HasToy)
                 {
                     new UseToyIntention(hero, CampaignTime.Now).Action();
                 }

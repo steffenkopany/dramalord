@@ -45,7 +45,7 @@ namespace Dramalord.Data.Intentions
                 MBInformationManager.AddNotice(new ChildBornMapNotification(child, textObject, CampaignTime.Now));
             }
 
-            if(Pregnancy.Father == Hero.MainHero || Hero.MainHero.IsSpouseOf(IntentionHero) || (IntentionHero.Clan == Clan.PlayerClan && IntentionHero != Hero.MainHero))
+            if((IntentionHero.Clan == Clan.PlayerClan && IntentionHero != Hero.MainHero) || (Pregnancy.Father.Clan != null && Pregnancy.Father.Clan == Clan.PlayerClan))
             {
                 int speed = (int)Campaign.Current.TimeControlMode;
                 Campaign.Current.SetTimeSpeed(0);

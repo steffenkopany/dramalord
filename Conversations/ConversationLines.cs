@@ -1,8 +1,4 @@
-﻿using SandBox.BoardGames;
-using System.Runtime.ConstrainedExecution;
-using System;
-using TaleWorlds.CampaignSystem;
-using TaleWorlds.Library;
+﻿using TaleWorlds.CampaignSystem;
 using TaleWorlds.Localization;
 
 namespace Dramalord.Conversations
@@ -325,7 +321,7 @@ namespace Dramalord.Conversations
 
         internal static void Init()
         {
-            MBTextManager.SetTextVariable(nameof(npc_starts_interaction_unknown), npc_starts_interaction_unknown);
+            MBTextManager.SetTextVariable("npc_starts_interaction_unknown", npc_starts_interaction_unknown);
             MBTextManager.SetTextVariable("npc_starts_interaction_known", npc_starts_interaction_known);
             MBTextManager.SetTextVariable("player_interaction_start_react_yes", player_interaction_start_react_yes);
             MBTextManager.SetTextVariable("player_interaction_start_react_no", player_interaction_start_react_no);
