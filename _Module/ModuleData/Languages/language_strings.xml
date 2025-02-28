@@ -32,7 +32,7 @@
     <string id="Dramalord026" text="my special friend" />
     <string id="Dramalord027" text="Excuse me, {TITLE}. I do not believe we have been introduced, but might I trouble you for a moment of your time?" />
     <string id="Dramalord028" text="{TITLE}, it is a pleasure to see you. May I humbly request a moment of your time?" />
-    <string id="Dramalord029" text="Certainly, {TITLE}. How may I be of service?" />
+    <string id="Dramalord029" text="Of course, {TITLE}. What is it you wish to discuss?" />
     <string id="Dramalord030" text="My apologies, {TITLE}, but I am short of time right now." />
     <string id="Dramalord031" text="I am always eager to hear new stories. Tell me of your latest exploits while traveling in the realm." />
     <string id="Dramalord032" text="There is a matter that has weighed upon my thoughts for some time. I would value hearing your opinion." />
@@ -218,7 +218,7 @@
     <string id="Dramalord221" text="Show Lovers" />
     <string id="Dramalord222" text="Show lovers on Encyclopedia page of a hero" />
     <string id="Dramalord223" text="Of course, {TITLE}. Let me tell you a tale of war and power..." />
-    <string id="Dramalord224" text="You do flatter me so, {TITLE}. I cannot say that I do not enjoy it, but if I grow too vain, I shall hold you responsible." />
+    <string id="Dramalord224" text="Oh, such flattery, {TITLE}. Alright, you have piqued my interest. Tell me more about yourself.." />
     <string id="Dramalord225" text="You know, {TITLE}... I have dreamt of this moment since I first laid eyes on you." />
     <string id="Dramalord226" text="Of course, {TITLE}. Let us spend some time together, just the two of us." />
     <string id="Dramalord227" text="Show Betrotheds" />
@@ -332,7 +332,7 @@
     <string id="Dramalord336" text="You learned the physical preferences of {HERO.LINK}." />
     <string id="Dramalord337" text="Minimum Trust Friends" />
     <string id="Dramalord338" text="Trust points required to consider a hero a friend (Dramalord friend only)" />
-    <string id="Dramalord339" text="I know you have tales worth telling. Indulge me with a few, will you? (Friendly chat)" />
+    <string id="Dramalord339" text="It may do us well to share our thoughts. Care to talk? (Friendly chat)" />
     <string id="Dramalord340" text="You look stunning, {TITLE}, though I suspect you are already well aware... (Flirting)" />
     <string id="Dramalord341" text="I must confess I have feelings for you, {TITLE}! (Love affair)" />
     <string id="Dramalord342" text="There is nothing I desire more than to be with you, and you alone. (Dating)" />

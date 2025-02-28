@@ -11,7 +11,7 @@ namespace Dramalord.Conversations
     {
         public static TextObject npc_starts_interaction_unknown = new("{=Dramalord027}Excuse me, {TITLE}. I do not believe we have been introduced, but might I trouble you for a moment of your time?");
         public static TextObject npc_starts_interaction_known = new("{=Dramalord028}{TITLE}, it is a pleasure to see you. May I humbly request a moment of your time?");
-        public static TextObject player_interaction_start_react_yes = new("{=Dramalord029}Certainly, {TITLE}. How may I be of service?");
+        public static TextObject player_interaction_start_react_yes = new("{=Dramalord029}Of course, {TITLE}. What is it you wish to discuss?");
         public static TextObject player_interaction_start_react_no = new("{=Dramalord030}My apologies, {TITLE}, but I am short of time right now.");
         public static TextObject npc_interaction_talk_1 = new("{=Dramalord031}I am always eager to hear new stories. Tell me of your latest exploits while traveling in the realm.");
         public static TextObject npc_interaction_talk_2 = new("{=Dramalord032}There is a matter that has weighed upon my thoughts for some time. I would value hearing your opinion.");
@@ -79,7 +79,7 @@ namespace Dramalord.Conversations
         public static TextObject npc_as_you_wish_reply = new("{=Dramalord186}As you wish, {TITLE}.");
 
         public static TextObject npc_interaction_reply_talk_2 = new("{=Dramalord223}Of course, {TITLE}. Let me tell you a tale of war and power...");
-        public static TextObject npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}You do flatter me so, {TITLE}. I cannot say that I do not enjoy it, but if I grow too vain, I shall hold you responsible.");
+        public static TextObject npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}Oh, such flattery, {TITLE}. Alright, you have piqued my interest. Tell me more about yourself.");
         public static TextObject npc_interaction_reply_date_first_yes_2 = new("{=Dramalord225}You know, {TITLE}... I have dreamt of this moment since I first laid eyes on you.");
         public static TextObject npc_interaction_reply_date_yes_2 = new("{=Dramalord226}Of course, {TITLE}. Let us spend some time together, just the two of us.");
 
@@ -154,7 +154,7 @@ namespace Dramalord.Conversations
         public static TextObject npc_info_reply_age = new("{=Dramalord331}I am drawn to those who are {AGEDIFF} than myself. I prefer partners around the age of {AGE}.");
         public static TextObject npc_info_reply_summary = new("{=Dramalord332}As for you {TITLE}, I think you are probably a... {RATING} out of 100.");
 
-        public static TextObject player_interaction_talk = new("{=Dramalord339}I know you have tales worth telling. Indulge me with a few, will you? (Friendly chat)");
+        public static TextObject player_interaction_talk = new("{=Dramalord339}It may do us well to share our thoughts. Care to talk? (Friendly chat)");
         public static TextObject player_interaction_flirt = new("{=Dramalord340}You look stunning, {TITLE}, though I suspect you are already well aware... (Flirting)");
         public static TextObject player_interaction_date_first = new("{=Dramalord341}I must confess I have feelings for you, {TITLE}! (Love affair)");
         public static TextObject player_interaction_date = new("{=Dramalord342}There is nothing I desire more than to be with you, and you alone. (Dating)");
@@ -689,7 +689,7 @@ namespace Dramalord.Conversations
             npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord186}As you wish, {TITLE}.");
 
             npc_interaction_reply_talk_2 = new("{=Dramalord223}Of course, {TITLE}. Let me tell you a tale of war and power...");
-            npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}You do flatter me so, {TITLE}. I cannot say that I do not enjoy it, but if I grow too vain, I shall hold you responsible.");
+            npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}Oh, such flattery, {TITLE}. Alright, you have piqued my interest. Tell me more about yourself.");
             npc_interaction_reply_date_first_yes_2 = new("{=Dramalord225}You know, {TITLE}... I have dreamt of this moment since I first laid eyes on you.");
             npc_interaction_reply_date_yes_2 = new("{=Dramalord226}Of course, {TITLE}. Let us spend some time together, just the two of us.");
 
