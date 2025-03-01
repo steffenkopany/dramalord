@@ -3,8 +3,6 @@ using Dramalord.Extensions;
 using HarmonyLib;
 using Helpers;
 using JetBrains.Annotations;
-using System.Collections.Generic;
-using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -45,40 +43,6 @@ namespace Dramalord.Patches
                 MBTextManager.SetTextVariable("STR_SALUTATION", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, true));
                 return;
             }
-        }
-    }
-
-    [HarmonyPatch(typeof(LordConversationsCampaignBehavior), "conversation_lord_introduction_on_condition")]
-    public static class conversation_lord_introduction_on_conditionPatch
-    {
-        [UsedImplicitly]
-        [HarmonyPrefix]
-        public static bool conversation_lord_introduction_on_condition(ref bool __result)
-        {
-            if (Hero.OneToOneConversationHero != null && Campaign.Current.ConversationManager.CurrentConversationIsFirst && Hero.OneToOneConversationHero.IsLord && Hero.OneToOneConversationHero.Clan != null)
-            {
-                return true;
-            }
-
-            __result = false;
-            if (Hero.OneToOneConversationHero != null && Campaign.Current.ConversationManager.CurrentConversationIsFirst && Hero.OneToOneConversationHero.IsLord && !Hero.OneToOneConversationHero.IsMinorFactionHero && !Hero.OneToOneConversationHero.IsRebel)
-            {
-                string id = "str_comment_noble_generic_intro";
-                TextObject textObject = Campaign.Current.ConversationManager.FindMatchingTextOrNull(id, CharacterObject.OneToOneConversationCharacter);
-                CharacterObject.OneToOneConversationCharacter.HeroObject.SetPropertiesToTextObject(textObject, "CONVERSATION_CHARACTER");
-                textObject.SetTextVariable("CLAN_NAME", Hero.OneToOneConversationHero.Clan?.EncyclopediaLinkWithName);
-                MBTextManager.SetTextVariable("LORD_INTRODUCTION_STRING", textObject);
-                List<TextObject> list = new List<TextObject>();
-                foreach (Settlement item in Campaign.Current.Settlements.Where((Settlement settlement) => settlement.IsTown).ToList())
-                {
-                    if (item.OwnerClan.Leader == Hero.OneToOneConversationHero)
-                    {
-                        list.Add(item.EncyclopediaLinkWithName);
-                    }
-                }
-                __result = true;
-            }
-            return false;
         }
     }
 

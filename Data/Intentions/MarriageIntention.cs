@@ -4,7 +4,6 @@ using Dramalord.Extensions;
 using Dramalord.Notifications.Logs;
 using Helpers;
 using System.Collections.Generic;
-using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.MapNotificationTypes;
@@ -52,67 +51,17 @@ namespace Dramalord.Data.Intentions
                 HeroRelation relation = IntentionHero.GetRelationTo(Target);
                 StartRelationshipAction.Apply(IntentionHero, Target, relation, RelationshipType.Spouse);
 
-                Hero groom = IntentionHero.IsFemale ? Target : IntentionHero;
-                Hero bride = groom == IntentionHero ? Target : IntentionHero;
-
                 if (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan)
                 {
-                    int speed = (int)Campaign.Current.TimeControlMode;
-                    Campaign.Current.SetTimeSpeed(0);
-                    TextObject title = new TextObject("{=Dramalord574}Join Clan On Marriage");
-                    TextObject text = new TextObject("{=Dramalord578}{HERO1} and {HERO2} just got married. Do you want them to stay in your clan?");
-                    text.SetTextVariable("HERO1", groom.Name);
-                    text.SetTextVariable("HERO2", bride.Name);
-                    InformationManager.ShowInquiry(
-                            new InquiryData(
-                                title.ToString(),
-                                text.ToString(),
-                                true,
-                                true,
-                                GameTexts.FindText("str_yes").ToString(),
-                                GameTexts.FindText("str_no").ToString(),
-                                () => {
+                    Hero groom = IntentionHero.IsFemale ? Target : IntentionHero;
+                    Hero bride = groom == IntentionHero ? Target : IntentionHero;
 
-                                    Hero otherHero = (groom.Clan == Clan.PlayerClan) ? bride : groom;
-                                    LeaveClanAction.Apply(otherHero);
-                                    JoinClanAction.Apply(otherHero, Clan.PlayerClan);
-                                    ChangeOccupationAfterMarriage(otherHero, Occupation.Lord);
+                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
+                    StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
+                    StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
 
-                                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
-                                    StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
-                                    StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
-
-                                    MBInformationManager.ShowSceneNotification(new MarriageSceneNotificationItem(groom, bride, CampaignTime.Now));
-                                    MBInformationManager.AddNotice(new MarriageMapNotification(groom, bride, textObject, CampaignTime.Now));
-
-                                    Campaign.Current.SetTimeSpeed(speed);
-                                },
-                                () => {
-
-                                    Hero clanHero = (groom.Clan == Clan.PlayerClan) ? groom : bride;
-                                    Hero otherHero = (groom.Clan == Clan.PlayerClan) ? bride : groom;
-                                    LeaveClanAction.Apply(clanHero);
-                                    if (otherHero.Clan != null)
-                                    {
-                                        JoinClanAction.Apply(clanHero, otherHero.Clan);
-                                        ChangeOccupationAfterMarriage(clanHero, Occupation.Lord);
-                                    }
-                                    else
-                                    {
-                                        ChangeOccupationAfterMarriage(clanHero, otherHero.Occupation);
-                                    }
-
-                                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
-                                    StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
-                                    StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
-
-                                    MBInformationManager.AddQuickInformation(textObject, 1000, clanHero.CharacterObject, "event:/ui/notification/relation");
-
-                                    Campaign.Current.SetTimeSpeed(speed);
-                                }), true);
-
-                    
-
+                    MBInformationManager.ShowSceneNotification(new MarriageSceneNotificationItem(groom, bride, CampaignTime.Now));
+                    MBInformationManager.AddNotice(new MarriageMapNotification(groom, bride, textObject, CampaignTime.Now));
                 }
 
                 if (DramalordMCM.Instance.RelationshipLogs)
@@ -122,9 +71,55 @@ namespace Dramalord.Data.Intentions
 
                 if(DramalordMCM.Instance.JoinClanOnMarriage)
                 {
-                    if(groom.Clan != bride.Clan && groom.Clan != Clan.PlayerClan && bride.Clan != Clan.PlayerClan)
+                    Hero groom = IntentionHero.IsFemale ? Target : IntentionHero;
+                    Hero bride = groom == IntentionHero ? Target : IntentionHero;
+
+                    if(groom.Clan != bride.Clan)
                     {
-                        if(groom.Clan != null && bride.Clan != null)
+                        if(groom.Clan == Clan.PlayerClan || bride.Clan == Clan.PlayerClan)
+                        {
+                            int speed = (int)Campaign.Current.TimeControlMode;
+                            Campaign.Current.SetTimeSpeed(0);
+                            TextObject title = new TextObject("{=Dramalord574}Join Clan On Marriage");
+                            TextObject text = new TextObject("{=Dramalord578}{HERO1} and {HERO2} just got married. Do you want them to stay in your clan?");
+                            text.SetTextVariable("HERO1", groom.Name);
+                            text.SetTextVariable("HERO2", bride.Name);
+                            InformationManager.ShowInquiry(
+                                    new InquiryData(
+                                        title.ToString(),
+                                        text.ToString(),
+                                        true,
+                                        true,
+                                        GameTexts.FindText("str_yes").ToString(),
+                                        GameTexts.FindText("str_no").ToString(),
+                                        () => {
+
+                                            Hero otherHero = (groom.Clan == Clan.PlayerClan) ? bride : groom;
+                                            LeaveClanAction.Apply(otherHero);
+                                            JoinClanAction.Apply(otherHero, Clan.PlayerClan);
+                                            ChangeOccupationAfterMarriage(otherHero, Occupation.Lord);
+
+                                            Campaign.Current.SetTimeSpeed(speed);
+                                        },
+                                        () => {
+
+                                            Hero clanHero = (groom.Clan == Clan.PlayerClan) ? groom : bride;
+                                            Hero otherHero = (groom.Clan == Clan.PlayerClan) ? bride : groom;
+                                            LeaveClanAction.Apply(clanHero);
+                                            if(otherHero.Clan != null)
+                                            {
+                                                JoinClanAction.Apply(clanHero, otherHero.Clan);
+                                                ChangeOccupationAfterMarriage(clanHero, Occupation.Lord);
+                                            }
+                                            else
+                                            {
+                                                ChangeOccupationAfterMarriage(clanHero, otherHero.Occupation);
+                                            }
+
+                                            Campaign.Current.SetTimeSpeed(speed);
+                                        }), true);
+                        }
+                        else if(groom.Clan != null && bride.Clan != null)
                         {
                             if(bride.Clan.Leader == bride)
                             {

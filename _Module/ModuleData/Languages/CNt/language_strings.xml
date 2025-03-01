@@ -586,11 +586,5 @@
     <string id="Dramalord589" text="最近有發生什麼有趣的事嗎？" />
     <string id="Dramalord590" text="我現在想不起來有什麼。" />
     <string id="Dramalord591" text="還有其他的事情嗎？" />
-    <string id="Dramalord592" text="FWB懷孕" />
-    <string id="Dramalord593" text="炮友關係也可能懷孕" />
-    <string id="Dramalord594" text="啟用Dramalord懷孕" />
-    <string id="Dramalord595" text="啟用Dramalord的懷孕系統（如果偵測到不相容的模組，將自動禁用）" />
-    <string id="Dramalord596" text="啟用Dramalord婚姻" />
-    <string id="Dramalord597" text="啟用Dramalord的婚姻系統（如果偵測到不相容的模組，將自動禁用）" />
   </strings>
 </base>

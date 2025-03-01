@@ -1,7 +1,4 @@
-﻿using Dramalord.Actions;
-using Dramalord.Extensions;
-using HarmonyLib;
-using System;
+﻿using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -44,9 +41,9 @@ namespace Dramalord.Data
             get => _lastInteraction; 
             set
             {
-                if (_lastUpdate.ElapsedDaysUntilNow > DramalordMCM.Instance.LoveDecayStartDay && _love > 0)
+                if (_lastUpdate.ElapsedDaysUntilNow > DramalordMCM.Instance.LoveDecayStartDay)
                 {
-                    _love = MBMath.ClampInt(_love - (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), 0, 100);
+                    _love = MBMath.ClampInt(_love - (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), (_love >= 0 && _lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay < 0) ? 0 : -100, 100);
                 }
                 _lastInteraction = value;
                 _lastUpdate = value;
@@ -55,12 +52,12 @@ namespace Dramalord.Data
 
         internal int Love
         {
-            get
+            get 
             {
-                if (_lastUpdate.ElapsedDaysUntilNow > DramalordMCM.Instance.LoveDecayStartDay && _love > 0)
+                if (_lastUpdate.ElapsedDaysUntilNow > DramalordMCM.Instance.LoveDecayStartDay)
                 {
-                    _love = MBMath.ClampInt(_love - (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), 0, 100);
-                    _lastUpdate = CampaignTime.Now;
+                    _love = MBMath.ClampInt(_love - (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), (_love >= 0 && _lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay < 0) ? 0 : -100, 100);
+                    _lastUpdate = CampaignTime.DaysFromNow(DramalordMCM.Instance.LoveDecayStartDay);
                 }
                 return _love;
             }
@@ -236,29 +233,6 @@ namespace Dramalord.Data
         protected override void OnNewGameCreated(CampaignGameStarter starter)
         {
             _relations.Clear();
-        }
-
-        internal override void InitEvents()
-        {
-            base.InitEvents();
-            CampaignEvents.RomanticStateChanged.AddNonSerializedListener(this, new Action<Hero, Hero, Romance.RomanceLevelEnum>(OnRomanticStateChanged));
-            CampaignEvents.HeroesMarried.AddNonSerializedListener(this, new Action<Hero, Hero, bool>(OnHeroesMarried));
-        }
-
-        public void OnRomanticStateChanged(Hero hero1, Hero hero2, Romance.RomanceLevelEnum level)
-        {
-            if (level == Romance.RomanceLevelEnum.Marriage && !hero1.IsSpouseOf(hero2))
-            {
-                StartRelationshipAction.Apply(hero1, hero2, hero1.GetRelationTo(hero2), RelationshipType.Spouse);
-            }
-        }
-
-        public void OnHeroesMarried(Hero hero1, Hero hero2, bool flag)
-        {
-            if (!hero1.IsSpouseOf(hero2))
-            {
-                StartRelationshipAction.Apply(hero1, hero2, hero1.GetRelationTo(hero2), RelationshipType.Spouse);
-            }
         }
     }
 }

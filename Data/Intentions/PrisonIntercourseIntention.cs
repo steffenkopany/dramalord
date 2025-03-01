@@ -26,7 +26,7 @@ namespace Dramalord.Data.Intentions
         {
             _accepted = false;
 
-            List<Hero> closeHeroes = IntentionHero.GetClosePrisoners();
+            List<Hero> closeHeroes = IntentionHero.GetCloseHeroes();
             if (Target == Hero.MainHero && closeHeroes.Contains(Hero.MainHero) && ConversationTools.StartConversation(this, true))
             {
                 return true;

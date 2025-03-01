@@ -616,11 +616,5 @@
     <string id="Dramalord589" text="Son zamanlarda ilginç bir şey oldu mu?" />
     <string id="Dramalord590" text="Şu anda aklıma bir şey gelmiyor." />
     <string id="Dramalord591" text="Başka bir şey var mı?" />
-    <string id="Dramalord592" text="FWB Hamilelik" />
-    <string id="Dramalord593" text="Arkadaşlık ilişkisinde hamilelik olabilir" />
-    <string id="Dramalord594" text="Dramalord Hamileliği Etkinleştir" />
-    <string id="Dramalord595" text="Dramalord’un hamilelik sistemini etkinleştir (Uyumsuz mod algılanırsa otomatik olarak devre dışı bırakılır)" />
-    <string id="Dramalord596" text="Dramalord Evliliğini Etkinleştir" />
-    <string id="Dramalord597" text="Dramalord’un evlilik sistemini etkinleştir (Uyumsuz mod algılanırsa otomatik olarak devre dışı bırakılır)" />
   </strings>
 </base>

@@ -27,10 +27,6 @@ namespace Dramalord.Data.Intentions
             Targets = targets;
             Targets.Add(intentionHero);
             IsWitness = isWitness;
-            if (IsWitness && MBRandom.RandomInt(1, 100) > DramalordMCM.Instance.ChanceApproachingPlayer && !Targets.Contains(Hero.MainHero))
-            {
-                Targets.Add(Hero.MainHero);
-            }
         }
 
         public override bool Action()
@@ -92,7 +88,7 @@ namespace Dramalord.Data.Intentions
                             {
                                 TextObject title = new TextObject("{=Dramalord557}React to gossip");
                                 TextObject text = new TextObject("{=Dramalord558}You have heard some disturbing gossip about {HERO1} and {HERO2}. How will you react?");
-                                text.SetTextVariable("HERO1", gossip.IntentionHero.Name);
+                                title.SetTextVariable("HERO1", gossip.IntentionHero.Name);
                                 text.SetTextVariable("HERO2", gossip.Target.Name);
                                 InformationManager.ShowInquiry(
                                         new InquiryData(

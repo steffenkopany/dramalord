@@ -85,11 +85,6 @@ namespace Dramalord.Data.Intentions
                 }
             }
 
-            if(child.Clan == null && child.Occupation == Occupation.Lord)
-            {
-                child.SetNewOccupation(Occupation.NotAssigned); //TODO thats some workaround
-            }
-
             if (IntentionHero.Clan == Clan.PlayerClan || Pregnancy.Father.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions)
             {
                 LogEntry.AddLogEntry(new BirthChildLog(IntentionHero, Pregnancy.Father, child));

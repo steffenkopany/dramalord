@@ -298,13 +298,13 @@ namespace Dramalord.Extensions
             if (hero.CurrentSettlement != null && hero.CurrentSettlement.Town != null)
             {
                 Town town = hero.CurrentSettlement.Town;
-                town.GetPrisonerHeroes().Where(h => h.HeroObject.IsDramalordLegit()).Select(h => h.HeroObject).Do(h => list.Add(h));
+                list.AddRange(town.GetPrisonerHeroes().Where(h => h.HeroObject.IsDramalordLegit()).Select(h => h.HeroObject));
 
                 hero.CurrentSettlement.Parties.ForEach(party =>
                 {
                     if(party.PrisonRoster.TotalHeroes > 0)
                     {
-                        party.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject).Do(h => list.Add(h));
+                        list.AddRange(party.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject));
                     }
                 });
             }
@@ -316,13 +316,13 @@ namespace Dramalord.Extensions
                     {
                         if (party.PrisonRoster.TotalHeroes > 0)
                         {
-                            party.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject).Do(h => list.Add(h));
+                            list.AddRange(party.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject));
                         }
                     });
                 }
                 if (hero.PartyBelongedTo.PrisonRoster != null && hero.PartyBelongedTo.PrisonRoster.TotalHeroes > 0)
                 {
-                    hero.PartyBelongedTo.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject).Do(h => list.Add(h));
+                    list.AddRange(hero.PartyBelongedTo.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject));
                 }
             }
             return list.Distinct().ToList();
