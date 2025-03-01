@@ -269,21 +269,21 @@ namespace Dramalord.Conversations
             Hero? poi = Hero.AllAliveHeroes.Where(h => h.IsLord && h != Hero.MainHero && h != challenger && (challenger.GetBaseHeroRelation(h) > 40 || challenger.GetBaseHeroRelation(h) < -30)).GetRandomElementInefficiently();
             if (poi == null) poi = Hero.AllAliveHeroes.Where(h => h.IsLord && h != Hero.MainHero && h != challenger && h.IsDramalordLegit()).GetRandomElementInefficiently();
 
-            _question = new TextObject("{=Dramalord352}Tell me {TITLE}, as you travel a lot and meet people, what's your opinion about {POI.NAME}?");
+            _question = new TextObject("{=Dramalord352}Tell me, {TITLE}, as you travel wide and meet many, do you have an opinion of {POI.NAME}?");
             _question.SetTextVariable("TITLE", challenger.HasAnyRelationshipWith(Hero.MainHero) ? Hero.MainHero.Name : ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
             StringHelpers.SetCharacterProperties("POI", poi?.CharacterObject, _question);
 
             if (poi?.HasMet ?? false)
             {
-                _answers[0] = new TextObject("{=Dramalord353}I have met {POI.NAME} and I consider them being a friend of mine.");
-                _answers[1] = new TextObject("{=Dramalord354}Ugh, don't remind me. {POI.NAME} is annoying and I hope I won't meet them again.");
-                _answers[2] = new TextObject("{=Dramalord355}{POI.NAME}, hmm. I actually don't have any particular opinion about them.");
+                _answers[0] = new TextObject("{=Dramalord353}Ah, {POI.NAME}! Yes, we have met. I am actually quite fond of them.");
+                _answers[1] = new TextObject("{=Dramalord354}Unfortunately, yes. I have met {POI.NAME} and do not regard them kindly.");
+                _answers[2] = new TextObject("{=Dramalord355}{POI.NAME}, you say? I harbor no feelings for them one way or the other.");
             }
             else
             {
-                _answers[0] = new TextObject("{=Dramalord356}Unfortunately I never hat the chance to meet {POI.NAME}, but they sound like a nice person?");
-                _answers[1] = new TextObject("{=Dramalord357}Good thing I never met {POI.NAME}. I can image them being a horrible being.");
-                _answers[2] = new TextObject("{=Dramalord358}I do not have any opinion about {POI.NAME}, as I never exchanged a word with them.");
+                _answers[0] = new TextObject("{=Dramalord356}Oh, {POI.NAME}? We have yet to meet, but I hope to, and have heard good things.");
+                _answers[1] = new TextObject("{=Dramalord357}From what I have heard, I have been spared a misfortune in not having met {POI.NAME}.");
+                _answers[2] = new TextObject("{=Dramalord358}I hold no opinion of {POI.NAME}, as we have yet to exchange words.");
             }
 
             StringHelpers.SetCharacterProperties("POI", poi?.CharacterObject, _answers[0]);
@@ -296,9 +296,9 @@ namespace Dramalord.Conversations
                 _weights[1] = -1;
                 _weights[2] = 0;
 
-                _reactions[0] = new TextObject("{=Dramalord359}That's good to hear! {POI.NAME} is a good friend of mine as well!");
-                _reactions[1] = new TextObject("{=Dramalord360}I'm disappointed to hear that. {POI.NAME} is actually a good friend of mine.");
-                _reactions[2] = new TextObject("{=Dramalord361}Well you probably don't know {POI.NAME} well. They're my friend.");
+                _reactions[0] = new TextObject("{=Dramalord359}That is good to hear! {POI.NAME} is a fine person to know.");
+                _reactions[1] = new TextObject("{=Dramalord360}That is most unfortunate. {POI.NAME} and I get along quite well.");
+                _reactions[2] = new TextObject("{=Dramalord361}Oh? That is a pity. {POI.NAME} is someone I have always thought well of.");
             }
             else if (challenger.GetBaseHeroRelation(poi) < DramalordMCM.Instance.MaxTrustEnemies)
             {
@@ -306,9 +306,9 @@ namespace Dramalord.Conversations
                 _weights[1] = 1;
                 _weights[2] = 0;
 
-                _reactions[0] = new TextObject("{=Dramalord362}Ugh, really? You like {POI.NAME}? That's very disappointing.");
-                _reactions[1] = new TextObject("{=Dramalord363}I totally agree! {POI.NAME} is like dirt under my fingernails.");
-                _reactions[2] = new TextObject("{=Dramalord364}Well you probably don't know {POI.NAME} well. I really don't like them.");
+                _reactions[0] = new TextObject("{=Dramalord362}Hmph. You admire {POI.NAME}? How very disappointing.");
+                _reactions[1] = new TextObject("{=Dramalord363}I completely agree! {POI.NAME} left a very poor impression on me.");
+                _reactions[2] = new TextObject("{=Dramalord364}Well, I do not care for {POI.NAME} much at all.");
             }
             else
             {
@@ -316,9 +316,9 @@ namespace Dramalord.Conversations
                 _weights[1] = 0;
                 _weights[2] = 1;
 
-                _reactions[0] = new TextObject("{=Dramalord365}You are fast in building up an opinion about {POI.NAME} I have to say.");
-                _reactions[1] = new TextObject("{=Dramalord365}You are fast in building up an opinion about {POI.NAME} I have to say.");
-                _reactions[2] = new TextObject("{=Dramalord366}I don't have an opinion about {POI.NAME} as well. I don't know them well enough.");
+                _reactions[0] = new TextObject("{=Dramalord365}You seem quick to form an opinion about {POI.NAME}, I have to say.");
+                _reactions[1] = new TextObject("{=Dramalord365}You seem quick to form an opinion about {POI.NAME}, I have to say.");
+                _reactions[2] = new TextObject("{=Dramalord366}I do not harbor an opinion about {POI.NAME}, either. I do not yet know them well enough.");
             }
 
             StringHelpers.SetCharacterProperties("POI", poi?.CharacterObject, _reactions[0]);
@@ -332,16 +332,16 @@ namespace Dramalord.Conversations
 
             int random = (MBRandom.RandomInt(0, 100) % 5) + 1; //mercy valor honor generosity calculating
 
-            TextObject good = new TextObject("{=Dramalord367}That's an excellent point of view! Agreed.");
-            TextObject bad = new TextObject("{=Dramalord368}Well, I actually have to diagree with you.");
-            TextObject neutral = new TextObject("{=Dramalord369}You are quite opinionated, aren't you?");
+            TextObject good = new TextObject("{=Dramalord367}That is an excellent point of view! Agreed.");
+            TextObject bad = new TextObject("{=Dramalord368}Well, I am afraid I must disagree with you on that.");
+            TextObject neutral = new TextObject("{=Dramalord369}Hm. You seem to be quite opinionated.");
 
             if (random == 1)
             {
-                _question = new TextObject("{=Dramalord370}Last war our faction raided an enemy village because they ran out of food. It's sad, but I think it had to be done for the greater good. (Honor)");
-                _answers[0] = new TextObject("{=Dramalord371}I disagree. Civilians shouldn't suffer because of politics.");
-                _answers[1] = new TextObject("{=Dramalord372}Right. Those peasants should have given their goods volunarily.");
-                _answers[2] = new TextObject("{=Dramalord373}I don't know. I guess thats just the way things are.");
+                _question = new TextObject("{=Dramalord370}I heard tale of a warrior that was executed for renouncing his oaths and turning to banditry, but it is said that he did it to feed the hungry. Did his ends justify his means? What do you think? (Honor)");
+                _answers[0] = new TextObject("{=Dramalord371}There is always another way, even if it presents great difficulty. One should not compromise their honor.");
+                _answers[1] = new TextObject("{=Dramalord372}Having a code is almost as important as knowing when to break it.");
+                _answers[2] = new TextObject("{=Dramalord373}People starve, people steal, and people die. It is just the way of things.");
 
                 _weights[0] = (challenger.GetHeroTraits().Honor != 0) ? challenger.GetHeroTraits().Honor : -1;
                 _weights[1] = (challenger.GetHeroTraits().Honor != 0) ? challenger.GetHeroTraits().Honor * -1 : -1;
@@ -353,10 +353,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 2)
             {
-                _question = new TextObject("{=Dramalord374}Have you ever encountered a stronger foe but went to battle nevertheless? (Valor)");
-                _answers[0] = new TextObject("{=Dramalord375}Yes, and we've won anyway. This world belongs to the brave!");
-                _answers[1] = new TextObject("{=Dramalord376}No. Why would I risk my life when I know we can't win.");
-                _answers[2] = new TextObject("{=Dramalord377}I can't say. I think that depends on the situation.");
+                _question = new TextObject("{=Dramalord374}I recently heard a story about a great commander who won a difficult victory against impossible odds. Would you still go to battle if you knew the odds were against you? (Valor)");
+                _answers[0] = new TextObject("{=Dramalord375}Yes, I would. Sometimes it is more important to fight than to be victorious. The world belongs to the brave");
+                _answers[1] = new TextObject("{=Dramalord376}No. Why would I risk my life when I am certain to lose? That would be foolish.");
+                _answers[2] = new TextObject("{=Dramalord377}Hm. I cannot say. I think that it would depend on the situation.");
 
                 _weights[0] = (challenger.GetHeroTraits().Valor != 0) ? challenger.GetHeroTraits().Valor : -1;
                 _weights[1] = (challenger.GetHeroTraits().Valor != 0) ? challenger.GetHeroTraits().Valor * -1 : -1;
@@ -368,10 +368,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 3)
             {
-                _question = new TextObject("{=Dramalord378}I heard that some lords let captured troops simply leave the battlefield. Isn't that a risk? (Mercy)");
-                _answers[0] = new TextObject("{=Dramalord379}They let them go home to their families. I would do the same.");
-                _answers[1] = new TextObject("{=Dramalord380}Heads off I'd say! Makes it hard for them to go to battle again.");
-                _answers[2] = new TextObject("{=Dramalord381}They are there to kill or be killed, so who cares about them.");
+                _question = new TextObject("{=Dramalord378}I have heard that some lords allow defeated foes to leave the battlefield unharmed. Some think it admirable, others deem it a dangerous folly. What do you think? (Mercy)");
+                _answers[0] = new TextObject("{=Dramalord379}They allowed them to go home to their families. I would do the same.");
+                _answers[1] = new TextObject("{=Dramalord380}Off with their heads, I say! That would make it difficult for them to march to battle again.");
+                _answers[2] = new TextObject("{=Dramalord381}It is the nature of war—some live, some do not. That is just the way of things.");
 
                 _weights[0] = (challenger.GetHeroTraits().Mercy != 0) ? challenger.GetHeroTraits().Mercy : -1;
                 _weights[1] = (challenger.GetHeroTraits().Mercy != 0) ? challenger.GetHeroTraits().Mercy * -1 : -1;
@@ -383,10 +383,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 4)
             {
-                _question = new TextObject("{=Dramalord382}Recently the champion of a tournament gave all of his winnings to the poor. (Generosity)");
-                _answers[0] = new TextObject("{=Dramalord383}That is a generous move indeed. This kind of people are rare, unfortunately.");
-                _answers[1] = new TextObject("{=Dramalord384}Bah! What a waste of money. Why did they participate in the first place?");
-                _answers[2] = new TextObject("{=Dramalord385}Well, I guess it's their money, thus it's their choice.");
+                _question = new TextObject("{=Dramalord382}Recently, I heard tale told of an arena champion who gave all of his tournament winnings away to the poor. (Generosity)");
+                _answers[0] = new TextObject("{=Dramalord383}That is quite the act of generosity. People such as that are a rarity, unfortunately.");
+                _answers[1] = new TextObject("{=Dramalord384}Bah! What a waste. What is the point of gold and glory if not to keep it?");
+                _answers[2] = new TextObject("{=Dramalord385}Well, I suppose that it is their money, thus it is their choice.");
 
                 _weights[0] = (challenger.GetHeroTraits().Generosity != 0) ? challenger.GetHeroTraits().Generosity : -1;
                 _weights[1] = (challenger.GetHeroTraits().Generosity != 0) ? challenger.GetHeroTraits().Generosity * -1 : -1;
@@ -398,10 +398,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 5)
             {
-                _question = new TextObject("{=Dramalord386}One of the southern clans almost left their kingdom, after their leader had an argument with their king. (Calculating)");
-                _answers[0] = new TextObject("{=Dramalord387}That's stupid. They would have lose their protection because of their pride.");
-                _answers[1] = new TextObject("{=Dramalord388}I can understand how they feel. I also loose me temper every now and then.");
-                _answers[2] = new TextObject("{=Dramalord389}I cant't judge that move, as long as I don't know what the argument was about.");
+                _question = new TextObject("{=Dramalord386}I heard that a noble clan nearly turned against their own king after being denied a request. Some call it reckless, others see it as a bold gambit. What do you think? (Calculating)");
+                _answers[0] = new TextObject("{=Dramalord387}That was a rash decision. One should not throw away power over a fleeting insult.");
+                _answers[1] = new TextObject("{=Dramalord388}I can understand the urge. Sometimes you must act on your convictions, consequences be damned.");
+                _answers[2] = new TextObject("{=Dramalord389}Difficult to say. Life is complicated, and I can hardly judge such things.");
 
                 _weights[0] = (challenger.GetHeroTraits().Calculating != 0) ? challenger.GetHeroTraits().Calculating : -1;
                 _weights[1] = (challenger.GetHeroTraits().Calculating != 0) ? challenger.GetHeroTraits().Calculating * -1 : -1;
@@ -419,16 +419,16 @@ namespace Dramalord.Conversations
 
             int random = (MBRandom.RandomInt(0, 100) % 4) + 1; //sex weight build age 
 
-            TextObject good = new TextObject("{=Dramalord390}Ohh! You're making me blush! I'm happy to hear that.");
-            TextObject bad = new TextObject("{=Dramalord391}So does that mean you don't consider me attractive?");
-            TextObject neutral = new TextObject("{=Dramalord392}I'm pretty sure you have some kind of preference.");
+            TextObject good = new TextObject("{=Dramalord390}Oh, you are making me blush! I am delighted to hear that.");
+            TextObject bad = new TextObject("{=Dramalord391}Does that mean that you do not consider me to be attractive?");
+            TextObject neutral = new TextObject("{=Dramalord392}You truly do not have any preference? Hm.");
 
             if (random == 1)
             {
-                _question = new TextObject("{=Dramalord393}I've heard that some lords and ladies have a different taste in physical gender. How about you? (Orientation)");
-                _answers[0] = new TextObject("{=Dramalord321}I feel drawn to the other sex and I don't have much interest in persons of my own.");
-                _answers[1] = new TextObject("{=Dramalord322}I don't have much interest in the other sex, I rather prefer persons of my own.");
-                _answers[2] = new TextObject("{=Dramalord394}I actually don't have any specific preference.");
+                _question = new TextObject("{=Dramalord393}Do you prefer the company of those alike to yourself, or do you find charm in a more opposite sort? (Orientation)");
+                _answers[0] = new TextObject("{=Dramalord321}I find myself primarily drawn to those of the opposite sex. As the saying goes, opposites attract.");
+                _answers[1] = new TextObject("{=Dramalord322}I am most inclined toward those of my own sex. As they say, birds of a feather flock together.");
+                _answers[2] = new TextObject("{=Dramalord394}I do not possess any particular preference.");
 
                 _weights[0] = (challenger.IsFemale != Hero.MainHero.IsFemale) ? 1 : -1;
                 _weights[1] = (challenger.IsFemale == Hero.MainHero.IsFemale) ? 1 : -1;
@@ -440,10 +440,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 2)
             {
-                _question = new TextObject("{=Dramalord395}The owner of the local inn has gained some weight. Now the tavern is packed with gawking customers every night. (Weight)");
-                _answers[0] = new TextObject("{=Dramalord327}I like people with more weight. There's more to grab for me.");
-                _answers[1] = new TextObject("{=Dramalord325}I think slim people are more grazile then others.");
-                _answers[2] = new TextObject("{=Dramalord326}I don't like thin or fat. The middle is just right.");
+                _question = new TextObject("{=Dramalord395}I overheard a debate at the tavern—some were saying they enjoy a fuller figure, while others prefer a leaner form. What do you think? (Weight)");
+                _answers[0] = new TextObject("{=Dramalord327}I favor those of a fuller figure—more to hold, more to enjoy.");
+                _answers[1] = new TextObject("{=Dramalord325}I find that slender figures possess a certain elegance.");
+                _answers[2] = new TextObject("{=Dramalord326}I prefer a balance—not too thin, nor too large. A form that is just right.");
 
                 _weights[0] = (challenger.Weight >= 0.7) ? 1 : -1;
                 _weights[1] = (challenger.Weight <= 0.3) ? 1 : -1;
@@ -455,10 +455,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 3)
             {
-                _question = new TextObject("{=Dramalord396}In the highlands lords and ladies are often bulky and powerful. Many people admire them for being strong. (Build)");
-                _answers[0] = new TextObject("{=Dramalord330}I love powerful people. The bulkier the better.");
-                _answers[1] = new TextObject("{=Dramalord328}Muscles are overrated. I like it skinny and want to see bones.");
-                _answers[2] = new TextObject("{=Dramalord329}Medium muscles are just right for me. I don't need something special.");
+                _question = new TextObject("{=Dramalord396}Many people admire a strong and powerful form. Others like the slender and agile. Where do your tastes lie? (Build)");
+                _answers[0] = new TextObject("{=Dramalord330}I am quite fond of strong, muscular figures. The more imposing, the better.");
+                _answers[1] = new TextObject("{=Dramalord328}I tend towards those who are lean. Sometimes less is more.");
+                _answers[2] = new TextObject("{=Dramalord329}A well-toned body suits me best—Athletic, maybe, but nothing excessive. Somewhere in the middle.");
 
                 _weights[0] = (challenger.Build >= 0.7) ? 1 : -1;
                 _weights[1] = (challenger.Build <= 0.3) ? 1 : -1;
@@ -470,10 +470,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 4)
             {
-                _question = new TextObject("{=Dramalord397}There are people who prefer older people and others prefer younger people. What is your preference? (Age)");
-                _answers[0] = new TextObject("{=Dramalord398}I prefer people older then me. Nothing is better then ripe fruit.");
-                _answers[1] = new TextObject("{=Dramalord399}I enjoy the energy and stamina of younger people very much.");
-                _answers[2] = new TextObject("{=Dramalord400}I think people around my own age are more attractive.");
+                _question = new TextObject("{=Dramalord397}Some are known to rob the cradle, others are known to rob the grave. What about you? (Age)");
+                _answers[0] = new TextObject("{=Dramalord398}I tend towards people older than myself. They say that wine grows better with age.");
+                _answers[1] = new TextObject("{=Dramalord399}I enjoy the company of people younger than myself. I find their energy invigorating.");
+                _answers[2] = new TextObject("{=Dramalord400}I usually enjoy being around people near to my own age.");
 
                 _weights[0] = (challenger.Age - Hero.MainHero.Age > 5) ? 1 : -1;
                 _weights[1] = (challenger.Age - Hero.MainHero.Age < -5) ? 1 : -1;
@@ -497,10 +497,10 @@ namespace Dramalord.Conversations
 
             if (random == 1)
             {
-                _question = new TextObject("{=Dramalord401}Do you think trying out new things is sometimes exciting? (Openness)");
-                _answers[0] = new TextObject("{=Dramalord402}I like trying new things. It's getting boring without change.");
-                _answers[1] = new TextObject("{=Dramalord403}Nonsense. Things are good the way they are and don't need to change.");
-                _answers[2] = new TextObject("{=Dramalord404}Maybe, I don't really care. Things are changing anyway all the time.");
+                _question = new TextObject("{=Dramalord401}I have heard it said that the world belongs to those willing to embrace change. What do you think? (Openness)");
+                _answers[0] = new TextObject("{=Dramalord402}Novel experiences bring life its color. I welcome change.");
+                _answers[1] = new TextObject("{=Dramalord403}I see no need to meddle with what already works. A steady routine serves me well.");
+                _answers[2] = new TextObject("{=Dramalord404}Change happens, whether we welcome it or not. I simply take things as they come.");
 
                 _weights[0] = (challenger.GetPersonality().Openness > 16) ? 1 : -1;
                 _weights[1] = (challenger.GetPersonality().Openness < -16) ? 1 : -1;
@@ -512,10 +512,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 2)
             {
-                _question = new TextObject("{=Dramalord405}So, are you rather a person who plans out things, or are you more the sponateous type? (Conscientiousness)");
-                _answers[0] = new TextObject("{=Dramalord406}Everything needs order and structure. Planning is everything.");
-                _answers[1] = new TextObject("{=Dramalord407}Nah, not really. I usually stumble into my next adventure.");
-                _answers[2] = new TextObject("{=Dramalord408}Eh, sometimes I plan, sometimes I don't.");
+                _question = new TextObject("{=Dramalord405}Tell me, do you find comfort in careful planning, or do you prefer to take life as it comes? (Conscientiousness)");
+                _answers[0] = new TextObject("{=Dramalord406}Order and structure are the foundation of success. A good plan is everything.");
+                _answers[1] = new TextObject("{=Dramalord407}Plans? No, not really. I usually follow the road where it takes me.");
+                _answers[2] = new TextObject("{=Dramalord408}Sometimes I plan, sometimes I do not. It depends on the day.");
 
                 _weights[0] = (challenger.GetPersonality().Conscientiousness > 16) ? 1 : -1;
                 _weights[1] = (challenger.GetPersonality().Conscientiousness < -16) ? 1 : -1;
@@ -527,10 +527,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 3)
             {
-                _question = new TextObject("{=Dramalord409}When there's a tournament in town, are you excited to meet new people? (Extroversion)");
-                _answers[0] = new TextObject("{=Dramalord410}Oh absolutely! I barely can't stop chatting when I'm around people.");
-                _answers[1] = new TextObject("{=Dramalord411}Ugh. Nah, I'm rather to myself. Most people are bothering me.");
-                _answers[2] = new TextObject("{=Dramalord412}Well, that depends. I'd meet a few probably, but not many.");
+                _question = new TextObject("{=Dramalord409}Feasts bring together all sorts—lords, merchants, poets, and travelers. Some relish the company, while others prefer a quiet corner. What about you? (Extroversion)");
+                _answers[0] = new TextObject("{=Dramalord410}Oh, absolutely! I thrive in good company. The more people, the better!");
+                _answers[1] = new TextObject("{=Dramalord411}I prefer to keep to myself. Large crowds can be exhausting.");
+                _answers[2] = new TextObject("{=Dramalord412}Well, I suppose that depends. I enjoy company, but too much can be overwhelming.");
 
                 _weights[0] = (challenger.GetPersonality().Extroversion > 16) ? 1 : -1;
                 _weights[1] = (challenger.GetPersonality().Extroversion < -16) ? 1 : -1;
@@ -542,10 +542,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 4)
             {
-                _question = new TextObject("{=Dramalord413}If one of your friends tell you a sad story, how do you react? (Agreeableness)");
-                _answers[0] = new TextObject("{=Dramalord414}I try to comfort them, or help if I can of course.");
-                _answers[1] = new TextObject("{=Dramalord415}Uhm, my friends know not to bother me with their personal stuff.");
-                _answers[2] = new TextObject("{=Dramalord416}That depends on how I feel myself, I guess.");
+                _question = new TextObject("{=Dramalord413}When a friend confides in you about something that weighs heavily on their heart. Do you offer comfort, or is it best they handle it on their own? (Agreeableness)");
+                _answers[0] = new TextObject("{=Dramalord414}Of course, I try to comfort them. If I can help, I will.");
+                _answers[1] = new TextObject("{=Dramalord415}Truthfully, I am not always the best person for that. People must learn to handle their own troubles.");
+                _answers[2] = new TextObject("{=Dramalord416}I suppose that it depends on my mood and the situation.");
 
                 _weights[0] = (challenger.GetPersonality().Agreeableness > 16) ? 1 : -1;
                 _weights[1] = (challenger.GetPersonality().Agreeableness < -16) ? 1 : -1;
@@ -557,10 +557,10 @@ namespace Dramalord.Conversations
             }
             else if (random == 5)
             {
-                _question = new TextObject("{=Dramalord417}Managing a party is a lot of stress sometimes. How do you deal with it? (Neuroticism)");
-                _answers[0] = new TextObject("{=Dramalord418}Oh yes. For recovering I usually lock myself away for a few days.");
-                _answers[1] = new TextObject("{=Dramalord419}Well, it's not stressful at all. I am actually rarely stressed.");
-                _answers[2] = new TextObject("{=Dramalord420}It's ok I think. Sometimes I need a day off or two.");
+                _question = new TextObject("{=Dramalord417}The burdens of leadership can weigh heavily on the mind. Some struggle under the pressure, while others thrive in it. How do you manage? (Neuroticism)");
+                _answers[0] = new TextObject("{=Dramalord418}Oh, the stress can be unbearable at times. When it becomes too much, I shut myself away for days.");
+                _answers[1] = new TextObject("{=Dramalord419}Stress? I hardly notice it. I find I rather enjoy the challenge.");
+                _answers[2] = new TextObject("{=Dramalord420}I manage well enough, though I do take time to rest when needed.");
 
                 _weights[0] = (challenger.GetPersonality().Neuroticism > 16) ? 1 : -1;
                 _weights[1] = (challenger.GetPersonality().Neuroticism < -16) ? 1 : -1;

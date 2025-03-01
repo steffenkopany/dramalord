@@ -93,7 +93,7 @@ namespace Dramalord
         public int LoveDecayStartDay { get; set; } = 10;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
-        [SettingPropertyBool("{=Dramalord592}FWB Pregnancy", Order = 13, HintText = "{=Dramalord593}Friends with beneifts can get pregnant", RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord592}FWB Pregnancy", Order = 13, HintText = "{=Dramalord593}Friends with benefits can get pregnant", RequireRestart = false)]
         public bool FWBPregnancy { get; set; } = false;
 
         [SettingPropertyGroup("{=Dramalord007}Logging Setup")]
@@ -168,16 +168,16 @@ namespace Dramalord
         [SettingPropertyBool("{=Dramalord594}Enable Dramalord Pregnancy", Order = 3, HintText = "{=Dramalord595}Enable Dramalords pregnancy system (Disabled automatically if incompatible mod is detected)", RequireRestart = false)]
         public bool EnableDramalordPregnancy
         {
-            get => IntercourseIntention.OtherPregnancyModFound;
-            set => IntercourseIntention.OtherPregnancyModFound = value;
+            get => !IntercourseIntention.OtherPregnancyModFound;
+            set => IntercourseIntention.OtherPregnancyModFound = !value;
         }
 
         [SettingPropertyGroup("{=Dramalord313}Optional")]
         [SettingPropertyBool("{=Dramalord596}Enable Dramalord Marriage", Order = 3, HintText = "{=Dramalord597}Enable Dramalords marriage system (Disabled automatically if incompatible mod is detected)", RequireRestart = false)]
         public bool EnableDramalordMarriage
         {
-            get => BethrothIntention.OtherMarriageModFound;
-            set => BethrothIntention.OtherMarriageModFound = value;
+            get => !BethrothIntention.OtherMarriageModFound;
+            set => BethrothIntention.OtherMarriageModFound = !value;
         }
 
         public override string Id => DramalordSubModule.ModuleName;
