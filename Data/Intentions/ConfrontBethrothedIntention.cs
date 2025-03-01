@@ -4,6 +4,7 @@ using Dramalord.Extensions;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Localization;
 using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Data.Intentions
@@ -63,6 +64,20 @@ namespace Dramalord.Data.Intentions
             DialogFlow npcFlow2 = DialogFlow.CreateDialogFlow("confront_bethrothed")
                 .BeginNpcOptions()
                     .NpcOption("{npc_confrontation_engagement}[ib:warrior][if:convo_grave]", () => !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
+                        .Consequence(() =>
+                        {
+                            Hero? other = ConversationInstance()?.Other;
+                            if(other != null && !other.GetRelationTo(Hero.OneToOneConversationHero).IsKnownToPlayer)
+                            {
+                                other.GetRelationTo(Hero.OneToOneConversationHero).IsKnownToPlayer = true;
+                                TextObject banner2 = new TextObject("{=Dramalord540}You have learned that {HERO} and {TARGET} are {RELATION}.");
+                                banner2.SetTextVariable("HERO", Hero.OneToOneConversationHero.Name);
+                                banner2.SetTextVariable("TARGET", other.Name);
+                                TextObject rel = new TextObject("{=Dramalord013}engaged");
+                                banner2.SetTextVariable("RELATION", rel);//"{=Dramalord011}friends with benefits" "{=Dramalord012}lovers" "{=Dramalord014}married"
+                                MBInformationManager.AddQuickInformation(banner2, 0, other.CharacterObject, "event:/ui/notification/relation");
+                            }
+                        })
                         .GotoDialogState("confront_bethrothed_reply")
                     .NpcOption("{npc_confrontation_engagement_player}[ib:warrior][if:convo_grave]", () => Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
                         .GotoDialogState("confront_bethrothed_reply")

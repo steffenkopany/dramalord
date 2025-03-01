@@ -1,4 +1,6 @@
-﻿using MCM.Abstractions.Attributes;
+﻿using Dramalord.Data;
+using Dramalord.Data.Intentions;
+using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.Global;
 
@@ -90,6 +92,10 @@ namespace Dramalord
         [SettingPropertyFloatingInteger("{=Dramalord480}Love Decay Start Day", 0, 100, Order = 12, HintText = "{=Dramalord481}Number of days lovers havent seen each others needed to make love decay.", RequireRestart = false)]
         public int LoveDecayStartDay { get; set; } = 10;
 
+        [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
+        [SettingPropertyBool("{=Dramalord592}FWB Pregnancy", Order = 13, HintText = "{=Dramalord593}Friends with beneifts can get pregnant", RequireRestart = false)]
+        public bool FWBPregnancy { get; set; } = false;
+
         [SettingPropertyGroup("{=Dramalord007}Logging Setup")]
         [SettingPropertyBool("{=Dramalord484}Intimate Logs", Order = 0, HintText = "{=Dramalord485}Show intimate events in the logs", RequireRestart = false)]
         public bool IntimateLogs { get; set; } = false;
@@ -155,8 +161,24 @@ namespace Dramalord
         public bool ShowRelationChanges { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord313}Optional")]
-        [SettingPropertyBool("{=Dramalord562}Show Real Relation", Order = 1, HintText = "{=Dramalord563}Enable this if you want to see the real relation to a hero (turn off if you're using True Noble Opinion)", RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord562}Show Real Relation", Order = 2, HintText = "{=Dramalord563}Enable this if you want to see the real relation to a hero (turn off if you're using True Noble Opinion)", RequireRestart = false)]
         public bool ShowRealrelation { get; set; } = true;
+
+        [SettingPropertyGroup("{=Dramalord313}Optional")]
+        [SettingPropertyBool("{=Dramalord594}Enable Dramalord Pregnancy", Order = 3, HintText = "{=Dramalord595}Enable Dramalords pregnancy system (Disabled automatically if incompatible mod is detected)", RequireRestart = false)]
+        public bool EnableDramalordPregnancy
+        {
+            get => IntercourseIntention.OtherPregnancyModFound;
+            set => IntercourseIntention.OtherPregnancyModFound = value;
+        }
+
+        [SettingPropertyGroup("{=Dramalord313}Optional")]
+        [SettingPropertyBool("{=Dramalord596}Enable Dramalord Marriage", Order = 3, HintText = "{=Dramalord597}Enable Dramalords marriage system (Disabled automatically if incompatible mod is detected)", RequireRestart = false)]
+        public bool EnableDramalordMarriage
+        {
+            get => BethrothIntention.OtherMarriageModFound;
+            set => BethrothIntention.OtherMarriageModFound = value;
+        }
 
         public override string Id => DramalordSubModule.ModuleName;
 

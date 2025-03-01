@@ -586,5 +586,11 @@
     <string id="Dramalord589" text="Did anything interesting happen recently?" />
     <string id="Dramalord590" text="I can't think of anything right now." />
     <string id="Dramalord591" text="Aynthing else?" />
+    <string id="Dramalord592" text="FWB Pregnancy" />
+    <string id="Dramalord593" text="Friends with beneifts can get pregnant" />
+    <string id="Dramalord594" text="Enable Dramalord Pregnancy" />
+    <string id="Dramalord595" text="Enable Dramalords pregnancy system (Disabled automatically if incompatible mod is detected)" />
+    <string id="Dramalord596" text="Enable Dramalord Marriage" />
+    <string id="Dramalord597" text="Enable Dramalords marriage system (Disabled automatically if incompatible mod is detected)" />
   </strings>
 </base>
