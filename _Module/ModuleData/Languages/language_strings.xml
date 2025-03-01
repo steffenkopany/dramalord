@@ -218,7 +218,7 @@
     <string id="Dramalord221" text="Show Lovers" />
     <string id="Dramalord222" text="Show lovers on Encyclopedia page of a hero" />
     <string id="Dramalord223" text="Of course, {TITLE}. Let me tell you a tale of war and power..." />
-    <string id="Dramalord224" text="Oh, such flattery, {TITLE}. Alright, you have piqued my interest. Tell me more about yourself.." />
+    <string id="Dramalord224" text="Oh, such flattery, {TITLE}. Alright, you have piqued my interest. Tell me more about yourself." />
     <string id="Dramalord225" text="You know, {TITLE}... I have dreamt of this moment since I first laid eyes on you." />
     <string id="Dramalord226" text="Of course, {TITLE}. Let us spend some time together, just the two of us." />
     <string id="Dramalord227" text="Show Betrotheds" />
@@ -363,7 +363,7 @@
     <string id="Dramalord367" text="That is an excellent point of view! Agreed." />
     <string id="Dramalord368" text="Well, I am afraid I must disagree with you on that." />
     <string id="Dramalord369" text="Hm. You seem to be quite opinionated." />
-    <string id="Dramalord370" text="I heard tale of a warrior that was executed for renouncing his oaths and turning to banditry, but it is said that he did it to feed the hungry. Did his ends justify his means? What do you think?" />
+    <string id="Dramalord370" text="I heard tale of a warrior that was executed for renouncing his oaths and turning to banditry, but it is said that he did it to feed the hungry. Did his ends justify his means? What do you think? (Honor)" />
     <string id="Dramalord371" text="There is always another way, even if it presents great difficulty. One should not compromise their honor." />
     <string id="Dramalord372" text="Having a code is almost as important as knowing when to break it." />
     <string id="Dramalord373" text="People starve, people steal, and people die. It is just the way of things." />
@@ -388,8 +388,8 @@
     <string id="Dramalord392" text="You truly do not have any preference? Hm." />
     <string id="Dramalord393" text="Do you prefer the company of those alike to yourself, or do you find charm in a more opposite sort? (Orientation)" />
     <string id="Dramalord394" text="I do not possess any particular preference." />
-    <string id="Dramalord395" text="I overheard a debate at the tavern—some were saying they enjoy a fuller figure, while others prefer a leaner form. What do you think?" />
-    <string id="Dramalord396" text="Many people admire a strong and powerful form. Others like the slender and agile. Where do your tastes lie?. (Build)" />
+    <string id="Dramalord395" text="I overheard a debate at the tavern—some were saying they enjoy a fuller figure, while others prefer a leaner form. What do you think? (Weight)" />
+    <string id="Dramalord396" text="Many people admire a strong and powerful form. Others like the slender and agile. Where do your tastes lie? (Build)" />
     <string id="Dramalord397" text="Some are known to rob the cradle, others are known to rob the grave. What about you? (Age)" />
     <string id="Dramalord398" text="I tend towards people older than myself. They say that wine grows better with age." />
     <string id="Dramalord399" text="I enjoy the company of people younger than myself. I find their energy invigorating." />
@@ -398,7 +398,7 @@
     <string id="Dramalord402" text="Novel experiences bring life its color. I welcome change." />
     <string id="Dramalord403" text="I see no need to meddle with what already works. A steady routine serves me well." />
     <string id="Dramalord404" text="Change happens, whether we welcome it or not. I simply take things as they come." />
-    <string id="Dramalord405" text="Tell me, do you find comfort in careful planning, or do you prefer to take life as it comes?? (Conscientiousness)" />
+    <string id="Dramalord405" text="Tell me, do you find comfort in careful planning, or do you prefer to take life as it comes? (Conscientiousness)" />
     <string id="Dramalord406" text="Order and structure are the foundation of success. A good plan is everything." />
     <string id="Dramalord407" text="Plans? No, not really. I usually follow the road where it takes me." />
     <string id="Dramalord408" text="Sometimes I plan, sometimes I do not. It depends on the day." />
@@ -585,5 +585,11 @@
     <string id="Dramalord589" text="Heard any noteworthy news of late?" />
     <string id="Dramalord590" text="Nothing comes to mind at the moment." />
     <string id="Dramalord591" text="Aynthing else?" />
+    <string id="Dramalord592" text="FWB Pregnancy" />
+    <string id="Dramalord593" text="Friends with benefits can get pregnant" />
+    <string id="Dramalord594" text="Enable Dramalord Pregnancy" />
+    <string id="Dramalord595" text="Enable Dramalords pregnancy system (Disabled automatically if incompatible mod is detected)" />
+    <string id="Dramalord596" text="Enable Dramalord Marriage" />
+    <string id="Dramalord597" text="Enable Dramalords marriage system (Disabled automatically if incompatible mod is detected)" />
   </strings>
 </base>

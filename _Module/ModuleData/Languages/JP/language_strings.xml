@@ -586,5 +586,11 @@
     <string id="Dramalord589" text="最近何か面白いことがありましたか？" />
     <string id="Dramalord590" text="今は特に思いつきません。" />
     <string id="Dramalord591" text="他に何かありますか？" />
+    <string id="Dramalord592" text="FWBの妊娠" />
+    <string id="Dramalord593" text="セフレ関係でも妊娠することがある" />
+    <string id="Dramalord594" text="Dramalordの妊娠を有効化" />
+    <string id="Dramalord595" text="Dramalordの妊娠システムを有効にする（互換性のないMODが検出された場合、自動的に無効化）" />
+    <string id="Dramalord596" text="Dramalordの結婚を有効化" />
+    <string id="Dramalord597" text="Dramalordの結婚システムを有効にする（互換性のないMODが検出された場合、自動的に無効化）" />
   </strings>
 </base>
