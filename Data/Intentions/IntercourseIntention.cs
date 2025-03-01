@@ -81,7 +81,7 @@ namespace Dramalord.Data.Intentions
                     Hero female = (IntentionHero.IsFemale) ? IntentionHero : Target;
                     Hero male = (IntentionHero.IsFemale) ? Target : IntentionHero;
                     
-                    if (female.IsFertile() && female.IsEmotionalWith(male))
+                    if (female.IsFertile() && (female.IsEmotionalWith(male) || DramalordMCM.Instance.FWBPregnancy))
                     {
                         ConceiveAction.Apply(female, male);
 

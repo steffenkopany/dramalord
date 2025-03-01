@@ -586,5 +586,11 @@
     <string id="Dramalord589" text="Ist in letzter Zeit etwas Interessantes passiert?" />
     <string id="Dramalord590" text="Mir fällt gerade nichts ein." />
     <string id="Dramalord591" text="Noch etwas?" />
+    <string id="Dramalord592" text="FWB-Schwangerschaft" />
+    <string id="Dramalord593" text="Freunde mit gewissen Vorzügen können schwanger werden" />
+    <string id="Dramalord594" text="Dramalord-Schwangerschaft aktivieren" />
+    <string id="Dramalord595" text="Dramalords Schwangerschaftssystem aktivieren (Wird automatisch deaktiviert, wenn eine inkompatible Mod erkannt wird)" />
+    <string id="Dramalord596" text="Dramalord-Ehe aktivieren" />
+    <string id="Dramalord597" text="Dramalords Ehe-System aktivieren (Wird automatisch deaktiviert, wenn eine inkompatible Mod erkannt wird)" />
   </strings>
 </base>

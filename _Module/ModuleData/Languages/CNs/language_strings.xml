@@ -586,5 +586,11 @@
     <string id="Dramalord589" text="最近发生了什么有趣的事情吗？" />
     <string id="Dramalord590" text="我现在想不出什么。" />
     <string id="Dramalord591" text="还有别的事情吗？" />
+    <string id="Dramalord592" text="FWB怀孕" />
+    <string id="Dramalord593" text="炮友关系也可能怀孕" />
+    <string id="Dramalord594" text="启用Dramalord怀孕" />
+    <string id="Dramalord595" text="启用Dramalord的怀孕系统（如果检测到不兼容的模组，将自动禁用）" />
+    <string id="Dramalord596" text="启用Dramalord婚姻" />
+    <string id="Dramalord597" text="启用Dramalord的婚姻系统（如果检测到不兼容的模组，将自动禁用）" />
   </strings>
 </base>

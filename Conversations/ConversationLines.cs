@@ -153,7 +153,7 @@ namespace Dramalord.Conversations
         public static TextObject npc_info_reply_build_high = new("{=Dramalord330}I am quite fond of strong, muscular figures. The more imposing, the better.");
         public static TextObject npc_info_reply_age = new("{=Dramalord331}I am drawn to those who are {AGEDIFF} than myself. I prefer partners around the age of {AGE}.");
         public static TextObject npc_info_reply_summary = new("{=Dramalord332}As for you {TITLE}, I think you are probably a... {RATING} out of 100.");
-
+      
         public static TextObject player_interaction_talk = new("{=Dramalord339}It may do us well to share our thoughts. Care to talk? (Friendly chat)");
         public static TextObject player_interaction_flirt = new("{=Dramalord340}You look stunning, {TITLE}, though I suspect you are already well aware... (Flirting)");
         public static TextObject player_interaction_date_first = new("{=Dramalord341}I must confess I have feelings for you, {TITLE}! (Love affair)");
@@ -255,7 +255,7 @@ namespace Dramalord.Conversations
 
         public static TextObject persuasion_success = new("{=Dramalord439}You successfully convinced {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
         public static TextObject persuasion_fail = new("{=Dramalord440}You failed to convince {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
-        public static TextObject player_interaction_adopt = new("{=Dramalord441}{TITLE}, I would like to add one of your children into my family."); 
+        public static TextObject player_interaction_adopt = new("{=Dramalord441}{TITLE}, I would like to add one of your children into my family.");
         public static TextObject npc_interaction_reply_adopt_yes = new("{=Dramalord442}It would be an honor, {TITLE}. Who would you like to take into your family?");
         public static TextObject npc_interaction_reply_adopt_no = new("{=Dramalord443}I am sorry, {TITLE}. I want my children to have a free choice when they come of age.");
         public static TextObject npc_interaction_reply_adopt_verify = new("{=Dramalord444}Are you sure you want to take my child {CHILD} into your family?");

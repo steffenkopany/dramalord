@@ -586,5 +586,11 @@
     <string id="Dramalord589" text="최근에 재미있는 일이 있었나요?" />
     <string id="Dramalord590" text="지금은 딱히 생각나는 것이 없네요." />
     <string id="Dramalord591" text="또 다른 소식은 없나요?" />
+    <string id="Dramalord592" text="FWB 임신" />
+    <string id="Dramalord593" text="섹스 친구도 임신할 수 있습니다" />
+    <string id="Dramalord594" text="Dramalord 임신 활성화" />
+    <string id="Dramalord595" text="Dramalord의 임신 시스템을 활성화합니다 (비호환 모드가 감지되면 자동으로 비활성화됨)" />
+    <string id="Dramalord596" text="Dramalord 결혼 활성화" />
+    <string id="Dramalord597" text="Dramalord의 결혼 시스템을 활성화합니다 (비호환 모드가 감지되면 자동으로 비활성화됨)" />
   </strings>
 </base>
