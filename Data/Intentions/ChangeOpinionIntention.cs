@@ -100,7 +100,7 @@ namespace Dramalord.Data.Intentions
                     LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Lover));
                 }
             }
-            else if((relation.Relationship == RelationshipType.Lover || relation.Relationship == RelationshipType.Betrothed || relation.Relationship == RelationshipType.Spouse) && currentLove <= 0)
+            else if((relation.Relationship == RelationshipType.Lover || relation.Relationship == RelationshipType.Betrothed || relation.Relationship == RelationshipType.Spouse || IntentionHero.Spouse == Target) && currentLove <= 0)
             {
                 RelationshipType oldRelationship = relation.Relationship;
                 EndRelationshipAction.Apply(IntentionHero, Target, relation);

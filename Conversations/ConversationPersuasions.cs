@@ -156,7 +156,7 @@ namespace Dramalord.Conversations
         internal static void CreatePersuasionTaskForDate()
         {
             PersuasionTask persuasionTask = new PersuasionTask(3);
-            persuasionTask.SpokenLine = new TextObject("{=Dramalord423}I... I am not sure about this. I like you, but do I like you enough?");
+            persuasionTask.SpokenLine = new TextObject("{=Dramalord423}I feel uncertain about this. I do care for you, but is it enough?");
             persuasionTask.TryLaterLine = Date;
             int loveDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinDatingLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)loveDiff;
@@ -171,7 +171,7 @@ namespace Dramalord.Conversations
         internal static void CreatePersuasionTaskForEngage()
         {
             PersuasionTask persuasionTask = new PersuasionTask(3);
-            persuasionTask.SpokenLine = new TextObject("{=Dramalord428}This is overwhelming. I love you, {PLAYER.NAME}, but are we ready for this step?");
+            persuasionTask.SpokenLine = new TextObject("{=Dramalord428}This is all so overwhelming... I love you, {PLAYER.NAME}, but are we truly ready?");
             persuasionTask.TryLaterLine = Engage;
             int loveDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinMarriageLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)loveDiff;
@@ -186,7 +186,7 @@ namespace Dramalord.Conversations
         internal static void CreatePersuasionTaskForFWB()
         {
             PersuasionTask persuasionTask = new PersuasionTask(3);
-            persuasionTask.SpokenLine = new TextObject("{=Dramalord433}This is a spicy proposal indeed. What if feelings are mixing in?");
+            persuasionTask.SpokenLine = new TextObject("{=Dramalord433}This is quite the scandalous suggestion... What if feelings become entangled?");
             persuasionTask.TryLaterLine = FWB;
             int trustDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinTrustFWB - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero)) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)trustDiff;
