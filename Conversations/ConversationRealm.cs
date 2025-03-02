@@ -1,4 +1,4 @@
-using Dramalord.Data;
+﻿using Dramalord.Data;
 using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace Dramalord.Conversations
                 .Condition(() => SetupLines())
                 .Consequence(() => { ConversationTools.ConversationIntention = new LeaveClanToJoinOtherIntention(Hero.OneToOneConversationHero, CampaignTime.Now); ConversationTools.EndConversation(); })
                 .CloseDialog();
-
+ 
             Campaign.Current.ConversationManager.AddDialogFlow(leaveClanFlow);
 
             DialogFlow gossipFlow = DialogFlow.CreateDialogFlow("hero_main_options")
@@ -35,7 +35,7 @@ namespace Dramalord.Conversations
                 .BeginNpcOptions()
                     .NpcOption("{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", () =>
                     {
-                        GossipBethrothedIntention? intention = DramalordIntentions.Instance.GetIntentions().FirstOrDefault(i =>
+                        GossipBethrothedIntention? intention = DramalordIntentions.Instance.GetIntentions().FirstOrDefault(i  =>
                         {
                             GossipBethrothedIntention? gbi = i as GossipBethrothedIntention;
 
@@ -47,7 +47,7 @@ namespace Dramalord.Conversations
                             return false;
                         }) as GossipBethrothedIntention;
 
-                        if (intention != null)
+                        if(intention != null)
                         {
                             intention.Targets.Add(Hero.MainHero);
                             intention.OnConversationStart();

@@ -1,4 +1,4 @@
-using Dramalord.Extensions;
+﻿using Dramalord.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -211,3 +211,4 @@ namespace Dramalord.Conversations
             ConversationLines.npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord186}As you wish, {TITLE}.");
         }
     }
+}
