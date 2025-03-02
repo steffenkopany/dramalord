@@ -338,7 +338,6 @@ namespace Dramalord.Conversations
 
             if (random == 1)
             {
-
                 _question = new TextObject("{=Dramalord370}I heard tale of a warrior that was executed for renouncing his oaths and turning to banditry, but it is said that he did it to feed the hungry. Did his ends justify his means? What do you think? (Honor)");
                 _answers[0] = new TextObject("{=Dramalord371}There is always another way, even if it presents great difficulty. One should not compromise their honor.");
                 _answers[1] = new TextObject("{=Dramalord372}Having a code is almost as important as knowing when to break it.");
@@ -354,7 +353,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 2)
             {
-
                 _question = new TextObject("{=Dramalord374}I recently heard a story about a great commander who won a difficult victory against impossible odds. Would you still go to battle if you knew the odds were against you? (Valor)");
                 _answers[0] = new TextObject("{=Dramalord375}Yes, I would. Sometimes it is more important to fight than to be victorious. The world belongs to the brave");
                 _answers[1] = new TextObject("{=Dramalord376}No. Why would I risk my life when I am certain to lose? That would be foolish.");
@@ -370,7 +368,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 3)
             {
-
                 _question = new TextObject("{=Dramalord378}I have heard that some lords allow defeated foes to leave the battlefield unharmed. Some think it admirable, others deem it a dangerous folly. What do you think? (Mercy)");
                 _answers[0] = new TextObject("{=Dramalord379}They allowed them to go home to their families. I would do the same.");
                 _answers[1] = new TextObject("{=Dramalord380}Off with their heads, I say! That would make it difficult for them to march to battle again.");
@@ -386,7 +383,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 4)
             {
-
                 _question = new TextObject("{=Dramalord382}Recently, I heard tale told of an arena champion who gave all of his tournament winnings away to the poor. (Generosity)");
                 _answers[0] = new TextObject("{=Dramalord383}That is quite the act of generosity. People such as that are a rarity, unfortunately.");
                 _answers[1] = new TextObject("{=Dramalord384}Bah! What a waste. What is the point of gold and glory if not to keep it?");
@@ -402,7 +398,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 5)
             {
-              
                 _question = new TextObject("{=Dramalord386}I heard that a noble clan nearly turned against their own king after being denied a request. Some call it reckless, others see it as a bold gambit. What do you think? (Calculating)");
                 _answers[0] = new TextObject("{=Dramalord387}That was a rash decision. One should not throw away power over a fleeting insult.");
                 _answers[1] = new TextObject("{=Dramalord388}I can understand the urge. Sometimes you must act on your convictions, consequences be damned.");
@@ -430,7 +425,6 @@ namespace Dramalord.Conversations
 
             if (random == 1)
             {
-
                 _question = new TextObject("{=Dramalord393}Do you prefer the company of those alike to yourself, or do you find charm in a more opposite sort? (Orientation)");
                 _answers[0] = new TextObject("{=Dramalord321}I find myself primarily drawn to those of the opposite sex. As the saying goes, opposites attract.");
                 _answers[1] = new TextObject("{=Dramalord322}I am most inclined toward those of my own sex. As they say, birds of a feather flock together.");
@@ -446,7 +440,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 2)
             {
-
                 _question = new TextObject("{=Dramalord395}I overheard a debate at the tavern—some were saying they enjoy a fuller figure, while others prefer a leaner form. What do you think? (Weight)");
                 _answers[0] = new TextObject("{=Dramalord327}I favor those of a fuller figure—more to hold, more to enjoy.");
                 _answers[1] = new TextObject("{=Dramalord325}I find that slender figures possess a certain elegance.");
@@ -462,7 +455,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 3)
             {
-
                 _question = new TextObject("{=Dramalord396}Many people admire a strong and powerful form. Others like the slender and agile. Where do your tastes lie? (Build)");
                 _answers[0] = new TextObject("{=Dramalord330}I am quite fond of strong, muscular figures. The more imposing, the better.");
                 _answers[1] = new TextObject("{=Dramalord328}I tend towards those who are lean. Sometimes less is more.");
@@ -478,8 +470,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 4)
             {
-
-
                 _question = new TextObject("{=Dramalord397}Some are known to rob the cradle, others are known to rob the grave. What about you? (Age)");
                 _answers[0] = new TextObject("{=Dramalord398}I tend towards people older than myself. They say that wine grows better with age.");
                 _answers[1] = new TextObject("{=Dramalord399}I enjoy the company of people younger than myself. I find their energy invigorating.");
@@ -507,7 +497,6 @@ namespace Dramalord.Conversations
 
             if (random == 1)
             {
-
                 _question = new TextObject("{=Dramalord401}I have heard it said that the world belongs to those willing to embrace change. What do you think? (Openness)");
                 _answers[0] = new TextObject("{=Dramalord402}Novel experiences bring life its color. I welcome change.");
                 _answers[1] = new TextObject("{=Dramalord403}I see no need to meddle with what already works. A steady routine serves me well.");
@@ -523,7 +512,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 2)
             {
-
                 _question = new TextObject("{=Dramalord405}Tell me, do you find comfort in careful planning, or do you prefer to take life as it comes? (Conscientiousness)");
                 _answers[0] = new TextObject("{=Dramalord406}Order and structure are the foundation of success. A good plan is everything.");
                 _answers[1] = new TextObject("{=Dramalord407}Plans? No, not really. I usually follow the road where it takes me.");
@@ -539,7 +527,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 3)
             {
-              
                 _question = new TextObject("{=Dramalord409}Feasts bring together all sorts—lords, merchants, poets, and travelers. Some relish the company, while others prefer a quiet corner. What about you? (Extroversion)");
                 _answers[0] = new TextObject("{=Dramalord410}Oh, absolutely! I thrive in good company. The more people, the better!");
                 _answers[1] = new TextObject("{=Dramalord411}I prefer to keep to myself. Large crowds can be exhausting.");
@@ -555,7 +542,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 4)
             {
-
                 _question = new TextObject("{=Dramalord413}When a friend confides in you about something that weighs heavily on their heart. Do you offer comfort, or is it best they handle it on their own? (Agreeableness)");
                 _answers[0] = new TextObject("{=Dramalord414}Of course, I try to comfort them. If I can help, I will.");
                 _answers[1] = new TextObject("{=Dramalord415}Truthfully, I am not always the best person for that. People must learn to handle their own troubles.");
@@ -571,7 +557,6 @@ namespace Dramalord.Conversations
             }
             else if (random == 5)
             {
-
                 _question = new TextObject("{=Dramalord417}The burdens of leadership can weigh heavily on the mind. Some struggle under the pressure, while others thrive in it. How do you manage? (Neuroticism)");
                 _answers[0] = new TextObject("{=Dramalord418}Oh, the stress can be unbearable at times. When it becomes too much, I shut myself away for days.");
                 _answers[1] = new TextObject("{=Dramalord419}Stress? I hardly notice it. I find I rather enjoy the challenge.");
