@@ -211,4 +211,3 @@ namespace Dramalord.Conversations
             ConversationLines.npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord186}As you wish, {TITLE}.");
         }
     }
-}
