@@ -592,5 +592,7 @@
     <string id="Dramalord595" text="Abilita il sistema di gravidanza di Dramalord (Disabilitato automaticamente se viene rilevata una mod incompatibile)" />
     <string id="Dramalord596" text="Abilita matrimonio Dramalord" />
     <string id="Dramalord597" text="Abilita il sistema di matrimonio di Dramalord (Disabilitato automaticamente se viene rilevata una mod incompatibile)" />
+    <string id="Dramalord598" text="Probabilità di giocatore pettegolo" />
+    <string id="Dramalord599" text="Probabilità che gli eroi si avvicinino al giocatore per diffondere pettegolezzi" />
   </strings>
 </base>

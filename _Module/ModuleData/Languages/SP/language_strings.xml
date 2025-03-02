@@ -592,5 +592,7 @@
     <string id="Dramalord595" text="Habilitar el sistema de embarazo de Dramalord (Deshabilitado automáticamente si se detecta un mod incompatible)" />
     <string id="Dramalord596" text="Habilitar matrimonio Dramalord" />
     <string id="Dramalord597" text="Habilitar el sistema de matrimonio de Dramalord (Deshabilitado automáticamente si se detecta un mod incompatible)" />
+    <string id="Dramalord598" text="Probabilidad de jugador chismoso" />
+    <string id="Dramalord599" text="Probabilidad de que los héroes se acerquen al jugador para difundir chismes" />
   </strings>
 </base>

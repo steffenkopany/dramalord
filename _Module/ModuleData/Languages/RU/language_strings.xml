@@ -592,5 +592,7 @@
     <string id="Dramalord595" text="Включить систему беременности Dramalord (Автоматически отключается, если обнаружен несовместимый мод)" />
     <string id="Dramalord596" text="Включить брак Dramalord" />
     <string id="Dramalord597" text="Включить систему брака Dramalord (Автоматически отключается, если обнаружен несовместимый мод)" />
+    <string id="Dramalord598" text="Шанс сплетничающего игрока" />
+    <string id="Dramalord599" text="Шанс, что герои подойдут к игроку, чтобы распространять слухи" />
   </strings>
 </base>

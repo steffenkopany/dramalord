@@ -222,7 +222,7 @@ namespace Dramalord.Conversations
             DialogFlow engageFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_engage")
                 .BeginNpcOptions()  
                     .NpcOption("{player_reaction_engagement_yes}[ib:aggressive][if:convo_delighted]", () =>
-                        Hero.OneToOneConversationHero.Spouse == null && (Hero.OneToOneConversationHero.Father == null || Hero.OneToOneConversationHero.Father == Hero.MainHero) && (Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan))
+                        Hero.OneToOneConversationHero.Spouse == null && (Hero.OneToOneConversationHero.Father == null || Hero.OneToOneConversationHero.Father == Hero.MainHero) && (Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan || Hero.OneToOneConversationHero.Clan?.Leader == Hero.OneToOneConversationHero))
                         .Consequence(() => { new BethrothIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, true).OnConversationEnded(); ConversationTools.EndConversation(); })
                         .CloseDialog()
                     .NpcOption("{player_quest_marriage_start}[ib:aggressive][if:convo_delighted]", () => Hero.OneToOneConversationHero.Spouse == null &&

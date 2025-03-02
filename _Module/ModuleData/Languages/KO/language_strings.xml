@@ -592,5 +592,7 @@
     <string id="Dramalord595" text="Dramalord의 임신 시스템을 활성화합니다 (비호환 모드가 감지되면 자동으로 비활성화됨)" />
     <string id="Dramalord596" text="Dramalord 결혼 활성화" />
     <string id="Dramalord597" text="Dramalord의 결혼 시스템을 활성화합니다 (비호환 모드가 감지되면 자동으로 비활성화됨)" />
+    <string id="Dramalord598" text="소문을 퍼뜨리는 플레이어 확률" />
+    <string id="Dramalord599" text="영웅이 플레이어에게 다가와 소문을 퍼뜨릴 확률" />
   </strings>
 </base>
