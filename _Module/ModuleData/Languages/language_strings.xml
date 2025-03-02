@@ -36,11 +36,11 @@
     <string id="Dramalord030" text="My apologies, {TITLE}, but I am short of time right now." />
     <string id="Dramalord031" text="I am always eager to hear new stories. Tell me of your latest exploits while traveling in the realm." />
     <string id="Dramalord032" text="There is a matter that has weighed upon my thoughts for some time. I would value hearing your opinion." />
-    <string id="Dramalord033" text="I must admit that I find you quite charming. Would you mind telling me more about yourself?" />
-    <string id="Dramalord034" text="Would you care to walk with me? I should be most honored to be seen with such a remarkable beauty." />
+    <string id="Dramalord033" text="I must admit that I find you quite charming. It would be a shame to not grow better acquainted." />
+    <string id="Dramalord034" text="Would you care to walk with me? I should enjoy the company of one so striking." />
     <string id="Dramalord035" text="I must confess, I cannot stop thinking of you. I have strong feelings for you, {TITLE}, and would see our bond grow deeper. What say you?" />
     <string id="Dramalord036" text="Your presence stirs my heart, {TITLE}. I should very much like to see you more often—just the two of us, away from prying eyes. What do you think, {TITLE}?" />
-    <string id="Dramalord037" text="Ah, {TITLE}, I have missed you dearly. Might we share a meal together?" />
+    <string id="Dramalord037" text="Ah, {TITLE}, I have missed you dearly. Might we share some time together?" />
     <string id="Dramalord038" text="I had been hoping to see you, {TITLE}. Shall we seek a quieter place for a more... private discussion?" />
     <string id="Dramalord039" text="It seems we are in luck, {TITLE}. {SPOUSE} is away and will not return soon. Will you join me?" />
     <string id="Dramalord040" text="At last, {SPOUSE} is gone, and we have some precious moments of privacy. Will you come to me, {TITLE}?" />
@@ -59,7 +59,7 @@
     <string id="Dramalord053" text="Now that we are within a settlement, {TITLE}, let us seek an officiant and be wed at last. Shall we?" />
     <string id="Dramalord054" text="While we are in a settlement, {TITLE}, we should take this chance to formalize our union without delay, should we not?" />
     <string id="Dramalord055" text="Very well. Let us speak, then, {TITLE}." />
-    <string id="Dramalord056" text="Of course, {TITLE}. I would be honored to join you." />
+    <string id="Dramalord056" text="You make quite the impression. But tell me, what else should I know of you?" />
     <string id="Dramalord057" text="Oh {TITLE}, I wish for the very same!" />
     <string id="Dramalord058" text="Sure, {TITLE}, I always enjoy your company." /> 
     <string id="Dramalord059" text="Oh yes, {TITLE}. Let us savor our time while they remain away." />
@@ -217,8 +217,8 @@
     <string id="Dramalord220" text="Show friends with benefits on Encyclopedia page of a hero" />
     <string id="Dramalord221" text="Show Lovers" />
     <string id="Dramalord222" text="Show lovers on Encyclopedia page of a hero" />
-    <string id="Dramalord223" text="Of course, {TITLE}. Let me tell you a tale of war and power..." />
-    <string id="Dramalord224" text="Oh, such flattery, {TITLE}. Alright, you have piqued my interest. Tell me more about yourself." />
+    <string id="Dramalord223" text="Certainly! I am game for a good conversation." />
+    <string id="Dramalord224" text="Ah, you are bold, {TITLE}. I wonder, is your wit as sharp as your tongue? Let us find out." />
     <string id="Dramalord225" text="You know, {TITLE}... I have dreamt of this moment since I first laid eyes on you." />
     <string id="Dramalord226" text="Of course, {TITLE}. Let us spend some time together, just the two of us." />
     <string id="Dramalord227" text="Show Betrotheds" />

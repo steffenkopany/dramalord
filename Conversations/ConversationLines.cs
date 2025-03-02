@@ -11,11 +11,11 @@ namespace Dramalord.Conversations
         public static TextObject player_interaction_start_react_no = new("{=Dramalord030}My apologies, {TITLE}, but I am short of time right now.");
         public static TextObject npc_interaction_talk_1 = new("{=Dramalord031}I am always eager to hear new stories. Tell me of your latest exploits while traveling in the realm.");
         public static TextObject npc_interaction_talk_2 = new("{=Dramalord032}There is a matter that has weighed upon my thoughts for some time. I would value hearing your opinion.");
-        public static TextObject npc_interaction_flirt_1 = new("{=Dramalord033}I must admit that I find you quite charming. Would you mind telling me more about yourself?");
-        public static TextObject npc_interaction_flirt_2 = new("{=Dramalord034}Would you care to walk with me? I should be most honored to be seen with such a remarkable beauty.");
+        public static TextObject npc_interaction_flirt_1 = new("{=Dramalord033}I must admit that I find you quite charming. It would be a shame to not grow better acquainted.");
+        public static TextObject npc_interaction_flirt_2 = new("{=Dramalord034}Would you care to walk with me? I should enjoy the company of one so striking.");
         public static TextObject npc_interaction_date_first_1 = new("{=Dramalord035}I must confess, I cannot stop thinking of you. I have strong feelings for you, {TITLE}, and would see our bond grow deeper. What say you?");
         public static TextObject npc_interaction_date_first_2 = new("{=Dramalord036}Your presence stirs my heart, {TITLE}. I should very much like to see you more often—just the two of us, away from prying eyes. What do you think, {TITLE}?");
-        public static TextObject npc_interaction_date_single_1 = new("{=Dramalord037}Ah, {TITLE}, I have missed you dearly. Might we share a meal together?");
+        public static TextObject npc_interaction_date_single_1 = new("{=Dramalord037}Ah, {TITLE}, I have missed you dearly. Might we share some time together?");
         public static TextObject npc_interaction_date_single_2 = new("{=Dramalord038}I had been hoping to see you, {TITLE}. Shall we seek a quieter place for a more... private discussion?");
         public static TextObject npc_interaction_date_married_1 = new("{=Dramalord039}It seems we are in luck, {TITLE}. {SPOUSE} is away and will not return soon. Will you join me?");
         public static TextObject npc_interaction_date_married_2 = new("{=Dramalord040}At last, {SPOUSE} is gone, and we have some precious moments of privacy. Will you come to me, {TITLE}?");
@@ -34,7 +34,7 @@ namespace Dramalord.Conversations
         public static TextObject npc_interaction_marriage_1 = new("{=Dramalord053}Now that we are within a settlement, {TITLE}, let us seek an officiant and be wed at last. Shall we?");
         public static TextObject npc_interaction_marriage_2 = new("{=Dramalord054}While we are in a settlement, {TITLE}, we should take this chance to formalize our union without delay, should we not?");
         public static TextObject npc_interaction_reply_talk_1 = new("{=Dramalord055}Very well. Let us speak, then, {TITLE}.");
-        public static TextObject npc_interaction_reply_flirt_yes_1 = new("{=Dramalord056}Of course, {TITLE}. I would be honored to join you.");
+        public static TextObject npc_interaction_reply_flirt_yes_1 = new("{=Dramalord056}You make quite the impression. But tell me, what else should I know of you?");
         public static TextObject npc_interaction_reply_date_first_yes_1 = new("{=Dramalord057}Oh {TITLE}, I wish for the very same!");
         public static TextObject npc_interaction_reply_date_yes_1 = new("{=Dramalord058}Sure, {TITLE}, I always enjoy your company.");
         public static TextObject player_reaction_date_married_yes = new("{=Dramalord059}Oh yes, {TITLE}. Let us savor our time while they remain away.");
@@ -74,8 +74,8 @@ namespace Dramalord.Conversations
         public static TextObject npc_reply_confrontation_nocare = new("{=Dramalord185}Well, well, {TITLE}. What now?");
         public static TextObject npc_as_you_wish_reply = new("{=Dramalord186}As you wish, {TITLE}.");
 
-        public static TextObject npc_interaction_reply_talk_2 = new("{=Dramalord223}Of course, {TITLE}. Let me tell you a tale of war and power...");
-        public static TextObject npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}Oh, such flattery, {TITLE}. Alright, you have piqued my interest. Tell me more about yourself.");
+        public static TextObject npc_interaction_reply_talk_2 = new("{=Dramalord223}Certainly! I am game for a good conversation.");
+        public static TextObject npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}Ah, you are bold, {TITLE}. I wonder, is your wit as sharp as your tongue? Let us find out.");
         public static TextObject npc_interaction_reply_date_first_yes_2 = new("{=Dramalord225}You know, {TITLE}... I have dreamt of this moment since I first laid eyes on you.");
         public static TextObject npc_interaction_reply_date_yes_2 = new("{=Dramalord226}Of course, {TITLE}. Let us spend some time together, just the two of us.");
 
@@ -684,8 +684,8 @@ namespace Dramalord.Conversations
             npc_reply_confrontation_nocare.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord185}Well, oh well, {TITLE}. So what now?");
             npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord186}As you wish, {TITLE}.");
 
-            npc_interaction_reply_talk_2 = new("{=Dramalord223}Of course, {TITLE}. Let me tell you a tale of war and power...");
-            npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}Oh, such flattery, {TITLE}. Alright, you have piqued my interest. Tell me more about yourself.");
+            npc_interaction_reply_talk_2 = new("{=Dramalord223}Certainly! I am game for a good conversation.");
+            npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}Ah, you are bold, {TITLE}. I wonder, is your wit as sharp as your tongue? Let us find out.");
             npc_interaction_reply_date_first_yes_2 = new("{=Dramalord225}You know, {TITLE}... I have dreamt of this moment since I first laid eyes on you.");
             npc_interaction_reply_date_yes_2 = new("{=Dramalord226}Of course, {TITLE}. Let us spend some time together, just the two of us.");
 
