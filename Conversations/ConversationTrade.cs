@@ -1,4 +1,4 @@
-﻿using Dramalord.Extensions;
+using Dramalord.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -190,8 +190,8 @@ namespace Dramalord.Conversations
                             .PlayerOption("{nevermind}")
                                 .NpcLine("{npc_as_you_wish_reply}")
                                 .GotoDialogState("hero_main_options")
-                            .EndPlayerOptions()
-                        .EndPlayerOptions();
+                        .EndPlayerOptions()
+                .EndPlayerOptions();
 
             Campaign.Current.ConversationManager.AddDialogFlow(goodsFlow);
         }
