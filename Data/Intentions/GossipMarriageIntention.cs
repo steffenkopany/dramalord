@@ -27,7 +27,7 @@ namespace Dramalord.Data.Intentions
             Targets = targets;
             Targets.Add(intentionHero);
             IsWitness = isWitness;
-            if (IsWitness && MBRandom.RandomInt(1, 100) > DramalordMCM.Instance.ChanceApproachingPlayer && !Targets.Contains(Hero.MainHero))
+            if (IsWitness && MBRandom.RandomInt(1, 100) > DramalordMCM.Instance.ChanceGossipingPlayer && !Targets.Contains(Hero.MainHero))
             {
                 Targets.Add(Hero.MainHero);
             }
@@ -39,7 +39,7 @@ namespace Dramalord.Data.Intentions
 
             if (target == Hero.MainHero)
             {
-                if (IntentionHero.HasMet && ConversationTools.StartConversation(this, IntentionHero.CurrentSettlement != null))
+                if (IntentionHero.HasMet && (EventIntention.IntentionHero.HasMet || EventIntention.Target.HasMet) && ConversationTools.StartConversation(this, IntentionHero.CurrentSettlement != null))
                 {
                     Targets.Add(Hero.MainHero);
                 }
