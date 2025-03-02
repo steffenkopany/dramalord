@@ -76,8 +76,8 @@ namespace Dramalord.Data.Intentions
                     int speed = (int)Campaign.Current.TimeControlMode;
                     Campaign.Current.SetTimeSpeed(0);
                     TextObject title = new TextObject("{=Dramalord568}Opportunity for intimacy");
-                    TextObject text = new TextObject("{=Dramalord569}You see a certain sparkle in {HERO1}'s eyes while they smile in a lewd way... Will you seize this opportunity?");
-                    title.SetTextVariable("HERO1", IntentionHero.Name);
+                    TextObject text = new TextObject("{=Dramalord569}There is a certain heat in {HERO1}'s gaze, their smile laced with unmistakable intent. Will you answer their invitation?");
+                    title.SetTextVariable("HERO1", otherHero.Name);
                     InformationManager.ShowInquiry(
                             new InquiryData(
                                 title.ToString(),

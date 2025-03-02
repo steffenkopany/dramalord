@@ -7,15 +7,15 @@ namespace Dramalord.Conversations
     {
         public static TextObject npc_starts_interaction_unknown = new("{=Dramalord027}Excuse me, {TITLE}. I do not believe we have been introduced, but might I trouble you for a moment of your time?");
         public static TextObject npc_starts_interaction_known = new("{=Dramalord028}{TITLE}, it is a pleasure to see you. May I humbly request a moment of your time?");
-        public static TextObject player_interaction_start_react_yes = new("{=Dramalord029}Certainly, {TITLE}. How may I be of service?");
+        public static TextObject player_interaction_start_react_yes = new("{=Dramalord029}Of course, {TITLE}. What is it you wish to discuss?");
         public static TextObject player_interaction_start_react_no = new("{=Dramalord030}My apologies, {TITLE}, but I am short of time right now.");
         public static TextObject npc_interaction_talk_1 = new("{=Dramalord031}I am always eager to hear new stories. Tell me of your latest exploits while traveling in the realm.");
         public static TextObject npc_interaction_talk_2 = new("{=Dramalord032}There is a matter that has weighed upon my thoughts for some time. I would value hearing your opinion.");
-        public static TextObject npc_interaction_flirt_1 = new("{=Dramalord033}I must admit that I find you quite charming. Would you mind telling me more about yourself?");
-        public static TextObject npc_interaction_flirt_2 = new("{=Dramalord034}Would you care to walk with me? I should be most honored to be seen with such a remarkable beauty.");
+        public static TextObject npc_interaction_flirt_1 = new("{=Dramalord033}I must admit that I find you quite charming. It would be a shame to not grow better acquainted.");
+        public static TextObject npc_interaction_flirt_2 = new("{=Dramalord034}Would you care to walk with me? I should enjoy the company of one so striking.");
         public static TextObject npc_interaction_date_first_1 = new("{=Dramalord035}I must confess, I cannot stop thinking of you. I have strong feelings for you, {TITLE}, and would see our bond grow deeper. What say you?");
         public static TextObject npc_interaction_date_first_2 = new("{=Dramalord036}Your presence stirs my heart, {TITLE}. I should very much like to see you more often—just the two of us, away from prying eyes. What do you think, {TITLE}?");
-        public static TextObject npc_interaction_date_single_1 = new("{=Dramalord037}Ah, {TITLE}, I have missed you dearly. Might we share a meal together?");
+        public static TextObject npc_interaction_date_single_1 = new("{=Dramalord037}Ah, {TITLE}, I have missed you dearly. Might we share some time together?");
         public static TextObject npc_interaction_date_single_2 = new("{=Dramalord038}I had been hoping to see you, {TITLE}. Shall we seek a quieter place for a more... private discussion?");
         public static TextObject npc_interaction_date_married_1 = new("{=Dramalord039}It seems we are in luck, {TITLE}. {SPOUSE} is away and will not return soon. Will you join me?");
         public static TextObject npc_interaction_date_married_2 = new("{=Dramalord040}At last, {SPOUSE} is gone, and we have some precious moments of privacy. Will you come to me, {TITLE}?");
@@ -34,7 +34,7 @@ namespace Dramalord.Conversations
         public static TextObject npc_interaction_marriage_1 = new("{=Dramalord053}Now that we are within a settlement, {TITLE}, let us seek an officiant and be wed at last. Shall we?");
         public static TextObject npc_interaction_marriage_2 = new("{=Dramalord054}While we are in a settlement, {TITLE}, we should take this chance to formalize our union without delay, should we not?");
         public static TextObject npc_interaction_reply_talk_1 = new("{=Dramalord055}Very well. Let us speak, then, {TITLE}.");
-        public static TextObject npc_interaction_reply_flirt_yes_1 = new("{=Dramalord056}Of course, {TITLE}. I would be honored to join you.");
+        public static TextObject npc_interaction_reply_flirt_yes_1 = new("{=Dramalord056}You make quite the impression. But tell me, what else should I know of you?");
         public static TextObject npc_interaction_reply_date_first_yes_1 = new("{=Dramalord057}Oh {TITLE}, I wish for the very same!");
         public static TextObject npc_interaction_reply_date_yes_1 = new("{=Dramalord058}Sure, {TITLE}, I always enjoy your company.");
         public static TextObject player_reaction_date_married_yes = new("{=Dramalord059}Oh yes, {TITLE}. Let us savor our time while they remain away.");
@@ -74,8 +74,8 @@ namespace Dramalord.Conversations
         public static TextObject npc_reply_confrontation_nocare = new("{=Dramalord185}Well, well, {TITLE}. What now?");
         public static TextObject npc_as_you_wish_reply = new("{=Dramalord186}As you wish, {TITLE}.");
 
-        public static TextObject npc_interaction_reply_talk_2 = new("{=Dramalord223}Of course, {TITLE}. Let me tell you a tale of war and power...");
-        public static TextObject npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}You do flatter me so, {TITLE}. I cannot say that I do not enjoy it, but if I grow too vain, I shall hold you responsible.");
+        public static TextObject npc_interaction_reply_talk_2 = new("{=Dramalord223}Certainly! I am game for a good conversation.");
+        public static TextObject npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}Ah, you are bold, {TITLE}. I wonder, is your wit as sharp as your tongue? Let us find out.");
         public static TextObject npc_interaction_reply_date_first_yes_2 = new("{=Dramalord225}You know, {TITLE}... I have dreamt of this moment since I first laid eyes on you.");
         public static TextObject npc_interaction_reply_date_yes_2 = new("{=Dramalord226}Of course, {TITLE}. Let us spend some time together, just the two of us.");
 
@@ -149,8 +149,8 @@ namespace Dramalord.Conversations
         public static TextObject npc_info_reply_build_high = new("{=Dramalord330}I am quite fond of strong, muscular figures. The more imposing, the better.");
         public static TextObject npc_info_reply_age = new("{=Dramalord331}I am drawn to those who are {AGEDIFF} than myself. I prefer partners around the age of {AGE}.");
         public static TextObject npc_info_reply_summary = new("{=Dramalord332}As for you {TITLE}, I think you are probably a... {RATING} out of 100.");
-
-        public static TextObject player_interaction_talk = new("{=Dramalord339}I know you have tales worth telling. Indulge me with a few, will you? (Friendly chat)");
+      
+        public static TextObject player_interaction_talk = new("{=Dramalord339}It may do us well to share our thoughts. Care to talk? (Friendly chat)");
         public static TextObject player_interaction_flirt = new("{=Dramalord340}You look stunning, {TITLE}, though I suspect you are already well aware... (Flirting)");
         public static TextObject player_interaction_date_first = new("{=Dramalord341}I must confess I have feelings for you, {TITLE}! (Love affair)");
         public static TextObject player_interaction_date = new("{=Dramalord342}There is nothing I desire more than to be with you, and you alone. (Dating)");
@@ -666,37 +666,37 @@ namespace Dramalord.Conversations
             npc_interaction_reply_engage_no.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord104}I am sorry {TITLE}, but I am not ready for this step just yet.");
 
 
-            npc_starts_confrontation_unknown = new("{=Dramalord166}Greetings, {TITLE}, you don't know me. I am {HERO} of the {CLAN}.");
-            npc_starts_confrontation_known = new("{=Dramalord167}Good day, {TITLE}. Good that I catch you.");
-            npc_confrontation_date = new("{=Dramalord168}It looks like you and {HERO} were enjoying some romantic time. Are you aware that their are my {STATUS}?");
-            npc_confrontation_intercourse = new("{=Dramalord169}Huh, you and {HERO} were pounding each other in bed. You know they are {STATUS}, do you?");
-            npc_confrontation_birth_player = new("{=Dramalord170}So you have given birth to {CHILD}. The child is apparently from {HERO} and not from me. You are {STATUS}, right?");
-            npc_confrontation_marriage_player = new("{=Dramalord171}You married {HERO} behind my back. Did you even think about telling me? You are {STATUS}!");
-            npc_confrontation_engagement_player = new("{=Dramalord172}I heard that you and {HERO} are now engaged. Did you think I won't hear about it, {STATUS}?");
-            npc_confrontation_date_player = new("{=Dramalord176}Apparently you and {HERO} are meeting privatly sometimes. Have you fogotten that you are {STATUS}?");
-            npc_confrontation_intercourse_player = new("{=Dramalord177}So {HERO} was giving you a good time in bed, eh? You are {STATUS}, do you remember?");
-            npc_confrontation_birth = new("{=Dramalord178}{HERO} has given birth to {CHILD} and you are apparently the father. I thought you are {STATUS}?");
-            npc_confrontation_result_ok = new("{=Dramalord180}I forgive you, {TITLE}. But I will not forget it.");
-            npc_confrontation_result_break = new("{=Dramalord181}I will not accept this, {TITLE}. I will end this relationship.");
-            npc_confrontation_result_other = new("{=Dramalord182}This won't be forgotton, {TITLE}. Farewell.");
-            player_confrontation_abort = new("{=Dramalord183}Nevermind, {TITLE}. Farewell.");
+            npc_starts_confrontation_unknown = new("{=Dramalord166}Greetings, {TITLE}, you do not yet know me. I am {HERO} of the {CLAN}.");
+            npc_starts_confrontation_known = new("{=Dramalord167}Good day, {TITLE}. It is fortunate that I have caught you.");
+            npc_confrontation_date = new("{=Dramalord168}It seems that you and {HERO} were... enjoying yourselves. Are you aware that they are {STATUS}?");
+            npc_confrontation_intercourse = new("{=Dramalord169}Huh... so you and {HERO} were enjoying each other's company... in bed. You do know that they are {STATUS}, right?");
+            npc_confrontation_birth_player = new("{=Dramalord170}So you have given birth to {CHILD}. It is no secret that the child's true father is {HERO}, and not myself. Yet you are {STATUS}, are you not?");
+            npc_confrontation_marriage_player = new("{=Dramalord171}You wed {HERO} behind my back. Did it never occur to you to inform me? You are {STATUS}!");
+            npc_confrontation_engagement_player = new("{=Dramalord172}So you and {HERO} are now betrothed. Did you truly believe I would not learn of it?!");
+            npc_confrontation_date_player = new("{=Dramalord176}It is apparent that you and {HERO.LINK} often conduct 'private meetings'. Have you forgotten that you are {STATUS}?");
+            npc_confrontation_intercourse_player = new("{=Dramalord177}So, {HERO} has been keeping you entertained in bed? You are {STATUS}, or has that slipped your mind?");
+            npc_confrontation_birth = new("{=Dramalord178}{HERO} has given birth to {CHILD}, and it seems you are the father. I thought you were {STATUS}?");
+            npc_confrontation_result_ok = new("{=Dramalord180}I forgive you, {TITLE}. But mark my words—I shall not forget this.");
+            npc_confrontation_result_break = new("{=Dramalord181}I cannot accept this, {TITLE}. You are undeserving of anything more from me. Our relationship ends here.");
+            npc_confrontation_result_other = new("{=Dramalord182}This will not be forgotten, {TITLE}. Farewell.");
+            player_confrontation_abort = new("{=Dramalord183}Forget it, {TITLE}. Farewell.");
             npc_reply_confrontation_love.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord184}Oh {TITLE}, I love you! I beg you, don't do anything you might regret later...");
             npc_reply_confrontation_nocare.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord185}Well, oh well, {TITLE}. So what now?");
             npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord186}As you wish, {TITLE}.");
 
-            npc_interaction_reply_talk_2 = new("{=Dramalord223}Of course, {TITLE}. Let me tell you a tale of war and power...");
-            npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}Oh {TITLE}, you silly! All eyes will turn on you anyway, and I will enjoy that.");
-            npc_interaction_reply_date_first_yes_2 = new("{=Dramalord225}You know {TITLE}... I dreamed of this moment since I laid eyes on you!");
-            npc_interaction_reply_date_yes_2 = new("{=Dramalord226}Of course {TITLE}. Let us spend some quality time, just the two of us.");
+            npc_interaction_reply_talk_2 = new("{=Dramalord223}Certainly! I am game for a good conversation.");
+            npc_interaction_reply_flirt_yes_2 = new("{=Dramalord224}Ah, you are bold, {TITLE}. I wonder, is your wit as sharp as your tongue? Let us find out.");
+            npc_interaction_reply_date_first_yes_2 = new("{=Dramalord225}You know, {TITLE}... I have dreamt of this moment since I first laid eyes on you.");
+            npc_interaction_reply_date_yes_2 = new("{=Dramalord226}Of course, {TITLE}. Let us spend some time together, just the two of us.");
 
-            npc_interaction_breakup = new("{=Dramalord229}It hurts me, {TITLE}, but I have to put an end to our relationship.");
-            npc_interaction_breakup_love = new("{=Dramalord230}Oh no, {TITLE}! You are breaking my heart! But I have no other choice then to accept your decision.");
-            player_reaction_breakup_accept = new("{=Dramalord231}Well, eventually it always comes to this, right {TITLE}? It was nice while it lasted, truly. Thank you.");
-            npc_confrontation_result_leave = new("{=Dramalord232}I.. I don't know what to say. This is shocking me. I have to think if I can stay around you...");
-            player_reaction_breakup_leave = new("{=Dramalord233}Get out of my sight, {NAME}. Pack your belongings and leave.");
-            npc_confrontation_result_break_other = new("{=Dramalord234}I give you one more chance, {TITLE}, but you will end it with {HERO}.");
-            npc_confrontation_marriage = new("{=Dramalord235}I've heard that you married {HERO}. Did they tell you that they are actually {STATUS}?");
-            npc_confrontation_engagement = new("{=Dramalord236}Congratulations to you and {HERO} on your engagement. I just want to mention that they are {STATUS}.");
+            npc_interaction_breakup = new("{=Dramalord229}It pains me, {TITLE}, but I must put an end to our relationship.");
+            npc_interaction_breakup_love = new("{=Dramalord230}Oh no, {TITLE}! My heart breaks, yet I know I have no choice but to accept your decision...");
+            player_reaction_breakup_accept = new("{=Dramalord231}Well, I suppose it always comes to this in the end, does it not, {TITLE}? It was wonderful while it lasted. Truly, I thank you.");
+            npc_confrontation_result_leave = new("{=Dramalord232}I do not know what to say. This has left me utterly distraught. I need some time to consider things.");
+            player_reaction_breakup_leave = new("{=Dramalord233}Be gone from my sight, {NAME}. Gather your belongings and leave at once.");
+            npc_confrontation_result_break_other = new("{=Dramalord234}I will grant only one final chance, {TITLE}. If you mean to stay, then you must end things with {HERO}—there is no other way.");
+            npc_confrontation_marriage = new("{=Dramalord235}I have heard that you wed {HERO}. I assume they have neglected to inform you that they are, in fact, {STATUS}?");
+            npc_confrontation_engagement = new("{=Dramalord236}Congratulations to you and {HERO} on your engagement. I simply thought you should know that they are {STATUS}.");
 
             npc_interaction_reply_sex_fwb_no.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord239}Not today, {TITLE}. I'm not in the mood, ask me some other time.");
 
@@ -721,17 +721,17 @@ namespace Dramalord.Conversations
             orphanage_do_orphanize.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord271}Thus, it is decided! We will take care of {ORPHAN.NAME} and find a new home for the child.");
             orphanage_dont_orphanize.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));// "{=Dramalord272}Very well, {TITLE}. {ORPHAN.NAME} will stay in your clan.");
             player_prisoner_start.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));// "{=Dramalord273}Prisoner, I need to have a word with you.");
-            npc_prisoner_reply_yes = new("{=Dramalord274}It's not like I have much of a choice {TITLE}.");
-            npc_prisoner_reply_no = new("{=Dramalord275}I refuse to converse with you.");
+            npc_prisoner_reply_yes = new("{=Dramalord274}It is not as if I have much of a choice, is it {TITLE}?");
+            npc_prisoner_reply_no = new("{=Dramalord275}I have no interest in conversing with the likes of you. Begone!");
             player_wants_prisonfun.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));// "{=Dramalord276}I would consider letting you go for... some special service in my bedroom.");
-            player_wants_kill = new("{=Dramalord277}It's time to end this. Your existence is bothering me.");
+            player_wants_kill = new("{=Dramalord277}It is time to end this. Your existence is a nuisance.");
             npc_prisonfun_reaction_yes.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));// "{=Dramalord278}You got yourself a deal! I think I will even enjoy it.");
             npc_prisonfun_reaction_no.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));// "{=Dramalord279}Never! You will not taint my honor with such offers!");
-            npc_kill_reaction_yes = new("{=Dramalord280}Do what you must, you honorless swine!");
-            npc_kill_reaction_no = new("{=Dramalord281}Oh god! No please... I beg you!");
-            npc_kill_reaction_offer = new("{=Dramalord282}Wait {TITLE}! Why choose death if there's also pleasure?");
-            player_choose_pleasure_yes = new("{=Dramalord283}Hmm... Alright. I accept. I spare you this time if you perform well.");
-            player_choose_pleasure_no = new("{=Dramalord284}Well, your death is my sweetest pleasure.");
+            npc_kill_reaction_yes = new("{=Dramalord280}Do what you must then, you vile and honorless swine!");
+            npc_kill_reaction_no = new("{=Dramalord281}Oh Lord, no! Please—I beg of you!");
+            npc_kill_reaction_offer = new("{=Dramalord282}Wait, {TITLE}! Please stay your hand. Why choose death over... pleasure?");
+            player_choose_pleasure_yes = new("{=Dramalord283}Hmm. Alright, I accept. But know that you will only be spared if you performance is satisfactory.");
+            player_choose_pleasure_no = new("{=Dramalord284}Unfortunately for you, nothing could grant me greater pleasure than your death.");
 
             player_interaction_gift.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord292}{TITLE}, let me give you this exceptional {GIFT} as a token of my affection.");
             npc_interaction_reply_gift.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));//"{=Dramalord293}Thank you {TITLE}! I will keep it close to my... bed as a reminder of your... affection and enjoy it every day!");
@@ -764,91 +764,91 @@ namespace Dramalord.Conversations
             player_interaction_marry.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));// "{=Dramalord347}We are in a settlement, {TITLE}, let's  get married! (Marriage)");
             player_interaction_breakup.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));// "{=Dramalord348}It's just not working between you and I. Let's end this farce before it festers. (Break up)");
 
-            npc_challenge_summarize_end = new("{=Dramalord351}Thank you for the conversation {TITLE}.");
-            player_challenge_friend = new("{=Dramalord353}I have met {POI.NAME} and I consider them being a friend of mine.");
-            player_challenge_friend_no_met = new("{=Dramalord354}Ugh, don't remind me. {POI.NAME} is annoying and I hope I won't meet them again.");
-            player_challenge_friend_neutral_met = new("{=Dramalord355}{POI.NAME}, hmm. I actually don't have any particular opinion about them.");
-            player_challenge_friend_yes_notmet = new("{=Dramalord356}Unfortunately I never hat the chance to meet {POI.NAME}, but they sound like a nice person?");
-            player_challenge_friend_no_notmet = new("{=Dramalord357}Good thing I never met {POI.NAME}. I can image them being a horrible being.");
-            player_challenge_friend_neutral_notmet = new("{=Dramalord358}I do not have any opinion about {POI.NAME}, as I never exchanged a word with them.");
-            npc_challenge_friend_summarize_1 = new("{=Dramalord359}That's good to hear! {POI.NAME} is a good friend of mine as well!");
-            npc_challenge_friend_summarize_2 = new("{=Dramalord360}I'm disappointed to hear that. {POI.NAME} is actually a good friend of mine.");
-            npc_challenge_friend_summarize_3 = new("{=Dramalord361}Well you probably don't know {POI.NAME} well. They're my friend.");
-            npc_challenge_friend_summarize_4 = new("{=Dramalord362}Ugh, really? You like {POI.NAME}? That's very disappointing.");
-            npc_challenge_friend_summarize_5 = new("{=Dramalord363}I totally agree! {POI.NAME} is like dirt under my fingernails.");
-            npc_challenge_friend_summarize_6 = new("{=Dramalord364}Well you probably don't know {POI.NAME} well. I really don't like them.");
-            npc_challenge_friend_summarize_7 = new("{=Dramalord365}You are fast in building up an opinion about {POI.NAME} I have to say.");
-            npc_challenge_friend_summarize_8 = new("{=Dramalord366}I don't have an opinion about {POI.NAME} as well. I don't know them well enough.");
-            npc_challenge_friend_summarize_9 = new("{=Dramalord367}That's an excellent point of view! Agreed.");
-            npc_challenge_friend_summarize_10 = new("{=Dramalord368}Well, I actually have to diagree with you.");
-            npc_challenge_friend_summarize_11 = new("{=Dramalord369}You are quite opinionated, aren't you?");
-            npc_challenge_honor = new("{=Dramalord370}Last war our faction raided an enemy village because they ran out of food. It's sad, but I think it had to be done for the greater good. (Honor)");
-            npc_challenge_honor_yes = new("{=Dramalord371}I disagree. Civilians shouldn't suffer because of politics.");
-            npc_challenge_honor_no = new("{=Dramalord372}Right. Those peasants should have given their goods volunarily.");
-            npc_challenge_honor_neutral = new("{=Dramalord373}I don't know. I guess thats just the way things are.");
-            npc_challenge_valor = new("{=Dramalord374}Have you ever encountered a stronger foe but went to battle nevertheless? (Valor)");
-            npc_challenge_valor_yes = new("{=Dramalord375}Yes, and we've won anyway. This world belongs to the brave!");
-            npc_challenge_valor_no = new("{=Dramalord376}No. Why would I risk my life when I know we can't win.");
-            npc_challenge_valor_neutral = new("{=Dramalord377}I can't say. I think that depends on the situation.");
-            npc_challenge_mercy = new("{=Dramalord378}I heard that some lords let captured troops simply leave the battlefield. Isn't that a risk? (Mercy)");
-            npc_challenge_mercy_yes = new("{=Dramalord379}They let them go home to their families. I would do the same.");
-            npc_challenge_mercy_no = new("{=Dramalord380}Heads off I'd say! Makes it hard for them to go to battle again.");
-            npc_challenge_mercy_neutral = new("{=Dramalord381}They are there to kill or be killed, so who cares about them.");
-            npc_challenge_generosity = new("{=Dramalord382}Recently the champion of a tournament gave all of his winnings to the poor. (Generosity)");
-            npc_challenge_generosity_yes = new("{=Dramalord383}That is a generous move indeed. This kind of people are rare, unfortunately.");
-            npc_challenge_generosity_no = new("{=Dramalord384}Bah! What a waste of money. Why did they participate in the first place?");
-            npc_challenge_generosity_neutral = new("{=Dramalord385}Well, I guess it's their money, thus it's their choice.");
-            npc_challenge_calculating = new("{=Dramalord386}One of the southern clans almost left their kingdom, after their leader had an argument with their king. (Calculating)");
-            npc_challenge_calculating_yes = new("{=Dramalord387}That's stupid. They would have lose their protection because of their pride.");
-            npc_challenge_calculating_no = new("{=Dramalord388}I can understand how they feel. I also loose me temper every now and then.");
-            npc_challenge_calculating_neutral = new("{=Dramalord389}I cant't judge that move, as long as I don't know what the argument was about.");
-            npc_challenge_attraction_summarize_1 = new("{=Dramalord390}Ohh! You're making me blush! I'm happy to hear that.");
-            npc_challenge_attraction_summarize_2 = new("{=Dramalord391}So does that mean you don't consider me attractive?");
-            npc_challenge_attraction_summarize_3 = new("{=Dramalord392}I'm pretty sure you have some kind of preference.");
-            npc_challenge_orientation = new("{=Dramalord393}I've heard that some lords and ladies have a different taste in physical gender. How about you? (Orientation)");
-            npc_challenge_orientation_neutral = new("{=Dramalord394}I actually don't have any specific preference.");
-            npc_challenge_weight = new("{=Dramalord395}The owner of the local inn has gained some weight. Now the tavern is packed with gawking customers every night. (Weight)");
-            npc_challenge_build = new("{=Dramalord396}In the highlands lords and ladies are often bulky and powerful. Many people admire them for being strong. (Build)");
-            npc_challenge_age = new("{=Dramalord397}There are people who prefer older people and others prefer younger people. What is your preference? (Age)");
-            npc_challenge_age_old = new("{=Dramalord398}I prefer people older then me. Nothing is better then ripe fruit.");
-            npc_challenge_age_young = new("{=Dramalord399}I enjoy the energy and stamina of younger people very much.");
-            npc_challenge_age_same = new("{=Dramalord400}I think people around my own age are more attractive.");
-            npc_challenge_openness = new("{=Dramalord401}Do you think trying out new things is sometimes exciting? (Openness)");
-            npc_challenge_openness_yes = new("{=Dramalord402}I like trying new things. It's getting boring without change.");
-            npc_challenge_openness_no = new("{=Dramalord403}Nonsense. Things are good the way they are and don't need to change.");
-            npc_challenge_openness_neutral = new("{=Dramalord404}Maybe, I don't really care. Things are changing anyway all the time.");
-            npc_challenge_conscientiousness = new("{=Dramalord405}So, are you rather a person who plans out things, or are you more the sponateous type? (Conscientiousness)");
-            npc_challenge_conscientiousness_yes = new("{=Dramalord406}Everything needs order and structure. Planning is everything.");
-            npc_challenge_conscientiousness_no = new("{=Dramalord407}Nah, not really. I usually stumble into my next adventure.");
-            npc_challenge_conscientiousness_neutral = new("{=Dramalord408}Eh, sometimes I plan, sometimes I don't.");
-            npc_challenge_extroversion = new("{=Dramalord409}When there's a tournament in town, are you excited to meet new people? (Extroversion)");
-            npc_challenge_extroversion_yes = new("{=Dramalord410}Oh absolutely! I barely can't stop chatting when I'm around people.");
-            npc_challenge_extroversion_no = new("{=Dramalord411}Ugh. Nah, I'm rather to myself. Most people are bothering me.");
-            npc_challenge_extroversion_neutral = new("{=Dramalord412}Well, that depends. I'd meet a few probably, but not many.");
-            npc_challenge_agreeableness = new("{=Dramalord413}If one of your friends tell you a sad story, how do you react? (Agreeableness)");
-            npc_challenge_agreeableness_yes = new("{=Dramalord414}I try to comfort them, or help if I can of course.");
-            npc_challenge_agreeableness_no = new("{=Dramalord415}Uhm, my friends know not to bother me with their personal stuff.");
-            npc_challenge_agreeableness_neutral = new("{=Dramalord416}That depends on how I feel myself, I guess.");
-            npc_challenge_neuroticism = new("{=Dramalord417}Managing a party is a lot of stress sometimes. How do you deal with it? (Neuroticism)");
-            npc_challenge_neuroticism_yes = new("{=Dramalord418}Oh yes. For recovering I usually lock myself away for a few days.");
-            npc_challenge_neuroticism_no = new("{=Dramalord419}Well, it's not stressful at all. I am actually rarely stressed.");
-            npc_challenge_neuroticism_neutral = new("{=Dramalord420}It's ok I think. Sometimes I need a day off or two.");
+            npc_challenge_summarize_end = new("{=Dramalord351}Thank you for the conversation, {TITLE}.");
+            player_challenge_friend = new("{=Dramalord353}Ah, {POI.NAME}! Yes, we have met. I am actually quite fond of them.");
+            player_challenge_friend_no_met = new("{=Dramalord354}Unfortunately, yes. I have met {POI.NAME} and do not regard them kindly.");
+            player_challenge_friend_neutral_met = new("{=Dramalord355}{POI.NAME}, you say? I harbor no feelings for them one way or the other.");
+            player_challenge_friend_yes_notmet = new("{=Dramalord356}Oh, {POI.NAME}? We have yet to meet, but I hope to, and have heard good things.");
+            player_challenge_friend_no_notmet = new("{=Dramalord357}From what I have heard, I have been spared a misfortune in not having met {POI.NAME}.");
+            player_challenge_friend_neutral_notmet = new("{=Dramalord358}I hold no opinion of {POI.NAME}, as we have yet to exchange words.");
+            npc_challenge_friend_summarize_1 = new("{=Dramalord359}That is good to hear! {POI.NAME} is a fine person to know.");
+            npc_challenge_friend_summarize_2 = new("{=Dramalord360}That is most unfortunate. {POI.NAME} and I get along quite well.");
+            npc_challenge_friend_summarize_3 = new("{=Dramalord361}Oh? That is a pity. {POI.NAME} is someone I have always thought well of.");
+            npc_challenge_friend_summarize_4 = new("{=Dramalord362}Hmph. You admire {POI.NAME}? How very disappointing.");
+            npc_challenge_friend_summarize_5 = new("{=Dramalord363}I completely agree! {POI.NAME} left a very poor impression on me.");
+            npc_challenge_friend_summarize_6 = new("{=Dramalord364}Well, I do not care for {POI.NAME} much at all.");
+            npc_challenge_friend_summarize_7 = new("{=Dramalord365}You seem quick to form an opinion about {POI.NAME}, I have to say.");
+            npc_challenge_friend_summarize_8 = new("{=Dramalord366}I do not harbor an opinion about {POI.NAME}, either. I do not yet know them well enough.");
+            npc_challenge_friend_summarize_9 = new("{=Dramalord367}That is an excellent point of view! Agreed.");
+            npc_challenge_friend_summarize_10 = new("{=Dramalord368}Well, I am afraid I must disagree with you on that.");
+            npc_challenge_friend_summarize_11 = new("{=Dramalord369}Hm. You seem to be quite opinionated.");
+            npc_challenge_honor = new("{=Dramalord370}I heard tale of a warrior that was executed for renouncing his oaths and turning to banditry, but it is said that he did it to feed the hungry. Did his ends justify his means? What do you think?");
+            npc_challenge_honor_yes = new("{=Dramalord371}There is always another way, even if it presents great difficulty. One should not compromise their honor.");
+            npc_challenge_honor_no = new("{=Dramalord372}Having a code is almost as important as knowing when to break it.");
+            npc_challenge_honor_neutral = new("{=Dramalord373}People starve, people steal, and people die. It is just the way of things.");
+            npc_challenge_valor = new("{=Dramalord374}I recently heard a story about a great commander who won a difficult victory against impossible odds. Would you still go to battle if you knew the odds were against you?");
+            npc_challenge_valor_yes = new("{=Dramalord375}Yes, I would. Sometimes it is more important to fight than to be victorious. The world belongs to the brave.");
+            npc_challenge_valor_no = new("{=Dramalord376}No. Why would I risk my life when I am certain to lose? That would be foolish.");
+            npc_challenge_valor_neutral = new("{=Dramalord377}Hm. I cannot say. I think that it would depend on the situation.");
+            npc_challenge_mercy = new("{=Dramalord378}I have heard that some lords allow defeated foes to leave the battlefield unharmed. Some think it admirable, others deem it a dangerous folly. What do you think?");
+            npc_challenge_mercy_yes = new("{=Dramalord379}They allowed them to go home to their families. I would do the same.");
+            npc_challenge_mercy_no = new("{=Dramalord380}Off with their heads, I say! That would make it difficult for them to march to battle again.");
+            npc_challenge_mercy_neutral = new("{=Dramalord381}It is the nature of war—some live, some do not. That is just the way of things.");
+            npc_challenge_generosity = new("{=Dramalord382}Recently, I heard tale told of an arena champion who gave all of his tournament winnings away to the poor.");
+            npc_challenge_generosity_yes = new("{=Dramalord383}That is quite the act of generosity. People such as that are a rarity, unfortunately.");
+            npc_challenge_generosity_no = new("{=Dramalord384}Bah! What a waste. What is the point of gold and glory if not to keep it?");
+            npc_challenge_generosity_neutral = new("{=Dramalord385}Well, I suppose that it is their money, thus it is their choice.");
+            npc_challenge_calculating = new("{=Dramalord386}I heard that a noble clan nearly turned against their own king after being denied a request. Some call it reckless, others see it as a bold gambit. What do you think?");
+            npc_challenge_calculating_yes = new("{=Dramalord387}That was a rash decision. One should not throw away power over a fleeting insult.");
+            npc_challenge_calculating_no = new("{=Dramalord388}I can understand the urge. Sometimes you must act on your convictions, consequences be damned.");
+            npc_challenge_calculating_neutral = new("{=Dramalord389}Difficult to say. Life is complicated, and I can hardly judge such things.");
+            npc_challenge_attraction_summarize_1 = new("{=Dramalord390}Oh, you are making me blush! I am delighted to hear that.");
+            npc_challenge_attraction_summarize_2 = new("{=Dramalord391}Does that mean that you do not consider me to be attractive?");
+            npc_challenge_attraction_summarize_3 = new("{=Dramalord392}You truly do not have any preference? Hm.");
+            npc_challenge_orientation = new("{=Dramalord393}Do you prefer the company of those alike to yourself, or do you find charm in a more opposite sort?");
+            npc_challenge_orientation_neutral = new("{=Dramalord394}I do not possess any particular preference.");
+            npc_challenge_weight = new("{=Dramalord395}I overheard a debate at the tavern—some were saying they enjoy a fuller figure, while others prefer a leaner form. What do you think?");
+            npc_challenge_build = new("{=Dramalord396}Many people admire a strong and powerful form. Others like the slender and agile. Where do your tastes lie?");
+            npc_challenge_age = new("{=Dramalord397}Some are known to rob the cradle, others are known to rob the grave. What about you?");
+            npc_challenge_age_old = new("{=Dramalord398}I tend towards people older than myself. They say that wine grows better with age.");
+            npc_challenge_age_young = new("{=Dramalord399}I enjoy the company of people younger than myself. I find their energy invigorating.");
+            npc_challenge_age_same = new("{=Dramalord400}I usually enjoy being around people near to my own age.");
+            npc_challenge_openness = new("{=Dramalord401}I have heard it said that the world belongs to those willing to embrace change. What do you think?");
+            npc_challenge_openness_yes = new("{=Dramalord402}Novel experiences bring life its color. I welcome change.");
+            npc_challenge_openness_no = new("{=Dramalord403}I see no need to meddle with what already works. A steady routine serves me well.");
+            npc_challenge_openness_neutral = new("{=Dramalord404}Change happens, whether we welcome it or not. I simply take things as they come.");
+            npc_challenge_conscientiousness = new("{=Dramalord405}Tell me, do you find comfort in careful planning, or do you prefer to take life as it comes?");
+            npc_challenge_conscientiousness_yes = new("{=Dramalord406}Order and structure are the foundation of success. A good plan is everything.");
+            npc_challenge_conscientiousness_no = new("{=Dramalord407}Plans? No, not really. I usually follow the road where it takes me.");
+            npc_challenge_conscientiousness_neutral = new("{=Dramalord408}Sometimes I plan, sometimes I do not. It depends on the day.");
+            npc_challenge_extroversion = new("{=Dramalord409}Feasts bring together all sorts—lords, merchants, poets, and travelers. Some relish the company, while others prefer a quiet corner. What about you?");
+            npc_challenge_extroversion_yes = new("{=Dramalord410}Oh, absolutely! I thrive in good company. The more people, the better!");
+            npc_challenge_extroversion_no = new("{=Dramalord411}I prefer to keep to myself. Large crowds can be exhausting.");
+            npc_challenge_extroversion_neutral = new("{=Dramalord412}Well, I suppose that depends. I enjoy company, but too much can be overwhelming.");
+            npc_challenge_agreeableness = new("{=Dramalord413}When a friend confides in you about something that weighs heavily on their heart, do you offer comfort, or is it best they handle it on their own?");
+            npc_challenge_agreeableness_yes = new("{=Dramalord414}Of course, I try to comfort them. If I can help, I will.");
+            npc_challenge_agreeableness_no = new("{=Dramalord415}Truthfully, I am not always the best person for that. People must learn to handle their own troubles.");
+            npc_challenge_agreeableness_neutral = new("{=Dramalord416}I suppose that it depends on my mood and the situation.");
+            npc_challenge_neuroticism = new("{=Dramalord417}The burdens of leadership can weigh heavily on the mind. Some struggle under the pressure, while others thrive in it. How do you manage?");
+            npc_challenge_neuroticism_yes = new("{=Dramalord418}Oh, the stress can be unbearable at times. When it becomes too much, I shut myself away for days.");
+            npc_challenge_neuroticism_no = new("{=Dramalord419}Stress? I hardly notice it. I find I rather enjoy the challenge.");
+            npc_challenge_neuroticism_neutral = new("{=Dramalord420}I manage well enough, though I do take time to rest when needed.");
 
-            npc_persuasion_love = new("{=Dramalord423}I... I am not sure about this. I like you, but do I like you enough?");
-            npc_persuasion_love_answer_1 = new("{=Dramalord424}If we don't try we never will find out if this could work.");
-            npc_persuasion_love_answer_2 = new("{=Dramalord425}You think too much. Just let it happen.");
-            npc_persuasion_love_answer_3 = new("{=Dramalord426}I am convinced we can give each other much love.");
-            npc_persuasion_love_answer_4 = new("{=Dramalord427}I will feel honored if you would consider it.");
-            npc_persuasion_marriage = new("{=Dramalord428}This is overwhelming. I love you, {PLAYER.NAME}, but are we ready for this step?");
-            npc_persuasion_marriage_answer_1 = new("{=Dramalord429}Love is an adventure and this will be our next challenge!");
-            npc_persuasion_marriage_answer_2 = new("{=Dramalord430}If you think about it, this is logically the next step.");
-            npc_persuasion_marriage_answer_3 = new("{=Dramalord431}We finally could share everything with each other.");
-            npc_persuasion_marriage_answer_4 = new("{=Dramalord432}It's a honorful thing to do in our situation.");
-            npc_persuasion_fwb = new("{=Dramalord433}This is a spicy proposal indeed. What if feelings are mixing in?");
-            npc_persuasion_fwb_answer_1 = new("{=Dramalord434}What is a steamy adventure without risks anyway?");
-            npc_persuasion_fwb_answer_2 = new("{=Dramalord435}Then we re-evaluate the situation and draw our conclusions.");
-            npc_persuasion_fwb_answer_3 = new("{=Dramalord436}Think about all the pleasure we could give each other.");
-            npc_persuasion_fwb_answer_4 = new("{=Dramalord437}Then we release each other and go back to manual work.");
+            npc_persuasion_love = new("{=Dramalord423}I... I am not sure about this. I do care for you, but is it enough?");
+            npc_persuasion_love_answer_1 = new("{=Dramalord424}If we never try, we will never know what might have been.");
+            npc_persuasion_love_answer_2 = new("{=Dramalord425}You are overthinking this. Trust your heart.");
+            npc_persuasion_love_answer_3 = new("{=Dramalord426}I truly believe that we could build something lasting, if we choose to.");
+            npc_persuasion_love_answer_4 = new("{=Dramalord427}I would be honored if you would have me.");
+            npc_persuasion_marriage = new("{=Dramalord428}This is all so overwhelming... I love you, {PLAYER.NAME}, but are we truly ready?");
+            npc_persuasion_marriage_answer_1 = new("{=Dramalord429}Love is a journey, and I would see where this road leads us.");
+            npc_persuasion_marriage_answer_2 = new("{=Dramalord430}This feels right. There is nowhere else for us to go but forward.");
+            npc_persuasion_marriage_answer_3 = new("{=Dramalord431}At last, we could share everything with each other.");
+            npc_persuasion_marriage_answer_4 = new("{=Dramalord432}In truth, this is the only honorable course before us.");
+            npc_persuasion_fwb = new("{=Dramalord433}This is quite the scandalous suggestion... What if feelings become entangled?");
+            npc_persuasion_fwb_answer_1 = new("{=Dramalord434}What is passion without a little risk?");
+            npc_persuasion_fwb_answer_2 = new("{=Dramalord435}Then we shall face whatever comes, together.");
+            npc_persuasion_fwb_answer_3 = new("{=Dramalord436}Just imagine the pleasure we could share...");
+            npc_persuasion_fwb_answer_4 = new("{=Dramalord437}Then we release each other and return to what was before.");
 
             npc_interaction_reply_uhwell.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(speaker, listener, false));// "{=Dramalord437}Uh... well...");
 
@@ -877,23 +877,23 @@ namespace Dramalord.Conversations
 
             npc_starts_confrontation_surprised = new("{=Dramalord482}Oh, hello {TITLE}. I... didn't expect you...");
 
-            player_interaction_kick_clan = new("{=Dramalord497}I have decided that you dot fit into my clan. Pack your stuff and leave.");
-            player_interaction_kick_kingdom = new("{=Dramalord498}There is no place for your clan in my kingdom. Be gone and don't return!");
-            npc_interaction_kick_friend = new("{=Dramalord499}Good to know how much your friendship is worth. What a disappointment! I will do as you ask.");
+            player_interaction_kick_clan = new("{=Dramalord497}You have shown that you do not belong in this clan. Gather your things and leave at once.");
+            player_interaction_kick_kingdom = new("{=Dramalord498}There is no place for your clan in my kingdom. Depart now, and do not return!");
+            npc_interaction_kick_friend = new("{=Dramalord499}So, this is what our friendship amounts to in the end? What a disappointment. Very well, I will do as you ask.");
 
             player_interaction_abort_own = new("{=Dramalord502}I want you to get rid of our unborn child.");
             player_interaction_abort_self = new("{=Dramalord504}I do not want to give birth to our child.");
             player_interaction_abort_other = new("{=Dramalord503}I want you to get rid of the unborn child of you and {HERO}.");
 
 
-            npc_interaction_abort_own_accept = new("{=Dramalord507}If you consider this necessary, then I will take care about it {TITLE}.");
-            npc_interaction_abort_own_decline = new("{=Dramalord508}I will not accept this, {TITLE}. I urge you to reconsider or there are consequences!");
-            npc_interaction_abort_self_accept = new("{=Dramalord509}If this is your wish, then do so {TITLE}. I will not force you to keep it.");
+            npc_interaction_abort_own_accept = new("{=Dramalord507}If you consider this necessary, then I will take care of it, {TITLE}.");
+            npc_interaction_abort_own_decline = new("{=Dramalord508}I will not accept this, {TITLE}. I urge you to reconsider, or there will be consequences!");
+            npc_interaction_abort_self_accept = new("{=Dramalord509}If that is your wish, then so be it, {TITLE}. I cannot force you to keep it.");
             npc_interaction_abort_self_decline = new("{=Dramalord510}Are you insane, {TITLE}? This child is the manifestation of our love!");
-            npc_interaction_abort_other_accept = new("{=Dramalord511}You are right. It wouldn't be proper to give birth to a child of {HERO}.");
-            npc_interaction_abort_other_decline = new("{=Dramalord512}Never, {TITLE}! This child is the result of the love I have for {HERO}!");
+            npc_interaction_abort_other_accept = new("{=Dramalord511}You are right. It would not be proper to give birth to a child of {HERO}.");
+            npc_interaction_abort_other_decline = new("{=Dramalord512}I cannot, {TITLE}! This child is the result of the love I have for {HERO}!");
         }
 
-        
+
     }
 }

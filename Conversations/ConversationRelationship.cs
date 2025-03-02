@@ -140,8 +140,8 @@ namespace Dramalord.Conversations
 
             DialogFlow talkFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_talk")
                 .BeginNpcOptions()
-                    .NpcOptionWithVariation("{npc_interaction_talk_1}[ib:normal][if:convo_calm_friendly]", () => !Timeout())
-                        .Variation("{npc_interaction_talk_2}[ib:normal][if:convo_calm_friendly]")
+                    .NpcOptionWithVariation("{npc_interaction_reply_talk_1}[ib:normal][if:convo_calm_friendly]", () => !Timeout())
+                        .Variation("{npc_interaction_reply_talk_2}[ib:normal][if:convo_calm_friendly]")
                         .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Chat, 1))
                         .GotoDialogState("start_challenge")
                     .NpcOption("{npc_interaction_reply_timeout}[ib:closed][if:convo_bored]", () => Timeout())
@@ -150,8 +150,8 @@ namespace Dramalord.Conversations
 
             DialogFlow flirtFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_flirt")
                 .BeginNpcOptions()
-                    .NpcOptionWithVariation("{npc_interaction_flirt_1}[ib:normal2][if:convo_mocking_teasing]", () => (Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) >= DramalordMCM.Instance.MinAttraction) && !Timeout())
-                        .Variation("{npc_interaction_flirt_2}[ib:normal2][if:convo_mocking_teasing]")
+                    .NpcOptionWithVariation("{npc_interaction_reply_flirt_yes_1}[ib:normal2][if:convo_mocking_teasing]", () => (Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) >= DramalordMCM.Instance.MinAttraction) && !Timeout())
+                        .Variation("{npc_interaction_reply_flirt_yes_2}[ib:normal2][if:convo_mocking_teasing]")
                         .Consequence(() => {
                             ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Flirt, 1); 
                         })
@@ -164,12 +164,12 @@ namespace Dramalord.Conversations
 
             DialogFlow dateFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_date")
                 .BeginNpcOptions()
-                    .NpcOptionWithVariation("{npc_interaction_date_first_1}[ib:confident3][if:convo_excited]", () => (SpouseAway() || !HasOtherSpouse()) && !Timeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove && !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
-                        .Variation("{npc_interaction_date_first_2}[ib:confident3][if:convo_excited]")
+                    .NpcOptionWithVariation("{npc_interaction_reply_date_first_yes_1}[ib:confident3][if:convo_excited]", () => (SpouseAway() || !HasOtherSpouse()) && !Timeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove && !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
+                        .Variation("{npc_interaction_reply_date_first_yes_2}[ib:confident3][if:convo_excited]")
                         .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3))
                         .GotoDialogState("start_challenge")
-                    .NpcOptionWithVariation("{npc_interaction_date_single_1}[ib:demure2][if:convo_merry]", () => (SpouseAway() || !HasOtherSpouse()) && !Timeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
-                        .Variation("{npc_interaction_date_single_2}[ib:demure2][if:convo_merry]")
+                    .NpcOptionWithVariation("{npc_interaction_reply_date_yes_1}[ib:demure2][if:convo_merry]", () => (SpouseAway() || !HasOtherSpouse()) && !Timeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
+                        .Variation("{npc_interaction_reply_date_yes_2}[ib:demure2][if:convo_merry]")
                         .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3))
                         .GotoDialogState("start_challenge")
                     .NpcOptionWithVariation("{npc_interaction_date_married_1}[ib:demure2][if:convo_mocking_teasing]", () => SpouseAway() && HasOtherSpouse() && !Timeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
@@ -425,14 +425,14 @@ namespace Dramalord.Conversations
             ConversationLines.npc_interaction_reply_uhwell.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord437}Uh... well...");
             ConversationLines.npc_interaction_reply_husband.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord102}Apologies, {TITLE}, but my spouse is around I we can not risk it.");
 
-            ConversationLines.npc_interaction_talk_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord031}I always like to hear new stories. Tell me about your latest exploits while traveling in the realm.");
-            ConversationLines.npc_interaction_talk_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord032}I would like to hear your opinion of a certain matter which is occupying my mind for a while.");
-            ConversationLines.npc_interaction_flirt_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord033}I have to say I really like your smile. Would you mind telling me more about yourself?");
-            ConversationLines.npc_interaction_flirt_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord034}Would you mind going for a walk with me? I want to cause jealousy with your outstanding appearance.");
-            ConversationLines.npc_interaction_date_first_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord035}I must confess, I can not stop thinking of you. I clearly have feelings for you, {TITLE}, and would like to bring our relationship to the next level. What do you say?");
-            ConversationLines.npc_interaction_date_first_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord036}Your presence makes me blush, {TITLE}. I would love to see you more frequently, just the two of us in private. What do you say, {TITLE}?");
+            ConversationLines.npc_interaction_reply_talk_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord031}I always like to hear new stories. Tell me about your latest exploits while traveling in the realm.");
+            ConversationLines.npc_interaction_reply_talk_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord032}I would like to hear your opinion of a certain matter which is occupying my mind for a while.");
+            ConversationLines.npc_interaction_reply_flirt_yes_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord033}I have to say I really like your smile. Would you mind telling me more about yourself?");
+            ConversationLines.npc_interaction_reply_flirt_yes_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord034}Would you mind going for a walk with me? I want to cause jealousy with your outstanding appearance.");
+            ConversationLines.npc_interaction_reply_date_first_yes_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord035}I must confess, I can not stop thinking of you. I clearly have feelings for you, {TITLE}, and would like to bring our relationship to the next level. What do you say?");
+            ConversationLines.npc_interaction_reply_date_first_yes_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord036}Your presence makes me blush, {TITLE}. I would love to see you more frequently, just the two of us in private. What do you say, {TITLE}?");
             ConversationLines.npc_interaction_date_single_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord037}Oh, {TITLE}, I have been missing you! The servants prepared a meal im my private chambers. Would you care to join me?");
-            ConversationLines.npc_interaction_date_single_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord038}I was looking forward to seeing you, {TITLE}. Would you like to retreat somewhere more silent, for a more private conversation?");
+            ConversationLines.npc_interaction_reply_date_yes_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord038}I was looking forward to seeing you, {TITLE}. Would you like to retreat somewhere more silent, for a more private conversation?");
             ConversationLines.npc_interaction_date_married_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord039}We are in luck, {TITLE}. {SPOUSE} is currently not around and the chambermaid swore to remain silent. Will you come with me?");
             ConversationLines.npc_interaction_date_married_1.SetTextVariable("SPOUSE", Hero.OneToOneConversationHero.Spouse?.Name);//"{=Dramalord039}We are in luck, {TITLE}. {SPOUSE} is currently not around and the chambermaid swore to remain silent. Will you come with me?");
             ConversationLines.npc_interaction_date_married_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord040}Ugh, {SPOUSE} is finally away. Now we have all the rooms for us! The servants will keep it for themselves, care to join me, {TITLE}?");
@@ -451,7 +451,6 @@ namespace Dramalord.Conversations
             ConversationLines.player_reaction_marry_yes.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord067}I agree, {TITLE}. Let's seal this bond of ours.");
 
             ConversationLines.player_quest_joinparty_start.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));//{=Dramalord545}Tell me, {TITLE}, would you like to join my party for a while?"
-            ConversationLines.npc_interaction_reply_flirt_yes_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord056}Of course {TITLE}, I would love to join you."
             ConversationLines.player_reaction_no.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord068}I am sorry {TITLE}, but I have no interest in that right now.");
 
             Hero? Permitter = (Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsAlive) ? Hero.OneToOneConversationHero.Father :

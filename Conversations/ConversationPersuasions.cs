@@ -186,7 +186,7 @@ namespace Dramalord.Conversations
         internal static void CreatePersuasionTaskForFWB()
         {
             PersuasionTask persuasionTask = new PersuasionTask(3);
-            persuasionTask.SpokenLine = new TextObject("{=Dramalord433}This is quite the scandalous suggestion... What if feelings become entangled?");
+            persuasionTask.SpokenLine = new TextObject("{=Dramalord433}This is quite the scandalous suggestion... What if feelings become entangled??");
             persuasionTask.TryLaterLine = FWB;
             int trustDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinTrustFWB - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero)) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)trustDiff;
