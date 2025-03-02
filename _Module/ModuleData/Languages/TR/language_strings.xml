@@ -622,5 +622,7 @@
     <string id="Dramalord595" text="Dramalord’un hamilelik sistemini etkinleştir (Uyumsuz mod algılanırsa otomatik olarak devre dışı bırakılır)" />
     <string id="Dramalord596" text="Dramalord Evliliğini Etkinleştir" />
     <string id="Dramalord597" text="Dramalord’un evlilik sistemini etkinleştir (Uyumsuz mod algılanırsa otomatik olarak devre dışı bırakılır)" />
+    <string id="Dramalord598" text="Dedikoducu oyuncu şansı" />
+    <string id="Dramalord599" text="Kahramanların oyuncuya gelip dedikodu yapma olasılığı" />
   </strings>
 </base>

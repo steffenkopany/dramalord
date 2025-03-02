@@ -592,5 +592,7 @@
     <string id="Dramalord595" text="Dramalords Schwangerschaftssystem aktivieren (Wird automatisch deaktiviert, wenn eine inkompatible Mod erkannt wird)" />
     <string id="Dramalord596" text="Dramalord-Ehe aktivieren" />
     <string id="Dramalord597" text="Dramalords Ehe-System aktivieren (Wird automatisch deaktiviert, wenn eine inkompatible Mod erkannt wird)" />
+    <string id="Dramalord598" text="Chance auf klatschenden Spieler" />
+    <string id="Dramalord599" text="Chance, dass Helden den Spieler aufsuchen, um Klatsch zu verbreiten" />
   </strings>
 </base>

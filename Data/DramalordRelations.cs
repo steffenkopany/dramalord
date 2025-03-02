@@ -117,7 +117,7 @@ namespace Dramalord.Data
             {
                 _relations[hero1].Add(hero2, new HeroRelation(
                     (hero1.Spouse == hero2) ? MBRandom.RandomInt(50, 100) : 0,
-                     hero1.IsFriend(hero2) ? RelationshipType.Friend : (hero1.Spouse == hero2) ? RelationshipType.Spouse : RelationshipType.None)
+                     (hero1.Spouse == hero2) ? RelationshipType.Spouse : hero1.IsFriend(hero2) ? RelationshipType.Friend :  RelationshipType.None)
                     );
                 _relations[hero1][hero2].IsKnownToPlayer = hero1.Spouse == hero2 ? true : false;
             }
@@ -178,6 +178,15 @@ namespace Dramalord.Data
             {
                 LegacySave.LoadLegacyRelations(_relations, dataStore);
             }
+
+            //lets fix marriages
+            Hero.AllAliveHeroes.Where(h => h.Spouse != null && _relations.ContainsKey(h)).Do(h =>
+            {
+                if (h.GetRelationTo(h.Spouse).Relationship != RelationshipType.Spouse)
+                {
+                    StartRelationshipAction.Apply(h, h.Spouse, h.GetRelationTo(h.Spouse), RelationshipType.Spouse);
+                }
+            });
         }
 
         internal override void SaveData(IDataStore dataStore)

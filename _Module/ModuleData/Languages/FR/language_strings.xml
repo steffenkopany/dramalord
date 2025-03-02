@@ -592,5 +592,7 @@
     <string id="Dramalord595" text="Activer le système de grossesse de Dramalord (Désactivé automatiquement si un mod incompatible est détecté)" />
     <string id="Dramalord596" text="Activer le mariage Dramalord" />
     <string id="Dramalord597" text="Activer le système de mariage de Dramalord (Désactivé automatiquement si un mod incompatible est détecté)" />
+    <string id="Dramalord598" text="Chance de joueur colporteur de rumeurs" />
+    <string id="Dramalord599" text="Chance que des héros approchent le joueur pour répandre des rumeurs" />
   </strings>
 </base>

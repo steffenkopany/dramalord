@@ -592,5 +592,7 @@
     <string id="Dramalord595" text="Włącz system ciąży Dramalorda (Automatycznie wyłączone, jeśli wykryto niekompatybilny mod)" />
     <string id="Dramalord596" text="Włącz małżeństwo Dramalorda" />
     <string id="Dramalord597" text="Włącz system małżeństwa Dramalorda (Automatycznie wyłączone, jeśli wykryto niekompatybilny mod)" />
+    <string id="Dramalord598" text="Szansa na plotkującego gracza" />
+    <string id="Dramalord599" text="Szansa, że bohaterowie podejdą do gracza, aby szerzyć plotki" />
   </strings>
 </base>
