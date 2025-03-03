@@ -27,7 +27,7 @@ namespace Dramalord.Conversations
         public static TextObject npc_interaction_sex_friend_wb_2 = new("{=Dramalord046}Ah, {TITLE}, I was hoping you might have time for conversation... and perhaps a study of human form thereafter. Are you intrigued?");
         public static TextObject npc_interaction_sex_married_1 = new("{=Dramalord047}{SPOUSE} is away, and I yearn for you, {TITLE}. Let us retire to the bedchamber and revel in our time together. Will you?");
         public static TextObject npc_interaction_sex_married_2 = new("{=Dramalord048}With {SPOUSE} is absent, the bed lies empty. It would be a shame to let it go to waste, would it not? Does this idea tempt you, {TITLE}?");
-        public static TextObject npc_interaction_sex_else_1 = new("{=Dramalord049}Come to me and kiss me, {TITLE}. I have longed for your touch, and I can bear the wait no longer.!");
+        public static TextObject npc_interaction_sex_else_1 = new("{=Dramalord049}Come to me and kiss me, {TITLE}. I have longed for your touch, and I can bear the wait no longer!");
         public static TextObject npc_interaction_sex_else_2 = new("{=Dramalord050}Set aside your garments, and I shall show you a different kind of battle—one fought in my bedchamber, where both sides emerge victorious.");
         public static TextObject npc_interaction_betrothed_1 = new("{=Dramalord051}I love you dearly, {TITLE}. The time has come to take the next step in our journey together. Will you marry me?");
         public static TextObject npc_interaction_betrothed_2 = new("{=Dramalord052}You have my heart, {TITLE}, and I know that no other shall ever take your place. Will you do me the honor of marriage?");

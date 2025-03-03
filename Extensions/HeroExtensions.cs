@@ -137,14 +137,49 @@ namespace Dramalord.Extensions
             return true;
         }
 
-        public static bool IsFaithful(this Hero hero)
+        public static bool CanPursueRomanceWith(this Hero initiator, Hero target)
         {
-            if (DramalordMCM.Instance.PlayerSpouseFaithful && hero != Hero.MainHero && (hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero)))
+            // Enforce "Player Spouse Faithful" if desired:
+            // (Meaning: If a hero is the player's spouse AND
+            //  the other party is NOT the player, block romance.)
+            if (DramalordMCM.Instance?.PlayerSpouseFaithful == true)
             {
-                return true;
+                // If initiator is spouse of the player (but not the player),
+                // refuse if target is not the player:
+                if (initiator != Hero.MainHero
+                    && (initiator.Spouse == Hero.MainHero || initiator.IsSpouseOf(Hero.MainHero))
+                    && target != Hero.MainHero)
+                {
+                    return false;
+                }
+
+                // If target is spouse of the player (but not the player),
+                // refuse if initiator is not the player:
+                if (target != Hero.MainHero
+                    && (target.Spouse == Hero.MainHero || target.IsSpouseOf(Hero.MainHero))
+                    && initiator != Hero.MainHero)
+                {
+                    return false;
+                }
             }
-            return false;
+
+            // Enforce "toy" restriction (if an NPC has a toy, they should only
+            // engage with the player, not with other NPCs):
+            // This is optional if your existing code already covers it, but shown here
+            // in case you want a single place for the logic.
+            if (initiator.GetDesires().HasToy && target != Hero.MainHero)
+            {
+                return false;
+            }
+            if (target.GetDesires().HasToy && initiator != Hero.MainHero)
+            {
+                return false;
+            }
+
+            // If none of the above blocked it, romance is allowed:
+            return true;
         }
+
 
         public static bool IsRelativeOf(this Hero hero, Hero target)
         {

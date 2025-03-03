@@ -47,24 +47,30 @@ namespace Dramalord.Behaviours
                         if (isHorny)
                         {
                             target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsSexualWith(Hero.MainHero)) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.IsSexualWith(h) && !hero.HasMetRecently(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
-                            if(target != null && (target == Hero.MainHero || !desires.HasToy || !target.IsFaithful()) && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
+                            if (target != null
+                                && (target == Hero.MainHero || !desires.HasToy || hero.CanPursueRomanceWith(target))
+                                && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
                             }
 
-                            if(desires.Horny == 100 && !isConcient && !isNeurotic && isOpen)
+                            if (desires.Horny == 100 && !isConcient && !isNeurotic && isOpen)
                             {
                                 target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsFriendOf(Hero.MainHero) && hero.HasMutualAttractionWith(Hero.MainHero)) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.IsFriendOf(h) && !hero.HasMetRecently(h) && hero.HasMutualAttractionWith(h) && !hero.IsRelativeOf(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
-                                if (target != null && (target == Hero.MainHero || !desires.HasToy || !target.IsFaithful()) && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
+                                if (target != null
+                                    && (target == Hero.MainHero || !desires.HasToy || hero.CanPursueRomanceWith(target))
+                                    && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
                                 {
                                     return;
                                 }
                             }
 
-                            if(hero.GetHeroTraits().Honor <= 0)
+                            if (hero.GetHeroTraits().Honor <= 0)
                             {
                                 target = hero.GetClosePrisoners().GetRandomElementWithPredicate(h => hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction && !hero.HasMetRecently(h));
-                                if (target != null && (target == Hero.MainHero || !desires.HasToy || !hero.IsFaithful()) && new PrisonIntercourseIntention(target, hero, CampaignTime.Now).Action())
+                                if (target != null
+                                    && (target == Hero.MainHero || !desires.HasToy || hero.CanPursueRomanceWith(target))
+                                    && new PrisonIntercourseIntention(target, hero, CampaignTime.Now).Action())
                                 {
                                     return;
                                 }
@@ -123,7 +129,9 @@ namespace Dramalord.Behaviours
                             {
                                 return;
                             }
-                            else if ((target == Hero.MainHero || !desires.HasToy || !target.IsFaithful() || hero.Spouse == target) && new DateIntention(target, hero, CampaignTime.Now).Action())
+                            else if ((target == Hero.MainHero || !desires.HasToy || hero.Spouse == target
+                                      || hero.CanPursueRomanceWith(target))
+                                && new DateIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
                             }
@@ -133,7 +141,10 @@ namespace Dramalord.Behaviours
                         if (target != null)
                         {
                             HeroRelation targetRelation = hero.GetRelationTo(target);
-                            if (targetRelation.Love >= DramalordMCM.Instance.MinDatingLove && (target == Hero.MainHero || !desires.HasToy || !target.IsFaithful() || hero.Spouse == target) && new DateIntention(target, hero, CampaignTime.Now).Action())
+                            if (targetRelation.Love >= DramalordMCM.Instance.MinDatingLove
+                                && (target == Hero.MainHero || !desires.HasToy || hero.Spouse == target
+                                    || hero.CanPursueRomanceWith(target))
+                                && new DateIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
                             }
