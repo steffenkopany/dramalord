@@ -48,6 +48,10 @@ namespace Dramalord.Data
                 {
                     _love = MBMath.ClampInt(_love - (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), 0, 100);
                 }
+                else if (_lastUpdate.ElapsedDaysUntilNow > DramalordMCM.Instance.LoveDecayStartDay && _love < 0)
+                {
+                    _love = MBMath.ClampInt(_love + (int)(_lastUpdate.ElapsedDaysUntilNow - DramalordMCM.Instance.LoveDecayStartDay), -100, 0);
+                }
                 _lastInteraction = value;
                 _lastUpdate = value;
             }

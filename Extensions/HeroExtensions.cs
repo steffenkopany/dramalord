@@ -140,7 +140,7 @@ namespace Dramalord.Extensions
 
         public static bool IsFaithful(this Hero hero)
         {
-            if (DramalordMCM.Instance.PlayerSpouseFaithful && hero != Hero.MainHero && (hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero)))
+            if (DramalordMCM.Instance.PlayerSpouseFaithful && hero != Hero.MainHero && hero.IsSpouseOf(Hero.MainHero))
             {
                 return true;
             }

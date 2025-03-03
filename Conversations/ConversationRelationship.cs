@@ -226,7 +226,7 @@ namespace Dramalord.Conversations
                         .Consequence(() => { new BethrothIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, true).OnConversationEnded(); ConversationTools.EndConversation(); })
                         .CloseDialog()
                     .NpcOption("{player_quest_marriage_start}[ib:aggressive][if:convo_delighted]", () => Hero.OneToOneConversationHero.Spouse == null &&
-                        ((Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsAlive && Hero.OneToOneConversationHero.Father != Hero.MainHero) || (Hero.OneToOneConversationHero.Clan?.Leader != Hero.MainHero && Hero.OneToOneConversationHero.Clan?.Leader != Hero.OneToOneConversationHero)))
+                        ((Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsAlive && Hero.OneToOneConversationHero.Father != Hero.MainHero) || (Hero.OneToOneConversationHero.Clan != null && Hero.OneToOneConversationHero.Clan?.Leader != Hero.MainHero && Hero.OneToOneConversationHero.Clan?.Leader != Hero.OneToOneConversationHero)))
                         .BeginPlayerOptions()
                             .PlayerOption("{npc_as_you_wish_reply}")
                             .Condition(() => { ConversationLines.npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false)); return true; })
