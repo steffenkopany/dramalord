@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -100,17 +101,34 @@ namespace Dramalord.Patches
             }
             if(hero != null)
             { 
-                foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Spouse).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
+                if(!BethrothIntention.OtherMarriageModFound)
                 {
-                    if (charObj.IsHero && charObj.HeroObject != hero)
+                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Spouse).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                     {
-                        MBBindingList<HeroVM> companions = __instance.Companions;
-                        companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
+                        if (charObj.IsHero && charObj.HeroObject != hero)
+                        {
+                            MBBindingList<HeroVM> companions = __instance.Companions;
+                            companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
 
-                        MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
-                        family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
+                            MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
+                            family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
 
-                        __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
+                            __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
+                        }
+                    }
+
+                    foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Betrothed && relation.Value.IsKnownToPlayer).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
+                    {
+                        if (charObj.IsHero)
+                        {
+                            MBBindingList<HeroVM> companions = __instance.Companions;
+                            companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
+
+                            MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
+                            family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
+
+                            __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
+                        }
                     }
                 }
 
@@ -129,21 +147,6 @@ namespace Dramalord.Patches
                 }
                 
                 foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.FriendWithBenefits && relation.Value.IsKnownToPlayer).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
-                {
-                    if (charObj.IsHero)
-                    {
-                        MBBindingList<HeroVM> companions = __instance.Companions;
-                        companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
-
-                        MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
-                        family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
-
-                        __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
-                    }
-                }
-                
-
-                foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Betrothed && relation.Value.IsKnownToPlayer).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                 {
                     if (charObj.IsHero)
                     {
@@ -188,12 +191,12 @@ namespace Dramalord.Patches
             if (hero != null && hero.IsDramalordLegit())
             {
                 TextObject text = new();
-                if (hero.Weight >= 0.66 && hero.Build >= 0.66) text = new("{=Dramalord445}{NAME} is known to eat a lot and doing workouts regularly.");
-                else if (hero.Weight <= 0.33 && hero.Build >= 0.66) text = new("{=Dramalord446}{NAME} is known to barely eat anything and doing workouts regularly.");
-                else if (hero.Weight >= 0.66 && hero.Build <= 0.33) text = new("{=Dramalord447}{NAME} is known to eat a lot and rarely doing workouts.");
-                else if (hero.Weight <= 0.33 && hero.Build <= 0.33) text = new("{=Dramalord448}{NAME} is known to barely eat anything and rarely doing workouts.");
-                else if (hero.Build <= 0.33) text = new("{=Dramalord449}{NAME} is known to rarely doing workouts.");
-                else if (hero.Weight <= 0.33) text = new("{=Dramalord450}{NAME} is known to barely eat anything.");
+                if (hero.Weight >= 0.66 && hero.Build >= 0.66) text = new("{=Dramalord445}{NAME} has a broad and heavyset physique.");
+                else if (hero.Weight <= 0.33 && hero.Build >= 0.66) text = new("{=Dramalord446}{NAME} has a broad but lean physique.");
+                else if (hero.Weight >= 0.66 && hero.Build <= 0.33) text = new("{=Dramalord447}{NAME} has a soft but heavyset physique.");
+                else if (hero.Weight <= 0.33 && hero.Build <= 0.33) text = new("{=Dramalord448}{NAME} has a slender and lean physique.");
+                else if (hero.Build <= 0.33) text = new("{=Dramalord449}{NAME} has a slender physique.");
+                else if (hero.Weight <= 0.33) text = new("{=Dramalord450}{NAME} has a lean physique.");
 
                 
                 text.SetTextVariable("NAME", hero.Name);

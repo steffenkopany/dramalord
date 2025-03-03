@@ -593,5 +593,7 @@
     <string id="Dramalord595" text="Ativar o sistema de gravidez do Dramalord (Desativado automaticamente se for detectado um mod incompatível)" />
     <string id="Dramalord596" text="Ativar casamento Dramalord" />
     <string id="Dramalord597" text="Ativar o sistema de casamento do Dramalord (Desativado automaticamente se for detectado um mod incompatível)" />
+    <string id="Dramalord598" text="Chance de jogador fofoqueiro" />
+    <string id="Dramalord599" text="Chance de que heróis se aproximem do jogador para espalhar fofocas" />
   </strings>
 </base>

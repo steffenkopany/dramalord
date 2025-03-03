@@ -592,5 +592,7 @@
     <string id="Dramalord595" text="Dramalordの妊娠システムを有効にする（互換性のないMODが検出された場合、自動的に無効化）" />
     <string id="Dramalord596" text="Dramalordの結婚を有効化" />
     <string id="Dramalord597" text="Dramalordの結婚システムを有効にする（互換性のないMODが検出された場合、自動的に無効化）" />
+    <string id="Dramalord598" text="噂好きのプレイヤーの確率" />
+    <string id="Dramalord599" text="英雄がプレイヤーに近づき噂を広める確率" />
   </strings>
 </base>

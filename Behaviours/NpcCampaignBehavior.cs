@@ -7,6 +7,7 @@ using Helpers;
 using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -163,7 +164,7 @@ namespace Dramalord.Behaviours
                 }
 
                 //twice, if there's noone around we gotta check for the quest again
-                if (isHorny && !playerClose && hero.IsLoverOf(Hero.MainHero) && randomNumber <= DramalordMCM.Instance.QuestChance && DramalordQuests.Instance.GetQuest(hero) == null)
+                if (isHorny && hero.CurrentSettlement != Hero.MainHero.CurrentSettlement && hero.PartyBelongedTo != MobileParty.MainParty && hero.IsLoverOf(Hero.MainHero) && randomNumber <= DramalordMCM.Instance.QuestChance && DramalordQuests.Instance.GetQuest(hero) == null)
                 {
                     int speed = (int)Campaign.Current.TimeControlMode;
                     Campaign.Current.SetTimeSpeed(0);

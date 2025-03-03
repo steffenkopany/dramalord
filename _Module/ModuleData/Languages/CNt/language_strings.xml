@@ -592,5 +592,7 @@
     <string id="Dramalord595" text="啟用Dramalord的懷孕系統（如果偵測到不相容的模組，將自動禁用）" />
     <string id="Dramalord596" text="啟用Dramalord婚姻" />
     <string id="Dramalord597" text="啟用Dramalord的婚姻系統（如果偵測到不相容的模組，將自動禁用）" />
+    <string id="Dramalord598" text="八卦玩家的機率" />
+    <string id="Dramalord599" text="英雄接近玩家傳播八卦的機率" />
   </strings>
 </base>

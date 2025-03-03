@@ -25,27 +25,31 @@ namespace Dramalord
         public int ChanceApproachingPlayer { get; set; } = 30;
 
         [SettingPropertyGroup("{=Dramalord001}Autonomy")]
-        [SettingPropertyBool("{=Dramalord298}Allow Default Pregnancies", HintText = "{=Dramalord299}Allow default pregnancies for all npcs", Order = 5, RequireRestart = false)]
+        [SettingPropertyFloatingInteger("{=Dramalord598}Chance Gossiping Player", 0, 100, Order = 5, HintText = "{=Dramalord599}Chance that heroes approach the player for spreading gossip", RequireRestart = false)]
+        public int ChanceGossipingPlayer { get; set; } = 30;
+
+        [SettingPropertyGroup("{=Dramalord001}Autonomy")]
+        [SettingPropertyBool("{=Dramalord298}Allow Default Pregnancies", HintText = "{=Dramalord299}Allow default pregnancies for all npcs", Order = 6, RequireRestart = false)]
         public bool AllowDefaultPregnancies { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord001}Autonomy")]
-        [SettingPropertyBool("{=Dramalord300}Allow Default Marriages", HintText = "{=Dramalord301}Allow default marriages for all npcs", Order = 6, RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord300}Allow Default Marriages", HintText = "{=Dramalord301}Allow default marriages for all npcs", Order = 7, RequireRestart = false)]
         public bool AllowDefaultMarriages { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord001}Autonomy")]
-        [SettingPropertyBool("{=Dramalord242}Allow Incest", HintText = "{=Dramalord243}Allow AI to approach family members for intimate and emotional events", Order = 7, RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord242}Allow Incest", HintText = "{=Dramalord243}Allow AI to approach family members for intimate and emotional events", Order = 8, RequireRestart = false)]
         public bool AllowIncest { get; set; } = false;
 
         [SettingPropertyGroup("{=Dramalord001}Autonomy")]
-        [SettingPropertyBool("{=Dramalord246}Allow Same Sex Marriage", HintText = "{=Dramalord247}Allow AI to marry other heroes of the same sex (otherwise they are just lovers)", Order = 8, RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord246}Allow Same Sex Marriage", HintText = "{=Dramalord247}Allow AI to marry other heroes of the same sex (otherwise they are just lovers)", Order = 9, RequireRestart = false)]
         public bool AllowSameSexMarriage { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord001}Autonomy")]
-        [SettingPropertyBool("{=Dramalord576}Allow Social Class Mix", HintText = "{=Dramalord577}Allow AI interactions between nobles and commoners (Lords and Notables/Wanderers)", Order = 9, RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord576}Allow Social Class Mix", HintText = "{=Dramalord577}Allow AI interactions between nobles and commoners (Lords and Notables/Wanderers)", Order = 10, RequireRestart = false)]
         public bool AllowSocialClassMix { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord001}Autonomy")]
-        [SettingPropertyBool("{=Dramalord574}Join Clan On Marriage", HintText = "{=Dramalord575}Allow AI to join the clan of their spouse (otherwise they're just married)", Order = 10, RequireRestart = false)]
+        [SettingPropertyBool("{=Dramalord574}Join Clan On Marriage", HintText = "{=Dramalord575}Allow AI to join the clan of their spouse (otherwise they're just married)", Order = 11, RequireRestart = false)]
         public bool JoinClanOnMarriage { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]

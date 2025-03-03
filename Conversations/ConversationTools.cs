@@ -6,16 +6,65 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Settlements.Locations;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Conversations
 {
     internal static class ConversationTools
     {
         internal static Intention? ConversationIntention { get; set; } = null;
+
+        private static Mission? ConversationMission = null;
+
+        private class ConversationListener : IMissionListener
+        {
+            Vec2 _position;
+
+            public ConversationListener(Vec2 mapPos)
+            {
+                _position = mapPos;
+            }
+
+            public void OnConversationCharacterChanged() { }
+
+            public void OnEndMission()
+            {
+                ConversationIntention = null;
+                ConversationMission?.RemoveListener(this);
+                ConversationMission = null;
+                PlayerEncounter.Finish();
+
+                if (_position.IsValid)
+                {
+                    MobileParty.MainParty.Position2D = _position;
+                }
+            }
+
+            public void OnEquipItemsFromSpawnEquipment(Agent agent, Agent.CreationType creationType) { }
+
+            public void OnEquipItemsFromSpawnEquipmentBegin(Agent agent, Agent.CreationType creationType) { }
+
+            public void OnInitialDeploymentPlanMade(BattleSideEnum battleSide, bool isFirstPlan) { }
+
+            public void OnMissionModeChange(MissionMode oldMissionMode, bool atStart)
+            {
+                if(ConversationMission?.Mode != MissionMode.Conversation && ConversationMission?.Mode != MissionMode.Barter)
+                {
+                    ConversationMission?.EndMission();
+                }
+            }
+
+            public void OnResetMission() { }
+        }
+
 
         internal static bool StartConversation(Intention intention, bool civilian)
         {
@@ -27,6 +76,51 @@ namespace Dramalord.Conversations
                 CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(speaker.CharacterObject, isCivilianEquipmentRequiredForLeader: civilian, noBodyguards: true, noHorse: true, noWeapon: true));
                 return true;
             }
+            return false;
+        }
+
+        internal static bool StartVisit(Intention intention, bool civilian)
+        {
+            if (ConversationIntention == null)
+            {
+                ConversationIntention = intention;
+                ConversationIntention.OnConversationStart();
+                Hero speaker = (ConversationIntention.IntentionHero == Hero.MainHero) ? ConversationIntention.Target : ConversationIntention.IntentionHero;
+
+                PlayerEncounter.Start();
+                PlayerEncounter.Current.SetupFields(PartyBase.MainParty, PartyBase.MainParty);
+                Campaign.Current.CurrentConversationContext = ConversationContext.Default;
+
+                Vec2 position = new(Hero.MainHero.GetMapPoint().Position2D);
+
+                if (speaker.CurrentSettlement != null)
+                {
+                    PlayerEncounter.EnterSettlement();
+
+                    var locationOfTarget = LocationComplex.Current.GetLocationOfCharacter(speaker);
+                    var locationOfCharacter = LocationComplex.Current.GetLocationOfCharacter(Hero.MainHero);
+
+                    CampaignEventDispatcher.Instance.OnPlayerStartTalkFromMenu(speaker);
+                    ConversationMission = (Mission)PlayerEncounter.LocationEncounter.CreateAndOpenMissionController(locationOfTarget, locationOfCharacter, speaker.CharacterObject);
+                }
+                else
+                {
+                    position = Vec2.Invalid;
+
+                    var specialScene = "";
+                    var sceneLevels = "";
+
+                    ConversationMission = (Mission)Campaign.Current.CampaignMissionManager.OpenConversationMission(
+                        new ConversationCharacterData(Hero.MainHero.CharacterObject, null, true),
+                        new ConversationCharacterData(speaker.CharacterObject, null, true),
+                        specialScene, sceneLevels);
+                }
+
+                ConversationMission.AddListener(new ConversationListener(position));
+
+                return true;
+            }
+
             return false;
         }
 

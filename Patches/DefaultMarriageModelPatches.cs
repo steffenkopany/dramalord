@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -20,7 +21,7 @@ namespace Dramalord.Patches
             }
             else if(__result)
             {
-                __result = maidenOrSuitor.GetRelationTo(Hero.MainHero).Relationship != RelationshipType.Spouse;
+                __result = (maidenOrSuitor.GetRelationTo(Hero.MainHero).Relationship != RelationshipType.Spouse && !BethrothIntention.OtherMarriageModFound);
             }
         }
     } 

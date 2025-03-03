@@ -1,4 +1,5 @@
 ﻿using Dramalord.Data;
+using Dramalord.Data.Intentions;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -79,12 +80,12 @@ namespace Dramalord.Extensions
 
         public static bool IsSpouseOf(this Hero hero, Hero target)
         {
-            return hero.Spouse == target || GetRelationTo(hero, target).Relationship == RelationshipType.Spouse;
+            return hero.Spouse == target || (GetRelationTo(hero, target).Relationship == RelationshipType.Spouse && !BethrothIntention.OtherMarriageModFound);
         }
 
         public static bool IsBetrothedOf(this Hero hero, Hero target)
         {
-            return GetRelationTo(hero, target).Relationship == RelationshipType.Betrothed;
+            return (GetRelationTo(hero, target).Relationship == RelationshipType.Betrothed && !BethrothIntention.OtherMarriageModFound);
         }
 
         public static bool IsLoverOf(this Hero hero, Hero target)
@@ -143,6 +144,7 @@ namespace Dramalord.Extensions
             // (Meaning: If a hero is the player's spouse AND
             //  the other party is NOT the player, block romance.)
             if (DramalordMCM.Instance?.PlayerSpouseFaithful == true)
+
             {
                 // If initiator is spouse of the player (but not the player),
                 // refuse if target is not the player:
