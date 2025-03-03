@@ -1,4 +1,5 @@
 ﻿using Dramalord.Actions;
+using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
 using HarmonyLib;
 using System;
@@ -147,7 +148,7 @@ namespace Dramalord.Data
         {
             _relations.Clear();
 
-            if(!IsOldData)
+            if (!IsOldData)
             {
                 Dictionary<Hero, Dictionary<Hero, HeroRelation>> data = new();
                 dataStore.SyncData(SaveIdentifier, ref data);
@@ -183,15 +184,39 @@ namespace Dramalord.Data
                 LegacySave.LoadLegacyRelations(_relations, dataStore);
             }
 
-            //lets fix marriages
-            Hero.AllAliveHeroes.Where(h => h.Spouse != null && _relations.ContainsKey(h)).Do(h =>
+            // Retroactively fix marriages.
+            // If OtherMarriageMod is active, update the vanilla spouse property based on Dramalord relations.
+            if (BetrothIntention.OtherMarriageModFound)
             {
-                if (h.GetRelationTo(h.Spouse).Relationship != RelationshipType.Spouse)
+                foreach (Hero hero in Hero.AllAliveHeroes)
                 {
-                    StartRelationshipAction.Apply(h, h.Spouse, h.GetRelationTo(h.Spouse), RelationshipType.Spouse);
+                    if (_relations.ContainsKey(hero))
+                    {
+                        hero.GetAllRelations().Do(kvp =>
+                        {
+                            Hero potentialSpouse = kvp.Key;
+                            HeroRelation relation = kvp.Value;
+                            if (relation.Relationship == RelationshipType.Spouse && hero.Spouse != potentialSpouse)
+                            {
+                                hero.Spouse = potentialSpouse;
+                            }
+                        });
+                    }
                 }
-            });
+            }
+            else
+            {
+                // When not in compatibility mode, ensure that if the vanilla spouse is set, the Dramalord relation is correct.
+                Hero.AllAliveHeroes.Where(h => h.Spouse != null && _relations.ContainsKey(h)).Do(h =>
+                {
+                    if (h.GetRelationTo(h.Spouse).Relationship != RelationshipType.Spouse)
+                    {
+                        StartRelationshipAction.Apply(h, h.Spouse, h.GetRelationTo(h.Spouse), RelationshipType.Spouse);
+                    }
+                });
+            }
         }
+
 
         internal override void SaveData(IDataStore dataStore)
         {

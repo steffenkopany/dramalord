@@ -80,12 +80,12 @@ namespace Dramalord.Extensions
 
         public static bool IsSpouseOf(this Hero hero, Hero target)
         {
-            return hero.Spouse == target || (GetRelationTo(hero, target).Relationship == RelationshipType.Spouse && !BethrothIntention.OtherMarriageModFound);
+            return hero.Spouse == target || (GetRelationTo(hero, target).Relationship == RelationshipType.Spouse && !BetrothIntention.OtherMarriageModFound);
         }
 
         public static bool IsBetrothedOf(this Hero hero, Hero target)
         {
-            return (GetRelationTo(hero, target).Relationship == RelationshipType.Betrothed && !BethrothIntention.OtherMarriageModFound);
+            return (GetRelationTo(hero, target).Relationship == RelationshipType.Betrothed && !BetrothIntention.OtherMarriageModFound);
         }
 
         public static bool IsLoverOf(this Hero hero, Hero target)
@@ -138,50 +138,33 @@ namespace Dramalord.Extensions
             return true;
         }
 
-        public static bool CanPursueRomanceWith(this Hero initiator, Hero target)
+        // Helper method to check if a hero is married to the player using both systems.
+        public static bool IsPlayerSpouse(this Hero hero)
         {
-            // Enforce "Player Spouse Faithful" if desired:
-            // (Meaning: If a hero is the player's spouse AND
-            //  the other party is NOT the player, block romance.)
-            if (DramalordMCM.Instance?.PlayerSpouseFaithful == true)
-
-            {
-                // If initiator is spouse of the player (but not the player),
-                // refuse if target is not the player:
-                if (initiator != Hero.MainHero
-                    && (initiator.Spouse == Hero.MainHero || initiator.IsSpouseOf(Hero.MainHero))
-                    && target != Hero.MainHero)
-                {
-                    return false;
-                }
-
-                // If target is spouse of the player (but not the player),
-                // refuse if initiator is not the player:
-                if (target != Hero.MainHero
-                    && (target.Spouse == Hero.MainHero || target.IsSpouseOf(Hero.MainHero))
-                    && initiator != Hero.MainHero)
-                {
-                    return false;
-                }
-            }
-
-            // Enforce "toy" restriction (if an NPC has a toy, they should only
-            // engage with the player, not with other NPCs):
-            // This is optional if your existing code already covers it, but shown here
-            // in case you want a single place for the logic.
-            if (initiator.GetDesires().HasToy && target != Hero.MainHero)
-            {
-                return false;
-            }
-            if (target.GetDesires().HasToy && initiator != Hero.MainHero)
-            {
-                return false;
-            }
-
-            // If none of the above blocked it, romance is allowed:
-            return true;
+            return hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero);
         }
 
+        public static bool CanPursueRomanceWith(this Hero initiator, Hero target)
+        {
+            // If either party is the player, allow romance regardless of other conditions.
+            if (initiator == Hero.MainHero || target == Hero.MainHero)
+                return true;
+
+            // If the Player Spouse Faithful setting is enabled, block romance if either is the player's spouse.
+            if (DramalordMCM.Instance.PlayerSpouseFaithful && (initiator.IsPlayerSpouse() || target.IsPlayerSpouse()))
+            {
+                return false;
+            }
+
+            // If either hero has a "toy" (and neither is the player), block romance.
+            if (initiator.GetDesires().HasToy || target.GetDesires().HasToy)
+            {
+                return false;
+            }
+
+            // Otherwise, romance is allowed.
+            return true;
+        }
 
         public static bool IsRelativeOf(this Hero hero, Hero target)
         {

@@ -11,7 +11,7 @@ namespace Dramalord.Actions
         {
             relation.Relationship = RelationshipType.None;
 
-            if (!BethrothIntention.OtherMarriageModFound && hero.Spouse == target)
+            if (!BetrothIntention.OtherMarriageModFound && hero.Spouse == target)
             {
                 foreach (Romance.RomanticState romanticState in Romance.RomanticStateList.ToList())
                 {

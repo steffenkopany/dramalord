@@ -9,7 +9,7 @@ using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Data.Intentions
 {
-    internal class ConfrontBethrothedIntention : Intention
+    internal class ConfrontBetrothedIntention : Intention
     {
         [SaveableField(4)]
         public readonly Hero Other;
@@ -22,9 +22,9 @@ namespace Dramalord.Data.Intentions
         private static int _answer = 0;
         private static bool _hasDenied = false;
 
-        private static ConfrontBethrothedIntention? ConversationInstance() => ConversationTools.ConversationIntention as ConfrontBethrothedIntention;
+        private static ConfrontBetrothedIntention? ConversationInstance() => ConversationTools.ConversationIntention as ConfrontBetrothedIntention;
 
-        public ConfrontBethrothedIntention(Hero target, Hero other, Hero intentionHero, CampaignTime validUntil, bool isWitness) : base(intentionHero, target, validUntil)
+        public ConfrontBetrothedIntention(Hero target, Hero other, Hero intentionHero, CampaignTime validUntil, bool isWitness) : base(intentionHero, target, validUntil)
         {
             Other = other;
             IsWitness = isWitness;
@@ -56,12 +56,12 @@ namespace Dramalord.Data.Intentions
                 .BeginNpcOptions()
                     .NpcOption("{npc_starts_confrontation_unknown}[ib:aggressive][if:convo_undecided_open]", () => Hero.OneToOneConversationHero.IsDramalordLegit() && ConversationInstance() != null && ConversationTools.ConversationIntention.IntentionHero != Hero.MainHero && !Hero.OneToOneConversationHero.HasMet)
                         .Consequence(() => Hero.OneToOneConversationHero.SetHasMet())
-                        .GotoDialogState("confront_bethrothed")
+                        .GotoDialogState("confront_betrothed")
                     .NpcOption("{npc_starts_confrontation_known}[ib:aggressive][if:convo_undecided_open]", () => ConversationInstance() != null && ConversationTools.ConversationIntention.IntentionHero != Hero.MainHero && Hero.OneToOneConversationHero.HasMet)
-                        .GotoDialogState("confront_bethrothed")
+                        .GotoDialogState("confront_betrothed")
                 .EndNpcOptions();
 
-            DialogFlow npcFlow2 = DialogFlow.CreateDialogFlow("confront_bethrothed")
+            DialogFlow npcFlow2 = DialogFlow.CreateDialogFlow("confront_betrothed")
                 .BeginNpcOptions()
                     .NpcOption("{npc_confrontation_engagement}[ib:warrior][if:convo_grave]", () => !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
                         .Consequence(() =>
@@ -78,26 +78,26 @@ namespace Dramalord.Data.Intentions
                                 MBInformationManager.AddQuickInformation(banner2, 0, other.CharacterObject, "event:/ui/notification/relation");
                             }
                         })
-                        .GotoDialogState("confront_bethrothed_reply")
+                        .GotoDialogState("confront_betrothed_reply")
                     .NpcOption("{npc_confrontation_engagement_player}[ib:warrior][if:convo_grave]", () => Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
-                        .GotoDialogState("confront_bethrothed_reply")
+                        .GotoDialogState("confront_betrothed_reply")
                 .EndNpcOptions();
 
-            DialogFlow npcFlow3 = DialogFlow.CreateDialogFlow("confront_bethrothed_reply")
+            DialogFlow npcFlow3 = DialogFlow.CreateDialogFlow("confront_betrothed_reply")
                 .BeginPlayerOptions()
                     .PlayerOption("{npc_reply_confrontation_love}")
                         .Consequence(() => { _hasDenied = true; ConsequenceConfrontations(Hero.OneToOneConversationHero, Hero.MainHero); })
-                        .GotoDialogState("confront_bethrothed_final")
+                        .GotoDialogState("confront_betrothed_final")
                     .PlayerOption("{npc_reply_confrontation_nocare}")
                         .Consequence(() => { _hasDenied = false; ConsequenceConfrontations(Hero.OneToOneConversationHero, Hero.MainHero); })
-                        .GotoDialogState("confront_bethrothed_final")
+                        .GotoDialogState("confront_betrothed_final")
                     .PlayerOption("{npc_confrontation_reply_gossip}")
                         .Condition(() => !ConversationInstance().IsWitness)
                         .Consequence(() => { _hasDenied = true; ConsequenceConfrontations(Hero.OneToOneConversationHero, Hero.MainHero); })
-                        .GotoDialogState("confront_bethrothed_final")
+                        .GotoDialogState("confront_betrothed_final")
                 .EndPlayerOptions();
 
-            DialogFlow npcFlow4 = DialogFlow.CreateDialogFlow("confront_bethrothed_final")
+            DialogFlow npcFlow4 = DialogFlow.CreateDialogFlow("confront_betrothed_final")
                 .BeginNpcOptions()
                     .NpcOption("{npc_confrontation_result_ok}[ib:nervous2][if:convo_confused_normal]", () => _answer == 0)
                         .Consequence(() => { ConversationTools.EndConversation(); })

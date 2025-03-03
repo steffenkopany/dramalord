@@ -33,14 +33,14 @@ namespace Dramalord.Behavior
             FlirtIntention.AddDialogs(starter);
             IntercourseIntention.AddDialogs(starter);
             DateIntention.AddDialogs(starter);
-            BethrothIntention.AddDialogs(starter);
+            BetrothIntention.AddDialogs(starter);
             MarriageIntention.AddDialogs(starter);
             ConfrontIntercourseIntention.AddDialogs(starter);
             ConfrontDateIntention.AddDialogs(starter);
-            ConfrontBethrothedIntention.AddDialogs(starter);
+            ConfrontBetrothedIntention.AddDialogs(starter);
             ConfrontMarriageIntention.AddDialogs(starter);
             ConfrontBirthIntention.AddDialogs(starter);
-            GossipBethrothedIntention.AddDialogs(starter);
+            GossipBetrothedIntention.AddDialogs(starter);
             GossipBirthIntention.AddDialogs(starter);
             GossipDateIntention.AddDialogs(starter);
             GossipIntercourseIntention.AddDialogs(starter);

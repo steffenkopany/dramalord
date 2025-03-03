@@ -35,9 +35,9 @@ namespace Dramalord.Conversations
                 .BeginNpcOptions()
                     .NpcOption("{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", () =>
                     {
-                        GossipBethrothedIntention? intention = DramalordIntentions.Instance.GetIntentions().FirstOrDefault(i  =>
+                        GossipBetrothedIntention? intention = DramalordIntentions.Instance.GetIntentions().FirstOrDefault(i  =>
                         {
-                            GossipBethrothedIntention? gbi = i as GossipBethrothedIntention;
+                            GossipBetrothedIntention? gbi = i as GossipBetrothedIntention;
 
                             if (gbi != null && gbi.EventIntention.IntentionHero != Hero.MainHero && gbi.EventIntention.Target != Hero.MainHero && gbi.EventIntention.IntentionHero != Hero.OneToOneConversationHero && gbi.EventIntention.Target != Hero.OneToOneConversationHero && gbi.Targets.Contains(Hero.OneToOneConversationHero) && !gbi.Targets.Contains(Hero.MainHero))
                             {
@@ -45,7 +45,7 @@ namespace Dramalord.Conversations
                             }
 
                             return false;
-                        }) as GossipBethrothedIntention;
+                        }) as GossipBetrothedIntention;
 
                         if(intention != null)
                         {
@@ -56,7 +56,7 @@ namespace Dramalord.Conversations
                         }
                         return false;
                     })
-                        .GotoDialogState("gossip_start_bethrothed")
+                        .GotoDialogState("gossip_start_betrothed")
                     .NpcOption("{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", () =>
                     {
                         GossipBirthIntention? intention = DramalordIntentions.Instance.GetIntentions().FirstOrDefault(i =>

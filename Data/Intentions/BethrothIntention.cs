@@ -13,13 +13,13 @@ using TaleWorlds.Localization;
 
 namespace Dramalord.Data.Intentions
 {
-    internal class BethrothIntention : Intention
+    internal class BetrothIntention : Intention
     {
         internal static bool OtherMarriageModFound = false;
 
         private static bool _accepted = false;
 
-        public BethrothIntention(Hero target, Hero intentionHero, CampaignTime validUntil, bool alwaysExecute = false) : base(intentionHero, target, validUntil)
+        public BetrothIntention(Hero target, Hero intentionHero, CampaignTime validUntil, bool alwaysExecute = false) : base(intentionHero, target, validUntil)
         {
             _accepted = alwaysExecute;
         }
@@ -102,13 +102,13 @@ namespace Dramalord.Data.Intentions
                     {
                         if (witness != Hero.MainHero && (witness.IsEmotionalWith(IntentionHero) || witness.IsEmotionalWith(Target)))
                         {
-                            DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBethrothedIntention(IntentionHero, Target, witness, CampaignTime.DaysFromNow(7), true));
-                            DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBethrothedIntention(Target, IntentionHero, witness, CampaignTime.DaysFromNow(7), true));
+                            DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBetrothedIntention(IntentionHero, Target, witness, CampaignTime.DaysFromNow(7), true));
+                            DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBetrothedIntention(Target, IntentionHero, witness, CampaignTime.DaysFromNow(7), true));
                         }
                         else if (witness != Hero.MainHero)
                         {
                             List<Hero> targets = new() { IntentionHero, Target };
-                            DramalordIntentions.Instance.GetIntentions().Add(new GossipBethrothedIntention(this, true, targets, witness, CampaignTime.DaysFromNow(7)));
+                            DramalordIntentions.Instance.GetIntentions().Add(new GossipBetrothedIntention(this, true, targets, witness, CampaignTime.DaysFromNow(7)));
                         }
 
                         if (witness == Hero.MainHero)
@@ -174,7 +174,7 @@ namespace Dramalord.Data.Intentions
         {
             DialogFlow flow = DialogFlow.CreateDialogFlow("start", 200)
                 .BeginNpcOptions()
-                    .NpcOption("{npc_starts_interaction_unknown}[ib:nervous][if:convo_nervous]", () => Hero.OneToOneConversationHero.IsDramalordLegit() && ConversationTools.ConversationIntention as BethrothIntention != null && !Hero.OneToOneConversationHero.HasMet)
+                    .NpcOption("{npc_starts_interaction_unknown}[ib:nervous][if:convo_nervous]", () => Hero.OneToOneConversationHero.IsDramalordLegit() && ConversationTools.ConversationIntention as BetrothIntention != null && !Hero.OneToOneConversationHero.HasMet)
                         .Consequence(() => Hero.OneToOneConversationHero.SetHasMet())
                         .BeginPlayerOptions()
                             .PlayerOption("{player_interaction_start_react_yes}")
@@ -183,7 +183,7 @@ namespace Dramalord.Data.Intentions
                                 .Consequence(() => ConversationTools.EndConversation())
                                 .CloseDialog()
                         .EndPlayerOptions()
-                    .NpcOption("{npc_starts_interaction_known}[ib:nervous2][if:convo_confused_normal]", () => Hero.OneToOneConversationHero.IsDramalordLegit() && ConversationTools.ConversationIntention as BethrothIntention != null && Hero.OneToOneConversationHero.HasMet)
+                    .NpcOption("{npc_starts_interaction_known}[ib:nervous2][if:convo_confused_normal]", () => Hero.OneToOneConversationHero.IsDramalordLegit() && ConversationTools.ConversationIntention as BetrothIntention != null && Hero.OneToOneConversationHero.HasMet)
                         .BeginPlayerOptions()
                             .PlayerOption("{player_interaction_start_react_yes}")
                                 .GotoDialogState("start_engagement")
@@ -219,7 +219,7 @@ namespace Dramalord.Data.Intentions
                                             .CloseDialog()
                                     .EndPlayerOptions()
                                 .NpcOption("{player_reaction_engagement_yes}[ib:aggressive][if:convo_delighted]", () => Hero.OneToOneConversationHero.Father == null && Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan )
-                                    .Consequence(() => { new BethrothIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now).Action(); ConversationTools.EndConversation(); })
+                                    .Consequence(() => { new BetrothIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now).Action(); ConversationTools.EndConversation(); })
                                     .CloseDialog()
                             .EndNpcOptions()
                         .PlayerOption("{player_reaction_no}")

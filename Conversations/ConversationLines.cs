@@ -290,7 +290,7 @@ namespace Dramalord.Conversations
         public static TextObject npc_interaction_abort_other_accept = new("{=Dramalord511}You are right. It would not be proper to give birth to a child of {HERO}.");
         public static TextObject npc_interaction_abort_other_decline = new("{=Dramalord512}I cannot, {TITLE}! This child is the result of the love I have for {HERO}!");
 
-        public static TextObject npc_gossip_bethrothed = new("{=Dramalord532}Have you heard? {HERO} and {OTHER} are to be wed—who would have thought, after all those whispers about their courtly dalliances?");
+        public static TextObject npc_gossip_betrothed = new("{=Dramalord532}Have you heard? {HERO} and {OTHER} are to be wed—who would have thought, after all those whispers about their courtly dalliances?");
         public static TextObject npc_gossip_married = new("{=Dramalord533}Did you hear? {HERO} and {OTHER} are now husband and wife—though with all that has been said, one wonders if vows alone will silence the rumors.");
         public static TextObject npc_gossip_date = new("{=Dramalord534}Word travels fast—{HERO} and {OTHER} have been meeting in secret, though if they wish to remain unnoticed, they should be less obvious with their stolen glances.");
         public static TextObject npc_gossip_sex = new("{=Dramalord535}Well, the whole castle is aflutter! {HERO} and {OTHER} were found abed together, and not even the dawn could wash away the scandal.");
@@ -578,7 +578,7 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("npc_interaction_abort_other_accept", npc_interaction_abort_other_accept);
             MBTextManager.SetTextVariable("npc_interaction_abort_other_decline", npc_interaction_abort_other_decline);
 
-            MBTextManager.SetTextVariable("npc_gossip_bethrothed", npc_gossip_bethrothed);
+            MBTextManager.SetTextVariable("npc_gossip_betrothed", npc_gossip_betrothed);
             MBTextManager.SetTextVariable("npc_gossip_married", npc_gossip_married);
             MBTextManager.SetTextVariable("npc_gossip_date", npc_gossip_date);
             MBTextManager.SetTextVariable("npc_gossip_sex", npc_gossip_sex);

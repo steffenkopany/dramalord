@@ -122,11 +122,11 @@ namespace Dramalord.Behaviours
                         if(target != null)
                         {
                             HeroRelation targetRelation = hero.GetRelationTo(target);
-                            if(!BethrothIntention.OtherMarriageModFound && targetRelation.Relationship == RelationshipType.Betrothed && targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove && DramalordQuests.Instance.GetQuest(hero) == null && new MarriageIntention(target, hero, CampaignTime.Now).Action())
+                            if(!BetrothIntention.OtherMarriageModFound && targetRelation.Relationship == RelationshipType.Betrothed && targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove && DramalordQuests.Instance.GetQuest(hero) == null && new MarriageIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
                             }
-                            else if (hero.Spouse == null && !BethrothIntention.OtherMarriageModFound && targetRelation.Relationship == RelationshipType.Lover && targetRelation.LastInteraction.RemainingDaysFromNow < -3 && targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove && new BethrothIntention(target, hero, CampaignTime.Now).Action())
+                            else if (hero.Spouse == null && !BetrothIntention.OtherMarriageModFound && targetRelation.Relationship == RelationshipType.Lover && targetRelation.LastInteraction.RemainingDaysFromNow < -3 && targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove && new BetrothIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
                             }
