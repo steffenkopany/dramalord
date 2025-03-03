@@ -184,6 +184,8 @@ namespace Dramalord.Behaviours
 
                                     RelationshipLossAction.Apply(hero, Hero.MainHero, out int loveDamage, out int trustDamage, 10, 17);
                                     new ChangeOpinionIntention(hero, Hero.MainHero, loveDamage, trustDamage, CampaignTime.Now).Action();
+
+                                    hero.GetDesires().Horny = 0;
                                 }), true);
 
 
