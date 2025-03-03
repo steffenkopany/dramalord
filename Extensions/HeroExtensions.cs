@@ -150,29 +150,27 @@ namespace Dramalord.Extensions
             return true;
         }
 
-        // Helper method to check if a hero is married to the player using both systems.
+        // Determines if a hero is married to the player by checking both vanilla and internal systems.
         public static bool IsPlayerSpouse(this Hero hero)
         {
             return hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero);
         }
 
+        // Determines whether a romance attempt is allowed between two heroes.
         public static bool CanPursueRomanceWith(this Hero initiator, Hero target)
         {
-            // If either party is the player, allow romance regardless of other conditions.
+            // Always allow romance if one party is the player.
             if (initiator == Hero.MainHero || target == Hero.MainHero)
                 return true;
 
-            // If the Player Spouse Faithful setting is enabled, block romance if either is the player's spouse.
+            // If the Player Spouse Faithful setting is enabled,
+            // block romance if either party is married to the player.
             if (DramalordMCM.Instance.PlayerSpouseFaithful && (initiator.IsPlayerSpouse() || target.IsPlayerSpouse()))
-            {
                 return false;
-            }
 
-            // If either hero has a "toy" (and neither is the player), block romance.
+            // Block romance if either hero has a toy.
             if (initiator.GetDesires().HasToy || target.GetDesires().HasToy)
-            {
                 return false;
-            }
 
             // Otherwise, romance is allowed.
             return true;
