@@ -80,7 +80,19 @@ namespace Dramalord.Extensions
 
         public static bool IsSpouseOf(this Hero hero, Hero target)
         {
-            return hero.Spouse == target || (GetRelationTo(hero, target).Relationship == RelationshipType.Spouse && !BetrothIntention.OtherMarriageModFound);
+            // Always check the vanilla spouse property first
+            if (hero.Spouse == target)
+            {
+                return true;
+            }
+
+            // If OtherMarriageMod is enabled, don't ignore Dramalord data completely—use it as a fallback
+            if (BetrothIntention.OtherMarriageModFound)
+            {
+                return hero.GetRelationTo(target).Relationship == RelationshipType.Spouse;
+            }
+
+            return false;
         }
 
         public static bool IsBetrothedOf(this Hero hero, Hero target)

@@ -75,7 +75,7 @@ namespace Dramalord.Quests
         {
             DateAction.Apply(QuestGiver, Hero.MainHero, out int loveGain, out int trustGain, 2);
 
-            TextObject banner = new TextObject("{=Dramalord305}{HERO.LINK} is very happy you fullfilled their request...");
+            TextObject banner = new TextObject("{=Dramalord305}{HERO.LINK} is pleased that you have seen their request through to completion...");
             StringHelpers.SetCharacterProperties("HERO", QuestGiver.CharacterObject, banner);
             MBTextManager.SetTextVariable("NUM", ConversationTools.FormatNumber(loveGain));
             MBTextManager.SetTextVariable("NUM2", ConversationTools.FormatNumber(trustGain));
@@ -96,7 +96,7 @@ namespace Dramalord.Quests
         {
             RelationshipLossAction.Apply(QuestGiver, Hero.MainHero, out int loveDamage, out int trustDamage, 20, 33);
 
-            TextObject banner = new TextObject("{=Dramalord537}In your absence {OTHER.LINK} took care of {HERO.LINK} and their issue...");
+            TextObject banner = new TextObject("{=Dramalord537}In your absence, it seems that {OTHER} saw to {HERO} and their 'needs'.");
             StringHelpers.SetCharacterProperties("HERO", QuestGiver.CharacterObject, banner);
             StringHelpers.SetCharacterProperties("OTHER", reason.CharacterObject, banner);
             MBInformationManager.AddQuickInformation(banner, 0, QuestGiver.CharacterObject, "event:/ui/notification/relation");
@@ -112,7 +112,7 @@ namespace Dramalord.Quests
         {
             RelationshipLossAction.Apply(QuestGiver, Hero.MainHero, out int loveDamage, out int trustDamage, 20, 33);
 
-            TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed by your neglection of their matter...");
+            TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed in you, for you have failed to fulfill their urgent request...");
             StringHelpers.SetCharacterProperties("HERO", QuestGiver.CharacterObject, banner);
             MBInformationManager.AddQuickInformation(banner, 0, QuestGiver.CharacterObject, "event:/ui/notification/relation");
 

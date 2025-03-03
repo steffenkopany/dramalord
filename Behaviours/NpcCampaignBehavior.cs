@@ -47,9 +47,12 @@ namespace Dramalord.Behaviours
                         Hero? target = null;
                         if (isHorny)
                         {
-                            target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsSexualWith(Hero.MainHero)) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.IsSexualWith(h) && !hero.HasMetRecently(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
+                            target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsSexualWith(Hero.MainHero))
+                                ? Hero.MainHero
+                                : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.IsSexualWith(h) && !hero.HasMetRecently(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
                             if (target != null
-                                && (target == Hero.MainHero || !desires.HasToy || hero.CanPursueRomanceWith(target))
+                                // Always enforce romance restrictions via the helper.
+                                && hero.CanPursueRomanceWith(target)
                                 && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
@@ -57,9 +60,12 @@ namespace Dramalord.Behaviours
 
                             if (desires.Horny == 100 && !isConcient && !isNeurotic && isOpen)
                             {
-                                target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsFriendOf(Hero.MainHero) && hero.HasMutualAttractionWith(Hero.MainHero)) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.IsFriendOf(h) && !hero.HasMetRecently(h) && hero.HasMutualAttractionWith(h) && !hero.IsRelativeOf(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
+                                target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsFriendOf(Hero.MainHero) && hero.HasMutualAttractionWith(Hero.MainHero))
+                                    ? Hero.MainHero
+                                    : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.IsFriendOf(h) && !hero.HasMetRecently(h) && hero.HasMutualAttractionWith(h) && !hero.IsRelativeOf(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
                                 if (target != null
-                                    && (target == Hero.MainHero || !desires.HasToy || hero.CanPursueRomanceWith(target))
+                                    // Remove redundant toy checks; always check romance eligibility.
+                                    && hero.CanPursueRomanceWith(target)
                                     && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
                                 {
                                     return;
@@ -70,7 +76,8 @@ namespace Dramalord.Behaviours
                             {
                                 target = hero.GetClosePrisoners().GetRandomElementWithPredicate(h => hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction && !hero.HasMetRecently(h));
                                 if (target != null
-                                    && (target == Hero.MainHero || !desires.HasToy || hero.CanPursueRomanceWith(target))
+                                    // Always enforce romance restrictions via the helper.
+                                    && hero.CanPursueRomanceWith(target)
                                     && new PrisonIntercourseIntention(target, hero, CampaignTime.Now).Action())
                                 {
                                     return;
@@ -103,7 +110,7 @@ namespace Dramalord.Behaviours
                                             () => {
                                                 Campaign.Current.SetTimeSpeed(speed);
 
-                                                TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed by your neglection of their matter...");
+                                                TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed in you, for you have failed to fulfill their urgent request...");
                                                 StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
                                                 MBInformationManager.AddQuickInformation(banner, 0, hero.CharacterObject, "event:/ui/notification/relation");
 
@@ -117,35 +124,56 @@ namespace Dramalord.Behaviours
                                 return;
                             }
                         }
-                        
-                        target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsEmotionalWith(Hero.MainHero)) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.IsEmotionalWith(h) && !hero.HasMetRecently(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord) && (h.IsFemale != hero.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage));
-                        if(target != null)
+
+                        target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsEmotionalWith(Hero.MainHero))
+                            ? Hero.MainHero
+                            : closeHeroes.GetRandomElementWithPredicate(h =>
+                                  h.IsAutonom()
+                                  && hero.IsEmotionalWith(h)
+                                  && !hero.HasMetRecently(h)
+                                  && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
+                                  && (h.IsFemale != hero.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage));
+                        if (target != null)
                         {
                             HeroRelation targetRelation = hero.GetRelationTo(target);
-                            if(!BetrothIntention.OtherMarriageModFound && targetRelation.Relationship == RelationshipType.Betrothed && targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove && DramalordQuests.Instance.GetQuest(hero) == null && new MarriageIntention(target, hero, CampaignTime.Now).Action())
+                            if (!BetrothIntention.OtherMarriageModFound
+                                 && targetRelation.Relationship == RelationshipType.Betrothed
+                                 && targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove
+                                 && DramalordQuests.Instance.GetQuest(hero) == null
+                                 && new MarriageIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
                             }
-                            else if (hero.Spouse == null && !BetrothIntention.OtherMarriageModFound && targetRelation.Relationship == RelationshipType.Lover && targetRelation.LastInteraction.RemainingDaysFromNow < -3 && targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove && new BetrothIntention(target, hero, CampaignTime.Now).Action())
+                            else if (hero.Spouse == null
+                                 && !BetrothIntention.OtherMarriageModFound
+                                 && targetRelation.Relationship == RelationshipType.Lover
+                                 && targetRelation.LastInteraction.RemainingDaysFromNow < -3
+                                 && targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove
+                                 && new BetrothIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
                             }
-                            else if ((target == Hero.MainHero || !desires.HasToy || hero.Spouse == target
-                                      || hero.CanPursueRomanceWith(target))
-                                && new DateIntention(target, hero, CampaignTime.Now).Action())
+                            else if (hero.CanPursueRomanceWith(target)  // Always enforce romance restrictions.
+                                 && new DateIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
                             }
                         }
 
-                        target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero)) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && hero.HasMutualAttractionWith(h) && !hero.IsRelativeOf(h) && !hero.HasMetRecently(h) && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
+                        target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero))
+                            ? Hero.MainHero
+                            : closeHeroes.GetRandomElementWithPredicate(h =>
+                                  h.IsAutonom()
+                                  && hero.HasMutualAttractionWith(h)
+                                  && !hero.IsRelativeOf(h)
+                                  && !hero.HasMetRecently(h)
+                                  && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord));
                         if (target != null)
                         {
                             HeroRelation targetRelation = hero.GetRelationTo(target);
                             if (targetRelation.Love >= DramalordMCM.Instance.MinDatingLove
-                                && (target == Hero.MainHero || !desires.HasToy || hero.Spouse == target
-                                    || hero.CanPursueRomanceWith(target))
-                                && new DateIntention(target, hero, CampaignTime.Now).Action())
+                                 && hero.CanPursueRomanceWith(target)  // Always enforce romance restrictions.
+                                 && new DateIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
                             }
@@ -189,7 +217,7 @@ namespace Dramalord.Behaviours
                                 () => {
                                     Campaign.Current.SetTimeSpeed(speed);
 
-                                    TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed by your neglection of their matter...");
+                                    TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed in you, for you have failed to fulfill their urgent request...");
                                     StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
                                     MBInformationManager.AddQuickInformation(banner, 0, hero.CharacterObject, "event:/ui/notification/relation");
 

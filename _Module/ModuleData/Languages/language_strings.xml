@@ -298,6 +298,7 @@
     <string id="Dramalord301" text="Allow default marriages for all npcs" />
     <string id="Dramalord302" text="{HERO.LINK} is disappointed in you, for you have failed to fulfill their urgent request... (Love {NUM}, Trust {NUM2})" />
     <string id="Dramalord303" text="{HERO.LINK} seeks your presence regarding a matter of great urgency. Will you arrive in time?" />
+	<string id="Dramalord304" text="{QUESTHERO} requests your presence." />
     <string id="Dramalord305" text="{HERO.LINK} is pleased that you have seen their request through to completion... (Love {NUM}, Trust {NUM2})" />
     <string id="Dramalord306" text="Oh, {TITLE}, you have finally come! I was desperately awaiting your arrival!" />
     <string id="Dramalord307" text="Ah, look who it is. You have finally decided that I am worthy of your time then, {TITLE}?" /> 
