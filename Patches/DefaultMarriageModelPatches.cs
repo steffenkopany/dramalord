@@ -21,7 +21,7 @@ namespace Dramalord.Patches
             }
             else if(__result)
             {
-                __result = (maidenOrSuitor.GetRelationTo(Hero.MainHero).Relationship != RelationshipType.Spouse && !BethrothIntention.OtherMarriageModFound);
+                __result = (maidenOrSuitor.GetRelationTo(Hero.MainHero).Relationship != RelationshipType.Spouse && !BetrothIntention.OtherMarriageModFound);
             }
         }
     } 

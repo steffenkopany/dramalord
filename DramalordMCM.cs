@@ -180,8 +180,8 @@ namespace Dramalord
         [SettingPropertyBool("{=Dramalord596}Enable Dramalord Marriage", Order = 3, HintText = "{=Dramalord597}Enable Dramalords marriage system (Disabled automatically if incompatible mod is detected)", RequireRestart = false)]
         public bool EnableDramalordMarriage
         {
-            get => !BethrothIntention.OtherMarriageModFound;
-            set => BethrothIntention.OtherMarriageModFound = !value;
+            get => !BetrothIntention.OtherMarriageModFound;
+            set => BetrothIntention.OtherMarriageModFound = !value;
         }
 
         public override string Id => DramalordSubModule.ModuleName;

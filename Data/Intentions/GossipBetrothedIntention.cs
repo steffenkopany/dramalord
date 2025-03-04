@@ -10,10 +10,10 @@ using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Data.Intentions
 {
-    internal class GossipBethrothedIntention : Intention
+    internal class GossipBetrothedIntention : Intention
     {
         [SaveableField(4)]
-        public readonly BethrothIntention EventIntention;
+        public readonly BetrothIntention EventIntention;
 
         [SaveableField(5)]
         public readonly List<Hero> Targets;
@@ -21,7 +21,7 @@ namespace Dramalord.Data.Intentions
         [SaveableField(6)]
         public readonly bool IsWitness;
 
-        public GossipBethrothedIntention(BethrothIntention intention, bool isWitness, List<Hero> targets, Hero intentionHero, CampaignTime validUntil) : base(intentionHero, intentionHero, validUntil)
+        public GossipBetrothedIntention(BetrothIntention intention, bool isWitness, List<Hero> targets, Hero intentionHero, CampaignTime validUntil) : base(intentionHero, intentionHero, validUntil)
         {
             EventIntention = intention;
             Targets = targets;
@@ -50,12 +50,12 @@ namespace Dramalord.Data.Intentions
                 if(target.IsEmotionalWith(EventIntention.IntentionHero) || target.IsEmotionalWith(EventIntention.Target))
                 {
                     Targets.Add(target);
-                    DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBethrothedIntention(EventIntention.IntentionHero, EventIntention.Target, target, CampaignTime.DaysFromNow(7), false));
-                    DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBethrothedIntention(EventIntention.Target, EventIntention.IntentionHero, target, CampaignTime.DaysFromNow(7), false));
+                    DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBetrothedIntention(EventIntention.IntentionHero, EventIntention.Target, target, CampaignTime.DaysFromNow(7), false));
+                    DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBetrothedIntention(EventIntention.Target, EventIntention.IntentionHero, target, CampaignTime.DaysFromNow(7), false));
                 }
                 else
                 {
-                    DramalordIntentions.Instance.GetIntentions().Add(new GossipBethrothedIntention(EventIntention, false, Targets, target, ValidUntil));
+                    DramalordIntentions.Instance.GetIntentions().Add(new GossipBetrothedIntention(EventIntention, false, Targets, target, ValidUntil));
                 }
                 return false;
             }
@@ -67,16 +67,16 @@ namespace Dramalord.Data.Intentions
         {
             DialogFlow npcFlow = DialogFlow.CreateDialogFlow("start", 200)
                 .NpcLine("{npc_starts_confrontation_known}[ib:aggressive][if:convo_undecided_open]")
-                        .Condition(() => Hero.OneToOneConversationHero.IsDramalordLegit() && ConversationTools.ConversationIntention as GossipBethrothedIntention != null)
-                .GotoDialogState("gossip_start_bethrothed");
+                        .Condition(() => Hero.OneToOneConversationHero.IsDramalordLegit() && ConversationTools.ConversationIntention as GossipBetrothedIntention != null)
+                .GotoDialogState("gossip_start_betrothed");
 
 
-            DialogFlow gossipFlow = DialogFlow.CreateDialogFlow("gossip_start_bethrothed")
+            DialogFlow gossipFlow = DialogFlow.CreateDialogFlow("gossip_start_betrothed")
                 .BeginNpcOptions()
-                    .NpcLine("{npc_gossip_bethrothed}[ib:aggressive][if:convo_excited]")
+                    .NpcLine("{npc_gossip_betrothed}[ib:aggressive][if:convo_excited]")
                         .Consequence(() =>
                         {
-                            BethrothIntention gossip = (ConversationTools.ConversationIntention as GossipBethrothedIntention).EventIntention;
+                            BetrothIntention gossip = (ConversationTools.ConversationIntention as GossipBetrothedIntention).EventIntention;
                             HeroRelation relation = gossip.IntentionHero.GetRelationTo(gossip.Target);
                             if (!relation.IsKnownToPlayer)
                             {
@@ -146,8 +146,8 @@ namespace Dramalord.Data.Intentions
 
         public override void OnConversationStart()
         {
-            ConversationLines.npc_gossip_bethrothed.SetTextVariable("HERO", EventIntention.IntentionHero.Name);
-            ConversationLines.npc_gossip_bethrothed.SetTextVariable("OTHER", EventIntention.Target.Name);
+            ConversationLines.npc_gossip_betrothed.SetTextVariable("HERO", EventIntention.IntentionHero.Name);
+            ConversationLines.npc_gossip_betrothed.SetTextVariable("OTHER", EventIntention.Target.Name);
             ConversationLines.npc_starts_confrontation_known.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Hero.MainHero, false));
         }
     }

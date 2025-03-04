@@ -39,7 +39,7 @@ namespace Dramalord.Quests
             ConversationLines.npc_confrontation_result_break_other.SetTextVariable("HERO", OtherHero.Name);
 
             
-            if (ConfrontIntention as BethrothIntention != null)
+            if (ConfrontIntention as BetrothIntention != null)
             {
                 ConversationLines.npc_confrontation_engagement_player.SetTextVariable("HERO", OtherHero.Name);
                 ConversationLines.npc_confrontation_engagement_player.SetTextVariable("STATUS", ConversationTools.GetHeroRelation(Hero.MainHero, Hero.OneToOneConversationHero));

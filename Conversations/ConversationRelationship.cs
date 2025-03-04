@@ -85,10 +85,10 @@ namespace Dramalord.Conversations
                         .EndNpcOptions()
                     .PlayerOption("{player_interaction_engage}")
                         .GotoDialogState("npc_interaction_reply_engage")
-                        .Condition(() => !BethrothIntention.OtherMarriageModFound && Hero.MainHero.IsLoverOf(Hero.OneToOneConversationHero) && DramalordQuests.Instance.GetQuest(Hero.OneToOneConversationHero) == null)      
+                        .Condition(() => !BetrothIntention.OtherMarriageModFound && Hero.MainHero.IsLoverOf(Hero.OneToOneConversationHero) && DramalordQuests.Instance.GetQuest(Hero.OneToOneConversationHero) == null)      
                     .PlayerOption("{player_interaction_marry}")
                         .GotoDialogState("npc_interaction_reply_marriage")
-                        .Condition(() => !BethrothIntention.OtherMarriageModFound && Hero.MainHero.IsBetrothedOf(Hero.OneToOneConversationHero) && Hero.MainHero.CurrentSettlement != null && Hero.MainHero.CurrentSettlement == Hero.OneToOneConversationHero.CurrentSettlement)
+                        .Condition(() => !BetrothIntention.OtherMarriageModFound && Hero.MainHero.IsBetrothedOf(Hero.OneToOneConversationHero) && Hero.MainHero.CurrentSettlement != null && Hero.MainHero.CurrentSettlement == Hero.OneToOneConversationHero.CurrentSettlement)
                     .PlayerOption("{player_interaction_breakup}")
                         .GotoDialogState("npc_interaction_reply_breakup")
                         .Condition(() => Hero.MainHero.IsSexualWith(Hero.OneToOneConversationHero))
@@ -223,7 +223,7 @@ namespace Dramalord.Conversations
                 .BeginNpcOptions()  
                     .NpcOption("{player_reaction_engagement_yes}[ib:aggressive][if:convo_delighted]", () =>
                         Hero.OneToOneConversationHero.Spouse == null && (Hero.OneToOneConversationHero.Father == null || Hero.OneToOneConversationHero.Father == Hero.MainHero) && (Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan || Hero.OneToOneConversationHero.Clan?.Leader == Hero.OneToOneConversationHero))
-                        .Consequence(() => { new BethrothIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, true).OnConversationEnded(); ConversationTools.EndConversation(); })
+                        .Consequence(() => { new BetrothIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, true).OnConversationEnded(); ConversationTools.EndConversation(); })
                         .CloseDialog()
                     .NpcOption("{player_quest_marriage_start}[ib:aggressive][if:convo_delighted]", () => Hero.OneToOneConversationHero.Spouse == null &&
                         ((Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsAlive && Hero.OneToOneConversationHero.Father != Hero.MainHero) || (Hero.OneToOneConversationHero.Clan != null && Hero.OneToOneConversationHero.Clan?.Leader != Hero.MainHero && Hero.OneToOneConversationHero.Clan?.Leader != Hero.OneToOneConversationHero)))

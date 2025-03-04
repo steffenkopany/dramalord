@@ -55,7 +55,7 @@ namespace Dramalord.Quests
 
         public override void QuestSuccess(Hero reason)
         {
-            new BethrothIntention(QuestGiver, Hero.MainHero, CampaignTime.Now, true).OnConversationEnded();
+            new BetrothIntention(QuestGiver, Hero.MainHero, CampaignTime.Now, true).OnConversationEnded();
             CompleteQuestWithSuccess();
             DramalordQuests.Instance.RemoveQuest(QuestGiver);
             Campaign.Current.ConversationManager.RemoveRelatedLines(this);

@@ -287,7 +287,7 @@ namespace Dramalord
         public bool RelationshipEngaged
         {
             get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Betrothed;
-            set { if (_selected != _target && !BethrothIntention.OtherMarriageModFound) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Betrothed); OnPropertyChanged(); } }
+            set { if (_selected != _target && !BetrothIntention.OtherMarriageModFound) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Betrothed); OnPropertyChanged(); } }
         }
 
         [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
@@ -295,7 +295,7 @@ namespace Dramalord
         public bool RelationshipMarried
         {
             get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Spouse || _selected.Spouse == _target;
-            set { if (_selected != _target && !BethrothIntention.OtherMarriageModFound) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Spouse); OnPropertyChanged(); } }
+            set { if (_selected != _target && !BetrothIntention.OtherMarriageModFound) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Spouse); OnPropertyChanged(); } }
         }
 
         public override string Id => "DramalordEditor";
