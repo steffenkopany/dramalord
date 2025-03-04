@@ -96,7 +96,7 @@ namespace Dramalord.Quests
         {
             RelationshipLossAction.Apply(QuestGiver, Hero.MainHero, out int loveDamage, out int trustDamage, 20, 33);
 
-            TextObject banner = new TextObject("{=Dramalord537}In your absence, it seems that {OTHER} saw to {HERO} and their 'needs'.");
+            TextObject banner = new TextObject("{=Dramalord537}In your absence, it seems that {OTHER.LINK} saw to {HERO.LINK} and their 'needs'.");
             StringHelpers.SetCharacterProperties("HERO", QuestGiver.CharacterObject, banner);
             StringHelpers.SetCharacterProperties("OTHER", reason.CharacterObject, banner);
             MBInformationManager.AddQuickInformation(banner, 0, QuestGiver.CharacterObject, "event:/ui/notification/relation");
