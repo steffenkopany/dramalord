@@ -52,7 +52,7 @@
     <string id="Dramalord046" text="Ah, {TITLE}, I was hoping you might have time for conversation... and perhaps a study of human form thereafter. Are you intrigued?" />
     <string id="Dramalord047" text="{SPOUSE} is away, and I yearn for you, {TITLE}. Let us retire to the bedchamber and revel in our time together. Will you?" />
     <string id="Dramalord048" text="With {SPOUSE} is absent, the bed lies empty. It would be a shame to let it go to waste, would it not? Does this idea tempt you, {TITLE}?" />
-    <string id="Dramalord049" text="Come to me and kiss me, {TITLE}. I have longed for your touch, and I can bear the wait no longer.!" />
+    <string id="Dramalord049" text="Come to me and kiss me, {TITLE}. I have longed for your touch, and I can bear the wait no longer!" />
     <string id="Dramalord050" text="Set aside your garments, and I shall show you a different kind of battle—one fought in my bedchamber, where both sides emerge victorious." />
     <string id="Dramalord051" text="I love you dearly, {TITLE}. The time has come to take the next step in our journey together. Will you marry me?" />
     <string id="Dramalord052" text="You have my heart, {TITLE}, and I know that no other shall ever take your place. Will you do me the honor of marriage?" />
@@ -298,6 +298,7 @@
     <string id="Dramalord301" text="Allow default marriages for all npcs" />
     <string id="Dramalord302" text="{HERO.LINK} is disappointed in you, for you have failed to fulfill their urgent request... (Love {NUM}, Trust {NUM2})" />
     <string id="Dramalord303" text="{HERO.LINK} seeks your presence regarding a matter of great urgency. Will you arrive in time?" />
+	<string id="Dramalord304" text="{QUESTHERO} requests your presence." />
     <string id="Dramalord305" text="{HERO.LINK} is pleased that you have seen their request through to completion... (Love {NUM}, Trust {NUM2})" />
     <string id="Dramalord306" text="Oh, {TITLE}, you have finally come! I was desperately awaiting your arrival!" />
     <string id="Dramalord307" text="Ah, look who it is. You have finally decided that I am worthy of your time then, {TITLE}?" /> 
