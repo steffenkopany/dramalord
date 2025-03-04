@@ -6,7 +6,6 @@ using Dramalord.Quests;
 using Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -42,19 +41,6 @@ namespace Dramalord.Behaviours
                 if (isExtrovert)
                 {
                     List<Hero> closeHeroes = hero.GetCloseHeroes();
-
-                    // Filter out non-player targets that fail romance eligibility.
-                    var romanceCandidates = closeHeroes.Where(t => t == Hero.MainHero || hero.CanPursueRomanceWith(t)).ToList();
-                    if (!romanceCandidates.Any(t => t != Hero.MainHero))
-                    {
-                        // No NPC target is eligible for romance; try a TalkIntention instead.
-                        Hero target = closeHeroes.GetRandomElementWithPredicate(h => h.IsAutonom() && !hero.HasMetRecently(h));
-                        if (target != null && new TalkIntention(target, hero, CampaignTime.Now).Action())
-                        {
-                            return;
-                        }
-                    }
-
                     playerClose = closeHeroes.Contains(Hero.MainHero) && hero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow >= DramalordMCM.Instance.DaysBetweenInteractions;
                     if(closeHeroes.Count > 0)
                     {
