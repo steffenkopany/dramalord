@@ -89,7 +89,7 @@ namespace Dramalord.Extensions
             // If OtherMarriageMod is enabled, don't ignore Dramalord data completely—use it as a fallback
             if (BetrothIntention.OtherMarriageModFound)
             {
-                return hero.GetRelationTo(target).Relationship == RelationshipType.Spouse;
+                return GetRelationTo(hero, target).Relationship == RelationshipType.Spouse;
             }
 
             return false;
@@ -153,7 +153,7 @@ namespace Dramalord.Extensions
         // Determines if a hero is married to the player by checking both vanilla and internal systems.
         public static bool IsPlayerSpouse(this Hero hero)
         {
-            return hero.Spouse == Hero.MainHero || hero.IsSpouseOf(Hero.MainHero);
+            return hero.Spouse == Hero.MainHero; // not necessary to request Dramalord data!
         }
 
         // Determines whether a romance attempt is allowed between two heroes.
@@ -161,16 +161,22 @@ namespace Dramalord.Extensions
         {
             // Always allow romance if one party is the player.
             if (initiator == Hero.MainHero || target == Hero.MainHero)
+            {
                 return true;
+            }
 
             // If the Player Spouse Faithful setting is enabled,
             // block romance if either party is married to the player.
             if (DramalordMCM.Instance.PlayerSpouseFaithful && (initiator.IsPlayerSpouse() || target.IsPlayerSpouse()))
+            {
                 return false;
+            }
 
             // Block romance if either hero has a toy.
             if (initiator.GetDesires().HasToy || target.GetDesires().HasToy)
+            {
                 return false;
+            }
 
             // Otherwise, romance is allowed.
             return true;

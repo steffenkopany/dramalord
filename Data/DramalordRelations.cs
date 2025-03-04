@@ -184,27 +184,8 @@ namespace Dramalord.Data
                 LegacySave.LoadLegacyRelations(_relations, dataStore);
             }
 
-            // Retroactively fix marriages.
-            // If OtherMarriageMod is active, update the vanilla spouse property based on Dramalord relations.
-            if (BetrothIntention.OtherMarriageModFound)
-            {
-                foreach (Hero hero in Hero.AllAliveHeroes)
-                {
-                    if (_relations.ContainsKey(hero))
-                    {
-                        hero.GetAllRelations().Do(kvp =>
-                        {
-                            Hero potentialSpouse = kvp.Key;
-                            HeroRelation relation = kvp.Value;
-                            if (relation.Relationship == RelationshipType.Spouse && hero.Spouse != potentialSpouse)
-                            {
-                                hero.Spouse = potentialSpouse;
-                            }
-                        });
-                    }
-                }
-            }
-            else
+            // also this is actually not necessary
+            if (!BetrothIntention.OtherMarriageModFound)
             {
                 // When not in compatibility mode, ensure that if the vanilla spouse is set, the Dramalord relation is correct.
                 Hero.AllAliveHeroes.Where(h => h.Spouse != null && _relations.ContainsKey(h)).Do(h =>
