@@ -75,21 +75,21 @@ namespace Dramalord
             Type? AMType = AccessTools.TypeByName("MAMarriageAction");
             if (AMType != null)
             {
-                BethrothIntention.OtherMarriageModFound = true;
+                BetrothIntention.OtherMarriageModFound = true;
                 InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: MarryAnyone detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
             }
 
             Type? SEType = AccessTools.TypeByName("SpousesExpandedUtil");
             if (SEType != null)
             {
-                BethrothIntention.OtherMarriageModFound = true;
+                BetrothIntention.OtherMarriageModFound = true;
                 InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Spouses Expanded detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
             }
 
             Type? BKType = AccessTools.TypeByName("BannerKingsSettings");
             if (BKType != null)
             {
-                BethrothIntention.OtherMarriageModFound = true;
+                BetrothIntention.OtherMarriageModFound = true;
                 InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Banner Kings detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
             }
 
@@ -110,7 +110,7 @@ namespace Dramalord
             Type? MoreSpousesType = AccessTools.TypeByName("MoreSpouseSetting");
             if (MoreSpousesType != null)
             {
-                BethrothIntention.OtherMarriageModFound = true;
+                BetrothIntention.OtherMarriageModFound = true;
                 InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: MoreSpouses Pro detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
             }
         }

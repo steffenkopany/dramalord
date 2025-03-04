@@ -32,11 +32,11 @@ namespace Dramalord
             AddClassDefinition(typeof(DateIntention), 1010);
             AddClassDefinition(typeof(ConfrontDateIntention), 1011);
             AddClassDefinition(typeof(ConfrontMarriageIntention), 1012);
-            AddClassDefinition(typeof(ConfrontBethrothedIntention), 1013);
-            AddClassDefinition(typeof(BethrothIntention), 1014);
+            AddClassDefinition(typeof(ConfrontBetrothedIntention), 1013);
+            AddClassDefinition(typeof(BetrothIntention), 1014);
             AddClassDefinition(typeof(ConfrontBirthIntention), 1015);
             AddClassDefinition(typeof(MarriageIntention), 1016);
-            AddClassDefinition(typeof(GossipBethrothedIntention), 1017);
+            AddClassDefinition(typeof(GossipBetrothedIntention), 1017);
             AddClassDefinition(typeof(GossipBirthIntention), 1018);
             AddClassDefinition(typeof(GossipDateIntention), 1019);
             AddClassDefinition(typeof(GossipIntercourseIntention), 1020);

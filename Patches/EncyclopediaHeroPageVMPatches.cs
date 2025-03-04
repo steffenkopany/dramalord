@@ -101,7 +101,7 @@ namespace Dramalord.Patches
             }
             if(hero != null)
             { 
-                if(!BethrothIntention.OtherMarriageModFound)
+                if(!BetrothIntention.OtherMarriageModFound)
                 {
                     foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Spouse).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
                     {
