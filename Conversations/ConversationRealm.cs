@@ -1,12 +1,10 @@
 ﻿using Dramalord.Data;
 using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
-using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.Core;
-using TaleWorlds.Localization;
 
 namespace Dramalord.Conversations
 {

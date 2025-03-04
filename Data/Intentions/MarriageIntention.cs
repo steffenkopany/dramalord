@@ -6,6 +6,7 @@ using Helpers;
 using System.Collections.Generic;
 using System.Reflection;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.MapNotificationTypes;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
@@ -55,7 +56,7 @@ namespace Dramalord.Data.Intentions
                 Hero groom = IntentionHero.IsFemale ? Target : IntentionHero;
                 Hero bride = groom == IntentionHero ? Target : IntentionHero;
 
-                if (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan)
+                if ((groom.Clan == Clan.PlayerClan && bride.Clan != Clan.PlayerClan) || (groom.Clan != Clan.PlayerClan && bride.Clan == Clan.PlayerClan))
                 {
                     int speed = (int)Campaign.Current.TimeControlMode;
                     Campaign.Current.SetTimeSpeed(0);
@@ -72,11 +73,11 @@ namespace Dramalord.Data.Intentions
                                 GameTexts.FindText("str_yes").ToString(),
                                 GameTexts.FindText("str_no").ToString(),
                                 () => {
-
+                                    Hero clanHero = (groom.Clan == Clan.PlayerClan) ? groom : bride;
                                     Hero otherHero = (groom.Clan == Clan.PlayerClan) ? bride : groom;
                                     LeaveClanAction.Apply(otherHero);
                                     JoinClanAction.Apply(otherHero, Clan.PlayerClan);
-                                    ChangeOccupationAfterMarriage(otherHero, Occupation.Lord);
+                                    ChangeOccupationAfterMarriage(otherHero, otherHero.Occupation != Occupation.Lord ? clanHero.Occupation : otherHero.Occupation);
 
                                     TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
                                     StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
@@ -84,6 +85,13 @@ namespace Dramalord.Data.Intentions
 
                                     MBInformationManager.ShowSceneNotification(new MarriageSceneNotificationItem(groom, bride, CampaignTime.Now));
                                     MBInformationManager.AddNotice(new MarriageMapNotification(groom, bride, textObject, CampaignTime.Now));
+
+                                    HandleWitness();
+
+                                    if (DramalordMCM.Instance.RelationshipLogs)
+                                    {
+                                        LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
+                                    }
 
                                     Campaign.Current.SetTimeSpeed(speed);
                                 },
@@ -108,25 +116,39 @@ namespace Dramalord.Data.Intentions
 
                                     MBInformationManager.AddQuickInformation(textObject, 1000, clanHero.CharacterObject, "event:/ui/notification/relation");
 
+                                    HandleWitness();
+
+                                    if (DramalordMCM.Instance.RelationshipLogs)
+                                    {
+                                        LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
+                                    }
+
                                     Campaign.Current.SetTimeSpeed(speed);
                                 }), true);
-
-                    
-
                 }
-
-                if (DramalordMCM.Instance.RelationshipLogs)
+                else if(groom.Clan == Clan.PlayerClan && bride.Clan == Clan.PlayerClan)
                 {
-                    LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
-                }
+                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
+                    StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
+                    StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
 
-                if(DramalordMCM.Instance.JoinClanOnMarriage)
-                {
-                    if(groom.Clan != bride.Clan && groom.Clan != Clan.PlayerClan && bride.Clan != Clan.PlayerClan)
+                    MBInformationManager.ShowSceneNotification(new MarriageSceneNotificationItem(groom, bride, CampaignTime.Now));
+                    MBInformationManager.AddNotice(new MarriageMapNotification(groom, bride, textObject, CampaignTime.Now));
+
+                    if (DramalordMCM.Instance.RelationshipLogs)
                     {
-                        if(groom.Clan != null && bride.Clan != null)
+                        LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
+                    }
+
+                    HandleWitness();
+                }
+                else if(DramalordMCM.Instance.JoinClanOnMarriage)
+                {
+                    if (groom.Clan != bride.Clan)
+                    {
+                        if (groom.Clan != null && bride.Clan != null)
                         {
-                            if(bride.Clan.Leader == bride)
+                            if (bride.Clan.Leader == bride)
                             {
                                 LeaveClanAction.Apply(groom);
                                 JoinClanAction.Apply(groom, bride.Clan);
@@ -135,83 +157,35 @@ namespace Dramalord.Data.Intentions
                             else
                             {
                                 LeaveClanAction.Apply(bride);
-                                JoinClanAction.Apply(bride, groom.Clan); 
+                                JoinClanAction.Apply(bride, groom.Clan);
                                 ChangeOccupationAfterMarriage(bride, groom.Occupation);
                             }
                         }
-                    }
-                    else if(groom.Clan != null)
-                    {
-                        LeaveClanAction.Apply(bride);
-                        JoinClanAction.Apply(bride, groom.Clan);
-                        ChangeOccupationAfterMarriage(bride, groom.Occupation);
-                    }
-                    else if(bride.Clan != null)
-                    {
-                        LeaveClanAction.Apply(groom);
-                        JoinClanAction.Apply(groom, bride.Clan);
-                        ChangeOccupationAfterMarriage(groom, bride.Occupation);
-                    }
-                    else
-                    {
-                        //ChangeOccupationAfterMarriage(bride, groom.Occupation);
+                        else if (groom.Clan != null)
+                        {
+                            LeaveClanAction.Apply(bride);
+                            JoinClanAction.Apply(bride, groom.Clan);
+                            ChangeOccupationAfterMarriage(bride, groom.Occupation);
+                        }
+                        else if (bride.Clan != null)
+                        {
+                            LeaveClanAction.Apply(groom);
+                            JoinClanAction.Apply(groom, bride.Clan);
+                            ChangeOccupationAfterMarriage(groom, bride.Occupation);
+                        }
+                        else
+                        {
+                            //ChangeOccupationAfterMarriage(bride, groom.Occupation);
+                        }
                     }
                 }
 
-                List<Hero> closeHeroes = IntentionHero.GetCloseHeroes();
-                Hero? witness = DramalordMCM.Instance.PlayerAlwaysWitness && Target != Hero.MainHero && closeHeroes.Contains(Hero.MainHero) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h != Target);
-                if(witness != null)
+                if (DramalordMCM.Instance.RelationshipLogs)
                 {
-                    if(witness != Target && (witness.IsEmotionalWith(IntentionHero) || witness.IsEmotionalWith(Target)))
-                    {
-                        if(witness != Hero.MainHero)
-                        {
-                            DramalordIntentions.Instance.GetIntentions().Add(new ConfrontMarriageIntention(IntentionHero, Target, witness, CampaignTime.DaysFromNow(7), true));
-                            DramalordIntentions.Instance.GetIntentions().Add(new ConfrontMarriageIntention(Target, IntentionHero, witness, CampaignTime.DaysFromNow(7), true));
-                        }
-
-                        if (witness == Hero.MainHero)
-                        {
-                            TextObject banner = new TextObject("{=Dramalord531}You witnessed {HERO.LINK} getting married to {OTHER.LINK}.");
-                            StringHelpers.SetCharacterProperties("HERO", IntentionHero.CharacterObject, banner);
-                            StringHelpers.SetCharacterProperties("TARGET", Target.CharacterObject, banner);
-                            MBInformationManager.AddQuickInformation(banner, 0, IntentionHero.CharacterObject, "event:/ui/notification/relation");
-
-                            int speed = (int)Campaign.Current.TimeControlMode;
-                            Campaign.Current.SetTimeSpeed(0);
-                            TextObject title = new TextObject("{=Dramalord579}Catch {HERO1} and {HERO2} in the act");
-                            TextObject text = new TextObject("{=Dramalord580}You caught {HERO1} and {HERO2} in the act. Do you wish to interrupt them?");
-                            title.SetTextVariable("HERO1", IntentionHero.Name);
-                            title.SetTextVariable("HERO2", Target.Name);
-                            text.SetTextVariable("HERO1", IntentionHero.Name);
-                            text.SetTextVariable("HERO2", Target.Name);
-                            InformationManager.ShowInquiry(
-                                    new InquiryData(
-                                        title.ToString(),
-                                        text.ToString(),
-                                        true,
-                                        true,
-                                        GameTexts.FindText("str_yes").ToString(),
-                                        GameTexts.FindText("str_no").ToString(),
-                                        () => { new ConfrontationPlayerIntention(this, Hero.MainHero.IsEmotionalWith(IntentionHero) ? IntentionHero : Target, CampaignTime.Now).Action(); },
-                                        () => { Campaign.Current.SetTimeSpeed(speed); }), true);
-                            
-                        }
-                        else if (IntentionHero == Hero.MainHero || Target == Hero.MainHero)
-                        {
-                            Hero otherHero = (IntentionHero == Hero.MainHero) ? Target : IntentionHero;
-                            TextObject banner = new TextObject("{=Dramalord530}{HERO.LINK} saw you getting married to {TARGET.LINK}.");
-                            StringHelpers.SetCharacterProperties("HERO", witness.CharacterObject, banner);
-                            StringHelpers.SetCharacterProperties("TARGET", otherHero.CharacterObject, banner);
-                            MBInformationManager.AddQuickInformation(banner, 0, witness.CharacterObject, "event:/ui/notification/relation");
-                        }
-                    }
-                    else if(witness != Target && witness != Hero.MainHero)
-                    {
-                        List<Hero> targets = new() { IntentionHero, Target };
-                        DramalordIntentions.Instance.GetIntentions().Add(new GossipMarriageIntention(this, true, targets, witness, CampaignTime.DaysFromNow(7)));
-                    }
+                    LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
                 }
+
+                HandleWitness();
             }
             else if (!_accepted)
             {
@@ -230,6 +204,64 @@ namespace Dramalord.Data.Intentions
             }
 
             _accepted = false;
+        }
+
+        internal void HandleWitness()
+        {
+            List<Hero> closeHeroes = IntentionHero.GetCloseHeroes();
+            Hero? witness = DramalordMCM.Instance.PlayerAlwaysWitness && Target != Hero.MainHero && closeHeroes.Contains(Hero.MainHero) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h != Target);
+            if (witness != null)
+            {
+                if (witness != Target && (witness.IsEmotionalWith(IntentionHero) || witness.IsEmotionalWith(Target)))
+                {
+                    if (witness != Hero.MainHero)
+                    {
+                        DramalordIntentions.Instance.GetIntentions().Add(new ConfrontMarriageIntention(IntentionHero, Target, witness, CampaignTime.DaysFromNow(7), true));
+                        DramalordIntentions.Instance.GetIntentions().Add(new ConfrontMarriageIntention(Target, IntentionHero, witness, CampaignTime.DaysFromNow(7), true));
+                    }
+
+                    if (witness == Hero.MainHero)
+                    {
+                        TextObject banner = new TextObject("{=Dramalord531}You witnessed {HERO.LINK} getting married to {OTHER.LINK}.");
+                        StringHelpers.SetCharacterProperties("HERO", IntentionHero.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", Target.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 0, IntentionHero.CharacterObject, "event:/ui/notification/relation");
+
+                        int speed = (int)Campaign.Current.TimeControlMode;
+                        Campaign.Current.SetTimeSpeed(0);
+                        TextObject title = new TextObject("{=Dramalord579}Catch {HERO1} and {HERO2} in the act");
+                        TextObject text = new TextObject("{=Dramalord580}You caught {HERO1} and {HERO2} in the act. Do you wish to interrupt them?");
+                        title.SetTextVariable("HERO1", IntentionHero.Name);
+                        title.SetTextVariable("HERO2", Target.Name);
+                        text.SetTextVariable("HERO1", IntentionHero.Name);
+                        text.SetTextVariable("HERO2", Target.Name);
+                        InformationManager.ShowInquiry(
+                                new InquiryData(
+                                    title.ToString(),
+                                    text.ToString(),
+                                    true,
+                                    true,
+                                    GameTexts.FindText("str_yes").ToString(),
+                                    GameTexts.FindText("str_no").ToString(),
+                                    () => { new ConfrontationPlayerIntention(this, Hero.MainHero.IsEmotionalWith(IntentionHero) ? IntentionHero : Target, CampaignTime.Now).Action(); },
+                                    () => { Campaign.Current.SetTimeSpeed(speed); }), true);
+
+                    }
+                    else if (IntentionHero == Hero.MainHero || Target == Hero.MainHero)
+                    {
+                        Hero otherHero = (IntentionHero == Hero.MainHero) ? Target : IntentionHero;
+                        TextObject banner = new TextObject("{=Dramalord530}{HERO.LINK} saw you getting married to {TARGET.LINK}.");
+                        StringHelpers.SetCharacterProperties("HERO", witness.CharacterObject, banner);
+                        StringHelpers.SetCharacterProperties("TARGET", otherHero.CharacterObject, banner);
+                        MBInformationManager.AddQuickInformation(banner, 0, witness.CharacterObject, "event:/ui/notification/relation");
+                    }
+                }
+                else if (witness != Target && witness != Hero.MainHero)
+                {
+                    List<Hero> targets = new() { IntentionHero, Target };
+                    DramalordIntentions.Instance.GetIntentions().Add(new GossipMarriageIntention(this, true, targets, witness, CampaignTime.DaysFromNow(7)));
+                }
+            }
         }
 
         internal void ChangeOccupationAfterMarriage(Hero changeHero, Occupation newOccupation)

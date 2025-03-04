@@ -236,6 +236,44 @@ namespace Dramalord.Behaviours
                 }
 
                 // (Optionally do second checks for quest triggers, etc.)
+                if (isHorny && hero.CurrentSettlement != Hero.MainHero.CurrentSettlement && hero.PartyBelongedTo != MobileParty.MainParty && hero.IsLoverOf(Hero.MainHero) && randomNumber <= DramalordMCM.Instance.QuestChance && DramalordQuests.Instance.GetQuest(hero) == null)
+                {
+                    int speed = (int)Campaign.Current.TimeControlMode;
+                    Campaign.Current.SetTimeSpeed(0);
+                    TextObject title = new TextObject("{=Dramalord304}{QUESTHERO} requests your presence.");
+                    TextObject text = new TextObject("{=Dramalord303}{HERO.LINK} asks you to find them, as they have an urgent matter to discuss. Will you make it in time?");
+                    title.SetTextVariable("QUESTHERO", hero.Name);
+                    StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, text);
+                    InformationManager.ShowInquiry(
+                            new InquiryData(
+                                title.ToString(),
+                                text.ToString(),
+                                true,
+                                true,
+                                GameTexts.FindText("str_yes").ToString(),
+                                GameTexts.FindText("str_no").ToString(),
+                                () => {
+                                    VisitLoverQuest quest = new VisitLoverQuest(hero);
+                                    quest.StartQuest();
+                                    DramalordQuests.Instance.AddQuest(hero, quest);
+                                    Campaign.Current.SetTimeSpeed(speed);
+                                },
+                                () => {
+                                    Campaign.Current.SetTimeSpeed(speed);
+
+                                    TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed by your neglection of their matter...");
+                                    StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
+                                    MBInformationManager.AddQuickInformation(banner, 0, hero.CharacterObject, "event:/ui/notification/relation");
+
+                                    RelationshipLossAction.Apply(hero, Hero.MainHero, out int loveDamage, out int trustDamage, 10, 17);
+                                    new ChangeOpinionIntention(hero, Hero.MainHero, loveDamage, trustDamage, CampaignTime.Now).Action();
+
+                                    hero.GetDesires().Horny = 0;
+                                }), true);
+
+
+                    return;
+                }
 
                 // If nothing else fired and hero has a toy, do toy usage:
                 if (desires.HasToy)
