@@ -21,11 +21,13 @@ namespace Dramalord.Actions
 
             if(relationType == RelationshipType.Spouse)
             {
+                // Only the main hero keeps their old spouses - npcs are divorced!
                 if(hero != Hero.MainHero && hero.Spouse != null)
                 {
                     EndRelationshipAction.Apply(hero, hero.Spouse, hero.GetRelationTo(hero.Spouse));
                 }
 
+                // Only the main hero keeps their old spouses - npcs are divorced!
                 if (target != Hero.MainHero && target.Spouse != null)
                 {
                     EndRelationshipAction.Apply(target, target.Spouse, target.GetRelationTo(target.Spouse));

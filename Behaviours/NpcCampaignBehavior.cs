@@ -98,7 +98,7 @@ namespace Dramalord.Behaviours
                                 target = hero.GetClosePrisoners().GetRandomElementWithPredicate(h =>
                                     hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction
                                     && !hero.HasMetRecently(h)
-                                    && hero.CanPursueRomanceWith(h)   // EARLY FILTER
+                                    && (!hero.IsPlayerSpouse() || !DramalordMCM.Instance.PlayerSpouseFaithful)
                                 );
                                 if (target != null && new PrisonIntercourseIntention(target, hero, CampaignTime.Now).Action())
                                 {
