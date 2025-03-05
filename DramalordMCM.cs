@@ -54,7 +54,7 @@ namespace Dramalord
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord005}Minimum Attraction", 0, 100, Order = 1, HintText = "{=Dramalord006}Attraction score required for NPCs to consider others as attractive", RequireRestart = false)]
-        public int MinAttraction { get; set; } = 60;
+        public int MinAttraction { get; set; } = 66;
 
         [SettingPropertyGroup("{=Dramalord004}Hero Setup")]
         [SettingPropertyFloatingInteger("{=Dramalord191}Minimum Dating Love", 0, 100, Order = 2, HintText = "{=Dramalord192}Love points required to consider dating a hero", RequireRestart = false)]
