@@ -296,10 +296,10 @@
     <string id="Dramalord299" text="Allow default pregnancies for all npcs" />
     <string id="Dramalord300" text="Global Default Marriages." />
     <string id="Dramalord301" text="Allow default marriages for all npcs" />
-    <string id="Dramalord302" text="{HERO.LINK} is disappointed in you, for you have failed to fulfill their urgent request... (Love {NUM}, Trust {NUM2})" />
+    <string id="Dramalord302" text="{HERO.LINK} is disappointed in you, for you have failed to fulfill their urgent request..." />
     <string id="Dramalord303" text="{HERO.LINK} seeks your presence regarding a matter of great urgency. Will you arrive in time?" />
-	<string id="Dramalord304" text="{QUESTHERO} requests your presence." />
-    <string id="Dramalord305" text="{HERO.LINK} is pleased that you have seen their request through to completion... (Love {NUM}, Trust {NUM2})" />
+	  <string id="Dramalord304" text="{QUESTHERO} requests your presence." />
+    <string id="Dramalord305" text="{HERO.LINK} is pleased that you have seen their request through to completion..." />
     <string id="Dramalord306" text="Oh, {TITLE}, you have finally come! I was desperately awaiting your arrival!" />
     <string id="Dramalord307" text="Ah, look who it is. You have finally decided that I am worthy of your time then, {TITLE}?" /> 
     <string id="Dramalord308" text="Here I am. What is this issue of urgency that requires my attention?" />
@@ -435,10 +435,10 @@
     <string id="Dramalord438" text="Uhh... well..." />
     <string id="Dramalord439" text="You successfully convinced {HERO.LINK}. (Love {LOVE}, Trust {TRUST})" />
     <string id="Dramalord440" text="You failed to convince {HERO.LINK}. (Love {LOVE}, Trust {TRUST})" />
-    <string id="Dramalord441" text="{TITLE}, I would like to add one of your children into my family." />
-    <string id="Dramalord442" text="It would be an honor, {TITLE}. Who would you like to take into your family?" />
-    <string id="Dramalord443" text="I am sorry, {TITLE}. I want my children to have a free choice when they come of age." />
-    <string id="Dramalord444" text="Are you sure that you want to take my child {CHILD} into your family?" />
+    <string id="Dramalord441" text="{TITLE}, I wish your family to enter nobility and join our clan as true members" />
+    <string id="Dramalord442" text="It would be an honor, {TITLE}. In the name of my family I accept with gratitude!" />
+    <string id="Dramalord443" text="I am sorry, {TITLE}. Not all members of my family would feel comfortable enough for this step. This could tore my family apart." />
+    <string id="Dramalord444" text="Thank you for the offer, {TITLE}. But this is for the eldest members of my family to decide." />
     <string id="Dramalord445" text="{NAME} has a broad and heavyset physique." />
     <string id="Dramalord446" text="{NAME} has a broad but lean physique." />
     <string id="Dramalord447" text="{NAME} has a soft but heavyset physique." />

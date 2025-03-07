@@ -465,10 +465,10 @@
     <string id="Dramalord438" text="Şey... peki..." />
     <string id="Dramalord439" text="{HERO.LINK}'i başarıyla ikna ettiniz. (Sevgi {LOVE}, Güven {TRUST})" />
     <string id="Dramalord440" text="{HERO.LINK}'i ikna etmeyi başaramadınız. (Sevgi {LOVE}, Güven {TRUST})" />
-    <string id="Dramalord441" text="{TITLE}, çocuklarınızdan birini aileme katmak istiyorum." />
-    <string id="Dramalord442" text="Bu bir onur olurdu, {TITLE}. Ailenize kimi katmak istersiniz?" />
-    <string id="Dramalord443" text="Üzgünüm, {TITLE}. Çocuklarımın reşit olduklarında özgür bir seçim yapmalarını istiyorum." />
-    <string id="Dramalord444" text="Çocuğumu {CHILD} ailenize katmak istediğinizden emin misiniz?" />
+    <string id="Dramalord441" text="{TITLE}, ailenin soyluluğa kabul edilmesini ve klanımıza tam üyeler olarak katılmasını istiyorum." />
+    <string id="Dramalord442" text="Bu benim için bir onurdur, {TITLE}. Ailem adına minnetle kabul ediyorum!" />
+    <string id="Dramalord443" text="Üzgünüm, {TITLE}. Ailemin tüm üyeleri bu kararı rahatça kabul edemez. Bu, ailemi bölebilir." />
+    <string id="Dramalord444" text="Teklifiniz için teşekkür ederim, {TITLE}. Ancak bu, ailemin en yaşlı üyelerinin karar vermesi gereken bir konudur." />
     <string id="Dramalord445" text="{NAME}'in çok fazla yediği ve düzenli olarak egzersiz yaptığı biliniyor." />
     <string id="Dramalord446" text="{NAME}'in neredeyse hiçbir şey yemediği ve düzenli olarak egzersiz yaptığı biliniyor." />
     <string id="Dramalord447" text="{NAME} adlı kişinin çok fazla yediği ve nadiren egzersiz yaptığı biliniyor." />

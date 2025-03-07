@@ -435,10 +435,10 @@
     <string id="Dramalord438" text="음... 글쎄요..." />
     <string id="Dramalord439" text="당신은 {HERO.LINK}를 성공적으로 설득했습니다. (사랑 {LOVE}, 신뢰 {TRUST})" />
     <string id="Dramalord440" text="당신은 {HERO.LINK}를 설득하는 데 실패했습니다. (사랑 {LOVE}, 신뢰 {TRUST})" />
-    <string id="Dramalord441" text="{TITLE}, 저는 당신의 자녀 중 한 명을 제 가족으로 받아들이고 싶습니다." />
-    <string id="Dramalord442" text="{TITLE}, 영광입니다. 누구를 가족으로 받아들이고 싶으신가요?" />
-    <string id="Dramalord443" text="죄송합니다, {TITLE}. 저는 아이들이 성인이 되면 자유롭게 선택할 수 있기를 바랍니다." />
-    <string id="Dramalord444" text="제 자녀 {CHILD}를 당신의 가족으로 받아들이시겠습니까?" />
+    <string id="Dramalord441" text="{TITLE}, 당신의 가족이 귀족이 되어 우리 가문의 진정한 일원이 되기를 바랍니다." />
+    <string id="Dramalord442" text="영광입니다, {TITLE}. 제 가족을 대표하여 감사히 받아들이겠습니다!" />
+    <string id="Dramalord443" text="죄송합니다, {TITLE}. 제 가족 모두가 이 결정을 편하게 받아들이지는 못할 것입니다. 이로 인해 가족이 분열될 수도 있습니다." />
+    <string id="Dramalord444" text="제안을 감사드립니다, {TITLE}. 하지만 이는 우리 가문의 연장자들이 결정할 문제입니다." />
     <string id="Dramalord445" text="{NAME}은 많이 먹고 규칙적으로 운동을 하는 것으로 알려져 있습니다." />
     <string id="Dramalord446" text="{NAME}은 거의 아무것도 먹지 않고 규칙적으로 운동을 하는 것으로 알려져 있습니다." />
     <string id="Dramalord447" text="{NAME}은 많이 먹고 거의 운동을 하지 않는 것으로 알려져 있습니다." />

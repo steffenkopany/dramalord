@@ -436,10 +436,10 @@
     <string id="Dramalord438" text="Uh... bem..." />
     <string id="Dramalord439" text="Você convenceu com sucesso {HERO.LINK}. (Ame {LOVE}, Confie {TRUST})" />
     <string id="Dramalord440" text="Você falhou em convencer {HERO.LINK}. (Ame {LOVE}, Confie {TRUST})" />
-    <string id="Dramalord441" text="{TITLE}, gostaria de adicionar um de seus filhos à minha família." />
-    <string id="Dramalord442" text="Seria uma honra, {TITLE}. Quem você gostaria de levar para sua família?" />
-    <string id="Dramalord443" text="Sinto muito, {TITLE}. Quero que meus filhos tenham liberdade de escolha quando atingirem a maioridade." />
-    <string id="Dramalord444" text="Tem certeza de que deseja levar meu filho {CHILD} para sua família?" />
+    <string id="Dramalord441" text="{TITLE}, desejo que sua família entre para a nobreza e se junte ao nosso clã como membros de verdade." />
+    <string id="Dramalord442" text="Seria uma honra, {TITLE}. Em nome da minha família, aceito com gratidão!" />
+    <string id="Dramalord443" text="Sinto muito, {TITLE}. Nem todos da minha família se sentiriam confortáveis com essa decisão. Isso poderia nos dividir." />
+    <string id="Dramalord444" text="Obrigado pela oferta, {TITLE}. Mas essa é uma decisão que cabe aos mais velhos da minha família." />
     <string id="Dramalord445" text="{NAME} é conhecido por comer muito e fazer exercícios regularmente." />
     <string id="Dramalord446" text="{NAME} é conhecido por comer muito e fazer exercícios regularmente." />
     <string id="Dramalord447" text="{NAME} é conhecido por comer muito e raramente fazer exercícios." />

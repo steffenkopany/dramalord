@@ -435,10 +435,10 @@
     <string id="Dramalord438" text="Euh... eh bien..." />
     <string id="Dramalord439" text="Vous avez réussi à convaincre {HERO.LINK}. (Amour {LOVE}, Confiance {TRUST})" />
     <string id="Dramalord440" text="Vous n'avez pas réussi à convaincre {HERO.LINK}. (Amour {LOVE}, Confiance {TRUST})" />
-    <string id="Dramalord441" text="{TITLE}, j'aimerais accueillir l'un de vos enfants dans ma famille." />
-    <string id="Dramalord442" text="Ce serait un honneur, {TITLE}. Qui souhaiteriez-vous accueillir dans votre famille ?" />
-    <string id="Dramalord443" text="Je suis désolé, {TITLE}. Je veux que mes enfants aient le libre choix lorsqu'ils seront majeurs." />
-    <string id="Dramalord444" text="Êtes-vous sûr de vouloir accueillir mon enfant {CHILD} dans votre famille ?" />
+    <string id="Dramalord441" text="{TITLE}, je souhaite que votre famille accède à la noblesse et rejoigne notre clan en tant que membres à part entière." />
+    <string id="Dramalord442" text="Ce serait un honneur, {TITLE}. Au nom de ma famille, j'accepte avec gratitude !" />
+    <string id="Dramalord443" text="Je suis désolé, {TITLE}. Tous les membres de ma famille ne se sentiraient pas à l'aise avec cette décision. Cela pourrait la diviser." />
+    <string id="Dramalord444" text="Merci pour votre offre, {TITLE}. Mais c'est une décision qui revient aux aînés de ma famille." />
     <string id="Dramalord445" text="{NAME} est connu pour manger beaucoup et faire régulièrement de l'exercice." />
     <string id="Dramalord446" text="{NAME} est connu pour ne presque rien manger et faire régulièrement de l'exercice." />
     <string id="Dramalord447" text="{NAME} est connu pour manger beaucoup et faire rarement des exercices." />

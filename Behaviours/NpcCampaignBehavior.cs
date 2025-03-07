@@ -261,7 +261,7 @@ namespace Dramalord.Behaviours
                                 () => {
                                     Campaign.Current.SetTimeSpeed(speed);
 
-                                    TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed by your neglection of their matter...");
+                                    TextObject banner = new TextObject("{=Dramalord302}{HERO.LINK} is disappointed in you, for you have failed to fulfill their urgent request...");
                                     StringHelpers.SetCharacterProperties("HERO", hero.CharacterObject, banner);
                                     MBInformationManager.AddQuickInformation(banner, 0, hero.CharacterObject, "event:/ui/notification/relation");
 

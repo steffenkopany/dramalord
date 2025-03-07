@@ -435,10 +435,10 @@
     <string id="Dramalord438" text="嗯…那麽…" />
     <string id="Dramalord439" text="你成功说服了{HERO.LINK}。（爱慕{LOVE}，信赖{TRUST}）" />
     <string id="Dramalord440" text="你未能说服{HERO.LINK}。（爱慕{LOVE}，信赖{TRUST}）" />
-    <string id="Dramalord441" text="{TITLE}，我想让你的孩子成为我家族的一份子。" />
-    <string id="Dramalord442" text="这是莫大的荣幸！{TITLE}，你希望将家族之名赐予给谁？" />
-    <string id="Dramalord443" text="对不起，{TITLE}。我希望我的孩子在长大後能自己找到归宿。" />
-    <string id="Dramalord444" text="你确定要赐予{CHILD}你的家族之名，使其正式成为你家族的一份子吗？" />
+    <string id="Dramalord441" text="{TITLE}，我希望你的家族能加入贵族，并成为我们氏族的正式成员。" />
+    <string id="Dramalord442" text="这将是我的荣幸，{TITLE}。我代表我的家族满怀感激地接受！" />
+    <string id="Dramalord443" text="很抱歉，{TITLE}。我的家人并非所有人都能接受这样的决定，这可能会导致家庭分裂。" />
+    <string id="Dramalord444" text="感谢您的提议，{TITLE}。但这应该由我的家族长辈来决定。" />
     <string id="Dramalord445" text="传闻，{NAME}非常会吃，且身强力壮。" />
     <string id="Dramalord446" text="传闻，{NAME}食量很少，但非常强壮。" />
     <string id="Dramalord447" text="传闻，{NAME}非常会吃，但体能欠佳。" />

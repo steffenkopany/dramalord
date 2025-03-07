@@ -116,13 +116,13 @@ namespace Dramalord.Data.Intentions
                             DramalordIntentions.Instance.GetIntentions().Add(new ConfrontIntercourseIntention(IntentionHero, Target, witness, CampaignTime.DaysFromNow(7), true));
                             DramalordIntentions.Instance.GetIntentions().Add(new ConfrontIntercourseIntention(Target, IntentionHero, witness, CampaignTime.DaysFromNow(7), true));
                         }
-                        else if (witness != Hero.MainHero && IntentionHero.Spouse != Target)
+                        else if (witness != Hero.MainHero && !IntentionHero.IsSpouseOf(Target))
                         {
                             List<Hero> targets = new() { IntentionHero, Target };
                             DramalordIntentions.Instance.GetIntentions().Add(new GossipIntercourseIntention(this, true, targets, witness, CampaignTime.DaysFromNow(7)));
                         }
 
-                        if (witness == Hero.MainHero)
+                        if (witness == Hero.MainHero && (IntentionHero.Spouse != Target || witness.IsEmotionalWith(Target) || witness.IsEmotionalWith(IntentionHero)))
                         {
                             TextObject banner = new TextObject("{=Dramalord073}You caught {HERO.LINK} being intimate with {TARGET.LINK}.");
                             StringHelpers.SetCharacterProperties("HERO", IntentionHero.CharacterObject, banner);
@@ -163,7 +163,7 @@ namespace Dramalord.Data.Intentions
                                             () => { Campaign.Current.SetTimeSpeed(speed); }), true);
                             }
                         }
-                        else if (IntentionHero == Hero.MainHero || Target == Hero.MainHero)
+                        else if ((IntentionHero == Hero.MainHero || Target == Hero.MainHero) && !IntentionHero.IsSpouseOf(Target))
                         {
                             Hero otherHero = (IntentionHero == Hero.MainHero) ? Target : IntentionHero;
                             TextObject banner = new TextObject("{=Dramalord074}{HERO.LINK} caught you being intimate with {TARGET.LINK}.");
