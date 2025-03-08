@@ -319,6 +319,13 @@ namespace Dramalord.Conversations
         public static TextObject npc_no_gossip = new("{=Dramalord590}Nothing comes to mind at the moment.");
         public static TextObject player_request_more_gossip = new("{=Dramalord591}Aynthing else?");
 
+        public static TextObject npc_blackmail_betrothed = new("{=Dramalord601}I happened to pass by when you asked {HERO} for their hand. If you do not want {SPOUSE} to learn about this, it will cost you {AMOUNT}{GOLD_ICON}.");
+        public static TextObject npc_blackmail_date = new("{=Dramalord602}It is nice to see that you and {HERO} are sweethearts. For {AMOUNT}{GOLD_ICON} {SPOUSE} will never learn what happened.");
+        public static TextObject npc_blackmail_intercourse = new("{=Dramalord603}You and {HERO} were moaning so loudly that almost everyone could hear it. I wonder what {SPOUSE} would say to that? {AMOUNT}{GOLD_ICON} {SPOUSE} would silence that noise.");
+        public static TextObject player_blackmail_pay = new("{=Dramalord604}You snake! Here, take the money and get out of my sight!");
+        public static TextObject player_blackmail_quest = new("{=Dramalord605}How dare you? If you do not keep this to yourself I will cut out your tongue!");
+        public static TextObject player_blackmail_nocare = new("{=Dramalord606}Haha! Go and spread your rumors you sad human being.");
+
         internal static void Init()
         {
             MBTextManager.SetTextVariable("npc_starts_interaction_unknown", npc_starts_interaction_unknown);
@@ -584,22 +591,22 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("npc_gossip_sex", npc_gossip_sex);
             MBTextManager.SetTextVariable("npc_gossip_child", npc_gossip_child);
 
-            MBTextManager.SetTextVariable("npc_confrontation_reply_gossip", npc_confrontation_reply_gossip); 
+            MBTextManager.SetTextVariable("npc_confrontation_reply_gossip", npc_confrontation_reply_gossip);
             MBTextManager.SetTextVariable("npc_confrontation_gossip_accept", npc_confrontation_gossip_accept);
 
             MBTextManager.SetTextVariable("npc_quest_visit_start_open", npc_quest_visit_start_open);
             MBTextManager.SetTextVariable("npc_quest_visit_start_fail", npc_quest_visit_start_fail);
             MBTextManager.SetTextVariable("player_quest_visit_reply", player_quest_visit_reply);
             MBTextManager.SetTextVariable("npc_quest_visit_success", npc_quest_visit_success);
-            MBTextManager.SetTextVariable("npc_quest_visit_fail", npc_quest_visit_fail); 
+            MBTextManager.SetTextVariable("npc_quest_visit_fail", npc_quest_visit_fail);
 
-            MBTextManager.SetTextVariable("player_quest_joinparty_start", player_quest_joinparty_start); 
-            MBTextManager.SetTextVariable("player_quest_joinparty_end", player_quest_joinparty_end); 
-            MBTextManager.SetTextVariable("player_quest_marriage_start", player_quest_marriage_start); 
+            MBTextManager.SetTextVariable("player_quest_joinparty_start", player_quest_joinparty_start);
+            MBTextManager.SetTextVariable("player_quest_joinparty_end", player_quest_joinparty_end);
+            MBTextManager.SetTextVariable("player_quest_marriage_start", player_quest_marriage_start);
             MBTextManager.SetTextVariable("player_quest_marriage_ask", player_quest_marriage_ask);
             MBTextManager.SetTextVariable("player_quest_marriage_agree", player_quest_marriage_agree);
             MBTextManager.SetTextVariable("player_quest_marriage_later", player_quest_marriage_later);
-            MBTextManager.SetTextVariable("player_quest_marriage_decline", player_quest_marriage_decline); 
+            MBTextManager.SetTextVariable("player_quest_marriage_decline", player_quest_marriage_decline);
 
             MBTextManager.SetTextVariable("npc_interaction_betrothed_married", npc_interaction_betrothed_married);
 
@@ -611,6 +618,14 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("player_request_gossip", player_request_gossip);
             MBTextManager.SetTextVariable("npc_no_gossip", npc_no_gossip);
             MBTextManager.SetTextVariable("player_request_more_gossip", player_request_more_gossip);
+
+
+            MBTextManager.SetTextVariable("npc_blackmail_betrothed", npc_blackmail_betrothed);
+            MBTextManager.SetTextVariable("npc_blackmail_date", npc_blackmail_date);
+            MBTextManager.SetTextVariable("npc_blackmail_intercourse", npc_blackmail_intercourse);
+            MBTextManager.SetTextVariable("player_blackmail_pay", player_blackmail_pay);
+            MBTextManager.SetTextVariable("player_blackmail_quest", player_blackmail_quest);
+            MBTextManager.SetTextVariable("player_blackmail_nocare", player_blackmail_nocare);
         }
     }
 }

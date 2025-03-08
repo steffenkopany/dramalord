@@ -49,6 +49,7 @@ namespace Dramalord.Behavior
             FinishJoinPartyQuestIntention.AddDialogs(starter);
             ConfrontationPlayerIntention.AddDialogs(starter);
             DuelIntention.AddDialogs(starter);
+            BlackmailBetrothedIntention.AddDialogs(starter);
         }
 
         public override void RegisterEvents()

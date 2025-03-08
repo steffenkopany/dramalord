@@ -48,6 +48,7 @@ namespace Dramalord
             AddClassDefinition(typeof(ConfrontationPlayerIntention), 1026); 
             AddClassDefinition(typeof(DuelIntention), 1027);
             AddClassDefinition(typeof(AdoptIntention), 1028);
+            AddClassDefinition(typeof(BlackmailBetrothedIntention), 1029);
 
             AddClassDefinition(typeof(HeroPregnancy), 2000);
             AddClassDefinition(typeof(HeroDesires), 2001);

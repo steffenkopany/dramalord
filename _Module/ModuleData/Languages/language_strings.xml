@@ -572,7 +572,7 @@
     <string id="Dramalord575" text="Allow AI to join the clan of their spouse (otherwise they're just married)" />
     <string id="Dramalord576" text="Allow Social Class Mix" />
     <string id="Dramalord577" text="Allow AI interactions between nobles and commoners (Lords and Notables/Wanderers)" />
-    <string id="Dramalord578" text="{HERO1} and {HERO2} just got married. Do you want them to stay in your clan?" />
+    <string id="Dramalord578" text="{HERO1} and {HERO2} are ready for the altar. Will you welcome them in your clan after the ceremony?" />
     <string id="Dramalord579" text="Interrupt {HERO1} and {HERO2} in the act" />
     <string id="Dramalord580" text="You caught {HERO1} and {HERO2} in the act. Do you wish to interrupt them?" />
     <string id="Dramalord581" text="{TITLE}! I challenge you for the love of {HERO}!" />
@@ -594,5 +594,12 @@
     <string id="Dramalord597" text="Enable Dramalords marriage system (Disabled automatically if incompatible mod is detected)" />
     <string id="Dramalord598" text="Chance Gossiping Player" />
     <string id="Dramalord599" text="Chance that heroes approach the player for spreading gossip" />
+    <string id="Dramalord600" text="{HERO} is getting ready for the ceremony. Do you want to them to join your clan after getting married?" />
+    <string id="Dramalord601" text="I happened to pass by when you asked {HERO} for their hand. If you do not want {SPOUSE} to learn about this, it will cost you {AMOUNT}{GOLD_ICON}." />
+    <string id="Dramalord602" text="It is nice to see that you and {HERO} are sweethearts. For {AMOUNT}{GOLD_ICON} {SPOUSE} will never learn what happened." />
+    <string id="Dramalord603" text="You and {HERO} were moaning so loudly that almost everyone could hear it. I wonder what {SPOUSE} would say to that? {AMOUNT}{GOLD_ICON} {SPOUSE} would silence that noise." />
+    <string id="Dramalord604" text="You snake! Here, take the money and get out of my sight!" />
+    <string id="Dramalord605" text="How dare you? If you do not keep this to yourself I will cut out your tongue!" />
+    <string id="Dramalord606" text="Haha! Go and spread your rumors you sad human being." />
   </strings>
 </base>
