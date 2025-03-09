@@ -19,7 +19,13 @@ namespace Dramalord.Patches
             foreach (ClanLordItemVM child in otherChildren)
             {
                 __instance.Family.Remove(child);
-                __instance.Companions.Add(child);
+                //__instance.Companions.Add(child);
+            }
+
+            List<ClanLordItemVM> companionChildren = __instance.Companions.Where(item => item.IsChild).ToList();
+            foreach(ClanLordItemVM child in companionChildren)
+            {
+                __instance.Companions.Remove(child);
             }
         }
     }

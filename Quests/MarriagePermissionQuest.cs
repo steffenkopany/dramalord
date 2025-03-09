@@ -4,21 +4,23 @@ using Dramalord.Data;
 using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
 using Helpers;
-using System.Linq;
+using System;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
+using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Quests
 {
     internal class MarriagePermissionQuest : DramalordQuest
     {
-        private Hero? Permitter => (QuestGiver.Father != null && QuestGiver.Father.IsAlive) ? QuestGiver.Father :
-            (QuestGiver.Clan != null && QuestGiver.Clan != Clan.PlayerClan && QuestGiver.Clan.Leader != QuestGiver) ? QuestGiver.Clan.Leader : null;
+        [SaveableField(1)]
+        internal Hero Permitter;
 
-
-        public MarriagePermissionQuest(Hero questGiver, CampaignTime duration) : base("DramalordMarriagePermissionQuest", questGiver, duration)
+        public MarriagePermissionQuest(Hero questGiver, Hero permitter, CampaignTime duration) : base("DramalordMarriagePermissionQuest", questGiver, duration)
         {
+            Permitter = permitter;
             InitializeQuestOnGameLoad();
         }
 
@@ -68,7 +70,7 @@ namespace Dramalord.Quests
 
         protected override void RegisterEvents()
         {
-            CampaignEvents.HourlyTickEvent.AddNonSerializedListener(this, HourlyTick);
+            CampaignEvents.HeroKilledEvent.AddNonSerializedListener(this, new Action<Hero, Hero, KillCharacterAction.KillCharacterActionDetail, bool>(OnHeroKilled));
         }
 
         public override void QuestStartInit()
@@ -115,6 +117,25 @@ namespace Dramalord.Quests
             if(Permitter == null)
             {
                 QuestSuccess(Hero.MainHero);
+            }
+        }
+
+        protected void OnHeroKilled(Hero victim, Hero killer, KillCharacterAction.KillCharacterActionDetail reason, bool showNotifications)
+        {
+            if(victim == Permitter)
+            {
+                if(QuestGiver.Father != null && QuestGiver.Father.IsAlive && QuestGiver.Father != Hero.MainHero)
+                {
+                    Permitter = QuestGiver.Father;
+                }
+                else if (QuestGiver.Clan != null && QuestGiver.Clan.Leader != Hero.MainHero && QuestGiver.Clan.Leader != QuestGiver)
+                {
+                    Permitter = QuestGiver.Clan.Leader;
+                }
+                else
+                {
+                    QuestSuccess(Hero.MainHero);
+                }
             }
         }
     }

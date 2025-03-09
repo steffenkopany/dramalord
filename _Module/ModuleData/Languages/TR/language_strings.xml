@@ -465,10 +465,10 @@
     <string id="Dramalord438" text="Şey... peki..." />
     <string id="Dramalord439" text="{HERO.LINK}'i başarıyla ikna ettiniz. (Sevgi {LOVE}, Güven {TRUST})" />
     <string id="Dramalord440" text="{HERO.LINK}'i ikna etmeyi başaramadınız. (Sevgi {LOVE}, Güven {TRUST})" />
-    <string id="Dramalord441" text="{TITLE}, çocuklarınızdan birini aileme katmak istiyorum." />
-    <string id="Dramalord442" text="Bu bir onur olurdu, {TITLE}. Ailenize kimi katmak istersiniz?" />
-    <string id="Dramalord443" text="Üzgünüm, {TITLE}. Çocuklarımın reşit olduklarında özgür bir seçim yapmalarını istiyorum." />
-    <string id="Dramalord444" text="Çocuğumu {CHILD} ailenize katmak istediğinizden emin misiniz?" />
+    <string id="Dramalord441" text="{TITLE}, ailenin soyluluğa kabul edilmesini ve klanımıza tam üyeler olarak katılmasını istiyorum." />
+    <string id="Dramalord442" text="Bu benim için bir onurdur, {TITLE}. Ailem adına minnetle kabul ediyorum!" />
+    <string id="Dramalord443" text="Üzgünüm, {TITLE}. Ailemin tüm üyeleri bu kararı rahatça kabul edemez. Bu, ailemi bölebilir." />
+    <string id="Dramalord444" text="Teklifiniz için teşekkür ederim, {TITLE}. Ancak bu, ailemin en yaşlı üyelerinin karar vermesi gereken bir konudur." />
     <string id="Dramalord445" text="{NAME}'in çok fazla yediği ve düzenli olarak egzersiz yaptığı biliniyor." />
     <string id="Dramalord446" text="{NAME}'in neredeyse hiçbir şey yemediği ve düzenli olarak egzersiz yaptığı biliniyor." />
     <string id="Dramalord447" text="{NAME} adlı kişinin çok fazla yediği ve nadiren egzersiz yaptığı biliniyor." />
@@ -624,5 +624,14 @@
     <string id="Dramalord597" text="Dramalord’un evlilik sistemini etkinleştir (Uyumsuz mod algılanırsa otomatik olarak devre dışı bırakılır)" />
     <string id="Dramalord598" text="Dedikoducu oyuncu şansı" />
     <string id="Dramalord599" text="Kahramanların oyuncuya gelip dedikodu yapma olasılığı" />
+    <string id="Dramalord600" text="{HERO} tören için hazırlanıyor. Evlendikten sonra klanınıza katılmasını ister misiniz?" />
+    <string id="Dramalord601" text="{HERO}'ya evlenme teklif ettiğinizde tesadüfen oradan geçiyordum. {SPOUSE}'un bunu öğrenmesini istemiyorsanız, size {AMOUNT}{GOLD_ICON} mal olacak." />
+    <string id="Dramalord602" text="{HERO} ile sevgili olduğunuzu görmek güzel. {AMOUNT}{GOLD_ICON} karşılığında {SPOUSE} asla ne olduğunu öğrenmeyecek." />
+    <string id="Dramalord603" text="Sen ve {HERO} o kadar yüksek sesle inliyordunuz ki neredeyse herkes duydu. {SPOUSE} bunu öğrenirse ne der acaba? {AMOUNT}{GOLD_ICON} bu söylentiyi susturabilir." />
+    <string id="Dramalord604" text="Sinsi yılan! Al şu parayı ve gözümün önünden kaybol!" />
+    <string id="Dramalord605" text="Buna nasıl cüret edersin?! Eğer bu sırrı saklamazsan, dilini koparırım!" />
+    <string id="Dramalord606" text="Haha! Git ve dedikodularını yay, zavallı insan!" />
+    <string id="Dramalord607" text="{HERO} seni şantaj yapıyor" />
+    <string id="Dramalord608" text="{HERO.LINK}, seni {OTHER.LINK} ile gördü. Eğer {AMOUNT}{GOLD_ICON} ödemezsen, {SPOUSE.LINK}'e her şeyi anlatmakla tehdit ediyorlar. Gece vakti onlarla konuşup bu meseleyi çöz." />
   </strings>
 </base>

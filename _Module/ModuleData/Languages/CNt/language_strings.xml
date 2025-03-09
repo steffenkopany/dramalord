@@ -296,7 +296,7 @@
     <string id="Dramalord299" text="允許所有NPC適用原版的懷孕判定（Dramalord採用獨立的懷孕判定機制，若開啟此選項，原版和MOD的懷孕判定將同時運作）" />
     <string id="Dramalord300" text="全局適用原版婚姻" />
     <string id="Dramalord301" text="允許所有NPC適用原版的婚姻機制（Dramalord採用獨立的婚姻機制，若開啟此選項，原版和MOD的婚姻機制將同時運作）" />
-    <string id="Dramalord302" text="{HERO.LINK}對你忽略他的「緊急要務」感到失望……（愛慕{NUM}，信賴{NUM2}）" />
+    <string id="Dramalord302" text="{HERO.LINK}對你忽略他的「緊急要務」感到失望……" />
     <string id="Dramalord302" text="{HERO.LINK} 對你忽視他們的緊急事務感到失望..." />
     <string id="Dramalord304" text="{QUESTHERO}請求你見他。" />
     <string id="Dramalord305" text="{HERO.LINK} 對你滿足了他們的請求感到非常高興..." />
@@ -435,10 +435,10 @@
     <string id="Dramalord438" text="嗯…那麼…" />
     <string id="Dramalord439" text="你成功說服了{HERO.LINK}。（愛慕{LOVE}，信賴{TRUST}）" />
     <string id="Dramalord440" text="你未能說服{HERO.LINK}。（愛慕{LOVE}，信賴{TRUST}）" />
-    <string id="Dramalord441" text="{TITLE}，我想讓你的孩子成為我家族的一份子。" />
-    <string id="Dramalord442" text="這是莫大的榮幸！{TITLE}，你希望將家族之名賜予給誰？" />
-    <string id="Dramalord443" text="對不起，{TITLE}。我希望我的孩子在長大後能自己找到歸宿。" />
-    <string id="Dramalord444" text="你確定要賜予{CHILD}你的家族之名，使其正式成為你家族的一份子嗎？" />
+    <string id="Dramalord441" text="{TITLE}，我希望你的家族能加入貴族，成為我們氏族的正式成員。" />
+    <string id="Dramalord442" text="這將是我的榮幸，{TITLE}。我代表我的家族滿懷感激地接受！" />
+    <string id="Dramalord443" text="很抱歉，{TITLE}。我的家人並非所有人都能接受這樣的決定，這可能會導致家庭分裂。" />
+    <string id="Dramalord444" text="感謝您的提議，{TITLE}。但這應該由我的家族長輩來決定。" />
     <string id="Dramalord445" text="傳聞，{NAME}非常會吃，且身強力壯。" />
     <string id="Dramalord446" text="傳聞，{NAME}食量很少，但非常強壯。" />
     <string id="Dramalord447" text="傳聞，{NAME}非常會吃，但體能欠佳。" />
@@ -594,5 +594,14 @@
     <string id="Dramalord597" text="啟用Dramalord的婚姻系統（如果偵測到不相容的模組，將自動禁用）" />
     <string id="Dramalord598" text="八卦玩家的機率" />
     <string id="Dramalord599" text="英雄接近玩家傳播八卦的機率" />
+    <string id="Dramalord600" text="{HERO}正在準備婚禮。你希望他們婚後加入你的氏族嗎？" />
+    <string id="Dramalord601" text="當你向{HERO}求婚時，我剛好路過。如果你不想讓{SPOUSE}知道，那就得付{AMOUNT}{GOLD_ICON}。" />
+    <string id="Dramalord602" text="看到你和{HERO}如此甜蜜真是讓人開心。只需{AMOUNT}{GOLD_ICON}，{SPOUSE}就永遠不會知道發生了什麼。" />
+    <string id="Dramalord603" text="你和{HERO}的呻吟聲太大了，幾乎所有人都聽到了。我想知道{SPOUSE}會怎麼說？{AMOUNT}{GOLD_ICON}就能讓這事消失。" />
+    <string id="Dramalord604" text="你這個卑鄙的傢伙！拿著錢滾出我的視線！" />
+    <string id="Dramalord605" text="你竟敢威脅我？如果你敢說出去，我就割掉你的舌頭！" />
+    <string id="Dramalord606" text="哈哈！去吧，把你的謠言四處傳播吧，可憐的人。" />
+    <string id="Dramalord607" text="{HERO}正在勒索你" />
+    <string id="Dramalord608" text="{HERO.LINK}看到你和{OTHER.LINK}在一起。他們威脅要告訴{SPOUSE.LINK}，除非你支付{AMOUNT}{GOLD_ICON}。晚上去找他們，解決這個問題。" />
   </strings>
 </base>

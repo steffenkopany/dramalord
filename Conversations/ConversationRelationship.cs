@@ -118,12 +118,12 @@ namespace Dramalord.Conversations
                             }
                             return false;
                         })
-                    /*.PlayerOption("{player_interaction_adopt}")
-                        .GotoDialogState("npc_interaction_reply_adopt")
-                        .Condition(() => Hero.OneToOneConversationHero.Children.FirstOrDefault(child => child.Clan == Clan.PlayerClan && child.Occupation == Occupation.Wanderer) != null)*/
+                    .PlayerOption("{player_invite_companion_family}")
+                        .Condition(() => Hero.OneToOneConversationHero.IsPlayerCompanion)
+                        .GotoDialogState("npc_invite_companion_family")
                     .PlayerOption("{player_interaction_kick_clan}")
                         .GotoDialogState("npc_interaction_reply_kick_clan")
-                        .Condition(() => Hero.OneToOneConversationHero.Clan == Hero.MainHero.Clan)
+                        .Condition(() => Hero.OneToOneConversationHero.Clan == Hero.MainHero.Clan && !Hero.OneToOneConversationHero.IsPlayerCompanion)
                     /*.PlayerOption("{player_interaction_kick_kingdom}")
                         .GotoDialogState("npc_interaction_reply_kick_kingdom")
                         .Condition(() => Hero.OneToOneConversationHero.Clan != null && Hero.MainHero.Clan.Kingdom != null && Hero.MainHero.IsKingdomLeader && Hero.OneToOneConversationHero.Clan.Kingdom == Hero.MainHero.Clan.Kingdom && Hero.OneToOneConversationHero.Clan != Hero.MainHero.Clan)*/
@@ -222,7 +222,7 @@ namespace Dramalord.Conversations
             DialogFlow engageFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_engage")
                 .BeginNpcOptions()  
                     .NpcOption("{player_reaction_engagement_yes}[ib:aggressive][if:convo_delighted]", () =>
-                        Hero.OneToOneConversationHero.Spouse == null && (Hero.OneToOneConversationHero.Father == null || Hero.OneToOneConversationHero.Father == Hero.MainHero) && (Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan || Hero.OneToOneConversationHero.Clan?.Leader == Hero.OneToOneConversationHero))
+                        Hero.OneToOneConversationHero.Spouse == null && (Hero.OneToOneConversationHero.Father == null || !Hero.OneToOneConversationHero.Father.IsAlive || Hero.OneToOneConversationHero.Father == Hero.MainHero) && (Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan || Hero.OneToOneConversationHero.Clan?.Leader == Hero.OneToOneConversationHero))
                         .Consequence(() => { new BetrothIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, true).OnConversationEnded(); ConversationTools.EndConversation(); })
                         .CloseDialog()
                     .NpcOption("{player_quest_marriage_start}[ib:aggressive][if:convo_delighted]", () => Hero.OneToOneConversationHero.Spouse == null &&
@@ -232,7 +232,9 @@ namespace Dramalord.Conversations
                             .Condition(() => { ConversationLines.npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false)); return true; })
                                 .Consequence(() =>
                                 {
-                                    MarriagePermissionQuest quest = new MarriagePermissionQuest(Hero.OneToOneConversationHero, CampaignTime.DaysFromNow(21));
+                                    MarriagePermissionQuest quest = new MarriagePermissionQuest(Hero.OneToOneConversationHero,
+                                        (Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsAlive && Hero.OneToOneConversationHero.Father != Hero.MainHero) ? Hero.OneToOneConversationHero.Father : Hero.OneToOneConversationHero.Clan.Leader, 
+                                        CampaignTime.DaysFromNow(21));
                                     quest.StartQuest();
                                     DramalordQuests.Instance.AddQuest(Hero.OneToOneConversationHero, quest);
                                     ConversationTools.EndConversation();
@@ -422,7 +424,7 @@ namespace Dramalord.Conversations
 
             ConversationLines.npc_interaction_reply_timeout.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false)); // "{=Dramalord105}Again? Give me some rest, {TITLE}. Let's talk about it later."
             ConversationLines.player_reaction_no.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord068}I am sorry {TITLE}, but I have no interest in that right now.");
-            ConversationLines.npc_interaction_reply_uhwell.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord437}Uh... well...");
+            ConversationLines.npc_interaction_reply_uhwell.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord438}Uh... well...");
             ConversationLines.npc_interaction_reply_husband.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord102}Apologies, {TITLE}, but my spouse is around I we can not risk it.");
 
             ConversationLines.npc_interaction_reply_talk_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord031}I always like to hear new stories. Tell me about your latest exploits while traveling in the realm.");
@@ -463,7 +465,7 @@ namespace Dramalord.Conversations
             ConversationLines.npc_interaction_betrothed_married.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
             ConversationLines.player_reaction_engagement_yes.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord051}I love you very much, {TITLE}. I think it's time for us to take the next step in our relationship. Will you marry me?");
             ConversationLines.npc_interaction_reply_engage_no.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord104}I am sorry {TITLE}, but I am not ready for this step just yet.");
-            ConversationLines.npc_interaction_reply_uhwell.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord437}Uh... well...");
+            ConversationLines.npc_interaction_reply_uhwell.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));// "{=Dramalord438}Uh... well...");
             ConversationLines.npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));
 
             ConversationLines.npc_interaction_reply_gift.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord293}Thank you {TITLE}! I will keep it close to my... bed as a reminder of your... affection and enjoy it every day!");
@@ -491,6 +493,7 @@ namespace Dramalord.Conversations
             ConversationLines.npc_interaction_breakup_love.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false)); 
             ConversationLines.player_reaction_breakup_accept.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
             ConversationLines.npc_confrontation_result_leave.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
+            ConversationLines.player_invite_companion_family.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, true));
         }
     }
 }

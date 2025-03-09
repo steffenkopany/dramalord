@@ -42,7 +42,7 @@ namespace Dramalord.Data.Intentions
             }
             else
             {
-                OnFightEnd(MBRandom.RandomInt(1, 100) > 50 ? true : false);
+                OnFightEnd(false);
             }
 
             return true;
@@ -67,33 +67,39 @@ namespace Dramalord.Data.Intentions
         {
             if (playerWon)
             {
+                Hero winner = IntentionHero == Hero.MainHero ? IntentionHero : Target;
+                Hero looser = IntentionHero == Hero.MainHero ? Target : IntentionHero;
+
                 if(Target.IsAlive)
                 {
                     if(DramalordMCM.Instance.AlwaysDuelToDeath)
                     {
-                        KillCharacterAction.ApplyByBattle(Target, IntentionHero, true);
+                        KillCharacterAction.ApplyByBattle(looser, winner, true);
                     }
                     else
                     {
-                        new ChangeOpinionIntention(Target, Other, MathF.Max(0, Target.GetRelationTo(Other).Love) * -1, MathF.Max(0, Target.GetTrust(Other)) * -1, CampaignTime.Now).Action();
+                        new ChangeOpinionIntention(looser, Other, MathF.Max(0, looser.GetRelationTo(Other).Love) * -1, MathF.Max(0, looser.GetTrust(Other)) * -1, CampaignTime.Now).Action();
                     } 
                 }
-                MakeFamilyHate(Target, IntentionHero, Other);
+                MakeFamilyHate(looser, winner, Other);
             }
             else
             {
+                Hero winner = (IntentionHero == Hero.MainHero || Target == Hero.MainHero) ? (IntentionHero == Hero.MainHero ? Target : IntentionHero) : (MBRandom.RandomInt(1,100) > 50 ? IntentionHero : Target);
+                Hero looser = IntentionHero == winner ? Target : IntentionHero;
+
                 if (IntentionHero.IsAlive)
                 {
                     if (DramalordMCM.Instance.AlwaysDuelToDeath)
                     {
-                        KillCharacterAction.ApplyByBattle(IntentionHero, Target, true);
+                        KillCharacterAction.ApplyByBattle(looser, winner, true);
                     }
                     else
                     {
-                        new ChangeOpinionIntention(IntentionHero, Other, MathF.Max(0, IntentionHero.GetRelationTo(Other).Love) * -1, MathF.Max(0, IntentionHero.GetTrust(Other)) * -1, CampaignTime.Now).Action();
+                        new ChangeOpinionIntention(looser, Other, MathF.Max(0, looser.GetRelationTo(Other).Love) * -1, MathF.Max(0, looser.GetTrust(Other)) * -1, CampaignTime.Now).Action();
                     }
                 }
-                MakeFamilyHate(IntentionHero, Target, Other);
+                MakeFamilyHate(looser, winner, Other);
             }
         }
 

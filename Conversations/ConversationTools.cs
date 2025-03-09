@@ -168,15 +168,15 @@ namespace Dramalord.Conversations
             string text;
             if (relationship == RelationshipType.Spouse || hero.Spouse == target)
             {
-                text = target.IsFemale ? ((name) ? target.Name.ToString() : new TextObject("{=8eHRth3U}my wife").ToString()) : ((name) ? target.Name.ToString() : new TextObject("{=QuVgluRH}my husband").ToString());
+                text = target.IsFemale ? ((name) ? target.FirstName.ToString() : new TextObject("{=8eHRth3U}my wife").ToString()) : ((name) ? target.FirstName.ToString() : new TextObject("{=QuVgluRH}my husband").ToString());
             }
             else if (relationship == RelationshipType.Betrothed)
             {
-                text = (name) ? target.Name.ToString() : new TextObject("{=Dramalord025}my betrothed").ToString();
+                text = (name) ? target.FirstName.ToString() : new TextObject("{=Dramalord025}my betrothed").ToString();
             }
             else if (relationship == RelationshipType.Lover)
             {
-                text = target.IsFemale ? ((name) ? target.Name.ToString() : new TextObject("{=Dramalord024}my love").ToString()) : ((name) ? target.Name.ToString() : new TextObject("{=Dramalord023}my lover").ToString());
+                text = target.IsFemale ? ((name) ? target.FirstName.ToString() : new TextObject("{=Dramalord024}my love").ToString()) : ((name) ? target.FirstName.ToString() : new TextObject("{=Dramalord023}my lover").ToString());
             }
             else if (hero.Father == target)
             {
@@ -188,25 +188,25 @@ namespace Dramalord.Conversations
             }
             else if (hero.Siblings.Contains(target))
             {
-                text = target.IsFemale ? ((name) ? target.Name.ToString() : new TextObject("{=Dramalord487}sister").ToString()) : ((name) ? target.Name.ToString() : new TextObject("{=Dramalord486}brother").ToString());
+                text = target.IsFemale ? ((name) ? target.FirstName.ToString() : new TextObject("{=Dramalord487}sister").ToString()) : ((name) ? target.FirstName.ToString() : new TextObject("{=Dramalord486}brother").ToString());
             }
             else if (target.Father == hero || target.Mother == hero)
             {
-                text = target.IsFemale ? (name) ? target.Name.ToString() : new TextObject("{=Dramalord489}daughter").ToString() : (name) ? target.Name.ToString() : new TextObject("{=Dramalord488}son").ToString();
+                text = target.IsFemale ? (name) ? target.FirstName.ToString() : new TextObject("{=Dramalord489}daughter").ToString() : (name) ? target.FirstName.ToString() : new TextObject("{=Dramalord488}son").ToString();
             }
             else if (relationship == RelationshipType.FriendWithBenefits)
             {
-                text = (name) ? target.Name.ToString() : new TextObject("{=Dramalord026}my special friend").ToString();
+                text = (name) ? target.FirstName.ToString() : new TextObject("{=Dramalord026}my special friend").ToString();
             }
             else if (relationship == RelationshipType.Friend)
             {
-                text = (name) ? target.Name.ToString() : new TextObject("{=edRggEQ4}my friend").ToString();
+                text = (name) ? target.FirstName.ToString() : new TextObject("{=edRggEQ4}my friend").ToString();
             }
             else
             {
                 if (hero.IsLord && target.IsLord)
                 {
-                    text = target.Name.ToString();
+                    text = target.FirstName.ToString();
                 }
                 else if ((!hero.IsLord && target.IsLord) || target.MapFaction.Leader == target)
                 {

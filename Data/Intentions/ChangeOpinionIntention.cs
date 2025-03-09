@@ -21,10 +21,14 @@ namespace Dramalord.Data.Intentions
         [SaveableField(5)]
         private int TrustChange;
 
-        public ChangeOpinionIntention(Hero intentionHero, Hero target, int loveChange, int trustChange, CampaignTime validUntil) : base(intentionHero, target, validUntil)
+        [SaveableField(6)]
+        private bool Notify;
+
+        public ChangeOpinionIntention(Hero intentionHero, Hero target, int loveChange, int trustChange, CampaignTime validUntil, bool showNotification = true) : base(intentionHero, target, validUntil)
         {
             LoveChange = loveChange;
             TrustChange = trustChange;
+            Notify = showNotification;
         }
 
         public override bool Action()
@@ -56,7 +60,7 @@ namespace Dramalord.Data.Intentions
                     LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Friend));
                 }
 
-                if (playerinvolved)
+                if (playerinvolved && Notify)
                 {
                     Hero otherHero = (IntentionHero == Hero.MainHero) ? Target : IntentionHero;
                     StartRelationshipAction.Apply(otherHero, Hero.MainHero, otherHero.GetRelationTo(Hero.MainHero), RelationshipType.Friend);
@@ -75,7 +79,7 @@ namespace Dramalord.Data.Intentions
                     LogEntry.AddLogEntry(new EndRelationshipLog(IntentionHero, Target, oldRelationship));
                 }
 
-                if (IntentionHero == Hero.MainHero)
+                if (IntentionHero == Hero.MainHero && Notify)
                 {
                     TextObject textObject = new TextObject("{=Dramalord203}You ended your friendship with {HERO.LINK}.");
                     StringHelpers.SetCharacterProperties("HERO", Target.CharacterObject, textObject);
@@ -83,7 +87,7 @@ namespace Dramalord.Data.Intentions
 
                     DramalordQuests.Instance.GetQuest(Target)?.QuestFail(Target);
                 }
-                else if (Target == Hero.MainHero)
+                else if (Target == Hero.MainHero && Notify)
                 {
                     TextObject textObject = new TextObject("{=Dramalord204}{HERO.LINK} ended their friendship with you.");
                     StringHelpers.SetCharacterProperties("HERO", IntentionHero.CharacterObject, textObject);
@@ -105,7 +109,7 @@ namespace Dramalord.Data.Intentions
                 RelationshipType oldRelationship = relation.Relationship;
                 EndRelationshipAction.Apply(IntentionHero, Target, relation);
 
-                if (IntentionHero == Hero.MainHero)
+                if (IntentionHero == Hero.MainHero && Notify)
                 {
                     TextObject textObject = new TextObject("{=Dramalord088}You ended your relationship with {HERO.LINK}.");
                     StringHelpers.SetCharacterProperties("HERO", Target.CharacterObject, textObject);
@@ -113,7 +117,7 @@ namespace Dramalord.Data.Intentions
 
                     DramalordQuests.Instance.GetQuest(Target)?.QuestFail(Target);
                 }
-                else if (Target == Hero.MainHero)
+                else if (Target == Hero.MainHero && Notify)
                 {
                     TextObject textObject = new TextObject("{=Dramalord089}{HERO.LINK} ended their relationship with you.");
                     StringHelpers.SetCharacterProperties("HERO", IntentionHero.CharacterObject, textObject);

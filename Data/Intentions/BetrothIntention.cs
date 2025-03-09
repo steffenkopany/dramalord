@@ -107,8 +107,16 @@ namespace Dramalord.Data.Intentions
                         }
                         else if (witness != Hero.MainHero)
                         {
-                            List<Hero> targets = new() { IntentionHero, Target };
-                            DramalordIntentions.Instance.GetIntentions().Add(new GossipBetrothedIntention(this, true, targets, witness, CampaignTime.DaysFromNow(7)));
+                            if(Hero.MainHero.Spouse != null && (witness.GetHeroTraits().Mercy < 0 || witness.GetHeroTraits().Honor < 0) && witness.GetTrust(IntentionHero) < DramalordMCM.Instance.MinTrustFriends && witness.GetTrust(Target) < DramalordMCM.Instance.MinTrustFriends)
+                            {
+                                DramalordIntentions.Instance.GetIntentions().Add(new BlackmailBetrothedIntention(this, witness, IntentionHero, CampaignTime.DaysFromNow(7)));
+                                DramalordIntentions.Instance.GetIntentions().Add(new BlackmailBetrothedIntention(this, witness, Target, CampaignTime.DaysFromNow(7)));
+                            }
+                            else
+                            {
+                                List<Hero> targets = new() { IntentionHero, Target };
+                                DramalordIntentions.Instance.GetIntentions().Add(new GossipBetrothedIntention(this, true, targets, witness, CampaignTime.DaysFromNow(7)));
+                            }
                         }
 
                         if (witness == Hero.MainHero)
@@ -203,12 +211,14 @@ namespace Dramalord.Data.Intentions
                             .Condition(() => Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
                             .Consequence(() => _accepted = true)
                             .BeginNpcOptions()
-                                .NpcOption("{player_quest_marriage_start}[ib:aggressive][if:convo_delighted]", () => Hero.OneToOneConversationHero.Father != null || Hero.OneToOneConversationHero.Clan?.Leader != Hero.MainHero || Hero.OneToOneConversationHero.Clan?.Leader != Hero.OneToOneConversationHero)
+                                .NpcOption("{player_quest_marriage_start}[ib:aggressive][if:convo_delighted]", () => (Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsAlive && Hero.OneToOneConversationHero.Father != Hero.MainHero) || (Hero.OneToOneConversationHero.Clan != null && Hero.OneToOneConversationHero.Clan?.Leader != Hero.MainHero && Hero.OneToOneConversationHero.Clan?.Leader != Hero.OneToOneConversationHero))
                                     .BeginPlayerOptions()
                                         .PlayerOption("{npc_as_you_wish_reply}")
                                             .Consequence(() =>
                                             {
-                                                MarriagePermissionQuest quest = new MarriagePermissionQuest(Hero.OneToOneConversationHero, CampaignTime.DaysFromNow(21));
+                                                MarriagePermissionQuest quest = new MarriagePermissionQuest(Hero.OneToOneConversationHero,
+                                                    (Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsAlive && Hero.OneToOneConversationHero.Father != Hero.MainHero) ? Hero.OneToOneConversationHero.Father : Hero.OneToOneConversationHero.Clan.Leader,
+                                                    CampaignTime.DaysFromNow(21));
                                                 quest.StartQuest();
                                                 DramalordQuests.Instance.AddQuest(Hero.OneToOneConversationHero, quest);
                                                 ConversationTools.EndConversation();
