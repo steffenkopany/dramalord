@@ -61,9 +61,15 @@ namespace Dramalord.Data.Intentions
                     int speed = (int)Campaign.Current.TimeControlMode;
                     Campaign.Current.SetTimeSpeed(0);
                     TextObject title = new TextObject("{=Dramalord574}Join Clan On Marriage");
-                    TextObject text = new TextObject("{=Dramalord578}{HERO1} and {HERO2} just got married. Do you want them to stay in your clan?");
+                    TextObject text = new TextObject("{=Dramalord578}{HERO1} and {HERO2} are ready for the altar. Will you welcome them in your clan after the ceremony?");
                     text.SetTextVariable("HERO1", groom.Name);
                     text.SetTextVariable("HERO2", bride.Name);
+                    if(IntentionHero == Hero.MainHero || Target == Hero.MainHero)
+                    {
+                        Hero otherHero = (IntentionHero == Hero.MainHero) ? Target : IntentionHero;
+                        text = new TextObject("{=Dramalord560}{HERO} is getting ready for the ceremony. Do you want to them to join your clan after getting married?");
+                        text.SetTextVariable("HERO", otherHero.Name);
+                    }
                     InformationManager.ShowInquiry(
                             new InquiryData(
                                 title.ToString(),
@@ -125,6 +131,8 @@ namespace Dramalord.Data.Intentions
 
                                     Campaign.Current.SetTimeSpeed(speed);
                                 }), true);
+                    
+                    
                 }
                 else if(groom.Clan == Clan.PlayerClan && bride.Clan == Clan.PlayerClan)
                 {

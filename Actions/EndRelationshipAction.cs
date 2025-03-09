@@ -1,5 +1,6 @@
 ﻿using Dramalord.Data;
 using Dramalord.Data.Intentions;
+using Dramalord.Extensions;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 
@@ -20,8 +21,17 @@ namespace Dramalord.Actions
                         romanticState.Level = Romance.RomanceLevelEnum.FailedInPracticalities;
                     }
                 }
-                hero.Spouse = null;
-                target.Spouse = null;
+                if(hero == Hero.MainHero || target == Hero.MainHero)
+                {
+                    Hero other = hero == Hero.MainHero ? target : hero;
+                    other.Spouse = null;
+                    Hero.MainHero.Spouse = Hero.MainHero.GetAllRelations().FirstOrDefault(r => r.Value.Relationship == RelationshipType.Spouse).Key ?? null;
+                }
+                else
+                {
+                    hero.Spouse = null;
+                    target.Spouse = null;
+                }
             }
         }
     }

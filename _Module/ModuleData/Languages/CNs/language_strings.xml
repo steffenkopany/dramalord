@@ -435,10 +435,10 @@
     <string id="Dramalord438" text="嗯…那麽…" />
     <string id="Dramalord439" text="你成功说服了{HERO.LINK}。（爱慕{LOVE}，信赖{TRUST}）" />
     <string id="Dramalord440" text="你未能说服{HERO.LINK}。（爱慕{LOVE}，信赖{TRUST}）" />
-    <string id="Dramalord441" text="{TITLE}，我想让你的孩子成为我家族的一份子。" />
-    <string id="Dramalord442" text="这是莫大的荣幸！{TITLE}，你希望将家族之名赐予给谁？" />
-    <string id="Dramalord443" text="对不起，{TITLE}。我希望我的孩子在长大後能自己找到归宿。" />
-    <string id="Dramalord444" text="你确定要赐予{CHILD}你的家族之名，使其正式成为你家族的一份子吗？" />
+    <string id="Dramalord441" text="{TITLE}，我希望你的家族能加入贵族，并成为我们氏族的正式成员。" />
+    <string id="Dramalord442" text="这将是我的荣幸，{TITLE}。我代表我的家族满怀感激地接受！" />
+    <string id="Dramalord443" text="很抱歉，{TITLE}。我的家人并非所有人都能接受这样的决定，这可能会导致家庭分裂。" />
+    <string id="Dramalord444" text="感谢您的提议，{TITLE}。但这应该由我的家族长辈来决定。" />
     <string id="Dramalord445" text="传闻，{NAME}非常会吃，且身强力壮。" />
     <string id="Dramalord446" text="传闻，{NAME}食量很少，但非常强壮。" />
     <string id="Dramalord447" text="传闻，{NAME}非常会吃，但体能欠佳。" />
@@ -594,5 +594,14 @@
     <string id="Dramalord597" text="启用Dramalord的婚姻系统（如果检测到不兼容的模组，将自动禁用）" />
     <string id="Dramalord598" text="八卦玩家的概率" />
     <string id="Dramalord599" text="英雄接近玩家传播八卦的概率" />
+    <string id="Dramalord600" text="{HERO}正在准备婚礼。你希望他们婚后加入你的氏族吗？" />
+    <string id="Dramalord601" text="当你向{HERO}求婚时，我刚好路过。如果你不想让{SPOUSE}知道，那就得付{AMOUNT}{GOLD_ICON}。" />
+    <string id="Dramalord602" text="看到你和{HERO}如此甜蜜真是让人开心。只需{AMOUNT}{GOLD_ICON}，{SPOUSE}就永远不会知道发生了什么。" />
+    <string id="Dramalord603" text="你和{HERO}的呻吟声太大了，几乎所有人都听到了。我想知道{SPOUSE}会怎么说？{AMOUNT}{GOLD_ICON}就能让这事消失。" />
+    <string id="Dramalord604" text="你这个卑鄙的家伙！拿着钱滚出我的视线！" />
+    <string id="Dramalord605" text="你竟敢威胁我？如果你敢说出去，我就割掉你的舌头！" />
+    <string id="Dramalord606" text="哈哈！去吧，把你的谣言四处传播吧，可怜的人。" />
+    <string id="Dramalord607" text="{HERO}正在勒索你" />
+    <string id="Dramalord608" text="{HERO.LINK}看到你和{OTHER.LINK}在一起。他们威胁要告诉{SPOUSE.LINK}，除非你支付{AMOUNT}{GOLD_ICON}。晚上去找他们，解决这个问题。" />
   </strings>
 </base>

@@ -5,6 +5,7 @@ using Helpers;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Conversation;
+using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
 namespace Dramalord.Conversations
@@ -136,13 +137,93 @@ namespace Dramalord.Conversations
                             .GotoDialogState("hero_main_options")
                     .EndPlayerOptions();
 
+            DialogFlow companionAddFamilyFlow = DialogFlow.CreateDialogFlow("npc_invite_companion_family")
+                .BeginNpcOptions()
+                    .NpcOption("{npc_invite_companion_family_yes}", () => SetupLines() && (Hero.OneToOneConversationHero.Father == null || !Hero.OneToOneConversationHero.Father.IsPlayerCompanion) && (Hero.OneToOneConversationHero.Mother == null || !Hero.OneToOneConversationHero.Mother.IsPlayerCompanion) && FamilyLikePlayer(Hero.OneToOneConversationHero))
+                        .Consequence(() =>
+                            {
+                                AdoptCompanionFamily(Hero.OneToOneConversationHero);
+                                TextObject banner = new TextObject("{=Dramalord087}{HERO.LINK} joined {CLAN}.");
+                                StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
+                                banner.SetTextVariable("CLAN", Hero.OneToOneConversationHero.Clan?.Name);
+                                MBInformationManager.AddQuickInformation(banner, 1000, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
+                            })
+                        .CloseDialog()
+                    .NpcOption("{npc_invite_companion_family_no}", () => (Hero.OneToOneConversationHero.Father == null || !Hero.OneToOneConversationHero.Father.IsPlayerCompanion) && (Hero.OneToOneConversationHero.Mother == null || !Hero.OneToOneConversationHero.Mother.IsPlayerCompanion) && !FamilyLikePlayer(Hero.OneToOneConversationHero))
+                        .GotoDialogState("player_interaction_selection")
+                    .NpcOption("{npc_invite_companion_family_elder}", () => (Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsPlayerCompanion) || (Hero.OneToOneConversationHero.Mother != null && Hero.OneToOneConversationHero.Mother.IsPlayerCompanion))
+                        .GotoDialogState("player_interaction_selection")
+                .EndNpcOptions();
 
             Campaign.Current.ConversationManager.AddDialogFlow(adoptFlow);
             Campaign.Current.ConversationManager.AddDialogFlow(doAdoptFlow);
             Campaign.Current.ConversationManager.AddDialogFlow(doOrphanizeFlow);
+            Campaign.Current.ConversationManager.AddDialogFlow(companionAddFamilyFlow);
         }
 
-        internal static void SetupLines()
+        internal static void AdoptCompanionFamily(Hero hero)
+        {
+            if(hero.Spouse != null && hero.Spouse.IsPlayerCompanion)
+            {
+                JoinClanAction.Apply(hero.Spouse, Clan.PlayerClan);
+                Clan.PlayerClan.Companions.Remove(hero.Spouse);
+            }
+
+            hero.Siblings.ToList().ForEach(s =>
+            {
+                if (s.IsPlayerCompanion)
+                {
+                    JoinClanAction.Apply(s, Clan.PlayerClan);
+                    Clan.PlayerClan.Companions.Remove(s);
+                }
+            });
+
+            hero.Children.ToList().ForEach(c =>
+            {
+                if (c.IsPlayerCompanion)
+                {
+                    AdoptCompanionFamily(c);
+                }
+            });
+
+            JoinClanAction.Apply(hero, Clan.PlayerClan);
+            Clan.PlayerClan.Companions.Remove(hero);
+        }
+
+        internal static bool FamilyLikePlayer(Hero hero)
+        {
+            if(!hero.IsChild && hero.GetRelationWithPlayer() < DramalordMCM.Instance.MinTrustFriends)
+            {
+                return false;
+            }
+
+            if(!hero.IsChild && hero.Spouse != null && hero.Spouse.IsPlayerCompanion && hero.Spouse.GetRelationWithPlayer() < DramalordMCM.Instance.MinTrustFriends)
+            {
+                return false;
+            }
+            bool like = true;
+            hero.Siblings.ToList().ForEach(s =>
+            {
+                if (!s.IsChild && s.IsPlayerCompanion && s.GetRelationWithPlayer() < DramalordMCM.Instance.MinTrustFriends)
+                {
+                    like = false;
+                }
+            });
+            if(!like)
+            {
+                return false;
+            }
+            hero.Children.ToList().ForEach(c =>
+            {
+                if (!c.IsChild && c.IsPlayerCompanion && !FamilyLikePlayer(c))
+                {
+                    like = false;
+                }
+            });
+            return like;
+        }
+
+        internal static bool SetupLines()
         {
             ConversationLines.orphanage_player_start_adopt.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));//"{=Dramalord253}I would like to extend my family and adopt an orphan.");
             ConversationLines.orphanage_player_start_orphanize.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));//"{=Dramalord254}I want to get rid off a child in my clan.");
@@ -163,6 +244,13 @@ namespace Dramalord.Conversations
             ConversationLines.orphanage_confirm_adopt_child.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord270}Very well. Are you absolutely sure you want to give away {ORPHAN.NAME}?");
             ConversationLines.orphanage_do_orphanize.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord271}Thus, it is decided! We will take care of {ORPHAN.NAME} and find a new home for the child.");
             ConversationLines.orphanage_dont_orphanize.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//"{=Dramalord272}Very well, {TITLE}. {ORPHAN.NAME} will stay in your clan.");
+
+            ConversationLines.player_invite_companion_family.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, true));
+            ConversationLines.npc_invite_companion_family_yes.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
+            ConversationLines.npc_invite_companion_family_no.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
+            ConversationLines.npc_invite_companion_family_elder.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
+
+            return true;
         }
     }
 }

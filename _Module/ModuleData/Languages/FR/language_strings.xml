@@ -435,10 +435,10 @@
     <string id="Dramalord438" text="Euh... eh bien..." />
     <string id="Dramalord439" text="Vous avez réussi à convaincre {HERO.LINK}. (Amour {LOVE}, Confiance {TRUST})" />
     <string id="Dramalord440" text="Vous n'avez pas réussi à convaincre {HERO.LINK}. (Amour {LOVE}, Confiance {TRUST})" />
-    <string id="Dramalord441" text="{TITLE}, j'aimerais accueillir l'un de vos enfants dans ma famille." />
-    <string id="Dramalord442" text="Ce serait un honneur, {TITLE}. Qui souhaiteriez-vous accueillir dans votre famille ?" />
-    <string id="Dramalord443" text="Je suis désolé, {TITLE}. Je veux que mes enfants aient le libre choix lorsqu'ils seront majeurs." />
-    <string id="Dramalord444" text="Êtes-vous sûr de vouloir accueillir mon enfant {CHILD} dans votre famille ?" />
+    <string id="Dramalord441" text="{TITLE}, je souhaite que votre famille accède à la noblesse et rejoigne notre clan en tant que membres à part entière." />
+    <string id="Dramalord442" text="Ce serait un honneur, {TITLE}. Au nom de ma famille, j'accepte avec gratitude !" />
+    <string id="Dramalord443" text="Je suis désolé, {TITLE}. Tous les membres de ma famille ne se sentiraient pas à l'aise avec cette décision. Cela pourrait la diviser." />
+    <string id="Dramalord444" text="Merci pour votre offre, {TITLE}. Mais c'est une décision qui revient aux aînés de ma famille." />
     <string id="Dramalord445" text="{NAME} est connu pour manger beaucoup et faire régulièrement de l'exercice." />
     <string id="Dramalord446" text="{NAME} est connu pour ne presque rien manger et faire régulièrement de l'exercice." />
     <string id="Dramalord447" text="{NAME} est connu pour manger beaucoup et faire rarement des exercices." />
@@ -594,5 +594,14 @@
     <string id="Dramalord597" text="Activer le système de mariage de Dramalord (Désactivé automatiquement si un mod incompatible est détecté)" />
     <string id="Dramalord598" text="Chance de joueur colporteur de rumeurs" />
     <string id="Dramalord599" text="Chance que des héros approchent le joueur pour répandre des rumeurs" />
+    <string id="Dramalord600" text="{HERO} se prépare pour la cérémonie. Voulez-vous qu'ils rejoignent votre clan après le mariage ?" />
+    <string id="Dramalord601" text="Je suis passé par hasard lorsque vous avez demandé la main de {HERO}. Si vous ne voulez pas que {SPOUSE} l'apprenne, cela vous coûtera {AMOUNT}{GOLD_ICON}." />
+    <string id="Dramalord602" text="C'est agréable de voir que vous et {HERO} êtes amoureux. Pour {AMOUNT}{GOLD_ICON}, {SPOUSE} n'en saura jamais rien." />
+    <string id="Dramalord603" text="Vous et {HERO} faisiez tellement de bruit que presque tout le monde l'a entendu. Je me demande ce que dirait {SPOUSE} ? {AMOUNT}{GOLD_ICON} fera taire ces rumeurs." />
+    <string id="Dramalord604" text="Espèce de serpent ! Tiens, prends cet argent et disparais de ma vue !" />
+    <string id="Dramalord605" text="Comment osez-vous ? Si vous ne gardez pas cela pour vous, je vous couperai la langue !" />
+    <string id="Dramalord606" text="Haha ! Allez-y, répandez vos rumeurs, misérable individu." />
+    <string id="Dramalord607" text="{HERO} vous fait chanter" />
+    <string id="Dramalord608" text="{HERO.LINK} vous a vu avec {OTHER.LINK}. Ils menacent de tout raconter à {SPOUSE.LINK} si vous ne payez pas {AMOUNT}{GOLD_ICON}. Rendez-leur visite la nuit pour régler cette affaire." />
   </strings>
 </base>

@@ -435,10 +435,10 @@
     <string id="Dramalord438" text="Uh... cóż..." />
     <string id="Dramalord439" text="Pomyślnie przekonałeś {HERO.LINK}. (Kocham {LOVE}, ufam {TRUST})" />
     <string id="Dramalord440" text="Nie udało Ci się przekonać {HERO.LINK}. (Kocham {LOVE}, ufam {TRUST})" />
-    <string id="Dramalord441" text="{TITLE}, chciałbym przyjąć jedno z Twoich dzieci do mojej rodziny." />
-    <string id="Dramalord442" text="Byłoby dla mnie zaszczytem, ​​{TITLE}. Kogo chciałbyś przyjąć do swojej rodziny?" />
-    <string id="Dramalord443" text="Przepraszam, {TITLE}. Chcę, aby moje dzieci miały wolny wybór, gdy osiągną pełnoletniość." />
-    <string id="Dramalord444" text="Czy na pewno chcesz przyjąć moje dziecko {CHILD} do swojej rodziny?" />
+    <string id="Dramalord441" text="{TITLE}, pragnę, aby twoja rodzina weszła do szlachty i dołączyła do naszego klanu jako pełnoprawni członkowie." />
+    <string id="Dramalord442" text="To byłby zaszczyt, {TITLE}. W imieniu mojej rodziny przyjmuję to z wdzięcznością!" />
+    <string id="Dramalord443" text="Przykro mi, {TITLE}. Nie wszyscy członkowie mojej rodziny czuliby się komfortowo z taką decyzją. To mogłoby nas podzielić." />
+    <string id="Dramalord444" text="Dziękuję za propozycję, {TITLE}. Jednak to starsi członkowie mojej rodziny powinni o tym zdecydować." />
     <string id="Dramalord445" text="{NAME} jest znany z tego, że dużo je i regularnie ćwiczy." />
     <string id="Dramalord446" text="{NAME} jest znany z tego, że prawie nic nie je i regularnie ćwiczy." />
     <string id="Dramalord447" text="{NAME} jest znany z tego, że dużo je i rzadko ćwiczy." />
@@ -594,5 +594,14 @@
     <string id="Dramalord597" text="Włącz system małżeństwa Dramalorda (Automatycznie wyłączone, jeśli wykryto niekompatybilny mod)" />
     <string id="Dramalord598" text="Szansa na plotkującego gracza" />
     <string id="Dramalord599" text="Szansa, że bohaterowie podejdą do gracza, aby szerzyć plotki" />
+    <string id="Dramalord600" text="{HERO} przygotowuje się do ceremonii. Czy chcesz, aby po ślubie dołączyli do twojego klanu?" />
+    <string id="Dramalord601" text="Przypadkiem przechodziłem obok, gdy oświadczyłeś się {HERO}. Jeśli nie chcesz, by {SPOUSE} się o tym dowiedział, będzie cię to kosztować {AMOUNT}{GOLD_ICON}." />
+    <string id="Dramalord602" text="Miło widzieć, że ty i {HERO} jesteście zakochani. Za {AMOUNT}{GOLD_ICON}, {SPOUSE} nigdy się nie dowie, co się wydarzyło." />
+    <string id="Dramalord603" text="Ty i {HERO} byliście tak głośni, że prawie wszyscy was słyszeli. Ciekawe, co na to powie {SPOUSE}? {AMOUNT}{GOLD_ICON} sprawi, że ta plotka ucichnie." />
+    <string id="Dramalord604" text="Ty żmijo! Weź te pieniądze i zniknij mi z oczu!" />
+    <string id="Dramalord605" text="Jak śmiesz?! Jeśli nie zachowasz tego dla siebie, wytargam ci język!" />
+    <string id="Dramalord606" text="Haha! Idź i rozpowiadaj swoje plotki, żałosny człowieku." />
+    <string id="Dramalord607" text="{HERO} cię szantażuje" />
+    <string id="Dramalord608" text="{HERO.LINK} widział cię z {OTHER.LINK}. Grozi, że wszystko powie {SPOUSE.LINK}, jeśli nie zapłacisz {AMOUNT}{GOLD_ICON}. Odwiedź go w nocy i rozwiąż ten problem." />
   </strings>
 </base>
