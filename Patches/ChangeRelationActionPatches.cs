@@ -2,7 +2,6 @@
 using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;
-using System;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using static TaleWorlds.CampaignSystem.Actions.ChangeRelationAction;
@@ -25,7 +24,7 @@ namespace Dramalord.Patches
         {
             if (originalHero.IsDramalordLegit() && originalGainedRelationWith.IsDramalordLegit())
             {
-                new ChangeOpinionIntention(originalHero, originalGainedRelationWith, 0, 0, CampaignTime.Now).Action();
+                new ChangeOpinionIntention(originalHero, originalGainedRelationWith, 0, 0, CampaignTime.Now, (DramalordMCM.Instance.ShowRelationChanges && showQuickNotification)).Action();
             } 
         }
     }

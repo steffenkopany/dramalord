@@ -124,8 +124,16 @@ namespace Dramalord.Data.Intentions
                     }
                     else if (witness != Hero.MainHero && !IntentionHero.IsSpouseOf(Target))
                     {
-                        List<Hero> targets = new() { IntentionHero, Target };
-                        DramalordIntentions.Instance.GetIntentions().Add(new GossipDateIntention(this, true, targets, witness, CampaignTime.DaysFromNow(7)));
+                        if (Hero.MainHero.Spouse != null && (witness.GetHeroTraits().Mercy < 0 || witness.GetHeroTraits().Honor < 0) && witness.GetTrust(IntentionHero) < DramalordMCM.Instance.MinTrustFriends && witness.GetTrust(Target) < DramalordMCM.Instance.MinTrustFriends)
+                        {
+                            DramalordIntentions.Instance.GetIntentions().Add(new BlackmailDateIntention(this, witness, IntentionHero, CampaignTime.DaysFromNow(7)));
+                            DramalordIntentions.Instance.GetIntentions().Add(new BlackmailDateIntention(this, witness, Target, CampaignTime.DaysFromNow(7)));
+                        }
+                        else
+                        {
+                            List<Hero> targets = new() { IntentionHero, Target };
+                            DramalordIntentions.Instance.GetIntentions().Add(new GossipDateIntention(this, true, targets, witness, CampaignTime.DaysFromNow(7)));
+                        }
                     }
 
                     if (witness == Hero.MainHero && (IntentionHero.Spouse != Target || witness.IsEmotionalWith(Target) || witness.IsEmotionalWith(IntentionHero)))

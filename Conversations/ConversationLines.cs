@@ -321,7 +321,7 @@ namespace Dramalord.Conversations
 
         public static TextObject npc_blackmail_betrothed = new("{=Dramalord601}I happened to pass by when you asked {HERO} for their hand. If you do not want {SPOUSE} to learn about this, it will cost you {AMOUNT}{GOLD_ICON}.");
         public static TextObject npc_blackmail_date = new("{=Dramalord602}It is nice to see that you and {HERO} are sweethearts. For {AMOUNT}{GOLD_ICON} {SPOUSE} will never learn what happened.");
-        public static TextObject npc_blackmail_intercourse = new("{=Dramalord603}You and {HERO} were moaning so loudly that almost everyone could hear it. I wonder what {SPOUSE} would say to that? {AMOUNT}{GOLD_ICON} {SPOUSE} would silence that noise.");
+        public static TextObject npc_blackmail_intercourse = new("{=Dramalord603}You and {HERO} were moaning so loudly that almost everyone could hear it. I wonder what {SPOUSE} would say to that? {AMOUNT}{GOLD_ICON} would silence that noise.");
         public static TextObject player_blackmail_pay = new("{=Dramalord604}You snake! Here, take the money and get out of my sight!");
         public static TextObject player_blackmail_quest = new("{=Dramalord605}How dare you? If you do not keep this to yourself I will cut out your tongue!");
         public static TextObject player_blackmail_nocare = new("{=Dramalord606}Haha! Go and spread your rumors you sad human being.");

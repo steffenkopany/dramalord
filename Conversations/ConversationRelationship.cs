@@ -118,12 +118,12 @@ namespace Dramalord.Conversations
                             }
                             return false;
                         })
-                    /*.PlayerOption("{player_interaction_adopt}")
-                        .GotoDialogState("npc_interaction_reply_adopt")
-                        .Condition(() => Hero.OneToOneConversationHero.Children.FirstOrDefault(child => child.Clan == Clan.PlayerClan && child.Occupation == Occupation.Wanderer) != null)*/
+                    .PlayerOption("{player_invite_companion_family}")
+                        .Condition(() => Hero.OneToOneConversationHero.IsPlayerCompanion)
+                        .GotoDialogState("npc_invite_companion_family")
                     .PlayerOption("{player_interaction_kick_clan}")
                         .GotoDialogState("npc_interaction_reply_kick_clan")
-                        .Condition(() => Hero.OneToOneConversationHero.Clan == Hero.MainHero.Clan)
+                        .Condition(() => Hero.OneToOneConversationHero.Clan == Hero.MainHero.Clan && !Hero.OneToOneConversationHero.IsPlayerCompanion)
                     /*.PlayerOption("{player_interaction_kick_kingdom}")
                         .GotoDialogState("npc_interaction_reply_kick_kingdom")
                         .Condition(() => Hero.OneToOneConversationHero.Clan != null && Hero.MainHero.Clan.Kingdom != null && Hero.MainHero.IsKingdomLeader && Hero.OneToOneConversationHero.Clan.Kingdom == Hero.MainHero.Clan.Kingdom && Hero.OneToOneConversationHero.Clan != Hero.MainHero.Clan)*/
@@ -232,7 +232,9 @@ namespace Dramalord.Conversations
                             .Condition(() => { ConversationLines.npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false)); return true; })
                                 .Consequence(() =>
                                 {
-                                    MarriagePermissionQuest quest = new MarriagePermissionQuest(Hero.OneToOneConversationHero, CampaignTime.DaysFromNow(21));
+                                    MarriagePermissionQuest quest = new MarriagePermissionQuest(Hero.OneToOneConversationHero,
+                                        (Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsAlive && Hero.OneToOneConversationHero.Father != Hero.MainHero) ? Hero.OneToOneConversationHero.Father : Hero.OneToOneConversationHero.Clan.Leader, 
+                                        CampaignTime.DaysFromNow(21));
                                     quest.StartQuest();
                                     DramalordQuests.Instance.AddQuest(Hero.OneToOneConversationHero, quest);
                                     ConversationTools.EndConversation();
@@ -491,6 +493,7 @@ namespace Dramalord.Conversations
             ConversationLines.npc_interaction_breakup_love.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false)); 
             ConversationLines.player_reaction_breakup_accept.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
             ConversationLines.npc_confrontation_result_leave.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
+            ConversationLines.player_invite_companion_family.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, true));
         }
     }
 }

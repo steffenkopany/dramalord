@@ -9,18 +9,18 @@ using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Data.Intentions
 {
-    internal class BlackmailBetrothedIntention : Intention
+    internal class BlackmailDateIntention : Intention
     {
         [SaveableField(4)]
-        public readonly BetrothIntention EventIntention;
+        public readonly DateIntention EventIntention;
 
         [SaveableField(5)]
         public readonly int Gold;
 
-        public BlackmailBetrothedIntention(BetrothIntention intention, Hero intentionHero, Hero target, CampaignTime validUntil) : base(intentionHero, target, validUntil)
+        public BlackmailDateIntention(DateIntention intention, Hero intentionHero, Hero target, CampaignTime validUntil) : base(intentionHero, target, validUntil)
         {
             EventIntention = intention;
-            Gold = MathF.Max(10000 + (100 * intentionHero.GetPersonality().Agreeableness * -1) + (100 * intentionHero.GetPersonality().Conscientiousness * -1), 1000);
+            Gold = MathF.Max(5000 + (100 * intentionHero.GetPersonality().Agreeableness * -1) + (100 * intentionHero.GetPersonality().Conscientiousness * -1), 500);
         }
 
         public override bool Action()
@@ -44,24 +44,24 @@ namespace Dramalord.Data.Intentions
         {
             DialogFlow npcFlow = DialogFlow.CreateDialogFlow("start", 200)
                 .NpcLine("{npc_starts_confrontation_known}[ib:aggressive][if:convo_undecided_open]")
-                        .Condition(() => Hero.OneToOneConversationHero.IsDramalordLegit() && ConversationTools.ConversationIntention as BlackmailBetrothedIntention != null)
-                .GotoDialogState("blackmail_start_betrothed");
+                        .Condition(() => Hero.OneToOneConversationHero.IsDramalordLegit() && ConversationTools.ConversationIntention as BlackmailDateIntention != null)
+                .GotoDialogState("blackmail_start_date");
 
 
-            DialogFlow gossipFlow = DialogFlow.CreateDialogFlow("blackmail_start_betrothed")
+            DialogFlow gossipFlow = DialogFlow.CreateDialogFlow("blackmail_start_date")
                 .BeginNpcOptions()
-                    .NpcLine("{npc_blackmail_betrothed}[ib:aggressive][if:convo_excited]")
+                    .NpcLine("{npc_blackmail_date}[ib:aggressive][if:convo_excited]")
                         .BeginPlayerOptions()
                             .PlayerOption("{player_blackmail_pay}")
-                                .Condition(() => Hero.MainHero.Gold >= (ConversationTools.ConversationIntention as BlackmailBetrothedIntention)?.Gold)
-                                .Consequence(() => Hero.MainHero.Gold -= (ConversationTools.ConversationIntention as BlackmailBetrothedIntention != null) ? (ConversationTools.ConversationIntention as BlackmailBetrothedIntention).Gold : 0)
+                                .Condition(() => Hero.MainHero.Gold >= (ConversationTools.ConversationIntention as BlackmailDateIntention)?.Gold)
+                                .Consequence(() => Hero.MainHero.Gold -= (ConversationTools.ConversationIntention as BlackmailDateIntention != null) ? (ConversationTools.ConversationIntention as BlackmailDateIntention).Gold : 0)
                                 .NpcLine("{player_goods_select_pay}[ib:normal2][if:convo_mocking_teasing]")
                                     .CloseDialog()
                             .PlayerOption("{player_blackmail_quest}")
                                 .Condition(() => DramalordQuests.Instance.GetQuest(Hero.OneToOneConversationHero) == null)
                                 .Consequence(() =>
                                 {
-                                    BlackmailPlayerQuest quest = new BlackmailPlayerQuest(Hero.OneToOneConversationHero, (ConversationTools.ConversationIntention as BlackmailBetrothedIntention).EventIntention, (ConversationTools.ConversationIntention as BlackmailBetrothedIntention).Gold, CampaignTime.DaysFromNow(3));
+                                    BlackmailPlayerQuest quest = new BlackmailPlayerQuest(Hero.OneToOneConversationHero, (ConversationTools.ConversationIntention as BlackmailDateIntention).EventIntention, (ConversationTools.ConversationIntention as BlackmailDateIntention).Gold, CampaignTime.DaysFromNow(3));
                                     DramalordQuests.Instance.AddQuest(Hero.OneToOneConversationHero, quest);
                                     quest.StartQuest();
                                 })
@@ -70,9 +70,9 @@ namespace Dramalord.Data.Intentions
                                 .NpcLine("{npc_as_you_wish_reply}[ib:closed][if:convo_bored]")
                                 .Consequence(() => 
                                     {
-                                        BlackmailBetrothedIntention intention = ConversationTools.ConversationIntention as BlackmailBetrothedIntention;
+                                        BlackmailDateIntention intention = ConversationTools.ConversationIntention as BlackmailDateIntention;
                                         List<Hero> targets = new() { intention.IntentionHero, intention.Target, intention.EventIntention.IntentionHero, intention.EventIntention.Target };
-                                        DramalordIntentions.Instance.GetIntentions().Add(new GossipBetrothedIntention(intention.EventIntention, true, targets, Hero.OneToOneConversationHero, CampaignTime.DaysFromNow(7)));
+                                        DramalordIntentions.Instance.GetIntentions().Add(new GossipDateIntention(intention.EventIntention, true, targets, Hero.OneToOneConversationHero, CampaignTime.DaysFromNow(7)));
                                     })
                         .EndPlayerOptions();
 
@@ -82,7 +82,7 @@ namespace Dramalord.Data.Intentions
 
         public override void OnConversationEnded()
         {
-            RelationshipLossAction.Apply(Target, IntentionHero, out int loveDamage, out int trustDamage, 50, 50);
+            RelationshipLossAction.Apply(Target, IntentionHero, out int loveDamage, out int trustDamage, 25, 25);
             new ChangeOpinionIntention(Target, IntentionHero, loveDamage, trustDamage, CampaignTime.Now).Action();
         }
 
@@ -90,9 +90,9 @@ namespace Dramalord.Data.Intentions
         {
             ConversationLines.npc_starts_confrontation_known.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Target, false));
             Hero other = EventIntention.IntentionHero == Hero.MainHero ? EventIntention.Target : EventIntention.IntentionHero;
-            ConversationLines.npc_blackmail_betrothed.SetTextVariable("HERO", other.Name);
-            ConversationLines.npc_blackmail_betrothed.SetTextVariable("AMOUNT", Gold);
-            ConversationLines.npc_blackmail_betrothed.SetTextVariable("SPOUSE", Hero.MainHero.Spouse.Name);
+            ConversationLines.npc_blackmail_date.SetTextVariable("HERO", other.Name);
+            ConversationLines.npc_blackmail_date.SetTextVariable("AMOUNT", Gold);
+            ConversationLines.npc_blackmail_date.SetTextVariable("SPOUSE", Hero.MainHero.Spouse.Name);
 
             ConversationLines.npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Target, false));
         }

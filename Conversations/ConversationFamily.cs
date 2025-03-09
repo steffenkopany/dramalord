@@ -137,27 +137,23 @@ namespace Dramalord.Conversations
                             .GotoDialogState("hero_main_options")
                     .EndPlayerOptions();
 
-            DialogFlow companionAddFamilyFlow = DialogFlow.CreateDialogFlow("player_interaction_selection")
-                .BeginPlayerOptions()
-                    .PlayerOption("{player_invite_companion_family}")
-                        .Condition(() => SetupLines() && Hero.OneToOneConversationHero.IsPlayerCompanion)
-                        .BeginNpcOptions()
-                            .NpcOption("{npc_invite_companion_family_yes}", () => (Hero.OneToOneConversationHero.Father == null || !Hero.OneToOneConversationHero.Father.IsPlayerCompanion) && (Hero.OneToOneConversationHero.Mother == null || !Hero.OneToOneConversationHero.Mother.IsPlayerCompanion) && FamilyLikePlayer(Hero.OneToOneConversationHero))
-                                .Consequence(() =>
-                                    {
-                                        AdoptCompanionFamily(Hero.OneToOneConversationHero);
-                                        TextObject banner = new TextObject("{=Dramalord087}{HERO.LINK} joined {CLAN}.");
-                                        StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                                        banner.SetTextVariable("CLAN", Hero.OneToOneConversationHero.Clan?.Name);
-                                        MBInformationManager.AddQuickInformation(banner, 1000, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
-                                    })
-                                .CloseDialog()
-                            .NpcOption("{npc_invite_companion_family_no}", () => (Hero.OneToOneConversationHero.Father == null || !Hero.OneToOneConversationHero.Father.IsPlayerCompanion) && (Hero.OneToOneConversationHero.Mother == null || !Hero.OneToOneConversationHero.Mother.IsPlayerCompanion) && !FamilyLikePlayer(Hero.OneToOneConversationHero))
-                                .GotoDialogState("player_interaction_selection")
-                            .NpcOption("{npc_invite_companion_family_elder}", () => (Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsPlayerCompanion) || (Hero.OneToOneConversationHero.Mother != null && Hero.OneToOneConversationHero.Mother.IsPlayerCompanion))
-                                .GotoDialogState("player_interaction_selection")
-                        .EndNpcOptions()
-                .EndPlayerOptions();
+            DialogFlow companionAddFamilyFlow = DialogFlow.CreateDialogFlow("npc_invite_companion_family")
+                .BeginNpcOptions()
+                    .NpcOption("{npc_invite_companion_family_yes}", () => SetupLines() && (Hero.OneToOneConversationHero.Father == null || !Hero.OneToOneConversationHero.Father.IsPlayerCompanion) && (Hero.OneToOneConversationHero.Mother == null || !Hero.OneToOneConversationHero.Mother.IsPlayerCompanion) && FamilyLikePlayer(Hero.OneToOneConversationHero))
+                        .Consequence(() =>
+                            {
+                                AdoptCompanionFamily(Hero.OneToOneConversationHero);
+                                TextObject banner = new TextObject("{=Dramalord087}{HERO.LINK} joined {CLAN}.");
+                                StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
+                                banner.SetTextVariable("CLAN", Hero.OneToOneConversationHero.Clan?.Name);
+                                MBInformationManager.AddQuickInformation(banner, 1000, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
+                            })
+                        .CloseDialog()
+                    .NpcOption("{npc_invite_companion_family_no}", () => (Hero.OneToOneConversationHero.Father == null || !Hero.OneToOneConversationHero.Father.IsPlayerCompanion) && (Hero.OneToOneConversationHero.Mother == null || !Hero.OneToOneConversationHero.Mother.IsPlayerCompanion) && !FamilyLikePlayer(Hero.OneToOneConversationHero))
+                        .GotoDialogState("player_interaction_selection")
+                    .NpcOption("{npc_invite_companion_family_elder}", () => (Hero.OneToOneConversationHero.Father != null && Hero.OneToOneConversationHero.Father.IsPlayerCompanion) || (Hero.OneToOneConversationHero.Mother != null && Hero.OneToOneConversationHero.Mother.IsPlayerCompanion))
+                        .GotoDialogState("player_interaction_selection")
+                .EndNpcOptions();
 
             Campaign.Current.ConversationManager.AddDialogFlow(adoptFlow);
             Campaign.Current.ConversationManager.AddDialogFlow(doAdoptFlow);

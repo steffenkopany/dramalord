@@ -49,6 +49,8 @@ namespace Dramalord
             AddClassDefinition(typeof(DuelIntention), 1027);
             AddClassDefinition(typeof(AdoptIntention), 1028);
             AddClassDefinition(typeof(BlackmailBetrothedIntention), 1029);
+            AddClassDefinition(typeof(BlackmailDateIntention), 1030);
+            AddClassDefinition(typeof(BlackmailIntercourseIntention), 1031);
 
             AddClassDefinition(typeof(HeroPregnancy), 2000);
             AddClassDefinition(typeof(HeroDesires), 2001);
@@ -59,6 +61,7 @@ namespace Dramalord
             AddClassDefinition(typeof(JoinPlayerQuest), 2006); 
             AddClassDefinition(typeof(MarriagePermissionQuest), 2007); 
             AddClassDefinition(typeof(ConfrontHeroQuest), 2008);
+            AddClassDefinition(typeof(BlackmailPlayerQuest), 2009);
 
             AddClassDefinition(typeof(StartRelationshipLog), 3000);
             AddClassDefinition(typeof(EndRelationshipLog), 3001);

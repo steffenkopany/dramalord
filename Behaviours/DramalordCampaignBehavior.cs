@@ -50,6 +50,8 @@ namespace Dramalord.Behavior
             ConfrontationPlayerIntention.AddDialogs(starter);
             DuelIntention.AddDialogs(starter);
             BlackmailBetrothedIntention.AddDialogs(starter);
+            BlackmailDateIntention.AddDialogs(starter);
+            BlackmailIntercourseIntention.AddDialogs(starter);
         }
 
         public override void RegisterEvents()

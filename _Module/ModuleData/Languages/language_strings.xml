@@ -597,9 +597,11 @@
     <string id="Dramalord600" text="{HERO} is getting ready for the ceremony. Do you want to them to join your clan after getting married?" />
     <string id="Dramalord601" text="I happened to pass by when you asked {HERO} for their hand. If you do not want {SPOUSE} to learn about this, it will cost you {AMOUNT}{GOLD_ICON}." />
     <string id="Dramalord602" text="It is nice to see that you and {HERO} are sweethearts. For {AMOUNT}{GOLD_ICON} {SPOUSE} will never learn what happened." />
-    <string id="Dramalord603" text="You and {HERO} were moaning so loudly that almost everyone could hear it. I wonder what {SPOUSE} would say to that? {AMOUNT}{GOLD_ICON} {SPOUSE} would silence that noise." />
+    <string id="Dramalord603" text="You and {HERO} were moaning so loudly that almost everyone could hear it. I wonder what {SPOUSE} would say to that? {AMOUNT}{GOLD_ICON} would silence that noise." />
     <string id="Dramalord604" text="You snake! Here, take the money and get out of my sight!" />
     <string id="Dramalord605" text="How dare you? If you do not keep this to yourself I will cut out your tongue!" />
     <string id="Dramalord606" text="Haha! Go and spread your rumors you sad human being." />
+    <string id="Dramalord607" text="{HERO} is blackmailing you" />
+    <string id="Dramalord608" text="{HERO.LINK} saw you and {OTHER.LINK}. They threaten you to tell {SPOUSE.LINK} if you do not pay them {AMOUNT}{GOLD_ICON}. Visit them during night time and resolve that matter." />
   </strings>
 </base>
