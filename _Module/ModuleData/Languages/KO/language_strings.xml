@@ -594,5 +594,14 @@
     <string id="Dramalord597" text="Dramalord의 결혼 시스템을 활성화합니다 (비호환 모드가 감지되면 자동으로 비활성화됨)" />
     <string id="Dramalord598" text="소문을 퍼뜨리는 플레이어 확률" />
     <string id="Dramalord599" text="영웅이 플레이어에게 다가와 소문을 퍼뜨릴 확률" />
+    <string id="Dramalord600" text="{HERO}가 결혼식을 준비하고 있습니다. 결혼 후 그들을 클랜에 받아들이겠습니까?" />
+    <string id="Dramalord601" text="당신이 {HERO}에게 청혼할 때 우연히 지나쳤습니다. {SPOUSE}에게 들키고 싶지 않다면 {AMOUNT}{GOLD_ICON}이 필요합니다." />
+    <string id="Dramalord602" text="당신과 {HERO}가 연인 관계인 것을 보니 보기 좋군요. {AMOUNT}{GOLD_ICON}을 주면 {SPOUSE}는 절대 알지 못할 겁니다." />
+    <string id="Dramalord603" text="당신과 {HERO}의 신음 소리가 너무 커서 거의 모든 사람이 들었습니다. {SPOUSE}가 들으면 뭐라고 할까요? {AMOUNT}{GOLD_ICON}이면 이 소문을 잠재울 수 있습니다." />
+    <string id="Dramalord604" text="이 뱀 같은 자식아! 여기 돈이나 가져가고 내 눈앞에서 사라져!" />
+    <string id="Dramalord605" text="감히 나를 협박해? 이걸 떠벌리면 네 혀를 잘라버리겠다!" />
+    <string id="Dramalord606" text="하하! 가서 네가 하고 싶은 대로 소문이나 퍼뜨려라, 한심한 인간아." />
+    <string id="Dramalord607" text="{HERO}가 당신을 협박하고 있습니다." />
+    <string id="Dramalord608" text="{HERO.LINK}가 당신과 {OTHER.LINK}를 목격했습니다. {SPOUSE.LINK}에게 말하겠다고 협박하고 있습니다. {AMOUNT}{GOLD_ICON}을 지불하지 않으면 안 됩니다. 밤에 찾아가서 해결하세요." />
   </strings>
 </base>

@@ -124,8 +124,9 @@ namespace Dramalord.Quests
                             .CloseDialog()
                         .PlayerOption("{player_blackmail_pay}")
                             .Condition(() => Hero.MainHero.Gold >= BlackmailGold)
-                            .Consequence(() => { Hero.MainHero.Gold -= BlackmailGold; QuestSuccess(Hero.MainHero); })
-                            .CloseDialog()
+                            .NpcLine("{player_goods_select_pay}[ib:normal2][if:convo_mocking_teasing]")
+                                .Consequence(() => { Hero.MainHero.Gold -= BlackmailGold; QuestSuccess(Hero.MainHero); })
+                                .CloseDialog()
                     .EndPlayerOptions();
 
 

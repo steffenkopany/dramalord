@@ -594,5 +594,14 @@
     <string id="Dramalord597" text="Habilitar el sistema de matrimonio de Dramalord (Deshabilitado automáticamente si se detecta un mod incompatible)" />
     <string id="Dramalord598" text="Probabilidad de jugador chismoso" />
     <string id="Dramalord599" text="Probabilidad de que los héroes se acerquen al jugador para difundir chismes" />
+    <string id="Dramalord600" text="{HERO} se está preparando para la ceremonia. ¿Quieres que se unan a tu clan después de casarse?" />
+    <string id="Dramalord601" text="Pasé por casualidad cuando pediste la mano de {HERO}. Si no quieres que {SPOUSE} se entere, te costará {AMOUNT}{GOLD_ICON}." />
+    <string id="Dramalord602" text="Es lindo ver que tú y {HERO} están enamorados. Por {AMOUNT}{GOLD_ICON}, {SPOUSE} nunca sabrá lo que pasó." />
+    <string id="Dramalord603" text="Tú y {HERO} hicieron tanto ruido que casi todos lo escucharon. Me pregunto qué diría {SPOUSE}. {AMOUNT}{GOLD_ICON} puede hacer que ese rumor desaparezca." />
+    <string id="Dramalord604" text="¡Serpiente! Toma el dinero y desaparece de mi vista." />
+    <string id="Dramalord605" text="¡Cómo te atreves! Si no te callas, te cortaré la lengua." />
+    <string id="Dramalord606" text="¡Ja! Ve y difunde tus rumores, pobre diablo." />
+    <string id="Dramalord607" text="{HERO} te está chantajeando" />
+    <string id="Dramalord608" text="{HERO.LINK} te vio con {OTHER.LINK}. Amenazan con contárselo a {SPOUSE.LINK} si no pagas {AMOUNT}{GOLD_ICON}. Visítalos por la noche para resolver este asunto." />
   </strings>
 </base>

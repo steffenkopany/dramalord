@@ -594,5 +594,14 @@
     <string id="Dramalord597" text="啟用Dramalord的婚姻系統（如果偵測到不相容的模組，將自動禁用）" />
     <string id="Dramalord598" text="八卦玩家的機率" />
     <string id="Dramalord599" text="英雄接近玩家傳播八卦的機率" />
+    <string id="Dramalord600" text="{HERO}正在準備婚禮。你希望他們婚後加入你的氏族嗎？" />
+    <string id="Dramalord601" text="當你向{HERO}求婚時，我剛好路過。如果你不想讓{SPOUSE}知道，那就得付{AMOUNT}{GOLD_ICON}。" />
+    <string id="Dramalord602" text="看到你和{HERO}如此甜蜜真是讓人開心。只需{AMOUNT}{GOLD_ICON}，{SPOUSE}就永遠不會知道發生了什麼。" />
+    <string id="Dramalord603" text="你和{HERO}的呻吟聲太大了，幾乎所有人都聽到了。我想知道{SPOUSE}會怎麼說？{AMOUNT}{GOLD_ICON}就能讓這事消失。" />
+    <string id="Dramalord604" text="你這個卑鄙的傢伙！拿著錢滾出我的視線！" />
+    <string id="Dramalord605" text="你竟敢威脅我？如果你敢說出去，我就割掉你的舌頭！" />
+    <string id="Dramalord606" text="哈哈！去吧，把你的謠言四處傳播吧，可憐的人。" />
+    <string id="Dramalord607" text="{HERO}正在勒索你" />
+    <string id="Dramalord608" text="{HERO.LINK}看到你和{OTHER.LINK}在一起。他們威脅要告訴{SPOUSE.LINK}，除非你支付{AMOUNT}{GOLD_ICON}。晚上去找他們，解決這個問題。" />
   </strings>
 </base>

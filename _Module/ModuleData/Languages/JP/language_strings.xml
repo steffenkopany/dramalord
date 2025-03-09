@@ -594,5 +594,14 @@
     <string id="Dramalord597" text="Dramalordの結婚システムを有効にする（互換性のないMODが検出された場合、自動的に無効化）" />
     <string id="Dramalord598" text="噂好きのプレイヤーの確率" />
     <string id="Dramalord599" text="英雄がプレイヤーに近づき噂を広める確率" />
+    <string id="Dramalord600" text="{HERO}は式の準備をしています。結婚後、彼らをクランに迎え入れますか？" />
+    <string id="Dramalord601" text="あなたが{HERO}に求婚したとき、たまたま通りかかりました。{SPOUSE}に知られたくなければ、{AMOUNT}{GOLD_ICON}が必要です。" />
+    <string id="Dramalord602" text="あなたと{HERO}が恋人同士なのは微笑ましいですね。{AMOUNT}{GOLD_ICON}で{SPOUSE}がこのことを知ることはありません。" />
+    <string id="Dramalord603" text="あなたと{HERO}の声が大きすぎて、ほぼ全員に聞こえていましたよ。{SPOUSE}は何と言うでしょうね？{AMOUNT}{GOLD_ICON}でその話を黙らせてあげます。" />
+    <string id="Dramalord604" text="この裏切り者め！金を持ってさっさと消えろ！" />
+    <string id="Dramalord605" text="よくもそんなことを！これを口外したら、お前の舌を切り落としてやる！" />
+    <string id="Dramalord606" text="ハハッ！好きに噂を広めるがいい、哀れな人間よ。" />
+    <string id="Dramalord607" text="{HERO}があなたを脅迫している" />
+    <string id="Dramalord608" text="{HERO.LINK}はあなたと{OTHER.LINK}を見た。{SPOUSE.LINK}に告げると脅している。{AMOUNT}{GOLD_ICON}を払わなければならない。夜に訪れて、この問題を解決しよう。" />
   </strings>
 </base>

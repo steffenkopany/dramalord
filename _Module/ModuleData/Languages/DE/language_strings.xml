@@ -594,5 +594,14 @@
     <string id="Dramalord597" text="Dramalords Ehe-System aktivieren (Wird automatisch deaktiviert, wenn eine inkompatible Mod erkannt wird)" />
     <string id="Dramalord598" text="Chance auf klatschenden Spieler" />
     <string id="Dramalord599" text="Chance, dass Helden den Spieler aufsuchen, um Klatsch zu verbreiten" />
+    <string id="Dramalord600" text="{HERO} bereitet sich auf die Zeremonie vor. Möchtest du, dass sie nach der Hochzeit deinem Clan beitreten?" />
+    <string id="Dramalord601" text="Ich kam zufällig vorbei, als du {HERO} einen Antrag gemacht hast. Falls du nicht möchtest, dass {SPOUSE} davon erfährt, kostet es dich {AMOUNT}{GOLD_ICON}." />
+    <string id="Dramalord602" text="Es ist schön zu sehen, dass du und {HERO} ein Liebespaar seid. Für {AMOUNT}{GOLD_ICON} wird {SPOUSE} nie erfahren, was passiert ist." />
+    <string id="Dramalord603" text="Du und {HERO} wart so laut, dass es fast jeder hören konnte. Ich frage mich, was {SPOUSE} dazu sagen würde? {AMOUNT}{GOLD_ICON} würden dieses Gerücht zum Schweigen bringen." />
+    <string id="Dramalord604" text="Du Schurke! Hier, nimm das Geld und verschwinde aus meinem Blickfeld!" />
+    <string id="Dramalord605" text="Wie kannst du es wagen? Wenn du das nicht für dich behältst, werde ich dir die Zunge herausschneiden!" />
+    <string id="Dramalord606" text="Haha! Geh und verbreite deine Gerüchte, du armselige Kreatur." />
+    <string id="Dramalord607" text="{HERO} erpresst dich" />
+    <string id="Dramalord608" text="{HERO.LINK} hat dich mit {OTHER.LINK} gesehen. Sie drohen, es {SPOUSE.LINK} zu erzählen, wenn du nicht {AMOUNT}{GOLD_ICON} zahlst. Besuche sie nachts und löse das Problem." />
   </strings>
 </base>

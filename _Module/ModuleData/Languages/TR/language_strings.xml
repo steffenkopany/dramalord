@@ -624,5 +624,14 @@
     <string id="Dramalord597" text="Dramalord’un evlilik sistemini etkinleştir (Uyumsuz mod algılanırsa otomatik olarak devre dışı bırakılır)" />
     <string id="Dramalord598" text="Dedikoducu oyuncu şansı" />
     <string id="Dramalord599" text="Kahramanların oyuncuya gelip dedikodu yapma olasılığı" />
+    <string id="Dramalord600" text="{HERO} tören için hazırlanıyor. Evlendikten sonra klanınıza katılmasını ister misiniz?" />
+    <string id="Dramalord601" text="{HERO}'ya evlenme teklif ettiğinizde tesadüfen oradan geçiyordum. {SPOUSE}'un bunu öğrenmesini istemiyorsanız, size {AMOUNT}{GOLD_ICON} mal olacak." />
+    <string id="Dramalord602" text="{HERO} ile sevgili olduğunuzu görmek güzel. {AMOUNT}{GOLD_ICON} karşılığında {SPOUSE} asla ne olduğunu öğrenmeyecek." />
+    <string id="Dramalord603" text="Sen ve {HERO} o kadar yüksek sesle inliyordunuz ki neredeyse herkes duydu. {SPOUSE} bunu öğrenirse ne der acaba? {AMOUNT}{GOLD_ICON} bu söylentiyi susturabilir." />
+    <string id="Dramalord604" text="Sinsi yılan! Al şu parayı ve gözümün önünden kaybol!" />
+    <string id="Dramalord605" text="Buna nasıl cüret edersin?! Eğer bu sırrı saklamazsan, dilini koparırım!" />
+    <string id="Dramalord606" text="Haha! Git ve dedikodularını yay, zavallı insan!" />
+    <string id="Dramalord607" text="{HERO} seni şantaj yapıyor" />
+    <string id="Dramalord608" text="{HERO.LINK}, seni {OTHER.LINK} ile gördü. Eğer {AMOUNT}{GOLD_ICON} ödemezsen, {SPOUSE.LINK}'e her şeyi anlatmakla tehdit ediyorlar. Gece vakti onlarla konuşup bu meseleyi çöz." />
   </strings>
 </base>
