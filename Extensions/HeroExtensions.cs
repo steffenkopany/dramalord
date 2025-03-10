@@ -271,8 +271,8 @@ namespace Dramalord.Extensions
             int rating = (target == Hero.MainHero) ? DramalordMCM.Instance.PlayerBaseAttraction : 0;
             rating += (target.IsFemale) ? desires.AttractionWomen : desires.AttractionMen;
             rating += (hero.Culture == target.Culture) ? 10 : 0;
-            rating -= (int)(Math.Abs(desires.AttractionWeight - (int)(target.BodyProperties.Weight))/3);
-            rating -= (int)(Math.Abs(desires.AttractionBuild - (int)(target.BodyProperties.Build))/3);
+            rating -= (int)(Math.Abs(desires.AttractionWeight - (int)(target.Weight*100))/2);
+            rating -= (int)(Math.Abs(desires.AttractionBuild - (int)(target.Build*100))/2);
             rating -= (int)(Math.Abs((MBMath.ClampInt(desires.AttractionAgeDiff + (int)hero.Age, 18, 130) - (int)target.Age)) /2);
             rating += hero.GetRelationTo(target).Love / 10;
             rating += desires.Horny / 10;
