@@ -47,7 +47,6 @@ namespace Dramalord.Actions
 
             if (hero.IsPlayerCompanion)
             {
-                Clan.PlayerClan.Companions.Remove(hero);
                 hero.CompanionOf = null;
             }
 
