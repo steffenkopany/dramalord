@@ -31,7 +31,7 @@ namespace Dramalord.Actions
             }
         }
 
-        private static Hero CreateBaby(Hero mother, Hero father)
+        internal static Hero CreateBaby(Hero mother, Hero father)
         {
             CharacterObject? template = null;
             if (mother.IsLord && father.IsLord)

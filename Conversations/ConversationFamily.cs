@@ -165,29 +165,29 @@ namespace Dramalord.Conversations
         {
             if(hero.Spouse != null && hero.Spouse.IsPlayerCompanion)
             {
+                hero.Spouse.CompanionOf = null;
                 JoinClanAction.Apply(hero.Spouse, Clan.PlayerClan);
-                Clan.PlayerClan.Companions.Remove(hero.Spouse);
             }
 
             hero.Siblings.ToList().ForEach(s =>
             {
-                if (s.IsPlayerCompanion)
+                if (s.IsPlayerCompanion || (s.IsChild && s.Occupation == Occupation.Wanderer))
                 {
+                    s.CompanionOf = null;
                     JoinClanAction.Apply(s, Clan.PlayerClan);
-                    Clan.PlayerClan.Companions.Remove(s);
                 }
             });
 
             hero.Children.ToList().ForEach(c =>
             {
-                if (c.IsPlayerCompanion)
+                if (c.IsPlayerCompanion || (c.IsChild && c.Occupation == Occupation.Wanderer))
                 {
                     AdoptCompanionFamily(c);
                 }
             });
 
+            hero.CompanionOf = null;
             JoinClanAction.Apply(hero, Clan.PlayerClan);
-            Clan.PlayerClan.Companions.Remove(hero);
         }
 
         internal static bool FamilyLikePlayer(Hero hero)
