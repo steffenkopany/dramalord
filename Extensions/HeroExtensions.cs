@@ -230,7 +230,7 @@ namespace Dramalord.Extensions
         // Determines if a hero is married to the player by checking both vanilla and internal systems.
         public static bool IsPlayerSpouse(this Hero hero)
         {
-            return hero.Spouse == Hero.MainHero; // Not necessary to request Dramalord data
+            return hero.Spouse == Hero.MainHero;
         }
 
         // Determines whether a romance attempt is allowed between two heroes.
