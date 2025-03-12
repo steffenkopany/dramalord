@@ -350,12 +350,9 @@ namespace Dramalord.Extensions
 
             rating += target.IsFemale ? desires.AttractionWomen : desires.AttractionMen;
             rating += (hero.Culture == target.Culture) ? 10 : 0;
-
-            rating -= (int)(Math.Abs(desires.AttractionWeight - (int)target.BodyProperties.Weight) / 3);
-            rating -= (int)(Math.Abs(desires.AttractionBuild - (int)target.BodyProperties.Build) / 3);
-
-            int idealAge = MBMath.ClampInt(desires.AttractionAgeDiff + (int)hero.Age, 18, 130);
-            rating -= (int)(Math.Abs(idealAge - (int)target.Age) / 2);
+            rating -= (int)(Math.Abs(desires.AttractionWeight - (int)(target.Weight*100))/2);
+            rating -= (int)(Math.Abs(desires.AttractionBuild - (int)(target.Build*100))/2);
+            rating -= (int)(Math.Abs((MBMath.ClampInt(desires.AttractionAgeDiff + (int)hero.Age, 18, 130) - (int)target.Age)) /2);
 
             // Single relation call
             var relation = hero.GetRelationTo(target);
