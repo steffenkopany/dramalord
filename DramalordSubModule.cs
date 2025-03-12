@@ -99,14 +99,14 @@ namespace Dramalord
                 IntercourseIntention.OtherPregnancyModFound = true;
                 InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Bastard Children detected (Disabling Pregnancy)", new Color(1f, 0.08f, 0.58f)));
             }
-
+            /*
             Type? CheyronCheatsType = AccessTools.TypeByName("CheyronSubModule");
             if (CheyronCheatsType != null)
             {
                 IntercourseIntention.OtherPregnancyModFound = true;
                 InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Bannerlord Trainer Plus detected (Disabling Pregnancy)", new Color(1f, 0.08f, 0.58f)));
             }
-
+            */
             Type? MoreSpousesType = AccessTools.TypeByName("MoreSpouseSetting");
             if (MoreSpousesType != null)
             {

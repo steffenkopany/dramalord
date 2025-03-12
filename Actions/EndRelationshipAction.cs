@@ -10,9 +10,7 @@ namespace Dramalord.Actions
     {
         internal static void Apply(Hero hero, Hero target, HeroRelation relation)
         {
-            relation.Relationship = RelationshipType.None;
-
-            if (!BetrothIntention.OtherMarriageModFound && hero.Spouse == target)
+            if (!BetrothIntention.OtherMarriageModFound && hero.IsSpouseOf(target))
             {
                 foreach (Romance.RomanticState romanticState in Romance.RomanticStateList.ToList())
                 {
@@ -32,7 +30,18 @@ namespace Dramalord.Actions
                     hero.Spouse = null;
                     target.Spouse = null;
                 }
+
+                if(!hero.ExSpouses.Contains(target))
+                {
+                    hero.ExSpouses.Add(target);
+                }
+                if (!target.ExSpouses.Contains(hero))
+                {
+                    target.ExSpouses.Add(hero);
+                }
             }
+
+            relation.Relationship = RelationshipType.None;
         }
     }
 }
