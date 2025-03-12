@@ -4,9 +4,7 @@ using Dramalord.Extensions;
 using Dramalord.Notifications.Logs;
 using Helpers;
 using System.Collections.Generic;
-using System.Reflection;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.MapNotificationTypes;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
@@ -143,11 +141,6 @@ namespace Dramalord.Data.Intentions
                     MBInformationManager.ShowSceneNotification(new MarriageSceneNotificationItem(groom, bride, CampaignTime.Now));
                     MBInformationManager.AddNotice(new MarriageMapNotification(groom, bride, textObject, CampaignTime.Now));
 
-                    if (DramalordMCM.Instance.RelationshipLogs)
-                    {
-                        LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
-                    }
-
                     HandleWitness();
                 }
                 else if(DramalordMCM.Instance.JoinClanOnMarriage)
@@ -186,9 +179,13 @@ namespace Dramalord.Data.Intentions
                             //ChangeOccupationAfterMarriage(bride, groom.Occupation);
                         }
                     }
-                }
 
-                if (DramalordMCM.Instance.RelationshipLogs)
+                    if (DramalordMCM.Instance.RelationshipLogs)
+                    {
+                        LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
+                    }
+                }
+                else if (DramalordMCM.Instance.RelationshipLogs)
                 {
                     LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
                 }

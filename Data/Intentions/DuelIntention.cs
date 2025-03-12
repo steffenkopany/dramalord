@@ -1,6 +1,9 @@
-﻿using Dramalord.Conversations;
+﻿using Dramalord.Actions;
+using Dramalord.Conversations;
 using Dramalord.Extensions;
+using Dramalord.Notifications.Logs;
 using HarmonyLib;
+using Helpers;
 using SandBox.Conversation.MissionLogics;
 using SandBox.Missions.MissionLogics;
 using System.Collections.Generic;
@@ -9,6 +12,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.SaveSystem;
 
@@ -78,7 +82,11 @@ namespace Dramalord.Data.Intentions
                     }
                     else
                     {
-                        new ChangeOpinionIntention(looser, Other, MathF.Max(0, looser.GetRelationTo(Other).Love) * -1, MathF.Max(0, looser.GetTrust(Other)) * -1, CampaignTime.Now).Action();
+                        RelationshipType oldRelationship = looser.GetRelationTo(Other).Relationship;
+                        EndRelationshipAction.Apply(looser, Other, looser.GetRelationTo(Other));
+
+                        TextObject textObject = new EndRelationshipLog(looser, Other, oldRelationship).GetEncyclopediaText();
+                        MBInformationManager.AddQuickInformation(textObject, 0, IntentionHero.CharacterObject, "event:/ui/notification/relation");
                     } 
                 }
                 MakeFamilyHate(looser, winner, Other);
@@ -96,7 +104,11 @@ namespace Dramalord.Data.Intentions
                     }
                     else
                     {
-                        new ChangeOpinionIntention(looser, Other, MathF.Max(0, looser.GetRelationTo(Other).Love) * -1, MathF.Max(0, looser.GetTrust(Other)) * -1, CampaignTime.Now).Action();
+                        RelationshipType oldRelationship = looser.GetRelationTo(Other).Relationship;
+                        EndRelationshipAction.Apply(looser, Other, looser.GetRelationTo(Other));
+
+                        TextObject textObject = new EndRelationshipLog(looser, Other, oldRelationship).GetEncyclopediaText();
+                        MBInformationManager.AddQuickInformation(textObject, 0, IntentionHero.CharacterObject, "event:/ui/notification/relation");
                     }
                 }
                 MakeFamilyHate(looser, winner, Other);
@@ -115,10 +127,13 @@ namespace Dramalord.Data.Intentions
                 MakeFamilyHate(victim.Mother, winner, love);
             }
 
-            new ChangeOpinionIntention(victim, winner, MathF.Abs(-100 - victim.GetRelationTo(winner).Love) * -1, MathF.Abs(-100 - victim.GetTrust(winner)) * -1, CampaignTime.Now).Action();
+            if(victim.IsDramalordLegit())
+            {
+                new ChangeOpinionIntention(victim, winner, MathF.Abs(-100 - victim.GetRelationTo(winner).Love) * -1, MathF.Abs(-100 - victim.GetTrust(winner)) * -1, CampaignTime.Now).Action();
+            }
 
-            victim.Siblings.Where(s => s != love && s != victim).Do(s => new ChangeOpinionIntention(s, winner, MathF.Abs(-100 - s.GetRelationTo(winner).Love) * -1, MathF.Abs(-100 - s.GetTrust(winner)) * -1, CampaignTime.Now).Action());
-            victim.Children.Where(s => s != love && s != victim).Do(s => new ChangeOpinionIntention(s, winner, MathF.Abs(-100 - s.GetRelationTo(winner).Love) * -1, MathF.Abs(-100 - s.GetTrust(winner)) * -1, CampaignTime.Now).Action());
+            victim.Siblings.Where(s => s != love && s != victim && s.IsDramalordLegit()).Do(s => new ChangeOpinionIntention(s, winner, MathF.Abs(-100 - s.GetRelationTo(winner).Love) * -1, MathF.Abs(-100 - s.GetTrust(winner)) * -1, CampaignTime.Now).Action());
+            victim.Children.Where(s => s != love && s != victim && s.IsDramalordLegit()).Do(s => new ChangeOpinionIntention(s, winner, MathF.Abs(-100 - s.GetRelationTo(winner).Love) * -1, MathF.Abs(-100 - s.GetTrust(winner)) * -1, CampaignTime.Now).Action());
         }
 
         internal static void AddDialogs(CampaignGameStarter starter)
