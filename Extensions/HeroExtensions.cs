@@ -87,7 +87,7 @@ namespace Dramalord.Extensions
             }
 
             // If OtherMarriageMod is enabled, don't ignore Dramalord data completely—use it as a fallback
-            if (BetrothIntention.OtherMarriageModFound)
+            if (!BetrothIntention.OtherMarriageModFound)
             {
                 return GetRelationTo(hero, target).Relationship == RelationshipType.Spouse;
             }
