@@ -6,7 +6,7 @@ using Dramalord.Quests;
 using Helpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.CompilerServices;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
@@ -23,15 +23,15 @@ namespace Dramalord.Behaviours
 
         internal void OnDailyHeroTick(Hero hero)
         {
-            // Only process if the hero qualifies
+            // Process only if the hero qualifies.
             if (!hero.IsDramalordLegit() || hero == Hero.MainHero || !hero.IsAutonom())
                 return;
 
-            // Cache personality and desires locally
+            // Cache personality and desires.
             HeroPersonality personality = hero.GetPersonality();
             HeroDesires desires = hero.GetDesires();
 
-            // Evaluate personality thresholds using WeightedRandom; note: variable naming corrections applied.
+            // Evaluate personality thresholds using a weighted random generator.
             bool isHorny = desires.Horny >= WeightedRandom(100, 75, 50, 100);
             bool isOpen = personality.Openness >= WeightedRandom(100, 50, 0, 100);
             bool isConscientious = personality.Conscientiousness >= WeightedRandom(100, 75, 0, 100);
@@ -41,42 +41,31 @@ namespace Dramalord.Behaviours
 
             int randomNumber = MBRandom.RandomInt(1, 100);
 
-            // Only extroverts consider interacting
+            // Only extroverts consider interacting.
             if (!isExtrovert)
                 return;
 
-            // Get the pool of close heroes once and cache it.
+            // Cache the pool of close heroes.
             List<Hero> closeHeroes = hero.GetCloseHeroes();
 
-            // Determine if the player is nearby and if enough time has elapsed
+            // Determine if the player is nearby and if enough time has elapsed.
             bool playerClose = closeHeroes.Contains(Hero.MainHero) &&
-                hero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow >= DramalordMCM.Instance.DaysBetweenInteractions;
+                               hero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow >= DramalordMCM.Instance.DaysBetweenInteractions;
 
-            // If no candidates are present, nothing to do
-            if (closeHeroes.Count == 0)
+            // Process interaction branches sequentially.
+            if (isHorny && ProcessIntercourse(hero, closeHeroes, playerClose, randomNumber, desires, isConscientious, isNeurotic, isOpen))
                 return;
 
-            // Process interaction branches in order. If one action fires, we return.
-            if (isHorny)
-            {
-                // Note: Pass isConscientious, isNeurotic, and isOpen into ProcessIntercourse.
-                if (ProcessIntercourse(hero, closeHeroes, playerClose, randomNumber, desires, isConscientious, isNeurotic, isOpen))
-                    return;
-            }
-
-            // Process betroth/marriage/date interactions
             if (ProcessBetrothMarriageDate(hero, closeHeroes, playerClose, randomNumber))
                 return;
 
-            // Process flirt interactions
             if (ProcessFlirt(hero, closeHeroes, playerClose, randomNumber))
                 return;
 
-            // Process talk as a fallback
             if (ProcessTalk(hero, closeHeroes, playerClose, randomNumber))
                 return;
 
-            // Additional quest trigger check (second chance) when not near the player.
+            // Additional quest trigger check (if the hero is the player's lover but not near the player).
             if (isHorny &&
                 hero.CurrentSettlement != Hero.MainHero.CurrentSettlement &&
                 hero.PartyBelongedTo != MobileParty.MainParty &&
@@ -88,7 +77,7 @@ namespace Dramalord.Behaviours
                 return;
             }
 
-            // If nothing else fired, use toy if available, else increment Horny by Libido.
+            // If nothing else fired, use toy if available; otherwise, increment Horny by Libido.
             if (desires.HasToy)
             {
                 new UseToyIntention(hero, CampaignTime.Now).Action();
@@ -99,27 +88,20 @@ namespace Dramalord.Behaviours
             }
         }
 
-        #region Candidate Selection Helpers
-
         /// <summary>
-        /// Returns either Hero.MainHero if player is close and chance is met and candidate meets predicate,
-        /// or a random element from the pool that satisfies the predicate.
+        /// Selects a candidate from a pool based on a predicate.
+        /// If includePlayer is true, it first checks if the player qualifies.
         /// </summary>
-        private Hero? SelectCandidate(List<Hero> pool, bool playerClose, int chanceApproach, Func<Hero, bool> predicate)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private Hero? SelectCandidate(List<Hero> pool, bool playerClose, int chanceApproach, bool includePlayer, Func<Hero, bool> predicate)
         {
-            if (playerClose && MBRandom.RandomInt(1, 100) <= chanceApproach && predicate(Hero.MainHero))
+            if (includePlayer && playerClose && MBRandom.RandomInt(1, 100) <= chanceApproach && predicate(Hero.MainHero))
                 return Hero.MainHero;
             return pool.GetRandomElementWithPredicate(predicate);
         }
 
-        #endregion
-
-        #region Interaction Processing Helpers
-
         /// <summary>
-        /// Process intercourse-related interactions.
-        /// Includes normal intercourse, friend intercourse (if conditions are met),
-        /// and prisoner intercourse if hero's Honor is low.
+        /// Processes intercourse-related interactions.
         /// </summary>
         private bool ProcessIntercourse(Hero hero, List<Hero> pool, bool playerClose, int randomNumber, HeroDesires desires,
                                         bool isConscientious, bool isNeurotic, bool isOpen)
@@ -127,50 +109,49 @@ namespace Dramalord.Behaviours
             Hero? target = null;
 
             // -- Normal Intercourse --
-            target = playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer &&
-                     hero.IsSexualWith(Hero.MainHero)
-                     ? Hero.MainHero
-                     : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, h =>
-                        h.IsAutonom() &&
-                        hero.IsSexualWith(h) &&
-                        !hero.HasMetRecently(h) &&
-                        (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord) &&
-                        hero.CanPursueRomanceWith(h));
+            target = playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsSexualWith(Hero.MainHero)
+                        ? Hero.MainHero
+                        : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, true,
+                            h => h.IsAutonom() &&
+                                 hero.IsSexualWith(h) &&
+                                 !hero.HasMetRecently(h) &&
+                                 (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord) &&
+                                 hero.CanPursueRomanceWith(h));
             if (target != null && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
                 return true;
 
-            // -- Friend (Intercourse) Branch: Only if maximum Horny, and personality conditions (non-conscientious, non-neurotic, open)
+            // -- Friend Intercourse Branch: maximum Horny and certain personality conditions.
             if (desires.Horny == 100 && !isConscientious && !isNeurotic && isOpen)
             {
                 target = playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer &&
                          hero.IsFriendOf(Hero.MainHero) &&
                          hero.HasMutualAttractionWith(Hero.MainHero)
-                         ? Hero.MainHero
-                         : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, h =>
-                            h.IsAutonom() &&
-                            hero.IsFriendOf(h) &&
-                            !hero.HasMetRecently(h) &&
-                            hero.HasMutualAttractionWith(h) &&
-                            !hero.IsRelativeOf(h) &&
-                            (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord) &&
-                            hero.CanPursueRomanceWith(h));
+                            ? Hero.MainHero
+                            : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, true,
+                                h => h.IsAutonom() &&
+                                     hero.IsFriendOf(h) &&
+                                     !hero.HasMetRecently(h) &&
+                                     hero.HasMutualAttractionWith(h) &&
+                                     !hero.IsRelativeOf(h) &&
+                                     (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord) &&
+                                     hero.CanPursueRomanceWith(h));
                 if (target != null && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
                     return true;
             }
 
-            // -- Prisoner Intercourse Branch: If hero's Honor is <= 0, try prisoner intercourse.
+            // -- Prisoner Intercourse Branch: if hero's Honor is <= 0.
             if (hero.GetHeroTraits().Honor <= 0)
             {
-                target = hero.GetClosePrisoners().GetRandomElementWithPredicate(h =>
-                    hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction &&
-                    !hero.HasMetRecently(h) &&
-                    (!hero.IsPlayerSpouse() || !DramalordMCM.Instance.PlayerSpouseFaithful));
+                target = hero.GetClosePrisoners().GetRandomElementWithPredicate(
+                    h => hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction &&
+                         !hero.HasMetRecently(h) &&
+                         (!hero.IsPlayerSpouse() || !DramalordMCM.Instance.PlayerSpouseFaithful)
+                );
                 if (target != null && new PrisonIntercourseIntention(target, hero, CampaignTime.Now).Action())
                     return true;
             }
 
             // -- Quest Trigger Branch --
-            // If hero is player's lover but not near the player, maybe spawn a quest inquiry.
             if (!playerClose &&
                 hero.IsLoverOf(Hero.MainHero) &&
                 randomNumber <= DramalordMCM.Instance.QuestChance &&
@@ -184,24 +165,24 @@ namespace Dramalord.Behaviours
         }
 
         /// <summary>
-        /// Process betroth, marriage, or date interactions.
+        /// Processes betroth, marriage, or date interactions.
         /// </summary>
         private bool ProcessBetrothMarriageDate(Hero hero, List<Hero> pool, bool playerClose, int randomNumber)
         {
             Hero? target = playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.IsEmotionalWith(Hero.MainHero)
                 ? Hero.MainHero
-                : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, h =>
-                    h.IsAutonom() &&
-                    hero.IsEmotionalWith(h) &&
-                    !hero.HasMetRecently(h) &&
-                    (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord) &&
-                    (h.IsFemale != hero.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage) &&
-                    hero.CanPursueRomanceWith(h));
+                : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, true,
+                    h => h.IsAutonom() &&
+                         hero.IsEmotionalWith(h) &&
+                         !hero.HasMetRecently(h) &&
+                         (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord) &&
+                         (h.IsFemale != hero.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage) &&
+                         hero.CanPursueRomanceWith(h));
             if (target != null)
             {
                 HeroRelation targetRelation = hero.GetRelationTo(target);
 
-                // Immediate marriage if betrothed and love threshold is met
+                // Immediate marriage if betrothed and love threshold is met.
                 if (!BetrothIntention.OtherMarriageModFound &&
                     targetRelation.Relationship == RelationshipType.Betrothed &&
                     targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove &&
@@ -210,7 +191,7 @@ namespace Dramalord.Behaviours
                 {
                     return true;
                 }
-                // Otherwise, attempt to become betrothed.
+                // Attempt to become betrothed.
                 else if (hero.Spouse == null &&
                          !BetrothIntention.OtherMarriageModFound &&
                          targetRelation.Relationship == RelationshipType.Lover &&
@@ -220,7 +201,7 @@ namespace Dramalord.Behaviours
                 {
                     return true;
                 }
-                // Else try a dating intention.
+                // Else attempt a date.
                 else if (new DateIntention(target, hero, CampaignTime.Now).Action())
                 {
                     return true;
@@ -230,23 +211,23 @@ namespace Dramalord.Behaviours
         }
 
         /// <summary>
-        /// Process flirt interactions (which may lead to a date or a simple flirt).
+        /// Processes flirt interactions.
         /// </summary>
         private bool ProcessFlirt(Hero hero, List<Hero> pool, bool playerClose, int randomNumber)
         {
             Hero? target = playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero)
                 ? Hero.MainHero
-                : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, h =>
-                    h.IsAutonom() &&
-                    hero.HasMutualAttractionWith(h) &&
-                    !hero.IsRelativeOf(h) &&
-                    !hero.HasMetRecently(h) &&
-                    (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord) &&
-                    hero.CanPursueRomanceWith(h));
+                : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, true,
+                    h => h.IsAutonom() &&
+                         hero.HasMutualAttractionWith(h) &&
+                         !hero.IsRelativeOf(h) &&
+                         !hero.HasMetRecently(h) &&
+                         (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord) &&
+                         hero.CanPursueRomanceWith(h));
             if (target != null)
             {
                 HeroRelation targetRelation = hero.GetRelationTo(target);
-                // Attempt a date if love is high enough
+                // Attempt a date if love is high enough.
                 if (targetRelation.Love >= DramalordMCM.Instance.MinDatingLove &&
                     new DateIntention(target, hero, CampaignTime.Now).Action())
                 {
@@ -261,14 +242,14 @@ namespace Dramalord.Behaviours
         }
 
         /// <summary>
-        /// Process talk interactions as a fallback.
+        /// Processes talk interactions as a fallback.
         /// </summary>
         private bool ProcessTalk(Hero hero, List<Hero> pool, bool playerClose, int randomNumber)
         {
             Hero? target = playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer
                 ? Hero.MainHero
-                : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, h =>
-                    h.IsAutonom() && !hero.HasMetRecently(h));
+                : SelectCandidate(pool, playerClose, DramalordMCM.Instance.ChanceApproachingPlayer, false,
+                    h => h.IsAutonom() && !hero.HasMetRecently(h));
             if (target != null && new TalkIntention(target, hero, CampaignTime.Now).Action())
                 return true;
             return false;
@@ -315,8 +296,6 @@ namespace Dramalord.Behaviours
             );
         }
 
-        #endregion
-
         public override void RegisterEvents()
         {
             CampaignEvents.DailyTickHeroEvent.AddNonSerializedListener(this, new Action<Hero>(OnDailyHeroTick));
@@ -324,7 +303,7 @@ namespace Dramalord.Behaviours
 
         public override void SyncData(IDataStore dataStore)
         {
-            // nothing to do
+            // nothing to do here
         }
 
         /// <summary>
