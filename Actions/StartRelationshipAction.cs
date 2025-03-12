@@ -38,9 +38,10 @@ namespace Dramalord.Actions
                 //if (target.Spouse != null && !target.ExSpouses.Contains(target.Spouse)) target.ExSpouses.Add(hero.Spouse);
                 hero.ExSpouses.Remove(target);
                 target.ExSpouses.Remove(hero);
-/*
+
                 hero.Spouse = target;
                 target.Spouse = hero;
+/*                
                 var ex1 = hero.ExSpouses.Distinct().Where(h => h != null).ToList();
                 hero.ExSpouses.Clear();
                 hero.ExSpouses.AddRange(ex1);
