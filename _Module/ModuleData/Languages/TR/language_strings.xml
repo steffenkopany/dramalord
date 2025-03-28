@@ -633,5 +633,7 @@
     <string id="Dramalord606" text="Haha! Git ve dedikodularını yay, zavallı insan!" />
     <string id="Dramalord607" text="{HERO} seni şantaj yapıyor" />
     <string id="Dramalord608" text="{HERO.LINK}, seni {OTHER.LINK} ile gördü. Eğer {AMOUNT}{GOLD_ICON} ödemezsen, {SPOUSE.LINK}'e her şeyi anlatmakla tehdit ediyorlar. Gece vakti onlarla konuşup bu meseleyi çöz." />
+    <string id="Dramalord609" text="Tek Gerçek Aşk" />
+    <string id="Dramalord610" text="Romantik etkileşimler yalnızca en yüksek aşk değerine sahip kişiyle gerçekleşir" />
   </strings>
 </base>

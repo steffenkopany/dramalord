@@ -69,6 +69,11 @@ namespace Dramalord.Patches
                 TextObject neuroticism = new TextObject("{=Dramalord118}Neuroticism");
 
                 TextObject sexOrientation = new TextObject("{=Dramalord157}Sexual orientation");
+
+                TextObject hasToy = new TextObject("{=Dramalord611}Has toy");
+                TextObject marriageType = new TextObject("{=Dramalord612}Marriage type");
+                TextObject marriageTypeName = (hero.GetRelationTo(Hero.MainHero).Relationship == RelationshipType.Spouse) ? GetMarriageTypeName(hero.GetRelationTo(Hero.MainHero).Rules) : GetMarriageTypeName(hero.GetDefaultRelationshipRule());
+
                 TextObject orientation = GameTexts.FindText("str_missing_info_indicator");
                 if (desires.IsKnowToPlayer && desires.AttractionMen >= DramalordMCM.Instance.MinAttraction && desires.AttractionWomen >= DramalordMCM.Instance.MinAttraction)
                 {
@@ -98,6 +103,8 @@ namespace Dramalord.Patches
                 __instance.Stats.Add(new StringPairItemVM(extroversion.ToString() + ":", __instance.IsInformationHidden ? hidden : personality.Extroversion.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(agreeableness.ToString() + ":", __instance.IsInformationHidden ? hidden : personality.Agreeableness.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(neuroticism.ToString() + ":", __instance.IsInformationHidden ? hidden : personality.Neuroticism.ToString()));
+                __instance.Stats.Add(new StringPairItemVM(hasToy.ToString() + ":", (__instance.IsInformationHidden || !desires.IsKnowToPlayer) ? hidden : (desires.HasToy) ? GameTexts.FindText("str_yes").ToString() : GameTexts.FindText("str_no").ToString()));
+                __instance.Stats.Add(new StringPairItemVM(marriageType.ToString() + ":", (__instance.IsInformationHidden || !desires.IsKnowToPlayer) ? hidden : marriageTypeName.ToString()));
             }
             if(hero != null)
             { 
@@ -161,6 +168,13 @@ namespace Dramalord.Patches
                 }
             }
         }
+
+        private static TextObject GetMarriageTypeName(RelationshipRule rule) => new TextObject(
+                        (rule == RelationshipRule.Open) ? "{=Dramalord616}Open" :
+                        (rule == RelationshipRule.Poly) ? "{=Dramalord615}Poly" :
+                        (rule == RelationshipRule.Playful) ? "{=Dramalord614}Playful" : "{=Dramalord613}Faithful"
+                        );
+        
     }
 
     [HarmonyPatch(typeof(EncyclopediaHeroPageVM), "UpdateInformationText")]

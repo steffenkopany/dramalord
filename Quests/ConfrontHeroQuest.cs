@@ -45,9 +45,9 @@ namespace Dramalord.Quests
                 ConversationLines.npc_confrontation_engagement_player.SetTextVariable("STATUS", ConversationTools.GetHeroRelation(Hero.MainHero, Hero.OneToOneConversationHero));
                 MBTextManager.SetTextVariable("CONFRONTATION_LINE", ConversationLines.npc_confrontation_engagement_player);
             }
-            else if (ConfrontIntention as GiveBirthIntention != null)
+            else if (ConfrontIntention as GossipBirthIntention != null)
             {
-                ConfrontBirthIntention i = ConfrontIntention as ConfrontBirthIntention;
+                GossipBirthIntention i = ConfrontIntention as GossipBirthIntention;
                 ConversationLines.npc_confrontation_birth_player.SetTextVariable("CHILD", i.Child.Name);
                 ConversationLines.npc_confrontation_birth_player.SetTextVariable("HERO", OtherHero.Name);
                 ConversationLines.npc_confrontation_birth_player.SetTextVariable("STATUS", ConversationTools.GetHeroRelation(Hero.MainHero, Hero.OneToOneConversationHero));

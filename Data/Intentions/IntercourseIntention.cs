@@ -203,7 +203,7 @@ namespace Dramalord.Data.Intentions
                     if (Target == Hero.MainHero || IntentionHero == Hero.MainHero)
                     {
                         Hero otherHero = (IntentionHero == Hero.MainHero) ? Target : IntentionHero;
-                        TextObject banner = new TextObject("{=Dramalord080}You and {HERO.LINK} are now friends with benefits.");
+                        TextObject banner = new TextObject("{=Dramalord080}You and {HERO.LINK} are now friends...with benefits.");
                         StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
                         MBInformationManager.AddQuickInformation(banner, 0, otherHero.CharacterObject, "event:/ui/notification/relation");
                     }

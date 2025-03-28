@@ -603,5 +603,7 @@
     <string id="Dramalord606" text="哈哈！去吧，把你的謠言四處傳播吧，可憐的人。" />
     <string id="Dramalord607" text="{HERO}正在勒索你" />
     <string id="Dramalord608" text="{HERO.LINK}看到你和{OTHER.LINK}在一起。他們威脅要告訴{SPOUSE.LINK}，除非你支付{AMOUNT}{GOLD_ICON}。晚上去找他們，解決這個問題。" />
+    <string id="Dramalord609" text="唯一真愛" />
+    <string id="Dramalord610" text="浪漫互動僅發生在愛意值最高的人身上" />
   </strings>
 </base>

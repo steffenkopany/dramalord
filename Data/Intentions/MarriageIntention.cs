@@ -83,7 +83,7 @@ namespace Dramalord.Data.Intentions
                                     JoinClanAction.Apply(otherHero, Clan.PlayerClan);
                                     ChangeOccupationAfterMarriage(otherHero, otherHero.Occupation != Occupation.Lord ? clanHero.Occupation : otherHero.Occupation);
 
-                                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
+                                    TextObject textObject = new TextObject("{=Dramalord099}{HERO.LINK} married {TARGET.LINK}.");
                                     StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
                                     StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
 
@@ -103,18 +103,22 @@ namespace Dramalord.Data.Intentions
 
                                     Hero clanHero = (groom.Clan == Clan.PlayerClan) ? groom : bride;
                                     Hero otherHero = (groom.Clan == Clan.PlayerClan) ? bride : groom;
-                                    LeaveClanAction.Apply(clanHero);
-                                    if (otherHero.Clan != null)
+
+                                    if(clanHero != Hero.MainHero)
                                     {
-                                        JoinClanAction.Apply(clanHero, otherHero.Clan);
-                                        ChangeOccupationAfterMarriage(clanHero, Occupation.Lord);
-                                    }
-                                    else
-                                    {
-                                        ChangeOccupationAfterMarriage(clanHero, otherHero.Occupation);
+                                        LeaveClanAction.Apply(clanHero);
+                                        if (otherHero.Clan != null)
+                                        {
+                                            JoinClanAction.Apply(clanHero, otherHero.Clan);
+                                            ChangeOccupationAfterMarriage(clanHero, Occupation.Lord);
+                                        }
+                                        else
+                                        {
+                                            ChangeOccupationAfterMarriage(clanHero, otherHero.Occupation);
+                                        }
                                     }
 
-                                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
+                                    TextObject textObject = new TextObject("{=Dramalord099}{HERO.LINK} married {TARGET.LINK}.");
                                     StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
                                     StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
 
@@ -134,7 +138,7 @@ namespace Dramalord.Data.Intentions
                 }
                 else if(groom.Clan == Clan.PlayerClan && bride.Clan == Clan.PlayerClan)
                 {
-                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
+                    TextObject textObject = new TextObject("{=Dramalord099}{HERO.LINK} married {TARGET.LINK}.");
                     StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
                     StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
 

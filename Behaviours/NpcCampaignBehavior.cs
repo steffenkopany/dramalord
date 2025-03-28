@@ -43,6 +43,31 @@ namespace Dramalord.Behaviours
                     playerClose = closeHeroes.Contains(Hero.MainHero)
                                   && hero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow >= DramalordMCM.Instance.DaysBetweenInteractions;
 
+                    List<Hero> romanceTargets = new();
+                    List<Hero> intimateTargets = new();
+
+                    foreach(var item in hero.GetAllRelations())
+                    {
+                        //cleanup
+                        if(item.Value.Love <= 0 && (item.Value.Relationship == RelationshipType.Lover || item.Value.Relationship == RelationshipType.Betrothed || item.Value.Relationship == RelationshipType.Spouse))
+                        {
+                            new ChangeOpinionIntention(hero, item.Key, 0, 0, CampaignTime.Now);
+                        }
+                    }
+
+                    int minLoveValue = 0;
+
+                    if (DramalordMCM.Instance.OneTrueLove)
+                    {
+                        hero.GetAllRelations().Values.ToMBList().ForEach(v =>
+                        {
+                            if (v.Love > minLoveValue)
+                            {
+                                minLoveValue = v.Love;
+                            }
+                        });
+                    }
+
                     if (closeHeroes.Count > 0)
                     {
                         Hero? target = null;
@@ -61,6 +86,7 @@ namespace Dramalord.Behaviours
                                     && !hero.HasMetRecently(h)
                                     && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
                                     && hero.CanPursueRomanceWith(h)  // EARLY FILTER
+                                    && hero.GetRelationTo(h).Love >= minLoveValue
                                 );
 
                             if (target != null && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
@@ -84,6 +110,7 @@ namespace Dramalord.Behaviours
                                         && !hero.IsRelativeOf(h)
                                         && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
                                         && hero.CanPursueRomanceWith(h)  // EARLY FILTER
+                                        && hero.GetRelationTo(h).Love >= minLoveValue
                                     );
 
                                 if (target != null && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
@@ -93,7 +120,7 @@ namespace Dramalord.Behaviours
                             }
 
                             // If hero's Honor <= 0, maybe do prisoner intercourse
-                            if (hero.GetHeroTraits().Honor <= 0)
+                            if ((hero.GetHeroTraits().Honor < 0 || hero.GetHeroTraits().Mercy < 0) && (hero.PartyBelongedTo == null || !hero.PartyBelongedTo.IsMainParty))
                             {
                                 target = hero.GetClosePrisoners().GetRandomElementWithPredicate(h =>
                                     hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction
@@ -161,6 +188,7 @@ namespace Dramalord.Behaviours
                                 && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
                                 && (h.IsFemale != hero.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage)
                                 && hero.CanPursueRomanceWith(h)  // EARLY FILTER
+                                && hero.GetRelationTo(h).Love >= minLoveValue
                             );
 
                         if (target != null)
@@ -210,6 +238,7 @@ namespace Dramalord.Behaviours
                             HeroRelation targetRelation = hero.GetRelationTo(target);
                             // Possibly do a date if love is high enough
                             if (targetRelation.Love >= DramalordMCM.Instance.MinDatingLove
+                                && hero.GetRelationTo(target).Love >= minLoveValue
                                 && new DateIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;

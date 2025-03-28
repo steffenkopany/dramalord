@@ -603,5 +603,7 @@
     <string id="Dramalord606" text="ハハッ！好きに噂を広めるがいい、哀れな人間よ。" />
     <string id="Dramalord607" text="{HERO}があなたを脅迫している" />
     <string id="Dramalord608" text="{HERO.LINK}はあなたと{OTHER.LINK}を見た。{SPOUSE.LINK}に告げると脅している。{AMOUNT}{GOLD_ICON}を払わなければならない。夜に訪れて、この問題を解決しよう。" />
+    <string id="Dramalord609" text="唯一の真実の愛" />
+    <string id="Dramalord610" text="ロマンチックな交流は、最も高い愛の値を持つ者とだけ発生する" />
   </strings>
 </base>

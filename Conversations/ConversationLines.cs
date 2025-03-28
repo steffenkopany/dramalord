@@ -63,7 +63,7 @@ namespace Dramalord.Conversations
         public static TextObject npc_confrontation_birth_player = new("{=Dramalord170}So you have given birth to {CHILD}. It is no secret that the child's true father is {HERO}, and not myself. Yet you are {STATUS}, are you not?");
         public static TextObject npc_confrontation_marriage_player = new("{=Dramalord171}You wed {HERO} behind my back. Did it never occur to you to inform me? You are {STATUS}!");
         public static TextObject npc_confrontation_engagement_player = new("{=Dramalord172}So you and {HERO} are now betrothed. Did you truly believe I would not learn of it?!");
-        public static TextObject npc_confrontation_date_player = new("{=Dramalord176}It is apparent that you and {HERO.LINK} often conduct 'private meetings'. Have you forgotten that you are {STATUS}?");
+        public static TextObject npc_confrontation_date_player = new("{=Dramalord176}It is apparent that you and {HERO} often conduct 'private meetings'. Have you forgotten that you are {STATUS}?");
         public static TextObject npc_confrontation_intercourse_player = new("{=Dramalord177}So, {HERO} has been keeping you entertained in bed? You are {STATUS}, or has that slipped your mind?");
         public static TextObject npc_confrontation_birth = new("{=Dramalord178}{HERO} has given birth to {CHILD}, and it seems you are the father. I thought you were {STATUS}?");
         public static TextObject npc_confrontation_result_ok = new("{=Dramalord180}I forgive you, {TITLE}. But mark my words—I shall not forget this.");
@@ -149,6 +149,10 @@ namespace Dramalord.Conversations
         public static TextObject npc_info_reply_build_high = new("{=Dramalord330}I am quite fond of strong, muscular figures. The more imposing, the better.");
         public static TextObject npc_info_reply_age = new("{=Dramalord331}I am drawn to those who are {AGEDIFF} than myself. I prefer partners around the age of {AGE}.");
         public static TextObject npc_info_reply_summary = new("{=Dramalord332}As for you {TITLE}, I think you are probably a... {RATING} out of 100.");
+        public static TextObject npc_info_reply_marriage_faithful = new("{=Dramalord617}I dream of a faithful marriage, where my partner and myself only have eyes for each other.");
+        public static TextObject npc_info_reply_marriage_playful = new("{=Dramalord618}I wish for a marriage based on true love, where one or two adventures once in a while won't matter.");
+        public static TextObject npc_info_reply_marriage_poly = new("{=Dramalord619}I long for a faithful marriage. It doesn't matter if the marriage consists of more then two people, as long as we keep private things to ourselves.");
+        public static TextObject npc_info_reply_marriage_open = new("{=Dramalord620}I think marriage is a political instrument, while love is something beautiful which should be shared with many people without jealousy.");
       
         public static TextObject player_interaction_talk = new("{=Dramalord339}It may do us well to share our thoughts. Care to talk? (Friendly chat)");
         public static TextObject player_interaction_flirt = new("{=Dramalord340}You look stunning, {TITLE}, though I suspect you are already well aware... (Flirting)");
@@ -159,7 +163,15 @@ namespace Dramalord.Conversations
         public static TextObject player_interaction_sex = new("{=Dramalord345}I crave your touch, {TITLE}. Will you grant me this indulgence? (Intimacy)");
         public static TextObject player_interaction_engage = new("{=Dramalord346}I love you dearly, {TITLE}. There is no road that I wish to walk without you. Will you marry me? (Betrothed)");
         public static TextObject player_interaction_marry = new("{=Dramalord347}Now that we are in a settlement, {TITLE}, let us seek an officiant and finally be wed! (Marriage)");
-        public static TextObject player_interaction_breakup = new("{=Dramalord348}This is not working, {TITLE}. Let us put an end to this charade before it turns to bitterness. (Break up)");
+
+
+        public static TextObject player_interaction_relationship = new("{=Dramalord622}I would like to talk about our relationship.");
+        public static TextObject player_interaction_relationship_faithful = new("{=Dramalord623}I want us to be faithful and lever lie an eye on somebody else.");
+        public static TextObject player_interaction_relationship_playful = new("{=Dramalord624}Our love shall never be shared, while our bodies may seek pleasure with others.");
+        public static TextObject player_interaction_relationship_poly = new("{=Dramalord625}Our marriage shall be faithful, but there is place for more then two.");
+        public static TextObject player_interaction_relationship_open = new("{=Dramalord626}We have much love to give, so let's share it with others too.");
+        public static TextObject player_interaction_relationship_breakup = new("{=Dramalord348}This is not working, {TITLE}. Let us put an end to this charade before it turns to bitterness. (Break up)");
+        public static TextObject player_interaction_relationship_reply_no = new("{=Dramalord627}You are insane! I would never agree to that!");
 
         public static TextObject npc_challenge_summarize_end = new("{=Dramalord351}Thank you for the conversation, {TITLE}.");
         public static TextObject player_challenge_friend = new("{=Dramalord353}Ah, {POI.NAME}! Yes, we have met. I am actually quite fond of them.");
@@ -456,6 +468,10 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("npc_info_reply_build_high", npc_info_reply_build_high);
             MBTextManager.SetTextVariable("npc_info_reply_age", npc_info_reply_age);
             MBTextManager.SetTextVariable("npc_info_reply_summary", npc_info_reply_summary);
+            MBTextManager.SetTextVariable("npc_info_reply_marriage_faithful", npc_info_reply_marriage_faithful);
+            MBTextManager.SetTextVariable("npc_info_reply_marriage_playful", npc_info_reply_marriage_playful);
+            MBTextManager.SetTextVariable("npc_info_reply_marriage_poly", npc_info_reply_marriage_poly);
+            MBTextManager.SetTextVariable("npc_info_reply_marriage_open", npc_info_reply_marriage_open);
             MBTextManager.SetTextVariable("player_interaction_talk", player_interaction_talk);
             MBTextManager.SetTextVariable("player_interaction_flirt", player_interaction_flirt);
             MBTextManager.SetTextVariable("player_interaction_date_first", player_interaction_date_first);
@@ -465,7 +481,16 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("player_interaction_sex", player_interaction_sex);
             MBTextManager.SetTextVariable("player_interaction_engage", player_interaction_engage);
             MBTextManager.SetTextVariable("player_interaction_marry", player_interaction_marry);
-            MBTextManager.SetTextVariable("player_interaction_breakup", player_interaction_breakup);
+            MBTextManager.SetTextVariable("player_interaction_breakup", player_interaction_relationship_breakup);
+
+            MBTextManager.SetTextVariable("player_interaction_relationship", player_interaction_relationship);
+            MBTextManager.SetTextVariable("player_interaction_relationship_faithful", player_interaction_relationship_faithful);
+            MBTextManager.SetTextVariable("player_interaction_relationship_playful", player_interaction_relationship_playful);
+            MBTextManager.SetTextVariable("player_interaction_relationship_poly", player_interaction_relationship_poly);
+            MBTextManager.SetTextVariable("player_interaction_relationship_open", player_interaction_relationship_open);
+            MBTextManager.SetTextVariable("player_interaction_relationship_breakup", player_interaction_relationship_breakup);
+            MBTextManager.SetTextVariable("player_interaction_relationship_reply_no", player_interaction_relationship_reply_no);
+
             MBTextManager.SetTextVariable("npc_challenge_summarize_end", npc_challenge_summarize_end);
             MBTextManager.SetTextVariable("player_challenge_friend", player_challenge_friend);
             MBTextManager.SetTextVariable("player_challenge_friend_no_met", player_challenge_friend_no_met);

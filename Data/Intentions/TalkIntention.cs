@@ -70,7 +70,7 @@ namespace Dramalord.Data.Intentions
                             .Variation("{npc_interaction_talk_2}[ib:normal2][if:convo_calm_friendly]")
                         .BeginPlayerOptions()
                             .PlayerOption("{npc_interaction_reply_talk_1}")
-                                .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Chat, 1); })
+                                .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Chat, 1, true); })
                                 .GotoDialogState("start_challenge")
                             .PlayerOption("{player_reaction_no}")
                                 .Consequence(() => { _accepted = false; ConversationTools.EndConversation(); })

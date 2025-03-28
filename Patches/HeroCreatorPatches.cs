@@ -69,7 +69,7 @@ namespace Dramalord.Patches
         [HarmonyPrefix]
         public static bool DeliverOffSpring(ref Hero mother, ref Hero father, ref bool isOffspringFemale, ref Hero __result)
         {
-            if(mother.IsLord && father.IsLord)
+            if(mother != null && mother.IsLord && father != null && father.IsLord)
             {
                 return true;
             }

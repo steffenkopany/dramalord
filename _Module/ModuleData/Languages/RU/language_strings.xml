@@ -603,5 +603,7 @@
     <string id="Dramalord606" text="Ха-ха! Иди и распространяй свои слухи, жалкий человечек." />
     <string id="Dramalord607" text="{HERO} шантажирует вас" />
     <string id="Dramalord608" text="{HERO.LINK} видел вас с {OTHER.LINK}. Они угрожают рассказать {SPOUSE.LINK}, если вы не заплатите {AMOUNT}{GOLD_ICON}. Посетите их ночью, чтобы решить этот вопрос." />
+    <string id="Dramalord609" text="Единственная истинная любовь" />
+    <string id="Dramalord610" text="Романтические взаимодействия происходят только с тем, у кого самый высокий уровень любви" />
   </strings>
 </base>

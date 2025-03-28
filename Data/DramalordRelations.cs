@@ -23,6 +23,14 @@ namespace Dramalord.Data
         Spouse
     }
 
+    public enum RelationshipRule
+    {
+        Faithful, //default
+        Playful, //FWB are ok
+        Poly,   // only spouse to spouse
+        Open    // doesnt care at all
+    }
+
     internal sealed class HeroRelation
     {
         [SaveableField(1)]
@@ -39,6 +47,9 @@ namespace Dramalord.Data
 
         [SaveableField(5)]
         private CampaignTime _lastUpdate;
+
+        [SaveableField(6)]
+        private int _rules;
 
         internal CampaignTime LastInteraction 
         { 
@@ -74,6 +85,8 @@ namespace Dramalord.Data
 
         internal RelationshipType Relationship { get => (RelationshipType)_relationship; set => _relationship = (int)value; }
 
+        internal RelationshipRule Rules { get => (RelationshipRule)_rules; set => _rules = (int)value; }
+
         internal bool IsKnownToPlayer { get => _isKnownToPlayer; set => _isKnownToPlayer = value; }
 
         internal HeroRelation(int love, RelationshipType relationship)
@@ -83,6 +96,7 @@ namespace Dramalord.Data
             _relationship = (int)relationship;
             _isKnownToPlayer = false;
             _lastUpdate = CampaignTime.Now;
+            _rules = (int)RelationshipRule.Faithful;
         }
     }
 
@@ -193,6 +207,12 @@ namespace Dramalord.Data
                     if (h.GetRelationTo(h.Spouse).Relationship != RelationshipType.Spouse)
                     {
                         StartRelationshipAction.Apply(h, h.Spouse, h.GetRelationTo(h.Spouse), RelationshipType.Spouse);
+                    }
+                    else if(h != Hero.MainHero && h.Spouse != Hero.MainHero)
+                    {
+                        RelationshipRule rule1 = h.GetDefaultRelationshipRule();
+                        RelationshipRule rule2 = h.Spouse.GetDefaultRelationshipRule();
+                        h.GetRelationTo(h.Spouse).Rules = (rule1 < rule2) ? rule1 : rule2;
                     }
                 });
             }

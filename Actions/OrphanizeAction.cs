@@ -20,7 +20,9 @@ namespace Dramalord.Actions
             {
                 child.BornSettlement = SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
             }
-            child.SetNewOccupation(Occupation.NotAssigned);
+
+            child.ChangeState(Hero.CharacterStates.Disabled);
+            child.SetNewOccupation(Occupation.Wanderer);
             child.UpdateHomeSettlement();
 
             DramalordOrphans.Instance.AddOrphan(child);

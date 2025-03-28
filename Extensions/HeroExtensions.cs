@@ -73,6 +73,25 @@ namespace Dramalord.Extensions
             return CachedRelation;
         }
 
+        public static RelationshipRule GetDefaultRelationshipRule(this Hero hero)
+        {
+            UpdateCachedData(hero);
+            if(CachedPersonality.Openness > 40 && CachedPersonality.Agreeableness > 40 && CachedPersonality.Neuroticism < -25 && CachedPersonality.Conscientiousness < -25)
+            {
+                return RelationshipRule.Open;
+            }
+            else if (CachedPersonality.Openness > 25 && CachedPersonality.Agreeableness > 25 && CachedPersonality.Neuroticism < 0 && CachedPersonality.Conscientiousness < 0)
+            {
+                return RelationshipRule.Poly;
+            }
+            else if (CachedPersonality.Openness > 10 && CachedPersonality.Conscientiousness < 0)
+            {
+                return RelationshipRule.Playful;
+            }
+
+            return RelationshipRule.Faithful;
+        }
+
         public static HeroPregnancy? GetPregnancy(this Hero hero)
         {
             return DramalordPregnancies.Instance.GetPregnancy(hero);

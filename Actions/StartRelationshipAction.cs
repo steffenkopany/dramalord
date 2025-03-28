@@ -34,26 +34,36 @@ namespace Dramalord.Actions
                 }
 
                 ChangeRomanticStateAction.Apply(hero, target, Romance.RomanceLevelEnum.Marriage);
-                //if (hero.Spouse != null && !hero.ExSpouses.Contains(hero.Spouse)) hero.ExSpouses.Add(hero.Spouse);
-                //if (target.Spouse != null && !target.ExSpouses.Contains(target.Spouse)) target.ExSpouses.Add(hero.Spouse);
                 hero.ExSpouses.Remove(target);
                 target.ExSpouses.Remove(hero);
 
                 hero.Spouse = target;
                 target.Spouse = hero;
-/*                
-                var ex1 = hero.ExSpouses.Distinct().Where(h => h != null).ToList();
-                hero.ExSpouses.Clear();
-                hero.ExSpouses.AddRange(ex1);
-                var ex2 = target.ExSpouses.Distinct().Where(h => h != null).ToList();
-                target.ExSpouses.Clear();
-                target.ExSpouses.AddRange(ex2);
-*/
+
             }
 
             if(hero == Hero.MainHero || target == Hero.MainHero || relationType == RelationshipType.Spouse)
             {
                 relation.IsKnownToPlayer = true;
+            }
+
+            if (hero == Hero.MainHero || target == Hero.MainHero)
+            {
+                if(relationType == RelationshipType.FriendWithBenefits || relationType == RelationshipType.Lover)
+                {
+                    relation.Rules = RelationshipRule.Open;
+                }
+                else if (relationType == RelationshipType.Betrothed || relationType == RelationshipType.Spouse)
+                {
+                    Hero otherHero = (hero == Hero.MainHero) ? target : hero;
+                    relation.Rules = otherHero.GetDefaultRelationshipRule();
+                }
+            }
+            else if (relationType == RelationshipType.Betrothed || relationType == RelationshipType.Spouse)
+            {
+                RelationshipRule rule1 = hero.GetDefaultRelationshipRule();
+                RelationshipRule rule2 = target.GetDefaultRelationshipRule();
+                relation.Rules = (rule1<rule2) ? rule1 : rule2;
             }
         }
     }

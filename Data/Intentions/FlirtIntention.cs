@@ -1,13 +1,8 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Conversations;
 using Dramalord.Extensions;
-using Dramalord.Quests;
-using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
-using TaleWorlds.Localization;
-using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Data.Intentions
 {
@@ -73,7 +68,7 @@ namespace Dramalord.Data.Intentions
                             .Variation("{npc_interaction_flirt_2}[ib:nervous][if:convo_mocking_teasing]")
                             .BeginPlayerOptions()
                                 .PlayerOption("{npc_interaction_reply_flirt_yes_1}")
-                                    .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Flirt, 1); })
+                                    .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Flirt, 1, true); })
                                     .GotoDialogState("start_challenge")
                                 .PlayerOption("{player_reaction_no}")
                                     .Consequence(() => { _accepted = false; ConversationTools.EndConversation(); })

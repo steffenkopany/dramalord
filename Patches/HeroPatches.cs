@@ -1,9 +1,6 @@
-﻿using Dramalord.Data;
-using Dramalord.Quests;
-using HarmonyLib;
+﻿using HarmonyLib;
 using JetBrains.Annotations;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Party;
 
 namespace Dramalord.Patches
 {
@@ -14,7 +11,7 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void GetRelation(ref Hero otherHero, ref Hero __instance, ref int __result)
         {
-            if(DramalordMCM.Instance.ShowRealrelation)
+            if(DramalordMCM.Instance.ShowRealrelation && otherHero != null && __instance != null && otherHero != __instance)
             {
                 __result = Campaign.Current.Models.DiplomacyModel.GetBaseRelation(__instance, otherHero);
             }

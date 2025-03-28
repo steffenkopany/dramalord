@@ -177,6 +177,8 @@ namespace Dramalord.Data.Intentions
             ConversationLines.npc_gossip_sex.SetTextVariable("HERO", EventIntention.IntentionHero.Name);
             ConversationLines.npc_gossip_sex.SetTextVariable("OTHER", EventIntention.Target.Name);
             ConversationLines.npc_starts_confrontation_known.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Hero.MainHero, false));
+            ConversationLines.player_interaction_abort.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, IntentionHero, false));
+            ConversationLines.npc_challenge_summarize_end.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, IntentionHero, false));
         }
     }
 }

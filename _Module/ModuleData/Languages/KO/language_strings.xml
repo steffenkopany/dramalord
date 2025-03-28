@@ -603,5 +603,7 @@
     <string id="Dramalord606" text="하하! 가서 네가 하고 싶은 대로 소문이나 퍼뜨려라, 한심한 인간아." />
     <string id="Dramalord607" text="{HERO}가 당신을 협박하고 있습니다." />
     <string id="Dramalord608" text="{HERO.LINK}가 당신과 {OTHER.LINK}를 목격했습니다. {SPOUSE.LINK}에게 말하겠다고 협박하고 있습니다. {AMOUNT}{GOLD_ICON}을 지불하지 않으면 안 됩니다. 밤에 찾아가서 해결하세요." />
+    <string id="Dramalord609" text="진정한 사랑" />
+    <string id="Dramalord610" text="가장 높은 사랑 값을 가진 상대와만 로맨틱한 상호작용이 가능합니다" />
   </strings>
 </base>

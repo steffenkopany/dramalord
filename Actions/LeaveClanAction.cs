@@ -31,7 +31,7 @@ namespace Dramalord.Actions
                 {
                     DisbandArmyAction.ApplyByUnknownReason(party.Army);
                 }
-                party.Army = null;
+                //party.Army = null;
 
                 if (party.Party.IsActive && party.Party.LeaderHero == hero)
                 {

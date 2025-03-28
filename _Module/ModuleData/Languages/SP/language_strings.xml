@@ -603,5 +603,7 @@
     <string id="Dramalord606" text="¡Ja! Ve y difunde tus rumores, pobre diablo." />
     <string id="Dramalord607" text="{HERO} te está chantajeando" />
     <string id="Dramalord608" text="{HERO.LINK} te vio con {OTHER.LINK}. Amenazan con contárselo a {SPOUSE.LINK} si no pagas {AMOUNT}{GOLD_ICON}. Visítalos por la noche para resolver este asunto." />
+    <string id="Dramalord609" text="Un amor verdadero" />
+    <string id="Dramalord610" text="Las interacciones románticas solo ocurren con quien tenga el mayor valor de amor" />
   </strings>
 </base>

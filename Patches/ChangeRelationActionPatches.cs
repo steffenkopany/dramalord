@@ -15,7 +15,7 @@ namespace Dramalord.Patches
         [HarmonyPrefix]
         public static void ApplyInternalPrefix(ref Hero originalHero, ref Hero originalGainedRelationWith, ref int relationChange, ref bool showQuickNotification, ref ChangeRelationDetail detail)
         {
-            showQuickNotification = (showQuickNotification && !DramalordMCM.Instance.ShowRelationChanges) ? false : showQuickNotification;
+            showQuickNotification = (showQuickNotification && !DramalordMCM.Instance.ShowRelationChanges && detail == ChangeRelationDetail.Default) ? false : showQuickNotification;
         }
 
         [UsedImplicitly]

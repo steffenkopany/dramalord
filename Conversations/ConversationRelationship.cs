@@ -22,7 +22,7 @@ namespace Dramalord.Conversations
 
         private static bool SpouseAway() => Hero.OneToOneConversationHero.Spouse == null || Hero.OneToOneConversationHero.Spouse == Hero.MainHero || !Hero.OneToOneConversationHero.IsCloseTo(Hero.OneToOneConversationHero.Spouse);
 
-        private static bool HasOtherSpouse() => Hero.OneToOneConversationHero.Spouse != null && !Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero);
+        private static bool HasOtherSpouse() => Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.Spouse.IsAlive && !Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero);
 
         internal static void AddDialogs(CampaignGameStarter starter)
         {
@@ -89,9 +89,10 @@ namespace Dramalord.Conversations
                     .PlayerOption("{player_interaction_marry}")
                         .GotoDialogState("npc_interaction_reply_marriage")
                         .Condition(() => !BetrothIntention.OtherMarriageModFound && Hero.MainHero.IsBetrothedOf(Hero.OneToOneConversationHero) && Hero.MainHero.CurrentSettlement != null && Hero.MainHero.CurrentSettlement == Hero.OneToOneConversationHero.CurrentSettlement)
-                    .PlayerOption("{player_interaction_breakup}")
-                        .GotoDialogState("npc_interaction_reply_breakup")
+                    .PlayerOption("{player_interaction_relationship}")
                         .Condition(() => Hero.MainHero.IsSexualWith(Hero.OneToOneConversationHero))
+                        .NpcLine("{npc_interaction_reply_talk_1}")
+                            .GotoDialogState("npc_interaction_relationship_reply")
                     .PlayerOption("{player_interaction_gift}")
                         .GotoDialogState("npc_interaction_reply_gift")
                         .Condition(() =>
@@ -142,7 +143,7 @@ namespace Dramalord.Conversations
                 .BeginNpcOptions()
                     .NpcOptionWithVariation("{npc_interaction_reply_talk_1}[ib:normal][if:convo_calm_friendly]", () => !Timeout())
                         .Variation("{npc_interaction_reply_talk_2}[ib:normal][if:convo_calm_friendly]")
-                        .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Chat, 1))
+                        .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Chat, 1, false))
                         .GotoDialogState("start_challenge")
                     .NpcOption("{npc_interaction_reply_timeout}[ib:closed][if:convo_bored]", () => Timeout())
                         .GotoDialogState("player_interaction_selection")
@@ -153,7 +154,7 @@ namespace Dramalord.Conversations
                     .NpcOptionWithVariation("{npc_interaction_reply_flirt_yes_1}[ib:normal2][if:convo_mocking_teasing]", () => (Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) >= DramalordMCM.Instance.MinAttraction) && !Timeout())
                         .Variation("{npc_interaction_reply_flirt_yes_2}[ib:normal2][if:convo_mocking_teasing]")
                         .Consequence(() => {
-                            ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Flirt, 1); 
+                            ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Flirt, 1, false); 
                         })
                         .GotoDialogState("start_challenge")
                     .NpcOption("{npc_interaction_reply_timeout}[ib:closed][if:convo_bored]", () => Timeout())
@@ -166,15 +167,15 @@ namespace Dramalord.Conversations
                 .BeginNpcOptions()
                     .NpcOptionWithVariation("{npc_interaction_reply_date_first_yes_1}[ib:confident3][if:convo_excited]", () => (SpouseAway() || !HasOtherSpouse()) && !Timeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove && !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
                         .Variation("{npc_interaction_reply_date_first_yes_2}[ib:confident3][if:convo_excited]")
-                        .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3))
+                        .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3, false))
                         .GotoDialogState("start_challenge")
                     .NpcOptionWithVariation("{npc_interaction_reply_date_yes_1}[ib:demure2][if:convo_merry]", () => (SpouseAway() || !HasOtherSpouse()) && !Timeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
                         .Variation("{npc_interaction_reply_date_yes_2}[ib:demure2][if:convo_merry]")
-                        .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3))
+                        .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3, false))
                         .GotoDialogState("start_challenge")
                     .NpcOptionWithVariation("{npc_interaction_date_married_1}[ib:demure2][if:convo_mocking_teasing]", () => SpouseAway() && HasOtherSpouse() && !Timeout() && Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
                         .Variation("{npc_interaction_date_married_2}[ib:demure2][if:convo_mocking_teasing]")
-                        .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3))
+                        .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3, false))
                         .GotoDialogState("start_challenge")
                     .NpcOption("{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", () => !Timeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > 0 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove)
                         .Consequence(() => ConversationPersuasions.CreatePersuasionTaskForDate())
@@ -267,6 +268,66 @@ namespace Dramalord.Conversations
                         .GotoDialogState("player_interaction_selection")
                 .EndNpcOptions();
 
+            DialogFlow relationshipChangeFlow = DialogFlow.CreateDialogFlow("npc_interaction_relationship_reply")
+                .BeginPlayerOptions()
+                    .PlayerOption("{player_interaction_relationship_faithful}")
+                        .Condition(() => Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Rules != RelationshipRule.Faithful)
+                        .GotoDialogState("npc_interaction_relationship_faithful")
+                    .PlayerOption("{player_interaction_relationship_playful}")
+                        .Condition(() => Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Rules != RelationshipRule.Playful)
+                        .GotoDialogState("npc_interaction_relationship_playful")
+                    .PlayerOption("{player_interaction_relationship_poly}")
+                        .Condition(() => Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Rules != RelationshipRule.Poly)
+                        .GotoDialogState("npc_interaction_relationship_poly")
+                    .PlayerOption("{player_interaction_relationship_open}")
+                        .Condition(() => Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero) && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Rules != RelationshipRule.Open)
+                        .GotoDialogState("npc_interaction_relationship_open")
+                    .PlayerOption("{player_interaction_relationship_breakup}")
+                        .GotoDialogState("npc_interaction_reply_breakup")
+                    .PlayerOption("{nevermind}")
+                        .GotoDialogState("player_interaction_selection")
+                .EndPlayerOptions();
+
+            DialogFlow relationshipFaithfulFlow = DialogFlow.CreateDialogFlow("npc_interaction_relationship_faithful")
+                .BeginNpcOptions()
+                    .NpcOption("{npc_interaction_reply_date_first_yes_1}[ib:confident3][if:convo_excited]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() == RelationshipRule.Faithful)
+                    .Consequence(() => new ChangeMarriageTypeIntention(Hero.MainHero, Hero.OneToOneConversationHero, RelationshipRule.Faithful, CampaignTime.Now).Action())
+                    .GotoDialogState("player_interaction_selection")
+                    .NpcOption("{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() != RelationshipRule.Faithful)
+                    .Consequence(() => new ChangeMarriageTypeIntention(Hero.MainHero, Hero.OneToOneConversationHero, RelationshipRule.Faithful, CampaignTime.Now).Action())
+                    .GotoDialogState("player_interaction_selection")
+                .EndNpcOptions();
+
+            DialogFlow relationshipPlayfulFlow = DialogFlow.CreateDialogFlow("npc_interaction_relationship_playful")
+                .BeginNpcOptions()
+                    .NpcOption("{npc_interaction_reply_date_first_yes_1}[ib:confident3][if:convo_excited]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() == RelationshipRule.Playful)
+                    .Consequence(() => new ChangeMarriageTypeIntention(Hero.MainHero, Hero.OneToOneConversationHero, RelationshipRule.Playful, CampaignTime.Now).Action())
+                    .GotoDialogState("player_interaction_selection")
+                    .NpcOption("{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() != RelationshipRule.Playful)
+                    .Consequence(() => new ChangeMarriageTypeIntention(Hero.MainHero, Hero.OneToOneConversationHero, RelationshipRule.Playful, CampaignTime.Now).Action())
+                    .GotoDialogState("player_interaction_selection")
+                .EndNpcOptions();
+
+            DialogFlow relationshipPolyFlow = DialogFlow.CreateDialogFlow("npc_interaction_relationship_poly")
+                .BeginNpcOptions()
+                    .NpcOption("{npc_interaction_reply_date_first_yes_1}[ib:confident3][if:convo_excited]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() == RelationshipRule.Poly)
+                    .Consequence(() => new ChangeMarriageTypeIntention(Hero.MainHero, Hero.OneToOneConversationHero, RelationshipRule.Poly, CampaignTime.Now).Action())
+                    .GotoDialogState("player_interaction_selection")
+                    .NpcOption("{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() != RelationshipRule.Poly)
+                    .Consequence(() => new ChangeMarriageTypeIntention(Hero.MainHero, Hero.OneToOneConversationHero, RelationshipRule.Poly, CampaignTime.Now).Action())
+                    .GotoDialogState("player_interaction_selection")
+                .EndNpcOptions();
+
+            DialogFlow relationshipOpenFlow = DialogFlow.CreateDialogFlow("npc_interaction_relationship_open")
+                .BeginNpcOptions()
+                    .NpcOption("{npc_interaction_reply_date_first_yes_1}[ib:confident3][if:convo_excited]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() == RelationshipRule.Open)
+                    .Consequence(() => new ChangeMarriageTypeIntention(Hero.MainHero, Hero.OneToOneConversationHero, RelationshipRule.Open, CampaignTime.Now).Action())
+                    .GotoDialogState("player_interaction_selection")
+                    .NpcOption("{npc_interaction_reply_uhwell}[ib:nervous2][if:convo_confused_normal]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() != RelationshipRule.Open)
+                    .Consequence(() => new ChangeMarriageTypeIntention(Hero.MainHero, Hero.OneToOneConversationHero, RelationshipRule.Open, CampaignTime.Now).Action())
+                    .GotoDialogState("player_interaction_selection")
+                .EndNpcOptions();
+
             DialogFlow breakupFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_breakup")
                 .BeginNpcOptions()
                     .NpcOption("{npc_interaction_breakup_love}[ib:nervous][if:convo_shocked]", () => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove && Hero.OneToOneConversationHero.GetPersonality().Neuroticism < 50)
@@ -285,7 +346,19 @@ namespace Dramalord.Conversations
                     .NpcOption("{npc_info_reply_ask_deny}[ib:hip][if:convo_annoyed]", () => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) < DramalordMCM.Instance.MinTrustFriends)
                         .GotoDialogState("player_interaction_selection")
                     .NpcOption("{npc_info_reply_ask_accept}[ib:normal2][if:convo_calm_friendly]", () => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrustFriends)
-                        .GotoDialogState("npc_interaction_reply_orientation")
+                        .GotoDialogState("npc_interaction_reply_marriage")
+                .EndNpcOptions();
+
+            DialogFlow answerMarriageFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_marriage")
+                 .BeginNpcOptions()
+                    .NpcOption("{npc_info_reply_marriage_open}[ib:demure][if:excited]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() == RelationshipRule.Open)
+                    .GotoDialogState("npc_interaction_reply_orientation")
+                    .NpcOption("{npc_info_reply_marriage_poly}[ib:demure][if:excited]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() == RelationshipRule.Poly)
+                    .GotoDialogState("npc_interaction_reply_orientation")
+                    .NpcOption("{npc_info_reply_marriage_playful}[ib:demure][if:excited]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() == RelationshipRule.Playful)
+                    .GotoDialogState("npc_interaction_reply_orientation")
+                    .NpcOption("{npc_info_reply_marriage_faithful}[ib:demure][if:excited]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() == RelationshipRule.Faithful)
+                    .GotoDialogState("npc_interaction_reply_orientation")
                 .EndNpcOptions();
 
             DialogFlow answerOrientationFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_orientation")
@@ -354,7 +427,6 @@ namespace Dramalord.Conversations
                     })
                 .GotoDialogState("player_interaction_selection");
 
-
             DialogFlow giftFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_gift")
                 .NpcLine("{npc_interaction_reply_gift}[ib:normal2][if:convo_mocking_teasing]")
                 .Consequence(() =>
@@ -392,9 +464,15 @@ namespace Dramalord.Conversations
             Campaign.Current.ConversationManager.AddDialogFlow(dateFlow);
             Campaign.Current.ConversationManager.AddDialogFlow(sexFlow);
             Campaign.Current.ConversationManager.AddDialogFlow(engageFlow);
-            Campaign.Current.ConversationManager.AddDialogFlow(marryFlow);
+            Campaign.Current.ConversationManager.AddDialogFlow(marryFlow); 
+            Campaign.Current.ConversationManager.AddDialogFlow(relationshipChangeFlow);
+            Campaign.Current.ConversationManager.AddDialogFlow(relationshipFaithfulFlow);
+            Campaign.Current.ConversationManager.AddDialogFlow(relationshipPlayfulFlow);
+            Campaign.Current.ConversationManager.AddDialogFlow(relationshipPolyFlow);
+            Campaign.Current.ConversationManager.AddDialogFlow(relationshipOpenFlow);
             Campaign.Current.ConversationManager.AddDialogFlow(breakupFlow);
-            Campaign.Current.ConversationManager.AddDialogFlow(askFlow);
+            Campaign.Current.ConversationManager.AddDialogFlow(askFlow); 
+            Campaign.Current.ConversationManager.AddDialogFlow(answerMarriageFlow);
             Campaign.Current.ConversationManager.AddDialogFlow(answerOrientationFlow);
             Campaign.Current.ConversationManager.AddDialogFlow(answerWeightFlow);
             Campaign.Current.ConversationManager.AddDialogFlow(answerBuildFlow);
@@ -417,7 +495,7 @@ namespace Dramalord.Conversations
             ConversationLines.player_interaction_sex.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));// "{=Dramalord345}I want you. I know you feel the same way. Meet me in my chambers. (Intimacy)");
             ConversationLines.player_interaction_engage.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));// "{=Dramalord346}I love you very much, {TITLE}. Will you marry me? (Betrothed)");
             ConversationLines.player_interaction_marry.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));// "{=Dramalord347}We are in a settlement, {TITLE}, let's  get married! (Marriage)");
-            ConversationLines.player_interaction_breakup.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));// "{=Dramalord348}It's just not working between you and I. Let's end this farce before it festers. (Break up)");
+            ConversationLines.player_interaction_relationship_breakup.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));// "{=Dramalord348}It's just not working between you and I. Let's end this farce before it festers. (Break up)");
             ConversationLines.player_interaction_abort.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));//"{=Dramalord101}Let's talk about something else, {TITLE}.");
             ConversationLines.player_interaction_gift.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, true));//"{=Dramalord292}{TITLE}, let me give you this exceptional {GIFT} as a token of my affection.");
             ConversationLines.player_info_ask.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, true));//"{=Dramalord318}{TITLE} I always wondered what looks you prefer. (Information)");

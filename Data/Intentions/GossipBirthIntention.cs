@@ -109,13 +109,13 @@ namespace Dramalord.Data.Intentions
                                             () => {
                                                 if (Hero.MainHero.IsEmotionalWith(gossip.IntentionHero))
                                                 {
-                                                    ConfrontHeroQuest quest = new ConfrontHeroQuest(gossip.IntentionHero, gossip, CampaignTime.DaysFromNow(7));
+                                                    ConfrontHeroQuest quest = new ConfrontHeroQuest(gossip.IntentionHero, (ConversationTools.ConversationIntention as GossipBirthIntention), CampaignTime.DaysFromNow(7));
                                                     quest.StartQuest();
                                                 }
 
                                                 if (Hero.MainHero.IsEmotionalWith(gossip.Target))
                                                 {
-                                                    ConfrontHeroQuest quest = new ConfrontHeroQuest(gossip.Target, gossip, CampaignTime.DaysFromNow(7));
+                                                    ConfrontHeroQuest quest = new ConfrontHeroQuest(gossip.Target, (ConversationTools.ConversationIntention as GossipBirthIntention), CampaignTime.DaysFromNow(7));
                                                     quest.StartQuest();
                                                 }
                                             },
@@ -151,6 +151,8 @@ namespace Dramalord.Data.Intentions
             ConversationLines.npc_gossip_child.SetTextVariable("HERO", EventIntention.IntentionHero.Name);
             ConversationLines.npc_gossip_child.SetTextVariable("OTHER", EventIntention.Pregnancy.Father.Name);
             ConversationLines.npc_starts_confrontation_known.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Hero.MainHero, false));
+            ConversationLines.player_interaction_abort.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, IntentionHero, false));
+            ConversationLines.npc_challenge_summarize_end.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, IntentionHero, false));
         }
     }
 }

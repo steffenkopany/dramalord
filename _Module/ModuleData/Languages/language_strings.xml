@@ -170,7 +170,7 @@
     <string id="Dramalord173" text="my spouse" />
     <string id="Dramalord174" text="my friend" />
     <string id="Dramalord175" text="my acquaintance" />
-    <string id="Dramalord176" text="It is apparent that you and {HERO.LINK} often conduct 'private meetings'. Have you forgotten that you are {STATUS}?" />
+    <string id="Dramalord176" text="It is apparent that you and {HERO} often conduct 'private meetings'. Have you forgotten that you are {STATUS}?" />
     <string id="Dramalord177" text="So, {HERO} has been keeping you entertained in bed? You are {STATUS}, or has that slipped your mind?" />
     <string id="Dramalord178" text="{HERO} has given birth to {CHILD}, and it seems you are the father. I thought you were {STATUS}?" />
     <string id="Dramalord179" text="Relation loss with {HERO}. (Love {NUM}, Trust {NUM2})" />
@@ -603,5 +603,24 @@
     <string id="Dramalord606" text="Haha! Go and spread your rumors you sad human being." />
     <string id="Dramalord607" text="{HERO} is blackmailing you" />
     <string id="Dramalord608" text="{HERO.LINK} saw you and {OTHER.LINK}. They threaten you to tell {SPOUSE.LINK} if you do not pay them {AMOUNT}{GOLD_ICON}. Visit them during night time and resolve that matter." />
+    <string id="Dramalord609" text="One True Love" />
+    <string id="Dramalord610" text="Romantic interactions are only happening with the one with the highest love value" />
+    <string id="Dramalord611" text="Has toy" />
+    <string id="Dramalord612" text="Marriage type" />
+    <string id="Dramalord613" text="Faithful" />
+    <string id="Dramalord614" text="Playful" />
+    <string id="Dramalord615" text="Poly" />
+    <string id="Dramalord616" text="Open" />
+    <string id="Dramalord617" text="I dream of a faithful marriage, where my partner and myself only have eyes for each other." />
+    <string id="Dramalord618" text="I wish for a marriage based on true love, where one or two adventures once in a while won't matter." />
+    <string id="Dramalord619" text="I long for a faithful marriage. It doesn't matter if the marriage consists of more then two people, as long as we keep private things to ourselves." />
+    <string id="Dramalord620" text="I think marriage is a political instrument, while love is something beautiful which should be shared with many people without jealousy." />
+    <string id="Dramalord621" text="The type of marriage this hero would prefer." />
+    <string id="Dramalord622" text="I would like to talk about our relationship." />
+    <string id="Dramalord623" text="I want us to be faithful and lever lie an eye on somebody else." />
+    <string id="Dramalord624" text="Our love shall never be shared, while our bodies may seek pleasure with others." />
+    <string id="Dramalord625" text="Our marriage shall be faithful, but there is place for more then two." />
+    <string id="Dramalord626" text="We have much love to give, so let's share it with others too." />
+    <string id="Dramalord627" text="You are insane! I would never agree to that!" />
   </strings>
 </base>

@@ -49,6 +49,10 @@ namespace Dramalord
         public bool AllowSocialClassMix { get; set; } = true;
 
         [SettingPropertyGroup("{=Dramalord001}Autonomy")]
+        [SettingPropertyBool("{=Dramalord609}One True Love", HintText = "{=Dramalord610}Romantic interactions are only happening with the one with the highest love value", Order = 10, RequireRestart = false)]
+        public bool OneTrueLove { get; set; } = false;
+
+        [SettingPropertyGroup("{=Dramalord001}Autonomy")]
         [SettingPropertyBool("{=Dramalord574}Join Clan On Marriage", HintText = "{=Dramalord575}Allow AI to join the clan of their spouse (otherwise they're just married)", Order = 11, RequireRestart = false)]
         public bool JoinClanOnMarriage { get; set; } = true;
 

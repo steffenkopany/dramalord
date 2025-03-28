@@ -182,13 +182,10 @@ namespace Dramalord.Conversations
                                     .EndNpcOptions()
                                 .PlayerOption("{player_wants_kill}")
                                     .BeginNpcOptions()
-                                        .NpcOption("{npc_kill_reaction_no}", () => Hero.OneToOneConversationHero.GetHeroTraits().Valor <= 0 && Hero.OneToOneConversationHero.GetHeroTraits().Honor > 0)
-                                            .Consequence(() => MBInformationManager.ShowSceneNotification(HeroExecutionSceneNotificationData.CreateForPlayerExecutingHero(Hero.OneToOneConversationHero, null)))
-                                            .CloseDialog()
                                         .NpcOption("{npc_kill_reaction_yes}", () => Hero.OneToOneConversationHero.GetHeroTraits().Valor > 0 && Hero.OneToOneConversationHero.GetHeroTraits().Honor > 0)
                                             .Consequence(() => MBInformationManager.ShowSceneNotification(HeroExecutionSceneNotificationData.CreateForPlayerExecutingHero(Hero.OneToOneConversationHero, null)))
                                             .CloseDialog()
-                                        .NpcOption("{npc_kill_reaction_offer}", () => Hero.OneToOneConversationHero.GetHeroTraits().Valor <= 0 && Hero.OneToOneConversationHero.GetHeroTraits().Honor <= 0)
+                                        .NpcOption("{npc_kill_reaction_offer}", () => Hero.OneToOneConversationHero.GetHeroTraits().Valor <= 0 || Hero.OneToOneConversationHero.GetHeroTraits().Honor <= 0)
                                             .BeginPlayerOptions()
                                                 .PlayerOption("{player_choose_pleasure_yes}")
                                                     .Consequence(() => ConversationTools.ConversationIntention = new PrisonIntercourseIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, true))
@@ -198,7 +195,10 @@ namespace Dramalord.Conversations
                                                     .CloseDialog()
                                             .EndPlayerOptions()
                                     .EndNpcOptions()
-                            .EndNpcOptions()
+                                .PlayerOption("{nevermind}")
+                                    .NpcLine("{npc_as_you_wish_reply}")
+                                        .GotoDialogState("hero_main_options")
+                            .EndPlayerOptions()
                         .NpcOption("{npc_prisoner_reply_no}[ib:aggressive][if:convo_grave]", () => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) <= DramalordMCM.Instance.MaxTrustEnemies)
                             .GotoDialogState("hero_main_options")
                     .EndNpcOptions()
@@ -225,6 +225,7 @@ namespace Dramalord.Conversations
             ConversationLines.npc_kill_reaction_offer.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));//new("{=Dramalord282}Wait {TITLE}! Why choose death if there's also pleasure?");
             ConversationLines.player_choose_pleasure_yes.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));//new("{=Dramalord283}Hmm... Alright. I accept. I spare you this time if you perform well.");
             ConversationLines.player_choose_pleasure_no.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false));//new("{=Dramalord284}Well, your death is my sweetest pleasure.");
+            ConversationLines.npc_as_you_wish_reply.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
             return true;
         }
     }
