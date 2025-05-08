@@ -635,5 +635,23 @@
     <string id="Dramalord608" text="{HERO.LINK}, seni {OTHER.LINK} ile gördü. Eğer {AMOUNT}{GOLD_ICON} ödemezsen, {SPOUSE.LINK}'e her şeyi anlatmakla tehdit ediyorlar. Gece vakti onlarla konuşup bu meseleyi çöz." />
     <string id="Dramalord609" text="Tek Gerçek Aşk" />
     <string id="Dramalord610" text="Romantik etkileşimler yalnızca en yüksek aşk değerine sahip kişiyle gerçekleşir" />
+    <string id="Dramalord611" text="Oyuncağı var" />
+    <string id="Dramalord612" text="Evlilik türü" />
+    <string id="Dramalord613" text="Sadık" />
+    <string id="Dramalord614" text="Oyunbaz" />
+    <string id="Dramalord615" text="Çok eşli" />
+    <string id="Dramalord616" text="Açık" />
+    <string id="Dramalord617" text="Sadece eşimle birbirimize sadık olduğumuz bir evlilik hayal ediyorum." />
+    <string id="Dramalord618" text="Gerçek aşka dayalı bir evlilik istiyorum, ara sıra yaşanan maceralar önemli değil." />
+    <string id="Dramalord619" text="Sadık bir evlilik istiyorum. Kaç kişi olduğunun önemi yok, yeter ki özel hayatımıza saygı duyulsun." />
+    <string id="Dramalord620" text="Evliliğin politik bir araç olduğunu, aşkın ise kıskançlık olmadan birçok kişiyle paylaşılması gereken güzel bir şey olduğunu düşünüyorum." />
+    <string id="Dramalord621" text="Bu kahramanın tercih ettiği evlilik türü." />
+    <string id="Dramalord622" text="İlişkimiz hakkında konuşmak istiyorum." />
+    <string id="Dramalord623" text="Sadık kalalım ve başka kimseye göz dikmeyelim istiyorum." />
+    <string id="Dramalord624" text="Aşkımız paylaşılmamalı, ama bedenlerimiz başkalarıyla zevk arayabilir." />
+    <string id="Dramalord625" text="Evliliğimiz sadık olmalı ama iki kişiden fazlasını da kapsayabilir." />
+    <string id="Dramalord626" text="Verecek çok sevgimiz var, bunu başkalarıyla da paylaşalım." />
+    <string id="Dramalord627" text="Sen delisin! Bunu asla kabul etmem!" />
+    <string id="Dramalord628" text="Beni küfürlerinle rahatsız etmeyi bırak! Defol!" />
   </strings>
 </base>

@@ -605,5 +605,23 @@
     <string id="Dramalord608" text="{HERO.LINK}看到你和{OTHER.LINK}在一起。他们威胁要告诉{SPOUSE.LINK}，除非你支付{AMOUNT}{GOLD_ICON}。晚上去找他们，解决这个问题。" />
     <string id="Dramalord609" text="唯一真爱" />
     <string id="Dramalord610" text="浪漫互动仅限于爱意值最高的人" />
+    <string id="Dramalord611" text="有玩具" />
+    <string id="Dramalord612" text="婚姻类型" />
+    <string id="Dramalord613" text="忠诚" />
+    <string id="Dramalord614" text="爱玩" />
+    <string id="Dramalord615" text="多元" />
+    <string id="Dramalord616" text="开放" />
+    <string id="Dramalord617" text="我梦想一段忠诚的婚姻，伴侣和我只在乎彼此。" />
+    <string id="Dramalord618" text="我希望婚姻建立在真爱之上，偶尔的冒险无伤大雅。" />
+    <string id="Dramalord619" text="我渴望一段忠诚的婚姻。无论婚姻是否有多个人参与，只要我们保持私密性即可。" />
+    <string id="Dramalord620" text="我认为婚姻是政治工具，而爱情是一种美丽的事物，应该与许多人共享，而没有嫉妒。" />
+    <string id="Dramalord621" text="这个英雄偏好的婚姻类型。" />
+    <string id="Dramalord622" text="我想谈谈我们的关系。" />
+    <string id="Dramalord623" text="我希望我们彼此忠诚，绝不对别人动心。" />
+    <string id="Dramalord624" text="我们的爱不会被分享，但我们的身体可以寻求别人的欢愉。" />
+    <string id="Dramalord625" text="我们的婚姻应该是忠诚的，但可以容纳不止两个人。" />
+    <string id="Dramalord626" text="我们有很多爱要给予，让我们也与他人分享吧。" />
+    <string id="Dramalord627" text="你疯了吗？我永远不会同意这个！" />
+    <string id="Dramalord628" text="别再用你的亵渎打扰我了！快滚！" />
   </strings>
 </base>

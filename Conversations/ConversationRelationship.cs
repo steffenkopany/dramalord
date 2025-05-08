@@ -3,15 +3,10 @@ using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
 using Dramalord.Quests;
 using Helpers;
-using SandBox.Conversation.MissionLogics;
-using SandBox.Missions.MissionLogics;
-using System.Collections.Generic;
-using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade;
 using TaleWorlds.ObjectSystem;
 
 namespace Dramalord.Conversations
@@ -20,7 +15,7 @@ namespace Dramalord.Conversations
     {
         private static bool Timeout() => Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow < DramalordMCM.Instance.DaysBetweenInteractions;
 
-        private static bool SpouseAway() => Hero.OneToOneConversationHero.Spouse == null || Hero.OneToOneConversationHero.Spouse == Hero.MainHero || !Hero.OneToOneConversationHero.IsCloseTo(Hero.OneToOneConversationHero.Spouse);
+        private static bool SpouseAway() => Hero.OneToOneConversationHero.Spouse == null || Hero.OneToOneConversationHero.Spouse == Hero.MainHero || !Hero.OneToOneConversationHero.IsCloseTo(Hero.OneToOneConversationHero.Spouse) || Hero.OneToOneConversationHero.GetRelationTo(Hero.OneToOneConversationHero.Spouse).Rules == RelationshipRule.Open;
 
         private static bool HasOtherSpouse() => Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.Spouse.IsAlive && !Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero);
 
@@ -136,7 +131,7 @@ namespace Dramalord.Conversations
                 .EndPlayerOptions();
 
             DialogFlow abortFlow = DialogFlow.CreateDialogFlow("npc_interaction_abort")
-                .NpcLine("{npc_interaction_abort}")
+                .NpcLine("{npc_as_you_wish_reply}")
                     .GotoDialogState("hero_main_options");
 
             DialogFlow talkFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_talk")
@@ -285,7 +280,8 @@ namespace Dramalord.Conversations
                     .PlayerOption("{player_interaction_relationship_breakup}")
                         .GotoDialogState("npc_interaction_reply_breakup")
                     .PlayerOption("{nevermind}")
-                        .GotoDialogState("player_interaction_selection")
+                        .NpcLine("{npc_as_you_wish_reply}")
+                            .GotoDialogState("player_interaction_selection")
                 .EndPlayerOptions();
 
             DialogFlow relationshipFaithfulFlow = DialogFlow.CreateDialogFlow("npc_interaction_relationship_faithful")
@@ -346,10 +342,10 @@ namespace Dramalord.Conversations
                     .NpcOption("{npc_info_reply_ask_deny}[ib:hip][if:convo_annoyed]", () => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) < DramalordMCM.Instance.MinTrustFriends)
                         .GotoDialogState("player_interaction_selection")
                     .NpcOption("{npc_info_reply_ask_accept}[ib:normal2][if:convo_calm_friendly]", () => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrustFriends)
-                        .GotoDialogState("npc_interaction_reply_marriage")
+                        .GotoDialogState("npc_interaction_reply_marriage_info")
                 .EndNpcOptions();
 
-            DialogFlow answerMarriageFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_marriage")
+            DialogFlow answerMarriageFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_marriage_info")
                  .BeginNpcOptions()
                     .NpcOption("{npc_info_reply_marriage_open}[ib:demure][if:excited]", () => Hero.OneToOneConversationHero.GetDefaultRelationshipRule() == RelationshipRule.Open)
                     .GotoDialogState("npc_interaction_reply_orientation")
@@ -371,7 +367,7 @@ namespace Dramalord.Conversations
                             : desires.AttractionMen < DramalordMCM.Instance.MinAttraction && desires.AttractionWomen >= DramalordMCM.Instance.MinAttraction;
                     })
                     .GotoDialogState("npc_interaction_reply_weight")
-                    .NpcOption("{npc_info_reply_orientation_hetero_gay}[ib:demure][if:convo_approving]", () =>
+                    .NpcOption("{npc_info_reply_orientation_gay}[ib:demure][if:convo_approving]", () =>
                     {
                         HeroDesires desires = Hero.OneToOneConversationHero.GetDesires();
                         Hero o2o = Hero.OneToOneConversationHero;

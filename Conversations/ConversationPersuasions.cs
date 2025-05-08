@@ -197,5 +197,20 @@ namespace Dramalord.Conversations
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.OneHanded, DefaultTraits.Mercy, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord437}Then we release each other and go back to manual work."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             CurrentTask = persuasionTask;
         }
+
+        internal static void CreatePersuasionTaskForMarriageType()
+        {
+            PersuasionTask persuasionTask = new PersuasionTask(3);
+            persuasionTask.SpokenLine = new TextObject("{=Dramalord428}This is all so overwhelming... I love you, {PLAYER.NAME}, but are we truly ready?");
+            persuasionTask.TryLaterLine = FWB;
+            int trustDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinTrustFWB - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero)) * -1) / 10, -3, 3);
+            PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)trustDiff;
+
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Roguery, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord429}Love is an adventure and this will be our next challenge!"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord435}Then we re-evaluate the situation and draw our conclusions."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord436}Think about all the pleasure we could give each other."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Tactics, DefaultTraits.Mercy, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord430}If you think about it, this is logically the next step."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            CurrentTask = persuasionTask;
+        }
     }
 }

@@ -144,9 +144,11 @@ namespace Dramalord
         [SettingPropertyBool("{=Dramalord213}Player Always Witness", Order = 6, HintText = "{=Dramalord214}The player will always be witness of events", RequireRestart = false)]
         public bool PlayerAlwaysWitness { get; set; } = true;
 
+        /*
         [SettingPropertyGroup("{=Dramalord016}General")]
         [SettingPropertyBool("{=Dramalord494}Player Spouse Faithful", Order = 10, HintText = "{=Dramalord495}The spouse of the player will not interact with anyone else", RequireRestart = false)]
         public bool PlayerSpouseFaithful { get; set; } = false;
+        */
 
         [SettingPropertyGroup("{=Dramalord016}General")]
         [SettingPropertyFloatingInteger("{=Dramalord311}Quest Chance", 0, 100, Order = 11, HintText = "{=Dramalord312}Chance that a lover of the player starts a quest", RequireRestart = false)]

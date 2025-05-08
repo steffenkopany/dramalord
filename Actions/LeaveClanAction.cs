@@ -29,9 +29,11 @@ namespace Dramalord.Actions
                 MobileParty party = hero.PartyBelongedTo;
                 if (party.Army != null && party.Army.LeaderParty == party)
                 {
-                    DisbandArmyAction.ApplyByUnknownReason(party.Army);
+                    if(party.Party.LeaderHero == hero)
+                    {
+                        DisbandArmyAction.ApplyByUnknownReason(party.Army);
+                    }
                 }
-                //party.Army = null;
 
                 if (party.Party.IsActive && party.Party.LeaderHero == hero)
                 {

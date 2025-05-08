@@ -77,6 +77,9 @@ namespace Dramalord.Data.Intentions
                     .PlayerOption("{player_interaction_start_react_no}")
                         .Consequence(() => ConversationTools.EndConversation())
                         .CloseDialog()
+                    .PlayerOption("{player_stop_bothering}")
+                        .Consequence(() => { new ChangeOpinionIntention(Hero.OneToOneConversationHero, Hero.MainHero, (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > DramalordMCM.Instance.MaxTrustEnemies) ? DramalordMCM.Instance.MaxTrustEnemies - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love : 0, 0, CampaignTime.Now).Action(); ConversationTools.EndConversation(); })
+                        .CloseDialog()
                 .EndPlayerOptions();
                 
 

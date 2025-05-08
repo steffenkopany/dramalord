@@ -605,5 +605,23 @@
     <string id="Dramalord608" text="{HERO.LINK}はあなたと{OTHER.LINK}を見た。{SPOUSE.LINK}に告げると脅している。{AMOUNT}{GOLD_ICON}を払わなければならない。夜に訪れて、この問題を解決しよう。" />
     <string id="Dramalord609" text="唯一の真実の愛" />
     <string id="Dramalord610" text="ロマンチックな交流は、最も高い愛の値を持つ者とだけ発生する" />
+    <string id="Dramalord611" text="おもちゃを持っている" />
+    <string id="Dramalord612" text="結婚の種類" />
+    <string id="Dramalord613" text="誠実" />
+    <string id="Dramalord614" text="遊び好き" />
+    <string id="Dramalord615" text="ポリ" />
+    <string id="Dramalord616" text="オープン" />
+    <string id="Dramalord617" text="私は誠実な結婚を夢見ています。パートナーと私はお互いだけを愛する関係が理想です。" />
+    <string id="Dramalord618" text="私は真実の愛に基づいた結婚を望んでいます。たまに冒険があっても構いません。" />
+    <string id="Dramalord619" text="私は誠実な結婚を望みます。たとえ複数人の関係でも、プライベートなことが守られれば問題ありません。" />
+    <string id="Dramalord620" text="結婚は政治的な手段であり、愛は美しいもので、嫉妬なく多くの人と分かち合うべきだと思います。" />
+    <string id="Dramalord621" text="この英雄が望む結婚の形。" />
+    <string id="Dramalord622" text="私たちの関係について話したい。" />
+    <string id="Dramalord623" text="私たちは誠実であり、お互いだけを見つめるべきだと思う。" />
+    <string id="Dramalord624" text="私たちの愛は決して共有されるべきではありませんが、肉体的な楽しみは他で求めてもよいでしょう。" />
+    <string id="Dramalord625" text="私たちの結婚は誠実であるべきですが、二人以上でも構いません。" />
+    <string id="Dramalord626" text="私たちには分かち合うべき愛がたくさんあります。他の人とも共有しましょう。" />
+    <string id="Dramalord627" text="正気か？そんなこと絶対に受け入れられない！" />
+    <string id="Dramalord628" text="その汚い言葉で私を煩わせるな！消えろ！" />
   </strings>
 </base>

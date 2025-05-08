@@ -605,5 +605,23 @@
     <string id="Dramalord608" text="{HERO.LINK}가 당신과 {OTHER.LINK}를 목격했습니다. {SPOUSE.LINK}에게 말하겠다고 협박하고 있습니다. {AMOUNT}{GOLD_ICON}을 지불하지 않으면 안 됩니다. 밤에 찾아가서 해결하세요." />
     <string id="Dramalord609" text="진정한 사랑" />
     <string id="Dramalord610" text="가장 높은 사랑 값을 가진 상대와만 로맨틱한 상호작용이 가능합니다" />
+    <string id="Dramalord611" text="장난감이 있음" />
+    <string id="Dramalord612" text="결혼 유형" />
+    <string id="Dramalord613" text="충실한" />
+    <string id="Dramalord614" text="장난기 많은" />
+    <string id="Dramalord615" text="폴리" />
+    <string id="Dramalord616" text="오픈" />
+    <string id="Dramalord617" text="나는 나와 내 배우자가 서로에게만 충실한 결혼을 꿈꿉니다." />
+    <string id="Dramalord618" text="나는 진정한 사랑에 기반한 결혼을 원합니다. 가끔씩의 모험은 상관없어요." />
+    <string id="Dramalord619" text="나는 충실한 결혼을 원합니다. 두 명 이상이 포함되더라도 우리의 사적인 관계를 지킨다면 문제되지 않습니다." />
+    <string id="Dramalord620" text="나는 결혼이 정치적 도구라고 생각하며, 사랑은 아름다운 것이므로 질투 없이 많은 사람과 나눠야 한다고 생각합니다." />
+    <string id="Dramalord621" text="이 영웅이 선호하는 결혼 유형입니다." />
+    <string id="Dramalord622" text="우리 관계에 대해 이야기하고 싶어요." />
+    <string id="Dramalord623" text="우리는 서로에게만 충실하고, 다른 사람에게 눈을 돌려서는 안 돼요." />
+    <string id="Dramalord624" text="우리의 사랑은 공유되지 않아야 하지만, 육체적인 즐거움은 다른 사람과 나눠도 돼요." />
+    <string id="Dramalord625" text="우리의 결혼은 충실해야 하지만, 두 명 이상도 포함될 수 있어요." />
+    <string id="Dramalord626" text="우리는 줄 사랑이 많아요. 다른 사람들과도 나눕시다." />
+    <string id="Dramalord627" text="너 미쳤어? 절대 동의할 수 없어!" />
+    <string id="Dramalord628" text="그런 상스러운 말로 귀찮게 하지 마! 꺼져!" />
   </strings>
 </base>

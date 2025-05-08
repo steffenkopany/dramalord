@@ -605,5 +605,23 @@
     <string id="Dramalord608" text="{HERO.LINK} te vio con {OTHER.LINK}. Amenazan con contárselo a {SPOUSE.LINK} si no pagas {AMOUNT}{GOLD_ICON}. Visítalos por la noche para resolver este asunto." />
     <string id="Dramalord609" text="Un amor verdadero" />
     <string id="Dramalord610" text="Las interacciones románticas solo ocurren con quien tenga el mayor valor de amor" />
+    <string id="Dramalord611" text="Tiene un juguete" />
+    <string id="Dramalord612" text="Tipo de matrimonio" />
+    <string id="Dramalord613" text="Fiel" />
+    <string id="Dramalord614" text="Juguetón" />
+    <string id="Dramalord615" text="Poliamoroso" />
+    <string id="Dramalord616" text="Abierto" />
+    <string id="Dramalord617" text="Sueño con un matrimonio fiel, donde mi pareja y yo solo tengamos ojos el uno para el otro." />
+    <string id="Dramalord618" text="Deseo un matrimonio basado en el amor verdadero, donde una o dos aventuras de vez en cuando no importen." />
+    <string id="Dramalord619" text="Anhelo un matrimonio fiel. No importa si somos más de dos, mientras mantengamos nuestra vida privada solo entre nosotros." />
+    <string id="Dramalord620" text="Creo que el matrimonio es una herramienta política, mientras que el amor es algo hermoso que debe compartirse con muchas personas sin celos." />
+    <string id="Dramalord621" text="El tipo de matrimonio que este héroe preferiría." />
+    <string id="Dramalord622" text="Me gustaría hablar sobre nuestra relación." />
+    <string id="Dramalord623" text="Quiero que seamos fieles y que nunca pongamos los ojos en otra persona." />
+    <string id="Dramalord624" text="Nuestro amor nunca se compartirá, pero nuestros cuerpos pueden buscar placer con otros." />
+    <string id="Dramalord625" text="Nuestro matrimonio será fiel, pero hay lugar para más de dos." />
+    <string id="Dramalord626" text="Tenemos mucho amor para dar, así que compartámoslo con otros también." />
+    <string id="Dramalord627" text="¡Estás loco! ¡Nunca aceptaría eso!" />
+    <string id="Dramalord628" text="¡Deja de molestarme con tus blasfemias! ¡Fuera!" />
   </strings>
 </base>

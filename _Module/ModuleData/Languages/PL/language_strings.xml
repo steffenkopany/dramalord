@@ -605,5 +605,23 @@
     <string id="Dramalord608" text="{HERO.LINK} widział cię z {OTHER.LINK}. Grozi, że wszystko powie {SPOUSE.LINK}, jeśli nie zapłacisz {AMOUNT}{GOLD_ICON}. Odwiedź go w nocy i rozwiąż ten problem." />
     <string id="Dramalord609" text="Jedyna prawdziwa miłość" />
     <string id="Dramalord610" text="Interakcje romantyczne są możliwe tylko z osobą o najwyższej wartości miłości" />
+    <string id="Dramalord611" text="Ma zabawkę" />
+    <string id="Dramalord612" text="Typ małżeństwa" />
+    <string id="Dramalord613" text="Wierny" />
+    <string id="Dramalord614" text="Zabawowy" />
+    <string id="Dramalord615" text="Poli" />
+    <string id="Dramalord616" text="Otwarty" />
+    <string id="Dramalord617" text="Marzę o wiernym małżeństwie, w którym ja i mój partner mamy oczy tylko dla siebie." />
+    <string id="Dramalord618" text="Chcę małżeństwa opartego na prawdziwej miłości, gdzie od czasu do czasu przygody nie będą miały znaczenia." />
+    <string id="Dramalord619" text="Pragnę wiernego małżeństwa. Nie ma znaczenia, ile osób jest zaangażowanych, dopóki zachowujemy naszą prywatność." />
+    <string id="Dramalord620" text="Uważam, że małżeństwo to narzędzie polityczne, a miłość to piękna rzecz, którą należy dzielić z wieloma osobami bez zazdrości." />
+    <string id="Dramalord621" text="Rodzaj małżeństwa preferowany przez tego bohatera." />
+    <string id="Dramalord622" text="Chciałbym porozmawiać o naszym związku." />
+    <string id="Dramalord623" text="Chcę, abyśmy byli wierni i nigdy nie patrzyli na nikogo innego." />
+    <string id="Dramalord624" text="Nasza miłość nigdy nie powinna być dzielona, ale nasze ciała mogą szukać przyjemności gdzie indziej." />
+    <string id="Dramalord625" text="Nasze małżeństwo powinno być wierne, ale może obejmować więcej niż dwie osoby." />
+    <string id="Dramalord626" text="Mamy dużo miłości do rozdania, więc podzielmy się nią z innymi." />
+    <string id="Dramalord627" text="Jesteś szalony! Nigdy się na to nie zgodzę!" />
+    <string id="Dramalord628" text="Przestań mnie dręczyć swoimi bluźnierstwami! Wynoś się!" />
   </strings>
 </base>

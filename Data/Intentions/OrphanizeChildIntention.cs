@@ -30,7 +30,7 @@ namespace Dramalord.Data.Intentions
                 MBInformationManager.AddQuickInformation(textObject, 0, IntentionHero.CharacterObject, "event:/ui/notification/relation");
             }
 
-            if (oldClan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions)
+            if (DramalordMCM.Instance.ChildrenEventLogs && (IntentionHero.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
             {
                 LogEntry.AddLogEntry(new OrphanizeChildLog(IntentionHero, Target));
             }

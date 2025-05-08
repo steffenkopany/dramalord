@@ -45,7 +45,7 @@ namespace Dramalord.Data.Intentions
                 MBInformationManager.AddNotice(new ChildBornMapNotification(child, textObject, CampaignTime.Now));
             }
 
-            if((IntentionHero.Clan == Clan.PlayerClan && IntentionHero != Hero.MainHero) || (Pregnancy.Father.Clan != null && Pregnancy.Father.Clan == Clan.PlayerClan))
+            if(!IntentionHero.IsSpouseOf(Pregnancy.Father) && ((IntentionHero.Clan == Clan.PlayerClan && IntentionHero != Hero.MainHero) || (Pregnancy.Father.Clan != null && Pregnancy.Father.Clan == Clan.PlayerClan)))
             {
                 int speed = (int)Campaign.Current.TimeControlMode;
                 Campaign.Current.SetTimeSpeed(0);
@@ -64,13 +64,36 @@ namespace Dramalord.Data.Intentions
                             new TextObject("{=Dramalord526}Get rid of the child").ToString(),
                             new TextObject("{=Dramalord527}Keep the child").ToString(),
                             () => { DramalordIntentions.Instance.GetIntentions().Add(new OrphanizeChildIntention(child, IntentionHero, CampaignTime.DaysFromNow(1))); Campaign.Current.SetTimeSpeed(speed); },
-                            () => { Campaign.Current.SetTimeSpeed(speed); }), true);
+                            () => { 
+                                if(Pregnancy.Father == Hero.MainHero && IntentionHero.Clan != Clan.PlayerClan)
+                                {
+                                    title = new TextObject("Accept child in your clan?");
+                                    text = new TextObject("Do you want {CHILD} to join your clan and grow up with your family?");
+                                    text.SetTextVariable("CHILD", child?.Name);
+                                    InformationManager.ShowInquiry(
+                                    new InquiryData(
+                                        title.ToString(),
+                                        text.ToString(),
+                                        true,
+                                        true,
+                                        GameTexts.FindText("str_yes").ToString(),
+                                        GameTexts.FindText("str_no").ToString(),
+                                        () => { child.Clan = Clan.PlayerClan; Campaign.Current.SetTimeSpeed(speed); },
+                                        () => { child.Clan = IntentionHero.Clan; Campaign.Current.SetTimeSpeed(speed); }
+                                        )
+                                    );
+                                }
+                                else
+                                {
+                                    Campaign.Current.SetTimeSpeed(speed);
+                                } 
+                            }), true);
             }
-            else if ((IntentionHero.Spouse == null || (IntentionHero.Spouse != Pregnancy.Father && IntentionHero.GetRelationTo(Pregnancy.Father).Relationship != RelationshipType.Spouse)) && ((IntentionHero.Clan != null && IntentionHero.Clan != Clan.PlayerClan && !DramalordMCM.Instance.KeepClanChildren) || (IntentionHero.Clan == null && !DramalordMCM.Instance.KeepNotableChildren)))
+            else if (!IntentionHero.IsSpouseOf(Pregnancy.Father) && ((IntentionHero.Clan != null && IntentionHero.Clan != Clan.PlayerClan && !DramalordMCM.Instance.KeepClanChildren) || (IntentionHero.Clan == null && !DramalordMCM.Instance.KeepNotableChildren)))
             {
                 DramalordIntentions.Instance.GetIntentions().Add(new OrphanizeChildIntention(child, IntentionHero, CampaignTime.DaysFromNow(1)));
             }
-            else if (child.Clan == Clan.PlayerClan && child.Occupation == Occupation.Wanderer)
+            else if (child.Clan == Clan.PlayerClan && child.Occupation != Occupation.Lord)
             {
                 if (Pregnancy.Father == Hero.MainHero || IntentionHero == Hero.MainHero)
                 {
@@ -90,7 +113,7 @@ namespace Dramalord.Data.Intentions
                 child.SetNewOccupation(Occupation.NotAssigned); //TODO thats some workaround
             }
 
-            if (IntentionHero.Clan == Clan.PlayerClan || Pregnancy.Father.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions)
+            if (DramalordMCM.Instance.ChildrenEventLogs && (IntentionHero.Clan == Clan.PlayerClan || Pregnancy.Father.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
             {
                 LogEntry.AddLogEntry(new BirthChildLog(IntentionHero, Pregnancy.Father, child));
             }

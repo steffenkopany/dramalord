@@ -184,12 +184,12 @@ namespace Dramalord.Data.Intentions
                         }
                     }
 
-                    if (DramalordMCM.Instance.RelationshipLogs)
+                    if (DramalordMCM.Instance.RelationshipLogs && (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
                     {
                         LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
                     }
                 }
-                else if (DramalordMCM.Instance.RelationshipLogs)
+                else if (DramalordMCM.Instance.RelationshipLogs && (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
                 {
                     LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
                 }
@@ -221,7 +221,7 @@ namespace Dramalord.Data.Intentions
             Hero? witness = DramalordMCM.Instance.PlayerAlwaysWitness && Target != Hero.MainHero && closeHeroes.Contains(Hero.MainHero) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h != Target);
             if (witness != null)
             {
-                if (witness != Target && (witness.IsEmotionalWith(IntentionHero) || witness.IsEmotionalWith(Target)))
+                if (witness != Target && (witness.CanBeJealousAboutRomance(IntentionHero, Target) || witness.CanBeJealousAboutRomance(Target, IntentionHero)))
                 {
                     if (witness != Hero.MainHero)
                     {
@@ -252,7 +252,7 @@ namespace Dramalord.Data.Intentions
                                     true,
                                     GameTexts.FindText("str_yes").ToString(),
                                     GameTexts.FindText("str_no").ToString(),
-                                    () => { new ConfrontationPlayerIntention(this, Hero.MainHero.IsEmotionalWith(IntentionHero) ? IntentionHero : Target, CampaignTime.Now).Action(); },
+                                    () => { new ConfrontationPlayerIntention(this, Hero.MainHero.CanBeJealousAboutRomance(IntentionHero, Target) ? IntentionHero : Target, CampaignTime.Now).Action(); },
                                     () => { Campaign.Current.SetTimeSpeed(speed); }), true);
 
                     }

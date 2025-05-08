@@ -338,6 +338,8 @@ namespace Dramalord.Conversations
         public static TextObject player_blackmail_quest = new("{=Dramalord605}How dare you? If you do not keep this to yourself I will cut out your tongue!");
         public static TextObject player_blackmail_nocare = new("{=Dramalord606}Haha! Go and spread your rumors you sad human being.");
 
+        public static TextObject player_stop_bothering = new("{=Dramalord628}Stop bothering me with your profanities! Be gone!");
+
         internal static void Init()
         {
             MBTextManager.SetTextVariable("npc_starts_interaction_unknown", npc_starts_interaction_unknown);
@@ -651,6 +653,8 @@ namespace Dramalord.Conversations
             MBTextManager.SetTextVariable("player_blackmail_pay", player_blackmail_pay);
             MBTextManager.SetTextVariable("player_blackmail_quest", player_blackmail_quest);
             MBTextManager.SetTextVariable("player_blackmail_nocare", player_blackmail_nocare);
+
+            MBTextManager.SetTextVariable("player_stop_bothering", player_stop_bothering);
         }
     }
 }
