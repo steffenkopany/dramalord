@@ -98,7 +98,7 @@ namespace Dramalord.Patches
                 {
                     if(Hero.OneToOneConversationHero.IsFemale)
                     {
-                        MBTextManager.SetTextVariable("IMPERIALCAPITAL", Settlement.FindFirst((Settlement x) => x.StringId == "town_ES4").Name);
+                        //MBTextManager.SetTextVariable("IMPERIALCAPITAL", Settlement.FindFirst((Settlement x) => x.StringId == "town_ES4").Name);
                         MBTextManager.SetTextVariable("WANDERER_BACKSTORY_A", new TextObject("{=Dramalord452}The local gang leader fed us barely and sent us stealing as soon as we were able to walk. If we weren't successful we were beaten."));
                         MBTextManager.SetTextVariable("WANDERER_BACKSTORY_B", new TextObject("{=Dramalord453}As soon as I grew teats I was sent to the tavern. I had to entertain disgusting men and make them spend their money on drinks.. or on me."));
                         MBTextManager.SetTextVariable("WANDERER_BACKSTORY_C", new TextObject("{=Dramalord454}Once there was an old, orange faced guy who constantly grabbed me by the... you know... without paying. So I kicked him in the nuts and fled out of the town."));
@@ -109,7 +109,7 @@ namespace Dramalord.Patches
                     }
                     else
                     {
-                        MBTextManager.SetTextVariable("IMPERIALCAPITAL", Settlement.FindFirst((Settlement x) => x.StringId == "town_ES4").Name);
+                        //MBTextManager.SetTextVariable("IMPERIALCAPITAL", Settlement.FindFirst((Settlement x) => x.StringId == "town_ES4").Name);
                         MBTextManager.SetTextVariable("WANDERER_BACKSTORY_A", new TextObject("{=Dramalord452}The local gang leader fed us barely and sent us stealing as soon as we were able to walk. If we weren't successful we were beaten."));
                         MBTextManager.SetTextVariable("WANDERER_BACKSTORY_B", new TextObject("{=Dramalord456}As soon as my armpit hair grew I was sent to castle as a servant for elderly ladies. For entertainment while their husbands were busy with war."));
                         MBTextManager.SetTextVariable("WANDERER_BACKSTORY_C", new TextObject("{=Dramalord457}One day, while I was... planting seedlings in the silver forest, the heart of... the forest's owner stopped. So I had to flee and leave the town."));

@@ -36,12 +36,40 @@ namespace Dramalord.Behaviours
 
                 bool playerClose = false;
                 int randomNumber = MBRandom.RandomInt(1, 100);
+                bool acceptsPlayer = hero.Clan != null && hero.Clan.Tier > Clan.PlayerClan.Tier ? false : (hero.GetRelationTo(Hero.MainHero).Love <= DramalordMCM.Instance.MaxTrustEnemies) ? false : true;
 
                 if (isExtrovert)
                 {
                     List<Hero> closeHeroes = hero.GetCloseHeroes();
                     playerClose = closeHeroes.Contains(Hero.MainHero)
                                   && hero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow >= DramalordMCM.Instance.DaysBetweenInteractions;
+
+
+                    foreach(var item in hero.GetAllRelations())
+                    {
+                        //cleanup
+                        if(item.Value.Love <= 0 && (item.Value.Relationship == RelationshipType.Lover || item.Value.Relationship == RelationshipType.Betrothed || item.Value.Relationship == RelationshipType.Spouse))
+                        {
+                            new ChangeOpinionIntention(hero, item.Key, 0, 0, CampaignTime.Now);
+                        }
+                        else if (hero.GetTrust(item.Key) <= 0 && (item.Value.Relationship == RelationshipType.Friend || item.Value.Relationship == RelationshipType.FriendWithBenefits))
+                        {
+                            new ChangeOpinionIntention(hero, item.Key, 0, 0, CampaignTime.Now);
+                        }
+                    }
+
+                    int minLoveValue = 0;
+
+                    if (DramalordMCM.Instance.OneTrueLove)
+                    {
+                        hero.GetAllRelations().Values.ToMBList().ForEach(v =>
+                        {
+                            if (v.Love > minLoveValue)
+                            {
+                                minLoveValue = v.Love;
+                            }
+                        });
+                    }
 
                     if (closeHeroes.Count > 0)
                     {
@@ -57,10 +85,12 @@ namespace Dramalord.Behaviours
                                 ? Hero.MainHero
                                 : closeHeroes.GetRandomElementWithPredicate(h =>
                                     h.IsAutonom()
+                                    && h != Hero.MainHero
                                     && hero.IsSexualWith(h)
                                     && !hero.HasMetRecently(h)
                                     && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
-                                    && hero.CanPursueRomanceWith(h)  // EARLY FILTER
+                                    && hero.GetRelationTo(h).Love >= minLoveValue
+                                    && hero.CanBeIntimateWith(h)  // EARLY FILTER
                                 );
 
                             if (target != null && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
@@ -78,12 +108,14 @@ namespace Dramalord.Behaviours
                                     ? Hero.MainHero
                                     : closeHeroes.GetRandomElementWithPredicate(h =>
                                         h.IsAutonom()
+                                        && h != Hero.MainHero
                                         && hero.IsFriendOf(h)
                                         && !hero.HasMetRecently(h)
                                         && hero.HasMutualAttractionWith(h)
                                         && !hero.IsRelativeOf(h)
                                         && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
-                                        && hero.CanPursueRomanceWith(h)  // EARLY FILTER
+                                        && hero.GetRelationTo(h).Love >= minLoveValue
+                                        && hero.CanBeIntimateWith(h)  // EARLY FILTER
                                     );
 
                                 if (target != null && new IntercourseIntention(target, hero, CampaignTime.Now).Action())
@@ -93,12 +125,12 @@ namespace Dramalord.Behaviours
                             }
 
                             // If hero's Honor <= 0, maybe do prisoner intercourse
-                            if (hero.GetHeroTraits().Honor <= 0)
+                            if ((hero.GetHeroTraits().Honor < 0 || hero.GetHeroTraits().Mercy < 0) && (hero.PartyBelongedTo == null || !hero.PartyBelongedTo.IsMainParty))
                             {
                                 target = hero.GetClosePrisoners().GetRandomElementWithPredicate(h =>
                                     hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction
                                     && !hero.HasMetRecently(h)
-                                    && (!hero.IsPlayerSpouse() || !DramalordMCM.Instance.PlayerSpouseFaithful)
+                                    && (!hero.IsPlayerSpouse() || hero.CanBeIntimateWith(h))
                                 );
                                 if (target != null && new PrisonIntercourseIntention(target, hero, CampaignTime.Now).Action())
                                 {
@@ -110,7 +142,8 @@ namespace Dramalord.Behaviours
                             if (!playerClose
                                 && hero.IsLoverOf(Hero.MainHero)
                                 && randomNumber <= DramalordMCM.Instance.QuestChance
-                                && DramalordQuests.Instance.GetQuest(hero) == null)
+                                && DramalordQuests.Instance.GetQuest(hero) == null
+                                && hero.GetRelationTo(Hero.MainHero).Love > 0)
                             {
                                 // Show inquiry logic remains unchanged
                                 int speed = (int)Campaign.Current.TimeControlMode;
@@ -156,11 +189,13 @@ namespace Dramalord.Behaviours
                             ? Hero.MainHero
                             : closeHeroes.GetRandomElementWithPredicate(h =>
                                 h.IsAutonom()
+                                && h != Hero.MainHero
                                 && hero.IsEmotionalWith(h)
                                 && !hero.HasMetRecently(h)
                                 && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
                                 && (h.IsFemale != hero.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage)
-                                && hero.CanPursueRomanceWith(h)  // EARLY FILTER
+                                && hero.GetRelationTo(h).Love >= minLoveValue
+                                && hero.CanBeRomanticWith(h)  // EARLY FILTER
                             );
 
                         if (target != null)
@@ -194,15 +229,15 @@ namespace Dramalord.Behaviours
                         }
 
                         // 3) FLIRT
-                        target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero))
+                        target = (playerClose && acceptsPlayer && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero))
                             ? Hero.MainHero
                             : closeHeroes.GetRandomElementWithPredicate(h =>
                                 h.IsAutonom()
+                                && h != Hero.MainHero
                                 && hero.HasMutualAttractionWith(h)
                                 && !hero.IsRelativeOf(h)
                                 && !hero.HasMetRecently(h)
                                 && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
-                                && hero.CanPursueRomanceWith(h)  // EARLY FILTER
                             );
 
                         if (target != null)
@@ -210,6 +245,8 @@ namespace Dramalord.Behaviours
                             HeroRelation targetRelation = hero.GetRelationTo(target);
                             // Possibly do a date if love is high enough
                             if (targetRelation.Love >= DramalordMCM.Instance.MinDatingLove
+                                && hero.GetRelationTo(target).Love >= minLoveValue
+                                && hero.CanBeRomanticWith(target)
                                 && new DateIntention(target, hero, CampaignTime.Now).Action())
                             {
                                 return;
@@ -221,10 +258,11 @@ namespace Dramalord.Behaviours
                         }
 
                         // 4) TALK (fallback if no romance occurred)
-                        target = (playerClose && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer)
+                        target = (playerClose && acceptsPlayer && randomNumber <= DramalordMCM.Instance.ChanceApproachingPlayer)
                                     ? Hero.MainHero
                                     : closeHeroes.GetRandomElementWithPredicate(h =>
                                         h.IsAutonom()
+                                        && h != Hero.MainHero
                                         && !hero.HasMetRecently(h)
                                      );
 
@@ -236,7 +274,8 @@ namespace Dramalord.Behaviours
                 }
 
                 // (Optionally do second checks for quest triggers, etc.)
-                if (isHorny && hero.CurrentSettlement != Hero.MainHero.CurrentSettlement && hero.PartyBelongedTo != MobileParty.MainParty && hero.IsLoverOf(Hero.MainHero) && randomNumber <= DramalordMCM.Instance.QuestChance && DramalordQuests.Instance.GetQuest(hero) == null)
+                if (isHorny && hero.CurrentSettlement != Hero.MainHero.CurrentSettlement && hero.PartyBelongedTo != MobileParty.MainParty && hero.IsLoverOf(Hero.MainHero)
+                                && hero.GetRelationTo(Hero.MainHero).Love > 0 && randomNumber <= DramalordMCM.Instance.QuestChance && DramalordQuests.Instance.GetQuest(hero) == null)
                 {
                     int speed = (int)Campaign.Current.TimeControlMode;
                     Campaign.Current.SetTimeSpeed(0);

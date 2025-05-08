@@ -39,7 +39,7 @@ namespace Dramalord.Data.Intentions
 
             if (target == Hero.MainHero)
             {
-                if(IntentionHero.HasMet && (EventIntention.IntentionHero.HasMet || EventIntention.Target.HasMet) && ConversationTools.StartConversation(this, IntentionHero.CurrentSettlement != null))
+                if(IntentionHero.HasMet && (EventIntention.IntentionHero.HasMet || EventIntention.Target.HasMet) && IntentionHero.GetRelationTo(Hero.MainHero).Love > DramalordMCM.Instance.MaxTrustEnemies && ConversationTools.StartConversation(this, IntentionHero.CurrentSettlement != null))
                 {
                     Targets.Add(Hero.MainHero);
                 }
@@ -48,7 +48,7 @@ namespace Dramalord.Data.Intentions
             }
             else if(target != null)
             {
-                if(target.IsEmotionalWith(EventIntention.IntentionHero) || target.IsEmotionalWith(EventIntention.Target))
+                if (target.CanBeJealousAboutRomance(EventIntention.IntentionHero, EventIntention.Target) || target.CanBeJealousAboutRomance(EventIntention.Target, EventIntention.IntentionHero))
                 {
                     Targets.Add(target);
                     DramalordIntentions.Instance.GetIntentions().Add(new ConfrontDateIntention(EventIntention.IntentionHero, EventIntention.Target, target, CampaignTime.DaysFromNow(7), false));
@@ -128,6 +128,9 @@ namespace Dramalord.Data.Intentions
                             .PlayerOption("{npc_challenge_summarize_end}..")
                                 .Consequence( () => ConversationTools.EndConversation())
                                 .CloseDialog()
+                            .PlayerOption("{player_stop_bothering}")
+                                .Consequence(() => { new ChangeOpinionIntention(Hero.OneToOneConversationHero, Hero.MainHero, (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > DramalordMCM.Instance.MaxTrustEnemies) ? DramalordMCM.Instance.MaxTrustEnemies - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love : 0, 0, CampaignTime.Now).Action(); ConversationTools.EndConversation(); })
+                                .CloseDialog()
                         .EndPlayerOptions();
 
             Campaign.Current.ConversationManager.AddDialogFlow(npcFlow);
@@ -148,6 +151,8 @@ namespace Dramalord.Data.Intentions
             ConversationLines.npc_gossip_date.SetTextVariable("HERO", EventIntention.IntentionHero.Name);
             ConversationLines.npc_gossip_date.SetTextVariable("OTHER", EventIntention.Target.Name);
             ConversationLines.npc_starts_confrontation_known.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Hero.MainHero, false));
+            ConversationLines.player_interaction_abort.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, IntentionHero, false));
+            ConversationLines.npc_challenge_summarize_end.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, IntentionHero, false));
         }
     }
 }

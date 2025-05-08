@@ -64,7 +64,7 @@ namespace Dramalord.Data.Intentions
                     }
                 }
 
-                if (DramalordMCM.Instance.IntimateLogs)
+                if (DramalordMCM.Instance.IntimateLogs && (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
                 {
                     LogEntry.AddLogEntry(new PrisonIntercourseLog(IntentionHero, Target));
                 }

@@ -1,13 +1,8 @@
 ﻿using Dramalord.Actions;
 using Dramalord.Conversations;
 using Dramalord.Extensions;
-using Dramalord.Quests;
-using Helpers;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Core;
-using TaleWorlds.Localization;
-using TaleWorlds.SaveSystem;
 
 namespace Dramalord.Data.Intentions
 {
@@ -73,7 +68,7 @@ namespace Dramalord.Data.Intentions
                             .Variation("{npc_interaction_flirt_2}[ib:nervous][if:convo_mocking_teasing]")
                             .BeginPlayerOptions()
                                 .PlayerOption("{npc_interaction_reply_flirt_yes_1}")
-                                    .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Flirt, 1); })
+                                    .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Flirt, 1, true); })
                                     .GotoDialogState("start_challenge")
                                 .PlayerOption("{player_reaction_no}")
                                     .Consequence(() => { _accepted = false; ConversationTools.EndConversation(); })
@@ -81,6 +76,9 @@ namespace Dramalord.Data.Intentions
                             .EndPlayerOptions()
                     .PlayerOption("{player_interaction_start_react_no}")
                         .Consequence(() => ConversationTools.EndConversation())
+                        .CloseDialog()
+                    .PlayerOption("{player_stop_bothering}")
+                        .Consequence(() => { new ChangeOpinionIntention(Hero.OneToOneConversationHero, Hero.MainHero, (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > DramalordMCM.Instance.MaxTrustEnemies) ? DramalordMCM.Instance.MaxTrustEnemies - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love : 0, 0, CampaignTime.Now).Action(); ConversationTools.EndConversation(); })
                         .CloseDialog()
                 .EndPlayerOptions();
                 

@@ -603,5 +603,25 @@
     <string id="Dramalord606" text="Haha! Geh und verbreite deine Gerüchte, du armselige Kreatur." />
     <string id="Dramalord607" text="{HERO} erpresst dich" />
     <string id="Dramalord608" text="{HERO.LINK} hat dich mit {OTHER.LINK} gesehen. Sie drohen, es {SPOUSE.LINK} zu erzählen, wenn du nicht {AMOUNT}{GOLD_ICON} zahlst. Besuche sie nachts und löse das Problem." />
+    <string id="Dramalord609" text="Die wahre Liebe" />
+    <string id="Dramalord610" text="Romantische Interaktionen finden nur mit der Person mit dem höchsten Liebeswert statt" />
+    <string id="Dramalord611" text="Hat ein Spielzeug" />
+    <string id="Dramalord612" text="Ehetyp" />
+    <string id="Dramalord613" text="Treue" />
+    <string id="Dramalord614" text="Verspielt" />
+    <string id="Dramalord615" text="Poly" />
+    <string id="Dramalord616" text="Offen" />
+    <string id="Dramalord617" text="Ich träume von einer treuen Ehe, in der mein Partner und ich nur Augen füreinander haben." />
+    <string id="Dramalord618" text="Ich wünsche mir eine Ehe, die auf wahrer Liebe basiert, in der gelegentliche Abenteuer keine Rolle spielen." />
+    <string id="Dramalord619" text="Ich sehne mich nach einer treuen Ehe. Es spielt keine Rolle, ob mehr als zwei Menschen involviert sind, solange Privates privat bleibt." />
+    <string id="Dramalord620" text="Ich denke, die Ehe ist ein politisches Instrument, während Liebe etwas Schönes ist, das mit vielen Menschen ohne Eifersucht geteilt werden sollte." />
+    <string id="Dramalord621" text="Die Art von Ehe, die dieser Held bevorzugt." />
+    <string id="Dramalord622" text="Ich möchte über unsere Beziehung sprechen." />
+    <string id="Dramalord623" text="Ich möchte, dass wir treu sind und niemand anderen begehren." />
+    <string id="Dramalord624" text="Unsere Liebe soll niemals geteilt werden, aber unsere Körper dürfen Vergnügen bei anderen suchen." />
+    <string id="Dramalord625" text="Unsere Ehe soll treu sein, aber es gibt Platz für mehr als zwei." />
+    <string id="Dramalord626" text="Wir haben viel Liebe zu geben, also lasst sie uns auch mit anderen teilen." />
+    <string id="Dramalord627" text="Du bist verrückt! Das würde ich niemals akzeptieren!" />
+    <string id="Dramalord628" text="Hör auf, mich mit deinen Obszönitäten zu belästigen! Verschwinde!" />
   </strings>
 </base>

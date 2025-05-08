@@ -83,7 +83,7 @@ namespace Dramalord.Data.Intentions
                                     JoinClanAction.Apply(otherHero, Clan.PlayerClan);
                                     ChangeOccupationAfterMarriage(otherHero, otherHero.Occupation != Occupation.Lord ? clanHero.Occupation : otherHero.Occupation);
 
-                                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
+                                    TextObject textObject = new TextObject("{=Dramalord099}{HERO.LINK} married {TARGET.LINK}.");
                                     StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
                                     StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
 
@@ -103,18 +103,22 @@ namespace Dramalord.Data.Intentions
 
                                     Hero clanHero = (groom.Clan == Clan.PlayerClan) ? groom : bride;
                                     Hero otherHero = (groom.Clan == Clan.PlayerClan) ? bride : groom;
-                                    LeaveClanAction.Apply(clanHero);
-                                    if (otherHero.Clan != null)
+
+                                    if(clanHero != Hero.MainHero)
                                     {
-                                        JoinClanAction.Apply(clanHero, otherHero.Clan);
-                                        ChangeOccupationAfterMarriage(clanHero, Occupation.Lord);
-                                    }
-                                    else
-                                    {
-                                        ChangeOccupationAfterMarriage(clanHero, otherHero.Occupation);
+                                        LeaveClanAction.Apply(clanHero);
+                                        if (otherHero.Clan != null)
+                                        {
+                                            JoinClanAction.Apply(clanHero, otherHero.Clan);
+                                            ChangeOccupationAfterMarriage(clanHero, Occupation.Lord);
+                                        }
+                                        else
+                                        {
+                                            ChangeOccupationAfterMarriage(clanHero, otherHero.Occupation);
+                                        }
                                     }
 
-                                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
+                                    TextObject textObject = new TextObject("{=Dramalord099}{HERO.LINK} married {TARGET.LINK}.");
                                     StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
                                     StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
 
@@ -134,7 +138,7 @@ namespace Dramalord.Data.Intentions
                 }
                 else if(groom.Clan == Clan.PlayerClan && bride.Clan == Clan.PlayerClan)
                 {
-                    TextObject textObject = new TextObject("{=Dramalord080}{HERO.LINK} married {TARGET.LINK}.");
+                    TextObject textObject = new TextObject("{=Dramalord099}{HERO.LINK} married {TARGET.LINK}.");
                     StringHelpers.SetCharacterProperties("HERO", groom.CharacterObject, textObject);
                     StringHelpers.SetCharacterProperties("TARGET", bride.CharacterObject, textObject);
 
@@ -180,12 +184,12 @@ namespace Dramalord.Data.Intentions
                         }
                     }
 
-                    if (DramalordMCM.Instance.RelationshipLogs)
+                    if (DramalordMCM.Instance.RelationshipLogs && (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
                     {
                         LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
                     }
                 }
-                else if (DramalordMCM.Instance.RelationshipLogs)
+                else if (DramalordMCM.Instance.RelationshipLogs && (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
                 {
                     LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Spouse));
                 }
@@ -217,7 +221,7 @@ namespace Dramalord.Data.Intentions
             Hero? witness = DramalordMCM.Instance.PlayerAlwaysWitness && Target != Hero.MainHero && closeHeroes.Contains(Hero.MainHero) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h != Target);
             if (witness != null)
             {
-                if (witness != Target && (witness.IsEmotionalWith(IntentionHero) || witness.IsEmotionalWith(Target)))
+                if (witness != Target && (witness.CanBeJealousAboutRomance(IntentionHero, Target) || witness.CanBeJealousAboutRomance(Target, IntentionHero)))
                 {
                     if (witness != Hero.MainHero)
                     {
@@ -248,7 +252,7 @@ namespace Dramalord.Data.Intentions
                                     true,
                                     GameTexts.FindText("str_yes").ToString(),
                                     GameTexts.FindText("str_no").ToString(),
-                                    () => { new ConfrontationPlayerIntention(this, Hero.MainHero.IsEmotionalWith(IntentionHero) ? IntentionHero : Target, CampaignTime.Now).Action(); },
+                                    () => { new ConfrontationPlayerIntention(this, Hero.MainHero.CanBeJealousAboutRomance(IntentionHero, Target) ? IntentionHero : Target, CampaignTime.Now).Action(); },
                                     () => { Campaign.Current.SetTimeSpeed(speed); }), true);
 
                     }

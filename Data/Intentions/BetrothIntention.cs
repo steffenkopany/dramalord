@@ -89,7 +89,7 @@ namespace Dramalord.Data.Intentions
                     MBInformationManager.AddQuickInformation(banner, 0, otherHero.CharacterObject, "event:/ui/notification/relation");
                 }
 
-                if (DramalordMCM.Instance.RelationshipLogs)
+                if (DramalordMCM.Instance.RelationshipLogs && (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
                 {
                     LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Betrothed));
                 }
@@ -100,7 +100,7 @@ namespace Dramalord.Data.Intentions
                     Hero? witness = DramalordMCM.Instance.PlayerAlwaysWitness && Target != Hero.MainHero && closeHeroes.Contains(Hero.MainHero) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h != Target);
                     if (witness != null)
                     {
-                        if (witness != Hero.MainHero && (witness.IsEmotionalWith(IntentionHero) || witness.IsEmotionalWith(Target)))
+                        if (witness != Hero.MainHero && (witness.CanBeJealousAboutRomance(IntentionHero, Target) || witness.CanBeJealousAboutRomance(Target, IntentionHero)))
                         {
                             DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBetrothedIntention(IntentionHero, Target, witness, CampaignTime.DaysFromNow(7), true));
                             DramalordIntentions.Instance.GetIntentions().Add(new ConfrontBetrothedIntention(Target, IntentionHero, witness, CampaignTime.DaysFromNow(7), true));
@@ -136,7 +136,7 @@ namespace Dramalord.Data.Intentions
                                 MBInformationManager.AddQuickInformation(banner2, 0, IntentionHero.CharacterObject, "event:/ui/notification/relation");
                             }
 
-                            if (Hero.MainHero.IsEmotionalWith(IntentionHero) || Hero.MainHero.IsEmotionalWith(Target))
+                            if (Hero.MainHero.CanBeJealousAboutRomance(IntentionHero, Target) || Hero.MainHero.CanBeJealousAboutRomance(Target, IntentionHero))
                             {
                                 int speed = (int)Campaign.Current.TimeControlMode;
                                 Campaign.Current.SetTimeSpeed(0);
@@ -154,7 +154,7 @@ namespace Dramalord.Data.Intentions
                                             true,
                                             GameTexts.FindText("str_yes").ToString(),
                                             GameTexts.FindText("str_no").ToString(),
-                                            () => { new ConfrontationPlayerIntention(this, Hero.MainHero.IsEmotionalWith(IntentionHero) ? IntentionHero : Target, CampaignTime.Now).Action(); },
+                                            () => { new ConfrontationPlayerIntention(this, Hero.MainHero.CanBeJealousAboutRomance(IntentionHero, Target) ? IntentionHero : Target, CampaignTime.Now).Action(); },
                                             () => { Campaign.Current.SetTimeSpeed(speed); }), true);
                             }
                         }
@@ -228,7 +228,7 @@ namespace Dramalord.Data.Intentions
                                             .Consequence(() => { _accepted = false; ConversationTools.EndConversation(); })
                                             .CloseDialog()
                                     .EndPlayerOptions()
-                                .NpcOption("{player_reaction_engagement_yes}[ib:aggressive][if:convo_delighted]", () => Hero.OneToOneConversationHero.Father == null && Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan )
+                                .NpcOption("{player_reaction_marry_yes}[ib:aggressive][if:convo_delighted]", () => Hero.OneToOneConversationHero.Father == null && Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan )
                                     .Consequence(() => { new BetrothIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now).Action(); ConversationTools.EndConversation(); })
                                     .CloseDialog()
                             .EndNpcOptions()
@@ -250,6 +250,7 @@ namespace Dramalord.Data.Intentions
             ConversationLines.npc_interaction_betrothed_1.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Target, false));//"{=Dramalord051}I love you very much, {TITLE}. I think it's time for us to take the next step in our relationship. Will you marry me?");
             ConversationLines.npc_interaction_betrothed_2.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Target, false));//"{=Dramalord052}You know, {TITLE}, I love you deeply, and I know that you are the only one for me. Will you marry me?");
             ConversationLines.player_reaction_engagement_yes.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Target, IntentionHero, false));// "{=Dramalord065}You make my dream come true, {TITLE}. Yes I would love to marry you!");
+            ConversationLines.player_reaction_marry_yes.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(IntentionHero, Target, false));
             ConversationLines.player_reaction_engagement_instant_yes.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Target, IntentionHero, false));// "{=Dramalord066}We're at a settlement, {TITLE}. Let's marry right now!");
             ConversationLines.player_reaction_no.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Target, IntentionHero, false));// "{=Dramalord068}I am sorry {TITLE}, but I have no interest in that right now.");
         }

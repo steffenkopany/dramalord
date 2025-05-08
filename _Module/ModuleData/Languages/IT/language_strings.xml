@@ -603,5 +603,25 @@
     <string id="Dramalord606" text="Ahah! Vai pure a spargere le tue dicerie, povero sciocco." />
     <string id="Dramalord607" text="{HERO} ti sta ricattando" />
     <string id="Dramalord608" text="{HERO.LINK} ti ha visto con {OTHER.LINK}. Ti minacciano di raccontare tutto a {SPOUSE.LINK} se non paghi {AMOUNT}{GOLD_ICON}. Fai loro visita di notte e risolvi la questione." />
+    <string id="Dramalord609" text="Un vero amore" />
+    <string id="Dramalord610" text="Le interazioni romantiche avvengono solo con la persona con il valore d'amore più alto" />
+    <string id="Dramalord611" text="Ha un giocattolo" />
+    <string id="Dramalord612" text="Tipo di matrimonio" />
+    <string id="Dramalord613" text="Fedele" />
+    <string id="Dramalord614" text="Giocoso" />
+    <string id="Dramalord615" text="Poli" />
+    <string id="Dramalord616" text="Aperto" />
+    <string id="Dramalord617" text="Sogno un matrimonio fedele, in cui io e il mio partner abbiamo occhi solo l’uno per l’altro." />
+    <string id="Dramalord618" text="Desidero un matrimonio basato sul vero amore, in cui qualche avventura occasionale non sia un problema." />
+    <string id="Dramalord619" text="Desidero un matrimonio fedele. Non importa se ci sono più di due persone, finché manteniamo la nostra intimità privata." />
+    <string id="Dramalord620" text="Penso che il matrimonio sia uno strumento politico, mentre l’amore è qualcosa di bello da condividere con molte persone senza gelosia." />
+    <string id="Dramalord621" text="Il tipo di matrimonio che questo eroe preferisce." />
+    <string id="Dramalord622" text="Vorrei parlare della nostra relazione." />
+    <string id="Dramalord623" text="Voglio che siamo fedeli e che non guardiamo mai nessun altro." />
+    <string id="Dramalord624" text="Il nostro amore non deve mai essere condiviso, ma i nostri corpi possono cercare piacere altrove." />
+    <string id="Dramalord625" text="Il nostro matrimonio deve essere fedele, ma può includere più di due persone." />
+    <string id="Dramalord626" text="Abbiamo tanto amore da dare, condividiamolo anche con gli altri." />
+    <string id="Dramalord627" text="Sei impazzito? Non accetterò mai una cosa del genere!" />
+    <string id="Dramalord628" text="Smettila di infastidirmi con le tue volgarità! Sparisci!" />
   </strings>
 </base>

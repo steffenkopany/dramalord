@@ -19,6 +19,7 @@ namespace Dramalord.Conversations
             Date
         }
 
+        private static string expr_undecided = "[if:convo_undecided_open]";
 
         private static Context _currentContext = Context.Chat;
 
@@ -30,23 +31,24 @@ namespace Dramalord.Conversations
 
         private static int[] _weights = new int[3] { 0, 0, 0 };
 
-        //private static int _answer = -1;
+        private static bool _exitConversation;
 
         private static int _count = 0;
 
         private static int _result = 0;
 
-        public static void SetupQuestions(Context context, int count)
+        public static void SetupQuestions(Context context, int count, bool exitConversation)
         {
             _currentContext = context;
             _count = count;
+            _exitConversation = exitConversation;
             ConversationLines.npc_challenge_summarize_end.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
         }
 
         internal static void AddDialogs(CampaignGameStarter starter)
         {
             DialogFlow flow = DialogFlow.CreateDialogFlow("start_challenge")
-                .NpcLine("{CHALLENGE_QUESTION}[ib:aggressive][if:convo_undecided_open]")
+                .NpcLine("{CHALLENGE_QUESTION}[ib:aggressive]")
                     .Condition(() => GenerateQuestion())
                     .Consequence(()=> ConversationLines.player_interaction_abort.SetTextVariable("TITLE", ConversationTools.GetHeroGreeting(Hero.MainHero, Hero.OneToOneConversationHero, false)))
                 .BeginPlayerOptions()
@@ -70,9 +72,12 @@ namespace Dramalord.Conversations
                 .BeginNpcOptions()
                     .NpcOption("{player_interaction_abort}{SUMMARIZE_EXPRESSION}", () => _count > 0)
                         .GotoDialogState("start_challenge")
-                    .NpcOption("{npc_challenge_summarize_end}{SUMMARIZE_EXPRESSION}", () => _count <= 0)
+                    .NpcOption("{npc_challenge_summarize_end}{SUMMARIZE_EXPRESSION}", () => _count <= 0 && _exitConversation)
                         .Consequence(() => FinishChallenge())
                         .CloseDialog()
+                    .NpcOption("{npc_challenge_summarize_end}{SUMMARIZE_EXPRESSION}", () => _count <= 0 && !_exitConversation)
+                        .Consequence(() => FinishChallenge())
+                        .GotoDialogState("hero_main_options")
                 .EndNpcOptions();
 
             Campaign.Current.ConversationManager.AddDialogFlow(flow);
@@ -222,20 +227,48 @@ namespace Dramalord.Conversations
         {
             if(_currentContext == Context.Chat)
             {
-                ConversationTools.ConversationIntention = new TalkIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, _result);
+                if(_exitConversation)
+                {
+                    ConversationTools.ConversationIntention = new TalkIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, _result);
+                    ConversationTools.EndConversation();
+                }
+                else
+                {
+                    new TalkIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, _result).OnConversationEnded();
+                    ConversationRelationship.SetupLines();
+                }
+                
             }
             else if(_currentContext == Context.Flirt)
             {
-                ConversationTools.ConversationIntention = new FlirtIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, _result);
+                if (_exitConversation)
+                {
+                    ConversationTools.ConversationIntention = new FlirtIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, _result);
+                    ConversationTools.EndConversation();
+                }
+                else
+                {
+                    new FlirtIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, _result).OnConversationEnded();
+                    ConversationRelationship.SetupLines();
+                }
+                
             }
             else if (_currentContext == Context.Date)
             {
-                ConversationTools.ConversationIntention = new DateIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, _result);
+                if (_exitConversation)
+                {
+                    ConversationTools.ConversationIntention = new DateIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, _result);
+                    ConversationTools.EndConversation();
+                }
+                else
+                {
+                    new DateIntention(Hero.OneToOneConversationHero, Hero.MainHero, CampaignTime.Now, _result).OnConversationEnded();
+                    ConversationRelationship.SetupLines();
+                }
             }
 
             _result = 0;
             _count = 0;
-            ConversationTools.EndConversation();
         }
 
         ///////////////////////////////////////
@@ -266,10 +299,11 @@ namespace Dramalord.Conversations
         {
             Hero challenger = Hero.OneToOneConversationHero;
 
-            Hero? poi = Hero.AllAliveHeroes.Where(h => h.IsLord && h != Hero.MainHero && h != challenger && (challenger.GetBaseHeroRelation(h) > 40 || challenger.GetBaseHeroRelation(h) < -30)).GetRandomElementInefficiently();
+            Hero? poi = Hero.AllAliveHeroes.Where(h => h.IsLord && h != Hero.MainHero && h != challenger && (challenger.GetBaseHeroRelation(h) >= DramalordMCM.Instance.MinTrustFriends || challenger.GetBaseHeroRelation(h) <= DramalordMCM.Instance.MaxTrustEnemies)).GetRandomElementInefficiently();
             if (poi == null) poi = Hero.AllAliveHeroes.Where(h => h.IsLord && h != Hero.MainHero && h != challenger && h.IsDramalordLegit()).GetRandomElementInefficiently();
 
-            _question = new TextObject("{=Dramalord352}Tell me, {TITLE}, as you travel wide and meet many, do you have an opinion of {POI.NAME}?");
+            string expression = (challenger.GetBaseHeroRelation(poi) >= DramalordMCM.Instance.MinTrustFriends) ? "[if:convo_delighted]" : (challenger.GetBaseHeroRelation(poi) <= DramalordMCM.Instance.MaxTrustEnemies) ? "[if:convo_grave]" : "[if:convo_undecided_open]";
+            _question = new TextObject("{=Dramalord352}Tell me, {TITLE}, as you travel wide and meet many, do you have an opinion of {POI.NAME}?"+expression);
             _question.SetTextVariable("TITLE", challenger.HasAnyRelationshipWith(Hero.MainHero) ? Hero.MainHero.Name : ConversationTools.GetHeroGreeting(Hero.OneToOneConversationHero, Hero.MainHero, false));
             StringHelpers.SetCharacterProperties("POI", poi?.CharacterObject, _question);
 
@@ -338,7 +372,7 @@ namespace Dramalord.Conversations
 
             if (random == 1)
             {
-                _question = new TextObject("{=Dramalord370}I heard tale of a warrior that was executed for renouncing his oaths and turning to banditry, but it is said that he did it to feed the hungry. Did his ends justify his means? What do you think? (Honor)");
+                _question = new TextObject("{=Dramalord370}I heard tale of a warrior that was executed for renouncing his oaths and turning to banditry, but it is said that he did it to feed the hungry. Did his ends justify his means? What do you think? (Honor)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord371}There is always another way, even if it presents great difficulty. One should not compromise their honor.");
                 _answers[1] = new TextObject("{=Dramalord372}Having a code is almost as important as knowing when to break it.");
                 _answers[2] = new TextObject("{=Dramalord373}People starve, people steal, and people die. It is just the way of things.");
@@ -353,7 +387,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 2)
             {
-                _question = new TextObject("{=Dramalord374}I recently heard a story about a great commander who won a difficult victory against impossible odds. Would you still go to battle if you knew the odds were against you? (Valor)");
+                _question = new TextObject("{=Dramalord374}I recently heard a story about a great commander who won a difficult victory against impossible odds. Would you still go to battle if you knew the odds were against you? (Valor)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord375}Yes, I would. Sometimes it is more important to fight than to be victorious. The world belongs to the brave");
                 _answers[1] = new TextObject("{=Dramalord376}No. Why would I risk my life when I am certain to lose? That would be foolish.");
                 _answers[2] = new TextObject("{=Dramalord377}Hm. I cannot say. I think that it would depend on the situation.");
@@ -368,7 +402,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 3)
             {
-                _question = new TextObject("{=Dramalord378}I have heard that some lords allow defeated foes to leave the battlefield unharmed. Some think it admirable, others deem it a dangerous folly. What do you think? (Mercy)");
+                _question = new TextObject("{=Dramalord378}I have heard that some lords allow defeated foes to leave the battlefield unharmed. Some think it admirable, others deem it a dangerous folly. What do you think? (Mercy)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord379}They allowed them to go home to their families. I would do the same.");
                 _answers[1] = new TextObject("{=Dramalord380}Off with their heads, I say! That would make it difficult for them to march to battle again.");
                 _answers[2] = new TextObject("{=Dramalord381}It is the nature of war—some live, some do not. That is just the way of things.");
@@ -383,7 +417,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 4)
             {
-                _question = new TextObject("{=Dramalord382}Recently, I heard tale told of an arena champion who gave all of his tournament winnings away to the poor. (Generosity)");
+                _question = new TextObject("{=Dramalord382}Recently, I heard tale told of an arena champion who gave all of his tournament winnings away to the poor. (Generosity)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord383}That is quite the act of generosity. People such as that are a rarity, unfortunately.");
                 _answers[1] = new TextObject("{=Dramalord384}Bah! What a waste. What is the point of gold and glory if not to keep it?");
                 _answers[2] = new TextObject("{=Dramalord385}Well, I suppose that it is their money, thus it is their choice.");
@@ -398,7 +432,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 5)
             {
-                _question = new TextObject("{=Dramalord386}I heard that a noble clan nearly turned against their own king after being denied a request. Some call it reckless, others see it as a bold gambit. What do you think? (Calculating)");
+                _question = new TextObject("{=Dramalord386}I heard that a noble clan nearly turned against their own king after being denied a request. Some call it reckless, others see it as a bold gambit. What do you think? (Calculating)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord387}That was a rash decision. One should not throw away power over a fleeting insult.");
                 _answers[1] = new TextObject("{=Dramalord388}I can understand the urge. Sometimes you must act on your convictions, consequences be damned.");
                 _answers[2] = new TextObject("{=Dramalord389}Difficult to say. Life is complicated, and I can hardly judge such things.");
@@ -425,7 +459,7 @@ namespace Dramalord.Conversations
 
             if (random == 1)
             {
-                _question = new TextObject("{=Dramalord393}Do you prefer the company of those alike to yourself, or do you find charm in a more opposite sort? (Orientation)");
+                _question = new TextObject("{=Dramalord393}Do you prefer the company of those alike to yourself, or do you find charm in a more opposite sort? (Orientation)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord321}I find myself primarily drawn to those of the opposite sex. As the saying goes, opposites attract.");
                 _answers[1] = new TextObject("{=Dramalord322}I am most inclined toward those of my own sex. As they say, birds of a feather flock together.");
                 _answers[2] = new TextObject("{=Dramalord394}I do not possess any particular preference.");
@@ -440,7 +474,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 2)
             {
-                _question = new TextObject("{=Dramalord395}I overheard a debate at the tavern—some were saying they enjoy a fuller figure, while others prefer a leaner form. What do you think? (Weight)");
+                _question = new TextObject("{=Dramalord395}I overheard a debate at the tavern—some were saying they enjoy a fuller figure, while others prefer a leaner form. What do you think? (Weight)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord327}I favor those of a fuller figure—more to hold, more to enjoy.");
                 _answers[1] = new TextObject("{=Dramalord325}I find that slender figures possess a certain elegance.");
                 _answers[2] = new TextObject("{=Dramalord326}I prefer a balance—not too thin, nor too large. A form that is just right.");
@@ -455,7 +489,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 3)
             {
-                _question = new TextObject("{=Dramalord396}Many people admire a strong and powerful form. Others like the slender and agile. Where do your tastes lie? (Build)");
+                _question = new TextObject("{=Dramalord396}Many people admire a strong and powerful form. Others like the slender and agile. Where do your tastes lie? (Build)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord330}I am quite fond of strong, muscular figures. The more imposing, the better.");
                 _answers[1] = new TextObject("{=Dramalord328}I tend towards those who are lean. Sometimes less is more.");
                 _answers[2] = new TextObject("{=Dramalord329}A well-toned body suits me best—Athletic, maybe, but nothing excessive. Somewhere in the middle.");
@@ -470,7 +504,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 4)
             {
-                _question = new TextObject("{=Dramalord397}Some are known to rob the cradle, others are known to rob the grave. What about you? (Age)");
+                _question = new TextObject("{=Dramalord397}Some are known to rob the cradle, others are known to rob the grave. What about you? (Age)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord398}I tend towards people older than myself. They say that wine grows better with age.");
                 _answers[1] = new TextObject("{=Dramalord399}I enjoy the company of people younger than myself. I find their energy invigorating.");
                 _answers[2] = new TextObject("{=Dramalord400}I usually enjoy being around people near to my own age.");
@@ -497,7 +531,7 @@ namespace Dramalord.Conversations
 
             if (random == 1)
             {
-                _question = new TextObject("{=Dramalord401}I have heard it said that the world belongs to those willing to embrace change. What do you think? (Openness)");
+                _question = new TextObject("{=Dramalord401}I have heard it said that the world belongs to those willing to embrace change. What do you think? (Openness)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord402}Novel experiences bring life its color. I welcome change.");
                 _answers[1] = new TextObject("{=Dramalord403}I see no need to meddle with what already works. A steady routine serves me well.");
                 _answers[2] = new TextObject("{=Dramalord404}Change happens, whether we welcome it or not. I simply take things as they come.");
@@ -512,7 +546,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 2)
             {
-                _question = new TextObject("{=Dramalord405}Tell me, do you find comfort in careful planning, or do you prefer to take life as it comes? (Conscientiousness)");
+                _question = new TextObject("{=Dramalord405}Tell me, do you find comfort in careful planning, or do you prefer to take life as it comes? (Conscientiousness)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord406}Order and structure are the foundation of success. A good plan is everything.");
                 _answers[1] = new TextObject("{=Dramalord407}Plans? No, not really. I usually follow the road where it takes me.");
                 _answers[2] = new TextObject("{=Dramalord408}Sometimes I plan, sometimes I do not. It depends on the day.");
@@ -527,7 +561,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 3)
             {
-                _question = new TextObject("{=Dramalord409}Feasts bring together all sorts—lords, merchants, poets, and travelers. Some relish the company, while others prefer a quiet corner. What about you? (Extroversion)");
+                _question = new TextObject("{=Dramalord409}Feasts bring together all sorts—lords, merchants, poets, and travelers. Some relish the company, while others prefer a quiet corner. What about you? (Extroversion)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord410}Oh, absolutely! I thrive in good company. The more people, the better!");
                 _answers[1] = new TextObject("{=Dramalord411}I prefer to keep to myself. Large crowds can be exhausting.");
                 _answers[2] = new TextObject("{=Dramalord412}Well, I suppose that depends. I enjoy company, but too much can be overwhelming.");
@@ -542,7 +576,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 4)
             {
-                _question = new TextObject("{=Dramalord413}When a friend confides in you about something that weighs heavily on their heart. Do you offer comfort, or is it best they handle it on their own? (Agreeableness)");
+                _question = new TextObject("{=Dramalord413}When a friend confides in you about something that weighs heavily on their heart. Do you offer comfort, or is it best they handle it on their own? (Agreeableness)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord414}Of course, I try to comfort them. If I can help, I will.");
                 _answers[1] = new TextObject("{=Dramalord415}Truthfully, I am not always the best person for that. People must learn to handle their own troubles.");
                 _answers[2] = new TextObject("{=Dramalord416}I suppose that it depends on my mood and the situation.");
@@ -557,7 +591,7 @@ namespace Dramalord.Conversations
             }
             else if (random == 5)
             {
-                _question = new TextObject("{=Dramalord417}The burdens of leadership can weigh heavily on the mind. Some struggle under the pressure, while others thrive in it. How do you manage? (Neuroticism)");
+                _question = new TextObject("{=Dramalord417}The burdens of leadership can weigh heavily on the mind. Some struggle under the pressure, while others thrive in it. How do you manage? (Neuroticism)" + expr_undecided);
                 _answers[0] = new TextObject("{=Dramalord418}Oh, the stress can be unbearable at times. When it becomes too much, I shut myself away for days.");
                 _answers[1] = new TextObject("{=Dramalord419}Stress? I hardly notice it. I find I rather enjoy the challenge.");
                 _answers[2] = new TextObject("{=Dramalord420}I manage well enough, though I do take time to rest when needed.");

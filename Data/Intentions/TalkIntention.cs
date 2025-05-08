@@ -70,7 +70,7 @@ namespace Dramalord.Data.Intentions
                             .Variation("{npc_interaction_talk_2}[ib:normal2][if:convo_calm_friendly]")
                         .BeginPlayerOptions()
                             .PlayerOption("{npc_interaction_reply_talk_1}")
-                                .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Chat, 1); })
+                                .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Chat, 1, true); })
                                 .GotoDialogState("start_challenge")
                             .PlayerOption("{player_reaction_no}")
                                 .Consequence(() => { _accepted = false; ConversationTools.EndConversation(); })
@@ -78,6 +78,9 @@ namespace Dramalord.Data.Intentions
                         .EndPlayerOptions()
                     .PlayerOption("{player_interaction_start_react_no}")
                         .Consequence(() => ConversationTools.EndConversation())
+                        .CloseDialog()
+                    .PlayerOption("{player_stop_bothering}")
+                        .Consequence(() => { new ChangeOpinionIntention(Hero.OneToOneConversationHero, Hero.MainHero, (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > DramalordMCM.Instance.MaxTrustEnemies) ? DramalordMCM.Instance.MaxTrustEnemies - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love : 0, 0, CampaignTime.Now).Action(); ConversationTools.EndConversation(); })
                         .CloseDialog()
                 .EndPlayerOptions();
 

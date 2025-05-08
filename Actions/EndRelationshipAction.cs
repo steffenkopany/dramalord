@@ -42,6 +42,7 @@ namespace Dramalord.Actions
             }
 
             relation.Relationship = RelationshipType.None;
+            relation.Rules = RelationshipRule.Faithful;
         }
     }
 }

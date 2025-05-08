@@ -94,6 +94,7 @@ namespace Dramalord.Data
             if(_orphans.Contains(hero))
             {
                 hero.SetNewOccupation(Occupation.Wanderer);
+                hero.ChangeState(Hero.CharacterStates.Active);
             }
             _orphans.Remove(hero);
         }

@@ -56,7 +56,7 @@ namespace Dramalord.Data.Intentions
                 if ((relation.Relationship == RelationshipType.None || relation.Relationship == RelationshipType.Friend || relation.Relationship == RelationshipType.FriendWithBenefits) && relation.Love >= DramalordMCM.Instance.MinDatingLove)
                 {
                     StartRelationshipAction.Apply(IntentionHero, Target, relation, RelationshipType.Lover);
-                    if (DramalordMCM.Instance.RelationshipLogs)
+                    if (DramalordMCM.Instance.RelationshipLogs && (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
                     {
                         LogEntry.AddLogEntry(new StartRelationshipLog(IntentionHero, Target, RelationshipType.Lover));
                     }
@@ -117,7 +117,7 @@ namespace Dramalord.Data.Intentions
                 Hero? witness = DramalordMCM.Instance.PlayerAlwaysWitness && Target != Hero.MainHero && closeHeroes.Contains(Hero.MainHero) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h != Target);
                 if (witness != null)
                 {
-                    if (witness != Hero.MainHero && (witness.IsEmotionalWith(IntentionHero) || witness.IsEmotionalWith(Target)))
+                    if (witness != Hero.MainHero && (witness.CanBeJealousAboutRomance(IntentionHero, Target) || witness.CanBeJealousAboutRomance(Target, IntentionHero)))
                     {
                         DramalordIntentions.Instance.GetIntentions().Add(new ConfrontDateIntention(IntentionHero, Target, witness, CampaignTime.DaysFromNow(7), true));
                         DramalordIntentions.Instance.GetIntentions().Add(new ConfrontDateIntention(Target, IntentionHero, witness, CampaignTime.DaysFromNow(7), true));
@@ -154,7 +154,7 @@ namespace Dramalord.Data.Intentions
                             MBInformationManager.AddQuickInformation(banner2, 0, IntentionHero.CharacterObject, "event:/ui/notification/relation");
                         }
 
-                        if (Hero.MainHero.IsEmotionalWith(IntentionHero) || Hero.MainHero.IsEmotionalWith(Target))
+                        if (Hero.MainHero.CanBeJealousAboutRomance(IntentionHero, Target) || Hero.MainHero.CanBeJealousAboutRomance(Target, IntentionHero))
                         {
                             int speed = (int)Campaign.Current.TimeControlMode;
                             Campaign.Current.SetTimeSpeed(0);
@@ -172,7 +172,7 @@ namespace Dramalord.Data.Intentions
                                         true,
                                         GameTexts.FindText("str_yes").ToString(),
                                         GameTexts.FindText("str_no").ToString(),
-                                        () => { new ConfrontationPlayerIntention(this, Hero.MainHero.IsEmotionalWith(IntentionHero) ? IntentionHero : Target, CampaignTime.Now).Action(); },
+                                        () => { new ConfrontationPlayerIntention(this, Hero.MainHero.CanBeJealousAboutRomance(IntentionHero, Target) ? IntentionHero : Target, CampaignTime.Now).Action(); },
                                         () => { Campaign.Current.SetTimeSpeed(speed); }), true);
                         }
                     }
@@ -206,6 +206,9 @@ namespace Dramalord.Data.Intentions
                     .PlayerOption("{player_interaction_start_react_no}")
                         .Consequence(() => ConversationTools.EndConversation())
                         .CloseDialog()
+                    .PlayerOption("{player_stop_bothering}")
+                        .Consequence(() => { new ChangeOpinionIntention(Hero.OneToOneConversationHero, Hero.MainHero, (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > DramalordMCM.Instance.MaxTrustEnemies) ? DramalordMCM.Instance.MaxTrustEnemies - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love : 0, 0, CampaignTime.Now).Action(); ConversationTools.EndConversation(); })
+                        .CloseDialog()
                 .EndPlayerOptions();
 
             DialogFlow flow3 = DialogFlow.CreateDialogFlow("start_date2")
@@ -225,15 +228,15 @@ namespace Dramalord.Data.Intentions
                 .BeginPlayerOptions()
                     .PlayerOption("{npc_interaction_reply_date_first_yes_1}")
                         .Condition(() => !Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero))
-                        .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3); })
+                        .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3, true); })
                         .GotoDialogState("start_challenge")
                     .PlayerOption("{npc_interaction_reply_date_yes_1}")
                         .Condition(() => Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && (Hero.OneToOneConversationHero.Spouse == null || Hero.OneToOneConversationHero.Spouse == Hero.MainHero))
-                        .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3); })
+                        .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3, true); })
                         .GotoDialogState("start_challenge")
                     .PlayerOption("{player_reaction_date_married_yes}")
                         .Condition(() => Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) && Hero.OneToOneConversationHero.Spouse != null && Hero.OneToOneConversationHero.Spouse != Hero.MainHero)
-                        .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3); })
+                        .Consequence(() => { _accepted = false; ConversationQuestions.SetupQuestions(ConversationQuestions.Context.Date, 3, true); })
                         .GotoDialogState("start_challenge")
                     .PlayerOption("{player_reaction_no}")
                         .Consequence(() => { _accepted = false; ConversationTools.EndConversation(); })

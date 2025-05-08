@@ -71,7 +71,7 @@ namespace Dramalord.Data.Intentions
 
                 new ChangeOpinionIntention(IntentionHero, Target, loveGain, 0, CampaignTime.Now).Action();
 
-                if (DramalordMCM.Instance.IntimateLogs)
+                if (DramalordMCM.Instance.IntimateLogs && (IntentionHero.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan || !DramalordMCM.Instance.ShowOnlyClanInteractions))
                 {
                     LogEntry.AddLogEntry(new IntercourseLog(IntentionHero, Target));
                 }
@@ -111,7 +111,7 @@ namespace Dramalord.Data.Intentions
                     Hero? witness = DramalordMCM.Instance.PlayerAlwaysWitness && Target != Hero.MainHero && closeHeroes.Contains(Hero.MainHero) ? Hero.MainHero : closeHeroes.GetRandomElementWithPredicate(h => h != Target);
                     if (witness != null)
                     {
-                        if (witness != Hero.MainHero && (witness.IsEmotionalWith(IntentionHero) || witness.IsEmotionalWith(Target)))
+                        if (witness != Hero.MainHero && (witness.CanBeJealousAboutIntimacy(IntentionHero, Target) || witness.CanBeJealousAboutIntimacy(Target, IntentionHero)))
                         {
                             DramalordIntentions.Instance.GetIntentions().Add(new ConfrontIntercourseIntention(IntentionHero, Target, witness, CampaignTime.DaysFromNow(7), true));
                             DramalordIntentions.Instance.GetIntentions().Add(new ConfrontIntercourseIntention(Target, IntentionHero, witness, CampaignTime.DaysFromNow(7), true));
@@ -149,7 +149,8 @@ namespace Dramalord.Data.Intentions
                                 MBInformationManager.AddQuickInformation(banner2, 0, IntentionHero.CharacterObject, "event:/ui/notification/relation");
                             }
 
-                            if(Hero.MainHero.IsEmotionalWith(IntentionHero) || Hero.MainHero.IsEmotionalWith(Target))
+                            if((relation.Relationship == RelationshipType.Friend || relation.Relationship == RelationshipType.FriendWithBenefits) && (Hero.MainHero.CanBeJealousAboutIntimacy(IntentionHero, Target) || Hero.MainHero.CanBeJealousAboutIntimacy(Target, IntentionHero)) ||
+                                (relation.Relationship == RelationshipType.Lover || relation.Relationship == RelationshipType.Betrothed || relation.Relationship == RelationshipType.Spouse) && (Hero.MainHero.CanBeJealousAboutRomance(IntentionHero, Target) || Hero.MainHero.CanBeJealousAboutRomance(Target, IntentionHero)))
                             {
                                 int speed = (int)Campaign.Current.TimeControlMode;
                                 Campaign.Current.SetTimeSpeed(0);
@@ -203,7 +204,7 @@ namespace Dramalord.Data.Intentions
                     if (Target == Hero.MainHero || IntentionHero == Hero.MainHero)
                     {
                         Hero otherHero = (IntentionHero == Hero.MainHero) ? Target : IntentionHero;
-                        TextObject banner = new TextObject("{=Dramalord080}You and {HERO.LINK} are now friends with benefits.");
+                        TextObject banner = new TextObject("{=Dramalord080}You and {HERO.LINK} are now friends...with benefits.");
                         StringHelpers.SetCharacterProperties("HERO", otherHero.CharacterObject, banner);
                         MBInformationManager.AddQuickInformation(banner, 0, otherHero.CharacterObject, "event:/ui/notification/relation");
                     }
@@ -251,6 +252,9 @@ namespace Dramalord.Data.Intentions
                         .EndNpcOptions()
                     .PlayerOption("{player_interaction_start_react_no}")
                         .Consequence(() => ConversationTools.EndConversation())
+                        .CloseDialog()
+                    .PlayerOption("{player_stop_bothering}")
+                        .Consequence(() => { new ChangeOpinionIntention(Hero.OneToOneConversationHero, Hero.MainHero, (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > DramalordMCM.Instance.MaxTrustEnemies) ? DramalordMCM.Instance.MaxTrustEnemies - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love : 0, 0, CampaignTime.Now).Action(); ConversationTools.EndConversation(); })
                         .CloseDialog()
                 .EndPlayerOptions();
 

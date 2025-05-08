@@ -12,6 +12,7 @@ namespace Dramalord.Conversations
 {
     internal static class ConversationFamily
     {
+        private static Hero? SelectedChild = null;
         internal static void AddDialogs(CampaignGameStarter starter)
         {
             DialogFlow adoptFlow = DialogFlow.CreateDialogFlow("hero_main_options")
@@ -34,11 +35,11 @@ namespace Dramalord.Conversations
                                 .BeginPlayerOptions()
                                     .PlayerOption("{orphanage_player_select_boy}")
                                         .Condition( () => DramalordOrphans.Instance.CountOrphans(false) > 0)
-                                        .Consequence(() => ConversationSentence.SetObjectsToRepeatOver(DramalordOrphans.Instance.GetOrphans(false)))
+                                        .Consequence(() => { SelectedChild = null; ConversationSentence.SetObjectsToRepeatOver(DramalordOrphans.Instance.GetOrphans(false)); })
                                         .GotoDialogState("orphanage_child_selection")
                                     .PlayerOption("{orphanage_player_select_girl}")
                                         .Condition(() => DramalordOrphans.Instance.CountOrphans(true) > 0)
-                                        .Consequence(() => ConversationSentence.SetObjectsToRepeatOver(DramalordOrphans.Instance.GetOrphans(true)))
+                                        .Consequence(() => { SelectedChild = null; ConversationSentence.SetObjectsToRepeatOver(DramalordOrphans.Instance.GetOrphans(true)); })
                                         .GotoDialogState("orphanage_child_selection")
                                     .PlayerOption("{nevermind}")
                                         .GotoDialogState("hero_main_options")
@@ -50,7 +51,7 @@ namespace Dramalord.Conversations
                         .Condition(() => { if (Hero.OneToOneConversationHero.IsDramalordLegit()) SetupLines(); return Hero.OneToOneConversationHero.IsDramalordLegit() && Hero.OneToOneConversationHero.Occupation == Occupation.GangLeader; })
                         .BeginNpcOptions()
                             .NpcOption("{orphanize_reply_yes}", () => Hero.MainHero.Children.Where(c => c.Age < 18).ToList().Count > 0)
-                                .Consequence(() => ConversationSentence.SetObjectsToRepeatOver(Hero.MainHero.Children.Where(c => c.Age < 18).ToList()))
+                                .Consequence(() => { SelectedChild = null; ConversationSentence.SetObjectsToRepeatOver(Hero.MainHero.Children.Where(c => c.Age < 18).ToList()); })
                                 .GotoDialogState("orphanage_player_ownchild_selection")    
                             .NpcOption("{orphanize_reply_empty}", () => Hero.MainHero.Children.Where(c => c.Age < 18).ToList().Count == 0)
                                 .GotoDialogState("hero_main_options")
@@ -94,7 +95,8 @@ namespace Dramalord.Conversations
                 .NpcLine("{orphanage_confirm_adopt}")
                     .Condition(() =>
                     {
-                        StringHelpers.SetCharacterProperties("ORPHAN", (ConversationSentence.SelectedRepeatObject as Hero)?.CharacterObject);
+                        SelectedChild = (ConversationSentence.SelectedRepeatObject as Hero);
+                        StringHelpers.SetCharacterProperties("ORPHAN", SelectedChild?.CharacterObject);
                         return true;
                     })
                     .BeginPlayerOptions()
@@ -102,11 +104,11 @@ namespace Dramalord.Conversations
                             .NpcLine("{orphanage_do_adopt}")
                             .Consequence(() =>
                             {
-                                Hero? orphan = (ConversationSentence.SelectedRepeatObject as Hero);
-                                if (orphan != null)
+                                if (SelectedChild != null)
                                 {
-                                    AdoptAction.Apply(Hero.MainHero.IsFemale ? Hero.MainHero : Hero.MainHero.Spouse, !Hero.MainHero.IsFemale ? Hero.MainHero : Hero.MainHero.Spouse, orphan);
-                                    JoinClanAction.Apply(orphan, Clan.PlayerClan);
+                                    AdoptAction.Apply(Hero.MainHero.IsFemale ? Hero.MainHero : Hero.MainHero.Spouse, !Hero.MainHero.IsFemale ? Hero.MainHero : Hero.MainHero.Spouse, SelectedChild);
+                                    JoinClanAction.Apply(SelectedChild, Clan.PlayerClan);
+                                    SelectedChild = null;
                                 }
                             })
                         .PlayerOption("{=str_no}No.")
@@ -118,7 +120,8 @@ namespace Dramalord.Conversations
                 .NpcLine("{orphanage_confirm_adopt_child}")
                     .Condition(() =>
                     {
-                        StringHelpers.SetCharacterProperties("ORPHAN", (ConversationSentence.SelectedRepeatObject as Hero)?.CharacterObject);
+                        SelectedChild = (ConversationSentence.SelectedRepeatObject as Hero);
+                        StringHelpers.SetCharacterProperties("ORPHAN", SelectedChild?.CharacterObject);
                         return true;
                     })
                     .BeginPlayerOptions()
@@ -126,10 +129,10 @@ namespace Dramalord.Conversations
                             .NpcLine("{orphanage_do_orphanize}")
                             .Consequence(() =>
                             {
-                                Hero? orphan = (ConversationSentence.SelectedRepeatObject as Hero);
-                                if (orphan != null)
+                                if (SelectedChild != null)
                                 {
-                                    OrphanizeAction.Apply(orphan);
+                                    OrphanizeAction.Apply(SelectedChild);
+                                    SelectedChild = null;
                                 }
                             })
                         .PlayerOption("{=str_no}No.")

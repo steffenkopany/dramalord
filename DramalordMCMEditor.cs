@@ -5,9 +5,9 @@ using Dramalord.Extensions;
 using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v1;
 using MCM.Abstractions.Attributes.v2;
-using MCM.Abstractions.Base.PerCampaign;
 using MCM.Abstractions.Base.PerSave;
 using MCM.Common;
+using System.Data;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Localization;
@@ -198,6 +198,18 @@ namespace Dramalord
         {
             get => _selected.GetDesires().Horny;
             set { _selected.GetDesires().Horny = value; OnPropertyChanged(); }
+        }
+
+        [SettingPropertyGroup("{=Dramalord120}3: Desire")]
+        [SettingProperty("{=Dramalord612}Marriage type", Order = 8, RequireRestart = false, HintText = "{=Dramalord621}The type of marriage this hero would prefer.")]
+        public string CurrentMarriageType
+        {
+            get => new TextObject(
+                        (_selected.GetDefaultRelationshipRule() == RelationshipRule.Open) ? "{=Dramalord616}Open" :
+                        (_selected.GetDefaultRelationshipRule() == RelationshipRule.Poly) ? "{=Dramalord615}Poly" :
+                        (_selected.GetDefaultRelationshipRule() == RelationshipRule.Playful) ? "{=Dramalord614}Playful" : "{=Dramalord613}Faithful"
+                        ).ToString();
+            set => _dummy = value;
         }
 
         [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
