@@ -1,5 +1,4 @@
 ﻿using Dramalord.Data;
-using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -19,7 +18,7 @@ namespace Dramalord.Patches
             {
                 __result = false;
             }
-            else if(__result && !BetrothIntention.OtherMarriageModFound)
+            else if(__result)
             {
                 __result = maidenOrSuitor.GetRelationTo(Hero.MainHero).Relationship != RelationshipType.Spouse;
             }

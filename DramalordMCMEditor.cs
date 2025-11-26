@@ -1,20 +1,16 @@
-﻿using Dramalord.Actions;
-using Dramalord.Data;
-using Dramalord.Data.Intentions;
-using Dramalord.Extensions;
+﻿using Dramalord.Extensions;
+using Dramalord.Notifications;
 using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v1;
 using MCM.Abstractions.Attributes.v2;
-using MCM.Abstractions.Base.PerSave;
+using MCM.Abstractions.Base.PerCampaign;
 using MCM.Common;
-using System.Data;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Localization;
 
 namespace Dramalord
 {
-    internal sealed class DramalordMCMEditor : AttributePerSaveSettings<DramalordMCMEditor>
+    internal sealed class DramalordMCMEditor : AttributePerCampaignSettings<DramalordMCMEditor>
     {
         internal class HeroWrapper
         {
@@ -87,8 +83,8 @@ namespace Dramalord
             OnPropertyChanged();
         }
 
-        [SettingPropertyGroup("{=Dramalord107}1: Hero Selection")]
-        [SettingPropertyDropdown("{=Dramalord108}Select Hero", Order = 1, RequireRestart = false, HintText = "{=Dramalord193}Select hero from list (only works with running campaign)")]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_HERO)]
+        [SettingPropertyDropdown(DramalordTexts.MCM_EDITOR_HERO_SELECT, Order = 1, RequireRestart = false)]
         public Dropdown<HeroWrapper> SelectedHero
         {
             get
@@ -104,116 +100,90 @@ namespace Dramalord
         }
 
                
-        [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord110}Openness", -50, 50, HintText = "{=Dramalord111}Represents how willing a person is to try new things", Order = 1, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_PERSONALITY)]
+        [SettingPropertyFloatingInteger(DramalordTexts.NAME_JEALOUSY, 0, 100, Order = 1, RequireRestart = false)]
         public int Openness
         {
-            get => _selected.GetPersonality().Openness;
-            set { _selected.GetPersonality().Openness = value; OnPropertyChanged(); }
+            get => _selected.GetPersonality().Jealousy;
+            set { _selected.GetPersonality().Jealousy = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord112}Conscientiousness", -50, 50, HintText = "{=Dramalord113}Refers to an individual's desire to be careful and diligent", Order = 2, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_PERSONALITY)]
+        [SettingPropertyFloatingInteger(DramalordTexts.NAME_EMPATHY, 0, 100, Order = 2, RequireRestart = false)]
         public int Conscientiousness
         {
-            get => _selected.GetPersonality().Conscientiousness;
-            set { _selected.GetPersonality().Conscientiousness = value; OnPropertyChanged(); }
+            get => _selected.GetPersonality().Empathy;
+            set { _selected.GetPersonality().Empathy = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord114}Extroversion", -50, 50, HintText = "{=Dramalord115}Measures how energetic, outgoing and confident a person is", Order = 3, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_PERSONALITY)]
+        [SettingPropertyFloatingInteger(DramalordTexts.NAME_SOCIABILITY, 0, 100, Order = 3, RequireRestart = false)]
         public int Extroversion
         {
-            get => _selected.GetPersonality().Extroversion;
-            set { _selected.GetPersonality().Extroversion = value; OnPropertyChanged(); }
+            get => _selected.GetPersonality().Sociability;
+            set { _selected.GetPersonality().Sociability = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord116}Agreeableness", -50, 50, HintText = "{=Dramalord117}Refers to how an individual interacts with others", Order = 4, RequireRestart = false)]
-        public int Agreeableness
-        {
-            get => _selected.GetPersonality().Agreeableness;
-            set { _selected.GetPersonality().Agreeableness = value; OnPropertyChanged(); }
-        }
 
-        [SettingPropertyGroup("{=Dramalord109}2: Personality")]
-        [SettingPropertyFloatingInteger("{=Dramalord118}Neuroticism", -50, 50, HintText = "{=Dramalord119}Represents how much someone is inclined to experience negative emotions", Order = 5, RequireRestart = false)]
-        public int Neuroticism
-        {
-            get => _selected.GetPersonality().Neuroticism;
-            set { _selected.GetPersonality().Neuroticism = value; OnPropertyChanged(); }
-        }
-
-        [SettingPropertyGroup("{=Dramalord120}3: Desire")]
-        [SettingPropertyFloatingInteger("{=Dramalord121}Attraction To Men", 0, 100, HintText = "{=Dramalord122}Defines whether an individual finds male persons attractive or not", Order = 1, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_DESIRE)]
+        [SettingPropertyFloatingInteger(DramalordTexts.MCM_EDITOR_DESIRE_MEN, 0, 100, Order = 1, RequireRestart = false)]
         public int AttractionMen
         {
             get => _selected.GetDesires().AttractionMen;
             set { _selected.GetDesires().AttractionMen = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord120}3: Desire")]
-        [SettingPropertyFloatingInteger("{=Dramalord123}Attraction To Women", 0, 100, HintText = "{=Dramalord124}Defines whether an individual finds female persons attractive or not", Order = 2, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_DESIRE)]
+        [SettingPropertyFloatingInteger(DramalordTexts.MCM_EDITOR_DESIRE_WOMEN, 0, 100, Order = 2, RequireRestart = false)]
         public int AttractionWomen
         {
             get => _selected.GetDesires().AttractionWomen;
             set { _selected.GetDesires().AttractionWomen = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord120}3: Desire")]
-        [SettingPropertyFloatingInteger("{=Dramalord125}Attraction To Weight", 0, 100, HintText = "{=Dramalord126}Defines whether an individual has interest in chubby or thin heroes", Order = 3, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_DESIRE)]
+        [SettingPropertyFloatingInteger(DramalordTexts.MCM_EDITOR_DESIRE_WEIGHT, 0, 100, Order = 3, RequireRestart = false)]
         public int AttractionWeight
         {
             get => _selected.GetDesires().AttractionWeight;
             set { _selected.GetDesires().AttractionWeight = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord120}3: Desire")]
-        [SettingPropertyFloatingInteger("{=Dramalord127}Attraction To Build", 0, 100, HintText = "{=Dramalord128}Defines whether an individual has interest in muscular or weak heroes", Order = 4, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_DESIRE)]
+        [SettingPropertyFloatingInteger(DramalordTexts.MCM_EDITOR_DESIRE_BUILD, 0, 100, Order = 4, RequireRestart = false)]
         public int AttractionBuild
         {
             get => _selected.GetDesires().AttractionBuild;
             set { _selected.GetDesires().AttractionBuild = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord120}3: Desire")]
-        [SettingPropertyFloatingInteger("{=Dramalord129}Attraction To Age Difference", -20, 20, HintText = "{=Dramalord130}Defines whether an individual has interest in older or younger heroes in year difference", Order = 5, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_DESIRE)]
+        [SettingPropertyFloatingInteger(DramalordTexts.MCM_EDITOR_DESIRE_AGE, -20, 20, Order = 5, RequireRestart = false)]
         public int AttractionAgeDiff
         {
             get => _selected.GetDesires().AttractionAgeDiff;
             set { _selected.GetDesires().AttractionAgeDiff = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord120}3: Desire")]
-        [SettingPropertyFloatingInteger("{=Dramalord131}Libido", 0, 10, HintText = "{=Dramalord132}Defines whether an individual generally develops interest in intercourse or not", Order = 6, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_DESIRE)]
+        [SettingPropertyFloatingInteger(DramalordTexts.MCM_EDITOR_DESIRE_LIBIDO, 0, 10, HintText = DramalordTexts.MCM_EDITOR_DESIRE_LIBIDO_INFO, Order = 6, RequireRestart = false)]
         public int Libido
         {
             get => _selected.GetDesires().Libido;
             set { _selected.GetDesires().Libido = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord120}3: Desire")]
-        [SettingPropertyFloatingInteger("{=Dramalord133}Horny", 0, 100, HintText = "{=Dramalord134}Represents how willing a hero currently is for intercourse due to hormones", Order = 7, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_DESIRE)]
+        [SettingPropertyFloatingInteger(DramalordTexts.NAME_AROUSAL, 0, 100, HintText = DramalordTexts.MCM_EDITOR_DESIRE_AROUSAL_INFO, Order = 7, RequireRestart = false)]
         public int Horny
         {
             get => _selected.GetDesires().Horny;
             set { _selected.GetDesires().Horny = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord120}3: Desire")]
-        [SettingProperty("{=Dramalord612}Marriage type", Order = 8, RequireRestart = false, HintText = "{=Dramalord621}The type of marriage this hero would prefer.")]
-        public string CurrentMarriageType
-        {
-            get => new TextObject(
-                        (_selected.GetDefaultRelationshipRule() == RelationshipRule.Open) ? "{=Dramalord616}Open" :
-                        (_selected.GetDefaultRelationshipRule() == RelationshipRule.Poly) ? "{=Dramalord615}Poly" :
-                        (_selected.GetDefaultRelationshipRule() == RelationshipRule.Playful) ? "{=Dramalord614}Playful" : "{=Dramalord613}Faithful"
-                        ).ToString();
-            set => _dummy = value;
-        }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingPropertyDropdown("{=Dramalord570}Select Target", Order = 1, RequireRestart = false, HintText = "{=Dramalord193}Select hero from list (only works with running campaign)")]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_RELATION)]
+        [SettingPropertyDropdown(DramalordTexts.MCM_EDITOR_RELATION_TARGET, Order = 1, RequireRestart = false)]
         public Dropdown<HeroWrapper> SelectedTarget
         {
             get
@@ -229,8 +199,8 @@ namespace Dramalord
         }
 
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingProperty("{=Dramalord195}Current Attraction", Order = 2, RequireRestart = false, HintText = "{=Dramalord196}Current attraction value to player")]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_RELATION)]
+        [SettingProperty(DramalordTexts.MCM_EDITOR_RELATION_ATTRACTION, Order = 2, RequireRestart = false)]
         public string CurrentAttraction
         {
             get => (_selected == _target) ? 0.ToString() : _selected.GetAttractionTo(_target).ToString();
@@ -238,77 +208,30 @@ namespace Dramalord
         }
 
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingProperty("{=Dramalord197}Current Sympathy", Order = 3, RequireRestart = false, HintText = "{=Dramalord198}Current sympathy value to player")]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_RELATION)]
+        [SettingProperty(DramalordTexts.MCM_EDITOR_RELATION_SYMPATHY, Order = 3, RequireRestart = false)]
         public string CurrentTraitScore
         {
             get => (_selected == _target) ? 0.ToString() : _selected.GetSympathyTo(_target).ToString();
             set => _dummy = value;
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingPropertyFloatingInteger("{=Dramalord136}Trust", -100, 100, HintText = "{=Dramalord137}Trust value to the player", Order = 4, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_RELATION)]
+        [SettingPropertyFloatingInteger(DramalordTexts.NAME_TRUST, -100, 100, Order = 4, RequireRestart = false)]
         public int Trust
         {
             get => (_selected == _target) ? 0 : _selected.GetTrust(_target);
             set { if (_selected != _target) _selected.SetTrust(_target, value); OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingPropertyFloatingInteger("{=Dramalord138}Love", -100, 100, HintText = "{=Dramalord139}Love value to the player", Order = 5, RequireRestart = false)]
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_RELATION)]
+        [SettingPropertyFloatingInteger(DramalordTexts.NAME_LOVE, -100, 100, Order = 5, RequireRestart = false)]
         public int Love
         {
             get => (_selected == _target) ? 0 : _selected.GetRelationTo(_target).Love;
             set { if (_selected != _target) _selected.GetRelationTo(_target).Love = value; OnPropertyChanged(); }
         }
 
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingPropertyBool("{=Dramalord142}No Relationship", Order = 6, HintText = "{=Dramalord143}No relationship with the player", RequireRestart = false)]
-        public bool RelationshipNone
-        {
-            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.None;
-            set { if(_selected != Hero.MainHero) EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); OnPropertyChanged(); }
-        }
-
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingPropertyBool("{=Dramalord144}Friendship", Order = 7, HintText = "{=Dramalord145}Has friendship with the player", RequireRestart = false)]
-        public bool RelationshipFriend
-        {
-            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Friend;
-            set { if (_selected != _target) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Friend); OnPropertyChanged(); } }
-        }
-
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingPropertyBool("{=Dramalord146}Friend with benefits", Order = 8, HintText = "{=Dramalord147}Has friendship with benefits with the player", RequireRestart = false)]
-        public bool RelationshipFriendWithBenefits
-        {
-            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.FriendWithBenefits;
-            set { if (_selected != _target) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.FriendWithBenefits); OnPropertyChanged(); } }
-        }
-
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingPropertyBool("{=Dramalord148}Lover", Order = 9, HintText = "{=Dramalord149}Is a couple with the player", RequireRestart = false)]
-        public bool RelationshipLove
-        {
-            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Lover;
-            set { if (_selected != _target) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Lover); OnPropertyChanged(); } }
-        }
-
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingPropertyBool("{=Dramalord150}Betrothed", Order = 10, HintText = "{=Dramalord151}Is engaged with the player", RequireRestart = false)]
-        public bool RelationshipEngaged
-        {
-            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Betrothed;
-            set { if (_selected != _target && !BetrothIntention.OtherMarriageModFound) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Betrothed); OnPropertyChanged(); } }
-        }
-
-        [SettingPropertyGroup("{=Dramalord135}4: Relation to Target")]
-        [SettingPropertyBool("{=Dramalord209}Married", Order = 11, HintText = "{=Dramalord210}Is married to the player", RequireRestart = false)]
-        public bool RelationshipMarried
-        {
-            get => _selected.GetRelationTo(_target).Relationship == RelationshipType.Spouse || _selected.Spouse == _target;
-            set { if (_selected != _target && !BetrothIntention.OtherMarriageModFound) { if (_selected.Spouse == _target) { EndRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected)); } StartRelationshipAction.Apply(_target, _selected, _target.GetRelationTo(_selected), RelationshipType.Spouse); OnPropertyChanged(); } }
-        }
 
         public override string Id => "DramalordEditor";
 

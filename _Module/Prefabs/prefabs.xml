@@ -1,0 +1,481 @@
+<prefabs>
+	<game_entity name="sp_camel_rider" old_prefab_name="" mobility="1">
+		<flags>
+			<flag name="record_to_scene_replay" value="true"/>
+		</flags>
+		<visibility_masks>
+			<visibility_mask name="visible_only_when_editing" value="true"/>
+		</visibility_masks>
+		<tags>
+			<tag name="spawnpoint_player_1"/>
+		</tags>
+		<transform position="0.000, 0.000, 0.000" rotation_euler="0.000, 0.000, 0.000"/>
+		<skeleton skeleton_model="human_skeleton">
+			<components>
+				<meta_mesh_component name="arrow_new_icon"/>
+			</components>
+		</skeleton>
+		<scripts>
+			<script name="PopupSceneSpawnPoint">
+				<variables>
+					<variable name="InitialAction" value="act_camel_rider_stand_lance_pace_4"/>
+					<variable name="NegativeAction" value=""/>
+					<variable name="InitialFaceAnimCode" value="terrified"/>
+					<variable name="PositiveFaceAnimCode" value="terrified"/>
+					<variable name="NegativeFaceAnimCode" value="terrified"/>
+					<variable name="PositiveAction" value=""/>
+					<variable name="LeftHandWieldedItem" value=""/>
+					<variable name="RightHandWieldedItem" value=""/>
+					<variable name="BannerTagToUseForAddedPrefab" value=""/>
+					<variable name="StartWithRandomProgress" value="false"/>
+					<variable name="AttachedPrefabOffset" value="0.000, 0.200, 0.050, 340282346638528859811704183484516925440.000"/>
+					<variable name="PrefabItem" value="testdick1"/>
+					<variable name="PrefabBone" value="Abdomen"/>
+				</variables>
+			</script>
+			<script name="animation_instance">
+				<variables>
+					<variable name="Skeleton Name" value="human_skeleton"/>
+					<variable name="Animation Name" value="act_camel_rider_stand_lance_pace_4"/>
+					<variable name="Morph Animation Name" value="terrified"/>
+					<variable name="Speed Multiplier" value="1.000000"/>
+					<variable name="Animation Phase" value="0.000000"/>
+					<variable name="Morph Animation Phase" value="0.000000"/>
+					<variable name="Freeze Animation" value="false"/>
+				</variables>
+			</script>
+		</scripts>
+		<children>
+			<game_entity name="animationpoint" old_prefab_name="" mobility="1">
+				<flags>
+					<flag name="record_to_scene_replay" value="true"/>
+				</flags>
+				<transform position="0.115, 0.028, 0.064"/>
+				<scripts>
+					<script name="AnimationPoint">
+						<variables>
+							<variable name="ArriveAction" value="act_camel_rider_stand_lance_pace_4"/>
+							<variable name="LoopStartAction" value="act_camel_rider_stand_lance_pace_4"/>
+							<variable name="PairLoopStartAction" value=""/>
+							<variable name="LeaveAction" value=""/>
+							<variable name="GroupId" value="-1"/>
+							<variable name="RightHandItem" value=""/>
+							<variable name="RightHandItemBone" value="ItemR"/>
+							<variable name="LeftHandItem" value=""/>
+							<variable name="LeftHandItemBone" value="ItemL"/>
+							<variable name="MinUserToStartInteraction" value="1"/>
+							<variable name="ActivatePairs" value="false"/>
+							<variable name="MinWaitinSeconds" value="30.000"/>
+							<variable name="MaxWaitInSeconds" value="120.000"/>
+							<variable name="ForwardDistanceToPivotPoint" value="0.000"/>
+							<variable name="SideDistanceToPivotPoint" value="0.000"/>
+							<variable name="KeepOldVisibility" value="false"/>
+							<variable name="AutoSheathWeapons" value="true"/>
+							<variable name="AutoEquipWeaponsOnUseStopped" value="false"/>
+							<variable name="AutoWieldWeapons" value="false"/>
+							<variable name="TranslateUser" value="true"/>
+							<variable name="HasRecentlyBeenRechecked" value="false"/>
+							<variable name="_useOwnPositionInsteadOfWorldPosition" value="false"/>
+							<variable name="_customPlayerInteractionDistance" value="0.000"/>
+							<variable name="NavMeshPrefabName" value=""/>
+						</variables>
+					</script>
+				</scripts>
+			</game_entity>
+		</children>
+		<levels>
+			<level name="level_1"/>
+			<level name="level_2"/>
+			<level name="level_3"/>
+		</levels>
+	</game_entity>
+	<game_entity name="sp_sit_down_2" old_prefab_name="" mobility="1">
+		<flags>
+			<flag name="record_to_scene_replay" value="true"/>
+		</flags>
+		<visibility_masks>
+			<visibility_mask name="visible_only_when_editing" value="true"/>
+		</visibility_masks>
+		<tags>
+			<tag name="spawnpoint_player_2"/>
+		</tags>
+		<transform position="0.000, 0.000, 0.000" rotation_euler="0.000, 0.000, 0.000"/>
+		<skeleton skeleton_model="human_skeleton">
+			<components>
+				<meta_mesh_component name="arrow_new_icon"/>
+			</components>
+		</skeleton>
+		<scripts>
+			<script name="PopupSceneSpawnPoint">
+				<variables>
+					<variable name="InitialAction" value="act_lancer_ride_4"/>
+					<variable name="NegativeAction" value=""/>
+					<variable name="InitialFaceAnimCode" value=""/>
+					<variable name="PositiveFaceAnimCode" value=""/>
+					<variable name="NegativeFaceAnimCode" value=""/>
+					<variable name="PositiveAction" value=""/>
+					<variable name="LeftHandWieldedItem" value=""/>
+					<variable name="RightHandWieldedItem" value=""/>
+					<variable name="BannerTagToUseForAddedPrefab" value=""/>
+					<variable name="StartWithRandomProgress" value="false"/>
+					<variable name="AttachedPrefabOffset" value="0.000, 0.000, 0.000, -1.000"/>
+					<variable name="PrefabItem" value="baby_right"/>
+					<variable name="PrefabBone" value="ItemR"/>
+				</variables>
+			</script>
+			<script name="animation_instance">
+				<variables>
+					<variable name="Skeleton Name" value="human_skeleton"/>
+					<variable name="Animation Name" value="act_lancer_ride_4"/>
+					<variable name="Morph Animation Name" value=""/>
+					<variable name="Speed Multiplier" value="1.000000"/>
+					<variable name="Animation Phase" value="0.000000"/>
+					<variable name="Morph Animation Phase" value="0.000000"/>
+					<variable name="Freeze Animation" value="false"/>
+				</variables>
+			</script>
+		</scripts>
+		<children>
+			<game_entity name="animation_point" old_prefab_name="" mobility="1">
+				<flags>
+					<flag name="record_to_scene_replay" value="true"/>
+				</flags>
+				<visibility_masks>
+					<visibility_mask name="visible_only_when_editing" value="true"/>
+				</visibility_masks>
+				<tags>
+					<tag name="npc_wait"/>
+					<tag name="npc_common"/>
+				</tags>
+				<skeleton skeleton_model="human_skeleton"/>
+				<scripts>
+					<script name="AnimationPoint">
+						<variables>
+							<variable name="ArriveAction" value=""/>
+							<variable name="LoopStartAction" value="act_lancer_ride_4"/>
+							<variable name="PairLoopStartAction" value=""/>
+							<variable name="LeaveAction" value=""/>
+							<variable name="GroupId" value="-1"/>
+							<variable name="RightHandItem" value=""/>
+							<variable name="RightHandItemBone" value="ItemR"/>
+							<variable name="LeftHandItem" value=""/>
+							<variable name="LeftHandItemBone" value="ItemL"/>
+							<variable name="MinUserToStartInteraction" value="1"/>
+							<variable name="ActivatePairs" value="false"/>
+							<variable name="MinWaitinSeconds" value="50.000"/>
+							<variable name="MaxWaitInSeconds" value="320.000"/>
+							<variable name="ForwardDistanceToPivotPoint" value="0.000"/>
+							<variable name="SideDistanceToPivotPoint" value="0.000"/>
+							<variable name="KeepOldVisibility" value="false"/>
+							<variable name="AutoSheathWeapons" value="false"/>
+							<variable name="AutoEquipWeaponsOnUseStopped" value="false"/>
+							<variable name="AutoWieldWeapons" value="false"/>
+							<variable name="TranslateUser" value="true"/>
+							<variable name="HasRecentlyBeenRechecked" value="false"/>
+							<variable name="_useOwnPositionInsteadOfWorldPosition" value="false"/>
+							<variable name="_customPlayerInteractionDistance" value="0.000"/>
+							<variable name="NavMeshPrefabName" value=""/>
+						</variables>
+					</script>
+				</scripts>
+			</game_entity>
+		</children>
+		<levels>
+			<level name="level_1"/>
+			<level name="level_2"/>
+			<level name="level_3"/>
+		</levels>
+	</game_entity>
+	<game_entity name="sp_sit_up_2" old_prefab_name="" mobility="1">
+		<flags>
+			<flag name="record_to_scene_replay" value="true"/>
+		</flags>
+		<visibility_masks>
+			<visibility_mask name="visible_only_when_editing" value="true"/>
+		</visibility_masks>
+		<tags>
+			<tag name="spawnpoint_player_1"/>
+		</tags>
+		<transform position="0.000, 0.000, 0.000" rotation_euler="0.000, 0.000, 0.000"/>
+		<skeleton skeleton_model="human_skeleton">
+			<components>
+				<meta_mesh_component name="arrow_new_icon"/>
+			</components>
+		</skeleton>
+		<scripts>
+			<script name="PopupSceneSpawnPoint">
+				<variables>
+					<variable name="InitialAction" value="act_camel_forward_canter"/>
+					<variable name="NegativeAction" value=""/>
+					<variable name="InitialFaceAnimCode" value=""/>
+					<variable name="PositiveFaceAnimCode" value=""/>
+					<variable name="NegativeFaceAnimCode" value=""/>
+					<variable name="PositiveAction" value=""/>
+					<variable name="LeftHandWieldedItem" value=""/>
+					<variable name="RightHandWieldedItem" value=""/>
+					<variable name="BannerTagToUseForAddedPrefab" value=""/>
+					<variable name="StartWithRandomProgress" value="false"/>
+					<variable name="AttachedPrefabOffset" value="0.000, 0.000, 0.000, -1.000"/>
+					<variable name="PrefabItem" value="baby_right"/>
+					<variable name="PrefabBone" value="ItemR"/>
+				</variables>
+			</script>
+			<script name="animation_instance">
+				<variables>
+					<variable name="Skeleton Name" value="human_skeleton"/>
+					<variable name="Animation Name" value="act_camel_forward_canter"/>
+					<variable name="Morph Animation Name" value=""/>
+					<variable name="Speed Multiplier" value="1.000000"/>
+					<variable name="Animation Phase" value="0.000000"/>
+					<variable name="Morph Animation Phase" value="0.000000"/>
+					<variable name="Freeze Animation" value="false"/>
+				</variables>
+			</script>
+		</scripts>
+		<children>
+			<game_entity name="animation_point" old_prefab_name="" mobility="1">
+				<flags>
+					<flag name="record_to_scene_replay" value="true"/>
+				</flags>
+				<visibility_masks>
+					<visibility_mask name="visible_only_when_editing" value="true"/>
+				</visibility_masks>
+				<tags>
+					<tag name="npc_wait"/>
+					<tag name="npc_common"/>
+				</tags>
+				<skeleton skeleton_model="human_skeleton"/>
+				<scripts>
+					<script name="AnimationPoint">
+						<variables>
+							<variable name="ArriveAction" value=""/>
+							<variable name="LoopStartAction" value="act_camel_forward_canter"/>
+							<variable name="PairLoopStartAction" value=""/>
+							<variable name="LeaveAction" value=""/>
+							<variable name="GroupId" value="-1"/>
+							<variable name="RightHandItem" value=""/>
+							<variable name="RightHandItemBone" value="ItemR"/>
+							<variable name="LeftHandItem" value=""/>
+							<variable name="LeftHandItemBone" value="ItemL"/>
+							<variable name="MinUserToStartInteraction" value="1"/>
+							<variable name="ActivatePairs" value="false"/>
+							<variable name="MinWaitinSeconds" value="50.000"/>
+							<variable name="MaxWaitInSeconds" value="320.000"/>
+							<variable name="ForwardDistanceToPivotPoint" value="0.000"/>
+							<variable name="SideDistanceToPivotPoint" value="0.000"/>
+							<variable name="KeepOldVisibility" value="false"/>
+							<variable name="AutoSheathWeapons" value="false"/>
+							<variable name="AutoEquipWeaponsOnUseStopped" value="false"/>
+							<variable name="AutoWieldWeapons" value="false"/>
+							<variable name="TranslateUser" value="true"/>
+							<variable name="HasRecentlyBeenRechecked" value="false"/>
+							<variable name="_useOwnPositionInsteadOfWorldPosition" value="false"/>
+							<variable name="_customPlayerInteractionDistance" value="0.000"/>
+							<variable name="NavMeshPrefabName" value=""/>
+						</variables>
+					</script>
+				</scripts>
+			</game_entity>
+		</children>
+		<levels>
+			<level name="level_1"/>
+			<level name="level_2"/>
+			<level name="level_3"/>
+		</levels>
+	</game_entity>
+	<game_entity name="sp_missionary_up" old_prefab_name="" mobility="1">
+		<flags>
+			<flag name="record_to_scene_replay" value="true"/>
+		</flags>
+		<visibility_masks>
+			<visibility_mask name="visible_only_when_editing" value="true"/>
+		</visibility_masks>
+		<tags>
+			<tag name="spawnpoint_player_1"/>
+		</tags>
+		<transform position="0.000, 0.000, 0.000" rotation_euler="0.000, 0.000, 0.000"/>
+		<skeleton skeleton_model="human_skeleton">
+			<components>
+				<meta_mesh_component name="arrow_new_icon"/>
+			</components>
+		</skeleton>
+		<scripts>
+			<script name="PopupSceneSpawnPoint">
+				<variables>
+					<variable name="InitialAction" value="act_camel_backward_walk"/>
+					<variable name="NegativeAction" value=""/>
+					<variable name="InitialFaceAnimCode" value=""/>
+					<variable name="PositiveFaceAnimCode" value=""/>
+					<variable name="NegativeFaceAnimCode" value=""/>
+					<variable name="PositiveAction" value=""/>
+					<variable name="LeftHandWieldedItem" value=""/>
+					<variable name="RightHandWieldedItem" value=""/>
+					<variable name="BannerTagToUseForAddedPrefab" value=""/>
+					<variable name="StartWithRandomProgress" value="false"/>
+					<variable name="AttachedPrefabOffset" value="0.000, 0.000, 0.000, -1.000"/>
+					<variable name="PrefabItem" value="baby_right"/>
+					<variable name="PrefabBone" value="ItemR"/>
+				</variables>
+			</script>
+			<script name="animation_instance">
+				<variables>
+					<variable name="Skeleton Name" value="human_skeleton"/>
+					<variable name="Animation Name" value="act_camel_backward_walk"/>
+					<variable name="Morph Animation Name" value=""/>
+					<variable name="Speed Multiplier" value="1.000000"/>
+					<variable name="Animation Phase" value="0.000000"/>
+					<variable name="Morph Animation Phase" value="0.000000"/>
+					<variable name="Freeze Animation" value="false"/>
+				</variables>
+			</script>
+		</scripts>
+		<children>
+			<game_entity name="animation_point" old_prefab_name="" mobility="1">
+				<flags>
+					<flag name="record_to_scene_replay" value="true"/>
+				</flags>
+				<visibility_masks>
+					<visibility_mask name="visible_only_when_editing" value="true"/>
+				</visibility_masks>
+				<tags>
+					<tag name="npc_wait"/>
+					<tag name="npc_common"/>
+				</tags>
+				<skeleton skeleton_model="human_skeleton"/>
+				<scripts>
+					<script name="AnimationPoint">
+						<variables>
+							<variable name="ArriveAction" value=""/>
+							<variable name="LoopStartAction" value="act_camel_backward_walk"/>
+							<variable name="PairLoopStartAction" value=""/>
+							<variable name="LeaveAction" value=""/>
+							<variable name="GroupId" value="-1"/>
+							<variable name="RightHandItem" value=""/>
+							<variable name="RightHandItemBone" value="ItemR"/>
+							<variable name="LeftHandItem" value=""/>
+							<variable name="LeftHandItemBone" value="ItemL"/>
+							<variable name="MinUserToStartInteraction" value="1"/>
+							<variable name="ActivatePairs" value="false"/>
+							<variable name="MinWaitinSeconds" value="50.000"/>
+							<variable name="MaxWaitInSeconds" value="320.000"/>
+							<variable name="ForwardDistanceToPivotPoint" value="0.000"/>
+							<variable name="SideDistanceToPivotPoint" value="0.000"/>
+							<variable name="KeepOldVisibility" value="false"/>
+							<variable name="AutoSheathWeapons" value="false"/>
+							<variable name="AutoEquipWeaponsOnUseStopped" value="false"/>
+							<variable name="AutoWieldWeapons" value="false"/>
+							<variable name="TranslateUser" value="true"/>
+							<variable name="HasRecentlyBeenRechecked" value="false"/>
+							<variable name="_useOwnPositionInsteadOfWorldPosition" value="false"/>
+							<variable name="_customPlayerInteractionDistance" value="0.000"/>
+							<variable name="NavMeshPrefabName" value=""/>
+						</variables>
+					</script>
+				</scripts>
+			</game_entity>
+		</children>
+		<levels>
+			<level name="level_1"/>
+			<level name="level_2"/>
+			<level name="level_3"/>
+		</levels>
+	</game_entity>
+	<game_entity name="sp_missionary_down" old_prefab_name="" mobility="1">
+		<flags>
+			<flag name="record_to_scene_replay" value="true"/>
+		</flags>
+		<visibility_masks>
+			<visibility_mask name="visible_only_when_editing" value="true"/>
+		</visibility_masks>
+		<tags>
+			<tag name="spawnpoint_player_3"/>
+		</tags>
+		<transform position="0.000, 0.000, 0.000" rotation_euler="0.000, 0.000, 0.000"/>
+		<skeleton skeleton_model="human_skeleton">
+			<components>
+				<meta_mesh_component name="arrow_new_icon"/>
+			</components>
+		</skeleton>
+		<scripts>
+			<script name="PopupSceneSpawnPoint">
+				<variables>
+					<variable name="InitialAction" value="act_horse_backward_walk"/>
+					<variable name="NegativeAction" value=""/>
+					<variable name="InitialFaceAnimCode" value=""/>
+					<variable name="PositiveFaceAnimCode" value=""/>
+					<variable name="NegativeFaceAnimCode" value=""/>
+					<variable name="PositiveAction" value=""/>
+					<variable name="LeftHandWieldedItem" value=""/>
+					<variable name="RightHandWieldedItem" value=""/>
+					<variable name="BannerTagToUseForAddedPrefab" value=""/>
+					<variable name="StartWithRandomProgress" value="false"/>
+					<variable name="AttachedPrefabOffset" value="0.000, 0.000, 0.000, -1.000"/>
+					<variable name="PrefabItem" value="baby_right"/>
+					<variable name="PrefabBone" value="ItemR"/>
+				</variables>
+			</script>
+			<script name="animation_instance">
+				<variables>
+					<variable name="Skeleton Name" value="human_skeleton"/>
+					<variable name="Animation Name" value="act_horse_backward_walk"/>
+					<variable name="Morph Animation Name" value=""/>
+					<variable name="Speed Multiplier" value="1.000000"/>
+					<variable name="Animation Phase" value="0.000000"/>
+					<variable name="Morph Animation Phase" value="0.000000"/>
+					<variable name="Freeze Animation" value="false"/>
+				</variables>
+			</script>
+		</scripts>
+		<children>
+			<game_entity name="animation_point" old_prefab_name="" mobility="1">
+				<flags>
+					<flag name="record_to_scene_replay" value="true"/>
+				</flags>
+				<visibility_masks>
+					<visibility_mask name="visible_only_when_editing" value="true"/>
+				</visibility_masks>
+				<tags>
+					<tag name="npc_wait"/>
+					<tag name="npc_common"/>
+				</tags>
+				<skeleton skeleton_model="human_skeleton"/>
+				<scripts>
+					<script name="AnimationPoint">
+						<variables>
+							<variable name="ArriveAction" value=""/>
+							<variable name="LoopStartAction" value="act_horse_backward_walk"/>
+							<variable name="PairLoopStartAction" value=""/>
+							<variable name="LeaveAction" value=""/>
+							<variable name="GroupId" value="-1"/>
+							<variable name="RightHandItem" value=""/>
+							<variable name="RightHandItemBone" value="ItemR"/>
+							<variable name="LeftHandItem" value=""/>
+							<variable name="LeftHandItemBone" value="ItemL"/>
+							<variable name="MinUserToStartInteraction" value="1"/>
+							<variable name="ActivatePairs" value="false"/>
+							<variable name="MinWaitinSeconds" value="50.000"/>
+							<variable name="MaxWaitInSeconds" value="320.000"/>
+							<variable name="ForwardDistanceToPivotPoint" value="0.000"/>
+							<variable name="SideDistanceToPivotPoint" value="0.000"/>
+							<variable name="KeepOldVisibility" value="false"/>
+							<variable name="AutoSheathWeapons" value="false"/>
+							<variable name="AutoEquipWeaponsOnUseStopped" value="false"/>
+							<variable name="AutoWieldWeapons" value="false"/>
+							<variable name="TranslateUser" value="true"/>
+							<variable name="HasRecentlyBeenRechecked" value="false"/>
+							<variable name="_useOwnPositionInsteadOfWorldPosition" value="false"/>
+							<variable name="_customPlayerInteractionDistance" value="0.000"/>
+							<variable name="NavMeshPrefabName" value=""/>
+						</variables>
+					</script>
+				</scripts>
+			</game_entity>
+		</children>
+		<levels>
+			<level name="level_1"/>
+			<level name="level_2"/>
+			<level name="level_3"/>
+		</levels>
+	</game_entity>
+</prefabs>
+

@@ -39,16 +39,4 @@ namespace Dramalord.Patches
             __result = CharacterRelationManager.GetHeroRelation(__instance, otherHero) >= DramalordMCM.Instance.MinTrustFriends;
         }
     }
-/*
-    [HarmonyPatch(typeof(Hero), "CanMoveToSettlement")]
-    public static class CanMoveToSettlementPatch
-    {
-        [UsedImplicitly]
-        [HarmonyPostfix]
-        public static void CanMoveToSettlement(ref Hero __instance, ref bool __result)
-        {
-            __result = __instance.PartyBelongedTo == MobileParty.MainParty && DramalordQuests.Instance.GetQuest(__instance) as JoinPlayerQuest != null ? true : __result;
-        }
-    }
-*/
 }

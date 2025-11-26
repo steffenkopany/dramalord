@@ -1,4 +1,4 @@
-﻿using Dramalord.Data.Intentions;
+﻿using Dramalord.Data.Events;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -68,11 +68,25 @@ namespace Dramalord.Data
 
         internal void OnHourlyTick()
         {
+            foreach (var pregnancy in _pregnancies.ToList())
+            {
+                if(CampaignTime.Days((float)pregnancy.Value.Conceived.ToDays + (float)DramalordMCM.Instance.PregnancyDuration).IsPast)
+                {
+                    DramalordEvents.Instance.StartIntention(new BirthEvent(pregnancy.Key, pregnancy.Value.Father));
+                    _pregnancies.Remove(pregnancy.Key);
+                }
+                else if(!pregnancy.Key.IsPregnant)
+                {
+                    pregnancy.Key.IsPregnant = true;
+                }
+            }
+            /*
             _pregnancies.Where(keypair => CampaignTime.Days((float)keypair.Value.Conceived.ToDays + (float)DramalordMCM.Instance.PregnancyDuration).IsPast).ToList().ForEach(keypair =>
             {
-                new GiveBirthIntention(keypair.Value, keypair.Key, CampaignTime.Now).Action();
+                DramalordEvents.Instance.StartIntention(new BirthEvent(keypair.Key, keypair.Value.Father));
                 _pregnancies.Remove(keypair.Key);
             });
+            */
         }
 
         internal override void InitEvents()
@@ -90,10 +104,6 @@ namespace Dramalord.Data
                 Dictionary<Hero, HeroPregnancy> data = new();
                 dataStore.SyncData(SaveIdentifier, ref data);
                 data.Do(pair => _pregnancies.Add(pair.Key, pair.Value));
-            }
-            else
-            {
-                LegacySave.LoadLegacyPregnancies(_pregnancies, dataStore);
             }
 
             _pregnancies.Do(preg => preg.Key.IsPregnant = true);

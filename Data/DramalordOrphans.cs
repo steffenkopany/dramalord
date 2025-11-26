@@ -1,5 +1,4 @@
-﻿using HarmonyLib;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
@@ -65,10 +64,6 @@ namespace Dramalord.Data
                 dataStore.SyncData(SaveIdentifier, ref data);
                 _orphans.AddRange(data);
             }
-            else
-            {
-                LegacySave.LoadLegacyOrphans(_orphans, dataStore);
-            }   
         }
 
         internal override void SaveData(IDataStore dataStore)

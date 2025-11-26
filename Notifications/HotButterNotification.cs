@@ -44,14 +44,14 @@ namespace Dramalord.Notifications
                 scene = "scn_carsi_izni";
             }
 
-            _sceneName = scene;
+            _sceneName = "scn_generic_missionary";// "scn_tent4"; //scene;
         }
 
         public override string SceneID => _sceneName;
 
-        public override TextObject TitleText => new TextObject();
+        public override TextObject TitleText => TextObject.GetEmpty();
 
-        public override IEnumerable<SceneNotificationCharacter> GetSceneNotificationCharacters()
+        public override SceneNotificationCharacter[] GetSceneNotificationCharacters()
         {
             List<SceneNotificationCharacter> notificationCharacters = new();
             if(_sceneName == "scn_carsi_izni")
@@ -70,7 +70,7 @@ namespace Dramalord.Notifications
                 notificationCharacters.Add(CampaignSceneNotificationHelper.CreateNotificationCharacterFromHero(_spectator, _spectator.CivilianEquipment, true, _spectator.BodyProperties, uint.MaxValue, uint.MaxValue, false));
             }
 
-            return notificationCharacters;
+            return notificationCharacters.ToArray();
         }
     }
 }

@@ -34,15 +34,6 @@ namespace Dramalord.Data
         private int _horny;
 
         [SaveableField(8)]
-        private int _periodDayOfSeason;
-
-        [SaveableField(9)]
-        private int _intercourseSkill;
-
-        [SaveableField(10)]
-        private bool _hasToy;
-
-        [SaveableField(11)]
         private bool _isKnownToPlayer;
 
         internal int AttractionMen
@@ -87,31 +78,13 @@ namespace Dramalord.Data
             set => _horny = MBMath.ClampInt(value, 0, 100);
         }
 
-        internal int PeriodDayOfSeason
-        {
-            get => _periodDayOfSeason;
-            set => _periodDayOfSeason = MBMath.ClampInt(value, 1, CampaignTime.DaysInSeason);
-        }
-
-        internal int IntercourseSkill
-        {
-            get => _intercourseSkill;
-            set => _intercourseSkill = MBMath.ClampInt(value, 0, 100);
-        }
-
-        internal bool HasToy
-        {
-            get => _hasToy;
-            set => _hasToy = value;
-        }
-
         internal bool IsKnowToPlayer 
         {
             get => _isKnownToPlayer;
             set => _isKnownToPlayer = value; 
         }
 
-        internal HeroDesires(int attractionMen, int attractionWomen, int attractionWeight, int attractionBuild, int attractionAgeDiff, int libido, int horny, int periodDayOfSeason, int intercourseSkill, bool hasToy, bool infoKnown)
+        internal HeroDesires(int attractionMen, int attractionWomen, int attractionWeight, int attractionBuild, int attractionAgeDiff, int libido, int horny, bool infoKnown)
         {
             AttractionMen = attractionMen;
             AttractionWomen = attractionWomen;
@@ -120,19 +93,15 @@ namespace Dramalord.Data
             AttractionAgeDiff = attractionAgeDiff;
             Libido = libido;
             Horny = horny;
-            PeriodDayOfSeason = periodDayOfSeason;
-            IntercourseSkill = intercourseSkill;
-            HasToy = hasToy;
             IsKnowToPlayer = infoKnown;
         }
     }
 
     internal class DramalordDesires : DramalordData
     {
-        private static float _heterosexualRate = 0.75f;
-        private static float _homosexualRate = 0.1f;
-        private static float _bisexualRate = 0.1f;
-        private static float _asexualRate = 0.05f;
+        private const float _homosexualRate = 0.1f;
+        private const float _bisexualRate = 0.1f;
+        private const float _asexualRate = 0.05f;
 
         internal static int Heterosexual { get; private set; } = 0;
         internal static int Homosexual { get; private set; } = 0;
@@ -175,13 +144,10 @@ namespace Dramalord.Data
                 (hero.IsFemale) ? Generate(75, 100, 0, 100) : Generate(25, 50, 0, 100),
                 Generate(0, 10, -20, 20),
                 Generate(7, 10, 1, 10),
-                Generate(50, 75, 0, 100), 
-                MBRandom.RandomInt(1, CampaignTime.DaysInSeason),
-                Generate(5, 7, 0, 10),
-                false,
+                Generate(50, 75, 0, 100),
                 false);
 
-            float allHeroes = _desires.Count();
+            float allHeroes = _desires.Count() == 0 ? 1 : _desires.Count();
             float asRate = ((float)Asexual) / allHeroes;
             float biRate = ((float)Bisexual) / allHeroes;
             float hoRate = ((float)Homosexual) / allHeroes;
@@ -231,10 +197,6 @@ namespace Dramalord.Data
                 {
                     _desires.Add(keypair.Key, keypair.Value);
                 });
-            }
-            else
-            {
-                LegacySave.LoadLegacyDesires(_desires, dataStore);
             }
             
             _desires.Do(keypair =>

@@ -1,6 +1,4 @@
-﻿using Dramalord.Actions;
-using Dramalord.Data.Intentions;
-using Dramalord.Extensions;
+﻿using Dramalord.Extensions;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
@@ -17,18 +15,8 @@ namespace Dramalord.Data
     {
         None,
         Friend,
-        FriendWithBenefits,
         Lover,
-        Betrothed,
         Spouse
-    }
-
-    public enum RelationshipRule
-    {
-        Faithful, //default
-        Playful, //FWB are ok
-        Poly,   // only spouse to spouse
-        Open    // doesnt care at all
     }
 
     internal sealed class HeroRelation
@@ -43,13 +31,11 @@ namespace Dramalord.Data
         private int _relationship;
 
         [SaveableField(4)]
-        private bool _isKnownToPlayer;
-
-        [SaveableField(5)]
         private CampaignTime _lastUpdate;
 
-        [SaveableField(6)]
-        private int _rules;
+        [SaveableField(5)]
+        private CampaignTime _blockedUntil;
+
 
         internal CampaignTime LastInteraction 
         { 
@@ -85,18 +71,17 @@ namespace Dramalord.Data
 
         internal RelationshipType Relationship { get => (RelationshipType)_relationship; set => _relationship = (int)value; }
 
-        internal RelationshipRule Rules { get => (RelationshipRule)_rules; set => _rules = (int)value; }
+        internal void SetBlockedUntil(CampaignTime blockedDate) => _blockedUntil = blockedDate;
 
-        internal bool IsKnownToPlayer { get => _isKnownToPlayer; set => _isKnownToPlayer = value; }
+        internal bool IsBlocked() => _blockedUntil.IsFuture;
 
         internal HeroRelation(int love, RelationshipType relationship)
         {
             _love = love;
-            _lastInteraction = CampaignTime.Now;
+            _lastInteraction = CampaignTime.DaysFromNow(DramalordMCM.Instance.DaysBetweenInteractions * -1);
             _relationship = (int)relationship;
-            _isKnownToPlayer = false;
             _lastUpdate = CampaignTime.Now;
-            _rules = (int)RelationshipRule.Faithful;
+            _blockedUntil = CampaignTime.DaysFromNow(-14);
         }
     }
 
@@ -138,7 +123,6 @@ namespace Dramalord.Data
                     (hero1.Spouse == hero2) ? MBRandom.RandomInt(50, 100) : 0,
                      (hero1.Spouse == hero2) ? RelationshipType.Spouse : hero1.IsFriend(hero2) ? RelationshipType.Friend :  RelationshipType.None)
                     );
-                _relations[hero1][hero2].IsKnownToPlayer = hero1.Spouse == hero2 ? true : false;
             }
 
             if (!_relations[hero2].ContainsKey(hero1))
@@ -191,29 +175,6 @@ namespace Dramalord.Data
                             }
                         }
                     });
-                });
-            }
-            else
-            {
-                LegacySave.LoadLegacyRelations(_relations, dataStore);
-            }
-
-            // also this is actually not necessary
-            if (!BetrothIntention.OtherMarriageModFound)
-            {
-                // When not in compatibility mode, ensure that if the vanilla spouse is set, the Dramalord relation is correct.
-                Hero.AllAliveHeroes.Where(h => h.Spouse != null && _relations.ContainsKey(h)).Do(h =>
-                {
-                    if (h.GetRelationTo(h.Spouse).Relationship != RelationshipType.Spouse)
-                    {
-                        StartRelationshipAction.Apply(h, h.Spouse, h.GetRelationTo(h.Spouse), RelationshipType.Spouse);
-                    }
-                    else if(h != Hero.MainHero && h.Spouse != Hero.MainHero)
-                    {
-                        RelationshipRule rule1 = h.GetDefaultRelationshipRule();
-                        RelationshipRule rule2 = h.Spouse.GetDefaultRelationshipRule();
-                        h.GetRelationTo(h.Spouse).Rules = (rule1 < rule2) ? rule1 : rule2;
-                    }
                 });
             }
         }
@@ -281,22 +242,13 @@ namespace Dramalord.Data
         {
             base.InitEvents();
             CampaignEvents.RomanticStateChanged.AddNonSerializedListener(this, new Action<Hero, Hero, Romance.RomanceLevelEnum>(OnRomanticStateChanged));
-            CampaignEvents.HeroesMarried.AddNonSerializedListener(this, new Action<Hero, Hero, bool>(OnHeroesMarried));
         }
 
         public void OnRomanticStateChanged(Hero hero1, Hero hero2, Romance.RomanceLevelEnum level)
         {
-            if (level == Romance.RomanceLevelEnum.Marriage && !hero1.IsSpouseOf(hero2))
+            if (level == Romance.RomanceLevelEnum.Marriage)
             {
-                StartRelationshipAction.Apply(hero1, hero2, hero1.GetRelationTo(hero2), RelationshipType.Spouse);
-            }
-        }
-
-        public void OnHeroesMarried(Hero hero1, Hero hero2, bool flag)
-        {
-            if (!hero1.IsSpouseOf(hero2))
-            {
-                StartRelationshipAction.Apply(hero1, hero2, hero1.GetRelationTo(hero2), RelationshipType.Spouse);
+                hero1.GetRelationTo(hero2).Relationship = RelationshipType.Spouse;
             }
         }
     }
