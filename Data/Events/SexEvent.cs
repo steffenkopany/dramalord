@@ -4,11 +4,17 @@ using Dramalord.Data.Events.Interfaces;
 using Dramalord.Extensions;
 using Dramalord.Notifications;
 using Dramalord.Quests;
+using Dramalord.UI;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
+using TaleWorlds.Engine;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade.GauntletUI;
+using TaleWorlds.MountAndBlade.View.Screens;
+using TaleWorlds.MountAndBlade.ViewModelCollection.VideoPlayback;
 using TaleWorlds.ObjectSystem;
 using TaleWorlds.SaveSystem;
 
@@ -50,9 +56,22 @@ namespace Dramalord.Data.Events
             AddLogEntry(this);
             if (Actor == Hero.MainHero || Target == Hero.MainHero)
             {
-                if(DramalordCampaignBehavior.HotButterFound)
+                if(DramalordCampaignBehavior.HotButterFound && DramalordMCM.Instance.ShowHotButter)
                 {
                     MBInformationManager.ShowSceneNotification(new HotButterNotification(Actor, Target, Actor.CurrentSettlement));
+                }
+                else if(DramalordMCM.Instance.ShowDramaVideos)
+                {
+                    DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, DramalordVideoNotification.VideoContext.Intercourse);
+                    /*SimpleImagePopupHelper.ShowVideo(
+                        frameDirectory: "F:\\SteamLibrary\\steamapps\\common\\Mount & Blade II Bannerlord\\Modules\\Dramalord\\GUI\\VideoFrames\\lovers_desert_f_f",
+                        framePrefix: "f",      // expects frame_0001.png, frame_0002.png, etc.
+                        frameExtension: ".jpg",
+                        frameRate: 12,
+                        loop: false,
+                        title: "My Video",
+                        soundEvent: "romance_music"
+                    );*/
                 }
                 else
                 {

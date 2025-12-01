@@ -86,7 +86,7 @@ namespace Dramalord.Quests
                                             .Consequence(() =>
                                             {
                                                 Hero.MainHero.ChangeRelationTo(Hero.OneToOneConversationHero, Hero.MainHero.GetTrust(Hero.OneToOneConversationHero) * -1, Hero.MainHero.GetRelationTo(Hero.OneToOneConversationHero).Love * -1);
-                                                DramalordEvents.Instance.StartIntention(new RelationshipEvent(Hero.MainHero, Hero.OneToOneConversationHero));
+                                                (new RelationshipEvent(Hero.MainHero, Hero.OneToOneConversationHero)).Action();
                                                 QuestSuccess(Hero.MainHero);
                                             })
                                             .NpcLine(DramalordTexts.NPC_INTERACTION_ASYOUWISH)
@@ -97,7 +97,7 @@ namespace Dramalord.Quests
                                             .Consequence(() =>
                                             {
                                                 OtherHero.ChangeRelationTo(Hero.OneToOneConversationHero, 0, OtherHero.GetRelationTo(Hero.OneToOneConversationHero).Love * -1);
-                                                DramalordEvents.Instance.StartIntention(new RelationshipEvent(OtherHero, Hero.OneToOneConversationHero));
+                                                (new RelationshipEvent(OtherHero, Hero.OneToOneConversationHero)).Action();
                                                 QuestSuccess(Hero.MainHero);
                                             })
                                             .CloseDialog()

@@ -3,7 +3,13 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+using TaleWorlds.Core.ViewModelCollection.Information;
 using TaleWorlds.Localization;
+using TaleWorlds.MountAndBlade.GauntletUI.SceneNotification;
+using TaleWorlds.MountAndBlade.GauntletUI.Widgets;
+using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Information;
+using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Map.Notification;
+using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Tutorial;
 
 namespace Dramalord.Notifications
 {
@@ -44,7 +50,7 @@ namespace Dramalord.Notifications
                 scene = "scn_carsi_izni";
             }
 
-            _sceneName = "scn_generic_missionary";// "scn_tent4"; //scene;
+            _sceneName = scene;
         }
 
         public override string SceneID => _sceneName;

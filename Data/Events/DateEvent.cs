@@ -66,7 +66,9 @@ namespace Dramalord.Data.Events
         {
             AddLogEntry(this);
 
-            DramalordEvents.Instance.StartIntention(new RelationshipEvent(Actor, Target));
+            bool relationChanged = RelationshipEvent.CheckRelationship(Actor, Target) != Actor.GetRelationTo(Target).Relationship;
+
+            (new RelationshipEvent(Actor, Target, true)).Action();
 
             if (Actor != Hero.MainHero && Target != Hero.MainHero && Actor.GetDesires().Horny > 50 && Target.GetDesires().Horny > 50)
             {
@@ -75,7 +77,7 @@ namespace Dramalord.Data.Events
             else if ((Actor == Hero.MainHero || Target == Hero.MainHero) && TrustGain > 0 && LoveGain > 0)
             {
                 Hero otherHero = (Actor == Hero.MainHero) ? Target : Actor;
-                if(otherHero.GetDesires().Horny > 20)
+                if(otherHero.GetDesires().Horny > 50 && !relationChanged)
                 {
                     DramalordInquiry.CreateYesNoInquiry(otherHero, DramalordTexts.INQUIRY_SEX_TITLE, DramalordTexts.INQUIRY_SEX_TEXT, () => DramalordEvents.Instance.StartIntention(new SexEvent(Actor, Target)), () => { });
                 }

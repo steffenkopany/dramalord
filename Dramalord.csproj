@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>5.0.1</Version>
+    <Version>5.0.4</Version>
     <TargetFrameworks>net472;net6</TargetFrameworks>
     <Platforms>x64</Platforms>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -59,6 +59,12 @@
       <HintPath>%(Identity)</HintPath>
       <Private>False</Private>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="_Module\Assets\**" />
+    <EmbeddedResource Remove="_Module\Assets\**" />
+    <None Remove="_Module\Assets\**" />
   </ItemGroup>
 
   <ItemGroup>

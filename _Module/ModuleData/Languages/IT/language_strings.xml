@@ -414,5 +414,11 @@
     <string id="Dramalord408" text="Hai sentito qualche notizia degna di nota ultimamente?" />
     <string id="Dramalord409" text="Al momento non mi viene in mente nulla." />
     <string id="Dramalord410" text="Altro?" />
+    <string id="Dramalord411" text="Hai ragione, {ACTOR1.LINK}. Non provo più nulla per {ACTOR2.LINK}. Puoi parlargli e assicurarti che non ci disturbino più?" />
+    <string id="Dramalord412" text="Mi dispiace, {ACTOR1.LINK}, ma provo ancora qualcosa per {ACTOR2.LINK}. Per ora rimarrò in questo matrimonio." />
+    <string id="Dramalord413" text="Usa le animazioni HotButter" />
+    <string id="Dramalord414" text="Usa le animazioni di HotButter per le scene intime (disattiva le animazioni di Dramalord)." />
+    <string id="Dramalord415" text="Mostra i video di Dramalord" />
+    <string id="Dramalord416" text="Mostra i video di Dramalord per determinati eventi. Se disattivato, verranno visualizzate solo notifiche testuali." />
   </strings>
 </base>

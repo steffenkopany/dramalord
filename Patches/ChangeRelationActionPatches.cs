@@ -25,7 +25,7 @@ namespace Dramalord.Patches
         {
             if (originalHero.IsDramalordLegit() && originalGainedRelationWith.IsDramalordLegit())
             {
-                DramalordEvents.Instance.StartIntention(new RelationshipEvent(originalHero, originalGainedRelationWith));
+                (new RelationshipEvent(originalHero, originalGainedRelationWith)).Action();
             } 
         }
     }

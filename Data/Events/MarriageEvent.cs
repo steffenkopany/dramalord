@@ -57,14 +57,14 @@ namespace Dramalord.Data.Events
             if (Actor != Hero.MainHero && Actor.Spouse != null)
             {
                 Actor.ChangeRelationTo(Actor.Spouse, -100, -100);
-                DramalordEvents.Instance.StartIntention(new RelationshipEvent(Actor, Actor.Spouse));
+                (new RelationshipEvent(Actor, Actor.Spouse)).Action();
             }
 
             // Only the main hero keeps their old spouses - npcs are divorced!
             if (Target != Hero.MainHero && Target.Spouse != null)
             {
                 Target.ChangeRelationTo(Target.Spouse, -100, -100);
-                DramalordEvents.Instance.StartIntention(new RelationshipEvent(Target, Target.Spouse));
+                (new RelationshipEvent(Target, Target.Spouse)).Action();
             }
 
             ChangeRomanticStateAction.Apply(Actor, Target, Romance.RomanceLevelEnum.Marriage);

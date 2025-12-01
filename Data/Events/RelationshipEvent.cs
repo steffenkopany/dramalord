@@ -26,11 +26,13 @@ namespace Dramalord.Data.Events
         [SaveableField(4)]
         private TextObject NotificationLine = TextObject.GetEmpty();
 
+        private bool PlayerTriggered = false;
 
-        public RelationshipEvent(Hero actor, Hero target)
+        public RelationshipEvent(Hero actor, Hero target, bool playerTriggered = false)
         {
             Actor = actor;
             Target = target;
+            PlayerTriggered = playerTriggered;
             IsKnownTo.Add(Actor);
             IsKnownTo.Add(Target);
         }
@@ -72,11 +74,29 @@ namespace Dramalord.Data.Events
                 NotificationLine = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_RElATIONSHIP_START), Actor, Target);
                 ConversationTools.SetTextVariables(NotificationLine, DramalordTexts.GetRelationshipStatusName(RelationshipType.Lover));
 
-                if (Actor == Hero.MainHero || Target == Hero.MainHero)
+                if ((Actor == Hero.MainHero || Target == Hero.MainHero) && PlayerTriggered)
                 {
-                    DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_START), DramalordTexts.GetRelationshipStatusName(RelationshipType.Lover), true);
+                    relation.Relationship = RelationshipType.Lover;
+                    NotificationLine = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_RElATIONSHIP_START), Actor, Target);
+                    ConversationTools.SetTextVariables(NotificationLine, DramalordTexts.GetRelationshipStatusName(RelationshipType.Lover));
+
+                    if (DramalordMCM.Instance.ShowDramaVideos)
+                    {
+                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, DramalordVideoNotification.VideoContext.Lovers);
+                    }
+                    else
+                    {
+                        DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_START), DramalordTexts.GetRelationshipStatusName(RelationshipType.Lover), true);
+                    }
+                    AddLogEntry(this);
                 }
-                AddLogEntry(this);
+                else
+                {
+                    relation.Relationship = RelationshipType.Lover;
+                    NotificationLine = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_RElATIONSHIP_START), Actor, Target);
+                    ConversationTools.SetTextVariables(NotificationLine, DramalordTexts.GetRelationshipStatusName(RelationshipType.Lover));
+                    AddLogEntry(this);
+                }      
             }
             else if (relation.Relationship == RelationshipType.Lover && shouldRelation == RelationshipType.Friend)
             {

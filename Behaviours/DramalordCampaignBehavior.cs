@@ -9,7 +9,7 @@ namespace Dramalord.Behaviors
 {
     internal class DramalordCampaignBehavior : CampaignBehaviorBase
     {
-        internal static bool HotButterFound = true;//false;
+        internal static bool HotButterFound = false;
 
         internal DramalordCampaignBehavior(CampaignGameStarter starter)
         {

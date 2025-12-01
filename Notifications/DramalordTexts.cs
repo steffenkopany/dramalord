@@ -78,6 +78,11 @@ namespace Dramalord.Notifications
         public const string MCM_OPTIONAL_SHOW_RELATION_CHANGES_INFO = "{=Dramalord045}Enable this if you want to see relation change notifications (required for the Small Talk mod)";
         public const string MCM_OPTIONAL_SHOW_REAL_RELATIONS = "{=Dramalord070}Show Real Relation";
         public const string MCM_OPTIONAL_SHOW_REAL_RELATIONS_INFO = "{=Dramalord071}Enable this if you want to see the real relation to a hero (turn off if you're using True Noble Opinion)";
+        public const string MCM_OPTIONAL_SHOW_HOTBUTTER= "{=Dramalord413}Use HotButter Animations";
+        public const string MCM_OPTIONAL_SHOW_HOTBUTTER_INFO = "{=Dramalord414}Use HotButter animation for intimate scenes (will deactivate Dramalord animations).";
+        public const string MCM_OPTIONAL_SHOW_DRAMALORD_VIDEOS = "{=Dramalord415}Show Dramalord Videos";
+        public const string MCM_OPTIONAL_SHOW_DRAMALORD_VIDEOS_INFO = "{=Dramalord416}Show Dramalord videos for certain events. WHen turned off only text notifications will appear.";
+
         public const string MCM_EDITOR_HERO = "{=Dramalord072}1: Hero Selection";
         public const string MCM_EDITOR_HERO_SELECT = "{=Dramalord073}Select Hero";
         public const string MCM_EDITOR_PERSONALITY = "{=Dramalord074}2: Personality";
@@ -275,7 +280,9 @@ namespace Dramalord.Notifications
         public const string NPC_INTERACTION_ENGAGE_NO = "{=Dramalord298}I am sorry, {ACTOR1.LINK}, but I am not ready for that step just yet.";
         public const string NPC_INTERACTION_BREAKUP_OK = "{=Dramalord306}Oh no, {ACTOR1.LINK}! My heart breaks, yet I know I have no choice but to accept your decision...";
         public const string NPC_INTERACTION_GOSSIP_NONE = "{=Dramalord409}Nothing comes to mind at the moment.";
-                   
+        public const string NPC_INTERACTION_DIVORCE_OK = "{=Dramalord411}You are right, {ACTOR1.LINK}. I have no feelings for {ACTOR2.LINK} anymore. Can you talk to them and make sure they won't bother us anymore?";
+        public const string NPC_INTERACTION_DIVORCE_NO = "{=Dramalord412}I am sorry, {ACTOR1.LINK} but I have still feelings for {ACTOR2.LINK}. For the time being I will stay in this marriage.";
+
         public const string NPC_INTERACTION_INFO_OK = "{=Dramalord309}Certainly, {ACTOR1.LINK}. If you truly wish to know, I shall tell you...";
         public const string NPC_INTERACTION_INFO_NO = "{=Dramalord308}Forgive me, {ACTOR1.LINK}, but I do not trust you well enough to discuss this with you.";
         public const string NPC_INTERACTION_INFO_HETERO = "{=Dramalord310}I find myself primarily drawn to those of the opposite sex. As the saying goes, opposites attract.";

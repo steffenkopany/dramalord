@@ -414,5 +414,11 @@
     <string id="Dramalord408" text="Son zamanlarda duyduğun ilginç bir haber var mı?" />
     <string id="Dramalord409" text="Şu anda aklıma bir şey gelmiyor." />
     <string id="Dramalord410" text="Başka bir şey?" />
+    <string id="Dramalord411" text="Haklısın, {ACTOR1.LINK}. Artık {ACTOR2.LINK} için hiçbir şey hissetmiyorum. Onlarla konuşup bir daha bizi rahatsız etmemelerini sağlar mısın?" />
+    <string id="Dramalord412" text="Üzgünüm, {ACTOR1.LINK}, ama hâlâ {ACTOR2.LINK} için hislerim var. Şimdilik bu evlilikte kalacağım." />
+    <string id="Dramalord413" text="HotButter Animasyonlarını Kullan" />
+    <string id="Dramalord414" text="Mahrem sahnelerde HotButter animasyonlarını kullan (Dramalord animasyonlarını devre dışı bırakır)." />
+    <string id="Dramalord415" text="Dramalord Videolarını Göster" />
+    <string id="Dramalord416" text="Belirli olaylar için Dramalord videolarını gösterir. Kapalıysa yalnızca metin bildirimleri görünür." />
   </strings>
 </base>

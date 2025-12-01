@@ -41,11 +41,11 @@ namespace Dramalord.Behaviours
                         //cleanup
                         if(item.Key != Hero.MainHero && item.Value.Love <= 0 && (item.Value.Relationship == RelationshipType.Lover || item.Value.Relationship == RelationshipType.Spouse))
                         {
-                            DramalordEvents.Instance.StartIntention(new RelationshipEvent(hero, item.Key));
+                            (new RelationshipEvent(hero, item.Key)).Action(); //DramalordEvents.Instance.StartIntention(new RelationshipEvent(hero, item.Key)); 
                         }
                         else if (item.Key != Hero.MainHero && hero.GetTrust(item.Key) <= 0 && item.Value.Relationship == RelationshipType.Friend)
                         {
-                            DramalordEvents.Instance.StartIntention(new RelationshipEvent(hero, item.Key));
+                            (new RelationshipEvent(hero, item.Key)).Action(); //DramalordEvents.Instance.StartIntention(new RelationshipEvent(hero, item.Key));
                         }
                     }
 

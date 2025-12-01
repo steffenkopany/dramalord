@@ -14,7 +14,6 @@ using TaleWorlds.Localization;
 
 namespace Dramalord.Patches
 {
-
     [HarmonyPatch(typeof(LordConversationsCampaignBehavior), "conversation_lord_greets_under_24_hours_on_condition")]
     public static class conversation_lord_greets_under_24_hours_on_conditionPatch
     {
@@ -48,7 +47,7 @@ namespace Dramalord.Patches
             }
         }
     }
-
+    
     [HarmonyPatch(typeof(LordConversationsCampaignBehavior), "conversation_lord_introduction_on_condition")]
     public static class conversation_lord_introduction_on_conditionPatch
     {

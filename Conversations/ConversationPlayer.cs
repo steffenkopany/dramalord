@@ -10,6 +10,7 @@ using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Conversation;
+using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -220,6 +221,16 @@ namespace Dramalord.Conversations
                         .GotoDialogState("player_interaction_selection")
                 .EndNpcOptions();
 
+            DialogFlow divorceFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_divorce")
+                .BeginNpcOptions()
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_DIVORCE_OK + "[ib:normal][if:convo_calm_friendly]", () => !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero, Hero.OneToOneConversationHero.Spouse) && Hero.OneToOneConversationHero.GetRelationTo(Hero.OneToOneConversationHero.Spouse).Love <= 0)
+                        .GotoDialogState("player_interaction_selection")
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_DIVORCE_NO + "[ib:normal][if:convo_calm_friendly]", () => !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero, Hero.OneToOneConversationHero.Spouse) && Hero.OneToOneConversationHero.GetRelationTo(Hero.OneToOneConversationHero.Spouse).Love > 0)
+                        .GotoDialogState("player_interaction_selection")
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_TIMEOUT + "[ib:closed][if:convo_bored]", () => Timeout() && ConversationTools.SetConversationHero(Hero.MainHero))
+                        .GotoDialogState("player_interaction_selection")
+                .EndNpcOptions();
+
             DialogFlow engageFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_engage")
                 .BeginNpcOptions()  
                     .NpcOption(DramalordTexts.NPC_INTERACTION_MARRIAGE_OK + "[ib:aggressive][if:convo_delighted]", () => !Timeout() && FreeForMarriage() && (Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinMarriageLove || ConversationPersuasions.Success) && ConversationTools.SetConversationHero(Hero.MainHero))
@@ -274,7 +285,7 @@ namespace Dramalord.Conversations
                     .NpcOption(DramalordTexts.NPC_INTERACTION_BREAKUP_OK + "[ib:nervous][if:convo_shocked]", () => ConversationTools.SetConversationHero(Hero.MainHero))
                         .Consequence(() => { 
                             Hero.OneToOneConversationHero.ChangeRelationTo(Hero.MainHero, -100 + Hero.OneToOneConversationHero.GetPersonality().Empathy, Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love * -1);
-                            DramalordEvents.Instance.StartIntention(new RelationshipEvent(Hero.MainHero, Hero.OneToOneConversationHero));
+                            (new RelationshipEvent(Hero.MainHero, Hero.OneToOneConversationHero)).Action();
                         })
                         .CloseDialog()
                 .EndNpcOptions();
@@ -440,6 +451,7 @@ namespace Dramalord.Conversations
             starter.AddDialogFlow(flirtFlow);
             starter.AddDialogFlow(dateFlow);
             starter.AddDialogFlow(sexFlow);
+            starter.AddDialogFlow(divorceFlow);
             starter.AddDialogFlow(engageFlow);
             starter.AddDialogFlow(marryFlow);
             starter.AddDialogFlow(breakupFlow);

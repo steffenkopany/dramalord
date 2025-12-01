@@ -414,5 +414,11 @@
     <string id="Dramalord408" text="最近、何か興味深い噂を聞いたか？" />
     <string id="Dramalord409" text="今のところ特に思い当たらない。" />
     <string id="Dramalord410" text="他に何か？" />
+    <string id="Dramalord411" text="君の言う通りだ、{ACTOR1.LINK}。もう{ACTOR2.LINK}に対して気持ちはない。彼らに話して、もう私たちを悩ませないようにしてくれるか？" />
+    <string id="Dramalord412" text="すまない、{ACTOR1.LINK}。だが、まだ{ACTOR2.LINK}への気持ちが残っている。今のところ、この結婚を続けるつもりだ。" />
+    <string id="Dramalord413" text="HotButterアニメーションを使用" />
+    <string id="Dramalord414" text="親密なシーンでHotButterアニメーションを使用します（Dramalordアニメーションは無効化されます）。" />
+    <string id="Dramalord415" text="Dramalord動画を表示" />
+    <string id="Dramalord416" text="特定のイベントでDramalord動画を表示します。オフの場合はテキスト通知のみ表示されます。" />
   </strings>
 </base>

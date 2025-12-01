@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="module_sound">
+  <module_sounds>
+    <module_sound
+      name="romance_music"
+      is_2d="true"
+      sound_category="ui"
+      path="romantic_music.ogg"
+      loop="true" />
+  </module_sounds>
+</base>

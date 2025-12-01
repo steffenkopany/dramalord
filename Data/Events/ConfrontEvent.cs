@@ -45,7 +45,7 @@ namespace Dramalord.Data.Events
 
         public void AfterDialog()
         {
-            DramalordEvents.Instance.StartIntention(new RelationshipEvent(Actor, Target));
+            (new RelationshipEvent(Actor, Target)).Action();// DramalordEvents.Instance.StartIntention(new RelationshipEvent(Actor, Target));
             Actor.GetRelationTo(Target).LastInteraction = CampaignTime.Now;
         }
 

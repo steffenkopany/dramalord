@@ -140,7 +140,15 @@ namespace Dramalord
         public bool ShowRealrelation { get; set; } = true;
 
         [SettingPropertyGroup(DramalordTexts.MCM_OPTIONAL)]
-        [SettingPropertyBool("DEBUG: Show All Logs", Order = 3, HintText = "Debugmode: Show all Dramalord log output", RequireRestart = false)]
+        [SettingPropertyBool(DramalordTexts.MCM_OPTIONAL_SHOW_HOTBUTTER, Order = 3, HintText = DramalordTexts.MCM_OPTIONAL_SHOW_HOTBUTTER_INFO, RequireRestart = false)]
+        public bool ShowHotButter { get; set; } = true;
+
+        [SettingPropertyGroup(DramalordTexts.MCM_OPTIONAL)]
+        [SettingPropertyBool(DramalordTexts.MCM_OPTIONAL_SHOW_DRAMALORD_VIDEOS, Order = 4, HintText = DramalordTexts.MCM_OPTIONAL_SHOW_DRAMALORD_VIDEOS_INFO, RequireRestart = false)]
+        public bool ShowDramaVideos { get; set; } = true;
+
+        [SettingPropertyGroup(DramalordTexts.MCM_OPTIONAL)]
+        [SettingPropertyBool("DEBUG: Show All Logs", Order = 5, HintText = "Debugmode: Show all Dramalord log output", RequireRestart = false)]
         public bool DEBUGLOG { get; set; } = true;
 
 

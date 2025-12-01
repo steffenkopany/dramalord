@@ -73,7 +73,7 @@ namespace Dramalord.Quests
         {
             QuestGiver.ChangeRelationTo(Hero.MainHero, -100 + QuestGiver.GetPersonality().Empathy, QuestGiver.GetDesires().Horny * -1);
 
-            DramalordEvents.Instance.StartIntention(new RelationshipEvent(QuestGiver, Hero.MainHero));
+            (new RelationshipEvent(QuestGiver, Hero.MainHero)).Action();
 
             Campaign.Current.ConversationManager.RemoveRelatedLines(this);
 

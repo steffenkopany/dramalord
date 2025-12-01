@@ -414,5 +414,11 @@
     <string id="Dramalord408" text="最近听到什么值得注意的消息吗？" />
     <string id="Dramalord409" text="此刻我想不起来什么。" />
     <string id="Dramalord410" text="还有别的吗？" />
+    <string id="Dramalord411" text="你说得对，{ACTOR1.LINK}。我对 {ACTOR2.LINK} 已经没有感情了。你能和他们谈谈，让他们别再打扰我们了吗？" />
+    <string id="Dramalord412" text="对不起，{ACTOR1.LINK}，但我对 {ACTOR2.LINK} 仍有感情。目前我会继续这段婚姻。" />
+    <string id="Dramalord413" text="使用 HotButter 动画" />
+    <string id="Dramalord414" text="在亲密场景中使用 HotButter 动画（将停用 Dramalord 动画）。" />
+    <string id="Dramalord415" text="显示 Dramalord 视频" />
+    <string id="Dramalord416" text="为特定事件显示 Dramalord 视频。关闭时仅显示文字通知。" />
   </strings>
 </base>
