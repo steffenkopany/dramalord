@@ -32,7 +32,7 @@ namespace Dramalord.Data.Events
             IsKnownTo.Add(actor);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             if(Actor.Clan != null) return;
 

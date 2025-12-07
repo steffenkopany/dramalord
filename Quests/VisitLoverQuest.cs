@@ -38,7 +38,7 @@ namespace Dramalord.Quests
                         .PlayerLine(DramalordTexts.INTENTION_VISIT_REACT_1)
                             .NpcLine(DramalordTexts.INTENTION_VISIT_2_INTIME)
                             .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
-                            .Consequence(() => QuestSuccess(Hero.MainHero))
+                            .Consequence(() => { QuestSuccess(Hero.MainHero); DramalordEvents.Instance.StartIntention(new SexEvent(Hero.MainHero, Hero.OneToOneConversationHero)); })
                             .CloseDialog()
                     .NpcOption(DramalordTexts.INTENTION_VISIT_1_LATE, () => Hero.OneToOneConversationHero.IsDramalordLegit() && Hero.OneToOneConversationHero == QuestGiver && HasBeenVisited && ConversationTools.SetConversationHero(QuestGiver))
                         .PlayerLine(DramalordTexts.INTENTION_VISIT_REACT_1)
@@ -63,7 +63,7 @@ namespace Dramalord.Quests
             DramalordQuests.Instance.RemoveQuest(QuestGiver);
             Campaign.Current.ConversationManager.RemoveRelatedLines(this);
 
-            DramalordEvents.Instance.StartIntention(new DateEvent(Hero.MainHero, QuestGiver));
+            //DramalordEvents.Instance.StartIntention(new DateEvent(Hero.MainHero, QuestGiver));
 
             AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_VISIT_SUCCESS), QuestGiver));
             CompleteQuestWithSuccess();

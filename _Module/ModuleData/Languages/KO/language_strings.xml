@@ -420,5 +420,7 @@
     <string id="Dramalord414" text="친밀한 장면에서 HotButter 애니메이션을 사용합니다 (Dramalord 애니메이션이 비활성화됩니다)." />
     <string id="Dramalord415" text="Dramalord 동영상 표시" />
     <string id="Dramalord416" text="특정 이벤트에서 Dramalord 동영상을 표시합니다. 꺼져 있을 경우 텍스트 알림만 표시됩니다." />
+    <string id="Dramalord417" text="당신의 사생아를 받아들이겠습니까?" />
+    <string id="Dramalord418" text="{ACTOR1.LINK}가 당신의 아이를 낳았습니다. 결혼하지 않았기 때문에 {ACTOR1.LINK}는 아이를 고아원에 보내야 합니다. 대신 당신이 아이를 돌보시겠습니까?" />
   </strings>
 </base>

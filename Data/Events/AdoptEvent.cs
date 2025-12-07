@@ -29,7 +29,7 @@ namespace Dramalord.Data.Events
             IsKnownTo.Add(target);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             if(Actor.IsFemale)
             {
@@ -43,7 +43,18 @@ namespace Dramalord.Data.Events
             }
 
             Target.SetNewOccupation(Actor.Occupation);
-            Target.Clan = Actor.Clan;
+            if(Target.Clan != null)
+            {
+                LeaveClanEvent leaveClanEvent = new LeaveClanEvent(Target);
+                leaveClanEvent.Action();
+                leaveClanEvent.AfterDialog();
+            }
+            if(Actor.Clan != null)
+            {
+                JoinClanEvent joinClanEvent = new JoinClanEvent(Target, Actor.Clan);
+                joinClanEvent.Action();
+                joinClanEvent.AfterDialog();
+            }
 
             DramalordOrphans.Instance.RemoveOrphan(Target);
             Target.UpdateHomeSettlement();

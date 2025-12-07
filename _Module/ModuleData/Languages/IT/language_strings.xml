@@ -420,5 +420,7 @@
     <string id="Dramalord414" text="Usa le animazioni di HotButter per le scene intime (disattiva le animazioni di Dramalord)." />
     <string id="Dramalord415" text="Mostra i video di Dramalord" />
     <string id="Dramalord416" text="Mostra i video di Dramalord per determinati eventi. Se disattivato, verranno visualizzate solo notifiche testuali." />
+    <string id="Dramalord417" text="Prenderai il tuo figlio illegittimo?" />
+    <string id="Dramalord418" text="{ACTOR1.LINK} ha dato alla luce tuo figlio. Poiché non siete sposati, {ACTOR1.LINK} sarebbe costretto a mandare il bambino in orfanotrofio. Vuoi occuparti tu del bambino?" />
   </strings>
 </base>

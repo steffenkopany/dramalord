@@ -11,7 +11,7 @@ namespace Dramalord.Data.Events.Interfaces
 
         List<Hero> IsKnownTo { get; }
 
-        void Action();
+        void Action(int modifier = 0);
 
         void AfterDialog();
 

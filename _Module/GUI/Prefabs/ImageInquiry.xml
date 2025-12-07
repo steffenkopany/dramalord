@@ -1,0 +1,26 @@
+<Prefab>
+  <Window>
+    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="768" SuggestedHeight="432" HorizontalAlignment="Center" VerticalAlignment="Center" Sprite="BlankWhiteSquare_9" Color="#000000FF">
+      <Children>
+        <!--  Image fills the entire widget  -->
+        <FileImageWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" HorizontalAlignment="Center" VerticalAlignment="Center" MarginTop="0" MarginBottom="0" MarginLeft="0" MarginRight="0" FilePath="@ImagePath" Color="#FFFFFFFF" ColorFactor="1" AlphaFactor="1"/>
+        <!--  Title overlapping at top with bigger font  -->
+        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="50" HorizontalAlignment="Center" VerticalAlignment="Top" MarginTop="10" Text="@Title" Brush="TitleText.Popup"/>
+        <!--  Affirmative (Yes) Button - Bottom left corner  -->
+        <ButtonWidget DoNotPassEventsToChildren="true" Command.Click="ExecuteAffirmative" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="150" SuggestedHeight="50" HorizontalAlignment="Left" VerticalAlignment="Bottom" MarginBottom="10" MarginLeft="10" Brush="ButtonBrush">
+          <Children>
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" HorizontalAlignment="Center" VerticalAlignment="Center" Text="@AffirmativeText" Brush="ButtonBrush"/>
+          </Children>
+        </ButtonWidget>
+        <!--  Negative (No) Button - Bottom right corner  -->
+        <ButtonWidget DoNotPassEventsToChildren="true" Command.Click="ExecuteNegative" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="150" SuggestedHeight="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" MarginBottom="10" MarginRight="10" Brush="ButtonBrush">
+          <Children>
+            <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" HorizontalAlignment="Center" VerticalAlignment="Center" Text="@NegativeText" Brush="ButtonBrush"/>
+          </Children>
+        </ButtonWidget>
+        <!--  Border frame  -->
+        <BrushWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Frame1.Border" IsEnabled="false"/>
+      </Children>
+    </Widget>
+  </Window>
+</Prefab>

@@ -4,17 +4,11 @@ using Dramalord.Data.Events.Interfaces;
 using Dramalord.Extensions;
 using Dramalord.Notifications;
 using Dramalord.Quests;
-using Dramalord.UI;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.Core;
-using TaleWorlds.Engine;
-using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade.GauntletUI;
-using TaleWorlds.MountAndBlade.View.Screens;
-using TaleWorlds.MountAndBlade.ViewModelCollection.VideoPlayback;
 using TaleWorlds.ObjectSystem;
 using TaleWorlds.SaveSystem;
 
@@ -42,7 +36,7 @@ namespace Dramalord.Data.Events
             IsKnownTo.Add(target);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             HeroDesires heroDesires = Actor.GetDesires();
             HeroDesires targetDesires = Target.GetDesires();
@@ -54,32 +48,23 @@ namespace Dramalord.Data.Events
         public void AfterDialog()
         {
             AddLogEntry(this);
+
             if (Actor == Hero.MainHero || Target == Hero.MainHero)
             {
-                if(DramalordCampaignBehavior.HotButterFound && DramalordMCM.Instance.ShowHotButter)
+                if (DramalordCampaignBehavior.HotButterFound && DramalordMCM.Instance.ShowHotButter)
                 {
                     MBInformationManager.ShowSceneNotification(new HotButterNotification(Actor, Target, Actor.CurrentSettlement));
                 }
-                else if(DramalordMCM.Instance.ShowDramaVideos)
+                else if (DramalordMCM.Instance.ShowDramaVideos)
                 {
-                    DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, DramalordVideoNotification.VideoContext.Intercourse);
-                    /*SimpleImagePopupHelper.ShowVideo(
-                        frameDirectory: "F:\\SteamLibrary\\steamapps\\common\\Mount & Blade II Bannerlord\\Modules\\Dramalord\\GUI\\VideoFrames\\lovers_desert_f_f",
-                        framePrefix: "f",      // expects frame_0001.png, frame_0002.png, etc.
-                        frameExtension: ".jpg",
-                        frameRate: 12,
-                        loop: false,
-                        title: "My Video",
-                        soundEvent: "romance_music"
-                    );*/
+                    DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, null, DramalordVideoNotification.VideoContext.Intercourse);
                 }
                 else
                 {
                     DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, DramalordTexts.BANNER_SEX, true);
                 }
             }
-                
-            
+
             if (!CampaignOptions.IsLifeDeathCycleDisabled && Actor.IsFemale != Target.IsFemale && MBRandom.RandomInt(1, 100) <= DramalordMCM.Instance.PregnancyChance && DramalordPregnancies.Instance.GetPregnancy(Actor) == null)
             {
                 DramalordEvents.Instance.StartIntention(new ConceiveEvent(Actor, Target));

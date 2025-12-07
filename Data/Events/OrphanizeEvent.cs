@@ -31,7 +31,7 @@ namespace Dramalord.Data.Events
             IsKnownTo.Add(target);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             Hero father = Target.Father;
             Hero mother = Target.Mother;
@@ -95,7 +95,8 @@ namespace Dramalord.Data.Events
             trust = 0;
             love = 0;
         }
-        public bool IsVisibleNotification => DramalordMCM.Instance.ChildrenEventLogs && (DramalordMCM.Instance.DEBUGLOG || Actor == Hero.MainHero || Target?.Father == Hero.MainHero);
+
+        public bool IsVisibleNotification => DramalordMCM.Instance.ChildrenEventLogs && (DramalordMCM.Instance.DEBUGLOG || Actor == Hero.MainHero || Target?.Father == Hero.MainHero || Target?.Mother == Hero.MainHero);
 
         public override ChatNotificationType NotificationType => ChatNotificationType.Civilian;
     }

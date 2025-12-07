@@ -420,5 +420,7 @@
     <string id="Dramalord414" text="親密なシーンでHotButterアニメーションを使用します（Dramalordアニメーションは無効化されます）。" />
     <string id="Dramalord415" text="Dramalord動画を表示" />
     <string id="Dramalord416" text="特定のイベントでDramalord動画を表示します。オフの場合はテキスト通知のみ表示されます。" />
+    <string id="Dramalord417" text="自分の私生児を引き取りますか？" />
+    <string id="Dramalord418" text="{ACTOR1.LINK}があなたの子を出産しました。あなたたちは結婚していないため、{ACTOR1.LINK}は子を孤児院に預けることになります。代わりにあなたが世話をしますか？" />
   </strings>
 </base>

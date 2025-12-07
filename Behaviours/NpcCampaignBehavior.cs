@@ -66,6 +66,10 @@ namespace Dramalord.Behaviours
                                 );
                                 if (target != null)
                                 {
+                                    if(target == Hero.MainHero && !hero.HasMet)
+                                    {
+                                        hero.SetHasMet();
+                                    }
                                     DramalordEvents.Instance.StartIntention(new PrisonSexEvent(hero, target));
                                     return;
                                 }
@@ -120,19 +124,19 @@ namespace Dramalord.Behaviours
                         }
 
                         // 3) FLIRT
-                        target = (playerClose && acceptsPlayer && MBRandom.RandomInt(1,100) <= DramalordMCM.Instance.ChanceApproachingPlayer)
+                        target = (playerClose && acceptsPlayer && MBRandom.RandomInt(1,100) <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero))
                             ? Hero.MainHero
                             : closeHeroes.GetRandomElementWithPredicate(h =>
                                 h.IsAutonom()
                                 && h != Hero.MainHero
-                                && hero.HasMutualAttractionWith(h)
+                                && hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction
                                 && !hero.IsRelativeOf(h)
                                 && !hero.HasMetRecently(h)
                                 && !hero.IsBlockedBy(h)
                                 && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
                             );
 
-                        if (target != null && hero.HasMutualAttractionWith(target))
+                        if (target != null)
                         {
                             HeroRelation targetRelation = hero.GetRelationTo(target);
                             // Possibly do a date if love is high enough
@@ -177,7 +181,7 @@ namespace Dramalord.Behaviours
                     return;
                 }
 
-                if(hero.Spouse != null && hero.Spouse != Hero.MainHero && (hero.IsFemale == hero.Spouse.IsFemale || !hero.IsFertile() && !hero.Spouse.IsFertile()))
+                if(hero.Spouse != null && hero.Spouse != Hero.MainHero && (hero.IsFemale == hero.Spouse.IsFemale || (!hero.IsFertile() && !hero.Spouse.IsFertile())))
                 {
                     if(hero.Children.Count == 0)
                     {

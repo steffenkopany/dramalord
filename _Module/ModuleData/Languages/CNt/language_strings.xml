@@ -420,5 +420,7 @@
     <string id="Dramalord414" text="在親密場景中使用 HotButter 動畫（將停用 Dramalord 動畫）。" />
     <string id="Dramalord415" text="顯示 Dramalord 影片" />
     <string id="Dramalord416" text="為特定事件顯示 Dramalord 影片。關閉時僅顯示文字通知。" />
+    <string id="Dramalord417" text="要接納你的私生子嗎？" />
+    <string id="Dramalord418" text="{ACTOR1.LINK} 為你生下了孩子。由於你們未婚，{ACTOR1.LINK} 將被迫把孩子送到孤兒院。你是否願意親自撫養這個孩子？" />
   </strings>
 </base>

@@ -1,5 +1,6 @@
 ﻿using Dramalord.Data;
 using Dramalord.Data.Events;
+using Dramalord.Data.Events.Interfaces;
 using Dramalord.Extensions;
 using Dramalord.Notifications;
 using Helpers;
@@ -13,14 +14,7 @@ namespace Dramalord.Conversations
 {
     internal static class ConversationQuestions
     {
-        public enum QuestionType
-        {
-            Talk,
-            Flirt,
-            Date
-        }
-
-        private static QuestionType _questionType;
+        private static IDramalordEvent? _drEvent;
 
         private static string expr_undecided = "[if:convo_undecided_open]";
 
@@ -38,10 +32,10 @@ namespace Dramalord.Conversations
 
         private static int _result = 0;
 
-        public static void SetupQuestions(QuestionType qType, int count, bool exitConversation)
+        public static void SetupQuestions(IDramalordEvent drEvent, bool exitConversation)
         {
-            _questionType = qType;
-            _count = count;
+            _drEvent = drEvent;
+            _count = drEvent is DateEvent ? 3 : 1;
             _result = 0;
             _exitConversation = exitConversation;
         }
@@ -86,15 +80,15 @@ namespace Dramalord.Conversations
 
         internal static bool GenerateQuestion()
         {
-            if (_questionType == QuestionType.Date)
+            if (_drEvent is DateEvent)
             {
                 GenerateRandomDateChallenge();
             }
-            else if (_questionType == QuestionType.Flirt)
+            else if (_drEvent is FlirtEvent)
             {
                 GenerateRandomFlirtChallenge();
             }
-            else if (_questionType == QuestionType.Talk)
+            else if (_drEvent is TalkEvent)
             {
                 GenerateRandomChatChallenge();
             }
@@ -130,12 +124,12 @@ namespace Dramalord.Conversations
                 MBTextManager.SetTextVariable("SUMMARIZE_EXPRESSION", "[ib:closed][if:convo_bored]");
             }
 
-            if(_questionType == QuestionType.Talk || _questionType == QuestionType.Date)
+            if(_drEvent is TalkEvent || _drEvent is DateEvent)
             {
                 ChangeSympathy(_weights[0]);
             }
 
-            if(_questionType == QuestionType.Flirt || _questionType == QuestionType.Date)
+            if(_drEvent is FlirtEvent || _drEvent is DateEvent)
             {
                 ChangeAttraction(_weights[0]);
             }
@@ -163,12 +157,12 @@ namespace Dramalord.Conversations
                 MBTextManager.SetTextVariable("SUMMARIZE_EXPRESSION", "[ib:closed][if:convo_bored]");
             }
 
-            if (_questionType == QuestionType.Talk || _questionType == QuestionType.Date)
+            if (_drEvent is TalkEvent || _drEvent is DateEvent)
             {
                 ChangeSympathy(_weights[1]);
             }
 
-            if (_questionType == QuestionType.Flirt || _questionType == QuestionType.Date)
+            if (_drEvent is FlirtEvent || _drEvent is DateEvent)
             {
                 ChangeAttraction(_weights[1]);
             }
@@ -196,12 +190,12 @@ namespace Dramalord.Conversations
                 MBTextManager.SetTextVariable("SUMMARIZE_EXPRESSION", "[ib:closed][if:convo_bored]");
             }
 
-            if (_questionType == QuestionType.Talk || _questionType == QuestionType.Date)
+            if (_drEvent is TalkEvent || _drEvent is DateEvent)
             {
                 ChangeSympathy(_weights[2]);
             }
 
-            if (_questionType == QuestionType.Flirt || _questionType == QuestionType.Date)
+            if (_drEvent is FlirtEvent || _drEvent is DateEvent)
             {
                 ChangeAttraction(_weights[2]);
             }
@@ -226,20 +220,14 @@ namespace Dramalord.Conversations
 
         internal static void FinishChallenge()
         {
-
-            if (_questionType == QuestionType.Talk)
+            _drEvent.Action(_result);
+           
+            if(!_exitConversation)
             {
-                DramalordEvents.Instance.StartIntention(new TalkEvent(Hero.MainHero, Hero.OneToOneConversationHero, _result));
-            }
-            else if (_questionType == QuestionType.Flirt)
-            {
-                DramalordEvents.Instance.StartIntention(new FlirtEvent(Hero.MainHero, Hero.OneToOneConversationHero, _result));
-            }
-            if (_questionType == QuestionType.Date)
-            {
-                DramalordEvents.Instance.StartIntention(new DateEvent(Hero.MainHero, Hero.OneToOneConversationHero, _result));
+                _drEvent.AfterDialog();
             }
 
+            _drEvent = null;
             _result = 0;
             _count = 0;
         }

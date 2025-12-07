@@ -435,6 +435,8 @@ namespace Dramalord.Notifications
         public const string INQUIRY_MARRIAGE_JOIN_CLAN = "{=Dramalord393}Should {ACTOR1.LINK} join your clan after marriage?";
         public const string INQUIRY_CONFRONT_TITLE = "{=Dramalord400}Cheater caught!";
         public const string INQUIRY_CONFRONT_TEXT = "{=Dramalord401}{ACTOR1.LINK} was cheating on you with {ACTOR2.LINK}! Do you want to confront them?";
+        public const string INQUIRY_BASTARD_TITLE = "{=Dramalord417}Take your bastard?";
+        public const string INQUIRY_BASTARD_TEXT = "{=Dramalord418}{ACTOR1.LINK} has given birth to your child. As you are not married, {ACTOR1.LINK} would be forced to give the child to an orphanage. Will you take care of the child instead?";
                      
         public const string BANNER_RELATION_CHANGE = "{=Dramalord203}Your relation to {ACTOR1.LINK} has changed. (Love {TEXT1}, Trust {TEXT2})";
         public const string BANNER_RELATIONSHIP_START = "{=Dramalord209}{ACTOR1.LINK} and you are now {TEXT1}.";

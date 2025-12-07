@@ -26,22 +26,26 @@ namespace Dramalord.Data.Events
         [SaveableField(4)]
         private int TrustGain;
 
-        private readonly int Modifier;
-
-        public TalkEvent(Hero actor, Hero target, int modifier = 1)
+        public TalkEvent(Hero actor, Hero target)
         {
             Actor = actor;
             Target = target;
-            Modifier = modifier;
             IsKnownTo.Add(Actor);
             IsKnownTo.Add(Target);
         }
 
-        public void Action()
+        public void Action(int modifier = 1)
         {
             int sympathy = Actor.GetSympathyTo(Target);
 
-            TrustGain = MBMath.ClampInt(sympathy, 0, 100) * Modifier;
+            if (Actor == Hero.MainHero || Target == Hero.MainHero)
+            {
+                TrustGain = MBMath.ClampInt(sympathy, 0, 100) * modifier;
+            }
+            else
+            {
+                TrustGain = MBMath.ClampInt(sympathy, -100, 100) * modifier;
+            }
             Actor.ChangeRelationTo(Target, TrustGain, 0);
         }
 
@@ -77,7 +81,7 @@ namespace Dramalord.Data.Events
                         .BeginPlayerOptions()
                             .PlayerOption(DramalordTexts.INTENTION_TALK_REACT_OK)
                                 .Condition(() => ConversationTools.SetConversationHero(Actor))
-                                .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.QuestionType.Talk, 1, true))
+                                .Consequence(() => ConversationQuestions.SetupQuestions(this, true))
                                 .GotoDialogState("start_challenge")
                             .PlayerOption(DramalordTexts.INTENTION_REACT_NO_INTEREST)
                                 .Condition(() => ConversationTools.SetConversationHero(Actor))

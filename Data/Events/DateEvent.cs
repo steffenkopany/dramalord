@@ -31,19 +31,19 @@ namespace Dramalord.Data.Events
         [SaveableField(5)]
         private int TrustGain;
 
-        private readonly int Modifier;
+        private int Modifier = 0;
 
-        public DateEvent(Hero actor, Hero target, int modifier = 1)
+        public DateEvent(Hero actor, Hero target)
         {
             Actor = actor;
             Target = target;
-            Modifier = modifier;
             IsKnownTo.Add(Actor);
             IsKnownTo.Add(Target);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
+            Modifier = modifier;
             HeroDesires heroDesires = Actor.GetDesires();
             HeroDesires targetDesires = Target.GetDesires();
 
@@ -54,20 +54,33 @@ namespace Dramalord.Data.Events
             heroDesires.Horny += heroAttraction / 10;
             targetDesires.Horny += tagetAttraction / 10;
 
-            int attractionBonus = ((heroAttraction / 20) + (tagetAttraction / 20)) / 2;
+            //int attractionBonus = ((heroAttraction / 10) + (tagetAttraction / 10)) / 2;
+            int attractionBonus = tagetAttraction / 10;
 
-            LoveGain = MBMath.ClampInt((sympathy + attractionBonus), 0, 100) * Modifier;
-            TrustGain = MBMath.ClampInt(sympathy, 0, 100) * Modifier;
+            if (Actor == Hero.MainHero || Target == Hero.MainHero)
+            {
+                LoveGain = MBMath.ClampInt(attractionBonus, 0, 100) * modifier;
+                TrustGain = MBMath.ClampInt(sympathy, 0, 100) * modifier;
+            }
+            else
+            {
+                LoveGain = MBMath.ClampInt(attractionBonus, -100, 100) * modifier;
+                TrustGain = MBMath.ClampInt(sympathy, -100, 100) * modifier;
+            }
 
             Actor.ChangeRelationTo(Target, TrustGain, LoveGain);
         }
 
         public void AfterDialog()
         {
+            if(Modifier == 0)
+            {
+                return;
+            }
+
             AddLogEntry(this);
 
             bool relationChanged = RelationshipEvent.CheckRelationship(Actor, Target) != Actor.GetRelationTo(Target).Relationship;
-
             (new RelationshipEvent(Actor, Target, true)).Action();
 
             if (Actor != Hero.MainHero && Target != Hero.MainHero && Actor.GetDesires().Horny > 50 && Target.GetDesires().Horny > 50)
@@ -79,7 +92,21 @@ namespace Dramalord.Data.Events
                 Hero otherHero = (Actor == Hero.MainHero) ? Target : Actor;
                 if(otherHero.GetDesires().Horny > 50 && !relationChanged)
                 {
-                    DramalordInquiry.CreateYesNoInquiry(otherHero, DramalordTexts.INQUIRY_SEX_TITLE, DramalordTexts.INQUIRY_SEX_TEXT, () => DramalordEvents.Instance.StartIntention(new SexEvent(Actor, Target)), () => { });
+                    DramalordInquiry.CreateYesNoImageInquiry(Hero.MainHero, otherHero, new TextObject(DramalordTexts.INQUIRY_SEX_TEXT), () =>
+                    {
+                        SexEvent sexEvent = new SexEvent(Actor, Target);
+                        sexEvent.Action();
+                        sexEvent.AfterDialog();
+                    }, 
+                    () => { },
+                    InquiryContext.AcceptSex);
+                    /*
+                    DramalordInquiry.CreateYesNoInquiry(otherHero, DramalordTexts.INQUIRY_SEX_TITLE, DramalordTexts.INQUIRY_SEX_TEXT, () => {
+                        SexEvent sexEvent = new SexEvent(Actor, Target);
+                        sexEvent.Action();
+                        sexEvent.AfterDialog();
+                    }, () => { });
+                    */
                 }
             }
 
@@ -174,7 +201,7 @@ namespace Dramalord.Data.Events
                             .BeginPlayerOptions()
                                 .PlayerOption(DramalordTexts.INTENTION_DATE_FIRST_REACT_OK)
                                     .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
-                                    .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.QuestionType.Date, 3, true))
+                                    .Consequence(() => ConversationQuestions.SetupQuestions(this, true))
                                     .GotoDialogState("start_challenge")
                                 .PlayerOption(DramalordTexts.INTENTION_REACT_NO_INTEREST)
                                     .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
@@ -185,18 +212,18 @@ namespace Dramalord.Data.Events
                             .BeginPlayerOptions()
                                 .PlayerOption(DramalordTexts.INTENTION_DATE_REACT_OK)
                                     .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
-                                    .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.QuestionType.Date, 3, true))
+                                    .Consequence(() => ConversationQuestions.SetupQuestions(this, true))
                                     .GotoDialogState("start_challenge")
                                 .PlayerOption(DramalordTexts.INTENTION_REACT_NO_INTEREST)
                                     .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
                                     .CloseDialog()
                             .EndPlayerOptions()
-                    .NpcOptionWithVariation(DramalordTexts.INTENTION_DATE_CHEATING_1 + "[ib:confident2][if:convo_focused_happy]", () => Actor.IsEmotionalWith(Hero.MainHero) && Actor.Spouse != Hero.MainHero && Actor.Spouse != null && ConversationTools.SetConversationHero(Hero.MainHero))
+                    .NpcOptionWithVariation(DramalordTexts.INTENTION_DATE_CHEATING_1 + "[ib:confident2][if:convo_focused_happy]", () => Actor.IsEmotionalWith(Hero.MainHero) && Actor.Spouse != Hero.MainHero && Actor.Spouse != null && ConversationTools.SetConversationHero(Hero.MainHero, Actor.Spouse))
                         .Variation(DramalordTexts.INTENTION_DATE_CHEATING_2 + "[ib:confident2][if:convo_focused_happy]")
                             .BeginPlayerOptions()
                                 .PlayerOption(DramalordTexts.INTENTION_DATE_REACT_OK)
                                     .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
-                                    .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.QuestionType.Date, 3, true))
+                                    .Consequence(() => ConversationQuestions.SetupQuestions(this, true))
                                     .GotoDialogState("start_challenge")
                                 .PlayerOption(DramalordTexts.INTENTION_REACT_NO_INTEREST)
                                     .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))

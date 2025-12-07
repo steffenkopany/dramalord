@@ -2,10 +2,28 @@
 <base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="module_sound">
   <module_sounds>
     <module_sound
-      name="romance_music"
+      name="romantic_chime"
       is_2d="true"
       sound_category="ui"
-      path="romantic_music.ogg"
+      path="romantic_chime.ogg"
+      loop="true" />
+	<module_sound
+      name="dramatic_chime"
+      is_2d="true"
+      sound_category="ui"
+      path="dramatic_chime.ogg"
+      loop="true" />
+	<module_sound
+      name="wedding_chime"
+      is_2d="true"
+      sound_category="ui"
+      path="wedding_chime.ogg"
+      loop="true" />
+	<module_sound
+      name="inquiry_chime"
+      is_2d="true"
+      sound_category="ui"
+      path="inquiry_chime.ogg"
       loop="true" />
   </module_sounds>
 </base>

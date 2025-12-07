@@ -40,7 +40,7 @@ namespace Dramalord.Data.Events
             IsKnownTo.Add(target);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             try
             {
@@ -68,15 +68,56 @@ namespace Dramalord.Data.Events
         {
             AddLogEntry(this);
 
-            if (Offspring != null && (Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan))
-            {
-                MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(Target, Actor, CampaignTime.Now));
-                MBInformationManager.AddNotice(new ChildBornMapNotification(Offspring, GetEncyclopediaText(), CampaignTime.Now));
-            }
-
-            if (!Actor.IsSpouseOf(Target))
+            if (Offspring != null && Actor != Hero.MainHero && Target != Hero.MainHero && !Actor.IsSpouseOf(Target))
             {
                 DramalordEvents.Instance.StartIntention(new OrphanizeEvent(Actor, Offspring));
+            }
+            else if(Offspring != null && Actor != Hero.MainHero && Target == Hero.MainHero && !Actor.IsSpouseOf(Target))
+            {
+                DramalordInquiry.CreateYesNoImageInquiry(Hero.MainHero, Actor, new TextObject(DramalordTexts.INQUIRY_BASTARD_TEXT), () =>
+                    {
+                        LeaveClanEvent leaveClanEvent = new LeaveClanEvent(Offspring);
+                        leaveClanEvent.Action();
+                        leaveClanEvent.AfterDialog();
+
+                        JoinClanEvent joinClanEvent = new JoinClanEvent(Offspring, Clan.PlayerClan);
+                        joinClanEvent.Action();
+                        joinClanEvent.AfterDialog();
+                    },
+                    () => DramalordEvents.Instance.StartIntention(new OrphanizeEvent(Actor, Offspring)),
+                    InquiryContext.Orphanize
+                    );
+                /*
+                DramalordInquiry.CreateYesNoInquiry(
+                    Actor,
+                    DramalordTexts.INQUIRY_BASTARD_TITLE,
+                    DramalordTexts.INQUIRY_BASTARD_TEXT,
+                    () =>
+                    {
+                        LeaveClanEvent leaveClanEvent = new LeaveClanEvent(Offspring);
+                        leaveClanEvent.Action();
+                        leaveClanEvent.AfterDialog();
+
+                        JoinClanEvent joinClanEvent = new JoinClanEvent(Offspring, Clan.PlayerClan);
+                        joinClanEvent.Action();
+                        joinClanEvent.AfterDialog();
+                    },
+                    () => DramalordEvents.Instance.StartIntention(new OrphanizeEvent(Actor, Offspring))
+                    );
+                */
+            }
+
+            if (Offspring != null && (Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan))
+            {
+                if (DramalordMCM.Instance.ShowDramaVideos)
+                {
+                    DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, Offspring, DramalordVideoNotification.VideoContext.Birth);
+                }
+                else
+                {
+                    MBInformationManager.ShowSceneNotification(new NewBornSceneNotificationItem(Target, Actor, CampaignTime.Now));
+                    MBInformationManager.AddNotice(new ChildBornMapNotification(Offspring, GetEncyclopediaText(), CampaignTime.Now));
+                }
             }
         }
 

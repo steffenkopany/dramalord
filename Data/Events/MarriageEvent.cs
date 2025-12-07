@@ -38,7 +38,7 @@ namespace Dramalord.Data.Events
             DidMarry = false;
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             if((Actor.Clan != null && Actor.Clan == Clan.PlayerClan || Target.Clan != null && Target.Clan == Clan.PlayerClan) && Actor != Hero.MainHero && Target != Hero.MainHero)
             {
@@ -121,6 +121,17 @@ namespace Dramalord.Data.Events
                     groom.SetNewOccupation(bride.Occupation);
                 }, () => { });
             }
+            else if((groom == Hero.MainHero && bride.IsPlayerCompanion) || (bride == Hero.MainHero && groom.IsPlayerCompanion))
+            {
+                if (groom.IsPlayerCompanion)
+                {
+                    groom.SetNewOccupation(Occupation.Lord);
+                }
+                else
+                {
+                    bride.SetNewOccupation(Occupation.Lord);
+                }
+            }
             else if (groom.Clan != bride.Clan)
             {
                 if (groom.Clan != null && bride.Clan != null)
@@ -156,9 +167,16 @@ namespace Dramalord.Data.Events
 
             if(showScene)
             {
-                TextObject textObject = ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.LOG_MARRIAGE), Actor, Target);
-                MBInformationManager.ShowSceneNotification(new MarriageSceneNotificationItem(groom, bride, CampaignTime.Now));
-                MBInformationManager.AddNotice(new MarriageMapNotification(groom, bride, textObject, CampaignTime.Now));
+                if(DramalordMCM.Instance.ShowDramaVideos)
+                {
+                    DramalordVideoNotification.ShowDramalordVideoNotification(groom, bride, null,DramalordVideoNotification.VideoContext.Wedding);
+                }
+                else
+                {
+                    TextObject textObject = ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.LOG_MARRIAGE), Actor, Target);
+                    MBInformationManager.ShowSceneNotification(new MarriageSceneNotificationItem(groom, bride, CampaignTime.Now));
+                    MBInformationManager.AddNotice(new MarriageMapNotification(groom, bride, textObject, CampaignTime.Now));
+                }
             }
 
             Actor.GetRelationTo(Target).LastInteraction = CampaignTime.Now;

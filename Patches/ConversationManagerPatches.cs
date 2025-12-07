@@ -1,4 +1,5 @@
-﻿using Dramalord.Extensions;
+﻿/*
+using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;
 using TaleWorlds.CampaignSystem;
@@ -20,3 +21,4 @@ namespace Dramalord.Patches
         }
     }
 }
+*/

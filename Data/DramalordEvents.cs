@@ -46,7 +46,7 @@ namespace Dramalord.Data
                 Campaign.Current.ConversationManager.AddDialogFlow(isReaction ? ReactionStartFlow(dramaEvent.Actor) : IntentionStartFlow(dramaEvent.Actor), dramaEvent);
                 Campaign.Current.ConversationManager.AddDialogFlow(flow, dramaEvent);
 
-               CampaignMapConversation.OpenConversation(
+                CampaignMapConversation.OpenConversation(
                         new ConversationCharacterData(Hero.MainHero.CharacterObject),
                         new ConversationCharacterData(dramaEvent.Actor.CharacterObject, isCivilianEquipmentRequiredForLeader: dramaEvent.Actor.CurrentSettlement != null, noBodyguards: true, noHorse: true, noWeapon: true)
                         );
@@ -63,7 +63,7 @@ namespace Dramalord.Data
             //NPC approaches NPC
             else if (dramaEvent.Target != Hero.MainHero || dramaEvent.GetInitiationDialog() == null)
             {
-                dramaEvent.Action();
+                dramaEvent.Action(1);
                 dramaEvent.AfterDialog();
                 HandleWitness(dramaEvent);
                 return true;

@@ -29,7 +29,7 @@ namespace Dramalord.Data.Events
             IsKnownTo.Add(target);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             if(Actor.IsFemale == Target.IsFemale)
             {

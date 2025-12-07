@@ -197,11 +197,13 @@ namespace Dramalord.Extensions
             HeroPersonality heroPersonality = hero.GetPersonality();
             HeroPersonality targetPersonality = target.GetPersonality();
 
-            int sympathy = 10;
-            if (target == Hero.MainHero || hero == Hero.MainHero) sympathy += DramalordMCM.Instance.PlayerBaseSympathy;
-            sympathy -= Math.Abs(heroPersonality.Jealousy - targetPersonality.Jealousy) / 15;
-            sympathy -= Math.Abs(heroPersonality.Sociability - targetPersonality.Sociability) / 15;
-            sympathy -= Math.Abs(heroPersonality.Empathy - targetPersonality.Empathy) / 15;
+            int sympathy = 50;
+            sympathy += (target == Hero.MainHero || hero == Hero.MainHero) ? DramalordMCM.Instance.PlayerBaseSympathy : 0;
+            sympathy -= Math.Abs(heroPersonality.Jealousy - targetPersonality.Jealousy);
+            sympathy -= Math.Abs(heroPersonality.Sociability - targetPersonality.Sociability);
+            sympathy -= Math.Abs(heroPersonality.Empathy - targetPersonality.Empathy);
+
+            sympathy /= 10;
 
             //bonus
             sympathy += hero.GetTraitLevel(DefaultTraits.Honor) == target.GetTraitLevel(DefaultTraits.Honor) ? 1 : 0; 
@@ -224,7 +226,7 @@ namespace Dramalord.Extensions
             rating += hero.GetRelationTo(target).Love / 10;
             rating += desires.Horny / 10;
 
-            return MBMath.ClampInt(rating, 0, 100);
+            return MBMath.ClampInt(rating, -100, 100);
         }
 
         public static bool HasMutualAttractionWith(this Hero hero, Hero target) => hero.GetAttractionTo(target) >= DramalordMCM.Instance.MinAttraction && target.GetAttractionTo(hero) >= DramalordMCM.Instance.MinAttraction;

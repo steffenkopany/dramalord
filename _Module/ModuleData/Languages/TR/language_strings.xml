@@ -420,5 +420,7 @@
     <string id="Dramalord414" text="Mahrem sahnelerde HotButter animasyonlarını kullan (Dramalord animasyonlarını devre dışı bırakır)." />
     <string id="Dramalord415" text="Dramalord Videolarını Göster" />
     <string id="Dramalord416" text="Belirli olaylar için Dramalord videolarını gösterir. Kapalıysa yalnızca metin bildirimleri görünür." />
+    <string id="Dramalord417" text="Gayrimeşru çocuğunu sahiplenmek ister misin?" />
+    <string id="Dramalord418" text="{ACTOR1.LINK} senin çocuğunu dünyaya getirdi. Evli olmadığınız için {ACTOR1.LINK} çocuğu yetimhaneye vermek zorunda kalacak. Bunun yerine çocuğa sen mi bakmak istersin?" />
   </strings>
 </base>

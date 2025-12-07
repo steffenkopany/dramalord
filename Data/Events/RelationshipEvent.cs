@@ -37,7 +37,7 @@ namespace Dramalord.Data.Events
             IsKnownTo.Add(Target);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             HeroRelation relation = Actor.GetRelationTo(Target);
 
@@ -68,13 +68,13 @@ namespace Dramalord.Data.Events
                 }
                 AddLogEntry(this);
             }
-            else if (relation.Relationship == RelationshipType.Friend && shouldRelation == RelationshipType.Lover)
+            else if (relation.Relationship == RelationshipType.Friend && shouldRelation == RelationshipType.Lover && PlayerTriggered)
             {
                 relation.Relationship = RelationshipType.Lover;
                 NotificationLine = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_RElATIONSHIP_START), Actor, Target);
                 ConversationTools.SetTextVariables(NotificationLine, DramalordTexts.GetRelationshipStatusName(RelationshipType.Lover));
 
-                if ((Actor == Hero.MainHero || Target == Hero.MainHero) && PlayerTriggered)
+                if ((Actor == Hero.MainHero || Target == Hero.MainHero))
                 {
                     relation.Relationship = RelationshipType.Lover;
                     NotificationLine = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_RElATIONSHIP_START), Actor, Target);
@@ -82,7 +82,7 @@ namespace Dramalord.Data.Events
 
                     if (DramalordMCM.Instance.ShowDramaVideos)
                     {
-                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, DramalordVideoNotification.VideoContext.Lovers);
+                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, null, DramalordVideoNotification.VideoContext.Lovers);
                     }
                     else
                     {
@@ -130,7 +130,14 @@ namespace Dramalord.Data.Events
 
                 if (Actor == Hero.MainHero || Target == Hero.MainHero)
                 {
-                    DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(relation.Relationship), true);
+                    if (DramalordMCM.Instance.ShowDramaVideos)
+                    {
+                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, null, DramalordVideoNotification.VideoContext.Divorce);
+                    }
+                    else
+                    {
+                        DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(relation.Relationship), true);
+                    }
                 }
 
                 foreach (Romance.RomanticState romanticState in Romance.RomanticStateList.ToList())
@@ -168,7 +175,14 @@ namespace Dramalord.Data.Events
 
                 if (Actor == Hero.MainHero || Target == Hero.MainHero)
                 {
-                    DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(relation.Relationship), true);
+                    if(DramalordMCM.Instance.ShowDramaVideos)
+                    {
+                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, null, DramalordVideoNotification.VideoContext.Divorce);
+                    }
+                    else
+                    {
+                        DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(relation.Relationship), true);
+                    }
                 }
 
                 foreach (Romance.RomanticState romanticState in Romance.RomanticStateList.ToList())

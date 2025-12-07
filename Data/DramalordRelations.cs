@@ -249,6 +249,10 @@ namespace Dramalord.Data
             if (level == Romance.RomanceLevelEnum.Marriage)
             {
                 hero1.GetRelationTo(hero2).Relationship = RelationshipType.Spouse;
+                if(hero1.GetRelationTo(hero2).Love <=0)
+                {
+                    hero1.GetRelationTo(hero2).Love = MBRandom.RandomInt(10, 50);
+                }
             }
         }
     }

@@ -34,7 +34,7 @@ namespace Dramalord.Data.Events
             IsKnownTo.Add(actor);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             if(Actor.Clan != null)
             {
@@ -76,17 +76,16 @@ namespace Dramalord.Data.Events
                         party.MemberRoster.RemoveTroop(Actor.CharacterObject);
                     }
                 }
+
+                if (Actor.IsPlayerCompanion)
+                {
+                    Actor.CompanionOf = null;
+                }
+
+                Actor.Clan = null;
+
+                CampaignEventDispatcher.Instance.OnHeroChangedClan(Actor, LeftClan);
             }
-
-
-            if (Actor.IsPlayerCompanion)
-            {
-                Actor.CompanionOf = null;
-            }
-
-            Actor.Clan = null;
-
-            CampaignEventDispatcher.Instance.OnHeroChangedClan(Actor, LeftClan);
         }
 
         public void AfterDialog()

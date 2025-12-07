@@ -420,5 +420,7 @@
     <string id="Dramalord414" text="Verwende HotButter-Animationen für intime Szenen (deaktiviert Dramalord-Animationen)." />
     <string id="Dramalord415" text="Dramalord-Videos anzeigen" />
     <string id="Dramalord416" text="Zeige Dramalord-Videos für bestimmte Ereignisse. Wenn deaktiviert, erscheinen nur Textbenachrichtigungen." />
+    <string id="Dramalord417" text="Nimmst du dein uneheliches Kind an?" />
+    <string id="Dramalord418" text="{ACTOR1.LINK} hat dein Kind zur Welt gebracht. Da ihr nicht verheiratet seid, müsste {ACTOR1.LINK} das Kind ins Waisenhaus geben. Willst du dich stattdessen um das Kind kümmern?" />
   </strings>
 </base>

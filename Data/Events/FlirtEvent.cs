@@ -26,31 +26,39 @@ namespace Dramalord.Data.Events
         [SaveableField(4)]
         private int LoveGain;
 
-        private readonly int Modifier;
-
-        public FlirtEvent(Hero actor, Hero target, int modifier = 1)
+        public FlirtEvent(Hero actor, Hero target)
         {
             Actor = actor;
             Target = target;
-            Modifier = modifier;
             IsKnownTo.Add(Actor);
             IsKnownTo.Add(Target);
         }
 
-        public void Action()
+        public void Action(int modifier = 1)
         {
             HeroDesires heroDesires = Actor.GetDesires();
             HeroDesires targetDesires = Target.GetDesires();
 
-            int sympathy = Actor.GetSympathyTo(Target);
+            //int sympathy = Actor.GetSympathyTo(Target);
             int heroAttraction = Actor.GetAttractionTo(Target);
             int tagetAttraction = Target.GetAttractionTo(Actor);
 
             heroDesires.Horny += heroAttraction / 10;
             targetDesires.Horny += tagetAttraction / 10;
 
-            int attractionBonus = ((heroAttraction / 20) + (tagetAttraction / 20)) / 2;
-            LoveGain = MBMath.ClampInt(sympathy + attractionBonus, 0, 100) * Modifier;
+            int attractionBonus = tagetAttraction / 10;
+            //int attractionBonus = ((heroAttraction / 20) + (tagetAttraction / 20)) / 2;
+
+            if (Actor == Hero.MainHero || Target == Hero.MainHero)
+            {
+                LoveGain = MBMath.ClampInt(attractionBonus, 0, 100) * modifier;
+            }
+            else
+            {
+                int realGain = attractionBonus - (DramalordMCM.Instance.MinAttraction / 10);
+                LoveGain = MBMath.ClampInt(realGain, -100, 100) * modifier;
+            }
+            
 
             Actor.ChangeRelationTo(Target, 0, LoveGain);
         }
@@ -82,7 +90,7 @@ namespace Dramalord.Data.Events
                         .BeginPlayerOptions()
                             .PlayerOption(DramalordTexts.INTENTION_FLIRT_REACT_OK)
                                 .Condition(() => ConversationTools.SetConversationHero(Actor))
-                                .Consequence(() => ConversationQuestions.SetupQuestions(ConversationQuestions.QuestionType.Flirt, 1, true))
+                                .Consequence(() => ConversationQuestions.SetupQuestions(this, true))
                                 .GotoDialogState("start_challenge")
                             .PlayerOption(DramalordTexts.INTENTION_REACT_NO_INTEREST)
                                 .Condition(() => ConversationTools.SetConversationHero(Actor))

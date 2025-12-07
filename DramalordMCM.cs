@@ -97,11 +97,11 @@ namespace Dramalord
 
         [SettingPropertyGroup(DramalordTexts.MCM_GENERAL)]
         [SettingPropertyFloatingInteger(DramalordTexts.MCM_GENERAL_PLAYER_ATTRACTION, 0, 100, HintText = DramalordTexts.MCM_GENERAL_PLAYER_ATTRACTION_INFO, Order = 2, RequireRestart = false)]
-        public int PlayerBaseAttraction { get; set; } = 10;
+        public int PlayerBaseAttraction { get; set; } = 0;
 
         [SettingPropertyGroup(DramalordTexts.MCM_GENERAL)]
         [SettingPropertyFloatingInteger(DramalordTexts.MCM_GENERAL_PLAYER_SYMPATHY, 0, 10, HintText = DramalordTexts.MCM_GENERAL_PLAYER_SYMPATHY_INFO, Order = 3, RequireRestart = false)]
-        public int PlayerBaseSympathy { get; set; } = 5;
+        public int PlayerBaseSympathy { get; set; } = 0;
 
         [SettingPropertyGroup(DramalordTexts.MCM_GENERAL)]
         [SettingPropertyFloatingInteger(DramalordTexts.MCM_GENERAL_INTERACTION_DELAY, 0, 100, HintText = DramalordTexts.MCM_GENERAL_INTERACTION_DELAY_INFO, Order = 4, RequireRestart = false)]
@@ -109,7 +109,7 @@ namespace Dramalord
 
         [SettingPropertyGroup(DramalordTexts.MCM_GENERAL)]
         [SettingPropertyFloatingInteger(DramalordTexts.MCM_GENERAL_QUEST_CHANCE, 0, 100, Order = 5, HintText = DramalordTexts.MCM_GENERAL_QUEST_CHANCE_INFO, RequireRestart = false)]
-        public int QuestChance { get; set; } = 30;
+        public int QuestChance { get; set; } = 20;
 
         [SettingPropertyGroup(DramalordTexts.MCM_GENERAL)]
         [SettingPropertyBool(DramalordTexts.MCM_GENERAL_DEFAULT_PREGNANCIES, HintText = DramalordTexts.MCM_GENERAL_DEFAULT_PREGNANCIES_INFO, Order = 6, RequireRestart = false)]

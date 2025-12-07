@@ -35,7 +35,7 @@ namespace Dramalord.Data.Events
             dramaEvent.IsKnownTo.Add(Actor);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             AddLogEntry(this);
             DramaEvent.IsKnownTo.Add(Target);

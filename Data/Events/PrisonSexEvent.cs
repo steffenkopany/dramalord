@@ -25,16 +25,20 @@ namespace Dramalord.Data.Events
         [SaveableProperty(3)]
         public List<Hero> IsKnownTo { get; private set; } = new();
 
+        private bool hasAgreed = false;
+
         public PrisonSexEvent(Hero actor, Hero target)
         {
             Actor = actor;
             Target = target;
+            hasAgreed = false;
             IsKnownTo.Add(actor);
             IsKnownTo.Add(target);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
+            hasAgreed = true;
             HeroDesires heroDesires = Actor.GetDesires();
             HeroDesires targetDesires = Target.GetDesires();
 
@@ -49,14 +53,23 @@ namespace Dramalord.Data.Events
 
         public void AfterDialog()
         {
+            if(!hasAgreed)
+            {
+                return;
+            }
+
             AddLogEntry(this);
             (new RelationshipEvent(Actor, Target)).Action();
 
-            if (Actor == Hero.MainHero || Target == Hero.MainHero)
+            if (Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan)
             {
-                if (DramalordCampaignBehavior.HotButterFound)
+                if (DramalordCampaignBehavior.HotButterFound && DramalordMCM.Instance.ShowHotButter)
                 {
                     MBInformationManager.ShowSceneNotification(new HotButterNotification(Actor, Target, Actor.CurrentSettlement));
+                }
+                else if (DramalordMCM.Instance.ShowDramaVideos)
+                {
+                    DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, null, DramalordVideoNotification.VideoContext.PrisonSex);
                 }
                 else
                 {
@@ -93,12 +106,12 @@ namespace Dramalord.Data.Events
 
         public DialogFlow GetInitiationDialog()
         {
-            return DialogFlow.CreateDialogFlow("start", 200)
+            return DialogFlow.CreateDialogFlow("start", 500)
                 .NpcLine(DramalordTexts.INTENTION_SEX_PRISON_1 + "[ib:confident][if:convo_mocking_teasing]")
                     .NpcLine(DramalordTexts.INTENTION_SEX_PRISON_2 + "[ib:aggressive][if:convo_excited]")
                         .BeginPlayerOptions()
                             .PlayerOption(DramalordTexts.INTENTION_SEX_PRISON_REACT_OK)
-                                .Consequence(() => { Action(); AfterDialog(); })
+                                .Consequence(() => { Action(); })
                                 .CloseDialog()
                             .PlayerOption(DramalordTexts.INTENTION_SEX_PRISON_REACT_NO)
                                 .CloseDialog()

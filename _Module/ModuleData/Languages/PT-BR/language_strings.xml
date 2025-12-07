@@ -421,5 +421,7 @@
     <string id="Dramalord414" text="Use as animações do HotButter para cenas íntimas (desativa as animações do Dramalord)." />
     <string id="Dramalord415" text="Mostrar vídeos do Dramalord" />
     <string id="Dramalord416" text="Mostra vídeos do Dramalord para certos eventos. Quando desativado, apenas notificações de texto aparecerão." />
+    <string id="Dramalord417" text="Cuidar do seu filho bastardo?" />
+    <string id="Dramalord418" text="{ACTOR1.LINK} deu à luz seu filho. Como vocês não são casados, {ACTOR1.LINK} seria obrigado(a) a enviar a criança para um orfanato. Você quer cuidar da criança em vez disso?" />
   </strings>
 </base>

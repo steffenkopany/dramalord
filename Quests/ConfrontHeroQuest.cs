@@ -83,13 +83,13 @@ namespace Dramalord.Quests
                                             .CloseDialog()
                                     .PlayerOption(ConversationTools.SetCharacterObjects(new(DramalordTexts.CONFRONTATION_RESULT_BREAKUP), QuestGiver))
                                         .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
+                                            .NpcLine(DramalordTexts.NPC_INTERACTION_ASYOUWISH)
                                             .Consequence(() =>
                                             {
                                                 Hero.MainHero.ChangeRelationTo(Hero.OneToOneConversationHero, Hero.MainHero.GetTrust(Hero.OneToOneConversationHero) * -1, Hero.MainHero.GetRelationTo(Hero.OneToOneConversationHero).Love * -1);
                                                 (new RelationshipEvent(Hero.MainHero, Hero.OneToOneConversationHero)).Action();
                                                 QuestSuccess(Hero.MainHero);
                                             })
-                                            .NpcLine(DramalordTexts.NPC_INTERACTION_ASYOUWISH)
                                                 .CloseDialog()
                                     .PlayerOption(ConversationTools.SetCharacterObjects(new(DramalordTexts.CONFRONTATION_RESULT_BREAKUP_OTHER), OtherHero))
                                         .NpcLine(DramalordTexts.NPC_INTERACTION_ASYOUWISH)

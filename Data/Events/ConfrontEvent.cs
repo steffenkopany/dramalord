@@ -37,7 +37,7 @@ namespace Dramalord.Data.Events
             AddLogEntry(this);
         }
 
-        public void Action()
+        public void Action(int modifier = 0)
         {
             DramaEvent.ReactionResult(Actor, Target, out int trust, out int love);
             Actor.ChangeRelationTo(Target, trust, love);
