@@ -56,6 +56,7 @@ namespace Dramalord.Data.Events
                 joinClanEvent.AfterDialog();
             }
 
+            Target.ChangeState(Hero.CharacterStates.Active);
             DramalordOrphans.Instance.RemoveOrphan(Target);
             Target.UpdateHomeSettlement();
         }
@@ -63,6 +64,26 @@ namespace Dramalord.Data.Events
         public void AfterDialog()
         {
             AddLogEntry(this);
+            if(Actor.Clan == Clan.PlayerClan)
+            {
+                if(DramalordMCM.Instance.ShowDramaImages)
+                {
+                    DramalordImageNotification.ShowDramalordImageNotification(Actor, Target, hero3: Actor.Spouse, context: DramalordImageNotification.ImageContext.Adoption);
+                }
+                else
+                {
+                    if(Actor.Spouse != null)
+                    {
+                        TextObject bannerText = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_ADOPT_2), Actor, Target, Actor.Spouse);
+                        DramalordBanner.CreateBanner(Actor, bannerText, true);
+                    }
+                    else
+                    {
+                        TextObject bannerText = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_ADOPT), Actor, Target);
+                        DramalordBanner.CreateBanner(Actor, bannerText, true);
+                    }
+                }
+            }
         }
 
         public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase => IsVisibleNotification && (Actor == obj || Target == obj);

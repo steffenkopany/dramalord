@@ -68,13 +68,15 @@ namespace Dramalord.Data.Events
         {
             AddLogEntry(this);
 
-            if (Offspring != null && Actor != Hero.MainHero && Target != Hero.MainHero && !Actor.IsSpouseOf(Target))
+            if (DramalordMCM.Instance.AllowOrphanage && Offspring != null && Actor != Hero.MainHero && Target != Hero.MainHero && !Actor.IsSpouseOf(Target))
             {
                 DramalordEvents.Instance.StartIntention(new OrphanizeEvent(Actor, Offspring));
             }
-            else if(Offspring != null && Actor != Hero.MainHero && Target == Hero.MainHero && !Actor.IsSpouseOf(Target))
+            else if(DramalordMCM.Instance.AllowOrphanage && Offspring != null && Actor != Hero.MainHero && Target == Hero.MainHero && !Actor.IsSpouseOf(Target))
             {
-                DramalordInquiry.CreateYesNoImageInquiry(Hero.MainHero, Actor, new TextObject(DramalordTexts.INQUIRY_BASTARD_TEXT), () =>
+                if(DramalordMCM.Instance.ShowDramaImages)
+                {
+                    DramalordInquiry.CreateYesNoImageInquiry(Hero.MainHero, Actor, new TextObject(DramalordTexts.INQUIRY_BASTARD_TEXT), () =>
                     {
                         LeaveClanEvent leaveClanEvent = new LeaveClanEvent(Offspring);
                         leaveClanEvent.Action();
@@ -87,8 +89,10 @@ namespace Dramalord.Data.Events
                     () => DramalordEvents.Instance.StartIntention(new OrphanizeEvent(Actor, Offspring)),
                     InquiryContext.Orphanize
                     );
-                /*
-                DramalordInquiry.CreateYesNoInquiry(
+                }
+                else
+                {
+                    DramalordInquiry.CreateYesNoInquiry(
                     Actor,
                     DramalordTexts.INQUIRY_BASTARD_TITLE,
                     DramalordTexts.INQUIRY_BASTARD_TEXT,
@@ -104,7 +108,7 @@ namespace Dramalord.Data.Events
                     },
                     () => DramalordEvents.Instance.StartIntention(new OrphanizeEvent(Actor, Offspring))
                     );
-                */
+                }
             }
 
             if (Offspring != null && (Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan))
@@ -147,15 +151,37 @@ namespace Dramalord.Data.Events
                 {
                     Hero cheater = hero.IsEmotionalWith(Actor) ? Actor : Target;
                     Hero other = cheater == Actor ? Target : Actor;
-                    DramalordInquiry.CreateYesNoInquiry(Hero.MainHero, DramalordTexts.INQUIRY_CONFRONT_TITLE, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_TEXT), cheater, other).ToString(), () =>
+
+                    if (DramalordQuests.Instance.GetQuest(cheater) == null)
                     {
-                        if (DramalordQuests.Instance.GetQuest(cheater) == null)
+                        if (DramalordMCM.Instance.ShowDramaImages)
                         {
-                            ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
-                            DramalordQuests.Instance.AddQuest(cheater, quest);
-                            quest.StartQuest();
+                            DramalordInquiry.CreateYesNoImageInquiry(cheater, other, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_TEXT), cheater, other), () =>
+                                {
+                                    if (DramalordQuests.Instance.GetQuest(cheater) == null)
+                                    {
+                                        ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
+                                        DramalordQuests.Instance.AddQuest(cheater, quest);
+                                        quest.StartQuest();
+                                    }
+                                },
+                                    () => { },
+                                    InquiryContext.Confront
+                                 );
                         }
-                    }, () => { });
+                        else
+                        {
+                            DramalordInquiry.CreateYesNoInquiry(Hero.MainHero, DramalordTexts.INQUIRY_CONFRONT_TITLE, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_TEXT), cheater, other).ToString(), () =>
+                            {
+                                if (DramalordQuests.Instance.GetQuest(cheater) == null)
+                                {
+                                    ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
+                                    DramalordQuests.Instance.AddQuest(cheater, quest);
+                                    quest.StartQuest();
+                                }
+                            }, () => { });
+                        }
+                    }
                 }
 
                 return null;
@@ -226,14 +252,31 @@ namespace Dramalord.Data.Events
                             Hero other = cheater == Actor ? Target : Actor;
                             if (DramalordQuests.Instance.GetQuest(cheater) == null)
                             {
+                                DramalordInquiry.CreateYesNoImageInquiry(cheater, other, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_TEXT), cheater, other), () =>
+                                {
+                                    if (DramalordQuests.Instance.GetQuest(cheater) == null)
+                                    {
+                                        ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
+                                        DramalordQuests.Instance.AddQuest(cheater, quest);
+                                        quest.StartQuest();
+                                    }
+                                },
+                                    () => { },
+                                    InquiryContext.Confront
+                                 );
+                            }
+                            else
+                            {
                                 DramalordInquiry.CreateYesNoInquiry(Hero.MainHero, DramalordTexts.INQUIRY_CONFRONT_TITLE, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_TEXT), cheater, other).ToString(), () =>
                                 {
-                                    ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
-                                    DramalordQuests.Instance.AddQuest(cheater, quest);
-                                    quest.StartQuest();
-
+                                    if (DramalordQuests.Instance.GetQuest(cheater) == null)
+                                    {
+                                        ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
+                                        DramalordQuests.Instance.AddQuest(cheater, quest);
+                                        quest.StartQuest();
+                                    }
                                 }, () => { });
-                            } 
+                            }
                         }
                     })
                     .BeginPlayerOptions()

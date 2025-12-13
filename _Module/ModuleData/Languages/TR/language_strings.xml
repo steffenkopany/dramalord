@@ -422,5 +422,9 @@
     <string id="Dramalord416" text="Belirli olaylar için Dramalord videolarını gösterir. Kapalıysa yalnızca metin bildirimleri görünür." />
     <string id="Dramalord417" text="Gayrimeşru çocuğunu sahiplenmek ister misin?" />
     <string id="Dramalord418" text="{ACTOR1.LINK} senin çocuğunu dünyaya getirdi. Evli olmadığınız için {ACTOR1.LINK} çocuğu yetimhaneye vermek zorunda kalacak. Bunun yerine çocuğa sen mi bakmak istersin?" />
+    <string id="Dramalord419" text="{ACTOR1.LINK} ve {ACTOR2.LINK} yeni evlendi. Birlikte hayatlarına hangi klan içinde başlamalılar?" />
+    <string id="Dramalord420" text="{ACTOR1.LINK} ve {ACTOR3.LINK}, {ACTOR2.LINK} adlı yetimi evlat edindiler." />
+    <string id="Dramalord421" text="Dramalord Görsellerini Göster" />
+    <string id="Dramalord422" text="Belirli olaylar için Dramalord görsellerini gösterir. Kapalıysa yalnızca metin bildirimleri görünür." />
   </strings>
 </base>

@@ -422,5 +422,11 @@
     <string id="Dramalord416" text="Show Dramalord videos for certain events. When turned off only text notifications will appear." />
     <string id="Dramalord417" text="Take your bastard?" />
     <string id="Dramalord418" text="{ACTOR1.LINK} has given birth to your child. As you are not married, {ACTOR1.LINK} would be forced to give the child to an orphanage. Will you take care of the child instead?" />
+    <string id="Dramalord419" text="{ACTOR1.LINK} and {ACTOR2.LINK} newly wed. In which clan should they start their life together?" />
+    <string id="Dramalord420" text="{ACTOR1.LINK} and {ACTOR3.LINK} adopted orphan {ACTOR2.LINK}." />
+    <string id="Dramalord421" text="Show Dramalord Images" />
+    <string id="Dramalord422" text="Show Dramalord images for certain events. When turned off only text notifications will appear." />
+    <string id="Dramalord423" text="Enable Dramalord Orphanage" />
+    <string id="Dramalord424" text="If enabled NPC will put bastard children into the orphanage, otherwise they keep every child." />
   </strings>
 </base>

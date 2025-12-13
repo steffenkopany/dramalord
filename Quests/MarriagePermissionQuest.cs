@@ -88,8 +88,8 @@ namespace Dramalord.Quests
         {
             DialogFlow permitterFlow = DialogFlow.CreateDialogFlow("hero_main_options")
                 .BeginPlayerOptions()
-                .PlayerOption(DramalordTexts.INTENTION_MARRY_ENGAGE_ASK)
-                .Condition(() => Permitter == Hero.OneToOneConversationHero && HasAsked == false && ConversationTools.SetConversationHero(Permitter, QuestGiver))
+                .PlayerSpecialOption(ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INTENTION_MARRY_ENGAGE_ASK), Permitter, QuestGiver))
+                .Condition(() => Permitter == Hero.OneToOneConversationHero && HasAsked == false)
                 .BeginNpcOptions()
                     .NpcOption(DramalordTexts.INTENTION_MARRY_ENGAGE_OK+ "[ib:confident3][if:convo_excited]", () => Permitter?.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrustFriends && ConversationTools.SetConversationHero(QuestGiver))
                         .Consequence(() => GetPermission())

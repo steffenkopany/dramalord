@@ -181,7 +181,7 @@ namespace Dramalord.Behaviours
                     return;
                 }
 
-                if(hero.Spouse != null && hero.Spouse != Hero.MainHero && (hero.IsFemale == hero.Spouse.IsFemale || (!hero.IsFertile() && !hero.Spouse.IsFertile())))
+                if(DramalordMCM.Instance.AllowOrphanage && hero.Spouse != null && hero.Spouse != Hero.MainHero && (hero.IsFemale == hero.Spouse.IsFemale || (!hero.IsFertile() && !hero.Spouse.IsFertile())))
                 {
                     if(hero.Children.Count == 0)
                     {

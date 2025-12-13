@@ -422,5 +422,9 @@
     <string id="Dramalord416" text="Zeige Dramalord-Videos für bestimmte Ereignisse. Wenn deaktiviert, erscheinen nur Textbenachrichtigungen." />
     <string id="Dramalord417" text="Nimmst du dein uneheliches Kind an?" />
     <string id="Dramalord418" text="{ACTOR1.LINK} hat dein Kind zur Welt gebracht. Da ihr nicht verheiratet seid, müsste {ACTOR1.LINK} das Kind ins Waisenhaus geben. Willst du dich stattdessen um das Kind kümmern?" />
+    <string id="Dramalord419" text="{ACTOR1.LINK} und {ACTOR2.LINK} haben gerade geheiratet. In welchem Clan sollen sie ihr gemeinsames Leben beginnen?" />
+    <string id="Dramalord420" text="{ACTOR1.LINK} und {ACTOR3.LINK} haben das Waisenkind {ACTOR2.LINK} adoptiert." />
+    <string id="Dramalord421" text="Dramalord-Bilder anzeigen" />
+    <string id="Dramalord422" text="Zeige Dramalord-Bilder für bestimmte Ereignisse. Wenn deaktiviert, erscheinen nur Textbenachrichtigungen." />
   </strings>
 </base>

@@ -423,5 +423,9 @@
     <string id="Dramalord416" text="Mostra vídeos do Dramalord para certos eventos. Quando desativado, apenas notificações de texto aparecerão." />
     <string id="Dramalord417" text="Cuidar do seu filho bastardo?" />
     <string id="Dramalord418" text="{ACTOR1.LINK} deu à luz seu filho. Como vocês não são casados, {ACTOR1.LINK} seria obrigado(a) a enviar a criança para um orfanato. Você quer cuidar da criança em vez disso?" />
+    <string id="Dramalord419" text="{ACTOR1.LINK} e {ACTOR2.LINK} se casaram recentemente. Em qual clã eles devem começar a vida juntos?" />
+    <string id="Dramalord420" text="{ACTOR1.LINK} e {ACTOR3.LINK} adotaram o órfão {ACTOR2.LINK}." />
+    <string id="Dramalord421" text="Mostrar imagens do Dramalord" />
+    <string id="Dramalord422" text="Mostra imagens do Dramalord para certos eventos. Quando desativado, apenas notificações de texto aparecerão." />
   </strings>
 </base>

@@ -250,7 +250,7 @@ namespace Dramalord.Data.Events
             //nothing to do
         }
 
-        public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase => IsVisibleNotification && (Actor == obj || Target == obj);
+        public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase => DramalordMCM.Instance.RelationshipLogs && (Actor == obj || Target == obj);
 
         public TextObject GetEncyclopediaText()
         {

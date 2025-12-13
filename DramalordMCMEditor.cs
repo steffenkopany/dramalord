@@ -68,6 +68,12 @@ namespace Dramalord
             }
         }
 
+        private void RefreshHeroLists()
+        {
+            _heroList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
+            _targetList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
+        }
+
         public DramalordMCMEditor()
         {
             _heroList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
@@ -82,6 +88,7 @@ namespace Dramalord
             _dummy = "";
             OnPropertyChanged();
         }
+      
 
         [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_HERO)]
         [SettingPropertyDropdown(DramalordTexts.MCM_EDITOR_HERO_SELECT, Order = 1, RequireRestart = false)]

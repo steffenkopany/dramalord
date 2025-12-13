@@ -9,6 +9,8 @@ using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.CampaignSystem.LogEntries;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Settlements.Locations;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
@@ -46,11 +48,22 @@ namespace Dramalord.Data
                 Campaign.Current.ConversationManager.AddDialogFlow(isReaction ? ReactionStartFlow(dramaEvent.Actor) : IntentionStartFlow(dramaEvent.Actor), dramaEvent);
                 Campaign.Current.ConversationManager.AddDialogFlow(flow, dramaEvent);
 
-                CampaignMapConversation.OpenConversation(
+                if (MobileParty.MainParty != null && MobileParty.MainParty.IsCurrentlyAtSea)
+                {
+                    CampaignMission.OpenConversationMission(
+                        new ConversationCharacterData(CharacterObject.PlayerCharacter, PartyBase.MainParty), 
+                        new ConversationCharacterData(dramaEvent.Actor.CharacterObject, PartyBase.MainParty, noBodyguards: true, isCivilianEquipmentRequiredForLeader: dramaEvent.Actor.CurrentSettlement != null, noHorse: true, noWeapon: true)
+
+                        );
+                }
+                else
+                {
+                    CampaignMapConversation.OpenConversation(
                         new ConversationCharacterData(Hero.MainHero.CharacterObject),
                         new ConversationCharacterData(dramaEvent.Actor.CharacterObject, isCivilianEquipmentRequiredForLeader: dramaEvent.Actor.CurrentSettlement != null, noBodyguards: true, noHorse: true, noWeapon: true)
                         );
-               
+                }
+
                 return true;
             }
             // Player starts event during conversation
@@ -82,7 +95,7 @@ namespace Dramalord.Data
             {
                 if (!heroList.Contains(ev.Actor) && ((ev.Actor.GetCloseHeroes() is List<Hero> closeHeroes && closeHeroes.Contains(ev.Target)) || (ev.Target.IsChild) || ev.Actor == ev.Target))
                 {
-                    if(Instance.StartIntention(ev, true))
+                    if(Instance.StartIntention(ev, isReaction: true))
                     {
                         heroList.Add(ev.Actor);
                         garbage.Add(ev);
@@ -146,7 +159,7 @@ namespace Dramalord.Data
                         .CloseDialog()
                 .EndPlayerOptions();
 
-        public DialogFlow ReactionStartFlow(Hero speaker) => DialogFlow.CreateDialogFlow("start", 200)
+        public DialogFlow ReactionStartFlow(Hero speaker) => DialogFlow.CreateDialogFlow("start", 500)
             .NpcLine(ConversationTools.SetTextVariables(GetConfrontationGreeting(speaker), speaker.Clan != null ? speaker.Clan.EncyclopediaLinkWithName : TextObject.GetEmpty()) + "[ib:aggressive][if:convo_undecided_open]") //TODO: Get clanless name
                 .GotoDialogState("start_reaction");
 

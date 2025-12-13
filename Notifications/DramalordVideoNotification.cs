@@ -79,6 +79,10 @@ namespace Dramalord.Notifications
                 {
                     videoFile += "ship_";
                 }
+                else if(context == VideoContext.Wedding)
+                {
+                    videoFile += "green_";
+                }
                 else
                 {
                     videoFile += "tent_";
@@ -107,7 +111,7 @@ namespace Dramalord.Notifications
             }
             else
             {
-                if (hero2.Father.IsCloseTo(hero1))
+                if (hero2.IsCloseTo(hero1))
                 {
                     videoFile += "m_f";
                 }

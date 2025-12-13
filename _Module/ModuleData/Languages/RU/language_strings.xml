@@ -422,5 +422,9 @@
     <string id="Dramalord416" text="Показывает видео Dramalord для некоторых событий. Если выключено, появляются только текстовые уведомления." />
     <string id="Dramalord417" text="Примешь своего незаконнорождённого ребёнка?" />
     <string id="Dramalord418" text="{ACTOR1.LINK} родил(а) твоего ребёнка. Так как вы не женаты, {ACTOR1.LINK} будет вынужден(а) отдать ребёнка в приют. Хочешь ли ты сам(а) заботиться о ребёнке?" />
+    <string id="Dramalord419" text="{ACTOR1.LINK} и {ACTOR2.LINK} только что поженились. В каком клане им начать совместную жизнь?" />
+    <string id="Dramalord420" text="{ACTOR1.LINK} и {ACTOR3.LINK} усыновили сироту {ACTOR2.LINK}." />
+    <string id="Dramalord421" text="Показывать изображения Dramalord" />
+    <string id="Dramalord422" text="Показывает изображения Dramalord для некоторых событий. Если выключено, появляются только текстовые уведомления." />
   </strings>
 </base>

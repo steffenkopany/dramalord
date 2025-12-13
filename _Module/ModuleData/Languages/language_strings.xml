@@ -422,5 +422,25 @@
     <string id="Dramalord416" text="Show Dramalord videos for certain events. When turned off only text notifications will appear." />
     <string id="Dramalord417" text="Take your bastard?" />
     <string id="Dramalord418" text="{ACTOR1.LINK} has given birth to your child. As you are not married, {ACTOR1.LINK} would be forced to give the child to an orphanage. Will you take care of the child instead?" />
+    <string id="Dramalord419" text="{ACTOR1.LINK} and {ACTOR2.LINK} newly wed. In which clan should they start their life together?" />
+    <string id="Dramalord420" text="{ACTOR1.LINK} and {ACTOR3.LINK} adopted orphan {ACTOR2.LINK}." />
+    <string id="Dramalord421" text="Show Dramalord Images" />
+    <string id="Dramalord422" text="Show Dramalord images for certain events. When turned off only text notifications will appear." />
+    <string id="Dramalord423" text="Enable Dramalord Orphanage" />
+    <string id="Dramalord424" text="If enabled NPC will put bastard children into the orphanage, otherwise they keep every child." />
+    
+    <string id="Dramalord425" text="{ACTOR1.LINK} won a duel against {ACTOR2.LINK}." />
+    <string id="Dramalord426" text="{ACTOR1.LINK} lost a duel against {ACTOR2.LINK}." />
+    <string id="Dramalord427" text="Draw you weapon and let us settle this matter once and for all." />
+    <string id="Dramalord428" text="{ACTOR1.LINK} I need to talk to you about {ACTOR2.LINK}" />
+    <string id="Dramalord429" text="Visit me in a settlement if you have the urge to talk about personal matters." />
+    <string id="Dramalord430" text="Very well. What do you have to say?" />
+    <string id="Dramalord431" text="I want you to end this farce of a marriage and set {ACTOR1.LINK} free." />
+    <string id="Dramalord432" text="I do not care much about {ACTOR1.LINK}. If you compensate my financial loss I am glad to anul this marriage." />
+    <string id="Dramalord433" text="If you want to break my love to {ACTOR1.LINK} you will have to stab my heart. Good luck trying." />
+    <string id="Dramalord434" text="Agreed. Here are {TEXT1}{GOLD_ICON} compensation." />
+    <string id="Dramalord435" text="Convince {ACTOR2.NAME} to divorce {ACTOR1.NAME}." />
+    <string id="Dramalord436" text="{ACTOR1.LINK} asked you to take care about their divorce from {ACTOR2.LINK}." />
+    
   </strings>
 </base>

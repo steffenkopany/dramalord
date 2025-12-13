@@ -422,5 +422,9 @@
     <string id="Dramalord416" text="特定のイベントでDramalord動画を表示します。オフの場合はテキスト通知のみ表示されます。" />
     <string id="Dramalord417" text="自分の私生児を引き取りますか？" />
     <string id="Dramalord418" text="{ACTOR1.LINK}があなたの子を出産しました。あなたたちは結婚していないため、{ACTOR1.LINK}は子を孤児院に預けることになります。代わりにあなたが世話をしますか？" />
+    <string id="Dramalord419" text="{ACTOR1.LINK}と{ACTOR2.LINK}は新婚です。二人はどのクランで新しい生活を始めるべきでしょうか？" />
+    <string id="Dramalord420" text="{ACTOR1.LINK}と{ACTOR3.LINK}は孤児{ACTOR2.LINK}を養子に迎えました。" />
+    <string id="Dramalord421" text="Dramalord画像を表示" />
+    <string id="Dramalord422" text="特定のイベントでDramalord画像を表示します。オフの場合はテキスト通知のみ表示されます。" />
   </strings>
 </base>

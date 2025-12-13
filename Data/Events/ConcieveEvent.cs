@@ -1,5 +1,6 @@
 ﻿using Dramalord.Conversations;
 using Dramalord.Data.Events.Interfaces;
+using Dramalord.Extensions;
 using Dramalord.Notifications;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
@@ -39,7 +40,7 @@ namespace Dramalord.Data.Events
             Hero female = Actor.IsFemale ? Actor : Target;
             Hero male = Actor.IsFemale ? Target : Actor;
 
-            if (female.IsPregnant || DramalordPregnancies.Instance.GetPregnancy(female) != null)
+            if (female.IsFertile() || DramalordPregnancies.Instance.GetPregnancy(female) != null)
             {
                 return;
             }

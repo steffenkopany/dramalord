@@ -42,7 +42,8 @@ namespace Dramalord
             AddClassDefinition(typeof(VisitLoverQuest), 2004);
             AddClassDefinition(typeof(DramalordQuest), 2005);
             AddClassDefinition(typeof(MarriagePermissionQuest), 2007); 
-            AddClassDefinition(typeof(ConfrontHeroQuest), 2008);
+            AddClassDefinition(typeof(ConfrontHeroQuest), 2008); 
+            AddClassDefinition(typeof(DivorceLoverSpouseQuest), 2009);
         }
 
         protected override void DefineContainerDefinitions()

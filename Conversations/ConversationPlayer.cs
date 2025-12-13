@@ -1,16 +1,13 @@
 ﻿using Dramalord.Data;
 using Dramalord.Data.Events;
-using Dramalord.Data.Events.Interfaces;
 using Dramalord.Extensions;
 using Dramalord.Notifications;
 using Dramalord.Quests;
 using Helpers;
-using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Conversation;
-using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -67,7 +64,7 @@ namespace Dramalord.Conversations
                                 .GotoDialogState("hero_main_options")
                         .EndNpcOptions()
                     .PlayerOption(DramalordTexts.ORPHANAGE_ADOPT)
-                        .Condition(() => Hero.OneToOneConversationHero.Occupation == Occupation.GangLeader)
+                        .Condition(() => Hero.OneToOneConversationHero.Occupation == Occupation.GangLeader && DramalordMCM.Instance.AllowOrphanage)
                         .BeginNpcOptions()
                             .NpcOption(DramalordTexts.ORPHANAGE_ADOPT_BOY_GIRL, () =>
                             {
@@ -197,7 +194,8 @@ namespace Dramalord.Conversations
                     .NpcOption(DramalordTexts.NPC_INTERACTION_UHWELL + "[ib:nervous2][if:convo_confused_normal]", () => !Timeout() && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love > 0 && Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love < DramalordMCM.Instance.MinDatingLove && !ConversationPersuasions.Success)
                         .Consequence(() => ConversationPersuasions.CreatePersuasionTaskForDate())
                         .GotoDialogState("npc_persuasion_challenge")
-                    .NpcOption(DramalordTexts.NPC_INTERACTION_SPOUSE_NEARBY + "[ib:nervous][if:convo_shocked]", () => !SpouseAway() && HasOtherSpouse() && !Timeout() && (Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove) && ConversationTools.SetConversationHero(Hero.MainHero))
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_SPOUSE_NEARBY + "[ib:nervous][if:convo_shocked]", () => !SpouseAway() && HasOtherSpouse() && !Timeout() && (Hero.OneToOneConversationHero.IsEmotionalWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love >= DramalordMCM.Instance.MinDatingLove || ConversationPersuasions.Success) && ConversationTools.SetConversationHero(Hero.MainHero))
+                        .Consequence( () => { ConversationPersuasions.Success = false; })
                         .GotoDialogState("player_interaction_selection")
                     .NpcOption(DramalordTexts.NPC_INTERACTION_TIMEOUT + "[ib:closed][if:convo_bored]", () => Timeout() && ConversationTools.SetConversationHero(Hero.MainHero))
                         .GotoDialogState("player_interaction_selection")
@@ -223,9 +221,24 @@ namespace Dramalord.Conversations
 
             DialogFlow divorceFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_divorce")
                 .BeginNpcOptions()
-                    .NpcOption(DramalordTexts.NPC_INTERACTION_DIVORCE_OK + "[ib:normal][if:convo_calm_friendly]", () => !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero, Hero.OneToOneConversationHero.Spouse) && Hero.OneToOneConversationHero.GetRelationTo(Hero.OneToOneConversationHero.Spouse).Love <= 0)
-                        .GotoDialogState("player_interaction_selection")
-                    .NpcOption(DramalordTexts.NPC_INTERACTION_DIVORCE_NO + "[ib:normal][if:convo_calm_friendly]", () => !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero, Hero.OneToOneConversationHero.Spouse) && Hero.OneToOneConversationHero.GetRelationTo(Hero.OneToOneConversationHero.Spouse).Love > 0)
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_DIVORCE_OK + "[ib:normal][if:convo_calm_friendly]", () => !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero, Hero.OneToOneConversationHero.Spouse) && Hero.OneToOneConversationHero.GetRelationTo(Hero.OneToOneConversationHero.Spouse).Love <= DramalordMCM.Instance.MinDatingLove)
+                        .BeginPlayerOptions()
+                            .PlayerOption(DramalordTexts.NPC_INTERACTION_ASYOUWISH)
+                                .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
+                                .Consequence(() =>
+                                {
+                                    DivorceLoverSpouseQuest quest = new DivorceLoverSpouseQuest(Hero.OneToOneConversationHero,
+                                        Hero.OneToOneConversationHero.Spouse,
+                                        CampaignTime.DaysFromNow(21));
+                                    quest.StartQuest();
+                                    DramalordQuests.Instance.AddQuest(Hero.OneToOneConversationHero, quest);
+                                })
+                                .CloseDialog()
+                            .PlayerOption(DramalordTexts.PLAYER_INTERACTION_END)
+                                .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
+                                .GotoDialogState("player_interaction_selection")
+                        .EndPlayerOptions()
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_DIVORCE_NO + "[ib:normal][if:convo_calm_friendly]", () => !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero, Hero.OneToOneConversationHero.Spouse) && Hero.OneToOneConversationHero.GetRelationTo(Hero.OneToOneConversationHero.Spouse).Love > DramalordMCM.Instance.MinDatingLove)
                         .GotoDialogState("player_interaction_selection")
                     .NpcOption(DramalordTexts.NPC_INTERACTION_TIMEOUT + "[ib:closed][if:convo_bored]", () => Timeout() && ConversationTools.SetConversationHero(Hero.MainHero))
                         .GotoDialogState("player_interaction_selection")

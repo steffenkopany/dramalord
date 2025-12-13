@@ -422,5 +422,9 @@
     <string id="Dramalord416" text="Pokazuje filmy Dramalorda dla niektórych wydarzeń. Po wyłączeniu pojawiają się tylko powiadomienia tekstowe." />
     <string id="Dramalord417" text="Przyjmiesz swoje nieślubne dziecko?" />
     <string id="Dramalord418" text="{ACTOR1.LINK} urodził(a) twoje dziecko. Ponieważ nie jesteście małżeństwem, {ACTOR1.LINK} musiał(a)by oddać dziecko do sierocińca. Czy chcesz sam(a) się nim zająć?" />
+    <string id="Dramalord419" text="{ACTOR1.LINK} i {ACTOR2.LINK} właśnie się pobrali. W którym klanie powinni rozpocząć wspólne życie?" />
+    <string id="Dramalord420" text="{ACTOR1.LINK} i {ACTOR3.LINK} adoptowali sierotę {ACTOR2.LINK}." />
+    <string id="Dramalord421" text="Pokaż obrazy Dramalorda" />
+    <string id="Dramalord422" text="Pokazuje obrazy Dramalorda dla niektórych wydarzeń. Po wyłączeniu pojawiają się tylko powiadomienia tekstowe." />
   </strings>
 </base>

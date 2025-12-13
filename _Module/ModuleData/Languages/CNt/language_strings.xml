@@ -422,5 +422,9 @@
     <string id="Dramalord416" text="為特定事件顯示 Dramalord 影片。關閉時僅顯示文字通知。" />
     <string id="Dramalord417" text="要接納你的私生子嗎？" />
     <string id="Dramalord418" text="{ACTOR1.LINK} 為你生下了孩子。由於你們未婚，{ACTOR1.LINK} 將被迫把孩子送到孤兒院。你是否願意親自撫養這個孩子？" />
+    <string id="Dramalord419" text="{ACTOR1.LINK} 和 {ACTOR2.LINK} 新婚。你希望他們在哪個家族開始新的生活？" />
+    <string id="Dramalord420" text="{ACTOR1.LINK} 與 {ACTOR3.LINK} 共同收養了孤兒 {ACTOR2.LINK}。" />
+    <string id="Dramalord421" text="顯示 Dramalord 圖片" />
+    <string id="Dramalord422" text="為特定事件顯示 Dramalord 圖片。關閉時僅顯示文字通知。" />
   </strings>
 </base>

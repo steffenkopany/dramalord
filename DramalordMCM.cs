@@ -131,6 +131,10 @@ namespace Dramalord
         [SettingPropertyBool(DramalordTexts.MCM_GENERAL_ALLOW_CLASS_MIX, HintText = DramalordTexts.MCM_GENERAL_ALLOW_CLASS_MIX_INFO, Order = 10, RequireRestart = false)]
         public bool AllowSocialClassMix { get; set; } = true;
 
+        [SettingPropertyGroup(DramalordTexts.MCM_GENERAL)]
+        [SettingPropertyBool(DramalordTexts.MCM_GENERAL_ALLOW_ORPHANAGE, HintText = DramalordTexts.MCM_GENERAL_ALLOW_ORPHANAGE_INFO, Order = 11, RequireRestart = false)]
+        public bool AllowOrphanage { get; set; } = true;
+
         [SettingPropertyGroup(DramalordTexts.MCM_OPTIONAL)]
         [SettingPropertyBool(DramalordTexts.MCM_OPTIONAL_SHOW_RELATION_CHANGES, Order = 1, HintText = DramalordTexts.MCM_OPTIONAL_SHOW_RELATION_CHANGES_INFO, RequireRestart = false)]
         public bool ShowRelationChanges { get; set; } = true;
@@ -146,6 +150,10 @@ namespace Dramalord
         [SettingPropertyGroup(DramalordTexts.MCM_OPTIONAL)]
         [SettingPropertyBool(DramalordTexts.MCM_OPTIONAL_SHOW_DRAMALORD_VIDEOS, Order = 4, HintText = DramalordTexts.MCM_OPTIONAL_SHOW_DRAMALORD_VIDEOS_INFO, RequireRestart = false)]
         public bool ShowDramaVideos { get; set; } = true;
+
+        [SettingPropertyGroup(DramalordTexts.MCM_OPTIONAL)]
+        [SettingPropertyBool(DramalordTexts.MCM_OPTIONAL_SHOW_DRAMALORD_IMAGES, Order = 4, HintText = DramalordTexts.MCM_OPTIONAL_SHOW_DRAMALORD_IMAGES_INFO, RequireRestart = false)]
+        public bool ShowDramaImages { get; set; } = true;
 
         [SettingPropertyGroup(DramalordTexts.MCM_OPTIONAL)]
         [SettingPropertyBool("DEBUG: Show All Logs", Order = 5, HintText = "Debugmode: Show all Dramalord log output", RequireRestart = false)]

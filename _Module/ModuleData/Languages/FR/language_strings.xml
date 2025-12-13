@@ -422,5 +422,9 @@
     <string id="Dramalord416" text="Affiche les vidéos de Dramalord pour certains événements. Si désactivé, seules les notifications textuelles apparaîtront." />
     <string id="Dramalord417" text="Reconnaître ton enfant illégitime ?" />
     <string id="Dramalord418" text="{ACTOR1.LINK} a donné naissance à ton enfant. Comme vous n’êtes pas mariés, {ACTOR1.LINK} serait contraint(e) de confier l’enfant à un orphelinat. Veux-tu t’en occuper toi-même ?" />
+    <string id="Dramalord419" text="{ACTOR1.LINK} et {ACTOR2.LINK} viennent de se marier. Dans quel clan devraient-ils commencer leur vie commune ?" />
+    <string id="Dramalord420" text="{ACTOR1.LINK} et {ACTOR3.LINK} ont adopté l’orphelin {ACTOR2.LINK}." />
+    <string id="Dramalord421" text="Afficher les images de Dramalord" />
+    <string id="Dramalord422" text="Affiche les images de Dramalord pour certains événements. Si désactivé, seules les notifications textuelles apparaîtront." />
   </strings>
 </base>

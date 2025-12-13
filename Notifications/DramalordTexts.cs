@@ -73,15 +73,20 @@ namespace Dramalord.Notifications
         public const string MCM_GENERAL_ALLOW_SAMESEX_MARRIAGE_INFO = "{=Dramalord036}Allow AI to marry other heroes of the same sex (otherwise they are just lovers)";
         public const string MCM_GENERAL_ALLOW_CLASS_MIX = "{=Dramalord054}Allow Social Class Mix";
         public const string MCM_GENERAL_ALLOW_CLASS_MIX_INFO = "{=Dramalord055}Allow AI interactions between nobles and commoners (Lords and Notables/Wanderers)";
+        public const string MCM_GENERAL_ALLOW_ORPHANAGE = "{=Dramalord423}Enable Dramalord Orphanage";
+        public const string MCM_GENERAL_ALLOW_ORPHANAGE_INFO = "{=Dramalord424}If enabled NPC will put bastard children into the orphanage, otherwise they keep every child.";
+
         public const string MCM_OPTIONAL = "{=Dramalord043}Optional";
         public const string MCM_OPTIONAL_SHOW_RELATION_CHANGES = "{=Dramalord044}Show Relation Changes";
         public const string MCM_OPTIONAL_SHOW_RELATION_CHANGES_INFO = "{=Dramalord045}Enable this if you want to see relation change notifications (required for the Small Talk mod)";
         public const string MCM_OPTIONAL_SHOW_REAL_RELATIONS = "{=Dramalord070}Show Real Relation";
         public const string MCM_OPTIONAL_SHOW_REAL_RELATIONS_INFO = "{=Dramalord071}Enable this if you want to see the real relation to a hero (turn off if you're using True Noble Opinion)";
-        public const string MCM_OPTIONAL_SHOW_HOTBUTTER= "{=Dramalord413}Use HotButter Animations";
+        public const string MCM_OPTIONAL_SHOW_HOTBUTTER = "{=Dramalord413}Use HotButter Animations";
         public const string MCM_OPTIONAL_SHOW_HOTBUTTER_INFO = "{=Dramalord414}Use HotButter animation for intimate scenes (will deactivate Dramalord animations).";
         public const string MCM_OPTIONAL_SHOW_DRAMALORD_VIDEOS = "{=Dramalord415}Show Dramalord Videos";
-        public const string MCM_OPTIONAL_SHOW_DRAMALORD_VIDEOS_INFO = "{=Dramalord416}Show Dramalord videos for certain events. WHen turned off only text notifications will appear.";
+        public const string MCM_OPTIONAL_SHOW_DRAMALORD_VIDEOS_INFO = "{=Dramalord416}Show Dramalord videos for certain events. When turned off only text notifications will appear.";
+        public const string MCM_OPTIONAL_SHOW_DRAMALORD_IMAGES = "{=Dramalord421}Show Dramalord Images";
+        public const string MCM_OPTIONAL_SHOW_DRAMALORD_IMAGES_INFO = "{=Dramalord422}Show Dramalord images for certain events. When turned off only text notifications will appear.";
 
         public const string MCM_EDITOR_HERO = "{=Dramalord072}1: Hero Selection";
         public const string MCM_EDITOR_HERO_SELECT = "{=Dramalord073}Select Hero";
@@ -164,6 +169,9 @@ namespace Dramalord.Notifications
         public const string LOG_CONFRONTATION = "{=Dramalord349}{ACTOR1.LINK} learned {ACTOR2.LINK} is cheating on them.";
         public const string LOG_GOSSIP = "{=Dramalord360}{ACTOR1.LINK} shared gossip with {ACTOR2.LINK} about {ACTOR3.LINK} and {ACTOR4.LINK}.";
         public const string LOG_ADOPT = "{=Dramalord379}{ACTOR1.LINK} adopted orphan {ACTOR2.LINK}.";
+        public const string LOG_ADOPT_2 = "{=Dramalord420}{ACTOR1.LINK} and {ACTOR3.LINK} adopted orphan {ACTOR2.LINK}.";
+        public const string LOG_DUEL_WON = "{=Dramalord425}{ACTOR1.LINK} won a duel against {ACTOR2.LINK}.";
+        public const string LOG_DUEL_LOST = "{=Dramalord426}{ACTOR1.LINK} lost a duel against {ACTOR2.LINK}.";
 
         public const string INTENTION_GREETING_UNKNOWN = "{=Dramalord172}Excuse me, {ACTOR1.LINK}. I do not believe we have been introduced, but might I trouble you for a moment of your time?";
         public const string INTENTION_GREETING_KNOWN = "{=Dramalord173}{ACTOR1.LINK}, it is a pleasure to see you. May I humbly request a moment of your time?";
@@ -171,15 +179,15 @@ namespace Dramalord.Notifications
         public const string INTENTION_REACT_NO_TIME = "{=Dramalord177}My apologies, {ACTOR1.LINK}, but I am short of time right now.";
         public const string INTENTION_REACT_NO_INTEREST = "{=Dramalord181}I am sorry {ACTOR1.LINK}, but I have no interest in that right now.";
         public const string INTENTION_REACT_STOP = "{=Dramalord161}Stop bothering me with your profanities! Be gone!";
-                   
+
         public const string INTENTION_TALK_1 = "{=Dramalord178}I am always eager to hear new stories. Tell me of your latest exploits while traveling in the realm.";
         public const string INTENTION_TALK_2 = "{=Dramalord179}There is a matter that has weighed upon my thoughts for some time. I would value hearing your opinion.";
         public const string INTENTION_TALK_REACT_OK = "{=Dramalord180}Very well. Let us speak, then, {ACTOR1.LINK}.";
-                     
+
         public const string INTENTION_FLIRT_1 = "{=Dramalord182}I must admit that I find you quite charming. It would be a shame to not grow better acquainted.";
         public const string INTENTION_FLIRT_2 = "{=Dramalord183}Would you care to walk with me? I should enjoy the company of one so striking.";
         public const string INTENTION_FLIRT_REACT_OK = "{=Dramalord184}You make quite the impression. But tell me, what else should I know of you?";
-                      
+
         public const string INTENTION_DATE_FIRST_1 = "{=Dramalord185}I must confess, I cannot stop thinking of you. I have strong feelings for you, {ACTOR1.LINK}, and would see our bond grow deeper. What say you?";
         public const string INTENTION_DATE_FIRST_2 = "{=Dramalord186}Your presence stirs my heart, {ACTOR1.LINK}. I should very much like to see you more often—just the two of us, away from prying eyes. What do you think, {ACTOR1.LINK}?";
         public const string INTENTION_DATE_LOVER_1 = "{=Dramalord187}Ah, {ACTOR1.LINK}, I have missed you dearly. Might we share some time together?";
@@ -188,7 +196,7 @@ namespace Dramalord.Notifications
         public const string INTENTION_DATE_CHEATING_2 = "{=Dramalord190}At last, {ACTOR2.LINK} is gone, and we have some precious moments of privacy. Will you come to me, {ACTOR1.LINK}?";
         public const string INTENTION_DATE_FIRST_REACT_OK = "{=Dramalord191}Oh {ACTOR1.LINK}, I wish for the very same!";
         public const string INTENTION_DATE_REACT_OK = "{=Dramalord192}Sure, {ACTOR1.LINK}, I always enjoy your company.";
-                      
+
         public const string INTENTION_MARRY_1 = "{=Dramalord266}I love you dearly, {ACTOR1.LINK}. The time has come to take the next step in our journey together. Will you marry me?";
         public const string INTENTION_MARRY_2 = "{=Dramalord267}You have my heart, {ACTOR1.LINK}, and I know that no other shall ever take your place. Will you do me the honor of marriage?";
         public const string INTENTION_MARRY_REACT_OK = "{=Dramalord268}You bring my dreams to life, {ACTOR1.LINK}. Yes, I would love to marry you!";
@@ -196,17 +204,17 @@ namespace Dramalord.Notifications
         public const string INTENTION_MARRY_ENGAGE_ASK = "{=Dramalord301}{ACTOR1.LINK}, I humbly seek your blessing to take the hand of {ACTOR2.LINK} in marriage.";
         public const string INTENTION_MARRY_ENGAGE_OK = "{=Dramalord302}You have shown yourself to be honorable and true, and I see the love {ACTOR1.LINK} holds for you in her eyes. With that, I give my blessing. May your marriage be strong, your days joyful, and your hearts ever steadfast.";
         public const string INTENTION_MARRY_ENGAGE_NO = "{=Dramalord303}You? Marry {ACTOR1.LINK}? A lowly wretch with little to offer? {ACTOR1.LINK} is to wed someone of standing, not some starry-eyed fool who thinks love alone will keep a household.";
-                 
+
         public const string INTENTION_SEX_PRISON_1 = "{=Dramalord252}Prisoner, I would have a word with you.";
         public const string INTENTION_SEX_PRISON_2 = "{=Dramalord253}I might be persuaded to release you from your bonds. In exchange for 'services' in my bedroom.";
         public const string INTENTION_SEX_PRISON_REACT_OK = "{=Dramalord254}Truly? Well, I suppose I have little choice but to agree to your terms.";
         public const string INTENTION_SEX_PRISON_REACT_NO = "{=Dramalord255}How dare you attempt to stain my honor with such a proposition!";
-                
+
         public const string INTENTION_BLACKMAIL_BETROTHED = "{=Dramalord213}I happened to pass by when you asked {ACTOR1.LINK} for their hand. If you do not want {ACTOR2.LINK} to learn about this, it will cost you {TEXT1}{GOLD_ICON}.";
         public const string INTENTION_BLACKMAIL_DATE = "{=Dramalord214}It is nice to see that you and {ACTOR1.LINK} are sweethearts. For {TEXT1}{GOLD_ICON} {ACTOR2.LINK} will never learn what happened.";
         public const string INTENTION_BLACKMAIL_SEX = "{=Dramalord215}You and {ACTOR1.LINK} were moaning so loudly that almost everyone could hear it. I wonder what {ACTOR2.LINK} would say to that? {TEXT1}{GOLD_ICON} would silence that noise.";
         public const string INTENTION_BLACKMAIL_DAYS = "{=Dramalord216}I will give you {TEXT1} days to get the coins. See you soon, {ACTOR1.LINK}!";
-                     
+
         public const string INTENTION_VISIT_1_INTIME = "{=Dramalord260}Oh, {ACTOR1.LINK}, you have finally come! I was desperately awaiting your arrival!";
         public const string INTENTION_VISIT_1_LATE = "{=Dramalord261}Ah, look who it is. You have finally decided that I am worthy of your time then, {ACTOR1.LINK}?";
         public const string INTENTION_VISIT_2_INTIME = "{=Dramalord263}Oh, I fear the matter is most dire indeed! Cast aside your garments, {ACTOR1.LINK}, and follow me at once. Your expertise is required in a most delicate affair!";
@@ -220,11 +228,20 @@ namespace Dramalord.Notifications
         public const string INTENTION_PRISON_KILL = "{=Dramalord384}It is time to end this. Your existence is a nuisance.";
         public const string INTENTION_PRISON_OFFER_OK = "{=Dramalord385}Truly? Well, I suppose I have little choice but to agree to your terms. I may as well at least try to enjoy it...";
         public const string INTENTION_PRISON_OFFER_NO = "{=Dramalord386}How dare you attempt to stain my honor with such a proposition! You disgust me! I would never.";
-        public const string INTENTION_PRISON_KILL_OK = "{=Dramalord387}Do what you must then, you vile and honorless swine!";   
-                   
+        public const string INTENTION_PRISON_KILL_OK = "{=Dramalord387}Do what you must then, you vile and honorless swine!";
+
+        public const string INTENTION_DIVORCE_DRAW_WEAPON = "{=Dramalord427}Draw you weapon and let us settle this matter once and for all.";
+        public const string INTENTION_DIVORCE_START = "{=Dramalord428}{ACTOR1.LINK} I need to talk to you about {ACTOR2.LINK}";
+        public const string INTENTION_DIVORCE_START_NO = "{=Dramalord429}Visit me in a settlement if you have the urge to talk about personal matters.";
+        public const string INTENTION_DIVORCE_START_OK = "{=Dramalord430}Very well. What do you have to say?";
+        public const string INTENTION_DIVORCE_REQUEST = "{=Dramalord431}I want you to end this farce of a marriage and set {ACTOR1.LINK} free.";
+        public const string INTENTION_DIVORCE_REQUEST_PAY = "{=Dramalord432}I do not care much about {ACTOR1.LINK}. If you compensate my financial loss I am glad to anul this marriage.";
+        public const string INTENTION_DIVORCE_REQUEST_FIGHT = "{=Dramalord433}If you want to break my love to {ACTOR1.LINK} you will have to stab my heart. Good luck trying.";
+        public const string INTENTION_DIVORCE_PAY = "{=Dramalord434}Agreed. Here are {TEXT1}{GOLD_ICON} compensation.";
+
         public const string CONFRONTATION_GREETING_UNKNOWN = "{=Dramalord195}Greetings, {ACTOR1.LINK}, you do not yet know me. I am {ACTOR2.LINK} of the {TEXT1}.";
         public const string CONFRONTATION_GREETING_KNOWN = "{=Dramalord196}Good day, {ACTOR1.LINK}. It is fortunate that I have caught you.";
-                     
+
         public const string CONFRONTATION_DATE_OTHER = "{=Dramalord197}It seems that you and {ACTOR1.LINK} were...enjoying yourselves. Are you aware that they are {TEXT1}?";
         public const string CONFRONTATION_DATE_PLAYER = "{=Dramalord198}It is apparent that you and {ACTOR1.LINK} often conduct 'private meetings'. Have you forgotten that you are {TEXT1}?";
         public const string CONFRONTATION_SEX_OTHER = "{=Dramalord350}Huh...so you and {ACTOR1.LINK} were enjoying each other's company...in bed. You do know that they are {STATUS}, right?";
@@ -233,7 +250,7 @@ namespace Dramalord.Notifications
         public const string CONFRONTATION_BIRTH_PLAYER = "{=Dramalord352}So you have given birth to {ACTOR1.LINK}. It is no secret that the child's true father is {ACTOR2.LINK}, and not myself. Yet you are {TEXT1}, are you not?";
         public const string CONFRONTATION_MARRIAGE_OTHER = "{=Dramalord354}I have heard that you wed {ACTOR1.LINK}. I assume they have neglected to inform you that they are, in fact, {TEXT1}?";
         public const string CONFRONTATION_MARRIAGE_PLAYER = "{=Dramalord355}You wed {ACTOR1.LINK} behind my back. Did it never occur to you to inform me? You are {TEXT1}!";
-                      
+
         public const string CONFRONTATION_RESULT_OK = "{=Dramalord199}I forgive you, {ACTOR1.LINK}. But mark my words — I shall not forget this.";
         public const string CONFRONTATION_RESULT_BREAKUP = "{=Dramalord200}I cannot accept this, {ACTOR1.LINK}. You are undeserving of anything more from me. Our relationship ends here.";
         public const string CONFRONTATION_RESULT_NO_RELATION = "{=Dramalord201}This will not be forgotten, {ACTOR1.LINK}. Farewell.";
@@ -244,7 +261,7 @@ namespace Dramalord.Notifications
         public const string GOSSIP_DATE = "{=Dramalord357}Word travels fast — {ACTOR1.LINK} and {ACTOR2.LINK} have been meeting in secret, though if they wish to remain unnoticed, they should be less obvious with their stolen glances.";
         public const string GOSSIP_SEX = "{=Dramalord358}Well, the whole castle is aflutter! {ACTOR1.LINK} and {ACTOR2.LINK} were found abed together, and not even the dawn could wash away the scandal.";
         public const string GOSSIP_BIRTH = "{=Dramalord359}Whispers abound — {ACTOR1.LINK} and {ACTOR2.LINK} have welcomed a child, though some say the timing is rather... convenient.";
-                    
+
         public const string PLAYER_INTERACTION_START = "{=Dramalord272}{ACTOR1.LINK}, may I occupy a few minutes of your time?";
         public const string PLAYER_INTERACTION_END = "{=Dramalord273}Let us talk about something else, {ACTOR1.LINK}.";
         public const string PLAYER_INTERACTION_TALK = "{=Dramalord276}It may do us well to share our thoughts. Care to talk? (Friendly chat)";
@@ -264,7 +281,7 @@ namespace Dramalord.Notifications
         public const string PLAYER_CONFRONT_NPC_INTRO = "{=Dramalord399}Oh, hello {ACTOR1.LINK}. I... didn't expect you...";
         public const string PLAYER_CONFRONT_ACCUSE = "{=Dramalord406}So you and {ACTOR1.LINK}, eh? Did you think I wouldn't notice?";
         public const string PLAYER_CONFRONT_NPC_PLAYING_INNOCENT = "{=Dramalord405}But {ACTOR1.LINK}... this is all just a misunderstanding! I.. I...";
-                    
+
         public const string NPC_INTERACTION_ASYOUWISH = "{=Dramalord284}As you wish, {ACTOR1.LINK}.";
         public const string NPC_INTERACTION_UHWELL = "{=Dramalord291}Uh... well...";
         public const string NPC_INTERACTION_SPOUSE_NEARBY = "{=Dramalord292}Apologies, {ACTOR1.LINK}, but my spouse is around. Let us talk about that some other time.";
@@ -400,7 +417,7 @@ namespace Dramalord.Notifications
         public const string QUESTION_PERSONALITY_JEALOUSY = "{=Dramalord136}If an admirer of yours keeps on flirting with other people - does this make you angry? (Jealousy)";
         public const string QUESTION_PERSONALITY_JEALOUSY_GOOD = "{=Dramalord137}Of course it does! They should only have eyes for me and no one else!";
         public const string QUESTION_PERSONALITY_JEALOUSY_BAD = "{=Dramalord138}Not at all, let them have some fun I say. No one is hurt by that.";
-        public const string QUESTION_PERSONALITY_JEALOUSY_NOCARE = "{=Dramalord139}Well, I guess that depends on the situation..."; 
+        public const string QUESTION_PERSONALITY_JEALOUSY_NOCARE = "{=Dramalord139}Well, I guess that depends on the situation...";
         public const string QUESTION_PERSONALITY_SOCIABILITY = "{=Dramalord140}Feasts bring together all sorts—lords, merchants, poets, and travelers. Some relish the company, while others prefer a quiet corner. What about you? (Sociability)";
         public const string QUESTION_PERSONALITY_SOCIABILITY_GOOD = "{=Dramalord141}Oh, absolutely! I thrive in good company. The more people, the better!";
         public const string QUESTION_PERSONALITY_SOCIABILITY_BAD = "{=Dramalord142}I prefer to keep to myself. Large crowds can be exhausting.";
@@ -427,12 +444,15 @@ namespace Dramalord.Notifications
         public const string QUEST_CONFRONT_INFO = "{=Dramalord402}{ACTOR1.LINK} was cheating on you with {ACTOR2.LINK}. Confront them.";
         public const string QUEST_CONFRONT_SUCCESS = "{=Dramalord403}You confronted {ACTOR1.LINK}.";
         public const string QUEST_CONFRONT_FAILED = "{=Dramalord404}You failed to confront {ACTOR1.LINK} in time.";
+        public const string QUEST_DIVORCE_TITLE = "{=Dramalord435}Convince {ACTOR2.NAME} to divorce {ACTOR1.NAME}.";
+        public const string QUEST_DIVORCE_INFO = "{=Dramalord436}{ACTOR1.LINK} asked you to take care about their divorce from {ACTOR2.LINK}."; 
 
         public const string INQUIRY_SEX_TITLE = "{=Dramalord193}Opportunity for intimacy";
         public const string INQUIRY_SEX_TEXT = "{=Dramalord194}There is a certain heat in {ACTOR1.LINK}'s gaze, their smile laced with unmistakable intent. Will you answer their invitation?";
         public const string INQUIRY_MARRIAGE_TITLE = "{=Dramalord393}Marriage Request";
         public const string INQUIRY_MARRIAGE_ALLOW = "{=Dramalord394}{ACTOR1.LINK} and {ACTOR2.LINK} would like to marry. As clan leader you have to agree to that bond. What is your answer?";
         public const string INQUIRY_MARRIAGE_JOIN_CLAN = "{=Dramalord393}Should {ACTOR1.LINK} join your clan after marriage?";
+        public const string INQUIRY_MARRIAGE_JOIN_CLAN_2 = "{=Dramalord419}{ACTOR1.LINK} and {ACTOR2.LINK} newly wed. In which clan should they start their life together?";
         public const string INQUIRY_CONFRONT_TITLE = "{=Dramalord400}Cheater caught!";
         public const string INQUIRY_CONFRONT_TEXT = "{=Dramalord401}{ACTOR1.LINK} was cheating on you with {ACTOR2.LINK}! Do you want to confront them?";
         public const string INQUIRY_BASTARD_TITLE = "{=Dramalord417}Take your bastard?";
