@@ -1,166 +1,17 @@
 ﻿using Dramalord.Data;
-using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
-using HarmonyLib;
+using Dramalord.Notifications;
+using Helpers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.CampaignSystem.CampaignBehaviors;
-using TaleWorlds.CampaignSystem.Conversation;
-using TaleWorlds.CampaignSystem.Encounters;
-using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements.Locations;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade;
 
 namespace Dramalord.Conversations
 {
     internal static class ConversationTools
     {
-        internal static Intention? ConversationIntention { get; set; } = null;
-
-        private static Mission? ConversationMission = null;
-
-        private class ConversationListener : IMissionListener
-        {
-            Vec2 _position;
-
-            public ConversationListener(Vec2 mapPos)
-            {
-                _position = mapPos;
-            }
-
-            public void OnConversationCharacterChanged() { }
-
-            public void OnEndMission()
-            {
-                ConversationIntention = null;
-                ConversationMission?.RemoveListener(this);
-                ConversationMission = null;
-                PlayerEncounter.Finish();
-
-                if (_position.IsValid)
-                {
-                    MobileParty.MainParty.Position2D = _position;
-                }
-            }
-
-            public void OnEquipItemsFromSpawnEquipment(Agent agent, Agent.CreationType creationType) { }
-
-            public void OnEquipItemsFromSpawnEquipmentBegin(Agent agent, Agent.CreationType creationType) { }
-
-            public void OnInitialDeploymentPlanMade(BattleSideEnum battleSide, bool isFirstPlan) { }
-
-            public void OnMissionModeChange(MissionMode oldMissionMode, bool atStart)
-            {
-                if(ConversationMission?.Mode != MissionMode.Conversation && ConversationMission?.Mode != MissionMode.Barter)
-                {
-                    ConversationMission?.EndMission();
-                }
-            }
-
-            public void OnResetMission() { }
-        }
-
-
-        internal static bool StartConversation(Intention intention, bool civilian)
-        {
-            if(ConversationIntention == null)
-            {
-                ConversationIntention = intention;
-                ConversationIntention.OnConversationStart();
-                Hero speaker = (ConversationIntention.IntentionHero == Hero.MainHero) ? ConversationIntention.Target : ConversationIntention.IntentionHero;
-                CampaignMapConversation.OpenConversation(new ConversationCharacterData(Hero.MainHero.CharacterObject), new ConversationCharacterData(speaker.CharacterObject, isCivilianEquipmentRequiredForLeader: civilian, noBodyguards: true, noHorse: true, noWeapon: true));
-                return true;
-            }
-            return false;
-        }
-
-        internal static bool StartVisit(Intention intention, bool civilian)
-        {
-            if (ConversationIntention == null)
-            {
-                ConversationIntention = intention;
-                ConversationIntention.OnConversationStart();
-                Hero speaker = (ConversationIntention.IntentionHero == Hero.MainHero) ? ConversationIntention.Target : ConversationIntention.IntentionHero;
-
-                PlayerEncounter.Start();
-                PlayerEncounter.Current.SetupFields(PartyBase.MainParty, PartyBase.MainParty);
-                Campaign.Current.CurrentConversationContext = ConversationContext.Default;
-
-                Vec2 position = new(Hero.MainHero.GetMapPoint().Position2D);
-
-                if (speaker.CurrentSettlement != null)
-                {
-                    PlayerEncounter.EnterSettlement();
-
-                    var locationOfTarget = LocationComplex.Current.GetLocationOfCharacter(speaker);
-                    var locationOfCharacter = LocationComplex.Current.GetLocationOfCharacter(Hero.MainHero);
-
-                    CampaignEventDispatcher.Instance.OnPlayerStartTalkFromMenu(speaker);
-                    ConversationMission = (Mission)PlayerEncounter.LocationEncounter.CreateAndOpenMissionController(locationOfTarget, locationOfCharacter, speaker.CharacterObject);
-                }
-                else
-                {
-                    position = Vec2.Invalid;
-
-                    var specialScene = "";
-                    var sceneLevels = "";
-
-                    ConversationMission = (Mission)Campaign.Current.CampaignMissionManager.OpenConversationMission(
-                        new ConversationCharacterData(Hero.MainHero.CharacterObject, null, true),
-                        new ConversationCharacterData(speaker.CharacterObject, null, true),
-                        specialScene, sceneLevels);
-                }
-
-                ConversationMission.AddListener(new ConversationListener(position));
-
-                return true;
-            }
-
-            return false;
-        }
-
-        internal static void EndConversation(bool leaveEncounter = true)
-        {
-            if(leaveEncounter)
-            {
-                if (PlayerEncounter.Current != null)
-                {
-                    PlayerEncounter.LeaveEncounter = true;
-                }
-            }
-        }
-
-        internal static void OnConversationStart(IAgent agent)
-        {
-            if(agent.Character != CharacterObject.PlayerCharacter)
-            {
-                Intention? intention = DramalordIntentions.Instance.GetIntentions().FirstOrDefault(i => i.IntentionHero.CharacterObject == agent.Character && i.Target == Hero.MainHero);
-
-                if (intention != null && ConversationIntention == null)
-                {
-                    ConversationIntention = intention;
-                    ConversationIntention.OnConversationStart();
-                    DramalordIntentions.Instance.GetIntentions().Remove(intention);
-                }
-            }
-        }
-
-        internal static void OnConversationEnded(IEnumerable<CharacterObject> characters)
-        {
-            if (ConversationIntention != null)
-            {
-                 ConversationIntention.OnConversationEnded();
-            }
-            ConversationIntention = null;
-
-            //characters.Where(ch => ch.IsHero && ch.HeroObject != Hero.MainHero && ch.HeroObject.IsDramalordLegit()).Do(ch => ch.HeroObject.GetRelationTo(Hero.MainHero).LastInteraction = CampaignTime.Now);
-        }
 
         internal static TextObject GetHeroGreeting(Hero hero, Hero target, bool capital)
         {
@@ -171,13 +22,9 @@ namespace Dramalord.Conversations
             {
                 text = target.IsFemale ? ((name) ? target.FirstName.ToString() : new TextObject("{=8eHRth3U}my wife").ToString()) : ((name) ? target.FirstName.ToString() : new TextObject("{=QuVgluRH}my husband").ToString());
             }
-            else if (relationship == RelationshipType.Betrothed)
-            {
-                text = (name) ? target.FirstName.ToString() : new TextObject("{=Dramalord025}my betrothed").ToString();
-            }
             else if (relationship == RelationshipType.Lover)
             {
-                text = target.IsFemale ? ((name) ? target.FirstName.ToString() : new TextObject("{=Dramalord024}my love").ToString()) : ((name) ? target.FirstName.ToString() : new TextObject("{=Dramalord023}my lover").ToString());
+                text = target.IsFemale ? ((name) ? target.FirstName.ToString() : new TextObject(DramalordTexts.NAME_MY_LOVE).ToString()) : ((name) ? target.FirstName.ToString() : new TextObject(DramalordTexts.NAME_MY_LOVER).ToString());
             }
             else if (hero.Father == target)
             {
@@ -189,15 +36,11 @@ namespace Dramalord.Conversations
             }
             else if (hero.Siblings.Contains(target))
             {
-                text = target.IsFemale ? ((name) ? target.FirstName.ToString() : new TextObject("{=Dramalord487}sister").ToString()) : ((name) ? target.FirstName.ToString() : new TextObject("{=Dramalord486}brother").ToString());
+                text = target.IsFemale ? ((name) ? target.FirstName.ToString() : new TextObject(DramalordTexts.NAME_SISTER).ToString()) : ((name) ? target.FirstName.ToString() : new TextObject(DramalordTexts.NAME_BROTHER).ToString());
             }
             else if (target.Father == hero || target.Mother == hero)
             {
-                text = target.IsFemale ? (name) ? target.FirstName.ToString() : new TextObject("{=Dramalord489}daughter").ToString() : (name) ? target.FirstName.ToString() : new TextObject("{=Dramalord488}son").ToString();
-            }
-            else if (relationship == RelationshipType.FriendWithBenefits)
-            {
-                text = (name) ? target.FirstName.ToString() : new TextObject("{=Dramalord026}my special friend").ToString();
+                text = target.IsFemale ? (name) ? target.FirstName.ToString() : new TextObject(DramalordTexts.NAME_DAUGHTER).ToString() : (name) ? target.FirstName.ToString() : new TextObject(DramalordTexts.NAME_SON).ToString();
             }
             else if (relationship == RelationshipType.Friend)
             {
@@ -243,17 +86,108 @@ namespace Dramalord.Conversations
         internal static TextObject GetHeroRelation(Hero hero, Hero partner)
         {
             RelationshipType relation = hero.GetRelationTo(partner).Relationship;
-            if (relation == RelationshipType.Friend) return new TextObject("{=Dramalord174}my friend");
-            if (relation == RelationshipType.FriendWithBenefits) return new TextObject("{=Dramalord026}my special friend");
-            if (relation == RelationshipType.Lover) return new TextObject("{=Dramalord023}my lover");
-            if (relation == RelationshipType.Betrothed) return new TextObject("{=Dramalord025}my betrothed");
-            if (relation == RelationshipType.Spouse || hero.Spouse == partner) return new TextObject("{=Dramalord173}my spouse");
-            return new TextObject("{=Dramalord175}my acquaintance");
+            if (relation == RelationshipType.Friend) return new TextObject(DramalordTexts.NAME_MY_FRIEND);
+            if (relation == RelationshipType.Lover) return new TextObject(DramalordTexts.NAME_MY_LOVER);
+            if (relation == RelationshipType.Spouse || hero.Spouse == partner) return new TextObject(DramalordTexts.NAME_MY_SPOUSE);
+            return new TextObject(DramalordTexts.NAME_MY_ACQUAINTENCE);
         }
 
-        internal static string FormatNumber(int number)
+        internal static TextObject FormatNumber(int number)
         {
-            return (number > 0) ? "+" + number.ToString() : number.ToString();
+            return new TextObject((number > 0) ? "+" + number.ToString() : number.ToString());
+        }
+
+        public static bool SetConversationHero(Hero actor1)
+        {
+            StringHelpers.SetCharacterProperties("ACTOR1", actor1.CharacterObject);
+            return true;
+        }
+
+        public static bool SetConversationHero(Hero actor1, Hero actor2)
+        {
+            StringHelpers.SetCharacterProperties("ACTOR1", actor1.CharacterObject);
+            StringHelpers.SetCharacterProperties("ACTOR2", actor2.CharacterObject);
+            return true;
+        }
+
+        public static bool SetConversationHero(Hero actor1, Hero actor2, Hero actor3)
+        {
+            StringHelpers.SetCharacterProperties("ACTOR1", actor1.CharacterObject);
+            StringHelpers.SetCharacterProperties("ACTOR2", actor2.CharacterObject);
+            StringHelpers.SetCharacterProperties("ACTOR3", actor3.CharacterObject);
+            return true;
+        }
+
+        public static bool SetConversationText(TextObject text1)
+        {
+            MBTextManager.SetTextVariable("TEXT1", text1);
+            return true;
+        }
+
+        public static bool SetConversationText(TextObject text1, TextObject text2)
+        {
+            MBTextManager.SetTextVariable("TEXT1", text1);
+            MBTextManager.SetTextVariable("TEXT2", text2);
+            return true;
+        }
+        public static bool SetConversationText(TextObject text1, TextObject text2, TextObject text3)
+        {
+            MBTextManager.SetTextVariable("TEXT1", text1);
+            MBTextManager.SetTextVariable("TEXT2", text2);
+            MBTextManager.SetTextVariable("TEXT3", text3);
+            return true;
+        }
+
+        public static TextObject SetCharacterObjects(TextObject textObject, Hero actor1)
+        {
+            StringHelpers.SetCharacterProperties("ACTOR1", actor1.CharacterObject, textObject);
+            return textObject;
+        }
+
+        public static TextObject SetCharacterObjects(TextObject textObject, Hero actor1, Hero actor2)
+        {
+            StringHelpers.SetCharacterProperties("ACTOR1", actor1.CharacterObject, textObject);
+            StringHelpers.SetCharacterProperties("ACTOR2", actor2.CharacterObject, textObject);
+            return textObject;
+        }
+
+        public static TextObject SetCharacterObjects(TextObject textObject, Hero actor1, Hero actor2, Hero actor3)
+        {
+            StringHelpers.SetCharacterProperties("ACTOR1", actor1.CharacterObject, textObject);
+            StringHelpers.SetCharacterProperties("ACTOR2", actor2.CharacterObject, textObject);
+            StringHelpers.SetCharacterProperties("ACTOR3", actor3.CharacterObject, textObject);
+            return textObject;
+        }
+
+        public static TextObject SetCharacterObjects(TextObject textObject, Hero actor1, Hero actor2, Hero actor3, Hero actor4)
+        {
+            StringHelpers.SetCharacterProperties("ACTOR1", actor1.CharacterObject, textObject);
+            StringHelpers.SetCharacterProperties("ACTOR2", actor2.CharacterObject, textObject);
+            StringHelpers.SetCharacterProperties("ACTOR3", actor3.CharacterObject, textObject);
+            StringHelpers.SetCharacterProperties("ACTOR4", actor4.CharacterObject, textObject);
+            return textObject;
+        }
+
+        public static TextObject SetTextVariables(TextObject textObject, string text1) => SetTextVariables(textObject, new TextObject(text1));
+        public static TextObject SetTextVariables(TextObject textObject, string text1, string text2) => SetTextVariables(textObject, new TextObject(text1), new TextObject(text2));
+        public static TextObject SetTextVariables(TextObject textObject, string text1, string text2, string text3) => SetTextVariables(textObject, new TextObject(text1), new TextObject(text2), new TextObject(text3));
+
+        public static TextObject SetTextVariables(TextObject textObject, TextObject text1)
+        {
+            return textObject.SetTextVariable("TEXT1", text1);
+        }
+
+        public static TextObject SetTextVariables(TextObject textObject, TextObject text1, TextObject text2)
+        {
+            textObject.SetTextVariable("TEXT1", text1);
+            return textObject.SetTextVariable("TEXT2", text2);
+        }
+
+        public static TextObject SetTextVariables(TextObject textObject, TextObject text1, TextObject text2, TextObject text3)
+        {
+            textObject.SetTextVariable("TEXT1", text1);
+            textObject.SetTextVariable("TEXT2", text2);
+            return textObject.SetTextVariable("TEXT3", text3);
         }
     }
 }

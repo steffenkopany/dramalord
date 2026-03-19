@@ -6,622 +6,482 @@
   <strings>
     <string id="Dramalord001" text="自律" />
     <string id="Dramalord002" text="放浪者の自律" />
-    <string id="Dramalord003" text="氏族のない放浪者が領主や他の放浪者と交流できるようにする" />
-    <string id="Dramalord004" text="ヒーロー設定" />
-    <string id="Dramalord005" text="最小魅力" />
-    <string id="Dramalord006" text="NPCが他者を魅力的と見なすために必要な魅力スコア" />
+    <string id="Dramalord003" text="氏族を持たない放浪者が領主や他の放浪者と交流できるようにする" />
+    <string id="Dramalord004" text="英雄設定" />
+    <string id="Dramalord005" text="最小魅力度" />
+    <string id="Dramalord006" text="NPCが他者を魅力的と見なすために必要な魅力度スコア" />
     <string id="Dramalord007" text="ログ設定" />
     <string id="Dramalord008" text="関係ログ" />
-    <string id="Dramalord009" text="ログに関係の変化を表示する" />
-    <string id="Dramalord010" text="友人" />
-    <string id="Dramalord011" text="特別な友人" />
-    <string id="Dramalord012" text="恋人" />
-    <string id="Dramalord013" text="婚約者" />
-    <string id="Dramalord014" text="結婚" />
-    <string id="Dramalord015" text="{HERO1.LINK} と {HERO2.LINK} は今 {RELATIONSHIP} です" />
-    <string id="Dramalord016" text="一般" />
-    <string id="Dramalord017" text="発覚の確率" />
-    <string id="Dramalord018" text="他の英雄と交流している時にパートナーに発覚する確率" />
-    <string id="Dramalord019" text="あなたは {HERO.LINK} にフラートしました。 (愛 {NUM})" />
-    <string id="Dramalord020" text="あなたは {HERO.LINK} とカジュアルな会話をしました。 (信頼 {NUM})" />
-    <string id="Dramalord021" text="氏族の交流のみ表示" />
-    <string id="Dramalord022" text="チャットログに氏族メンバーの交流のみ表示する" />
-    <string id="Dramalord023" text="私の恋人" />
-    <string id="Dramalord024" text="私の愛" />
-    <string id="Dramalord025" text="私の婚約者" />
-    <string id="Dramalord026" text="私の特別な友人" />
-    <string id="Dramalord027" text="失礼します、{TITLE}。私たちは初めて会いますが、少しお時間をいただけないでしょうか？" />
-    <string id="Dramalord028" text="{TITLE}、お会いできて嬉しいです。少しお時間をいただけないでしょうか？" />
-    <string id="Dramalord029" text="もちろんです {TITLE}。どうぞお申し付けください。" />
-    <string id="Dramalord030" text="申し訳ありません、{TITLE}さん、今は時間が足りないんです。" />
-    <string id="Dramalord031" text="私はいつも新しい話を聞くのが好きです。王国を旅している間のあなたの最近の偉業について教えてください。" />
-    <string id="Dramalord032" text="しばらく私の心を占めているある事柄についてあなたの意見を聞きたいです。" />
-    <string id="Dramalord033" text="あなたの笑顔がとても好きです。あなた自身についてもっと教えていただけますか？" />
-    <string id="Dramalord034" text="私と一緒に散歩に行ってくれませんか？あなたの素晴らしい容姿で嫉妬させたいです。" />
-    <string id="Dramalord035" text="告白します。あなたのことを考えずにはいられません。{TITLE}さん、あなたに明らかに好意を抱いています。私たちの関係を次のレベルに進めたいと思っています。どう思いますか？" />
-    <string id="Dramalord036" text="{TITLE}さん、あなたがいるだけで恥ずかしくなります。もっと頻繁に会って、二人きりで過ごしたいです。{TITLE}さん、どう思いますか？" />
-    <string id="Dramalord037" text="ああ、{TITLE}さん、あなたがいなくて寂しかったです！召使たちが私の個室で食事を用意してくれました。一緒に行きませんか？" />
-    <string id="Dramalord038" text="{TITLE}さん、お会いできるのを楽しみにしていました。もっと静かな場所で、もっとプライベートな会話をしませんか？" />
-    <string id="Dramalord039" text="運がいいです、{TITLE}。{SPOUSE}は現在不在で、女中は黙っていると誓っています。私と一緒に来ませんか?" />
-    <string id="Dramalord040" text="うわ、{SPOUSE}はついにいなくなりました。これですべての部屋が私たちのものになりました！使用人たちは自分たちで保管します。{TITLE}、私と一緒に来ませんか?" />
-    <string id="Dramalord041" text="率直に言います、{TITLE}。私は緊急に満たさなければならないニーズがあり、あなたは秘密を守れる人のように見えます。あなたの助けをお願いできますか?" />
-    <string id="Dramalord042" text="これは私にとって非常に恥ずかしいことです、{TITLE}。私は特定のかゆみがあり、それに対処する必要があるので、あなたが私のかゆみを掻いてくれることを期待していました。どう思いますか?" />
-    <string id="Dramalord043" text="あなたは{TITLE}で、私はあなたを信頼しています。私たちが定期的に...自然な衝動...に関してお互いに助け合えるかどうか考えていました。あなたはそれを望みますか?" />
-    <string id="Dramalord044" text="私は、{TITLE}、私たちがお互いに助け合えるかどうか考えていました。率直に言って、快楽に関してです。私たちは時々会ってお互いを楽しみ合うことができます。どう思いますか?" />
-    <string id="Dramalord045" text="{TITLE}、あなたに会えるのを楽しみにしていました。その後、おしゃべりしたり、ベッドでエクササイズしたりしてもいいですか?" />
-    <string id="Dramalord046" text="ああ、{TITLE}。後で会話したり、解剖学の研究をする時間があればいいなと思っていました。興味がありますか?" />
-    <string id="Dramalord047" text="{配偶者} がいないから、{TITLE} を感じたいんだ。寝室に行って楽しもう。いいかな?" />
-    <string id="Dramalord048" text="{配偶者} がいないから、{TITLE} と二人で空いているベッドを使おうかと思ってたんだ。これは魅力的かな?" />
-    <string id="Dramalord049" text="{TITLE} に来てキスして。君の体が欲しくてたまらない。欲望と快楽を思う存分味わいたいんだ!" />
-    <string id="Dramalord050" text="君の服を脱がせよう。寝室で、双方が勝つ別の戦いを見せてあげるよ!" />
-    <string id="Dramalord051" text="私はあなたをとても愛しています、{TITLE}。私たちの関係を次のステップに進める時が来たと思います。結婚してくれますか?" />
-    <string id="Dramalord052" text="{TITLE}、私はあなたに深い感情を抱いていますし、あなたこそが運命の人だと確信しています。結婚してくれますか?" />
-    <string id="Dramalord053" text="私たちは居留地にいるのですから、{TITLE}、司祭を呼んでついに結婚しましょう！{TITLE}、どう思いますか?" />
-    <string id="Dramalord054" text="居留地にいるこの機会を活用できます、{TITLE}。教会に行って、一生の絆を結びましょう!" />
-    <string id="Dramalord055" text="もちろん、{TITLE}と話をしましょう。" />
-    <string id="Dramalord056" text="もちろんです、{TITLE}。私も参加したいです。" />
-    <string id="Dramalord057" text="ああ、{TITLE}、私も同じことを望みます！" />
-    <string id="Dramalord058" text="もちろんです、{TITLE}。あなたと過ごす時間はすべて楽しいです。" />
-    <string id="Dramalord059" text="ああ、はい、{TITLE}。彼らがいなくなるまで、一緒に時間を過ごしましょう。" />
-    <string id="Dramalord060" text="心配しないでください、{TITLE}。あなたの気持ちはよくわかりますし、喜んでお手伝いします。" />
-    <string id="Dramalord061" text="興味深い提案ですね、{TITLE}。そのアイデアは気に入りました。" />
-    <string id="Dramalord062" text="もちろん、{TITLE}。娯楽が欲しいです。" />
-    <string id="Dramalord063" text="まあ、興奮のためにやることです... {TITLE}を先導してください!" />
-    <string id="Dramalord064" text="お望みどおりです。{TITLE}、あまり眠らないように保証します" />
-    <string id="Dramalord065" text="あなたは私の夢を叶えてくれます、{TITLE}。はい、あなたと結婚したいです!" />
-    <string id="Dramalord066" text="和解しました、{TITLE}。今すぐ結婚しましょう!" />
-    <string id="Dramalord067" text="同意します、{TITLE}。私たちの絆を固めましょう。" />
-    <string id="Dramalord068" text="申し訳ありませんが、{TITLE}、今はそれに興味がありません。" />
-    <string id="Dramalord069" text="あなたは{HERO.LINK}とデートしました。(愛{NUM}、信頼{NUM2})" />
-    <string id="Dramalord070" text="あなたは{HERO.LINK}が{TARGET.LINK}とデートしているのを見ました。" />
-    <string id="Dramalord071" text="{HERO.LINK}はあなたが{TARGET.LINK}とデートしているのを見ました。" />
-    <string id="Dramalord072" text="あなたは{HERO.LINK}と親密でした。" />
-    <string id="Dramalord073" text="あなたは{HERO.LINK}が{TARGET.LINK}と親密になっているのを見ました。" />
-    <string id="Dramalord074" text="{HERO.LINK} が、あなたが {TARGET.LINK} と親密になっているのを見つけました。" />
-    <string id="Dramalord075" text="あなたは {HERO.LINK} から妊娠しました。" />
-    <string id="Dramalord076" text="{HERO.LINK} はあなたから妊娠しました。" />
-    <string id="Dramalord077" text="{HERO.LINK} が生まれました。" />
-    <string id="Dramalord078" text="あなたは {HERO.LINK} と婚約しました。" />
-    <string id="Dramalord079" text="あなたと {HERO.LINK} は友達になりました。" />
-    <string id="Dramalord080" text="あなたと {HERO.LINK} はセフレになりました。" />
-    <string id="Dramalord081" text="あなたは {HERO.LINK} を一族から追放しました。" />
-    <string id="Dramalord082" text="{HERO.LINK} があなたのクランを脱退しました。" />
-    <string id="Dramalord083" text="クラン変更ログ" />
-    <string id="Dramalord084" text="ログにクラン変更を表示" />
-    <string id="Dramalord085" text="{HERO.LINK} が {OLDCLAN} を脱退しました。" />
-    <string id="Dramalord086" text="{HERO.LINK} は {CAUSEDBY.LINK} によって {OLDCLAN} から追い出されました。" />
-    <string id="Dramalord087" text="{HERO.LINK} が {CLAN} に参加しました。" />
-    <string id="Dramalord088" text="{HERO.LINK} との関係を終了しました。" />
-    <string id="Dramalord089" text="{HERO.LINK} はあなたとの関係を終了しました。" />
-    <string id="Dramalord099" text="{HERO.LINK} は {TARGET.LINK} と結婚しました。" />
-    <string id="Dramalord100" text="{TITLE}、少しお時間をいただいてもよろしいでしょうか?" />
-    <string id="Dramalord101" text="{TITLE}、別の話をしましょう。" />
-    <string id="Dramalord102" text="申し訳ありませんが、{TITLE}、配偶者が近くにいるので、リスクを冒すことはできません。" />
-    <string id="Dramalord103" text="申し訳ありませんが、{TITLE}、あなたとはそうしません。" />
-    <string id="Dramalord104" text="申し訳ありませんが、{TITLE}、まだこのステップの準備ができていません。" />
-    <string id="Dramalord105" text="またですか？少し休んでください、{TITLE}。後で話しましょう。" />
-    <string id="Dramalord106" text="あなたは今、{HERO.LINK}の恋人です。" />
-    <string id="Dramalord107" text="1: ヒーローの選択" />
-    <string id="Dramalord108" text="ヒーローの選択" />
-    <string id="Dramalord109" text="2: 性格" />
-    <string id="Dramalord110" text="開放性" />
-    <string id="Dramalord111" text="人が新しいことに挑戦する意欲を表します" />
-    <string id="Dramalord112" text="誠実さ" />
-    <string id="Dramalord113" text="注意深く勤勉になりたいという個人の願望を指します" />
-    <string id="Dramalord114" text="外向性" />
-    <string id="Dramalord115" text="人がどれだけエネルギッシュで、社交的で、自信があるかを測定します" />
-    <string id="Dramalord116" text="協調性" />
-    <string id="Dramalord117" text="個人が他者とどのように交流するかを指します" />
-    <string id="Dramalord118" text="神経症傾向" />
-    <string id="Dramalord119" text="人が否定的な感情を経験する傾向がどの程度あるかを表します" />
-    <string id="Dramalord120" text="3: 欲望" />
-    <string id="Dramalord121" text="男性への魅力" />
-    <string id="Dramalord122" text="個人が男性を魅力的だと思うかどうかを定義します" />
-    <string id="Dramalord123" text="女性への魅力" />
-    <string id="Dramalord124" text="個人が女性を魅力的だと思うかどうかを定義します" />
-    <string id="Dramalord125" text="体重への魅力" />
-    <string id="Dramalord126" text="個人が太ったヒーローと痩せたヒーローのどちらに興味があるかを定義します" />
-    <string id="Dramalord127" text="筋肉への魅力" />
-    <string id="Dramalord128" text="個人が筋肉質のヒーローと弱いヒーローのどちらに興味があるかを定義します" />
-    <string id="Dramalord129" text="年齢差への魅力" />
-    <string id="Dramalord130" text="個人が年齢差のある年上のヒーローと年下のヒーローのどちらに興味があるかを定義します" />
-    <string id="Dramalord131" text="性欲" />
-    <string id="Dramalord132" text="個人が一般的に性交に興味を持つかどうかを定義します" />
-    <string id="Dramalord133" text="性欲" />
-    <string id="Dramalord134" text="どのようにヒーローが現在性交を望んでいるのはホルモンのせいです" />
-    <string id="Dramalord135" text="4: 目標との関係" />
-    <string id="Dramalord136" text="信頼" />
-    <string id="Dramalord137" text="プレイヤーへの信頼値" />
-    <string id="Dramalord138" text="愛" />
-    <string id="Dramalord139" text="プレイヤーへの愛値" />
-    <string id="Dramalord140" text="緊張" />
-    <string id="Dramalord141" text="プレイヤーへの緊張値" />
-    <string id="Dramalord142" text="関係なし" />
-    <string id="Dramalord143" text="プレイヤーとの関係なし" />
-    <string id="Dramalord144" text="友人" />
-    <string id="Dramalord145" text="プレイヤーと友情がある" />
-    <string id="Dramalord146" text="ベネフィットのある友人" />
-    <string id="Dramalord147" text="プレイヤーとセックスフレンド関係にある" />
-    <string id="Dramalord148" text="恋人" />
-    <string id="Dramalord149" text="プレイヤーとカップルである" />
-    <string id="Dramalord150" text="婚約中" />
-    <string id="Dramalord151" text="プレイヤーと婚約している" />
-    <string id="Dramalord152" text="既婚" />
-    <string id="Dramalord153" text="プレイヤーと結婚している" />
-    <string id="Dramalord154" text="魅力" />
-    <string id="Dramalord155" text="共感" />
-    <string id="Dramalord156" text="生殖能力がある" />
-    <string id="Dramalord157" text="性的指向" />
-    <string id="Dramalord158" text="無性愛者" />
-    <string id="Dramalord159" text="両性愛者" />
-    <string id="Dramalord160" text="異性愛者" />
-    <string id="Dramalord161" text="同性愛者" />
-    <string id="Dramalord162" text="子供のログ" />
-    <string id="Dramalord163" text="ログに誕生、受胎、孤児院のイベントを表示する" />
-    <string id="Dramalord164" text="{HERO1.LINK} は {HERO2.LINK} によって妊娠しました" />
-    <string id="Dramalord165" text="{CHILD.LINK} は {HERO1.LINK} と {HERO2.LINK} の間に生まれました" />
-    <string id="Dramalord166" text="ご挨拶、 {TITLE}、あなたは私を知らない。私は{CLAN}の{HERO}だ。" />
-    <string id="Dramalord167" text="こんにちは、{TITLE}。あなたに会えてよかった。" />
-    <string id="Dramalord168" text="あなたと{HERO}はロマンチックな時間を楽しんでいたようだ。彼らが私の{STATUS}であることは知っているか?" />
-    <string id="Dramalord169" text="ふーん、あなたと{HERO}はベッドで激しく突き合っていた。彼らが{STATUS}であることは知っているか?" />
-    <string id="Dramalord170" text="それであなたは{CHILD}を産んだ。その子はどうやら私ではなく{FATHER}の子らしい。あなたは{STATUS}だよね?" />
-    <string id="Dramalord171" text="あなたは私に内緒で{HERO}と結婚した。私に話そうと思ったこともあったか？あなたは {STATUS} です!" />
-    <string id="Dramalord172" text="あなたと {HERO} が婚約したと聞きました。私がそのことを聞かないと思ったのですか?" />
-    <string id="Dramalord173" text="私の配偶者" />
-    <string id="Dramalord174" text="私の友人" />
-    <string id="Dramalord175" text="私の知人" />
-    <string id="Dramalord176" text="どうやらあなたと {HERO.LINK} は時々個人的に会っているようです。あなたは自分が {STATUS} だということを忘れていませんか?" />
-    <string id="Dramalord177" text="それで {HERO} はベッドであなたを楽しませていたのですね。あなたは {STATUS} です、覚えていますか?" />
-    <string id="Dramalord178" text="{HERO} は {CHILD} を出産し、あなたは父親のようです。私はあなたが {STATUS} だと思っていました?" />
-    <string id="Dramalord179" text="{HERO} との関係が悪化しました。(愛 {NUM}、信頼 {NUM2})" />
-    <string id="Dramalord180" text="{TITLE}、あなたを許します。でも忘れません。" />
-    <string id="Dramalord181" text="私はこれを受け入れません、{TITLE}。この関係を終わらせます。" />
-    <string id="Dramalord182" text="これは忘れられません、{TITLE}。さようなら。" />
-    <string id="Dramalord183" text="気にしないでください、{TITLE}。さようなら。" />
-    <string id="Dramalord184" text="ああ、{TITLE}、私はあなたを愛しています！ 後で後悔するようなことはしないでください..." />
-    <string id="Dramalord185" text="まあまあ、{TITLE}。それで、どうしますか？" />
-    <string id="Dramalord186" text="あなたの望みどおりに、{TITLE}。" />
-    <string id="Dramalord187" text="妊娠期間" />
-    <string id="Dramalord188" text="ヒーローが出産するまでに何日間妊娠しているか" />
-    <string id="Dramalord189" text="妊娠の可能性" />
-    <string id="Dramalord190" text="ヒーローが妊娠する可能性 (Dramalord の妊娠のみ)" />
-    <string id="Dramalord191" text="デートの最低愛" />
-    <string id="Dramalord192" text="ヒーローとのデートを検討するために必要な愛ポイント" />
-    <string id="Dramalord193" text="リストから英雄を選択（進行中のキャンペーンでのみ機能）" />
-    <string id="Dramalord194" text="ヒーローをロード" />
-    <string id="Dramalord195" text="現在の魅力" />
-    <string id="Dramalord196" text="プレイヤーに対する現在の魅力値" />
-    <string id="Dramalord197" text="現在の共感" />
-    <string id="Dramalord198" text="プレイヤーに対する現在の共感値" />
-    <string id="Dramalord199" text="ボーナス プレイヤー魅力" />
-    <string id="Dramalord200" text="プレイヤーの他のヒーローに対する魅力のボーナス値" />
-    <string id="Dramalord201" text="プレイヤーに近づく確率" />
-    <string id="Dramalord202" text="ヒーローが会話のためにプレイヤーに近づく確率" />
-    <string id="Dramalord203" text="{HERO.LINK} との友情を終了しました。" />
-    <string id="Dramalord204" text="{HERO.LINK} はあなたとの友情を終了しました。" />
-    <string id="Dramalord205" text="結婚に必要な愛情" />
-    <string id="Dramalord206" text="ヒーローと結婚するために必要な愛情ポイント" />
-    <string id="Dramalord207" text="交流間の日数" />
-    <string id="Dramalord208" text="ヒーローが同じヒーローと再び交流できない日数" />
-    <string id="Dramalord209" text="既婚" />
-    <string id="Dramalord210" text="プレイヤーと結婚している" />
-    <string id="Dramalord211" text="プレイヤーのデフォルトの妊娠" />
-    <string id="Dramalord212" text="プレイヤーまたはその配偶者のデフォルトの妊娠を許可する" />
-    <string id="Dramalord213" text="プレイヤーは常に目撃者" />
-    <string id="Dramalord214" text="プレイヤーは常にイベントの目撃者になります" />
-    <string id="Dramalord215" text="{HERO.LINK} が {TARGET.LINK} にプロポーズしているのを見ました。" />
-    <string id="Dramalord216" text="{HERO.LINK} があなたが {TARGET.LINK} にプロポーズしているのを見ました。" />
-    <string id="Dramalord217" text="ボーナス プレイヤー同情" />
-    <string id="Dramalord218" text="プレイヤーが他のヒーローに共感するとボーナス値" />
-    <string id="Dramalord219" text="友達以上恋人未満を表示" />
-    <string id="Dramalord220" text="ヒーローの百科事典ページに友達以上恋人未満を表示" />
-    <string id="Dramalord221" text="恋人未満を表示" />
-    <string id="Dramalord222" text="ヒーローの百科事典ページに恋人未満を表示" />
-    <string id="Dramalord223" text="もちろん、{TITLE}。戦争と権力の物語をお話ししましょう..." />
-    <string id="Dramalord224" text="ああ、{TITLE}、このバカ！いずれにしてもみんなの目があなたに向けられるでしょうし、私はそれを楽しんでいます。" />
-    <string id="Dramalord225" text="{TITLE}さん、ご存知ですよね... あなたを見たときから、この瞬間を夢見ていました！" />
-    <string id="Dramalord226" text="もちろんです、{TITLE}さん。二人きりで、充実した時間を過ごしましょう。" />
-    <string id="Dramalord227" text="婚約者を表示" />
-    <string id="Dramalord228" text="英雄の百科事典のページに婚約者を表示" />
-    <string id="Dramalord229" text="{TITLE}さん、辛いですが、私たちの関係に終止符を打たなければなりません。" />
-    <string id="Dramalord230" text="ああ、{TITLE}さん！あなたは私の心を壊しています！でも、あなたの決断を受け入れる以外に選択肢はありません。" />
-    <string id="Dramalord231" text="結局はそうなるんだよね、{TITLE}。長く続いた分、よかったよ。ありがとう。" />
-    <string id="Dramalord232" text="私は…何て言えばいいのか分からない。これはショックだ。君のそばに居られるか考えないといけない…" />
-    <string id="Dramalord233" text="私の前から消えてくれ、{NAME}。荷物をまとめて出て行け。" />
-    <string id="Dramalord234" text="{TITLE}、もう一度チャンスを与えるが、君は{HERO}と終わるだろう。" />
-    <string id="Dramalord235" text="君が{HERO}と結婚したと聞いたよ。彼らは実は{STATUS}だと君に言ったのか？" />
-    <string id="Dramalord236" text="あなたと {HERO} の婚約おめでとうございます。ただ、彼らは {STATUS} であることをお伝えしたいと思います。" />
-    <string id="Dramalord237" text="プレイヤー クランの自治" />
-    <string id="Dramalord238" text="クランのヒーローが領主や他の放浪者と交流できるようにします" />
-    <string id="Dramalord239" text="今日はだめですよ、{TITLE}。気分じゃないので、また別のときに聞いてください。" />
-    <string id="Dramalord240" text="ソーセージ" />
-    <string id="Dramalord241" text="パイ" />
-    <string id="Dramalord242" text="近親相姦を許可" />
-    <string id="Dramalord243" text="AI が家族に近づき、親密で感情的なイベントを開催することを許可する" />
-    <string id="Dramalord244" text="プレイヤーの会話のクールダウン" />
-    <string id="Dramalord245" text="ヒーローがプレイヤーと話した後、プレイヤーと対話できない日数" />
-    <string id="Dramalord246" text="同性結婚を許可" />
-    <string id="Dramalord247" text="AI が同性のヒーローと結婚することを許可する (そうでない場合は恋人同士)" />
-    <string id="Dramalord248" text="軍隊内でのやり取りを許可する" />
-    <string id="Dramalord249" text="軍隊に所属している AI 同士がやり取りできるようにする" />
-    <string id="Dramalord250" text="{HERO1.LINK} が子供 {CHILD.LINK} を孤児院に入れました。" />
-    <string id="Dramalord251" text="{HERO1.LINK} が孤児 {CHILD.LINK} を養子にしました。" />
-    <string id="Dramalord252" text="こんにちは、{TITLE}。何かお手伝いできることはありますか?" />
-    <string id="Dramalord253" text="家族を増やして孤児を養子に迎えたいです。" />
-    <string id="Dramalord254" text="一族の子供を処分したいです。" />
-    <string id="Dramalord255" text="気にしないでください。" />
-    <string id="Dramalord256" text="ああ、それは素晴らしいですね {TITLE}。現在、私たちの孤児院には {BOYS} 人の男の子と {GIRLS} 人の女の子がいます。" />
-    <string id="Dramalord257" text="誠に申し訳ございませんが、{TITLE} 様、子供を養子に迎えるには結婚している必要があります。" />
-    <string id="Dramalord258" text="申し訳ございませんが、{TITLE} 様、現在、当孤児院には子供がおりません。" />
-    <string id="Dramalord259" text="男の子を養子に迎えたいです。" />
-    <string id="Dramalord260" text="女の子を養子に迎えたいです。" />
-    <string id="Dramalord261" text="誰を養子に迎えたいですか?" />
-    <string id="Dramalord262" text="{ORPHAN.NAME}、{ORPHANAGE} 歳。" />
-    <string id="Dramalord263" text="別の子供を考えています。" />
-    <string id="Dramalord264" text="わかりました。{ORPHAN.NAME} を養子に迎えたいとお考えですか?" />
-    <string id="Dramalord265" text="おめでとうございます。{ORPHAN.NAME} はきっと良い人の手に委ねられるでしょう。" />
-    <string id="Dramalord266" text="ああ、それは残念ですね。{ORPHAN.NAME} はきっとがっかりするでしょう。" />
-    <string id="Dramalord267" text="もちろん、{TITLE}、手配できます。" />
-    <string id="Dramalord268" text="{TITLE}、あなたの一族には子供がいないようですね。" />
-    <string id="Dramalord269" text="私たちが保護すべき不幸な子供は誰でしょうか？" />
-    <string id="Dramalord270" text="わかりました。本当に {ORPHAN.NAME} を譲ってもいいですか?" />
-    <string id="Dramalord271" text="それでは、決定です! 私達が {ORPHAN.NAME} の面倒を見て、その子に新しい家を見つけます。" />
-    <string id="Dramalord272" text="わかりました、{TITLE}。{ORPHAN.NAME} はあなたの一族に残ります。" />
-    <string id="Dramalord273" text="囚人、君と話をしたい。" />
-    <string id="Dramalord274" text="私には選択肢があまりないようだ {TITLE}。" />
-    <string id="Dramalord275" text="君と話をするのは拒否する。" />
-    <string id="Dramalord276" text="私の寝室で特別なサービスを受けさせてあげることを考える。" />
-    <string id="Dramalord277" text="もう終わりにしよう。君の存在が邪魔だ。" />
-    <string id="Dramalord278" text="君はいい取引をした！私もそれを楽しむと思う。" />
-    <string id="Dramalord279" text="絶対にだめだ！そんな申し出で私の名誉を汚すな！" /> />
-    <string id="Dramalord280" text="やるべきことをやれ、この無礼な豚野郎め！" />
-    <string id="Dramalord281" text="ああ神様！やめてください…お願いです！" />
-    <string id="Dramalord282" text="待ってください、{TITLE}！快楽もあるのに、なぜ死を選ぶのですか？" />
-    <string id="Dramalord283" text="うーん… わかった。受け入れるよ。うまくやれば、今回は許してあげるよ。" />
-    <string id="Dramalord284" text="そうだな、君の死は私にとって最高の快楽だ。" />
-    <string id="Dramalord285" text="{HERO1.LINK} は特別な儀式のために捕虜の {HERO2.LINK} を解放しました" />
-    <string id="Dramalord286" text="孤児院を訪問" />
-    <string id="Dramalord287" text="孤児院を訪問して子供を養子に迎えるか、一族の一人を追い出す" />
-    <string id="Dramalord288" text="愛の獲得倍率" />
-    <string id="Dramalord289" text="いちゃつくことやデートで獲得した愛は、この値で乗算されます" />
-    <string id="Dramalord290" text="信頼の獲得倍率" />
-    <string id="Dramalord291" text="会話やデートで獲得した信頼は、この値で乗算されます" />
-    <string id="Dramalord292" text="{TITLE}、私の愛情の証として、この特別な{ギフト}をあなたにあげましょう。" />
-    <string id="Dramalord293" text="{TITLE}、ありがとう！あなたの愛情の証として、ベッドの近くに置いて、毎日楽しみます！" />
-    <string id="Dramalord294" text="{HERO.LINK}に{TOY}をあげました。" />
-    <string id="Dramalord295" text="おもちゃが壊れる確率" />
-    <string id="Dramalord296" text="ヒーローが使用している間におもちゃが壊れる確率。" />
-    <string id="Dramalord297" text="{HERO.LINK} のおもちゃが壊れました!" />
-    <string id="Dramalord298" text="グローバル デフォルト妊娠。" />
-    <string id="Dramalord299" text="すべての NPC にデフォルト妊娠を許可する" />
-    <string id="Dramalord300" text="グローバルデフォルト結婚。" />
-    <string id="Dramalord301" text="すべての NPC にデフォルト結婚を許可する" />
-    <string id="Dramalord302" text="{HERO.LINK} は自分の緊急な問題を無視されたことに失望している..." />
-    <string id="Dramalord303" text="{HERO.LINK} は、緊急に話し合う必要がある問題があるため、彼らを見つけるように頼んでいます。間に合いますか?" />
-    <string id="Dramalord304" text="{QUESTHERO} があなたの出席を要求しています。" />
-    <string id="Dramalord305" text="{HERO.LINK} はあなたが自分の頼みを叶えてくれてとても喜んでいる..." />
-    <string id="Dramalord306" text="ああ、{TITLE}、やっと来たのね! ずっと待ってたよ!" />
-    <string id="Dramalord307" text="誰が来たか見て。{TITLE} 急いでなかったよね?" />
-    <string id="Dramalord308" text="ここにいるよ。私に頼んだ緊急の用事は何だ?" />
-    <string id="Dramalord309" text="服を脱いで {TITLE} ついてきてくれ。とてもデリケートな問題で君の機転を利かせたいんだ!" />
-    <string id="Dramalord310" text="さて、{TITLE}、私の... 問題は他の誰かが処理してくれていました。とても気持ちの良い方法で。さようなら。" />
-    <string id="Dramalord311" text="クエスト チャンス" />
-    <string id="Dramalord312" text="プレイヤーの恋人がクエストを開始するチャンス" />
-    <string id="Dramalord313" text="オプション" />
-    <string id="Dramalord314" text="関係の変更を表示" />
-    <string id="Dramalord315" text="関係の変更通知を表示する場合は、これを有効にします (Small Talk モッドに必要)" />
-    <string id="Dramalord316" text="捕獲ログを表示" />
-    <string id="Dramalord317" text="ヒーローが捕獲されたときにログを表示する場合は、これを有効にします" />
-    <string id="Dramalord318" text="{TITLE} いつも、あなたがどんな外見を好むのか気になっていました。 (情報)" />
-    <string id="Dramalord319" text="申し訳ありませんが、{TITLE}、私はあなたを信頼していないので、私の個人的な好みについて話すことはできません。" />
-    <string id="Dramalord320" text="もちろんです、{TITLE}。本当に知りたいなら、教えましょう..." />
-    <string id="Dramalord321" text="私は異性に惹かれますが、自分の同性にはあまり興味がありません。" />
-    <string id="Dramalord322" text="私は異性にはあまり興味がありません。むしろ自分の同性の方が好きです。" />
-    <string id="Dramalord323" text="私は異性の人を魅力的だと思いますが、自分の同性にも惹かれます。" />
-    <string id="Dramalord324" text="私はどちらの性別にも愛着はありません。あまり興味がありません。" />
-    <string id="Dramalord325" text="私はスリムな人の方が他の人よりも魅力的だと思います。" />
-    <string id="Dramalord326" text="痩せている人や太っている人は好きではありません。ちょうどいい中間くらいがちょうどいいです。" />
-    <string id="Dramalord327" text="体重のある人が好きです。その方が掴めるものが多いです。" />
-    <string id="Dramalord328" text="筋肉は過大評価されています。私は痩せていて骨が見えるのが好きです。" />
-    <string id="Dramalord329" text="中くらいの筋肉が私にはちょうどいいです。特別なものは必要ありません。" />
-    <string id="Dramalord330" text="力強い人が好きです。がっしりしているほどいいです。" />
-    <string id="Dramalord331" text="私より{AGEDIFF}歳の人が好きです。{AGE}歳くらいの人がベストです。" />
-    <string id="Dramalord332" text="あなた {TITLE}、私はあなたを 100 点満点中 {RATING} だと思います。" />
-    <string id="Dramalord333" text="若い" />
-    <string id="Dramalord334" text="年上" />
-    <string id="Dramalord335" text="年上でも年下でもない" />
-    <string id="Dramalord336" text="あなたは {HERO.LINK} の身体的嗜好を知りました。" />
-    <string id="Dramalord337" text="友人に対する最低限の信頼" />
-    <string id="Dramalord338" text="ヒーローを友人とみなすために必要な信頼ポイント (Dramalord の友人のみ)" />
-    <string id="Dramalord339" text="新しい話を聞かせてください! (友好的なチャット)" />
-    <string id="Dramalord340" text="私と一緒に散歩しませんか? (いちゃつき)" />
-    <string id="Dramalord341" text="告白します、{TITLE} さん、あなたに好意を抱いています! (恋愛)" />
-    <string id="Dramalord342" text="もっと静かな場所に隠れませんか? (デート)" />
-    <string id="Dramalord343" text="{TITLE} さん、あなたも快楽を求めますか? (セフレ)" />
-    <string id="Dramalord344" text="ベッドでエクササイズしませんか、{TITLE}？（親密さ）" />
-    <string id="Dramalord345" text="{TITLE}、あなたを感じたいです！（親密さ）" />
-    <string id="Dramalord346" text="{TITLE}、あなたをとても愛しています。結婚してくれますか？（婚約）" />
-    <string id="Dramalord347" text="和解しました、{TITLE}、結婚しましょう！（結婚）" />
-    <string id="Dramalord348" text="辛いですが、私たちの関係を終わらせなければなりません。（別れ）" />
-    <string id="Dramalord349" text="妻" />
-    <string id="Dramalord350" text="夫" />
-    <string id="Dramalord351" text="{TITLE} との会話に感謝します。" />
-    <string id="Dramalord352" text="{TITLE} さん、教えてください。あなたはよく旅行して人と会いますが、{POI.NAME} についてどう思いますか?" />
-    <string id="Dramalord353" text="私は {POI.NAME} に会ったことがあります。私は彼らを友人だと思っています。" />
-    <string id="Dramalord354" text="うーん、思い出させないでください。{POI.NAME} はうっとうしいので、二度と会わないでほしいです。" />
-    <string id="Dramalord355" text="{POI.NAME}、うーん。実は彼らについて特に意見はありません。" />
-    <string id="Dramalord356" text="残念ながら、私は {POI.NAME} に会う機会がありませんが、彼らはいい人のように聞こえますか?" />
-    <string id="Dramalord357" text="{POI.NAME} に会わなくてよかった。彼らが恐ろしい存在であることは想像できます。" />
-    <string id="Dramalord358" text="{POI.NAME} については、一言も会話したことがないので、何の意見もありません。" />
-    <string id="Dramalord359" text="それはよかったです。{POI.NAME} は私の良き友人でもあります。" />
-    <string id="Dramalord360" text="それは残念です。{POI.NAME} は実際には私の良き友人です。" />
-    <string id="Dramalord361" text="まあ、あなたはおそらく {POI.NAME} のことをよく知らないのでしょう。彼らは私の友人です。" />
-    <string id="Dramalord362" text="うーん、本当ですか? {POI.NAME} が好きなんですか? それはとても残念です。" />
-    <string id="Dramalord363" text="まったく同感です！ {POI.NAME} は私の爪の下の汚れのようなものです。" />
-    <string id="Dramalord364" text="まあ、あなたはおそらく {POI.NAME} をよく知らないのでしょう。私は本当に彼らが好きではありません。" />
-    <string id="Dramalord365" text="あなたは {POI.NAME} についての意見をすぐに作り上げていますね。" />
-    <string id="Dramalord366" text="私も {POI.NAME} について意見を持っていません。彼らのことを十分には知りません。" />
-    <string id="Dramalord367" text="それは素晴らしい視点です！同感です。" />
-    <string id="Dramalord368" text="まあ、私は実際にはあなたに同意せざるを得ません。" />
-    <string id="Dramalord369" text="あなたはかなり意見が強いですね。" />
-    <string id="Dramalord370" text="前回の戦争で、私たちの派閥は敵の村を襲撃しました。食料がなくなったからです。悲しいことですが、大義のためにそうするしかなかったと思います。(名誉)" />
-    <string id="Dramalord371" text="同意できません。市民が政治のせいで苦しむべきではありません。" />
-    <string id="Dramalord372" text="その通りです。農民は自発的に物資を差し出すべきでした。" />
-    <string id="Dramalord373" text="わかりません。そういうものなのでしょう。" />
-    <string id="Dramalord374" text="より強い敵に遭遇したにもかかわらず、それでも戦いに行ったことはありますか? (勇気)" />
-    <string id="Dramalord375" text="はい、とにかく私たちは勝ちました。この世界は勇敢な者のものです。" />
-    <string id="Dramalord376" text="いいえ。勝てないとわかっているのに、なぜ命を危険にさらす必要があるでしょうか。" />
-    <string id="Dramalord377" text="何とも言えません。状況によると思います。" />
-    <string id="Dramalord378" text="捕虜となった兵士をそのまま戦場から去らせる領主もいると聞きました。それは危険ではないでしょうか？（マーシー）" />
-    <string id="Dramalord379" text="彼らは彼らを家族の元に帰らせます。私もそうします。" />
-    <string id="Dramalord380" text="首を切るといいと思います！彼らが再び戦場に行くのが難しくなります。" />
-    <string id="Dramalord381" text="彼らは殺すか殺されるためにそこにいるので、誰も彼らのことを気にしません。" />
-    <string id="Dramalord382" text="最近、あるトーナメントの優勝者が賞金のすべてを貧しい人々に寄付しました。(寛大さ)" />
-    <string id="Dramalord383" text="それは本当に寛大な行動です。残念ながら、このような人はまれです。" />
-    <string id="Dramalord384" text="ばかげている！お金の無駄遣い。そもそもなぜ彼らは参加したのか？" />
-    <string id="Dramalord385" text="まあ、彼らのお金だから、彼らの選択だと思います。" />
-    <string id="Dramalord386" text="南部の一族は、リーダーが王と口論した後、王国を去ろうとしました。(計算高い)" />
-    <string id="Dramalord387" text="それは愚かだ。彼らはプライドのせいで保護を失っていただろう。" />
-    <string id="Dramalord388" text="彼らの気持ちはわかります。私も時々カッとなることがあります。" />
-    <string id="Dramalord389" text="その議論が何についてのものだったか分からない限り、その行動を批判することはできません。" />
-    <string id="Dramalord390" text="おお！ 恥ずかしいです！ そう言ってもらえて嬉しいです。" />
-    <string id="Dramalord391" text="つまり、あなたは私を魅力的だとは思っていないということですか?" />
-    <string id="Dramalord392" text="あなたには何らかの好みがあると思います。" />
-    <string id="Dramalord393" text="一部の領主と領主夫人は、身体的な性別の好みが異なると聞きました。あなたはどうですか? (オリエンテーション)" />
-    <string id="Dramalord394" text="実は、特に好みはありません。" />
-    <string id="Dramalord395" text="地元の宿屋の主人が太ってしまいました。今では、居酒屋は毎晩、驚いて見とれる客でいっぱいです。(体重)" />
-    <string id="Dramalord396" text="高地の領主や領主夫人は、がっしりとしていて力強い人が多いです。多くの人が、彼らの強さを尊敬しています。(体格)" />
-    <string id="Dramalord397" text="年上の人を好む人もいれば、年下の人を好む人もいます。あなたの好みは？(年齢)" />
-    <string id="Dramalord398" text="私は自分より年上の人が好きです。熟した果物ほど良いものはありません。" />
-    <string id="Dramalord399" text="私は、若い人のエネルギーとスタミナがとても好きです。" />
-    <string id="Dramalord400" text="私と同年代の人の方が魅力的だと思います。" />
-    <string id="Dramalord401" text="新しいことに挑戦するのは、時々ワクワクすると思いますか？（オープンさ）" />
-    <string id="Dramalord402" text="新しいことに挑戦するのは好きです。変化がないと退屈になります。" />
-    <string id="Dramalord403" text="ナンセンス。物事は今のままで良いので、変える必要はありません。" />
-    <string id="Dramalord404" text="そうかもしれません。あまり気にしていません。物事は常に変化しています。" />
-    <string id="Dramalord405" text="では、あなたは計画を立てるタイプですか、それとも衝動的なタイプですか？（誠実さ）" />
-    <string id="Dramalord406" text="すべてに秩序と構造が必要です。計画がすべてです。" />
-    <string id="Dramalord407" text="いや、そうでもないです。私はたいてい偶然に次の冒険に出会います。" />
-    <string id="Dramalord408" text="ええ、計画するときもあれば、しないときもあります。" />
-    <string id="Dramalord409" text="町でトーナメントがあるとき、新しい人に会えてワクワクしますか？（外向性）" />
-    <string id="Dramalord410" text="もちろんです！人と一緒にいると、おしゃべりが止まりません。" />
-    <string id="Dramalord411" text="うーん。いや、私はどちらかと言うと一人でいるほうです。ほとんどの人が邪魔をします。" />
-    <string id="Dramalord412" text="まあ、それは場合によります。何人かは会うでしょうが、多くはないでしょう。" />
-    <string id="Dramalord413" text="友達が悲しい話をしてきたら、どう反応しますか？（同調性）" />
-    <string id="Dramalord414" text="もちろん、できるなら慰めたり、助けたりします。" />
-    <string id="Dramalord415" text="ええと、友達は個人的なことで私を煩わせないようにしています。" />
-    <string id="Dramalord416" text="それは私自身の気分次第だと思います。" />
-    <string id="Dramalord417" text="パーティーの運営は時々とてもストレスになります。どのように対処しますか？（神経症傾向）" />
-    <string id="Dramalord418" text="ああ、そうですね。回復のために、私は通常数日間自分を閉じ込めます。" />
-    <string id="Dramalord419" text="ええ、まったくストレスではありません。実際、めったにストレスを感じません。" />
-    <string id="Dramalord420" text="大丈夫だと思います。たまには1日か2日休みが必要なこともあります。" />
-    <string id="Dramalord421" text="最低限の信頼度 FWB" />
-    <string id="Dramalord422" text="ヒーローをセフレと見なすために必要な信頼ポイント" />
-    <string id="Dramalord423" text="私は...これについてはよく分かりません。私はあなたが好きですが、十分に好きでしょうか?" />
-    <string id="Dramalord424" text="試してみなければ、これがうまくいくかどうかは決してわかりません。" />
-    <string id="Dramalord425" text="考えすぎです。ただ起こるままにさせてください。" />
-    <string id="Dramalord426" text="私たちはお互いにたくさんの愛を与えることができると確信しています。" />
-    <string id="Dramalord427" text="検討していただければ光栄です。" />
-    <string id="Dramalord428" text="これは圧倒的です。{PLAYER.NAME}さん、あなたを愛していますが、このステップの準備はできていますか？" />
-    <string id="Dramalord429" text="愛は冒険であり、これが私たちの次の挑戦になります！" />
-    <string id="Dramalord430" text="考えてみれば、これが論理的な次のステップです。" />
-    <string id="Dramalord431" text="私たちはついにお互いにすべてを共有することができます。" />
-    <string id="Dramalord432" text="私たちの状況では、それは名誉あることです。" />
-    <string id="Dramalord433" text="これは確かに刺激的な提案です。感情が混ざっていたらどうしますか？" />
-    <string id="Dramalord434" text="そもそもリスクのない刺激的な冒険とは何でしょうか？" />
-    <string id="Dramalord435" text="その後、状況を再評価して結論を​​出します。" />
-    <string id="Dramalord436" text="お互いに与え合える喜びについて考えてみましょう。" />
-    <string id="Dramalord437" text="それからお互いを解放して手作業に戻ります。" />
-    <string id="Dramalord438" text="うーん...そうですね..." />
-    <string id="Dramalord439" text="{HERO.LINK} を説得することに成功しました。(愛 {LOVE}、信頼 {TRUST})" />
-    <string id="Dramalord440" text="{HERO.LINK} を説得できませんでした。(愛 {LOVE}、信頼 {TRUST})" />
-    <string id="Dramalord441" text="{TITLE}、あなたの家族を貴族に迎え、我々の氏族の正式な一員として迎えたい。" />
-    <string id="Dramalord442" text="それは光栄です、{TITLE}。家族を代表して、感謝の気持ちとともにお受けします！" />
-    <string id="Dramalord443" text="申し訳ありません、{TITLE}。家族の全員がこの決断に納得しているわけではありません。これが家族を引き裂く可能性もあります。" />
-    <string id="Dramalord444" text="ご提案ありがとうございます、{TITLE}。しかし、これは私の家族の年長者たちが決めるべきことです。" />
-    <string id="Dramalord445" text="{NAME}さんはよく食べ、定期的に運動していることで知られています。" />
-    <string id="Dramalord446" text="{NAME}さんは、ほとんど何も食べず、定期的に運動していることで知られています。" />
-    <string id="Dramalord447" text="{NAME} さんはたくさん食べるのに、トレーニングをほとんどしないことで知られています。" />
-    <string id="Dramalord448" text="{NAME} さんは何もほとんど食べず、トレーニングをほとんどしないことで知られています。" />
-    <string id="Dramalord449" text="{NAME} さんはトレーニングをほとんどしないことで知られています。" />
-    <string id="Dramalord450" text="{NAME} さんは何もほとんど食べないことで知られています。" />
-    <string id="Dramalord451" text="私は孤児院で育ったので、良い子供時代を過ごしたわけではありません。" />
-    <string id="Dramalord452" text="地元のギャング団のリーダーは私たちにほとんど食事を与えず、歩けるようになるとすぐに盗みを働かせました。うまくいかなければ殴られました。" />
-    <string id="Dramalord453" text="乳首が生えるとすぐに私は酒場に送られました。私は嫌な男たちをもてなして、飲み物や私にお金を使わせなければなりませんでした。" />
-    <string id="Dramalord454" text="かつて、オレンジ色の顔をした老人がいて、お金を払わずに私をつかみ続けました。それで私は彼を蹴飛ばして街から逃げました。" />
-    <string id="Dramalord455" text="とにかく、刺す方が刺されるよりいいと思ったんだ... 言いたいことは分かるだろう。だからそれを新しい仕事にしたんだ。" />
-    <string id="Dramalord456" text="脇毛が生えるとすぐに、私は城に送られて年配の女性たちの召使になった。夫たちが戦争で忙しい間の娯楽のためだ。" />
-    <string id="Dramalord457" text="ある日、私が銀の森に苗木を植えていたとき... 森の所有者の心が止まった。私は逃げて町を去らなければならなかった。" />
-    <string id="Dramalord458" text="それで、木を扱う時代は終わり、代わりに剣と斧に切り替えた。結局、私もそれでかなり上手いことが分かった。" />
-    <string id="Dramalord459" text="スティッキーフィンガー卿はもっと良い扱いを受けるに値しなかったと思う。" />
-    <string id="Dramalord460" text="痛い！それは厳しい罰だ。" />
-    <string id="Dramalord461" text="乾いた土を耕すのは大変な仕事のようだ。" />
-    <string id="Dramalord462" text="まあ、若い木は古代の森には属さないよね？" />
-    <string id="Dramalord463" text="ある品物を手に入れたいのですが…" />
-    <string id="Dramalord464" text="わかりました。何に興味がありますか？" />
-    <string id="Dramalord465" text="湿った環境に耐えられる、長くて丸いもの。" />
-    <string id="Dramalord466" text="指を何度も入れられる柔らかくて湿ったもの。" />
-    <string id="Dramalord467" text="ご希望であれば、{GOOD} かそれ以上をお売りできます。" />
-    <string id="Dramalord468" text="1 個で十分です。" />
-    <string id="Dramalord469" text="5 個あれば十分です。" />
-    <string id="Dramalord470" text="少なくとも 10 個必要です。" />
-    <string id="Dramalord471" text="問題ありません! あなたには {AMOUNT}{GOLD_ICON} になります。もちろん特別価格です。" />
-    <string id="Dramalord472" text="あなたと取引できて嬉しいです。" />
-    <string id="Dramalord473" text="プレイヤーのダイアログなし" />
-    <string id="Dramalord474" text="会話/いちゃつく/デートのときにダイアログは必要だが自動結果が必要な場合はこれを有効にします。" />
-    <string id="Dramalord475" text="あなたは現在 {HERO.LINK} にとってより魅力的です。({NUMBER})" />
-    <string id="Dramalord476" text="あなたは現在 {HERO.LINK} にとってより魅力的ではありません。({NUMBER})" />
-    <string id="Dramalord477" text="{HERO.LINK} はあなたにもっと共感しています。({NUMBER})" />
-    <string id="Dramalord478" text="{HERO.LINK} はあなたにあまり共感していません。({NUMBER})" />
-    <string id="Dramalord479" text="{HERO1.LINK} と {HERO2.LINK} はもう {RELATIONSHIP} ではありません" />
-    <string id="Dramalord480" text="愛の衰退開始日" />
-    <string id="Dramalord481" text="愛が衰退するのに必要な、恋人同士が会っていない日数。" />
-    <string id="Dramalord482" text="ああ、こんにちは {TITLE}。まさか... 来るとは思っていませんでした..." />
-    <string id="Dramalord483" text="{HERO1.LINK} は {HERO2.LINK} と親密でした。" />
-    <string id="Dramalord484" text="親密なログ" />
-    <string id="Dramalord485" text="親密なイベントをログに表示" />
-    <string id="Dramalord486" text="兄弟" />
-    <string id="Dramalord487" text="姉妹" />
-    <string id="Dramalord488" text="息子" />
-    <string id="Dramalord489" text="娘" />
-    <string id="Dramalord490" text="クランによる王国の変更を許可する" />
-    <string id="Dramalord491" text="AI クランが敗北または結婚時に王国を変更できるようにする" />
-    <string id="Dramalord492" text="{CLAN} が {KINGDOM} に参加しました。" />
-    <string id="Dramalord493" text="{CLAN} が {KINGDOM} を離れました。" />
-    <string id="Dramalord494" text="プレイヤーの配偶者は忠実です" />
-    <string id="Dramalord495" text="プレイヤーの配偶者は他の誰とも交流しません。" />
-    <string id="Dramalord496" text="{HERO} は 1 日以内に {FACTION} を離れます。" />
-    <string id="Dramalord497" text="あなたは私のクランに合わないと判断しました。荷物をまとめて出て行ってください。" />
-    <string id="Dramalord498" text="私の王国にあなたの一族の居場所はありません。出て行ってください、そして二度と戻ってきません！" />
-    <string id="Dramalord499" text="あなたの友情がどれほど価値があるかを知ることができてよかったです。残念です！あなたの言うとおりにします。" />
-    <string id="Dramalord500" text="子供は氏族内に留めておく" />
-    <string id="Dramalord501" text="氏族に生まれた非嫡出子は孤児院に送られることはありません" />
-    <string id="Dramalord502" text="私たちのまだ生まれていない子供を処分してほしい。" />
-    <string id="Dramalord503" text="あなたと {HERO} のまだ生まれていない子供を処分してほしい。" />
-    <string id="Dramalord504" text="私たちの子供を産みたくない。" />
-    <string id="Dramalord505" text="著名人を含める" />
-    <string id="Dramalord506" text="ギャングリーダーなどの著名人をDramalord AIに含める（実験的、パフォーマンスへの影響）" />
-    <string id="Dramalord507" text="必要と思われる場合は、私が対処します {TITLE}。" />
-    <string id="Dramalord508" text="私はこれを受け入れません、{TITLE}。再考を強くお勧めします。さもないと、結果が伴います!" />
-    <string id="Dramalord509" text="これがあなたの望みなら、そうしてください {TITLE}。私はあなたにそれを保つよう強制しません。" />
-    <string id="Dramalord510" text="あなたは正気ですか、{TITLE}？この子は私たちの愛の現れです！" />
-    <string id="Dramalord511" text="その通りです。{HERO} の子供を産むのは不適切です。" />
-    <string id="Dramalord512" text="絶対にだめですよ、{TITLE}！この子供は私が {HERO} に抱く愛の結果です！" />
-    <string id="Dramalord513" text="他の誰か" />
-    <string id="Dramalord514" text="{HERO} は 1 日以内に中絶手術を行います。" />
-    <string id="Dramalord515" text="{HERO.LINK} はあなたに対してあまり愛情を持っていません。({NUMBER})" />
-    <string id="Dramalord516" text="あなたは 1 日以内に中絶手術を行います。" />
-    <string id="Dramalord517" text="あなたは {HERO.LINK} の胎児を中絶しました。" />
-    <string id="Dramalord518" text="{HERO.LINK} はあなたの胎児を中絶しました。" />
-    <string id="Dramalord519" text="{HERO.LINK} は {HERO2.LINK} の胎児を中絶しました。" />
-    <string id="Dramalord520" text="最大妊娠可能年齢" />
-    <string id="Dramalord521" text="ヒーローが妊娠できる最大年齢（Dramalord の妊娠のみ）" />
-    <string id="Dramalord522" text="名士の子供を残す" />
-    <string id="Dramalord523" text="名士の非嫡出子は孤児院に送られない" />
-    <string id="Dramalord524" text="{CHILD} が生まれました。" />
-    <string id="Dramalord525" text="{MOTHER} が {CHILD} を出産しました。{FATHER} が父親です。母親に子供を引き取るように勧めますか、それとも捨てるように勧めますか?" />
-    <string id="Dramalord526" text="子供を追い出す" />
-    <string id="Dramalord527" text="子供を引き取る" />
-    <string id="Dramalord528" text="{HERO.LINK}が{FATHER.LINK}の子供を出産するのを目撃しました。" />
-    <string id="Dramalord529" text="{HERO.LINK}はあなたが{FATHER.LINK}の子供を出産するのを見ました。" />
-    <string id="Dramalord530" text="{HERO.LINK}はあなたが{OTHER.LINK}と結婚するのを見ました。" />
-    <string id="Dramalord531" text="あなたは{HERO.LINK}と{OTHER.LINK}の結婚式を目撃しました。" />
-    <string id="Dramalord532" text="聞いたか？{HERO}と{OTHER}が結婚するんだ — あの二人が結婚するなんて、あの court での噂がまさか本当だったとは誰が思っただろうか？" />
-    <string id="Dramalord533" text="聞いたか？{HERO}と{OTHER}が今や夫婦だそうだ — でも、これまで言われたことを考えると、誓いの言葉だけで噂を沈めることができるのか疑問だ。" />
-    <string id="Dramalord534" text="噂は早く広まる — {HERO}と{OTHER}が秘密裏に会っていたが、それを隠したいのなら、盗み見を少なくすべきだ。" />
-    <string id="Dramalord535" text="さあ、城がざわついている！{HERO}と{OTHER}が一緒に寝ているところが見つかり、夜明けさえもそのスキャンダルを払拭できなかった。" />
-    <string id="Dramalord536" text="噂が飛び交っている — {HERO}と{OTHER}が子供を授かったが、タイミングが微妙だという声もある。" />
-    <string id="Dramalord537" text="あなたが不在の間、{OTHER}は{HERO}とその事柄を取り仕切っていました..." />
-    <string id="Dramalord538" text="気にすることはありません、{TITLE}。それはただの噂で、すぐに忘れられるでしょう。" />
-    <string id="Dramalord539" text="多分あなたが正しい、{TITLE}。すぐに新たな噂の対象が現れるでしょう、そしてこれは忘れられるでしょう。" />
-    <string id="Dramalord540" text="あなたは{HERO}と{TARGET}が{RELATION}であることを知った。" />
-    <string id="Dramalord541" text="{QUESTHERO}がしばらくあなたのパーティに加わります。" />
-    <string id="Dramalord542" text="{HERO.LINK}はあなたと素晴らしい時間を過ごしたいと思っており、しばらく一緒に旅をすることになりました。" />
-    <string id="Dramalord543" text="{HERO.LINK}は一人にされて非常に失望し、{TOWN.LINK}に戻りました。" />
-    <string id="Dramalord544" text="{HERO.LINK}はあなたとの時間を楽しみ、{TOWN.LINK}に戻りました。" />
-    <string id="Dramalord545" text="教えてください、{TITLE}、私のパーティに加わりたいですか？" />
-    <string id="Dramalord546" text="あなたと過ごしたこの数日は贈り物のようでした、{TITLE}。私たちが共有したすべての瞬間に感謝します。今は別れることになりますが、すぐに私たちの道は再び交差するでしょう。私はそれを確信しています。" />
-    <string id="Dramalord547" text="もし私を本当にあなたのものにしたいのなら、{HERO}の元に行き、その祝福をお願いしなさい。私の心はすでにあなたのものですが、私たちが望む未来を得るには彼らの許可が必要です。" />
-    <string id="Dramalord548" text="{QUESTHERO}に結婚の申し込みをしてください。" />
-    <string id="Dramalord549" text="{QUESTHERO}はあなたに、{TARGET.LINK}の許可が必要だと伝えました。" />
-    <string id="Dramalord550" text="{TITLE}、私は{HERO}の手を求めて結婚の許可を謹んでお願い申し上げます。" />
-    <string id="Dramalord551" text="あなたは名誉と忠誠を示し、{HERO}があなたに抱いている愛はその目に見えます。そのため、私はあなたに祝福を与えます。あなたの結婚が強く、あなたの毎日が幸せで、あなたの心が永遠に堅固でありますように。" />
-    <string id="Dramalord552" text="あなたはうまく話しますし、私はあなたの感情を疑いませんが、人生を築こうとする者はそれに値することを証明しなければなりません。自分の場所を勝ち取るため、あなたの力と名誉を示し、それから結婚について話しましょう。" />
-    <string id="Dramalord553" text="あなたが私の娘と結婚するだと？名もなき貧乏な子供、何も持っていない者が？{HERO}は価値のある人と結婚すべきであり、ただの恋に酔った愚か者が家庭を築けると思っているのは馬鹿げています。" />
-    <string id="Dramalord554" text="あなたのクランは3以上のレベルで、{HERO}があなたを好きである必要があります。" />
-    <string id="Dramalord555" text="でも{TITLE}、私はすでに結婚しています…" />
-    <string id="Dramalord556" text="あなたと{HERO.LINK}の関係は変わりました。(愛 {LOVE}, 信頼 {TRUST})" />
-    <string id="Dramalord557" text="噂に反応する" />
-    <string id="Dramalord558" text="あなたは{HERO1}と{HERO2}に関する不穏な噂を耳にしました。どう反応しますか？" />
-    <string id="Dramalord559" text="対決する！" />
-    <string id="Dramalord560" text="無視する" />
-    <string id="Dramalord561" text="{HERO.LINK}を見つけ、聞いた不穏な噂を持ち出して対決しなさい。" />
-    <string id="Dramalord562" text="実際の関係を表示" />
-    <string id="Dramalord563" text="これはヒーローとの実際の関係を見たい場合に有効にします（もしTrue Noble Opinionを使っている場合は無効にしてください）" />
-    <string id="Dramalord564" text="最大信頼 敵" />
-    <string id="Dramalord565" text="ヒーローを敵と見なすために必要な信頼ポイントの減少" />
-    <string id="Dramalord566" text="結婚の申し込み" />
-    <string id="Dramalord567" text="{HERO1}と{HERO2}が結婚したいと思っています。彼らにあなたの祝福がありますか？" />
-    <string id="Dramalord568" text="親密になる機会" />
-    <string id="Dramalord569" text="{HERO1}の目に淫らな笑顔を浮かべた輝きを見ました…このチャンスを掴みますか？" />
-    <string id="Dramalord570" text="ターゲット選択" />
-    <string id="Dramalord571" text="{HERO1.LINK}に{HERO2.LINK}と別れろと言いました。" />
-    <string id="Dramalord572" text="あなたは{HERO1.LINK}と{HERO2.LINK}の関係を成功裏に終わらせました。" />
-    <string id="Dramalord573" text="噂を持ち出して{HERO}に対決する" />
-    <string id="Dramalord574" text="結婚でクランに参加" />
-    <string id="Dramalord575" text="AIが配偶者のクランに参加することを許可します（さもなくば単に結婚しているだけ）" />
-    <string id="Dramalord576" text="社会階級の混合を許可" />
-    <string id="Dramalord577" text="貴族と平民（領主と名士/放浪者）との間のAIの相互作用を許可" />
-    <string id="Dramalord578" text="{HERO1}と{HERO2}が結婚したばかりです。あなたのクランに残りますか？" />
-    <string id="Dramalord579" text="{HERO1}と{HERO2}の行為を妨害" />
-    <string id="Dramalord580" text="{HERO1}と{HERO2}の行為を見てしまいました。彼らを妨害しますか？" />
-    <string id="Dramalord581" text="{TITLE}! {HERO}の愛のためにあなたと決闘します!" />
-    <string id="Dramalord582" text="よろしい。武器を抜け!" />
-    <string id="Dramalord583" text="何時でも、{TITLE}!（決闘のために英雄を訪れてください）" />
-    <string id="Dramalord584" text="今そのような無駄なことに時間をかけていられません！私が町や城にいる時に来てください。" />
-    <string id="Dramalord585" text="常に死闘" />
-    <string id="Dramalord586" text="他の英雄との決闘は常に死闘です。" />
-    <string id="Dramalord587" text="{HERO}があなたのクランに参加を求めています" />
-    <string id="Dramalord588" text="{HERO}が{OLDCLAN}を離れ、あなたのクランに参加を求めています。受け入れますか？" />
-    <string id="Dramalord589" text="最近何か面白いことがありましたか？" />
-    <string id="Dramalord590" text="今は特に思いつきません。" />
-    <string id="Dramalord591" text="他に何かありますか？" />
-    <string id="Dramalord592" text="FWBの妊娠" />
-    <string id="Dramalord593" text="セフレ関係でも妊娠することがある" />
-    <string id="Dramalord594" text="Dramalordの妊娠を有効化" />
-    <string id="Dramalord595" text="Dramalordの妊娠システムを有効にする（互換性のないMODが検出された場合、自動的に無効化）" />
-    <string id="Dramalord596" text="Dramalordの結婚を有効化" />
-    <string id="Dramalord597" text="Dramalordの結婚システムを有効にする（互換性のないMODが検出された場合、自動的に無効化）" />
-    <string id="Dramalord598" text="噂好きのプレイヤーの確率" />
-    <string id="Dramalord599" text="英雄がプレイヤーに近づき噂を広める確率" />
-    <string id="Dramalord600" text="{HERO}は式の準備をしています。結婚後、彼らをクランに迎え入れますか？" />
-    <string id="Dramalord601" text="あなたが{HERO}に求婚したとき、たまたま通りかかりました。{SPOUSE}に知られたくなければ、{AMOUNT}{GOLD_ICON}が必要です。" />
-    <string id="Dramalord602" text="あなたと{HERO}が恋人同士なのは微笑ましいですね。{AMOUNT}{GOLD_ICON}で{SPOUSE}がこのことを知ることはありません。" />
-    <string id="Dramalord603" text="あなたと{HERO}の声が大きすぎて、ほぼ全員に聞こえていましたよ。{SPOUSE}は何と言うでしょうね？{AMOUNT}{GOLD_ICON}でその話を黙らせてあげます。" />
-    <string id="Dramalord604" text="この裏切り者め！金を持ってさっさと消えろ！" />
-    <string id="Dramalord605" text="よくもそんなことを！これを口外したら、お前の舌を切り落としてやる！" />
-    <string id="Dramalord606" text="ハハッ！好きに噂を広めるがいい、哀れな人間よ。" />
-    <string id="Dramalord607" text="{HERO}があなたを脅迫している" />
-    <string id="Dramalord608" text="{HERO.LINK}はあなたと{OTHER.LINK}を見た。{SPOUSE.LINK}に告げると脅している。{AMOUNT}{GOLD_ICON}を払わなければならない。夜に訪れて、この問題を解決しよう。" />
-    <string id="Dramalord609" text="唯一の真実の愛" />
-    <string id="Dramalord610" text="ロマンチックな交流は、最も高い愛の値を持つ者とだけ発生する" />
-    <string id="Dramalord611" text="おもちゃを持っている" />
-    <string id="Dramalord612" text="結婚の種類" />
-    <string id="Dramalord613" text="誠実" />
-    <string id="Dramalord614" text="遊び好き" />
-    <string id="Dramalord615" text="ポリ" />
-    <string id="Dramalord616" text="オープン" />
-    <string id="Dramalord617" text="私は誠実な結婚を夢見ています。パートナーと私はお互いだけを愛する関係が理想です。" />
-    <string id="Dramalord618" text="私は真実の愛に基づいた結婚を望んでいます。たまに冒険があっても構いません。" />
-    <string id="Dramalord619" text="私は誠実な結婚を望みます。たとえ複数人の関係でも、プライベートなことが守られれば問題ありません。" />
-    <string id="Dramalord620" text="結婚は政治的な手段であり、愛は美しいもので、嫉妬なく多くの人と分かち合うべきだと思います。" />
-    <string id="Dramalord621" text="この英雄が望む結婚の形。" />
-    <string id="Dramalord622" text="私たちの関係について話したい。" />
-    <string id="Dramalord623" text="私たちは誠実であり、お互いだけを見つめるべきだと思う。" />
-    <string id="Dramalord624" text="私たちの愛は決して共有されるべきではありませんが、肉体的な楽しみは他で求めてもよいでしょう。" />
-    <string id="Dramalord625" text="私たちの結婚は誠実であるべきですが、二人以上でも構いません。" />
-    <string id="Dramalord626" text="私たちには分かち合うべき愛がたくさんあります。他の人とも共有しましょう。" />
-    <string id="Dramalord627" text="正気か？そんなこと絶対に受け入れられない！" />
-    <string id="Dramalord628" text="その汚い言葉で私を煩わせるな！消えろ！" />
+    <string id="Dramalord009" text="関係の変化をログに表示する" />
+    <string id="Dramalord010" text="一般" />
+    <string id="Dramalord011" text="発覚の確率" />
+    <string id="Dramalord012" text="他の英雄と交流中にパートナーに見つかる確率" />
+    <string id="Dramalord013" text="子供ログ" />
+    <string id="Dramalord014" text="出生・受胎・孤児院の出来事をログに表示する" />
+    <string id="Dramalord015" text="妊娠期間" />
+    <string id="Dramalord016" text="英雄が出産するまでの妊娠日数" />
+    <string id="Dramalord017" text="妊娠確率" />
+    <string id="Dramalord018" text="英雄が妊娠する確率（Dramalord特有の妊娠のみ）" />
+    <string id="Dramalord019" text="交際に必要な最低愛情値" />
+    <string id="Dramalord020" text="英雄と交際を考えるために必要な愛情ポイント" />
+    <string id="Dramalord021" text="プレイヤー魅力ボーナス" />
+    <string id="Dramalord022" text="プレイヤーが他の英雄に対して持つ魅力度のボーナス値" />
+    <string id="Dramalord023" text="プレイヤーに接近する確率" />
+    <string id="Dramalord024" text="英雄がプレイヤーに話しかける確率" />
+    <string id="Dramalord025" text="結婚に必要な最低愛情値" />
+    <string id="Dramalord026" text="英雄が結婚を考えるために必要な愛情ポイント" />
+    <string id="Dramalord027" text="交流間の間隔日数" />
+    <string id="Dramalord028" text="同じ英雄と再び交流できない日数" />
+    <string id="Dramalord029" text="プレイヤー共感ボーナス" />
+    <string id="Dramalord030" text="プレイヤーの他の英雄への共感ボーナス値" />
+    <string id="Dramalord031" text="プレイヤー氏族の自律" />
+    <string id="Dramalord032" text="あなたの氏族の英雄が領主や他の放浪者と交流できるようにする" />
+    <string id="Dramalord033" text="近親相姦を許可" />
+    <string id="Dramalord034" text="AIが家族間で親密または感情的なイベントを行うことを許可する" />
+    <string id="Dramalord035" text="同性婚を許可" />
+    <string id="Dramalord036" text="AIが同性の英雄と結婚できるようにする（そうでなければ恋人関係のみ）" />
+    <string id="Dramalord037" text="デフォルト妊娠を許可" />
+    <string id="Dramalord038" text="全NPCにデフォルト妊娠を許可する" />
+    <string id="Dramalord039" text="デフォルト結婚を許可" />
+    <string id="Dramalord040" text="全NPCにデフォルト結婚を許可する" />
+    <string id="Dramalord041" text="クエスト発生率" />
+    <string id="Dramalord042" text="プレイヤーの恋人がクエストを開始する確率" />
+    <string id="Dramalord043" text="オプション" />
+    <string id="Dramalord044" text="関係変化を表示" />
+    <string id="Dramalord045" text="関係変化の通知を見たい場合は有効にする（Small Talkモッドに必要）" />
+    <string id="Dramalord046" text="友人になるための最低信頼値" />
+    <string id="Dramalord047" text="英雄を友人と見なすために必要な信頼ポイント（Dramalord専用）" />
+    <string id="Dramalord048" text="愛情減退開始日" />
+    <string id="Dramalord049" text="恋人同士が会わない日数がこの数値に達すると愛情が減少する" />
+    <string id="Dramalord050" text="重要人物を含める" />
+    <string id="Dramalord051" text="Dramalord AIにギャングのリーダーのような重要人物を含める" />
+    <string id="Dramalord052" text="最大生殖年齢" />
+    <string id="Dramalord053" text="英雄が妊娠できる最大年齢（Dramalord妊娠のみ）" />
+    <string id="Dramalord054" text="社会階級の混合を許可" />
+    <string id="Dramalord055" text="貴族と平民（領主や放浪者/著名人）間のAI交流を許可" />
+    <string id="Dramalord056" text="プレイヤーに関する噂の確率" />
+    <string id="Dramalord057" text="英雄がプレイヤーに近づいて噂を広める確率" />
+    <string id="Dramalord058" text="デートログ" />
+    <string id="Dramalord059" text="ログにデートイベントを表示" />
+    <string id="Dramalord060" text="フリートログ" />
+    <string id="Dramalord061" text="ログにフリートイベントを表示" />
+    <string id="Dramalord062" text="会話ログ" />
+    <string id="Dramalord063" text="ログに友好的な会話イベントを表示" />
+    <string id="Dramalord064" text="性交ログ" />
+    <string id="Dramalord065" text="ログに性交イベントを表示" />
+    <string id="Dramalord066" text="敵対の最大信頼値" />
+    <string id="Dramalord067" text="英雄を敵と見なすために必要な負の信頼ポイント" />
+    <string id="Dramalord068" text="受精ログ" />
+    <string id="Dramalord069" text="ログに受精イベントを表示" />
+    <string id="Dramalord070" text="実際の関係を表示" />
+    <string id="Dramalord071" text="英雄との実際の関係を表示する（True Noble Opinionを使用している場合は無効化）" />
+    <string id="Dramalord072" text="1：英雄の選択" />
+    <string id="Dramalord073" text="英雄を選択" />
+    <string id="Dramalord074" text="2：性格" />
+    <string id="Dramalord075" text="3：欲望" />
+    <string id="Dramalord076" text="男性への魅力" />
+    <string id="Dramalord077" text="女性への魅力" />
+    <string id="Dramalord078" text="体重への魅力" />
+    <string id="Dramalord079" text="体格への魅力" />
+    <string id="Dramalord080" text="年齢差への魅力" />
+    <string id="Dramalord081" text="性欲" />
+    <string id="Dramalord082" text="個人が一般的に性交に興味を持つかどうかを定義する" />
+    <string id="Dramalord083" text="ホルモンによる英雄の現在の性交意欲を示す" />
+    <string id="Dramalord084" text="4：対象との関係" />
+    <string id="Dramalord085" text="対象を選択" />
+    <string id="Dramalord086" text="現在の魅力" />
+    <string id="Dramalord087" text="現在の共感" />
+    <string id="Dramalord088" text="教えてくれ、{ACTOR1.LINK}。広く旅をして多くの人に会ってきただろうが、{ACTOR2.LINK}についてどう思う？" />
+    <string id="Dramalord089" text="ああ、{ACTOR1.LINK}！はい、会ったことがあります。とても好感を持っています。" />
+    <string id="Dramalord090" text="残念ながら、はい。{ACTOR1.LINK}に会いましたが、あまり良い印象ではありません。" />
+    <string id="Dramalord091" text="{ACTOR1.LINK}？彼らに対して特に感情はありません。" />
+    <string id="Dramalord092" text="おお、{ACTOR1.LINK}？まだ会っていませんが、良い評判を聞いています。" />
+    <string id="Dramalord093" text="聞くところによると、{ACTOR1.LINK}に会わずに済んだのは幸運のようです。" />
+    <string id="Dramalord094" text="{ACTOR1.LINK}とはまだ言葉を交わしていないので、特に意見はありません。" />
+    <string id="Dramalord095" text="それは嬉しい話です！{ACTOR1.LINK}は素晴らしい人物です。" />
+    <string id="Dramalord096" text="それは残念です。{ACTOR1.LINK}とはとても仲が良いのに。" />
+    <string id="Dramalord097" text="おや？それは惜しいですね。私はずっと{ACTOR1.LINK}を好ましく思っていました。" />
+    <string id="Dramalord098" text="ふん。{ACTOR1.LINK}を称賛するとは…がっかりだ。" />
+    <string id="Dramalord099" text="まったく同感です！{ACTOR1.LINK}には良くない印象を受けました。" />
+    <string id="Dramalord100" text="私は{ACTOR1.LINK}があまり好きではありません。" />
+    <string id="Dramalord101" text="あなたは {ACTOR1.LINK} について、ずいぶん早く判断を下すようですね。" />
+    <string id="Dramalord102" text="私も {ACTOR1.LINK} について特に意見はありません。まだよく知らないので。" />
+    <string id="Dramalord103" text="素晴らしい意見ですね！賛成です。" />
+    <string id="Dramalord104" text="うーん、それには同意しかねますね。" />
+    <string id="Dramalord105" text="ふむ……あなたはかなり意志の強い人のようだ。" />
+    <string id="Dramalord106" text="飢えた人々を助けるために誓いを破って盗賊となり、処刑された戦士の話を聞きました。彼の行動は正しかったと思いますか？（名誉）" />
+    <string id="Dramalord107" text="どんなに困難でも、別の道は必ずあります。名誉を犠牲にしてはいけません。" />
+    <string id="Dramalord108" text="信念を持つのは大切ですが、それを曲げるべき時を知るのも同じくらい大切です。" />
+    <string id="Dramalord109" text="人は飢え、盗み、そして死ぬ。それが世の常です。" />
+    <string id="Dramalord110" text="絶望的な戦いに勝利した偉大な将軍の話を聞いたことがあります。勝ち目がないと分かっていても、あなたは戦いますか？（勇気）" />
+    <string id="Dramalord111" text="もちろん。勝つことよりも戦うこと自体が重要な時もあります。勇者にこそ世界は微笑むのです。" />
+    <string id="Dramalord112" text="いいえ。負けると分かっているのに命を賭けるなんて、愚かです。" />
+    <string id="Dramalord113" text="状況によりますね。簡単には答えられません。" />
+    <string id="Dramalord114" text="ある領主が敗北した敵を解放したそうです。高潔な行いでしょうか？それとも愚かな行動？（慈悲）" />
+    <string id="Dramalord115" text="家族の元へ帰してやったのですね。私も同じようにしたでしょう。" />
+    <string id="Dramalord116" text="首をはねろ！そうすれば二度と戦場に戻れまい。" />
+    <string id="Dramalord117" text="それが戦争というものです。生きる者もいれば、死ぬ者もいる。" />
+    <string id="Dramalord118" text="闘技場のチャンピオンが全ての賞金を貧しい人々に寄付したそうです。（寛大）" />
+    <string id="Dramalord119" text="なんと立派なことだ。本当に高潔な人ですね。" />
+    <string id="Dramalord120" text="なんという無駄遣いだ！富も名声も、楽しむためにあるだろう？" />
+    <string id="Dramalord121" text="まあ、彼のお金ですから。どう使おうと自由です。" />
+    <string id="Dramalord122" text="ある貴族の家が、王の拒絶を受けてほとんど反乱を起こしたそうです。無謀ですか、それとも勇気ですか？（計算）" />
+    <string id="Dramalord123" text="愚かな行いです。感情のままに力を失うべきではありません。" />
+    <string id="Dramalord124" text="理解できます。時には信念に従うことが最も大切なのです。" />
+    <string id="Dramalord125" text="難しい問題ですね。人生はそう単純ではありません。" />
+    <string id="Dramalord126" text="あら、照れてしまいます！嬉しいお言葉ですね。" />
+    <string id="Dramalord127" text="つまり、私には魅力がないということですか？" />
+    <string id="Dramalord128" text="本当に好みがないのですか？ふむ。" />
+    <string id="Dramalord129" text="自分に似た人が好きですか？それとも全く違うタイプの人？（指向）" />
+    <string id="Dramalord130" text="酒場で聞いたのですが、ある者はふくよかな体型を、またある者は細身を好むとか。あなたは？（体重）" />
+    <string id="Dramalord131" text="力強さを魅力と感じる人もいれば、しなやかさを好む人もいます。あなたは？（体格）" />
+    <string id="Dramalord132" text="若い相手が好きな人もいれば、成熟した相手を好む人もいます。あなたは？（年齢）" />
+    <string id="Dramalord133" text="年上の人が好きですね。上質なワインのように、歳を重ねるほど深みが出ますから。" />
+    <string id="Dramalord134" text="若い人が好きです。彼らのエネルギーは見ていて楽しい。" />
+    <string id="Dramalord135" text="自分と同じくらいの年齢の人が一番落ち着きます。" />
+    <string id="Dramalord136" text="あなたを想う人が他の誰かといちゃついたら、怒りますか？（嫉妬）" />
+    <string id="Dramalord137" text="もちろん！その人の目は私だけを見ているべきです！" />
+    <string id="Dramalord138" text="いいえ、気にしません。楽しめばいいと思いますよ。" />
+    <string id="Dramalord139" text="うーん……状況によるでしょうね。" />
+    <string id="Dramalord140" text="宴には領主、商人、詩人、旅人が集まります。あなたは賑やかな場所が好きですか？それとも静かな方が？（社交性）" />
+    <string id="Dramalord141" text="もちろん！人の輪の中にいるのが好きです。多ければ多いほど良い！" />
+    <string id="Dramalord142" text="一人の方が好きです。人混みは疲れますから。" />
+    <string id="Dramalord143" text="時と場合によりますね。ほどほどがちょうどいいです。" />
+    <string id="Dramalord144" text="友人が悩みを打ち明けてきたら、慰めますか？それとも放っておきますか？（共感）" />
+    <string id="Dramalord145" text="もちろん慰めます。助けられるなら助けたいです。" />
+    <string id="Dramalord146" text="正直に言うと、そういうのはあまり得意じゃないですね。人は自分で解決するべきです。" />
+    <string id="Dramalord147" text="気分と状況によりますね。" />
+    <string id="Dramalord148" text="話してくれてありがとう、{ACTOR1.LINK}。" />
+    <string id="Dramalord149" text="子供の頃は大変でした。私は路上で育ち、地元のギャングに面倒を見られていました。" />
+    <string id="Dramalord150" text="頭はほとんど食べ物を与えず、盗みを強要しました。何も取れなければ殴られました。" />
+    <string id="Dramalord151" text="大人になると、酒場で男たちを楽しませ、金を巻き上げる仕事をさせられました。" />
+    <string id="Dramalord152" text="ある橙色の顔をした老人が、支払いもせずに私に手を出しました。私は殴って逃げ出しました。" />
+    <string id="Dramalord153" text="殴られるより殴る方がましだと思いました。そうして私は新しい仕事を見つけたのです。" />
+    <string id="Dramalord154" text="胸毛が生え始めた頃、古い城でご婦人方を『楽しませる』ように言われました。" />
+    <string id="Dramalord155" text="ある夜、『種を蒔いて』いる時にご婦人の心臓が止まりました。私はパニックになって逃げました。" />
+    <string id="Dramalord156" text="今では“木工”の仕事は終わりです。剣と斧で生きています。なかなか悪くないですよ。" />
+    <string id="Dramalord157" text="スティッキーフィンガー卿は、自業自得ですね。" />
+    <string id="Dramalord158" text="ああ！それは厳しい罰ですね。" />
+    <string id="Dramalord159" text="古い森で若者として生きるのは、さぞかし大変だったでしょうね。" />
+    <string id="Dramalord160" text="若木は古い森には育たない、そうでしょう？" />
+    <string id="Dramalord161" text="もう下品な話はやめて！出ていって！" />
+    <string id="Dramalord162" text="{ACTOR1.LINK} と {ACTOR2.LINK} のデートはうまくいかなかった。" />
+    <string id="Dramalord163" text="{ACTOR1.LINK} と {ACTOR2.LINK} は楽しいデートをした。" />
+    <string id="Dramalord164" text="{ACTOR1.LINK} と {ACTOR2.LINK} は情熱的なデートをした。" />
+    <string id="Dramalord165" text="{ACTOR2.LINK} は、{ACTOR1.LINK} がフ flirtした時に微笑んだ。" />
+    <string id="Dramalord166" text="{ACTOR2.LINK} は、{ACTOR1.LINK} が flirtした時に顔をしかめた。" />
+    <string id="Dramalord167" text="{ACTOR1.LINK} は {ACTOR2.LINK} と親しげに話していた。" />
+    <string id="Dramalord168" text="{ACTOR1.LINK} は {ACTOR2.LINK} と気まずい会話をしていた。" />
+    <string id="Dramalord169" text="{ACTOR1.LINK} は {ACTOR2.LINK} と関係を持った。" />
+    <string id="Dramalord170" text="{ACTOR1.LINK} は {ACTOR2.LINK} と満足のいく関係を持った。" />
+    <string id="Dramalord171" text="{ACTOR1.LINK} は {ACTOR2.LINK} によって妊娠した。" />
+    <string id="Dramalord172" text="すみません、{ACTOR1.LINK}。まだお会いしたことがありませんが、少しお話してもよろしいですか？" />
+    <string id="Dramalord173" text="{ACTOR1.LINK}、お会いできてうれしいです。少しお時間をいただけますか？" />
+    <string id="Dramalord174" text="正直に言うと、とても魅力的ですね。あなたをもっと知りたいです。" />
+    <string id="Dramalord175" text="一緒に散歩しませんか？あなたのような人と過ごす時間は素晴らしいでしょう。" />
+    <string id="Dramalord176" text="もちろんです、{ACTOR1.LINK}。何について話しましょう？" />
+    <string id="Dramalord177" text="すみません、{ACTOR1.LINK}。今は少し忙しいのです。" />
+    <string id="Dramalord178" text="新しい話を聞くのが好きです。最近の冒険を聞かせてください。" />
+    <string id="Dramalord179" text="ずっと気になっていたことがあるんです。あなたの意見を聞きたい。" />
+    <string id="Dramalord180" text="いいでしょう。話しましょう、{ACTOR1.LINK}。" />
+    <string id="Dramalord181" text="すみません、{ACTOR1.LINK}。今はその気分じゃないです。" />
+    <string id="Dramalord182" text="正直に言うと、とても魅力的ですね。あなたをもっと知りたいです。" />
+    <string id="Dramalord183" text="一緒に散歩しませんか？あなたと過ごす時間を楽しみたいです。" />
+    <string id="Dramalord184" text="あなたはとても印象的ですね。でも教えてください、あなたのことをもっと知るには？" />
+    <string id="Dramalord185" text="ずっとあなたのことを考えています、{ACTOR1.LINK}。あなたに強い想いがあります。この関係をもっと深めたい。どう思いますか？" />
+    <string id="Dramalord186" text="あなたがいると心が温まります、{ACTOR1.LINK}。もっと頻繁に会いたいです——二人だけで、誰にも見られずに。" />
+    <string id="Dramalord187" text="ああ、{ACTOR1.LINK}、会いたかったです。一緒に少し過ごしませんか？" />
+    <string id="Dramalord188" text="あなたに会えるのを期待していました、{ACTOR1.LINK}。もう少し静かな場所で話しませんか？" />
+    <string id="Dramalord189" text="運が味方してますね、{ACTOR1.LINK}。{ACTOR2.LINK} は出かけていて、すぐには戻らない。来ませんか？" />
+    <string id="Dramalord190" text="ついに {ACTOR2.LINK} が出かけましたね。今は二人きりです。来ませんか、{ACTOR1.LINK}？" />
+    <string id="Dramalord191" text="ああ、{ACTOR1.LINK}、私も同じ気持ちです！" />
+    <string id="Dramalord192" text="もちろんです、{ACTOR1.LINK}。あなたと過ごす時間はいつも楽しいです。" />
+    <string id="Dramalord193" text="親密な機会" />
+    <string id="Dramalord194" text="{ACTOR1.LINK} の目が熱く輝き、笑みが招いている。あなたはその誘いに応じますか？" />
+    <string id="Dramalord195" text="ご挨拶します、{ACTOR1.LINK}。まだお会いしたことはありませんね。私は {TEXT1} 出身の {ACTOR2.LINK} です。" />
+    <string id="Dramalord196" text="こんにちは、{ACTOR1.LINK}。あなたに会えて光栄です。" />
+    <string id="Dramalord197" text="あなたと {ACTOR1.LINK} が……楽しんでいたようですね。彼が {TEXT1} であることは知っていましたか？" />
+    <string id="Dramalord198" text="明らかに、あなたと {ACTOR1.LINK} は頻繁に『二人きり』になっていますね。自分が {TEXT1} だということを忘れたのですか？" />
+    <string id="Dramalord199" text="許します、{ACTOR1.LINK}。でも忘れません——決して。" />
+    <string id="Dramalord200" text="受け入れられません、{ACTOR1.LINK}。あなたはもう信頼に値しません。私たちは終わりです。" />
+    <string id="Dramalord201" text="このことは忘れない、{ACTOR1.LINK}。さようなら。" />
+    <string id="Dramalord202" text="……何と言えばいいのか分からない。心が乱れている。少し考える時間をくれ。" />
+    <string id="Dramalord203" text="あなたと{ACTOR1.LINK}の関係が変化しました。（愛情 {TEXT1}、信頼 {TEXT2}）" />
+    <string id="Dramalord204" text="友人" />
+    <string id="Dramalord205" text="恋人" />
+    <string id="Dramalord206" text="夫婦" />
+    <string id="Dramalord207" text="{ACTOR1.LINK}と{ACTOR2.LINK}は今、{TEXT1}です。" />
+    <string id="Dramalord208" text="{ACTOR1.LINK}と{ACTOR2.LINK}はもう{TEXT1}ではありません。" />
+    <string id="Dramalord209" text="{ACTOR1.LINK}とあなたは今、{TEXT1}です。" />
+    <string id="Dramalord210" text="{ACTOR1.LINK}とあなたはもう{TEXT1}ではありません。" />
+    <string id="Dramalord211" text="{ACTOR3.LINK}は{ACTOR1.LINK}と{ACTOR2.LINK}の子どもです。" />
+    <string id="Dramalord212" text="{ACTOR1.LINK}と{ACTOR2.LINK}の子どもは誕生時に亡くなりました。" />
+    <string id="Dramalord213" text="あなたが{ACTOR1.LINK}に求婚したのを見たぞ。{ACTOR2.LINK}に知られたくなければ、{TEXT1}{GOLD_ICON}を払え。" />
+    <string id="Dramalord214" text="あなたと{ACTOR1.LINK}の関係、実に微笑ましいな。{TEXT1}{GOLD_ICON}を払えば、{ACTOR2.LINK}には黙っておこう。" />
+    <string id="Dramalord215" text="あなたと{ACTOR1.LINK}の声があまりに大きくて、みんなに聞こえていたぞ。{ACTOR2.LINK}が知ったらどうなるかな？ {TEXT1}{GOLD_ICON}で口をつぐんでやる。" />
+    <string id="Dramalord216" text="金を用意する時間を{TEXT1}日やる。ではな、{ACTOR1.LINK}。" />
+    <string id="Dramalord217" text="{ACTOR1.NAME}があなたを脅迫しています。" />
+    <string id="Dramalord218" text="{ACTOR1.LINK}が、あなたと{ACTOR2.LINK}を一緒にいるところを見ました。あなたが{TEXT1}{GOLD_ICON}を支払わなければ、{ACTOR3.LINK}に話すと脅しています。彼らのもとを訪ね、この件を片付けるか、要求通り支払ってください。" />
+    <string id="Dramalord219" text="あなたは{ACTOR1.LINK}に{TEXT1}{GOLD_ICON}を支払いました。" />
+    <string id="Dramalord220" text="{ACTOR1.LINK}に、あなたを脅すとどうなるか教えてやった。" />
+    <string id="Dramalord221" text="あなたは{ACTOR1.LINK}を永遠に黙らせた。" />
+    <string id="Dramalord222" text="欲望" />
+    <string id="Dramalord223" text="信頼" />
+    <string id="Dramalord224" text="愛情" />
+    <string id="Dramalord225" text="関係なし" />
+    <string id="Dramalord226" text="友人" />
+    <string id="Dramalord227" text="恋人" />
+    <string id="Dramalord228" text="配偶者" />
+    <string id="Dramalord229" text="魅力" />
+    <string id="Dramalord230" text="好意" />
+    <string id="Dramalord231" text="性的指向" />
+    <string id="Dramalord232" text="アセクシャル" />
+    <string id="Dramalord233" text="バイセクシャル" />
+    <string id="Dramalord234" text="ヘテロセクシャル" />
+    <string id="Dramalord235" text="ホモセクシャル" />
+    <string id="Dramalord236" text="嫉妬" />
+    <string id="Dramalord237" text="共感" />
+    <string id="Dramalord238" text="社交性" />
+    <string id="Dramalord239" text="{ACTOR1.LINK}は体格が大きく、がっしりしている。" />
+    <string id="Dramalord240" text="{ACTOR1.LINK}は肩幅が広く、引き締まった体つきをしている。" />
+    <string id="Dramalord241" text="{ACTOR1.LINK}は柔らかくも力強い体をしている。" />
+    <string id="Dramalord242" text="{ACTOR1.LINK}は細くしなやかな体をしている。" />
+    <string id="Dramalord243" text="{ACTOR1.LINK}はスリムな体型をしている。" />
+    <string id="Dramalord244" text="{ACTOR1.LINK}は鍛え上げられた体をしている。" />
+    <string id="Dramalord245" text="兄弟" />
+    <string id="Dramalord246" text="姉妹" />
+    <string id="Dramalord247" text="息子" />
+    <string id="Dramalord248" text="娘" />
+    <string id="Dramalord249" text="夫" />
+    <string id="Dramalord250" text="妻" />
+    <string id="Dramalord251" text="{ACTOR1.LINK}は『特別な奉仕』と引き換えに囚人{ACTOR2.LINK}を解放した……。" />
+    <string id="Dramalord252" text="囚人よ、少し話がある。" />
+    <string id="Dramalord253" text="解放してやってもいい……その代わり、私の部屋で少し“奉仕”してもらおうか。" />
+    <string id="Dramalord254" text="……本気か？まぁ、他に選択肢はないようだな。分かった、従おう。" />
+    <string id="Dramalord255" text="そんな侮辱的な提案をするとは！恥を知れ！" />
+    <string id="Dramalord256" text="{ACTOR1.LINK}はあなたが彼の急ぎの頼みを聞かなかったことに失望している……。" />
+    <string id="Dramalord257" text="{ACTOR1.LINK}があなたを呼んでいます。急がないと間に合わないかもしれません。" />
+    <string id="Dramalord258" text="{ACTOR1.NAME}があなたを呼んでいます。" />
+    <string id="Dramalord259" text="{ACTOR1.LINK}はあなたが頼みを聞いてくれて喜んでいる……。" />
+    <string id="Dramalord260" text="ああ、{ACTOR1.LINK}、やっと来てくれた！君を待ち焦がれていたよ！" />
+    <string id="Dramalord261" text="おや、ようやく来たか。ようやく私と話す気になったのか、{ACTOR1.LINK}？" />
+    <string id="Dramalord262" text="来たぞ。で、そんなに急な用事とは何だ？" />
+    <string id="Dramalord263" text="ああ、{ACTOR1.LINK}、とても重大なことなんだ！服を脱いで、私について来てくれ——君の力が必要なんだ！" />
+    <string id="Dramalord264" text="残念だが、{ACTOR1.LINK}、もう遅い。他の誰かがすでに私の“問題”を解決してくれた。もう用はない。" />
+    <string id="Dramalord265" text="{ACTOR1.LINK}は{ACTOR2.LINK}と結婚した。" />
+    <string id="Dramalord266" text="愛している、{ACTOR1.LINK}。そろそろ次の段階に進みたい。私と結婚してくれないか？" />
+    <string id="Dramalord267" text="私の心は君のものだ、{ACTOR1.LINK}。君以外は考えられない。どうか結婚してほしい。" />
+    <string id="Dramalord268" text="あなたは私の夢そのものだ、{ACTOR1.LINK}。はい、もちろん結婚します！" />
+    <string id="Dramalord269" text="すまない、{ACTOR1.LINK}。今はその気になれない。" />
+    <string id="Dramalord270" text="{ACTOR1.LINK}が{TEXT1}を去った。" />
+    <string id="Dramalord271" text="{ACTOR1.LINK}が{TEXT1}に加わった。" />
+    <string id="Dramalord272" text="{ACTOR1.LINK}、少し話せるか？" />
+    <string id="Dramalord273" text="別の話をしよう、{ACTOR1.LINK}。" />
+    <string id="Dramalord274" text="もちろんだ、{ACTOR1.LINK}。何の話をしたい？" />
+    <string id="Dramalord275" text="すまない、{ACTOR1.LINK}。今は時間がない。" />
+    <string id="Dramalord276" text="少し語り合わないか？（親しい会話）" />
+    <string id="Dramalord277" text="本当に美しいね、{ACTOR1.LINK}。もっとも、君自身が一番分かっているだろうが……（軽い口説き）" />
+    <string id="Dramalord278" text="正直に言うと、君に惹かれているんだ、{ACTOR1.LINK}。（恋愛）" />
+    <string id="Dramalord279" text="君とだけ一緒にいたい。君しか見えない。（交際）" />
+    <string id="Dramalord280" text="君を抱きたい、{ACTOR1.LINK}。この気持ち、受け入れてくれるか？（親密）" />
+    <string id="Dramalord281" text="愛している、{ACTOR1.LINK}。君なしの人生など考えられない。私と結婚してくれ。（プロポーズ）" />
+    <string id="Dramalord282" text="ここは街だし、{ACTOR1.LINK}。神官を見つけて結婚しよう！（結婚）" />
+    <string id="Dramalord283" text="うまくいかないな、{ACTOR1.LINK}。これ以上悪化する前に終わらせよう。（別れ）" />
+    <string id="Dramalord284" text="君の言うとおりだ、{ACTOR1.LINK}。" />
+    <string id="Dramalord285" text="またか？少し休ませてくれ、{ACTOR1.LINK}。後で話そう。" />
+    <string id="Dramalord286" text="もちろん！話をするのはいつでも歓迎だ。" />
+    <string id="Dramalord287" text="ふふっ、大胆だな、{ACTOR1.LINK}。君の舌が君の知恵ほど鋭いか、試してみよう。" />
+    <string id="Dramalord288" text="知っているかい、{ACTOR1.LINK}……君に初めて会った時から、この瞬間を夢見ていた。" />
+    <string id="Dramalord289" text="もちろん、{ACTOR1.LINK}。二人きりで過ごそう。" />
+    <string id="Dramalord290" text="運がいいな、{ACTOR1.LINK}。{ACTOR2.LINK}は出かけていて、しばらく戻らない。来てくれるか？" />
+    <string id="Dramalord291" text="えっと……その……" />
+    <string id="Dramalord292" text="すまない、{ACTOR1.LINK}。配偶者が近くにいる。また今度にしよう。" />
+    <string id="Dramalord293" text="服を脱げ、{ACTOR1.LINK}。別の戦いを教えてやる——勝者は二人だ。" />
+    <string id="Dramalord294" text="愛しい人よ、{ACTOR2.LINK}が私たちの間に立ちはだかっている。（離婚）" />
+    <string id="Dramalord295" text="{ACTOR1.LINK}、聞かせてくれ——あなたが理想とする伴侶とは？（情報）" />
+    <string id="Dramalord296" text="あなたは私の夢そのものだ、{ACTOR1.LINK}。はい、もちろん結婚します！" />
+    <string id="Dramalord297" text="もし本気で私を望むなら、{ACTOR1.LINK}の許可を得る必要がある。私の心はすでにあなたのものだが、その承認があれば未来は確かになる。" />
+    <string id="Dramalord298" text="すまない、{ACTOR1.LINK}。まだその準備ができていない。" />
+    <string id="Dramalord299" text="{ACTOR1.NAME}に結婚を申し込む。" />
+    <string id="Dramalord300" text="{ACTOR1.LINK}は、結婚には{ACTOR2.LINK}の許可が必要だと言った。" />
+    <string id="Dramalord301" text="{ACTOR1.LINK}、あなたの祝福をいただきたく、{ACTOR2.LINK}との結婚をお許しください。" />
+    <string id="Dramalord302" text="あなたは誠実で高潔な人です。そして私は、{ACTOR1.LINK}の瞳にあなたへの深い愛を見ました。よって、あなたに祝福を授けます。どうか、あなたたちの絆が永遠に続きますように。" />
+    <string id="Dramalord303" text="お前が？{ACTOR1.LINK}と結婚だと？何の地位もない者が？{ACTOR1.LINK}は名誉ある者と結ばれるべきで、愛だけでは家は築けぬぞ。" />
+    <string id="Dramalord304" text="{ACTOR1.LINK}はあなたに{ACTOR2.LINK}との結婚を許しました。村へ行き、正式に婚約を交わしましょう。" />
+    <string id="Dramalord305" text="あなたは{ACTOR1.LINK}の祝福を得られず、{ACTOR2.LINK}との結婚も間に合いませんでした。" />
+    <string id="Dramalord306" text="ああ、{ACTOR1.LINK}……心が張り裂けそう。でも、あなたの決断を受け入れるしかありませんね。" />
+    <string id="Dramalord307" text="あなたは{ACTOR1.LINK}の肉体的な好みを知りました。" />
+    <string id="Dramalord308" text="ごめんなさい、{ACTOR1.LINK}。でも、そこまで信頼しているわけではないのです。" />
+    <string id="Dramalord309" text="もちろん、{ACTOR1.LINK}。もし本当に知りたいのなら、教えてあげましょう……。" />
+    <string id="Dramalord310" text="私は主に異性に惹かれます。昔から“異性は引き合う”と言いますからね。" />
+    <string id="Dramalord311" text="私は同性の方に惹かれる傾向があります。“似た者同士が惹かれ合う”とも言うでしょう？" />
+    <string id="Dramalord312" text="私は男性にも女性にも魅力を感じます。どちらにも美しさがあります。" />
+    <string id="Dramalord313" text="正直なところ、どちらの性にも特別な関心はありません。" />
+    <string id="Dramalord314" text="私は細身の体型に魅力を感じます。しなやかで優雅ですから。" />
+    <string id="Dramalord315" text="私は均整のとれた体型が好きです。細すぎず、太すぎず、ちょうどいい塩梅ですね。" />
+    <string id="Dramalord316" text="私はふくよかな体型が好きです。温もりがあって、包み込むような安心感があります。" />
+    <string id="Dramalord317" text="私はどちらかといえば細身の方が好みです。時に“少ない方が美しい”こともありますから。" />
+    <string id="Dramalord318" text="私は引き締まった体が好きです。鍛え上げられていて、健康的で……ほどよいバランスが理想です。" />
+    <string id="Dramalord319" text="私は筋肉質で力強い体型に惹かれます。たくましいほどに魅力的です。" />
+    <string id="Dramalord320" text="私は自分より{TEXT1}な人に惹かれます。理想の年齢はおおよそ{TEXT2}歳くらいです。" />
+    <string id="Dramalord321" text="さて、あなたはどうでしょうね、{ACTOR1.LINK}。100点中で言えば……{TEXT1}点くらいかな。" />
+    <string id="Dramalord322" text="年下" />
+    <string id="Dramalord323" text="年上" />
+    <string id="Dramalord324" text="同年代" />
+    <string id="Dramalord325" text="あなたは{ACTOR1.LINK}を説得することに成功しました。" />
+    <string id="Dramalord326" text="あなたは{ACTOR1.LINK}を説得できませんでした。" />
+    <string id="Dramalord327" text="わからない……あなたを想っているけれど、それだけで十分なのかしら？" />
+    <string id="Dramalord328" text="試してみなければ、何も分からないでしょう？" />
+    <string id="Dramalord329" text="考えすぎよ。心の声を聞いて。" />
+    <string id="Dramalord330" text="私たちなら、きっと長く続く絆を築けると信じています。" />
+    <string id="Dramalord331" text="あなたが望むなら……光栄です。" />
+    <string id="Dramalord332" text="すべてが急すぎて……{PLAYER.NAME}、あなたを愛しています。でも、本当に覚悟はできているの？" />
+    <string id="Dramalord333" text="愛は旅のようなもの。行く先を、この目で確かめたいのです。" />
+    <string id="Dramalord334" text="間違っていない気がします。あとは前へ進むだけです。" />
+    <string id="Dramalord335" text="やっと……お互いのすべてを分かち合える時が来ましたね。" />
+    <string id="Dramalord336" text="そう、これが私たちに残された唯一の名誉ある道です。" />
+    <string id="Dramalord337" text="魅力的な提案ね……でも、もし誰かに見つかったら？" />
+    <string id="Dramalord338" text="少しの危険がなければ、情熱なんて生まれないわ。" />
+    <string id="Dramalord339" text="ならば、何が起ころうとも共に受け止めましょう。" />
+    <string id="Dramalord340" text="想像してみて……私たちが分かち合える喜びを。" />
+    <string id="Dramalord341" text="では、お互いを自由にして、元の関係に戻りましょう。" />
+    <string id="Dramalord342" text="あなたは{ACTOR1.LINK}と肉体関係を持ちました。" />
+    <string id="Dramalord343" text="私の恋人" />
+    <string id="Dramalord344" text="私の愛しい人" />
+    <string id="Dramalord345" text="私の配偶者" />
+    <string id="Dramalord346" text="私の友" />
+    <string id="Dramalord347" text="私の知り合い" />
+    <string id="Dramalord348" text="{ACTOR1.LINK}は子供の{ACTOR2.LINK}を孤児院へ預けました。" />
+    <string id="Dramalord349" text="{ACTOR1.LINK}は{ACTOR2.LINK}の浮気を知りました。" />
+    <string id="Dramalord350" text="ふむ……つまりあなたと{ACTOR1.LINK}はベッドで楽しんでいたというわけね。{ACTOR1.LINK}が{TEXT1}だと知っているのかしら？" />
+    <string id="Dramalord351" text="なるほど、{ACTOR1.LINK}とそういう関係なのね。でも、あなたは{TEXT1}でしょう？忘れたの？" />
+    <string id="Dramalord352" text="あなたは{ACTOR1.LINK}を出産しました。本当の父親は{ACTOR2.LINK}であり、私ではない。それでもあなたは{TEXT1}なのか？" />
+    <string id="Dramalord353" text="{ACTOR2.LINK}が{ACTOR1.LINK}を出産したようですが……父親はあなたとか。あなた、{TEXT1}ではなかったの？" />
+    <string id="Dramalord354" text="あなたが{ACTOR1.LINK}と結婚したと聞きました。けれど、彼らが本当は{TEXT1}だということは知らないの？" />
+    <string id="Dramalord355" text="あなた、私に何も言わずに{ACTOR1.LINK}と結婚したの？どういうつもり？あなたは{TEXT1}よ！" />
+    <string id="Dramalord356" text="聞きました？{ACTOR1.LINK}と{ACTOR2.LINK}が結婚したそうです。でも、誓いの言葉で噂は消えるのでしょうかね。" />
+    <string id="Dramalord357" text="城中で噂が広まっています——{ACTOR1.LINK}と{ACTOR2.LINK}が秘密裏に会っているとか。隠したいなら、視線に気をつけるべきね。" />
+    <string id="Dramalord358" text="城全体が大騒ぎです！{ACTOR1.LINK}と{ACTOR2.LINK}が同じベッドで見つかったとか。夜明けになっても、その噂は消えません。" />
+    <string id="Dramalord359" text="人々が囁いています——{ACTOR1.LINK}と{ACTOR2.LINK}の間に子が生まれたそうですが、その時期が……妙に都合がいいですね。" />
+    <string id="Dramalord360" text="{ACTOR1.LINK}は{ACTOR2.LINK}とともに、{ACTOR3.LINK}と{ACTOR4.LINK}について噂話をしました。" />
+    <string id="Dramalord361" text="家族を増やしたいの。孤児を養子に迎えたいわ。" />
+    <string id="Dramalord362" text="自分の一族の子供を手放したいのです。" />
+    <string id="Dramalord363" text="素晴らしいですね、{ACTOR1.LINK}！現在、孤児院には{TEXT1}人の男の子と{TEXT2}人の女の子がいます。" />
+    <string id="Dramalord364" text="申し訳ありません、{ACTOR1.LINK}。現在、孤児院には子供がいません。" />
+    <string id="Dramalord365" text="男の子を養子に取りたいです。" />
+    <string id="Dramalord366" text="女の子を養子に取りたいです。" />
+    <string id="Dramalord367" text="どの子を養子に迎えたいですか？" />
+    <string id="Dramalord368" text="{ACTOR1.LINK}、{TEXT1}歳。" />
+    <string id="Dramalord369" text="別の子を考えています。" />
+    <string id="Dramalord370" text="よろしいですか？本当に{ACTOR1.LINK}を養子に迎えたいのですか？" />
+    <string id="Dramalord371" text="おめでとうございます！{ACTOR1.LINK}はきっと幸せに育つでしょう。" />
+    <string id="Dramalord372" text="残念ですね。{ACTOR1.LINK}はきっとがっかりするでしょう。" />
+    <string id="Dramalord373" text="もちろんです、{ACTOR1.LINK}。手配いたします。" />
+    <string id="Dramalord374" text="{ACTOR1.LINK}、あなたの一族には子供がいないようですね。" />
+    <string id="Dramalord375" text="私たちが世話すべき不幸な子供はどの子ですか？" />
+    <string id="Dramalord376" text="わかりました。本当に{ACTOR1.LINK}を手放すつもりですか？" />
+    <string id="Dramalord377" text="では、決まりですね。私たちが{ACTOR1.LINK}の面倒を見て、新しい家を探します。さあ、別れを告げてください。" />
+    <string id="Dramalord378" text="承知しました、{ACTOR1.LINK}。{ACTOR2.LINK}はあなたの一族に残ります。" />
+    <string id="Dramalord379" text="{ACTOR1.LINK}は孤児{ACTOR2.LINK}を養子に迎えました。" />
+    <string id="Dramalord380" text="{ACTOR1.LINK}、あなたの将来について話をしましょう。" />
+    <string id="Dramalord381" text="どうせ、私に選択肢なんてないんでしょう、{ACTOR1.LINK}？" />
+    <string id="Dramalord382" text="あなたのような人と話す気はありません。立ち去ってください！" />
+    <string id="Dramalord383" text="あなたを解放してもいいかもしれません……ただし、私の部屋で“少し奉仕”してもらうならね。" />
+    <string id="Dramalord384" text="もう終わりにしましょう。あなたの存在は重荷です。" />
+    <string id="Dramalord385" text="そうですか……では、あなたの条件を受け入れます。" />
+    <string id="Dramalord386" text="私の名誉をそんな提案で汚すなんて！恥を知りなさい！" />
+    <string id="Dramalord387" text="ならば好きにしなさい、この恥知らずめ！" />
+    <string id="Dramalord388" text="{ACTOR1.LINK}はがっしりとした体格をしている。" />
+    <string id="Dramalord389" text="{ACTOR1.LINK}は大柄な体格をしている。" />
+    <string id="Dramalord390" text="同意ですね、{ACTOR1.LINK}。では、我らの盟約を結びましょう。" />
+    <string id="Dramalord391" text="ゴシップ記録" />
+    <string id="Dramalord392" text="ゴシップが交わされたときにログに表示する" />
+    <string id="Dramalord393" text="結婚の申し出" />
+    <string id="Dramalord394" text="{ACTOR1.LINK} と {ACTOR2.LINK} は結婚を望んでいます。クランの長として、あなたがこの結びつきを承認しなければなりません。どう答えますか？" />
+    <string id="Dramalord395" text="結婚後、{ACTOR1.LINK} をあなたのクランに迎え入れますか？" />
+    <string id="Dramalord396" text="また話したくなったら、いつでも私のところに来ていいですよ、{ACTOR1.LINK}。" />
+    <string id="Dramalord397" text="{ACTOR1.LINK} はもうあなたに近づかないでしょう。" />
+    <string id="Dramalord398" text="{ACTOR1.LINK} は再びあなたに近づくでしょう。" />
+    <string id="Dramalord399" text="あっ、こんにちは {ACTOR1.LINK}。まさか会うとは思わなかった..." />
+    <string id="Dramalord400" text="浮気発覚！" />
+    <string id="Dramalord401" text="{ACTOR1.LINK}が{ACTOR2.LINK}と浮気していました！対決しますか？" />
+    <string id="Dramalord402" text="{ACTOR1.LINK}が{ACTOR2.LINK}と浮気していました。彼らを問い詰めましょう。" />
+    <string id="Dramalord403" text="あなたは{ACTOR1.LINK}を問い詰めた。" />
+    <string id="Dramalord404" text="あなたは{ACTOR1.LINK}を時間内に問い詰められなかった。" />
+    <string id="Dramalord405" text="でも、{ACTOR1.LINK}...これは誤解なんだ！私...私は..." />
+    <string id="Dramalord406" text="それで、君と{ACTOR1.LINK}か。気づかれないと思ったのか？" />
+    <string id="Dramalord407" text="{ACTOR1.LINK}とのこの『関係』を終わらせ、二度と会うな！" />
+    <string id="Dramalord408" text="最近、何か興味深い噂を聞いたか？" />
+    <string id="Dramalord409" text="今のところ特に思い当たらない。" />
+    <string id="Dramalord410" text="他に何か？" />
+    <string id="Dramalord411" text="君の言う通りだ、{ACTOR1.LINK}。もう{ACTOR2.LINK}に対して気持ちはない。彼らに話して、もう私たちを悩ませないようにしてくれるか？" />
+    <string id="Dramalord412" text="すまない、{ACTOR1.LINK}。だが、まだ{ACTOR2.LINK}への気持ちが残っている。今のところ、この結婚を続けるつもりだ。" />
+    <string id="Dramalord413" text="HotButterアニメーションを使用" />
+    <string id="Dramalord414" text="親密なシーンでHotButterアニメーションを使用します（Dramalordアニメーションは無効化されます）。" />
+    <string id="Dramalord415" text="Dramalord動画を表示" />
+    <string id="Dramalord416" text="特定のイベントでDramalord動画を表示します。オフの場合はテキスト通知のみ表示されます。" />
+    <string id="Dramalord417" text="自分の私生児を引き取りますか？" />
+    <string id="Dramalord418" text="{ACTOR1.LINK}があなたの子を出産しました。あなたたちは結婚していないため、{ACTOR1.LINK}は子を孤児院に預けることになります。代わりにあなたが世話をしますか？" />
+    <string id="Dramalord419" text="{ACTOR1.LINK}と{ACTOR2.LINK}は新婚です。二人はどのクランで新しい生活を始めるべきでしょうか？" />
+    <string id="Dramalord420" text="{ACTOR1.LINK}と{ACTOR3.LINK}は孤児{ACTOR2.LINK}を養子に迎えました。" />
+    <string id="Dramalord421" text="Dramalord画像を表示" />
+    <string id="Dramalord422" text="特定のイベントでDramalord画像を表示します。オフの場合はテキスト通知のみ表示されます。" />
+    <string id="Dramalord423" text="Dramalord孤児院を有効化" />
+    <string id="Dramalord424" text="有効にすると、NPCは私生児を孤児院に送ります。無効の場合、すべての子供を育てます。" />
+    <string id="Dramalord425" text="{ACTOR1.LINK}は{ACTOR2.LINK}との決闘に勝利した。" />
+    <string id="Dramalord426" text="{ACTOR1.LINK}は{ACTOR2.LINK}との決闘に敗北した。" />
+    <string id="Dramalord427" text="武器を抜け。これで決着をつけよう。" />
+    <string id="Dramalord428" text="{ACTOR1.LINK}、{ACTOR2.LINK}について話がある。" />
+    <string id="Dramalord429" text="個人的な話があるなら、町で私を訪ねてくれ。" />
+    <string id="Dramalord430" text="よかろう。何を言いたい？" />
+    <string id="Dramalord431" text="この茶番のような結婚を終わらせ、{ACTOR1.LINK}を解放してほしい。" />
+    <string id="Dramalord432" text="{ACTOR1.LINK}には特に執着していない。金銭的損失を補償してくれるなら、この結婚を解消しよう。" />
+    <string id="Dramalord433" text="{ACTOR1.LINK}への私の愛を断ち切りたいなら、まず私の心臓を刺すことだ。幸運を祈る。" />
+    <string id="Dramalord434" text="同意する。補償として{TEXT1}{GOLD_ICON}を受け取れ。" />
+    <string id="Dramalord435" text="{ACTOR2.NAME}を説得し、{ACTOR1.NAME}と離婚させる。" />
+    <string id="Dramalord436" text="{ACTOR1.LINK}は{ACTOR2.LINK}との離婚を手伝ってほしいと頼んできた。" />
+    <string id="Dramalord437" text="茶番？何を…何を言っているんだ、{ACTOR1.LINK}？" />
+    <string id="Dramalord438" text="いや…少し考え事をしていただけだ、気にしないでくれ。" />
+    <string id="Dramalord439" text="別々の道を歩む時が来た。我々の絆は断たれた。" />
+    <string id="Dramalord440" text="努力はしただろう？だが、もう君をほとんど知らない気がする。" />
+    <string id="Dramalord441" text="王国の務めが私を忙しくしている。安定した収入のためだ。" />
+    <string id="Dramalord442" text="残された時間で、愛の炎を再び燃え上がらせよう。" />
+    <string id="Dramalord443" text="君を危険にさらすのか？私は君を守っている。それは分かっているはずだ。" />
+    <string id="Dramalord444" text="私は誰よりも君を知っている。君に何が必要かも…" />
+    <string id="Dramalord445" text="君の言う通りだ、{ACTOR1.LINK}。もう一度、愛に賭けてみよう。" />
+    <string id="Dramalord446" text="この問題を解決しに来た、{ACTOR1.LINK}。" />
+    <string id="Dramalord447" text="そうか。では、この件を消し去るための金は持ってきたのか？" />
+    <string id="Dramalord448" text="ああ。ここに{TEXT1}{GOLD_ICON}ある。さあ失せろ。（支払う）" />
+    <string id="Dramalord449" text="いや。代わりに鋼を持ってきた。（攻撃）" />
+    <string id="Dramalord450" text="英雄を探す" />
+    <string id="Dramalord451" text="{ACTOR1.LINK}は{ACTOR2.LINK}と{ACTOR3.LINK}と三人関係を持ちました。" />
+    <string id="Dramalord452" text="スリーサムの機会。" />
+    <string id="Dramalord453" text="{ACTOR1.LINK}と{ACTOR2.LINK}は、寝室で一緒にどうかとあなたを誘っています。" />
+    <string id="Dramalord454" text="参加する" />
+    <string id="Dramalord455" text="問い詰める" />
+    <string id="Dramalord456" text="あなたは今、{ACTOR1.LINK}にとってより魅力的になった。（{TEXT1}）" />
+    <string id="Dramalord457" text="あなたは今、{ACTOR1.LINK}にとって魅力が下がった。（{TEXT1}）" />
+    <string id="Dramalord458" text="{ACTOR1.LINK}はあなたへの好意が増した。（{TEXT1}）" />
+    <string id="Dramalord459" text="{ACTOR1.LINK}はあなたへの好意が減った。（{TEXT1}）" />
+    <string id="Dramalord460" text="{ACTOR1.LINK}、愛しい人。少しうずくところがあって、あなたの特別な手助けが必要なの。お願いしてもいい？" />
+    <string id="Dramalord461" text="掻いてほしいなら、まずはその美味しそうな体を脱いでもらわないとね。" />
+    <string id="Dramalord462" text="残念だけど、今日は自分で掻くしかないわね。" />
+    <string id="Dramalord463" text="{ACTOR1.LINK}はあなたの無関心を深く受け止め、他の誰かを思い浮かべながら一人で済ませた。（愛情 {TEXT1}）" />
+    <string id="Dramalord464" text="{ACTOR1.LINK}はあなたの無関心にショックを受け、もう愛されていないのではないかと考えた。（愛情 {TEXT1}）" />
+    <string id="Dramalord465" text="厳格なクラン階級の分離" />
+    <string id="Dramalord466" text="ほとんどの領主や貴族は、社会的地位の低い領主や貴族に近づきません。" />
+    <string id="Dramalord467" text="捕虜イベントを有効化" />
+    <string id="Dramalord468" text="英雄が囚われの身を解くために親密な提案を受け入れることを許可する" />
+    <string id="Dramalord469" text="{ACTOR1.LINK}はあなたに隠れて{ACTOR2.LINK}とデートしていました。問い詰めますか？" />
+    <string id="Dramalord470" text="{ACTOR1.LINK}はあなたに隠れて{ACTOR2.LINK}と関係を持っていました。問い詰めますか？" />
+    <string id="Dramalord471" text="{ACTOR1.LINK}はあなたに隠れて{ACTOR2.LINK}と結婚しました。問い詰めますか？" />
+    <string id="Dramalord472" text="{ACTOR1.LINK}は{ACTOR2.LINK}の子を出産しました。問い詰めますか？" />
+    <string id="Dramalord473" text="笑わせないでくれ。運試しをしている姿は愛らしいが、農民を相手にした方が成功するだろう。" />
+    <string id="Dramalord474" text="お褒めの言葉はありがたいが、我が家の社会的地位は神聖なものだ。ゆえに辞退させてもらう。" />
+    <string id="Dramalord475" text="最大の子ども数" />
+    <string id="Dramalord476" text="女性英雄が同時に持てる最大の子ども数（Dramalordのみ）" />
+    <string id="Dramalord477" text="{ACTOR1.LINK}も誘ってみない？人は多い方が楽しいでしょう、ねえ、愛しい人？" />
+    <string id="Dramalord478" text="HotScenesアニメーションを使用" />
+    <string id="Dramalord479" text="親密なシーンでHotScenesアニメーションを使用（Dramalordのアニメーションは無効になります）。" />
   </strings>
 </base>

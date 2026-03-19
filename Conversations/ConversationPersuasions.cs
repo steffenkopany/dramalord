@@ -1,4 +1,5 @@
 ﻿using Dramalord.Extensions;
+using Dramalord.Notifications;
 using Helpers;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
@@ -19,6 +20,7 @@ namespace Dramalord.Conversations
         private static TextObject Date = new TextObject("date");
         private static TextObject Engage = new TextObject("engage");
         private static TextObject FWB = new TextObject("fwb");
+        private static TextObject Break = new TextObject("break");
 
         internal static void AddDialogs(CampaignGameStarter starter)
         {
@@ -30,9 +32,14 @@ namespace Dramalord.Conversations
             starter.AddPlayerLine("player_persuasion_argument_4", "player_persuasion_argument", "npc_persuasion_reaction", "{=!}{PERSUADE_ATTEMPT_4}", ConditionPersuasionLine4, ConsequencePersuasionLine4, 100, persuasionOptionDelegate: SetupOption4);
             starter.AddPlayerLine("player_persuasion_abort", "player_persuasion_argument", "npc_persuasion_reaction_abort", "{=Dramalord255}Nevermind.", null, ConsequencePersuasionAbort);
 
-            starter.AddDialogLine("npc_persuasion_reaction_date", "npc_persuasion_reaction", "npc_interaction_reply_date", "{=0UPds9x3}Very well, then...", ConditionPeruasionDate, ConsequencePeruasionDate);
-            starter.AddDialogLine("npc_persuasion_reaction_engage", "npc_persuasion_reaction", "npc_interaction_reply_engage", "{=0UPds9x3}Very well, then...", ConditionPeruasionEngage, ConsequencePeruasionEngage);
-            starter.AddDialogLine("npc_persuasion_reaction_sex", "npc_persuasion_reaction", "npc_interaction_reply_sex", "{=0UPds9x3}Very well, then...", ConditionPeruasionFWB, ConsequencePeruasionFWB);
+            starter.AddDialogLine("npc_persuasion_reaction_date", "npc_persuasion_reaction", "npc_interaction_reply_date", "{=0UPds9x3}Very well, then...", ConditionPeruasionDateSuccess, ConsequencePeruasionSuccess);
+            starter.AddDialogLine("npc_persuasion_reaction_date1", "npc_persuasion_reaction", "player_interaction_selection", "{=0UPds9x3}Very well, then...", ConditionPeruasionDateFail, ConsequencePeruasionFail);
+            starter.AddDialogLine("npc_persuasion_reaction_engage", "npc_persuasion_reaction", "npc_interaction_reply_engage", "{=0UPds9x3}Very well, then...", ConditionPeruasionEngageSuccess, ConsequencePeruasionSuccess);
+            starter.AddDialogLine("npc_persuasion_reaction_engage", "npc_persuasion_reaction", "player_interaction_selection", "{=0UPds9x3}Very well, then...", ConditionPeruasionEngageFail, ConsequencePeruasionFail);
+            starter.AddDialogLine("npc_persuasion_reaction_sex", "npc_persuasion_reaction", "npc_interaction_reply_sex", "{=0UPds9x3}Very well, then...", ConditionPeruasionFWBSuccess, ConsequencePeruasionSuccess);
+            starter.AddDialogLine("npc_persuasion_reaction_sex", "npc_persuasion_reaction", "player_interaction_selection", "{=0UPds9x3}Very well, then...", ConditionPeruasionFWBFail, ConsequencePeruasionFail);
+            starter.AddDialogLine("npc_persuasion_reaction_break", "npc_persuasion_reaction", "resolve_breakup", "{=0UPds9x3}Very well, then...", ConditionPeruasionBreakupSuccess, ConsequencePeruasionSuccess);
+            starter.AddDialogLine("npc_persuasion_reaction_break", "npc_persuasion_reaction", "resolve_breakup", "{=0UPds9x3}Very well, then...", ConditionPeruasionBreakupFail, ConsequencePeruasionFail);
             starter.AddDialogLine("npc_persuasion_reaction_abort", "npc_persuasion_reaction_abort", "player_interaction_selection", "{=0UPds9x3}Very well, then...", null, null);
         }
 
@@ -67,149 +74,95 @@ namespace Dramalord.Conversations
         internal static PersuasionOptionArgs SetupOption3() => CurrentTask.Options.ElementAt(2);
         internal static PersuasionOptionArgs SetupOption4() => CurrentTask.Options.ElementAt(3);
 
-        private static bool ConditionPeruasionDate() => CurrentTask.TryLaterLine == Date;
-        private static bool ConditionPeruasionEngage() => CurrentTask.TryLaterLine == Engage;
-        private static bool ConditionPeruasionFWB() => CurrentTask.TryLaterLine == FWB;
+        private static bool ConditionPeruasionDateSuccess() => CurrentTask.TryLaterLine == Date && ConversationManager.GetPersuasionProgressSatisfied();
+        private static bool ConditionPeruasionDateFail() => CurrentTask.TryLaterLine == Date && !ConversationManager.GetPersuasionProgressSatisfied();
+        private static bool ConditionPeruasionEngageSuccess() => CurrentTask.TryLaterLine == Engage && ConversationManager.GetPersuasionProgressSatisfied();
+        private static bool ConditionPeruasionEngageFail() => CurrentTask.TryLaterLine == Engage && !ConversationManager.GetPersuasionProgressSatisfied();
+        private static bool ConditionPeruasionFWBSuccess() => CurrentTask.TryLaterLine == FWB && ConversationManager.GetPersuasionProgressSatisfied();
+        private static bool ConditionPeruasionFWBFail() => CurrentTask.TryLaterLine == FWB && !ConversationManager.GetPersuasionProgressSatisfied();
+        private static bool ConditionPeruasionBreakupSuccess() => CurrentTask.TryLaterLine == Break && ConversationManager.GetPersuasionProgressSatisfied();
+        private static bool ConditionPeruasionBreakupFail() => CurrentTask.TryLaterLine == Break && !ConversationManager.GetPersuasionProgressSatisfied();
 
         private static void ConsequencePersuasionAbort()
         {
             ConversationManager.EndPersuasion();
         }
 
-        private static void ConsequencePeruasionDate()
+        private static void ConsequencePeruasionSuccess()
         {
-            if (ConversationManager.GetPersuasionProgressSatisfied())
-            {
-                TextObject banner = new TextObject("{=Dramalord439}You successfully convinced {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
-                StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int loveGain = DramalordMCM.Instance.MinDatingLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love;
-                MBTextManager.SetTextVariable("LOVE", ConversationTools.FormatNumber(loveGain));
-                MBTextManager.SetTextVariable("TRUST", ConversationTools.FormatNumber(0));
-                MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
-                Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love = DramalordMCM.Instance.MinDatingLove;
-            }
-            else
-            {
-                TextObject banner = new TextObject("{=Dramalord440}You failed to convince {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
-                StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int loveGain = Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love * -1;
-                MBTextManager.SetTextVariable("LOVE", ConversationTools.FormatNumber(loveGain));
-                MBTextManager.SetTextVariable("TRUST", ConversationTools.FormatNumber(0));
-                MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
-                Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love = 0;
-            }
+            Success = true;
+            DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_INFO_PERSIUASION_SUCCESS, true);  
             ConversationManager.EndPersuasion();
         }
 
-        private static void ConsequencePeruasionEngage()
+        private static void ConsequencePeruasionFail()
         {
-            if (ConversationManager.GetPersuasionProgressSatisfied())
-            {
-                TextObject banner = new TextObject("{=Dramalord439}You successfully convinced {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
-                StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int loveGain = DramalordMCM.Instance.MinMarriageLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love;
-                MBTextManager.SetTextVariable("LOVE", ConversationTools.FormatNumber(loveGain));
-                MBTextManager.SetTextVariable("TRUST", ConversationTools.FormatNumber(0));
-                MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
-                Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love = DramalordMCM.Instance.MinMarriageLove;
-            }
-            else
-            {
-                TextObject banner = new TextObject("{=Dramalord440}You failed to convince {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
-                StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int loveGain = 24 - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love;
-                MBTextManager.SetTextVariable("LOVE", ConversationTools.FormatNumber(loveGain));
-                MBTextManager.SetTextVariable("TRUST", ConversationTools.FormatNumber(0));
-                MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
-                Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love = 24;
-            }
-            ConversationManager.EndPersuasion();
-        }
-
-        private static void ConsequencePeruasionFWB()
-        {
-            if (ConversationManager.GetPersuasionProgressSatisfied())
-            {
-                TextObject banner = new TextObject("{=Dramalord439}You successfully convinced {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
-                StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int trustGain = 75 - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero);
-                MBTextManager.SetTextVariable("LOVE", ConversationTools.FormatNumber(0));
-                MBTextManager.SetTextVariable("TRUST", ConversationTools.FormatNumber(trustGain));
-                MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
-                Hero.OneToOneConversationHero.GetDesires().Horny = 75;
-                Hero.OneToOneConversationHero.SetTrust(Hero.MainHero, 75);
-            }
-            else
-            {
-                TextObject banner = new TextObject("{=Dramalord440}You failed to convince {HERO.LINK}. (Love {LOVE}, Trust {TRUST})");
-                StringHelpers.SetCharacterProperties("HERO", Hero.OneToOneConversationHero.CharacterObject, banner);
-                int trustGain = 24 - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero);
-                MBTextManager.SetTextVariable("LOVE", ConversationTools.FormatNumber(0));
-                MBTextManager.SetTextVariable("TRUST", ConversationTools.FormatNumber(trustGain));
-                MBInformationManager.AddQuickInformation(banner, 0, Hero.OneToOneConversationHero.CharacterObject, "event:/ui/notification/relation");
-                Hero.OneToOneConversationHero.GetDesires().Horny = 24;
-                Hero.OneToOneConversationHero.SetTrust(Hero.MainHero, 24);
-            }
+            DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_INFO_PERSIUASION_FAIL, true);
             ConversationManager.EndPersuasion();
         }
 
         internal static void CreatePersuasionTaskForDate()
         {
+            Success = false;
             PersuasionTask persuasionTask = new PersuasionTask(3);
-            persuasionTask.SpokenLine = new TextObject("{=Dramalord423}I feel uncertain about this. I do care for you, but is it enough?");
+            persuasionTask.SpokenLine = new TextObject(DramalordTexts.PERSUASION_DATE_Q);
             persuasionTask.TryLaterLine = Date;
             int loveDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinDatingLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)loveDiff;
 
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord424}If we don't try we never will find out if this could work."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Calculating, TraitEffect.Negative, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord425}You think too much. Just let it happen."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Steward, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord426}I am convinced we can give each other much love."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Honor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord427}I will feel honored if you would consider it."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_DATE_1), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Calculating, TraitEffect.Negative, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_DATE_2), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Steward, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_DATE_3), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Honor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_DATE_4), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             CurrentTask = persuasionTask;
         }
 
         internal static void CreatePersuasionTaskForEngage()
         {
+            Success = false;
             PersuasionTask persuasionTask = new PersuasionTask(3);
-            persuasionTask.SpokenLine = new TextObject("{=Dramalord428}This is all so overwhelming... I love you, {PLAYER.NAME}, but are we truly ready?");
+            persuasionTask.SpokenLine = new TextObject(DramalordTexts.PERSUASION_MARRIAGE_Q);
             persuasionTask.TryLaterLine = Engage;
             int loveDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinMarriageLove - Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)loveDiff;
 
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord429}Love is an adventure and this will be our next challenge!"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Steward, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord430}If you think about it, this is logically the next step."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord431}We finally could share everything with each other."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Tactics, DefaultTraits.Honor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord432}It's a honorful thing to do in our situation."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_MARRIAGE_1), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Steward, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_MARRIAGE_2), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_MARRIAGE_3), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Tactics, DefaultTraits.Honor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_MARRIAGE_4), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             CurrentTask = persuasionTask;
         }
 
         internal static void CreatePersuasionTaskForFWB()
         {
+            Success = false;
             PersuasionTask persuasionTask = new PersuasionTask(3);
-            persuasionTask.SpokenLine = new TextObject("{=Dramalord433}This is quite the scandalous suggestion... What if feelings become entangled??");
+            persuasionTask.SpokenLine = new TextObject(DramalordTexts.PERSUASION_SEX_Q);
             persuasionTask.TryLaterLine = FWB;
-            int trustDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinTrustFWB - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero)) * -1) / 10, -3, 3);
+            int trustDiff = MBMath.ClampInt(((100 - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero)) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)trustDiff;
 
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Roguery, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord434}What is a steamy adventure without risks anyway?"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord435}Then we re-evaluate the situation and draw our conclusions."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord436}Think about all the pleasure we could give each other."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.OneHanded, DefaultTraits.Mercy, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord437}Then we release each other and go back to manual work."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Roguery, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_SEX_1), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_SEX_2), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_SEX_3), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.OneHanded, DefaultTraits.Mercy, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_SEX_4), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             CurrentTask = persuasionTask;
         }
 
-        internal static void CreatePersuasionTaskForMarriageType()
+        internal static void CreatePersuasionTaskForBreakUp()
         {
+            Success = false;
             PersuasionTask persuasionTask = new PersuasionTask(3);
-            persuasionTask.SpokenLine = new TextObject("{=Dramalord428}This is all so overwhelming... I love you, {PLAYER.NAME}, but are we truly ready?");
-            persuasionTask.TryLaterLine = FWB;
-            int trustDiff = MBMath.ClampInt(((DramalordMCM.Instance.MinTrustFWB - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero)) * -1) / 10, -3, 3);
+            persuasionTask.SpokenLine = new TextObject(DramalordTexts.PERSUASION_BREAKUP_Q);
+            persuasionTask.TryLaterLine = Break;
+
+            int trustDiff = MBMath.ClampInt(((100 - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero)) * -1) / 10, -3, 3);
             PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)trustDiff;
 
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Roguery, DefaultTraits.Valor, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord429}Love is an adventure and this will be our next challenge!"), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord435}Then we re-evaluate the situation and draw our conclusions."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord436}Think about all the pleasure we could give each other."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
-            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Tactics, DefaultTraits.Mercy, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject("{=Dramalord430}If you think about it, this is logically the next step."), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Trade, DefaultTraits.Generosity, TraitEffect.Negative, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_BREAKUP_1), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_BREAKUP_2), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_BREAKUP_3), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Roguery, DefaultTraits.Mercy, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_BREAKUP_4), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             CurrentTask = persuasionTask;
         }
     }

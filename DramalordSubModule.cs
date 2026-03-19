@@ -1,12 +1,14 @@
-﻿using Dramalord.Actions;
-using Dramalord.Behavior;
+﻿using Dramalord.Behaviors;
 using Dramalord.Behaviours;
-using Dramalord.Data.Intentions;
+using Dramalord.Notifications;
+using Dramalord.UI.Dramalord.UI;
+using Dramalord.Video;
 using HarmonyLib;
 using System;
 using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Engine.GauntletUI;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 
@@ -37,7 +39,6 @@ namespace Dramalord
             {
                 campaignGameStarter.AddBehavior(new DramalordCampaignBehavior(campaignGameStarter));
                 campaignGameStarter.AddBehavior(new NpcCampaignBehavior(campaignGameStarter));
-                //campaignGameStarter.AddBehavior(new PlayerCampaignBehavior(campaignGameStarter));
 
                 if (!Patched && game.GameType is Campaign)
                 {
@@ -49,13 +50,17 @@ namespace Dramalord
                         {
                             new PatchClassProcessor(harmony, type).Patch();
                         }
-                        catch (HarmonyException)
+                        catch (HarmonyException ex)
                         {
                             InformationManager.DisplayMessage(new InformationMessage($"{ModuleName} could not apply patch {type.Name}", new Color(1f, 0f, 0f)));
                         }
                     }
                     Patched = true;
                 }
+                UIResourceManager.SpriteData.SpriteCategories.TryGetValue("ui_dramalord", out var spriteCategory);
+                spriteCategory?.Load(UIResourceManager.ResourceContext, UIResourceManager.ResourceDepot);
+
+                DramalordBrushExtension.ExtendNotificationBrush();
             }
         }
 
@@ -64,54 +69,28 @@ namespace Dramalord
             base.OnBeforeInitialModuleScreenSetAsRoot();
            
             InformationManager.DisplayMessage(new InformationMessage($"{ModuleName} {ModuleVersion} loaded", new Color(1f, 0.08f, 0.58f)));
-           
+
+            InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: " + VideoFileRegister.Instance.Count() + " videos scenes registered", new Color(1f, 0.08f, 0.58f)));
+
             Type? pompaType = AccessTools.TypeByName("PompaSceneNotificationItem");
             if(pompaType != null)
             {
-                IntercourseIntention.HotButterFound = true;
+                DramalordCampaignBehavior.HotButterFound = true;
                 InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: HotButter detected", new Color(1f, 0.08f, 0.58f)));
             }
 
-            Type? AMType = AccessTools.TypeByName("MAMarriageAction");
-            if (AMType != null)
+            Type? hotType = AccessTools.TypeByName("SexSceneNotificationData");
+            if(hotType != null)
             {
-                BetrothIntention.OtherMarriageModFound = true;
-                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: MarryAnyone detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
-            }
-
-            Type? SEType = AccessTools.TypeByName("SpousesExpandedUtil");
-            if (SEType != null)
-            {
-                BetrothIntention.OtherMarriageModFound = true;
-                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Spouses Expanded detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
-            }
-
-            Type? BKType = AccessTools.TypeByName("BannerKingsSettings");
-            if (BKType != null)
-            {
-                BetrothIntention.OtherMarriageModFound = true;
-                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Banner Kings detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
-            }
-
-            Type? BastardType = AccessTools.TypeByName("BastardCampaignEvents");
-            if (BastardType != null)
-            {
-                IntercourseIntention.OtherPregnancyModFound = true;
-                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Bastard Children detected (Disabling Pregnancy)", new Color(1f, 0.08f, 0.58f)));
-            }
-            /*
-            Type? CheyronCheatsType = AccessTools.TypeByName("CheyronSubModule");
-            if (CheyronCheatsType != null)
-            {
-                IntercourseIntention.OtherPregnancyModFound = true;
-                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: Bannerlord Trainer Plus detected (Disabling Pregnancy)", new Color(1f, 0.08f, 0.58f)));
-            }
-            */
-            Type? MoreSpousesType = AccessTools.TypeByName("MoreSpouseSetting");
-            if (MoreSpousesType != null)
-            {
-                BetrothIntention.OtherMarriageModFound = true;
-                InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: MoreSpouses Pro detected (Disabling Marriage)", new Color(1f, 0.08f, 0.58f)));
+                DramalordCampaignBehavior.HotScenesFound = HotScenesNotificationData.Initialize();
+                if(DramalordCampaignBehavior.HotScenesFound)
+                {
+                    InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: HotScenes detected", new Color(1f, 0.08f, 0.58f)));
+                }
+                else
+                {
+                    InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: FAILED to initialize HotScenes", new Color(1f, 0.08f, 0.58f)));
+                }
             }
         }
     }

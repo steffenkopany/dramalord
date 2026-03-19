@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
@@ -13,57 +12,38 @@ namespace Dramalord.Data
     internal sealed class HeroPersonality
     {
         [SaveableField(1)]
-        private int _openness;
+        private int _empathy;
 
         [SaveableField(2)]
-        private int _conscientiousness;
+        private int _jealousy;
 
         [SaveableField(3)]
-        private int _extroversion;
+        private int _sociability;
 
-        [SaveableField(4)]
-        private int _agreeableness;
-
-        [SaveableField(5)]
-        private int _neuroticism;
-
-        internal int Openness
+        internal int Empathy
         {
-            get => _openness;
-            set => _openness = MBMath.ClampInt(value, -50, 50);
+            get => _empathy;
+            set => _empathy = MBMath.ClampInt(value, 0, 100);
         }
 
-        internal int Conscientiousness
+        internal int Jealousy
         {
-            get => _conscientiousness;
-            set => _conscientiousness = MBMath.ClampInt(value, -50, 50);
+            get => _jealousy;
+            set => _jealousy = MBMath.ClampInt(value, 0, 100);
         }
 
-        internal int Extroversion
+        internal int Sociability
         {
-            get => _extroversion;
-            set =>_extroversion = MBMath.ClampInt(value, -50, 50);
+            get => _sociability;
+            set => _sociability = MBMath.ClampInt(value, 0, 100);
         }
 
-        internal int Agreeableness
-        {
-            get => _agreeableness;
-            set => _agreeableness = MBMath.ClampInt(value, -50, 50);
-        }
 
-        internal int Neuroticism
+        internal HeroPersonality(int empathy, int jealousy, int sociability)
         {
-            get => _neuroticism;
-            set => _neuroticism = MBMath.ClampInt(value, -50, 50);
-        }
-
-        internal HeroPersonality(int openness, int conscientiousness, int extroversion, int agreeableness, int neuroticism)
-        {
-            Openness = openness;
-            Conscientiousness = conscientiousness;
-            Extroversion = extroversion;
-            Agreeableness = agreeableness;
-            Neuroticism = neuroticism;
+            Empathy = empathy;
+            Jealousy = jealousy;
+            Sociability = sociability;
         }
     }
 
@@ -92,11 +72,9 @@ namespace Dramalord.Data
             if(!_personalities.ContainsKey(hero))
             {
                 _personalities.Add(hero, new HeroPersonality(
-                    Generate(),
-                    Generate(),
-                    Generate(),
-                    Generate(),
-                    Generate()
+                    Generate(50, 75, 0, 100),
+                    Generate(50, 75, 0, 100),
+                    Generate(50, 75, 0, 100)
                 ));
             }
             return _personalities[hero];
@@ -115,10 +93,6 @@ namespace Dramalord.Data
                 {
                     _personalities.Add(keypair.Key, keypair.Value);
                 });
-            }
-            else
-            {
-                LegacySave.LoadLegacyPersonality(_personalities, dataStore);
             }
         }
 
@@ -166,11 +140,24 @@ namespace Dramalord.Data
         {
             float rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);
             int result = (int)(25 * rand_std_normal);
-            while(result < -50 || result > 50)
+            while(result < 0 || result > 100)
             {
                 rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);
                 result = (int)(25 * rand_std_normal);
             }
+            return result;
+        }
+
+        private int Generate(int peak, int normal, int min, int max)
+        {
+            float rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);
+            int result = (int)(peak + normal * rand_std_normal);
+            while (result < min || result > max)
+            {
+                rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);
+                result = (int)(peak + normal * rand_std_normal);
+            }
+
             return result;
         }
     }

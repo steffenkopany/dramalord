@@ -1,0 +1,74 @@
+﻿<!--SpriteData>
+  <SpriteCategories>
+    <SpriteCategory>
+      <Name>ui_dramalord</Name>
+      <SpriteSheetCount>3</SpriteSheetCount>
+      <SpriteSheetSize ID="1" Width="75" Height="75" />
+      <SpriteSheetSize ID="2" Width="75" Height="75" />
+      <SpriteSheetSize ID="3" Width="75" Height="75" />
+    </SpriteCategory>
+  </SpriteCategories>
+  <SpriteParts>
+    <SpritePart>
+      <SheetID>1</SheetID>
+      <Name>icon_birth</Name>
+      <Width>75</Width>
+      <Height>75</Height>
+      <SheetX>0</SheetX>
+      <SheetY>0</SheetY>
+      <CategoryName>ui_dramalord</CategoryName>
+    </SpritePart>
+    <SpritePart>
+      <SheetID>2</SheetID>
+      <Name>icon_sex</Name>
+      <Width>75</Width>
+      <Height>75</Height>
+      <SheetX>0</SheetX>
+      <SheetY>0</SheetY>
+      <CategoryName>ui_dramalord</CategoryName>
+    </SpritePart>
+    <SpritePart>
+      <SheetID>3</SheetID>
+      <Name>icon_wedding</Name>
+      <Width>75</Width>
+      <Height>75</Height>
+      <SheetX>0</SheetX>
+      <SheetY>0</SheetY>
+      <CategoryName>ui_dramalord</CategoryName>
+    </SpritePart>
+  </SpriteParts>
+  <Sprites>
+    <GenericSprite>
+      <Name>icon_birth</Name>
+      <SpritePartName>icon_birth</SpritePartName>
+    </GenericSprite>
+    <GenericSprite>
+      <Name>icon_sex</Name>
+      <SpritePartName>icon_sex</SpritePartName>
+    </GenericSprite>
+    <GenericSprite>
+      <Name>icon_wedding</Name>
+      <SpritePartName>icon_wedding</SpritePartName>
+    </GenericSprite>
+  </Sprites>
+</SpriteData -->
+<SpriteData>
+  <SpriteCategories>
+    <SpriteCategory Name="ui_dramalord">
+      <PackAllSpritesToUniqueTextures/>
+      <SingleChannel>false</SingleChannel>
+      <AlwaysLoad>true</AlwaysLoad>
+    </SpriteCategory>
+  </SpriteCategories>
+  <SpriteParts>
+    <SpritePart Name="dramalord_birth">
+      <SpriteGeneric SpriteCategory="ui_dramalord" FilePath="ui_dramalord_1.png" />
+    </SpritePart>
+    <SpritePart Name="dramalord_sex">
+      <SpriteGeneric SpriteCategory="ui_dramalord" FilePath="ui_dramalord_2.png" />
+    </SpritePart>
+    <SpritePart Name="dramalord_wedding">
+      <SpriteGeneric SpriteCategory="ui_dramalord" FilePath="ui_dramalord_3.png" />
+    </SpritePart>
+  </SpriteParts>
+</SpriteData>

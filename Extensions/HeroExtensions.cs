@@ -1,12 +1,12 @@
-﻿using Dramalord.Data;
-using Dramalord.Data.Intentions;
+﻿using Dramalord.Conversations;
+using Dramalord.Data;
+using Dramalord.Notifications;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
-using TaleWorlds.CampaignSystem.ComponentInterfaces;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.Settlements;
@@ -73,23 +73,17 @@ namespace Dramalord.Extensions
             return CachedRelation;
         }
 
-        public static RelationshipRule GetDefaultRelationshipRule(this Hero hero)
+        public static void ChangeRelationTo(this Hero hero, Hero other, int trustChange, int loveChange, bool silent = false)
         {
-            UpdateCachedData(hero);
-            if(CachedPersonality.Openness > 40 && CachedPersonality.Agreeableness > 40 && CachedPersonality.Neuroticism < -25 && CachedPersonality.Conscientiousness < -25)
-            {
-                return RelationshipRule.Open;
-            }
-            else if (CachedPersonality.Openness > 25 && CachedPersonality.Agreeableness > 25 && CachedPersonality.Neuroticism < 0 && CachedPersonality.Conscientiousness < 0)
-            {
-                return RelationshipRule.Poly;
-            }
-            else if (CachedPersonality.Openness > 10 && CachedPersonality.Conscientiousness < 0)
-            {
-                return RelationshipRule.Playful;
-            }
+            hero.SetTrust(other, hero.GetTrust(other) + trustChange);
+            HeroRelation relation = hero.GetRelationTo(other);
+            relation.Love += loveChange;
 
-            return RelationshipRule.Faithful;
+            if ((hero == Hero.MainHero || other == Hero.MainHero) && (trustChange != 0 || loveChange != 0) && !silent)
+            {
+                Hero otherHero = (hero == Hero.MainHero) ? other : hero;
+                DramalordBanner.CreateBanner(otherHero, new(DramalordTexts.BANNER_RELATION_CHANGE), ConversationTools.FormatNumber(loveChange), ConversationTools.FormatNumber(trustChange), true);
+            }
         }
 
         public static HeroPregnancy? GetPregnancy(this Hero hero)
@@ -105,28 +99,13 @@ namespace Dramalord.Extensions
                 return true;
             }
 
-            // If OtherMarriageMod is enabled, don't ignore Dramalord data completely—use it as a fallback
-            if (!BetrothIntention.OtherMarriageModFound)
-            {
-                return GetRelationTo(hero, target).Relationship == RelationshipType.Spouse;
-            }
-
-            return false;
+            return GetRelationTo(hero, target).Relationship == RelationshipType.Spouse;
         }
 
-        public static bool IsBetrothedOf(this Hero hero, Hero target)
-        {
-            return (GetRelationTo(hero, target).Relationship == RelationshipType.Betrothed && !BetrothIntention.OtherMarriageModFound);
-        }
 
         public static bool IsLoverOf(this Hero hero, Hero target)
         {
             return GetRelationTo(hero, target).Relationship == RelationshipType.Lover;
-        }
-
-        public static bool IsFriendWithBenefitsOf(this Hero hero, Hero target)
-        {
-            return GetRelationTo(hero, target).Relationship == RelationshipType.FriendWithBenefits;
         }
 
         public static bool IsFriendOf(this Hero hero, Hero target)
@@ -137,19 +116,7 @@ namespace Dramalord.Extensions
         public static bool IsEmotionalWith(this Hero hero, Hero target)
         {
             HeroRelation relation = GetRelationTo(hero, target);
-            return hero.Spouse == target || relation.Relationship == RelationshipType.Lover || relation.Relationship == RelationshipType.Betrothed || relation.Relationship == RelationshipType.Spouse;
-        }
-
-        public static bool IsSexualWith(this Hero hero, Hero target)
-        {
-            HeroRelation relation = GetRelationTo(hero, target);
-            return hero.Spouse == target || relation.Relationship == RelationshipType.FriendWithBenefits || relation.Relationship == RelationshipType.Lover || relation.Relationship == RelationshipType.Betrothed || relation.Relationship == RelationshipType.Spouse;
-        }
-
-        public static bool IsFriendlyWith(this Hero hero, Hero target)
-        {
-            HeroRelation relation = GetRelationTo(hero, target);
-            return relation.Relationship == RelationshipType.Friend || relation.Relationship == RelationshipType.FriendWithBenefits;
+            return hero.Spouse == target || relation.Relationship == RelationshipType.Lover || relation.Relationship == RelationshipType.Spouse;
         }
 
         public static bool HasAnyRelationshipWith(this Hero hero, Hero target)
@@ -172,115 +139,13 @@ namespace Dramalord.Extensions
         // Determines if a hero is married to the player by checking both vanilla and internal systems.
         public static bool IsPlayerSpouse(this Hero hero)
         {
-            return hero.Spouse == Hero.MainHero; // not necessary to request Dramalord data!
-        }
-
-        public static bool CanBeIntimateWith(this Hero hero, Hero target)
-        {
-            if (hero.Spouse == null && target.Spouse == null)
+            if(hero.Spouse == Hero.MainHero)
             {
                 return true;
             }
-            else if (hero.Spouse == target)
+            else if( hero.GetRelationTo(Hero.MainHero).Relationship == RelationshipType.Spouse)
             {
-                return true;
-            }
-            else if(hero.Spouse != null && target.Spouse == null)
-            {
-                RelationshipRule rule = hero.GetRelationTo(hero.Spouse).Rules;
-                return rule == RelationshipRule.Playful || rule == RelationshipRule.Open;
-            }
-            else if (hero.Spouse == null && target.Spouse != null)
-            {
-                RelationshipRule rule = DramalordRelations.Instance.GetRelation(target, target.Spouse).Rules;
-                return rule == RelationshipRule.Playful || rule == RelationshipRule.Open;
-            }
-            else if (hero.Spouse == target.Spouse && hero.GetRelationTo(hero.Spouse).Rules != RelationshipRule.Faithful)
-            {
-                return true;
-            }
-            else if (hero.GetRelationTo(hero.Spouse).Rules == RelationshipRule.Playful || hero.GetRelationTo(hero.Spouse).Rules == RelationshipRule.Open )
-            {
-                RelationshipRule rule = DramalordRelations.Instance.GetRelation(target, target.Spouse).Rules;
-                return rule == RelationshipRule.Playful || rule == RelationshipRule.Open;
-            }
-            return false;
-        }
-
-        public static bool CanBeRomanticWith(this Hero hero, Hero target)
-        {
-            if (hero.Spouse == null && target.Spouse == null)
-            {
-                return true;
-            }
-            else if (hero.Spouse == target)
-            {
-                return true;
-            }
-            else if (hero.Spouse != null && target.Spouse == null)
-            {
-                return hero.GetRelationTo(hero.Spouse).Rules == RelationshipRule.Open;
-            }
-            else if (hero.Spouse == null && target.Spouse != null)
-            {
-                return DramalordRelations.Instance.GetRelation(target, target.Spouse).Rules == RelationshipRule.Open;
-            }
-            else if (hero.Spouse == target.Spouse && (hero.GetRelationTo(hero.Spouse).Rules == RelationshipRule.Poly || hero.GetRelationTo(hero.Spouse).Rules == RelationshipRule.Open))
-            {
-                return true;
-            }
-            else if (hero.GetRelationTo(hero.Spouse).Rules == RelationshipRule.Open)
-            {
-               return DramalordRelations.Instance.GetRelation(target, target.Spouse).Rules == RelationshipRule.Open;
-            }
-            return false;
-        }
-
-        public static bool CanBeJealousAboutIntimacy(this Hero hero, Hero target, Hero other)
-        {
-            if(hero.IsEmotionalWith(target))
-            {
-                HeroRelation relation = hero.GetRelationTo(target);
-                if (!BetrothIntention.OtherMarriageModFound && relation.Relationship == RelationshipType.Spouse)
-                { 
-                    HeroRelation otherRelation = hero.GetRelationTo(other);
-
-                    if(relation.Rules == RelationshipRule.Open)
-                    {
-                        return false;
-                    }
-                    else if(relation.Rules == RelationshipRule.Poly && otherRelation.Relationship == RelationshipType.Spouse)
-                    {
-                        return false;
-                    }
-                    else if(relation.Rules == RelationshipRule.Playful && (otherRelation.Relationship == RelationshipType.Friend || otherRelation.Relationship == RelationshipType.FriendWithBenefits))
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return false;
-        }
-
-        public static bool CanBeJealousAboutRomance(this Hero hero, Hero target, Hero other)
-        {
-            if (hero.IsEmotionalWith(target))
-            {
-                HeroRelation relation = hero.GetRelationTo(target);
-                if (!BetrothIntention.OtherMarriageModFound && relation.Relationship == RelationshipType.Spouse)
-                {
-                    HeroRelation otherRelation = hero.GetRelationTo(other);
-
-                    if (relation.Rules == RelationshipRule.Open)
-                    {
-                        return false;
-                    }
-                    else if (relation.Rules == RelationshipRule.Poly && otherRelation.Relationship == RelationshipType.Spouse)
-                    {
-                        return false;
-                    }
-                }
+                hero.Spouse = Hero.MainHero; // sync vanilla data
                 return true;
             }
             return false;
@@ -333,18 +198,7 @@ namespace Dramalord.Extensions
                 return false;
             }
 
-            int today = (int)CampaignTime.Now.GetDayOfSeason;
-            int nextToday = today + CampaignTime.DaysInSeason;
-            int startPeriod = hero.GetDesires().PeriodDayOfSeason;
-            int endPeriod = startPeriod + 5;
-
-            bool inPeriod = (today >= startPeriod && today <= endPeriod) || (nextToday >= startPeriod && nextToday <= endPeriod);
-
-            if (hero.IsFemale && hero.Age <= DramalordMCM.Instance.MaxFertilityAge && !inPeriod)
-            {
-                return true;
-            }
-            return false;
+            return hero.IsFemale && hero.Age <= DramalordMCM.Instance.MaxFertilityAge && hero.Children.Where(c => c.Age < 18).Count() < DramalordMCM.Instance.MaxChildren;
         }
 
         public static int GetSympathyTo(this Hero hero, Hero target)
@@ -352,20 +206,20 @@ namespace Dramalord.Extensions
             HeroPersonality heroPersonality = hero.GetPersonality();
             HeroPersonality targetPersonality = target.GetPersonality();
 
-            int sympathy = 10;
-            if (target == Hero.MainHero || hero == Hero.MainHero) sympathy += DramalordMCM.Instance.PlayerBaseSympathy;
-            sympathy -= Math.Abs(heroPersonality.Openness - targetPersonality.Openness) / 25;
-            sympathy -= Math.Abs(heroPersonality.Agreeableness - targetPersonality.Agreeableness) / 25;
-            sympathy -= Math.Abs(heroPersonality.Conscientiousness - targetPersonality.Conscientiousness) / 25;
-            sympathy -= Math.Abs(heroPersonality.Neuroticism - targetPersonality.Neuroticism) / 25;
-            sympathy -= Math.Abs(heroPersonality.Extroversion - targetPersonality.Extroversion) / 25;
+            int sympathy = 150;
+            sympathy += (target == Hero.MainHero || hero == Hero.MainHero) ? DramalordMCM.Instance.PlayerBaseSympathy : 0;
+            sympathy -= Math.Abs(heroPersonality.Jealousy - targetPersonality.Jealousy);
+            sympathy -= Math.Abs(heroPersonality.Sociability - targetPersonality.Sociability);
+            sympathy -= Math.Abs(heroPersonality.Empathy - targetPersonality.Empathy);
+
+            sympathy /= 10;
 
             //bonus
-            sympathy += hero.GetHeroTraits().Honor == target.GetHeroTraits().Honor ? 1 : 0; 
-            sympathy += hero.GetHeroTraits().Valor == target.GetHeroTraits().Valor ? 1 : 0;
-            sympathy += hero.GetHeroTraits().Calculating == target.GetHeroTraits().Calculating ? 1 : 0;
-            sympathy += hero.GetHeroTraits().Mercy == target.GetHeroTraits().Mercy ? 1 : 0;
-            sympathy += hero.GetHeroTraits().Generosity == target.GetHeroTraits().Generosity ? 1 : 0;
+            sympathy += hero.GetTraitLevel(DefaultTraits.Honor) == target.GetTraitLevel(DefaultTraits.Honor) ? 1 : 0; 
+            sympathy += hero.GetTraitLevel(DefaultTraits.Valor) == target.GetTraitLevel(DefaultTraits.Valor) ? 1 : 0;
+            sympathy += hero.GetTraitLevel(DefaultTraits.Calculating) == target.GetTraitLevel(DefaultTraits.Calculating) ? 1 : 0;
+            sympathy += hero.GetTraitLevel(DefaultTraits.Mercy) == target.GetTraitLevel(DefaultTraits.Mercy) ? 1 : 0;
+            sympathy += hero.GetTraitLevel(DefaultTraits.Generosity) == target.GetTraitLevel(DefaultTraits.Generosity) ? 1 : 0;
             return sympathy;
         }
 
@@ -378,21 +232,80 @@ namespace Dramalord.Extensions
             rating -= (int)(Math.Abs(desires.AttractionWeight - (int)(target.Weight*100))/2);
             rating -= (int)(Math.Abs(desires.AttractionBuild - (int)(target.Build*100))/2);
             rating -= (int)(Math.Abs((MBMath.ClampInt(desires.AttractionAgeDiff + (int)hero.Age, 18, 130) - (int)target.Age)) /2);
-            rating += hero.GetRelationTo(target).Love / 10;
+            //rating += hero.GetRelationTo(target).Love / 10;
             rating += desires.Horny / 10;
 
-            return MBMath.ClampInt(rating, 0, 100);
+            return MBMath.ClampInt(rating, -100, 100);
         }
 
         public static bool HasMutualAttractionWith(this Hero hero, Hero target) => hero.GetAttractionTo(target) >= DramalordMCM.Instance.MinAttraction && target.GetAttractionTo(hero) >= DramalordMCM.Instance.MinAttraction;
 
         public static bool HasMetRecently(this Hero hero, Hero target) => hero.GetRelationTo(target).LastInteraction.ElapsedDaysUntilNow < DramalordMCM.Instance.DaysBetweenInteractions;
 
+        public static bool IsBlockedBy(this Hero hero, Hero target) => hero.GetRelationTo(target).IsBlocked();
+
+        public static bool RomanceAccepted(this Hero hero, Hero target, bool initiatedByPlayer)
+        {
+            if(DramalordMCM.Instance.AllowSocialClassMix)
+            {
+                return true;
+            }  
+            
+            if (DramalordMCM.Instance.StrictTierSeparation && hero.IsLord == target.IsLord)
+            {
+                if(hero.Clan == target.Clan)
+                {
+                    return true;
+                }
+                else if(hero.Clan != null && target.Clan != null)
+                {
+                    if(hero.Clan.Tier > target.Clan.Tier)
+                    {
+                        if (hero.GetTraitLevel(DefaultTraits.Generosity) > 0 && hero.GetTraitLevel(DefaultTraits.Calculating) < 0)
+                        {
+                            return true;
+                        }
+                    }
+                    return hero.Clan.Tier == target.Clan.Tier;
+                }
+            }
+            else if(DramalordMCM.Instance.StrictTierSeparation && hero.IsLord != target.IsLord && !initiatedByPlayer)
+            {
+                return false;
+            }
+            return hero.IsLord == target.IsLord || initiatedByPlayer;
+        }
+
+        public static bool IsFaithFul(this Hero hero, Hero target)
+        {
+            if(hero.Spouse == target)
+            {
+                return true;
+            }
+            else if(hero.Spouse == null && (!hero.IsPlayerSpouse() || target == Hero.MainHero))
+            {
+                return true;
+            }
+            else if(hero.IsPlayerSpouse() && target.IsPlayerSpouse())
+            {
+                return true;
+            }
+            else if (target.IsPlayerSpouse() && target != Hero.MainHero)
+            {
+                return target.GetTraitLevel(DefaultTraits.Honor) < 1;
+            }
+            else if((hero.Spouse != null && target != hero.Spouse) || (target != Hero.MainHero && hero.IsPlayerSpouse() && !target.IsPlayerSpouse()))
+            {
+                return hero.GetTraitLevel(DefaultTraits.Honor) < 1;
+            }
+            return false;
+        }
+
         public static bool IsCloseTo(this Hero hero, Hero target)
         {
             return target.IsDramalordLegit() && (hero.CurrentSettlement != null && hero.CurrentSettlement == target.CurrentSettlement) ||
                 (hero.PartyBelongedTo != null && hero.PartyBelongedTo == target.PartyBelongedTo) ||
-                (hero.PartyBelongedTo != null && target.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null && hero.PartyBelongedTo.Army == target.PartyBelongedTo.Army && (hero.PartyBelongedTo.Army.LeaderParty == hero.PartyBelongedTo || hero.PartyBelongedTo.Army.LeaderParty.AttachedParties.Contains(hero.PartyBelongedTo)));
+                (hero.PartyBelongedTo != null && target.PartyBelongedTo != null && hero.PartyBelongedTo.Army != null && hero.PartyBelongedTo.Army == target.PartyBelongedTo.Army && (hero.PartyBelongedTo.Army.LeaderParty == hero.PartyBelongedTo || hero.PartyBelongedTo.Army.LeaderParty.AttachedParties.Contains(target.PartyBelongedTo)));
         }
 
         public static List<Hero> GetCloseHeroes(this Hero hero)
@@ -435,7 +348,7 @@ namespace Dramalord.Extensions
         public static List<Hero> GetClosePrisoners(this Hero hero)
         {
             List<Hero> list = new();
-            if (hero.CurrentSettlement != null && hero.CurrentSettlement.Town != null)
+            if (hero.CurrentSettlement != null && hero.CurrentSettlement.Town != null && hero.CurrentSettlement.OwnerClan == hero.Clan)
             {
                 Town town = hero.CurrentSettlement.Town;
                 town.GetPrisonerHeroes().Where(h => h.HeroObject.IsDramalordLegit()).Select(h => h.HeroObject).Do(h => list.Add(h));
@@ -454,7 +367,7 @@ namespace Dramalord.Extensions
                 {
                     hero.PartyBelongedTo.Army?.Parties.ForEach(party =>
                     {
-                        if (party.PrisonRoster.TotalHeroes > 0)
+                        if (party.ActualClan == hero.Clan && party.PrisonRoster.TotalHeroes > 0)
                         {
                             party.PrisonRoster.GetTroopRoster().Where(h => h.Character.HeroObject != null && h.Character.HeroObject.IsDramalordLegit()).Select(h => h.Character.HeroObject).Do(h => list.Add(h));
                         }

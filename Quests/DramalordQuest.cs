@@ -15,9 +15,11 @@ namespace Dramalord.Quests
 
         public override TextObject Title => GetTitle();
 
+        public abstract TextObject Description { get; }
+
         protected override void OnTimedOut() => QuestTimeout();
 
-        public override bool IsSpecialQuest => true;
+        public override string SpecialQuestType => "DramalordQuest";
 
         public override bool IsRemainingTimeHidden => false;
 

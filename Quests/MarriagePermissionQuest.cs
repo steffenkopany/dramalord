@@ -1,13 +1,11 @@
-﻿using Dramalord.Actions;
-using Dramalord.Conversations;
+﻿using Dramalord.Conversations;
 using Dramalord.Data;
-using Dramalord.Data.Intentions;
 using Dramalord.Extensions;
-using Helpers;
+using Dramalord.Notifications;
 using System;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
-using TaleWorlds.Core;
+using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Localization;
 using TaleWorlds.SaveSystem;
 
@@ -18,25 +16,25 @@ namespace Dramalord.Quests
         [SaveableField(1)]
         internal Hero Permitter;
 
+        [SaveableField(2)]
+        internal bool HasAsked;
+
         public MarriagePermissionQuest(Hero questGiver, Hero permitter, CampaignTime duration) : base("DramalordMarriagePermissionQuest", questGiver, duration)
         {
             Permitter = permitter;
+            HasAsked = false;
             InitializeQuestOnGameLoad();
         }
 
         public override TextObject GetTitle()
         {
-            TextObject txt = new TextObject("{=Dramalord548}Ask {QUESTHERO} for their hand in marriage.");
-            txt.SetTextVariable("QUESTHERO", QuestGiver.Name);
-            return txt;
+            return ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_MARRIAGE_TITLE), QuestGiver);
         }
+
+        public override TextObject Description => ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_MARRIAGE_INFO), QuestGiver, Permitter);
 
         protected override void SetDialogs()
         {
-            ConversationLines.player_quest_marriage_ask.SetTextVariable("HERO", QuestGiver.Name);
-            ConversationLines.player_quest_marriage_agree.SetTextVariable("HERO", QuestGiver.Name);
-            ConversationLines.player_quest_marriage_later.SetTextVariable("HERO", QuestGiver.Name);
-            ConversationLines.player_quest_marriage_decline.SetTextVariable("HERO", QuestGiver.Name);
         }
 
         public override void OnCanceled()
@@ -47,8 +45,7 @@ namespace Dramalord.Quests
 
         public override void QuestFail(Hero reason)
         {
-            RelationshipLossAction.Apply(QuestGiver, Hero.MainHero, out int loveDamage, out int trustDamage, 50, 30);
-            new ChangeOpinionIntention(QuestGiver, Hero.MainHero, loveDamage, trustDamage, CampaignTime.Now).Action();
+            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_MARRIAGE_BLESSING), Permitter, QuestGiver));
 
             CompleteQuestWithFail();
             DramalordQuests.Instance.RemoveQuest(QuestGiver);
@@ -57,7 +54,7 @@ namespace Dramalord.Quests
 
         public override void QuestSuccess(Hero reason)
         {
-            new BetrothIntention(QuestGiver, Hero.MainHero, CampaignTime.Now, true).OnConversationEnded();
+            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_MARRIAGE), Hero.MainHero, QuestGiver));
             CompleteQuestWithSuccess();
             DramalordQuests.Instance.RemoveQuest(QuestGiver);
             Campaign.Current.ConversationManager.RemoveRelatedLines(this);
@@ -75,48 +72,94 @@ namespace Dramalord.Quests
 
         public override void QuestStartInit()
         {
-            RemoveTrackedObject(QuestGiver);
-            AddTrackedObject(Permitter);
+            if (HasAsked)
+            {
+                AddTrackedObject(QuestGiver);
+                RemoveTrackedObject(Permitter);
+            }
+            else
+            {
+                AddTrackedObject(Permitter);
+                RemoveTrackedObject(QuestGiver);
+            }
 
-            TextObject txt = new TextObject("{=Dramalord549}{QUESTHERO.LINK} told you that you require the permission of {TARGET.LINK} in order to marry them.");
-            StringHelpers.SetCharacterProperties("TARGET", Permitter?.CharacterObject, txt);
-            StringHelpers.SetCharacterProperties("QUESTHERO", QuestGiver.CharacterObject, txt);
-            AddLog(txt);
+            AddLog(Description);
+        }
+
+        internal void GetPermission()
+        {
+            if(!HasAsked)
+            {
+                HasAsked = true;
+                AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_MARRIAGE_BLESSING), Permitter, QuestGiver));
+                RemoveTrackedObject(Permitter);
+            }
         }
 
         protected override void InitializeQuestOnGameLoad()
         {
             DialogFlow permitterFlow = DialogFlow.CreateDialogFlow("hero_main_options")
                 .BeginPlayerOptions()
-                .PlayerOption("{player_quest_marriage_ask}")
-                .Condition(() => { SetDialogs(); return Permitter != null && Permitter == Hero.OneToOneConversationHero; })
+                .PlayerSpecialOption(ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INTENTION_MARRY_ENGAGE_ASK), Permitter, QuestGiver))
+                .Condition(() => Permitter == Hero.OneToOneConversationHero && HasAsked == false)
                 .BeginNpcOptions()
-                    .NpcOption("{player_quest_marriage_agree}", () => Clan.PlayerClan.Tier >= 3 && Permitter?.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrustFriends)
-                        .Consequence(() => { QuestSuccess(Hero.MainHero); ConversationTools.EndConversation(); })
-                        .CloseDialog()
-                    .NpcOption("{player_quest_marriage_later}", () => Clan.PlayerClan.Tier < 3 || Permitter?.GetTrust(Hero.MainHero) < DramalordMCM.Instance.MinTrustFriends || Permitter?.GetTrust(Hero.MainHero) > 0)
+                    .NpcOption(DramalordTexts.INTENTION_MARRY_ENGAGE_OK+ "[ib:confident3][if:convo_excited]", () => Permitter?.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrustFriends && ConversationTools.SetConversationHero(QuestGiver))
                         .Consequence(() =>
                         {
-                            TextObject banner = new TextObject("{=Dramalord554}Make sure your clan is tier 3+ and {HERO} likes you.");
-                            MBTextManager.SetTextVariable("HERO", Permitter?.Name);
-                            MBInformationManager.AddQuickInformation(banner, 0, Permitter?.CharacterObject, "event:/ui/notification/relation");
-                            AddLog(banner);
+                            GetPermission();
+                            if (PlayerEncounter.Current != null)
+                            {
+                                PlayerEncounter.LeaveEncounter = true;
+                            }
                         })
-                        .GotoDialogState("hero_main_options")
-                    .NpcOption("{player_quest_marriage_decline}", () => Clan.PlayerClan.Tier < 3 && Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) < 0)
-                        .Consequence(() => { QuestFail(Hero.MainHero); ConversationTools.EndConversation(); })
+                        .CloseDialog()
+                    .NpcOption(DramalordTexts.INTENTION_MARRY_ENGAGE_NO + "[ib:nervous][if:convo_shocked]", () => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) < DramalordMCM.Instance.MinTrustFriends && ConversationTools.SetConversationHero(QuestGiver))
+                        .Consequence(() =>
+                        {
+                            if (PlayerEncounter.Current != null)
+                            {
+                                PlayerEncounter.LeaveEncounter = true;
+                            }
+                        })
                         .CloseDialog()
                 .EndNpcOptions()
                 .EndPlayerOptions();
 
             Campaign.Current.ConversationManager.AddDialogFlow(permitterFlow, this);
+
+            if (HasAsked)
+            {
+                AddTrackedObject(QuestGiver);
+                RemoveTrackedObject(Permitter);
+            }
+            else
+            {
+                AddTrackedObject(Permitter);
+                RemoveTrackedObject(QuestGiver);
+            }
         }
 
         protected override void HourlyTick()
         {
             if(Permitter == null)
             {
-                QuestSuccess(Hero.MainHero);
+                GetPermission();
+            }
+
+            if(QuestGiver.Spouse != null)
+            {
+                QuestTimeout();
+            }
+
+            if (HasAsked)
+            {
+                AddTrackedObject(QuestGiver);
+                RemoveTrackedObject(Permitter);
+            }
+            else
+            {
+                AddTrackedObject(Permitter);
+                RemoveTrackedObject(QuestGiver);
             }
         }
 
@@ -134,8 +177,19 @@ namespace Dramalord.Quests
                 }
                 else
                 {
-                    QuestSuccess(Hero.MainHero);
+                    GetPermission();
                 }
+            }
+
+            if (HasAsked)
+            {
+                AddTrackedObject(QuestGiver);
+                RemoveTrackedObject(Permitter);
+            }
+            else
+            {
+                AddTrackedObject(Permitter);
+                RemoveTrackedObject(QuestGiver);
             }
         }
     }

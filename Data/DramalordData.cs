@@ -31,7 +31,7 @@ namespace Dramalord.Data
         internal static void LoadAllData(IDataStore dataStore)
         {
             bool data = true;
-            dataStore.SyncData("DramalordData4", ref data);
+            dataStore.SyncData("DramalordData5", ref data);
             IsOldData = data;
 
             All.ForEach(loader => loader.LoadData(dataStore));
@@ -40,7 +40,7 @@ namespace Dramalord.Data
         internal static void SaveAllData(IDataStore dataStore)
         {
             bool data = false;
-            dataStore.SyncData("DramalordData4", ref data);
+            dataStore.SyncData("DramalordData5", ref data);
 
             All.ForEach(saver => saver.SaveData(dataStore));
         }

@@ -1,4 +1,4 @@
-﻿using Dramalord.Data.Intentions;
+﻿using Dramalord.Data.Events;
 using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -24,7 +24,7 @@ namespace Dramalord.Patches
         {
             if (originalHero.IsDramalordLegit() && originalGainedRelationWith.IsDramalordLegit())
             {
-                new ChangeOpinionIntention(originalHero, originalGainedRelationWith, 0, 0, CampaignTime.Now, (DramalordMCM.Instance.ShowRelationChanges && showQuickNotification)).Action();
+                (new RelationshipEvent(originalHero, originalGainedRelationWith)).Action();
             } 
         }
     }
