@@ -221,7 +221,7 @@
     <string id="Dramalord215" text="你和{ACTOR1.LINK}的呻吟声几乎传遍了整个地方。我想知道{ACTOR2.LINK}会怎么说？{TEXT1}{GOLD_ICON}能让一切安静下来。" />
     <string id="Dramalord216" text="我给你{TEXT1}天去准备金币。再见，{ACTOR1.LINK}！" />
     <string id="Dramalord217" text="{ACTOR1.NAME}正在勒索你。" />
-    <string id="Dramalord218" text="{ACTOR1.LINK}看见了你和{ACTOR2.LINK}。他们威胁要告诉{ACTOR3.LINK}，除非你付给他们{TEXT1}{GOLD_ICON}。夜晚去找他们解决，或支付他们想要的。" />
+    <string id="Dramalord218" text="{ACTOR1.LINK} 看见你和 {ACTOR2.LINK} 在一起。如果你不支付 {TEXT1}{GOLD_ICON}，他们就会把这件事告诉 {ACTOR3.LINK}。去找他们解决这件事，或者按他们的要求付钱。" />
     <string id="Dramalord219" text="你向{ACTOR1.LINK}支付了{TEXT1}{GOLD_ICON}。" />
     <string id="Dramalord220" text="你让{ACTOR1.LINK}知道，招惹你是多么愚蠢的事。" />
     <string id="Dramalord221" text="你让{ACTOR1.LINK}永远闭嘴了。" />
@@ -297,7 +297,7 @@
     <string id="Dramalord291" text="呃……那个……" />
     <string id="Dramalord292" text="抱歉，{ACTOR1.LINK}，我的配偶就在附近。改天再谈吧。" />
     <string id="Dramalord293" text="脱下衣服吧，我会让你见识一种不同的战斗——一种我们都会胜利的战斗。" />
-    <string id="Dramalord294" text="我的爱人，{ACTOR1.LINK}阻碍了我们的关系。（与配偶离婚）" />
+    <string id="Dramalord294" text="我的爱人，{ACTOR2.LINK}阻碍了我们的关系。（与配偶离婚）" />
     <string id="Dramalord295" text="{ACTOR1.LINK}，我很好奇——你喜欢什么样的伴侣？（信息）" />
     <string id="Dramalord296" text="你让我的梦想成真，{ACTOR1.LINK}。是的，我愿意嫁给你！" />
     <string id="Dramalord297" text="如果你真想与我相伴，那就必须得到{ACTOR1.LINK}的祝福。我的心早已属于你，但只有他的允许才能确保我们的未来。" />
@@ -426,5 +426,62 @@
     <string id="Dramalord420" text="{ACTOR1.LINK} 与 {ACTOR3.LINK} 共同收养了孤儿 {ACTOR2.LINK}。" />
     <string id="Dramalord421" text="显示 Dramalord 图片" />
     <string id="Dramalord422" text="为特定事件显示 Dramalord 图片。关闭时仅显示文字通知。" />
+    <string id="Dramalord423" text="启用 Dramalord 孤儿院" />
+    <string id="Dramalord424" text="启用后，NPC 会将私生子送往孤儿院；否则他们会保留所有孩子。" />
+    <string id="Dramalord425" text="{ACTOR1.LINK} 在决斗中击败了 {ACTOR2.LINK}。" />
+    <string id="Dramalord426" text="{ACTOR1.LINK} 在决斗中败给了 {ACTOR2.LINK}。" />
+    <string id="Dramalord427" text="拔出你的武器，让我们一劳永逸地解决这件事。" />
+    <string id="Dramalord428" text="{ACTOR1.LINK}，我需要和你谈谈关于 {ACTOR2.LINK} 的事。" />
+    <string id="Dramalord429" text="如果你想谈论私人事务，请在城镇中拜访我。" />
+    <string id="Dramalord430" text="很好。你想说什么？" />
+    <string id="Dramalord431" text="我要你结束这场可笑的婚姻，解放 {ACTOR1.LINK}。" />
+    <string id="Dramalord432" text="我并不怎么在乎 {ACTOR1.LINK}。如果你补偿我的经济损失，我愿意取消这段婚姻。" />
+    <string id="Dramalord433" text="如果你想摧毁我对 {ACTOR1.LINK} 的爱，你必须刺穿我的心。祝你好运。" />
+    <string id="Dramalord434" text="同意。这是 {TEXT1}{GOLD_ICON} 的补偿。" />
+    <string id="Dramalord435" text="说服 {ACTOR2.NAME} 与 {ACTOR1.NAME} 离婚。" />
+    <string id="Dramalord436" text="{ACTOR1.LINK} 请求你协助其与 {ACTOR2.LINK} 的离婚事宜。" />
+    <string id="Dramalord437" text="什么闹剧？你……你是什么意思，{ACTOR1.LINK}？" />
+    <string id="Dramalord438" text="我……呃，只是走神了，亲爱的。别在意我刚才说的话。" />
+    <string id="Dramalord439" text="是时候分道扬镳了。我们的羁绊已经破裂。" />
+    <string id="Dramalord440" text="我们努力过，不是吗？我感觉我几乎已经不认识你了。" />
+    <string id="Dramalord441" text="你知道王国事务让我很忙。我正在努力维持稳定的收入。" />
+    <string id="Dramalord442" text="让我们利用现有的时间，重新点燃爱情的火焰。" />
+    <string id="Dramalord443" text="让你置身危险之中？我是在保护你，你很清楚这一点。" />
+    <string id="Dramalord444" text="我比任何人都了解你。我知道你需要什么……" />
+    <string id="Dramalord445" text="你说得对，{ACTOR1.LINK}。让我们再给爱情一次机会。" />
+    <string id="Dramalord446" text="我来解决我们之间的问题了，{ACTOR1.LINK}。" />
+    <string id="Dramalord447" text="很好。你带来黄金了吗，让这件事就此消失？" />
+    <string id="Dramalord448" text="带来了。这是 {TEXT1}{GOLD_ICON}。现在滚吧。（支付）" />
+    <string id="Dramalord449" text="没有。相反，我带来了钢铁。（攻击）" />
+    <string id="Dramalord450" text="搜索英雄" />
+    <string id="Dramalord451" text="{ACTOR1.LINK} 与 {ACTOR2.LINK} 和 {ACTOR3.LINK} 发生了三人行。" />
+    <string id="Dramalord452" text="三人行机会。" />
+    <string id="Dramalord453" text="{ACTOR1.LINK} 和 {ACTOR2.LINK} 询问你是否愿意与他们一起到卧室。" />
+    <string id="Dramalord454" text="加入他们" />
+    <string id="Dramalord455" text="质问他们" />
+    <string id="Dramalord456" text="你现在对 {ACTOR1.LINK} 更有吸引力了。（{TEXT1}）" />
+    <string id="Dramalord457" text="你现在对 {ACTOR1.LINK} 的吸引力降低了。（{TEXT1}）" />
+    <string id="Dramalord458" text="{ACTOR1.LINK} 对你的好感增加了。（{TEXT1}）" />
+    <string id="Dramalord459" text="{ACTOR1.LINK} 对你的好感减少了。（{TEXT1}）" />
+    <string id="Dramalord460" text="{ACTOR1.LINK}，亲爱的。我有点痒，需要你特别的关照。你愿意帮我吗？" />
+    <string id="Dramalord461" text="如果你想帮我挠痒痒，亲爱的，得先把你那迷人的身体解开。" />
+    <string id="Dramalord462" text="恐怕今天你得自己挠痒痒了，亲爱的。" />
+    <string id="Dramalord463" text="{ACTOR1.LINK} 对你的冷落深感受伤，只好自己解决，心里想着别人。（爱情 {TEXT1}）" />
+    <string id="Dramalord464" text="{ACTOR1.LINK} 对你的冷落感到震惊，开始怀疑你是否已经不再爱他们。（爱情 {TEXT1}）" />
+    <string id="Dramalord465" text="严格的家族阶级划分" />
+    <string id="Dramalord466" text="大多数领主和贵族不会主动接近社会地位较低的领主或贵族。" />
+    <string id="Dramalord467" text="允许囚禁事件" />
+    <string id="Dramalord468" text="允许英雄接受亲密提议以结束囚禁状态" />
+    <string id="Dramalord469" text="{ACTOR1.LINK} 背着你与 {ACTOR2.LINK} 约会！你要当面对质吗？" />
+    <string id="Dramalord470" text="{ACTOR1.LINK} 背着你与 {ACTOR2.LINK} 发生了关系！你要当面对质吗？" />
+    <string id="Dramalord471" text="{ACTOR1.LINK} 背着你与 {ACTOR2.LINK} 结婚了！你要当面对质吗？" />
+    <string id="Dramalord472" text="{ACTOR1.LINK} 生下了 {ACTOR2.LINK} 的孩子！你要当面对质吗？" />
+    <string id="Dramalord473" text="别逗我笑了。你试着碰碰运气的样子确实可爱，但你大概追求农民会更成功。" />
+    <string id="Dramalord474" text="虽然我欣赏你的赞美，但我家族的社会地位对我来说是神圣的，因此我必须拒绝。" />
+    <string id="Dramalord475" text="最大子女数量" />
+    <string id="Dramalord476" text="女性英雄同时可拥有的最大子女数量（仅限 Dramalord）" />
+    <string id="Dramalord477" text="要不要邀请 {ACTOR1.LINK} 加入我们？人越多越开心，对吧，亲爱的？" />
+    <string id="Dramalord478" text="使用 HotScenes 动画" />
+    <string id="Dramalord479" text="在亲密场景中使用 HotScenes 动画（将停用 Dramalord 动画）。" />
   </strings>
 </base>

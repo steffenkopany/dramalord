@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
+using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 using TaleWorlds.SaveSystem;
@@ -82,7 +83,10 @@ namespace Dramalord.Data.Events
 
                     if (DramalordMCM.Instance.ShowDramaVideos)
                     {
-                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, null, DramalordVideoNotification.VideoContext.Lovers);
+                        TextObject txt = ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.LOG_RElATIONSHIP_START), Actor, Target);
+                        ConversationTools.SetTextVariables(txt, DramalordTexts.RELATIONSHIP_LOVERS);
+                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, txt, DramalordVideoNotification.VideoContext.Lovers, DramalordVideoNotification.VideoSound.RomanticChime);
+                        MBInformationManager.AddNotice(new DramalordEventNotification(this, GetEncyclopediaText()));
                     }
                     else
                     {
@@ -105,7 +109,7 @@ namespace Dramalord.Data.Events
 
                 if (Actor == Hero.MainHero || Target == Hero.MainHero)
                 {
-                    DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(relation.Relationship), true);
+                    DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(RelationshipType.Lover), true);
                 }
                 relation.Relationship = RelationshipType.Friend;
                 AddLogEntry(this);
@@ -117,7 +121,7 @@ namespace Dramalord.Data.Events
 
                 if (Actor == Hero.MainHero || Target == Hero.MainHero)
                 {
-                    DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(relation.Relationship), true);
+                    DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(RelationshipType.Lover), true);
                 }
                 relation.SetBlockedUntil(CampaignTime.DaysFromNow(14));
                 relation.Relationship = RelationshipType.None;
@@ -126,19 +130,7 @@ namespace Dramalord.Data.Events
             else if (relation.Relationship == RelationshipType.Spouse && shouldRelation == RelationshipType.Friend)
             {
                 NotificationLine = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_RElATIONSHIP_END), Actor, Target);
-                ConversationTools.SetTextVariables(NotificationLine, DramalordTexts.GetRelationshipStatusName(relation.Relationship));
-
-                if (Actor == Hero.MainHero || Target == Hero.MainHero)
-                {
-                    if (DramalordMCM.Instance.ShowDramaVideos)
-                    {
-                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, null, DramalordVideoNotification.VideoContext.Divorce);
-                    }
-                    else
-                    {
-                        DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(relation.Relationship), true);
-                    }
-                }
+                ConversationTools.SetTextVariables(NotificationLine, DramalordTexts.GetRelationshipStatusName(RelationshipType.Spouse));
 
                 foreach (Romance.RomanticState romanticState in Romance.RomanticStateList.ToList())
                 {
@@ -160,28 +152,49 @@ namespace Dramalord.Data.Events
                     Target.Spouse = Hero.MainHero.GetAllRelations().FirstOrDefault(r => r.Value.Relationship == RelationshipType.Spouse).Key ?? null;
                     Actor.Spouse = null;
                 }
-                else
+                else if(Actor != Hero.MainHero)
                 {
                     Actor.Spouse = null;
+                }
+                else if(Target != Hero.MainHero)
+                {
                     Target.Spouse = null;
                 }
-                
+
+                if (Actor == Hero.MainHero || Target == Hero.MainHero)
+                {
+                    if (DramalordMCM.Instance.ShowDramaVideos)
+                    {
+                        TextObject txt = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_RElATIONSHIP_END), Actor, Target);
+                        ConversationTools.SetTextVariables(txt, DramalordTexts.GetRelationshipStatusName(RelationshipType.Spouse));
+                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, txt, DramalordVideoNotification.VideoContext.Divorce, DramalordVideoNotification.VideoSound.DramaticChime);
+                        MBInformationManager.AddNotice(new DramalordEventNotification(this, GetEncyclopediaText()));
+                    }
+                    else
+                    {
+                        DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(RelationshipType.Spouse), true);
+                    }
+                }
+
                 AddLogEntry(this);
             }
             else if (relation.Relationship == RelationshipType.Spouse && shouldRelation == RelationshipType.None)
             {
                 NotificationLine = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_RElATIONSHIP_END), Actor, Target);
-                ConversationTools.SetTextVariables(NotificationLine, DramalordTexts.GetRelationshipStatusName(relation.Relationship));
+                ConversationTools.SetTextVariables(NotificationLine, DramalordTexts.GetRelationshipStatusName(RelationshipType.Spouse));
 
                 if (Actor == Hero.MainHero || Target == Hero.MainHero)
                 {
                     if(DramalordMCM.Instance.ShowDramaVideos)
                     {
-                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, null, DramalordVideoNotification.VideoContext.Divorce);
+                        TextObject txt = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_RElATIONSHIP_END), Actor, Target);
+                        ConversationTools.SetTextVariables(txt, DramalordTexts.GetRelationshipStatusName(RelationshipType.Spouse));
+                        DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, txt, DramalordVideoNotification.VideoContext.Divorce, DramalordVideoNotification.VideoSound.DramaticChime);
+                        MBInformationManager.AddNotice(new DramalordEventNotification(this, GetEncyclopediaText()));
                     }
                     else
                     {
-                        DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(relation.Relationship), true);
+                        DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, new(DramalordTexts.BANNER_RELATIONSHIP_END), DramalordTexts.GetRelationshipStatusName(RelationshipType.Spouse), true);
                     }
                 }
 
@@ -206,9 +219,12 @@ namespace Dramalord.Data.Events
                     Target.Spouse = Hero.MainHero.GetAllRelations().FirstOrDefault(r => r.Value.Relationship == RelationshipType.Spouse).Key ?? null;
                     Actor.Spouse = null;
                 }
-                else
+                else if (Actor != Hero.MainHero)
                 {
                     Actor.Spouse = null;
+                }
+                else if (Target != Hero.MainHero)
+                {
                     Target.Spouse = null;
                 }
                 AddLogEntry(this);
@@ -278,6 +294,11 @@ namespace Dramalord.Data.Events
         }
 
         public DialogFlow? GetGossipDialog(Hero speaker)
+        {
+            return null;
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
         {
             return null;
         }

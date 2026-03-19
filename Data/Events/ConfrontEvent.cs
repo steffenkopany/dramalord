@@ -25,8 +25,6 @@ namespace Dramalord.Data.Events
         [SaveableField(4)]
         private IDramalordEvent DramaEvent;
 
-        public TextObject GetConfrontationGreeting(Hero speaker) => speaker.HasMet ? ConversationTools.SetCharacterObjects(new(DramalordTexts.CONFRONTATION_GREETING_KNOWN), Hero.MainHero) : ConversationTools.SetCharacterObjects(new(DramalordTexts.CONFRONTATION_GREETING_UNKNOWN), Hero.MainHero, speaker);
-
         public ConfrontEvent(Hero actor, Hero target, IDramalordEvent dramaEvent)
         {
             Actor = actor;
@@ -77,6 +75,11 @@ namespace Dramalord.Data.Events
         }
 
         public DialogFlow? GetGossipDialog(Hero speaker)
+        {
+            return null;
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
         {
             return null;
         }

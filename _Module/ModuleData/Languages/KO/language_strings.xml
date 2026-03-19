@@ -221,7 +221,7 @@
     <string id="Dramalord215" text="당신과 {ACTOR1.LINK}의 신음 소리가 너무 커서 모두가 들었소. {ACTOR2.LINK}가 알면 어쩌겠소? {TEXT1}{GOLD_ICON}이면 입을 다물겠소." />
     <string id="Dramalord216" text="{TEXT1}일 안에 돈을 마련하시오. 그때 보지, {ACTOR1.LINK}." />
     <string id="Dramalord217" text="{ACTOR1.NAME}이(가) 당신을 협박하고 있습니다." />
-    <string id="Dramalord218" text="{ACTOR1.LINK}이(가) 당신과 {ACTOR2.LINK}를 봤소. {ACTOR3.LINK}에게 말하겠다고 협박 중이오. {TEXT1}{GOLD_ICON}을 내거나 밤에 찾아가 해결하시오." />
+    <string id="Dramalord218" text="{ACTOR1.LINK}가 당신과 {ACTOR2.LINK}를 함께 있는 것을 보았습니다. {TEXT1}{GOLD_ICON}을 지불하지 않으면 {ACTOR3.LINK}에게 말하겠다고 협박하고 있습니다. 그들을 찾아가 이 일을 해결하거나, 요구하는 대로 돈을 지불하십시오." />
     <string id="Dramalord219" text="당신은 {ACTOR1.LINK}에게 {TEXT1}{GOLD_ICON}을 지불했습니다." />
     <string id="Dramalord220" text="당신은 {ACTOR1.LINK}에게 감히 당신을 건드리면 어떤 일이 일어나는지 보여주었습니다." />
     <string id="Dramalord221" text="당신은 {ACTOR1.LINK}의 입을 영원히 막았습니다." />
@@ -297,7 +297,7 @@
     <string id="Dramalord291" text="어… 그게…" />
     <string id="Dramalord292" text="죄송하오, {ACTOR1.LINK}. 배우자가 근처에 있소. 다음에 이야기합시다." />
     <string id="Dramalord293" text="옷을 벗으시오, {ACTOR1.LINK}. 내가 다른 전투를 보여주겠소—우리 둘 다 승자가 되는 전투를." />
-    <string id="Dramalord294" text="내 사랑, {ACTOR1.LINK}이(가) 우리의 관계를 방해하고 있소. (이혼)" />
+    <string id="Dramalord294" text="내 사랑, {ACTOR2.LINK}이(가) 우리의 관계를 방해하고 있소. (이혼)" />
     <string id="Dramalord295" text="{ACTOR1.LINK}, 묻겠소—당신이 이상적으로 생각하는 짝은 어떤 사람입니까? (정보)" />
     <string id="Dramalord296" text="당신은 내 꿈의 실현이오, {ACTOR1.LINK}. 물론 결혼하겠소!" />
     <string id="Dramalord297" text="만약 진심으로 나를 원한다면, {ACTOR1.LINK}의 허락을 받아야 하오. 내 마음은 이미 당신의 것이지만, 그 승인이 우리의 미래를 보장할 것이오." />
@@ -426,5 +426,62 @@
     <string id="Dramalord420" text="{ACTOR1.LINK}와 {ACTOR3.LINK}가 고아 {ACTOR2.LINK}를 입양했습니다." />
     <string id="Dramalord421" text="Dramalord 이미지 표시" />
     <string id="Dramalord422" text="특정 이벤트에서 Dramalord 이미지를 표시합니다. 꺼져 있으면 텍스트 알림만 표시됩니다." />
+    <string id="Dramalord423" text="Dramalord 고아원 활성화" />
+    <string id="Dramalord424" text="활성화하면 NPC가 사생아를 고아원으로 보냅니다. 비활성화 시 모든 아이를 직접 키웁니다." />
+    <string id="Dramalord425" text="{ACTOR1.LINK}가 {ACTOR2.LINK}와의 결투에서 승리했습니다." />
+    <string id="Dramalord426" text="{ACTOR1.LINK}가 {ACTOR2.LINK}와의 결투에서 패배했습니다." />
+    <string id="Dramalord427" text="무기를 뽑아라. 이제 모든 것을 끝내자." />
+    <string id="Dramalord428" text="{ACTOR1.LINK}, {ACTOR2.LINK}에 대해 이야기할 것이 있다." />
+    <string id="Dramalord429" text="개인적인 이야기를 하고 싶다면 정착지에서 나를 찾아라." />
+    <string id="Dramalord430" text="좋다. 무슨 말을 하고 싶은가?" />
+    <string id="Dramalord431" text="이 결혼이라는 희극을 끝내고 {ACTOR1.LINK}를 자유롭게 해라." />
+    <string id="Dramalord432" text="{ACTOR1.LINK}에는 크게 관심 없다. 재정적 손실을 보상한다면 이 결혼을 무효로 하겠다." />
+    <string id="Dramalord433" text="{ACTOR1.LINK}에 대한 내 사랑을 끊고 싶다면 내 심장을 찔러야 할 것이다. 행운을 빌지." />
+    <string id="Dramalord434" text="동의한다. 보상금 {TEXT1}{GOLD_ICON}를 받아라." />
+    <string id="Dramalord435" text="{ACTOR2.NAME}를 설득해 {ACTOR1.NAME}와 이혼시키기." />
+    <string id="Dramalord436" text="{ACTOR1.LINK}가 {ACTOR2.LINK}와의 이혼을 도와달라고 요청했다." />
+    <string id="Dramalord437" text="희극이라니? 무슨… 무슨 뜻이야, {ACTOR1.LINK}?" />
+    <string id="Dramalord438" text="아… 잠시 생각에 잠겼을 뿐이야. 방금 말한 건 잊어줘." />
+    <string id="Dramalord439" text="이제 각자의 길을 가야 할 때다. 우리의 유대는 끝났다." />
+    <string id="Dramalord440" text="우린 노력했잖아? 이제는 네가 낯설게 느껴진다." />
+    <string id="Dramalord441" text="왕국의 일이 나를 바쁘게 한다. 안정적인 수입을 위해서다." />
+    <string id="Dramalord442" text="남은 시간을 이용해 사랑의 불꽃을 다시 살려보자." />
+    <string id="Dramalord443" text="너를 위험에 빠뜨리라고? 난 널 보호하고 있어. 너도 알잖아." />
+    <string id="Dramalord444" text="난 누구보다 널 잘 알아. 네가 무엇을 원하는지도…" />
+    <string id="Dramalord445" text="네 말이 맞아, {ACTOR1.LINK}. 우리 사랑에 다시 한 번 기회를 주자." />
+    <string id="Dramalord446" text="우리 문제를 해결하러 왔습니다, {ACTOR1.LINK}." />
+    <string id="Dramalord447" text="좋아. 이 일을 없애줄 금을 가져왔나?" />
+    <string id="Dramalord448" text="그래. 여기 {TEXT1}{GOLD_ICON} 있다. 이제 사라져라. (지불)" />
+    <string id="Dramalord449" text="아니. 대신 강철을 가져왔다. (공격)" />
+    <string id="Dramalord450" text="영웅 검색" />
+    <string id="Dramalord451" text="{ACTOR1.LINK}는 {ACTOR2.LINK}와 {ACTOR3.LINK}와 함께 3인 관계를 가졌습니다." />
+    <string id="Dramalord452" text="3인 관계 기회." />
+    <string id="Dramalord453" text="{ACTOR1.LINK}와 {ACTOR2.LINK}가 침실에서 함께하자고 당신에게 제안합니다." />
+    <string id="Dramalord454" text="함께한다" />
+    <string id="Dramalord455" text="따져 묻는다" />
+    <string id="Dramalord456" text="이제 {ACTOR1.LINK}에게 더 매력적으로 보입니다. ({TEXT1})" />
+    <string id="Dramalord457" text="이제 {ACTOR1.LINK}에게 덜 매력적으로 보입니다. ({TEXT1})" />
+    <string id="Dramalord458" text="{ACTOR1.LINK}가 당신에게 더 많은 호감을 느낍니다. ({TEXT1})" />
+    <string id="Dramalord459" text="{ACTOR1.LINK}가 당신에게 덜 호감을 느낍니다. ({TEXT1})" />
+    <string id="Dramalord460" text="{ACTOR1.LINK}, 내 사랑. 특별한 관심이 필요한 가려움이 있어. 좀 도와줄래?" />
+    <string id="Dramalord461" text="긁어주고 싶다면, 먼저 그 맛있는 몸을 풀어야겠지." />
+    <string id="Dramalord462" text="미안하지만, 오늘은 네가 직접 긁어야 할 것 같아." />
+    <string id="Dramalord463" text="{ACTOR1.LINK}는 당신의 무관심을 마음 깊이 받아들이고, 다른 사람을 떠올리며 스스로 해결했다. (사랑 {TEXT1})" />
+    <string id="Dramalord464" text="{ACTOR1.LINK}는 당신의 무관심에 충격을 받아, 당신이 더 이상 자신을 사랑하지 않는 건 아닐지 고민했다. (사랑 {TEXT1})" />
+    <string id="Dramalord465" text="엄격한 가문 계급 분리" />
+    <string id="Dramalord466" text="대부분의 영주와 귀족은 사회적 지위가 낮은 영주나 귀족에게 접근하지 않습니다." />
+    <string id="Dramalord467" text="포로 이벤트 허용" />
+    <string id="Dramalord468" text="영웅이 포로 상태를 끝내기 위해 친밀한 제안을 수락할 수 있도록 허용" />
+    <string id="Dramalord469" text="{ACTOR1.LINK}가 당신 몰래 {ACTOR2.LINK}와 데이트를 하고 있었습니다! 대면하시겠습니까?" />
+    <string id="Dramalord470" text="{ACTOR1.LINK}가 당신 몰래 {ACTOR2.LINK}와 관계를 맺었습니다! 대면하시겠습니까?" />
+    <string id="Dramalord471" text="{ACTOR1.LINK}가 당신 몰래 {ACTOR2.LINK}와 결혼했습니다! 대면하시겠습니까?" />
+    <string id="Dramalord472" text="{ACTOR1.LINK}가 {ACTOR2.LINK}의 아이를 출산했습니다! 대면하시겠습니까?" />
+    <string id="Dramalord473" text="웃기지 마세요. 당신이 운을 시험해 보는 모습은 귀엽지만, 농민을 쫓는 편이 더 성공적일 겁니다." />
+    <string id="Dramalord474" text="칭찬은 고맙지만, 제 가문의 사회적 지위는 저에게 신성한 것입니다. 그러므로 거절하겠습니다." />
+    <string id="Dramalord475" text="최대 자녀 수" />
+    <string id="Dramalord476" text="여성 영웅이 동시에 가질 수 있는 최대 자녀 수 (Dramalord 전용)" />
+    <string id="Dramalord477" text="{ACTOR1.LINK}도 우리와 함께하자고 할까? 많을수록 즐겁잖아, 그렇지 내 사랑?" />
+    <string id="Dramalord478" text="HotScenes 애니메이션 사용" />
+    <string id="Dramalord479" text="친밀한 장면에서 HotScenes 애니메이션을 사용합니다 (Dramalord 애니메이션은 비활성화됩니다)." />
   </strings>
 </base>

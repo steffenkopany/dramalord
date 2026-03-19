@@ -22,7 +22,7 @@ namespace Dramalord.UI
         private readonly string _imageSoundPath;
 
         private bool _closeRequested = false;
-        private CampaignTimeControlMode _timeSpeed = CampaignTimeControlMode.Stop;
+        //private CampaignTimeControlMode _timeSpeed = CampaignTimeControlMode.Stop;
 
         public SimpleImagePopupLayer(string imagePath, string title = null, string imageSoundPath = null)
         {
@@ -49,7 +49,7 @@ namespace Dramalord.UI
 
         private void Initialize()
         {
-            _timeSpeed = Campaign.Current.TimeControlMode;
+            //_timeSpeed = Campaign.Current.TimeControlMode;
             Campaign.Current.TimeControlMode = CampaignTimeControlMode.Stop;
 
             _viewModel = new SimpleImagePopupVM(RequestClose, _imagePath, _title);
@@ -164,7 +164,7 @@ namespace Dramalord.UI
             VideoCache.Clear();
             ScreenManager.RemoveGlobalLayer(this);
 
-            Campaign.Current.TimeControlMode = _timeSpeed;
+            //Campaign.Current.TimeControlMode = _timeSpeed;
         }
 
         protected override void OnTick(float dt)
@@ -206,7 +206,7 @@ namespace Dramalord.UI
         /// <summary>
         /// Show a popup playing a video from a ZIP file containing image frames
         /// </summary>
-        public static void ShowVideo(
+        public static void ShowZipVideo(
             string zipPath,
             string title = null,
             double frameRate = 30,
@@ -217,6 +217,29 @@ namespace Dramalord.UI
         {
             // Pre-load all frames from ZIP into VideoCache
             if (VideoCache.LoadFromZip(zipPath, frameRate, loop, soundPath))
+            {
+                ScreenManager.AddGlobalLayer(new SimpleImagePopupLayer(title, autoPlay, closeOnFinished), true);
+            }
+            else
+            {
+                Debug.Print($"[SimpleImagePopupHelper] Failed to load video from ZIP: {zipPath}");
+            }
+        }
+
+        /// <summary>
+        /// Show a popup playing a video from a ZIP file containing image frames
+        /// </summary>
+        public static void ShowH264Video(
+            string zipPath,
+            string title = null,
+            double frameRate = 30,
+            bool loop = false,
+            bool autoPlay = true,
+            bool closeOnFinished = false,
+            string soundPath = null)
+        {
+            // Pre-load all frames from ZIP into VideoCache
+            if (VideoCache.LoadFromH264(zipPath, (float)frameRate, loop, soundPath))
             {
                 ScreenManager.AddGlobalLayer(new SimpleImagePopupLayer(title, autoPlay, closeOnFinished), true);
             }

@@ -4,6 +4,7 @@ using Dramalord.Data.Events.Interfaces;
 using Dramalord.Extensions;
 using Dramalord.Notifications;
 using Helpers;
+using NetworkMessages.FromClient;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
@@ -225,6 +226,7 @@ namespace Dramalord.Conversations
             if(!_exitConversation)
             {
                 _drEvent.AfterDialog();
+                DramalordEvents.Instance.HandleWitness(_drEvent);
             }
 
             _drEvent = null;
@@ -475,7 +477,7 @@ namespace Dramalord.Conversations
 
                 _reactions[0] = (challenger.Age - Hero.MainHero.Age > 5) ? good : bad;
                 _reactions[1] = (challenger.Age - Hero.MainHero.Age < -5) ? good : bad;
-                _reactions[2] = (challenger.Age - Hero.MainHero.Age <= 5 && challenger.Age - Hero.MainHero.Age >= -5) ? good : bad;
+                _reactions[2] = (challenger.Age - Hero.MainHero.Age <= 5 && challenger.Age - Hero.MainHero.Age >= -5) ? good : bad; 
             }
         }
 
@@ -542,42 +544,50 @@ namespace Dramalord.Conversations
             {
                 return;
             }
-            int result = value > 0 ? 1 : -1;
+
+            int goodResult = value > 0 ? 1 : -1;
+            int badResult = value > 0 ? -1 : 1;
             Hero npc = Hero.OneToOneConversationHero;
             HeroDesires desires = npc.GetDesires();
             int oldAttraction = npc.GetAttractionTo(Hero.MainHero);
 
-            if (Hero.MainHero.IsFemale) { desires.AttractionWomen += result; desires.AttractionMen -= result; }
-            else if (!Hero.MainHero.IsFemale) { desires.AttractionWomen -= result; desires.AttractionMen += result; }
+            if (Hero.MainHero.IsFemale) { desires.AttractionWomen += goodResult; desires.AttractionMen += (desires.AttractionMen > 50) ? badResult : 0; }
+            else if (!Hero.MainHero.IsFemale) { desires.AttractionWomen += (desires.AttractionWomen > 50) ? badResult : 0; desires.AttractionMen += goodResult; }
 
             int build = (int)(Hero.MainHero.Build * 100);
-            if (build < desires.AttractionBuild) { desires.AttractionBuild -= result; }
-            else if (build > desires.AttractionBuild) { desires.AttractionBuild += result; }
+            if (build > desires.AttractionBuild) { desires.AttractionBuild += goodResult; }
+            else if (build < desires.AttractionBuild) { desires.AttractionBuild += badResult; }
 
             int weight = (int)(Hero.MainHero.Weight * 100);
-            if (weight < desires.AttractionWeight) { desires.AttractionWeight -= result; }
-            else if (weight > desires.AttractionWeight) { desires.AttractionWeight += result; }
+            if (weight > desires.AttractionWeight) { desires.AttractionWeight += goodResult; }
+            else if (weight < desires.AttractionWeight) { desires.AttractionWeight += badResult; }
 
             int age = (int)Hero.MainHero.Age;
             int wantedAge = (int)npc.Age + desires.AttractionAgeDiff;
-            if (age < wantedAge) { desires.AttractionAgeDiff -= result; }
-            else if (age > wantedAge) { desires.AttractionAgeDiff += result; }
+            if (age > wantedAge) { desires.AttractionAgeDiff += goodResult; }
+            else if (age < wantedAge) { desires.AttractionAgeDiff += badResult; }
 
             int newAttraction = npc.GetAttractionTo(Hero.MainHero);
 
-            if (result > 0 && newAttraction != oldAttraction)
+            if (newAttraction > oldAttraction)
             {
-                TextObject banner = new TextObject("{=Dramalord475}You are now more attractive to {HERO.LINK}. ({NUMBER})");
+                DramalordBanner.CreateBanner(npc, DramalordTexts.QUESTION_CHANGE_ATTRACTION_GOOD, ConversationTools.FormatNumber(newAttraction - oldAttraction).ToString());
+                /*
+                 * TextObject banner = new TextObject("{=Dramalord475}You are now more attractive to {HERO.LINK}. ({NUMBER})");
                 StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
                 banner.SetTextVariable("NUMBER", ConversationTools.FormatNumber(newAttraction - oldAttraction));
                 MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, soundEventPath: "event:/ui/notification/relation");
+                */
             }
-            else if (newAttraction != oldAttraction)
+            else if (newAttraction < oldAttraction)
             {
+                DramalordBanner.CreateBanner(npc, DramalordTexts.QUESTION_CHANGE_ATTRACTION_BAD, ConversationTools.FormatNumber(newAttraction - oldAttraction).ToString());
+                /*
                 TextObject banner = new TextObject("{=Dramalord476}You are now less attractive to {HERO.LINK}. ({NUMBER})");
                 StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
                 banner.SetTextVariable("NUMBER", ConversationTools.FormatNumber(newAttraction - oldAttraction));
                 MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, soundEventPath: "event:/ui/notification/relation");
+                */
             }
         }
 
@@ -587,32 +597,40 @@ namespace Dramalord.Conversations
             {
                 return;
             }
-            int result = value > 0 ? 1 : -1;
+
+            int goodResult = value > 0 ? 1 : -1;
+            int badResult = value > 0 ? -1 : 1;
             Hero npc = Hero.OneToOneConversationHero;
             HeroPersonality personality = npc.GetPersonality();
             HeroPersonality playerPersonality = Hero.MainHero.GetPersonality();
 
             int oldSympathy = npc.GetSympathyTo(Hero.MainHero);
 
-            personality.Jealousy += (playerPersonality.Jealousy > personality.Jealousy) ? result : (playerPersonality.Jealousy < personality.Jealousy) ? -result : 0;
-            personality.Sociability += (playerPersonality.Sociability > personality.Sociability) ? result : (playerPersonality.Sociability < personality.Sociability) ? -result : 0;
-            personality.Empathy += (playerPersonality.Empathy > personality.Empathy) ? result : (playerPersonality.Empathy < personality.Empathy) ? -result : 0;
+            personality.Jealousy += (playerPersonality.Jealousy > personality.Jealousy) ? goodResult : (playerPersonality.Jealousy < personality.Jealousy) ? badResult : 0;
+            personality.Sociability += (playerPersonality.Sociability > personality.Sociability) ? goodResult : (playerPersonality.Sociability < personality.Sociability) ? badResult : 0;
+            personality.Empathy += (playerPersonality.Empathy > personality.Empathy) ? goodResult : (playerPersonality.Empathy < personality.Empathy) ? badResult : 0;
 
             int newSympathy = npc.GetSympathyTo(Hero.MainHero);
 
-            if (_result > 0 && newSympathy != oldSympathy)
+            if (newSympathy > oldSympathy)
             {
+                DramalordBanner.CreateBanner(npc, DramalordTexts.QUESTION_CHANGE_SYMPATHY_GOOD, ConversationTools.FormatNumber(newSympathy - oldSympathy).ToString());
+                /*
                 TextObject banner = new TextObject("{=Dramalord477}{HERO.LINK} has more sympathy for you. ({NUMBER})");
                 StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
                 banner.SetTextVariable("NUMBER", ConversationTools.FormatNumber(newSympathy - oldSympathy));
                 MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, soundEventPath: "event:/ui/notification/relation");
+                */
             }
-            else if (newSympathy != oldSympathy)
+            else if (newSympathy < oldSympathy)
             {
+                DramalordBanner.CreateBanner(npc, DramalordTexts.QUESTION_CHANGE_SYMPATHY_BAD, ConversationTools.FormatNumber(newSympathy - oldSympathy).ToString());
+                /*
                 TextObject banner = new TextObject("{=Dramalord478}{HERO.LINK} has less sympathy for you. ({NUMBER})");
                 StringHelpers.SetCharacterProperties("HERO", npc.CharacterObject, banner);
                 banner.SetTextVariable("NUMBER", ConversationTools.FormatNumber(newSympathy - oldSympathy));
                 MBInformationManager.AddQuickInformation(banner, 1000, npc.CharacterObject, soundEventPath: "event:/ui/notification/relation");
+                */
             }
         }
     }

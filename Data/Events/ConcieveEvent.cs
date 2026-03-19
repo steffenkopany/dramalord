@@ -5,6 +5,7 @@ using Dramalord.Notifications;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.LogEntries;
+using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 using TaleWorlds.SaveSystem;
@@ -40,7 +41,7 @@ namespace Dramalord.Data.Events
             Hero female = Actor.IsFemale ? Actor : Target;
             Hero male = Actor.IsFemale ? Target : Actor;
 
-            if (female.IsFertile() || DramalordPregnancies.Instance.GetPregnancy(female) != null)
+            if (!female.IsFertile() || DramalordPregnancies.Instance.GetPregnancy(female) != null)
             {
                 return;
             }
@@ -51,7 +52,11 @@ namespace Dramalord.Data.Events
 
         public void AfterDialog()
         {
-            AddLogEntry(this);
+            Hero female = Actor.IsFemale ? Actor : Target;
+            if(female.IsPregnant)
+            {
+                AddLogEntry(this);
+            }
         }
 
         public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase => IsVisibleNotification && (Actor == obj || Target == obj);
@@ -84,6 +89,11 @@ namespace Dramalord.Data.Events
         }
 
         public DialogFlow? GetGossipDialog(Hero speaker)
+        {
+            return null;
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
         {
             return null;
         }

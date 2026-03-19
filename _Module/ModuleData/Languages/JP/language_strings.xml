@@ -221,7 +221,7 @@
     <string id="Dramalord215" text="あなたと{ACTOR1.LINK}の声があまりに大きくて、みんなに聞こえていたぞ。{ACTOR2.LINK}が知ったらどうなるかな？ {TEXT1}{GOLD_ICON}で口をつぐんでやる。" />
     <string id="Dramalord216" text="金を用意する時間を{TEXT1}日やる。ではな、{ACTOR1.LINK}。" />
     <string id="Dramalord217" text="{ACTOR1.NAME}があなたを脅迫しています。" />
-    <string id="Dramalord218" text="{ACTOR1.LINK}はあなたと{ACTOR2.LINK}を見ました。彼は{ACTOR3.LINK}に話すと脅しています。黙らせたければ{TEXT1}{GOLD_ICON}を払うか、夜に会いに行け。" />
+    <string id="Dramalord218" text="{ACTOR1.LINK}が、あなたと{ACTOR2.LINK}を一緒にいるところを見ました。あなたが{TEXT1}{GOLD_ICON}を支払わなければ、{ACTOR3.LINK}に話すと脅しています。彼らのもとを訪ね、この件を片付けるか、要求通り支払ってください。" />
     <string id="Dramalord219" text="あなたは{ACTOR1.LINK}に{TEXT1}{GOLD_ICON}を支払いました。" />
     <string id="Dramalord220" text="{ACTOR1.LINK}に、あなたを脅すとどうなるか教えてやった。" />
     <string id="Dramalord221" text="あなたは{ACTOR1.LINK}を永遠に黙らせた。" />
@@ -297,7 +297,7 @@
     <string id="Dramalord291" text="えっと……その……" />
     <string id="Dramalord292" text="すまない、{ACTOR1.LINK}。配偶者が近くにいる。また今度にしよう。" />
     <string id="Dramalord293" text="服を脱げ、{ACTOR1.LINK}。別の戦いを教えてやる——勝者は二人だ。" />
-    <string id="Dramalord294" text="愛しい人よ、{ACTOR1.LINK}が私たちの間に立ちはだかっている。（離婚）" />
+    <string id="Dramalord294" text="愛しい人よ、{ACTOR2.LINK}が私たちの間に立ちはだかっている。（離婚）" />
     <string id="Dramalord295" text="{ACTOR1.LINK}、聞かせてくれ——あなたが理想とする伴侶とは？（情報）" />
     <string id="Dramalord296" text="あなたは私の夢そのものだ、{ACTOR1.LINK}。はい、もちろん結婚します！" />
     <string id="Dramalord297" text="もし本気で私を望むなら、{ACTOR1.LINK}の許可を得る必要がある。私の心はすでにあなたのものだが、その承認があれば未来は確かになる。" />
@@ -426,5 +426,62 @@
     <string id="Dramalord420" text="{ACTOR1.LINK}と{ACTOR3.LINK}は孤児{ACTOR2.LINK}を養子に迎えました。" />
     <string id="Dramalord421" text="Dramalord画像を表示" />
     <string id="Dramalord422" text="特定のイベントでDramalord画像を表示します。オフの場合はテキスト通知のみ表示されます。" />
+    <string id="Dramalord423" text="Dramalord孤児院を有効化" />
+    <string id="Dramalord424" text="有効にすると、NPCは私生児を孤児院に送ります。無効の場合、すべての子供を育てます。" />
+    <string id="Dramalord425" text="{ACTOR1.LINK}は{ACTOR2.LINK}との決闘に勝利した。" />
+    <string id="Dramalord426" text="{ACTOR1.LINK}は{ACTOR2.LINK}との決闘に敗北した。" />
+    <string id="Dramalord427" text="武器を抜け。これで決着をつけよう。" />
+    <string id="Dramalord428" text="{ACTOR1.LINK}、{ACTOR2.LINK}について話がある。" />
+    <string id="Dramalord429" text="個人的な話があるなら、町で私を訪ねてくれ。" />
+    <string id="Dramalord430" text="よかろう。何を言いたい？" />
+    <string id="Dramalord431" text="この茶番のような結婚を終わらせ、{ACTOR1.LINK}を解放してほしい。" />
+    <string id="Dramalord432" text="{ACTOR1.LINK}には特に執着していない。金銭的損失を補償してくれるなら、この結婚を解消しよう。" />
+    <string id="Dramalord433" text="{ACTOR1.LINK}への私の愛を断ち切りたいなら、まず私の心臓を刺すことだ。幸運を祈る。" />
+    <string id="Dramalord434" text="同意する。補償として{TEXT1}{GOLD_ICON}を受け取れ。" />
+    <string id="Dramalord435" text="{ACTOR2.NAME}を説得し、{ACTOR1.NAME}と離婚させる。" />
+    <string id="Dramalord436" text="{ACTOR1.LINK}は{ACTOR2.LINK}との離婚を手伝ってほしいと頼んできた。" />
+    <string id="Dramalord437" text="茶番？何を…何を言っているんだ、{ACTOR1.LINK}？" />
+    <string id="Dramalord438" text="いや…少し考え事をしていただけだ、気にしないでくれ。" />
+    <string id="Dramalord439" text="別々の道を歩む時が来た。我々の絆は断たれた。" />
+    <string id="Dramalord440" text="努力はしただろう？だが、もう君をほとんど知らない気がする。" />
+    <string id="Dramalord441" text="王国の務めが私を忙しくしている。安定した収入のためだ。" />
+    <string id="Dramalord442" text="残された時間で、愛の炎を再び燃え上がらせよう。" />
+    <string id="Dramalord443" text="君を危険にさらすのか？私は君を守っている。それは分かっているはずだ。" />
+    <string id="Dramalord444" text="私は誰よりも君を知っている。君に何が必要かも…" />
+    <string id="Dramalord445" text="君の言う通りだ、{ACTOR1.LINK}。もう一度、愛に賭けてみよう。" />
+    <string id="Dramalord446" text="この問題を解決しに来た、{ACTOR1.LINK}。" />
+    <string id="Dramalord447" text="そうか。では、この件を消し去るための金は持ってきたのか？" />
+    <string id="Dramalord448" text="ああ。ここに{TEXT1}{GOLD_ICON}ある。さあ失せろ。（支払う）" />
+    <string id="Dramalord449" text="いや。代わりに鋼を持ってきた。（攻撃）" />
+    <string id="Dramalord450" text="英雄を探す" />
+    <string id="Dramalord451" text="{ACTOR1.LINK}は{ACTOR2.LINK}と{ACTOR3.LINK}と三人関係を持ちました。" />
+    <string id="Dramalord452" text="スリーサムの機会。" />
+    <string id="Dramalord453" text="{ACTOR1.LINK}と{ACTOR2.LINK}は、寝室で一緒にどうかとあなたを誘っています。" />
+    <string id="Dramalord454" text="参加する" />
+    <string id="Dramalord455" text="問い詰める" />
+    <string id="Dramalord456" text="あなたは今、{ACTOR1.LINK}にとってより魅力的になった。（{TEXT1}）" />
+    <string id="Dramalord457" text="あなたは今、{ACTOR1.LINK}にとって魅力が下がった。（{TEXT1}）" />
+    <string id="Dramalord458" text="{ACTOR1.LINK}はあなたへの好意が増した。（{TEXT1}）" />
+    <string id="Dramalord459" text="{ACTOR1.LINK}はあなたへの好意が減った。（{TEXT1}）" />
+    <string id="Dramalord460" text="{ACTOR1.LINK}、愛しい人。少しうずくところがあって、あなたの特別な手助けが必要なの。お願いしてもいい？" />
+    <string id="Dramalord461" text="掻いてほしいなら、まずはその美味しそうな体を脱いでもらわないとね。" />
+    <string id="Dramalord462" text="残念だけど、今日は自分で掻くしかないわね。" />
+    <string id="Dramalord463" text="{ACTOR1.LINK}はあなたの無関心を深く受け止め、他の誰かを思い浮かべながら一人で済ませた。（愛情 {TEXT1}）" />
+    <string id="Dramalord464" text="{ACTOR1.LINK}はあなたの無関心にショックを受け、もう愛されていないのではないかと考えた。（愛情 {TEXT1}）" />
+    <string id="Dramalord465" text="厳格なクラン階級の分離" />
+    <string id="Dramalord466" text="ほとんどの領主や貴族は、社会的地位の低い領主や貴族に近づきません。" />
+    <string id="Dramalord467" text="捕虜イベントを有効化" />
+    <string id="Dramalord468" text="英雄が囚われの身を解くために親密な提案を受け入れることを許可する" />
+    <string id="Dramalord469" text="{ACTOR1.LINK}はあなたに隠れて{ACTOR2.LINK}とデートしていました。問い詰めますか？" />
+    <string id="Dramalord470" text="{ACTOR1.LINK}はあなたに隠れて{ACTOR2.LINK}と関係を持っていました。問い詰めますか？" />
+    <string id="Dramalord471" text="{ACTOR1.LINK}はあなたに隠れて{ACTOR2.LINK}と結婚しました。問い詰めますか？" />
+    <string id="Dramalord472" text="{ACTOR1.LINK}は{ACTOR2.LINK}の子を出産しました。問い詰めますか？" />
+    <string id="Dramalord473" text="笑わせないでくれ。運試しをしている姿は愛らしいが、農民を相手にした方が成功するだろう。" />
+    <string id="Dramalord474" text="お褒めの言葉はありがたいが、我が家の社会的地位は神聖なものだ。ゆえに辞退させてもらう。" />
+    <string id="Dramalord475" text="最大の子ども数" />
+    <string id="Dramalord476" text="女性英雄が同時に持てる最大の子ども数（Dramalordのみ）" />
+    <string id="Dramalord477" text="{ACTOR1.LINK}も誘ってみない？人は多い方が楽しいでしょう、ねえ、愛しい人？" />
+    <string id="Dramalord478" text="HotScenesアニメーションを使用" />
+    <string id="Dramalord479" text="親密なシーンでHotScenesアニメーションを使用（Dramalordのアニメーションは無効になります）。" />
   </strings>
 </base>

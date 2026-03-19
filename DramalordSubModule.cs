@@ -1,18 +1,16 @@
 ﻿using Dramalord.Behaviors;
 using Dramalord.Behaviours;
+using Dramalord.Notifications;
+using Dramalord.UI.Dramalord.UI;
+using Dramalord.Video;
 using HarmonyLib;
 using System;
 using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
-using TaleWorlds.Engine;
-using TaleWorlds.GauntletUI;
-using TaleWorlds.GauntletUI.BaseTypes;
+using TaleWorlds.Engine.GauntletUI;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
-using TaleWorlds.MountAndBlade.GauntletUI;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets;
-using TaleWorlds.SaveSystem;
 
 namespace Dramalord
 {
@@ -52,13 +50,17 @@ namespace Dramalord
                         {
                             new PatchClassProcessor(harmony, type).Patch();
                         }
-                        catch (HarmonyException)
+                        catch (HarmonyException ex)
                         {
                             InformationManager.DisplayMessage(new InformationMessage($"{ModuleName} could not apply patch {type.Name}", new Color(1f, 0f, 0f)));
                         }
                     }
                     Patched = true;
                 }
+                UIResourceManager.SpriteData.SpriteCategories.TryGetValue("ui_dramalord", out var spriteCategory);
+                spriteCategory?.Load(UIResourceManager.ResourceContext, UIResourceManager.ResourceDepot);
+
+                DramalordBrushExtension.ExtendNotificationBrush();
             }
         }
 
@@ -67,12 +69,28 @@ namespace Dramalord
             base.OnBeforeInitialModuleScreenSetAsRoot();
            
             InformationManager.DisplayMessage(new InformationMessage($"{ModuleName} {ModuleVersion} loaded", new Color(1f, 0.08f, 0.58f)));
-           
+
+            InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: " + VideoFileRegister.Instance.Count() + " videos scenes registered", new Color(1f, 0.08f, 0.58f)));
+
             Type? pompaType = AccessTools.TypeByName("PompaSceneNotificationItem");
             if(pompaType != null)
             {
                 DramalordCampaignBehavior.HotButterFound = true;
                 InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: HotButter detected", new Color(1f, 0.08f, 0.58f)));
+            }
+
+            Type? hotType = AccessTools.TypeByName("SexSceneNotificationData");
+            if(hotType != null)
+            {
+                DramalordCampaignBehavior.HotScenesFound = HotScenesNotificationData.Initialize();
+                if(DramalordCampaignBehavior.HotScenesFound)
+                {
+                    InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: HotScenes detected", new Color(1f, 0.08f, 0.58f)));
+                }
+                else
+                {
+                    InformationManager.DisplayMessage(new InformationMessage($"{ModuleName}: FAILED to initialize HotScenes", new Color(1f, 0.08f, 0.58f)));
+                }
             }
         }
     }

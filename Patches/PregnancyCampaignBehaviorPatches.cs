@@ -16,10 +16,28 @@ namespace Dramalord.Patches
         public static void CheckOffspringsToDeliver(ref Hero hero)
         {
             HeroPregnancy? pregnancy = hero.GetPregnancy();
-            if(pregnancy != null)
+            if (pregnancy != null)
             {
                 hero.IsPregnant = true;
             }
+        }
+    }
+    
+
+    [HarmonyPatch(typeof(PregnancyCampaignBehavior), "ChildConceived", new Type[] { typeof(Hero) })]
+    public static class ChildConceivedPatch
+    {
+        [UsedImplicitly]
+        [HarmonyPrefix]
+        public static bool ChildConceived(ref Hero mother)
+        {
+            HeroPregnancy? pregnancy = mother.GetPregnancy();
+            if (pregnancy != null)
+            {
+                mother.IsPregnant = true;
+                return false;
+            }
+            return true;
         }
     }
 

@@ -15,7 +15,7 @@ namespace Dramalord.UI
         private ImageInquiryVM _viewModel;
         private bool _closeRequested = false;
 
-        private CampaignTimeControlMode _timeSpeed = CampaignTimeControlMode.Stop;
+        //private CampaignTimeControlMode _timeSpeed = CampaignTimeControlMode.Stop;
 
         public ImageInquiryLayer(
             string imagePath,
@@ -25,7 +25,7 @@ namespace Dramalord.UI
             Action onAffirmative,
             Action onNegative)
         {
-            _timeSpeed = Campaign.Current.TimeControlMode;
+            //_timeSpeed = Campaign.Current.TimeControlMode;
             Campaign.Current.TimeControlMode = CampaignTimeControlMode.Stop;
 
             _viewModel = new ImageInquiryVM(
@@ -72,7 +72,7 @@ namespace Dramalord.UI
 
             ScreenManager.RemoveGlobalLayer(this);
 
-            Campaign.Current.TimeControlMode = _timeSpeed;
+            //Campaign.Current.TimeControlMode = _timeSpeed;
         }
 
         protected override void OnTick(float dt)

@@ -60,7 +60,7 @@ namespace Dramalord.Data.Events
 
         public TextObject GetEncyclopediaText()
         {
-            return ConversationTools.SetCharacterObjects(TrustGain > 0 ? new(DramalordTexts.LOG_TALK_GOOD) : new(DramalordTexts.LOG_TALK_BAD), Actor, Target);
+            return ConversationTools.SetCharacterObjects(TrustGain >= 0 ? new(DramalordTexts.LOG_TALK_GOOD) : new(DramalordTexts.LOG_TALK_BAD), Actor, Target);
         }
 
         public TextObject GetNotificationText()
@@ -95,6 +95,11 @@ namespace Dramalord.Data.Events
         }
 
         public DialogFlow? GetGossipDialog(Hero speaker)
+        {
+            return null;
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
         {
             return null;
         }

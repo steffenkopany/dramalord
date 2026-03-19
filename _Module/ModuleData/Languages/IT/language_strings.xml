@@ -221,7 +221,7 @@
     <string id="Dramalord215" text="Tu e {ACTOR1.LINK} facevate tanto rumore che quasi tutti vi hanno sentiti. Mi chiedo cosa direbbe {ACTOR2.LINK}... {TEXT1}{GOLD_ICON} potrebbero mettere tutto a tacere." />
     <string id="Dramalord216" text="Ti do {TEXT1} giorni per procurarti le monete. A presto, {ACTOR1.LINK}!" />
     <string id="Dramalord217" text="{ACTOR1.NAME} ti sta ricattando." />
-    <string id="Dramalord218" text="{ACTOR1.LINK} ti ha visto con {ACTOR2.LINK}. Ti minaccia di raccontare tutto a {ACTOR3.LINK} se non paghi {TEXT1}{GOLD_ICON}. Incontralo di notte o paga ciò che vuole." />
+    <string id="Dramalord218" text="{ACTOR1.LINK} ti ha visto con {ACTOR2.LINK}. Ti minacciano di raccontarlo a {ACTOR3.LINK} se non paghi loro {TEXT1}{GOLD_ICON}. Fai loro visita e risolvi la questione, oppure paga ciò che chiedono." />
     <string id="Dramalord219" text="Hai pagato {ACTOR1.LINK} {TEXT1}{GOLD_ICON}." />
     <string id="Dramalord220" text="Hai mostrato a {ACTOR1.LINK} cosa succede a chi osa provocarti." />
     <string id="Dramalord221" text="Hai ridotto {ACTOR1.LINK} al silenzio per sempre." />
@@ -297,7 +297,7 @@
     <string id="Dramalord291" text="Eh... beh..." />
     <string id="Dramalord292" text="Scusami, {ACTOR1.LINK}, ma il mio coniuge è qui vicino. Parliamone un’altra volta." />
     <string id="Dramalord293" text="Spogliati, e ti mostrerò un altro tipo di battaglia — una in cui vincono entrambi." />
-    <string id="Dramalord294" text="Amore mio, {ACTOR1.LINK} è un ostacolo per la nostra relazione. (Divorziare dal coniuge)" />
+    <string id="Dramalord294" text="Amore mio, {ACTOR2.LINK} è un ostacolo per la nostra relazione. (Divorziare dal coniuge)" />
     <string id="Dramalord295" text="{ACTOR1.LINK}, sono curioso — quali qualità cerchi in un partner? (Informazione)" />
     <string id="Dramalord296" text="Rendi reali i miei sogni, {ACTOR1.LINK}. Sì, voglio sposarti!" />
     <string id="Dramalord297" text="Se vuoi davvero che io sia tuo, devi ottenere la benedizione di {ACTOR1.LINK}. Il mio cuore è tuo, ma il suo permesso garantirà il nostro futuro." />
@@ -426,5 +426,62 @@
     <string id="Dramalord420" text="{ACTOR1.LINK} e {ACTOR3.LINK} hanno adottato l’orfano {ACTOR2.LINK}." />
     <string id="Dramalord421" text="Mostra immagini di Dramalord" />
     <string id="Dramalord422" text="Mostra immagini di Dramalord per determinati eventi. Se disattivato, verranno visualizzate solo notifiche testuali." />
+    <string id="Dramalord423" text="Abilita l’orfanotrofio Dramalord" />
+    <string id="Dramalord424" text="Se abilitato, gli NPC manderanno i figli illegittimi all’orfanotrofio; altrimenti terranno tutti i figli." />
+    <string id="Dramalord425" text="{ACTOR1.LINK} ha vinto un duello contro {ACTOR2.LINK}." />
+    <string id="Dramalord426" text="{ACTOR1.LINK} ha perso un duello contro {ACTOR2.LINK}." />
+    <string id="Dramalord427" text="Sfodera la tua arma e risolviamo questa faccenda una volta per tutte." />
+    <string id="Dramalord428" text="{ACTOR1.LINK}, devo parlarti di {ACTOR2.LINK}." />
+    <string id="Dramalord429" text="Vieni a trovarmi in un insediamento se senti il bisogno di parlare di questioni personali." />
+    <string id="Dramalord430" text="Molto bene. Cosa hai da dire?" />
+    <string id="Dramalord431" text="Voglio che tu metta fine a questa farsa di matrimonio e liberi {ACTOR1.LINK}." />
+    <string id="Dramalord432" text="{ACTOR1.LINK} non significa molto per me. Se compensi la mia perdita finanziaria, annullerò questo matrimonio." />
+    <string id="Dramalord433" text="Se vuoi spezzare il mio amore per {ACTOR1.LINK}, dovrai pugnalarmi al cuore. Buona fortuna." />
+    <string id="Dramalord434" text="D’accordo. Ecco {TEXT1}{GOLD_ICON} come compensazione." />
+    <string id="Dramalord435" text="Convincere {ACTOR2.NAME} a divorziare da {ACTOR1.NAME}." />
+    <string id="Dramalord436" text="{ACTOR1.LINK} ti ha chiesto di occuparti del suo divorzio da {ACTOR2.LINK}." />
+    <string id="Dramalord437" text="Quale farsa? Cosa… cosa intendi, {ACTOR1.LINK}?" />
+    <string id="Dramalord438" text="Io… ehm, ero sovrappensiero, caro. Lascia perdere ciò che ho appena detto." />
+    <string id="Dramalord439" text="È tempo che tu e io prendiamo strade separate. Il nostro legame è spezzato." />
+    <string id="Dramalord440" text="Ci abbiamo provato, vero? Ho la sensazione di non conoscerti più." />
+    <string id="Dramalord441" text="Sai che il regno mi tiene occupato. Sto costruendo un reddito stabile." />
+    <string id="Dramalord442" text="Cerchiamo di usare il tempo che abbiamo per riaccendere la fiamma del nostro amore." />
+    <string id="Dramalord443" text="E mettere te stesso in pericolo? Ti sto proteggendo, lo sai." />
+    <string id="Dramalord444" text="Ti conosco meglio di chiunque altro. E so di cosa hai bisogno…" />
+    <string id="Dramalord445" text="Hai ragione, {ACTOR1.LINK}. Diamoci un’ultima possibilità." />
+    <string id="Dramalord446" text="Sono qui per risolvere la nostra questione, {ACTOR1.LINK}." />
+    <string id="Dramalord447" text="Molto bene. Hai portato l’oro per far sparire questa faccenda?" />
+    <string id="Dramalord448" text="Sì. Ecco {TEXT1}{GOLD_ICON}. Ora sparisci. (Paga)" />
+    <string id="Dramalord449" text="No. Invece ho portato l’acciaio. (Attacca)" />
+    <string id="Dramalord450" text="Cerca eroe" />
+    <string id="Dramalord451" text="{ACTOR1.LINK} ha fatto un trio con {ACTOR2.LINK} e {ACTOR3.LINK}." />
+    <string id="Dramalord452" text="Opportunità di trio." />
+    <string id="Dramalord453" text="{ACTOR1.LINK} e {ACTOR2.LINK} ti chiedono se vuoi unirti a loro in camera da letto." />
+    <string id="Dramalord454" text="Unisciti a loro" />
+    <string id="Dramalord455" text="Affrontali" />
+    <string id="Dramalord456" text="Ora sei più attraente per {ACTOR1.LINK}. ({TEXT1})" />
+    <string id="Dramalord457" text="Ora sei meno attraente per {ACTOR1.LINK}. ({TEXT1})" />
+    <string id="Dramalord458" text="{ACTOR1.LINK} ora prova più simpatia per te. ({TEXT1})" />
+    <string id="Dramalord459" text="{ACTOR1.LINK} ora prova meno simpatia per te. ({TEXT1})" />
+    <string id="Dramalord460" text="{ACTOR1.LINK}, amore mio. Ho un prurito che richiede la tua speciale attenzione. Ti dispiacerebbe occupartene?" />
+    <string id="Dramalord461" text="Se vuoi grattarmi, caro mio, dovrai prima scartare quel tuo corpo delizioso." />
+    <string id="Dramalord462" text="Temo, caro, che oggi dovrai grattarti da solo." />
+    <string id="Dramalord463" text="{ACTOR1.LINK} ha preso a cuore la tua negligenza e si è occupato/a da solo/a della faccenda, pensando a qualcun altro. (Amore {TEXT1})" />
+    <string id="Dramalord464" text="{ACTOR1.LINK} è rimasto/a scioccato/a dalla tua negligenza, temendo che tu non lo/la amassi più. (Amore {TEXT1})" />
+    <string id="Dramalord465" text="Separazione rigida dei ranghi del clan" />
+    <string id="Dramalord466" text="La maggior parte dei lord e delle dame non si avvicinerà a lord o dame di status sociale inferiore." />
+    <string id="Dramalord467" text="Abilita eventi di prigionia" />
+    <string id="Dramalord468" text="Consenti agli eroi di accettare offerte intime per porre fine alla loro prigionia" />
+    <string id="Dramalord469" text="{ACTOR1.LINK} usciva con {ACTOR2.LINK} alle tue spalle! Vuoi affrontarli?" />
+    <string id="Dramalord470" text="{ACTOR1.LINK} aveva rapporti intimi con {ACTOR2.LINK} alle tue spalle! Vuoi affrontarli?" />
+    <string id="Dramalord471" text="{ACTOR1.LINK} ha sposato {ACTOR2.LINK} alle tue spalle! Vuoi affrontarli?" />
+    <string id="Dramalord472" text="{ACTOR1.LINK} ha dato alla luce un figlio di {ACTOR2.LINK}! Vuoi affrontarli?" />
+    <string id="Dramalord473" text="Non farmi ridere. È adorabile che tu tenti la fortuna, ma probabilmente avresti più successo con dei contadini." />
+    <string id="Dramalord474" text="Per quanto apprezzi il complimento, lo status sociale della mia famiglia è sacro per me, quindi devo rifiutare." />
+    <string id="Dramalord475" text="Numero massimo di figli" />
+    <string id="Dramalord476" text="Numero massimo di figli che un'eroina può avere contemporaneamente (solo Dramalord)" />
+    <string id="Dramalord477" text="Dovremmo chiedere a {ACTOR1.LINK} di unirsi a noi? Più siamo, meglio è, vero tesoro?" />
+    <string id="Dramalord478" text="Usa animazioni HotScenes" />
+    <string id="Dramalord479" text="Usa le animazioni HotScenes per le scene intime (disattiverà le animazioni di Dramalord)." />
   </strings>
 </base>

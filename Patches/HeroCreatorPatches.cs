@@ -3,6 +3,7 @@ using HarmonyLib;
 using JetBrains.Annotations;
 using TaleWorlds.CampaignSystem;
 
+/*
 namespace Dramalord.Patches
 {
     [HarmonyPatch(typeof(HeroCreator), "DeliverOffSpring")]
@@ -30,3 +31,4 @@ namespace Dramalord.Patches
         }
     }
 }
+*/

@@ -63,13 +63,19 @@ namespace Dramalord.Data.Events
 
             if (Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan)
             {
-                if (DramalordCampaignBehavior.HotButterFound && DramalordMCM.Instance.ShowHotButter)
+                if (DramalordCampaignBehavior.HotScenesFound && DramalordMCM.Instance.ShowHotScenes)
+                {
+                    MBInformationManager.ShowSceneNotification(new HotScenesNotificationData(Actor, Target));
+                }
+                else if (DramalordCampaignBehavior.HotButterFound && DramalordMCM.Instance.ShowHotButter)
                 {
                     MBInformationManager.ShowSceneNotification(new HotButterNotification(Actor, Target, Actor.CurrentSettlement));
                 }
                 else if (DramalordMCM.Instance.ShowDramaVideos)
                 {
-                    DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, null, DramalordVideoNotification.VideoContext.PrisonSex);
+                    TextObject txt = ConversationTools.SetCharacterObjects(new(DramalordTexts.LOG_SEX_PRISON), Actor, Target);
+                    DramalordVideoNotification.ShowDramalordVideoNotification(Actor, Target, txt, DramalordVideoNotification.VideoContext.PrisonSex, DramalordVideoNotification.VideoSound.DramaticChime);
+                    MBInformationManager.AddNotice(new DramalordEventNotification(this, GetEncyclopediaText()));
                 }
                 else
                 {
@@ -125,6 +131,11 @@ namespace Dramalord.Data.Events
         }
 
         public DialogFlow? GetGossipDialog(Hero speaker)
+        {
+            return null;
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
         {
             return null;
         }

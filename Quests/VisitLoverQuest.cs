@@ -4,6 +4,7 @@ using Dramalord.Data.Events;
 using Dramalord.Extensions;
 using Dramalord.Notifications;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Localization;
 using TaleWorlds.SaveSystem;
 
@@ -24,6 +25,8 @@ namespace Dramalord.Quests
             return ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_VISIT_TITLE), QuestGiver);
         }
 
+        public override TextObject Description => ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_VISIT_INFO), QuestGiver);
+
 
         protected override void HourlyTick()
         {
@@ -38,13 +41,28 @@ namespace Dramalord.Quests
                         .PlayerLine(DramalordTexts.INTENTION_VISIT_REACT_1)
                             .NpcLine(DramalordTexts.INTENTION_VISIT_2_INTIME)
                             .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
-                            .Consequence(() => { QuestSuccess(Hero.MainHero); DramalordEvents.Instance.StartIntention(new SexEvent(Hero.MainHero, Hero.OneToOneConversationHero)); })
+                            .Consequence(() => 
+                            { 
+                                QuestSuccess(Hero.MainHero); 
+                                DramalordEvents.Instance.StartIntention(new SexEvent(Hero.MainHero, Hero.OneToOneConversationHero));
+                                if(PlayerEncounter.Current != null)
+                                {
+                                    PlayerEncounter.LeaveEncounter = true;
+                                }
+                            })
                             .CloseDialog()
                     .NpcOption(DramalordTexts.INTENTION_VISIT_1_LATE, () => Hero.OneToOneConversationHero.IsDramalordLegit() && Hero.OneToOneConversationHero == QuestGiver && HasBeenVisited && ConversationTools.SetConversationHero(QuestGiver))
                         .PlayerLine(DramalordTexts.INTENTION_VISIT_REACT_1)
                             .NpcLine(DramalordTexts.INTENTION_VISIT_2_LATE)
                             .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
-                            .Consequence(() => QuestTimeout())
+                            .Consequence(() => 
+                            { 
+                                QuestTimeout(); 
+                                if (PlayerEncounter.Current != null)
+                                {
+                                    PlayerEncounter.LeaveEncounter = true;
+                                }
+                            })
                             .CloseDialog()
             .EndNpcOptions();
 
@@ -90,7 +108,7 @@ namespace Dramalord.Quests
         public override void QuestStartInit()
         {
             HasBeenVisited = false;
-            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_VISIT_INFO), QuestGiver));
+            AddLog(Description);
             InitializeQuestOnGameLoad();
         }
 

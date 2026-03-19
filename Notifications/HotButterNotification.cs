@@ -3,13 +3,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
-using TaleWorlds.Core.ViewModelCollection.Information;
 using TaleWorlds.Localization;
-using TaleWorlds.MountAndBlade.GauntletUI.SceneNotification;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Information;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Map.Notification;
-using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Tutorial;
 
 namespace Dramalord.Notifications
 {

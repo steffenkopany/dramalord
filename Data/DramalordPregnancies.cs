@@ -68,25 +68,21 @@ namespace Dramalord.Data
 
         internal void OnHourlyTick()
         {
+            Hero? pregnant = _pregnancies.FirstOrDefault( preg => CampaignTime.Days((float)preg.Value.Conceived.ToDays + (float)DramalordMCM.Instance.PregnancyDuration).IsPast).Key;
+            if (pregnant != null)
+            {
+                HeroPregnancy pregnancy = _pregnancies[pregnant];
+                _pregnancies.Remove(pregnant);
+                DramalordEvents.Instance.StartIntention(new BirthEvent(pregnant, pregnancy.Father));
+            }
+
             foreach (var pregnancy in _pregnancies.ToList())
             {
-                if(CampaignTime.Days((float)pregnancy.Value.Conceived.ToDays + (float)DramalordMCM.Instance.PregnancyDuration).IsPast)
-                {
-                    DramalordEvents.Instance.StartIntention(new BirthEvent(pregnancy.Key, pregnancy.Value.Father));
-                    _pregnancies.Remove(pregnancy.Key);
-                }
-                else if(!pregnancy.Key.IsPregnant)
+                if(!pregnancy.Key.IsPregnant)
                 {
                     pregnancy.Key.IsPregnant = true;
                 }
             }
-            /*
-            _pregnancies.Where(keypair => CampaignTime.Days((float)keypair.Value.Conceived.ToDays + (float)DramalordMCM.Instance.PregnancyDuration).IsPast).ToList().ForEach(keypair =>
-            {
-                DramalordEvents.Instance.StartIntention(new BirthEvent(keypair.Key, keypair.Value.Father));
-                _pregnancies.Remove(keypair.Key);
-            });
-            */
         }
 
         internal override void InitEvents()

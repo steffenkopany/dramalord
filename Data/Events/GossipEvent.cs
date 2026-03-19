@@ -19,10 +19,12 @@ namespace Dramalord.Data.Events
         public Hero Target { get; private set; }
 
         [SaveableProperty(3)]
-        public List<Hero> IsKnownTo { get; private set; } = new();
+        public List<Hero> IsKnownTo { get; private set; } = new ();
 
         [SaveableField(4)]
         private IDramalordEvent DramaEvent;
+
+        public IDramalordEvent GetGossipEvent() => DramaEvent;
 
         public TextObject GetConfrontationGreeting(Hero speaker) => speaker.HasMet ? ConversationTools.SetCharacterObjects(new(DramalordTexts.CONFRONTATION_GREETING_KNOWN), Hero.MainHero) : ConversationTools.SetCharacterObjects(new(DramalordTexts.CONFRONTATION_GREETING_UNKNOWN), Hero.MainHero, speaker);
 
@@ -31,7 +33,6 @@ namespace Dramalord.Data.Events
             Actor = actor;
             Target = target;
             DramaEvent = dramaEvent;
-            IsKnownTo.Add(Actor);
             dramaEvent.IsKnownTo.Add(Actor);
         }
 
@@ -78,6 +79,11 @@ namespace Dramalord.Data.Events
         }
 
         public DialogFlow? GetGossipDialog(Hero speaker)
+        {
+            return null;
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
         {
             return null;
         }

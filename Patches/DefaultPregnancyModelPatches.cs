@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Dramalord.Data;
+using HarmonyLib;
 using JetBrains.Annotations;
 using System;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Dramalord.Patches
         [HarmonyPrefix]
         public static bool GetDailyChanceOfPregnancyForHero(ref Hero hero, ref float __result)
         {
-            if(!DramalordMCM.Instance.AllowDefaultPregnancies)
+            if(!DramalordMCM.Instance.AllowDefaultPregnancies || DramalordPregnancies.Instance.GetPregnancy(hero) != null)
             {
                 __result = 0;
                 return false;

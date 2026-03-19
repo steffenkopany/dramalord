@@ -4,9 +4,9 @@ using Dramalord.Extensions;
 using Dramalord.Notifications;
 using HarmonyLib;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.ViewModelCollection;
 using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Items;
 using TaleWorlds.CampaignSystem.ViewModelCollection.Encyclopedia.Pages;
 using TaleWorlds.Core;
@@ -26,7 +26,7 @@ namespace Dramalord.Patches
         {
             Hero? hero = __instance.Obj as Hero;
 
-            if (hero != null && hero != Hero.MainHero && hero.IsDramalordLegit() && hero.IsDramalordLegit())
+            if (hero != null && hero != Hero.MainHero && hero.IsDramalordLegit())
             {
                 DramalordMCMEditor.Instance.SetSelected(hero);
                 HeroDesires desires = hero.GetDesires();
@@ -64,35 +64,51 @@ namespace Dramalord.Patches
                 __instance.Stats.Add(new StringPairItemVM(new TextObject(DramalordTexts.NAME_EMPATHY) + ":", __instance.IsInformationHidden ? hidden : personality.Empathy.ToString()));
                 __instance.Stats.Add(new StringPairItemVM(new TextObject(DramalordTexts.NAME_SOCIABILITY) + ":", __instance.IsInformationHidden ? hidden : personality.Sociability.ToString()));
             }
-            if(hero != null)
-            { 
-                
-                foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Spouse).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
+            if(hero != null && hero.IsDramalordLegit())
+            {
+                MBBindingList<EncyclopediaFamilyMemberVM> newFamily = new();
+                Dictionary<Hero, HeroRelation> relations = hero.GetAllRelations().ToDictionary(x => x.Key, x => x.Value);
+                Dictionary<Hero, HeroRelation> playerSpouses = Hero.MainHero.GetAllRelations().ToDictionary(x => x.Key, x => x.Value);
+
+                foreach (var item in relations)
                 {
-                    if (charObj.IsHero && charObj.HeroObject != hero)
+                    Hero h = item.Key;
+                    HeroRelation relation = item.Value;
+
+                    if(h != null && relation != null && (relation.Relationship == RelationshipType.Spouse || relation.Relationship == RelationshipType.Lover))
                     {
-                        MBBindingList<HeroVM> companions = __instance.Companions;
-                        companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
-
-                        MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
-                        family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
-
-                        __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
+                        if (!newFamily.Any(fam => fam.Hero == h))
+                        {
+                            if (h.IsDramalordLegit() && Campaign.Current.EncyclopediaManager.GetPageOf(typeof(Hero)).IsValidEncyclopediaItem(h))
+                            {
+                                newFamily.Add(new EncyclopediaFamilyMemberVM(h, hero));
+                            }                           
+                        }
                     }
                 }
 
-                foreach (CharacterObject charObj in hero.GetAllRelations().Where(relation => relation.Value.Relationship == RelationshipType.Lover).Select(relation => relation.Key.CharacterObject).ToList().Distinct())
+                if (hero.IsPlayerSpouse())
                 {
-                    if (charObj.IsHero)
+                    foreach (var item in playerSpouses)
                     {
-                        MBBindingList<HeroVM> companions = __instance.Companions;
-                        companions.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => companions.Remove(entry));
+                        HeroRelation relation = item.Value;
+                        Hero h = item.Key;
 
-                        MBBindingList<EncyclopediaFamilyMemberVM> family = __instance.Family;
-                        family.Where(item => item.Hero == charObj.HeroObject).ToList().ForEach(entry => family.Remove(entry));
-
-                        __instance.Family.Add(new EncyclopediaFamilyMemberVM(charObj.HeroObject, hero));
+                        if (h != null && relation != null && relation.Relationship == RelationshipType.Spouse && h != hero)
+                        {
+                            if (!newFamily.Any(fam => fam.Hero == h))
+                            {
+                                newFamily.Add(new EncyclopediaFamilyMemberVM(h, hero));
+                            }
+                        }
                     }
+                }
+
+                __instance.Family.Where(h => !newFamily.Any(h2 => h2.Hero == h.Hero)).Do(h => newFamily.Add(h));
+                __instance.Family.Clear();
+                foreach (var familyMember in newFamily)
+                {
+                    __instance.Family.Add(familyMember);
                 }
             }
         }
@@ -106,18 +122,22 @@ namespace Dramalord.Patches
         public static bool UpdateInformationTextPrefix(ref EncyclopediaHeroPageVM __instance)
         {
             Hero? hero = __instance.Obj as Hero;
-            __instance.InformationText = "";
-            if (!TextObject.IsNullOrEmpty(hero.EncyclopediaText))
+            if (hero != null && hero.IsDramalordLegit())
             {
-                __instance.InformationText = hero.EncyclopediaText.ToString();
+                __instance.InformationText = "";
+                if (!TextObject.IsNullOrEmpty(hero.EncyclopediaText))
+                {
+                    __instance.InformationText = hero.EncyclopediaText.ToString();
+                }
+                else if (hero.CharacterObject.Occupation == Occupation.Lord && hero.Clan != null)
+                {
+                    __instance.InformationText = Hero.SetHeroEncyclopediaTextAndLinks(hero).ToString();
+                }
+                return false;
             }
-            else if (hero.CharacterObject.Occupation == Occupation.Lord && hero.Clan != null)
-            {
-                __instance.InformationText = Hero.SetHeroEncyclopediaTextAndLinks(hero).ToString();
-            }
-            return false;
+            return true;
         }
-
+        
         [UsedImplicitly]
         [HarmonyPostfix]
         public static void UpdateInformationText(ref EncyclopediaHeroPageVM __instance)

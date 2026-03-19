@@ -8,6 +8,7 @@ using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
+
 namespace Dramalord.Patches
 {
     [HarmonyPatch(typeof(ConversationHelper), "GetHeroRelationToHeroTextShort")]
@@ -22,7 +23,7 @@ namespace Dramalord.Patches
                 return;
             }
 
-            if (baseHero.IsSpouseOf(queriedHero))
+            if (baseHero.IsSpouseOf(queriedHero) || (baseHero.IsPlayerSpouse() && queriedHero.IsPlayerSpouse()))
             {
                 string text = (queriedHero.IsFemale) ? new TextObject(DramalordTexts.NAME_WIFE).ToString() : new TextObject(DramalordTexts.NAME_HUSBAND).ToString();
                 if (!char.IsLower(text[0]) != uppercaseFirst)

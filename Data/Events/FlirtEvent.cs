@@ -46,17 +46,15 @@ namespace Dramalord.Data.Events
             heroDesires.Horny += heroAttraction / 10;
             targetDesires.Horny += tagetAttraction / 10;
 
-            int attractionBonus = tagetAttraction / 10;
-            //int attractionBonus = ((heroAttraction / 20) + (tagetAttraction / 20)) / 2;
-
             if (Actor == Hero.MainHero || Target == Hero.MainHero)
             {
+                int attractionBonus = tagetAttraction / 10;
                 LoveGain = MBMath.ClampInt(attractionBonus, 0, 100) * modifier;
             }
             else
             {
-                int realGain = attractionBonus - (DramalordMCM.Instance.MinAttraction / 10);
-                LoveGain = MBMath.ClampInt(realGain, -100, 100) * modifier;
+                int attractionBonus = ((heroAttraction / 10) + (tagetAttraction / 10)) / 2;
+                LoveGain = MBMath.ClampInt(attractionBonus, -100, 100) * modifier;
             }
             
 
@@ -74,7 +72,7 @@ namespace Dramalord.Data.Events
 
         public TextObject GetEncyclopediaText()
         {
-            return ConversationTools.SetCharacterObjects(LoveGain > 0 ? new(DramalordTexts.LOG_FLIRT_GOOD) : new(DramalordTexts.LOG_FLIRT_BAD), Actor, Target);
+            return ConversationTools.SetCharacterObjects(LoveGain >= 0 ? new(DramalordTexts.LOG_FLIRT_GOOD) : new(DramalordTexts.LOG_FLIRT_BAD), Actor, Target);
         }
 
         public TextObject GetNotificationText()
@@ -109,6 +107,11 @@ namespace Dramalord.Data.Events
         }
 
         public DialogFlow? GetGossipDialog(Hero speaker)
+        {
+            return null;
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
         {
             return null;
         }

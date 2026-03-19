@@ -72,9 +72,9 @@ namespace Dramalord.Data
             if(!_personalities.ContainsKey(hero))
             {
                 _personalities.Add(hero, new HeroPersonality(
-                    Generate(),
-                    Generate(),
-                    Generate()
+                    Generate(50, 75, 0, 100),
+                    Generate(50, 75, 0, 100),
+                    Generate(50, 75, 0, 100)
                 ));
             }
             return _personalities[hero];
@@ -145,6 +145,19 @@ namespace Dramalord.Data
                 rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);
                 result = (int)(25 * rand_std_normal);
             }
+            return result;
+        }
+
+        private int Generate(int peak, int normal, int min, int max)
+        {
+            float rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);
+            int result = (int)(peak + normal * rand_std_normal);
+            while (result < min || result > max)
+            {
+                rand_std_normal = (float)Math.Sqrt(-2.0 * Math.Log(MBRandom.RandomFloat)) * (float)Math.Sin(2.0 * Math.PI * MBRandom.RandomFloat);
+                result = (int)(peak + normal * rand_std_normal);
+            }
+
             return result;
         }
     }

@@ -1,6 +1,8 @@
 ﻿using Dramalord.Data;
 using Dramalord.Data.Events;
+using Dramalord.Data.Events.Interfaces;
 using Dramalord.Extensions;
+using Dramalord.Notifications;
 using Dramalord.Quests;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,8 @@ namespace Dramalord.Behaviours
                 HeroPersonality personality = hero.GetPersonality();
                 HeroDesires desires = hero.GetDesires();
 
+                desires.Horny += desires.Libido; //always rise
+
                 bool isHorny = desires.Horny >= WeightedRandom(100, 75, 50, 100);
                 bool isExtrovert = personality.Sociability >= WeightedRandom(100, 75, 0, 100);
 
@@ -33,19 +37,39 @@ namespace Dramalord.Behaviours
                 {
                     List<Hero> closeHeroes = hero.GetCloseHeroes();
                     bool playerClose = closeHeroes.Contains(Hero.MainHero)
-                                  && hero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow >= DramalordMCM.Instance.DaysBetweenInteractions;
+                                  && hero.GetRelationTo(Hero.MainHero).LastInteraction.ElapsedDaysUntilNow >= DramalordMCM.Instance.DaysBetweenInteractions
+                                  && !hero.GetRelationTo(Hero.MainHero).IsBlocked();
 
 
                     foreach(var item in hero.GetAllRelations())
                     {
                         //cleanup
-                        if(item.Key != Hero.MainHero && item.Value.Love <= 0 && (item.Value.Relationship == RelationshipType.Lover || item.Value.Relationship == RelationshipType.Spouse))
+                        if(item.Value.Love <= 0 && (item.Value.Relationship == RelationshipType.Lover || item.Value.Relationship == RelationshipType.Spouse))
                         {
-                            (new RelationshipEvent(hero, item.Key)).Action(); //DramalordEvents.Instance.StartIntention(new RelationshipEvent(hero, item.Key)); 
+                            if(item.Key != Hero.MainHero)
+                            {
+                                (new RelationshipEvent(hero, item.Key)).Action(); //DramalordEvents.Instance.StartIntention(new RelationshipEvent(hero, item.Key)); 
+                            }
+                            else if(item.Value.Relationship == RelationshipType.Spouse && DramalordEvents.Instance.GetReaction(hero, Hero.MainHero) == null)
+                            {
+                                DramalordEvents.Instance.AddReaction(new BreakUpEvent(hero, Hero.MainHero));
+                            }
                         }
-                        else if (item.Key != Hero.MainHero && hero.GetTrust(item.Key) <= 0 && item.Value.Relationship == RelationshipType.Friend)
+                        else if (hero.GetTrust(item.Key) <= 0 && item.Value.Relationship == RelationshipType.Friend)
                         {
                             (new RelationshipEvent(hero, item.Key)).Action(); //DramalordEvents.Instance.StartIntention(new RelationshipEvent(hero, item.Key));
+                        }
+                        else if(item.Key == Hero.MainHero && item.Value.Relationship == RelationshipType.Spouse && item.Value.Love > 0)
+                        {
+                            IDramalordEvent? dEv = DramalordEvents.Instance.GetReaction(hero, Hero.MainHero);
+                            if(dEv != null && dEv is BreakUpEvent)
+                            {
+                                DramalordEvents.Instance.GetReaction(hero, Hero.MainHero, true); //remove the breakup
+                            }
+                        }
+                        else if (item.Key == Hero.MainHero && item.Value.Relationship == RelationshipType.Spouse && hero.Spouse == null)
+                        {
+                            hero.Spouse = Hero.MainHero; // fix it
                         }
                     }
 
@@ -58,7 +82,7 @@ namespace Dramalord.Behaviours
                         {
                             
                             // If hero's Honor <= 0, maybe do prisoner intercourse
-                            if ((hero.GetTraitLevel(DefaultTraits.Honor) < 1 && hero.GetPersonality().Empathy < 50) && (hero.PartyBelongedTo == null || !hero.PartyBelongedTo.IsMainParty))
+                            if (DramalordMCM.Instance.AllowCaptivitySex && (hero.GetTraitLevel(DefaultTraits.Honor) < 1 && hero.GetPersonality().Empathy < 50) && (hero.PartyBelongedTo == null || !hero.PartyBelongedTo.IsMainParty))
                             {
                                 target = hero.GetClosePrisoners().GetRandomElementWithPredicate(h =>
                                     hero.GetAttractionTo(h) >= DramalordMCM.Instance.MinAttraction
@@ -85,13 +109,20 @@ namespace Dramalord.Behaviours
                                 VisitLoverQuest quest = new VisitLoverQuest(hero);
                                 quest.StartQuest();
                                 DramalordQuests.Instance.AddQuest(hero, quest);
+                                MBInformationManager.AddNotice(new DramalordQuestNotification(quest));
 
+                                return;
+                            }
+
+                            if(playerClose && hero.IsEmotionalWith(Hero.MainHero) && desires.Horny == 100 && MBRandom.RandomInt(1, 100) <= DramalordMCM.Instance.ChanceApproachingPlayer)
+                            {
+                                DramalordEvents.Instance.StartIntention(new SexEvent(hero, Hero.MainHero));
                                 return;
                             }
                         }
 
                         // 2) BETROTH / MARRIAGE / DATE
-                        target = (playerClose && MBRandom.RandomInt(1, 100) <= DramalordMCM.Instance.ChanceApproachingPlayer)
+                        target = (playerClose && MBRandom.RandomInt(1, 100) <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.RomanceAccepted(Hero.MainHero, false))
                             ? Hero.MainHero
                             : closeHeroes.GetRandomElementWithPredicate(h =>
                                 h.IsAutonom()
@@ -99,10 +130,10 @@ namespace Dramalord.Behaviours
                                 && hero.IsEmotionalWith(h)
                                 && !hero.HasMetRecently(h)
                                 && !hero.IsBlockedBy(h)
-                                && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
+                                && hero.RomanceAccepted(h, false)
                             );
 
-                        if (target != null && hero.IsEmotionalWith(target))
+                        if (target != null && hero.IsEmotionalWith(target) && hero.IsFaithFul(target))
                         {
                             HeroRelation targetRelation = hero.GetRelationTo(target);
 
@@ -110,9 +141,33 @@ namespace Dramalord.Behaviours
                             if (targetRelation.Relationship == RelationshipType.Lover
                                 && targetRelation.Love >= DramalordMCM.Instance.MinMarriageLove
                                 && DramalordQuests.Instance.GetQuest(hero) == null
-                                && (target.IsFemale != hero.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage))
+                                && (target.IsFemale != hero.IsFemale || DramalordMCM.Instance.AllowSameSexMarriage)
+                                && (target.GetTraitLevel(DefaultTraits.Honor) < 1 || (!target.IsPlayerSpouse() || target == Hero.MainHero)))
                             {
-                                DramalordEvents.Instance.StartIntention(new MarriageEvent(hero, target));
+                                if(hero.IsPlayerSpouse() && !target.IsPlayerSpouse())
+                                {
+                                    IDramalordEvent? dEv = DramalordEvents.Instance.GetReaction(hero, Hero.MainHero);
+                                    if (dEv == null)
+                                    {
+                                        DramalordEvents.Instance.AddReaction(new BreakUpEvent(hero, Hero.MainHero));
+                                    }
+                                }
+                                else if (!hero.IsPlayerSpouse() && target.IsPlayerSpouse())
+                                {
+                                    IDramalordEvent? dEv = DramalordEvents.Instance.GetReaction(target, Hero.MainHero);
+                                    if (dEv == null)
+                                    {
+                                        DramalordEvents.Instance.AddReaction(new BreakUpEvent(target, Hero.MainHero));
+                                    }
+                                }
+                                else if(hero.Spouse == null && !hero.IsPlayerSpouse() && !target.IsPlayerSpouse() && (target.Spouse == null || target == Hero.MainHero))
+                                {
+                                    DramalordEvents.Instance.StartIntention(new MarriageEvent(hero, target));
+                                }
+                                else
+                                {
+                                    DramalordEvents.Instance.StartIntention(new DateEvent(hero, target));
+                                }
                                 return;
                             }
                             // Else do a date intention
@@ -124,7 +179,7 @@ namespace Dramalord.Behaviours
                         }
 
                         // 3) FLIRT
-                        target = (playerClose && acceptsPlayer && MBRandom.RandomInt(1,100) <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero))
+                        target = (playerClose && acceptsPlayer && MBRandom.RandomInt(1,100) <= DramalordMCM.Instance.ChanceApproachingPlayer && hero.HasMutualAttractionWith(Hero.MainHero) && hero.RomanceAccepted(Hero.MainHero, false))
                             ? Hero.MainHero
                             : closeHeroes.GetRandomElementWithPredicate(h =>
                                 h.IsAutonom()
@@ -133,10 +188,10 @@ namespace Dramalord.Behaviours
                                 && !hero.IsRelativeOf(h)
                                 && !hero.HasMetRecently(h)
                                 && !hero.IsBlockedBy(h)
-                                && (DramalordMCM.Instance.AllowSocialClassMix || h.IsLord == hero.IsLord)
+                                && hero.RomanceAccepted(h, false)
                             );
 
-                        if (target != null)
+                        if (target != null && hero.IsFaithFul(target))
                         {
                             HeroRelation targetRelation = hero.GetRelationTo(target);
                             // Possibly do a date if love is high enough
@@ -153,7 +208,7 @@ namespace Dramalord.Behaviours
                         }
 
                         // 4) TALK (fallback if no romance occurred)
-                        target = (playerClose && acceptsPlayer && MBRandom.RandomInt(1, 100) <= DramalordMCM.Instance.ChanceApproachingPlayer)
+                        target = (playerClose && acceptsPlayer && MBRandom.RandomInt(1, 100) <= DramalordMCM.Instance.ChanceApproachingPlayer && (DramalordMCM.Instance.AllowSocialClassMix || hero.IsLord))
                                     ? Hero.MainHero
                                     : closeHeroes.GetRandomElementWithPredicate(h =>
                                         h.IsAutonom()
@@ -177,6 +232,7 @@ namespace Dramalord.Behaviours
                     VisitLoverQuest quest = new VisitLoverQuest(hero);
                     quest.StartQuest();
                     DramalordQuests.Instance.AddQuest(hero, quest);
+                    MBInformationManager.AddNotice(new DramalordQuestNotification(quest));
 
                     return;
                 }
@@ -193,10 +249,6 @@ namespace Dramalord.Behaviours
                     }
                     return;
                 }
-
-                // If nothing else fired and hero has a toy, do toy usage:
-                desires.Horny += desires.Libido;
-                
             }
         }
 

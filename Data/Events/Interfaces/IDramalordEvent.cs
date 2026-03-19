@@ -23,6 +23,8 @@ namespace Dramalord.Data.Events.Interfaces
 
         DialogFlow? GetGossipDialog(Hero speaker);
 
+        DialogFlow? GetBlackmailDialog(Hero speaker);
+
         void ReactionResult(Hero speaker, Hero listener, out int trust, out int love);
     }
 }

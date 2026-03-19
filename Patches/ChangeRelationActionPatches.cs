@@ -1,5 +1,4 @@
-﻿using Dramalord.Data;
-using Dramalord.Data.Events;
+﻿using Dramalord.Data.Events;
 using Dramalord.Extensions;
 using HarmonyLib;
 using JetBrains.Annotations;

@@ -28,6 +28,7 @@ namespace Dramalord.Data.Events
         public List<Hero> IsKnownTo { get; private set; } = new();
 
         private bool DidMarry;
+        public override CampaignTime KeepInHistoryTime => CampaignTime.Days(14f);
 
         public MarriageEvent(Hero actor, Hero target)
         {
@@ -40,28 +41,43 @@ namespace Dramalord.Data.Events
 
         public void Action(int modifier = 0)
         {
-            if((Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan) && Actor != Hero.MainHero && Target != Hero.MainHero)
+            if((Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan || Actor.IsPlayerCompanion || Target.IsPlayerCompanion) && Actor != Hero.MainHero && Target != Hero.MainHero)
             {
-                //DramalordInquiry.CreateYesNoInquiry(Actor, Target, new TextObject(DramalordTexts.INQUIRY_MARRIAGE_TITLE), new TextObject(DramalordTexts.INQUIRY_MARRIAGE_ALLOW), () => { DoMarry(); AfterDialog(); }, () => { Actor.GetRelationTo(Target).SetBlockedUntil(CampaignTime.DaysFromNow(7)); });
-                DramalordInquiry.CreateYesNoImageInquiry(
-                    
-                       Actor,
-                       Target,
-                       new TextObject(ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_MARRIAGE_ALLOW), Actor, Target).ToString()),
-                       () => { DoMarry(); AfterDialog(); },
-                       () => { Actor.GetRelationTo(Target).SetBlockedUntil(CampaignTime.DaysFromNow(7)); },
-                       InquiryContext.MarriagePermission
-                   );
+                if(DramalordMCM.Instance.ShowDramaImages)
+                {
+                    DramalordInquiry.CreateYesNoImageInquiry(
+                           Actor,
+                           Target,
+                           new TextObject(ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_MARRIAGE_ALLOW), Actor, Target).ToString()),
+                           () => { DoMarry(); AfterDialog(); },
+                           () => { Actor.GetRelationTo(Target).SetBlockedUntil(CampaignTime.DaysFromNow(7));},
+                           InquiryContext.MarriagePermission
+                       );
+                }
+                else
+                {
+                    DramalordInquiry.CreateYesNoInquiry(
+                        Actor, 
+                        Target, 
+                        new TextObject(DramalordTexts.INQUIRY_MARRIAGE_TITLE), 
+                        new TextObject(DramalordTexts.INQUIRY_MARRIAGE_ALLOW), 
+                        () => { DoMarry(); AfterDialog(); }, 
+                        () => { Actor.GetRelationTo(Target).SetBlockedUntil(CampaignTime.DaysFromNow(7)); 
+                    });
+                }
+                
             }
             else
             {
                 DoMarry();
             }
 
+            /*
             if ((Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan) && Actor != Hero.MainHero && Target != Hero.MainHero)
             {
                 AfterDialog();
             }
+            */
         }
 
         private void DoMarry()
@@ -70,14 +86,14 @@ namespace Dramalord.Data.Events
 
             if (Actor != Hero.MainHero && Actor.Spouse != null)
             {
-                Actor.ChangeRelationTo(Actor.Spouse, -100, -100);
+                Actor.ChangeRelationTo(Actor.Spouse, 0, -100);
                 (new RelationshipEvent(Actor, Actor.Spouse)).Action();
             }
 
             // Only the main hero keeps their old spouses - npcs are divorced!
             if (Target != Hero.MainHero && Target.Spouse != null)
             {
-                Target.ChangeRelationTo(Target.Spouse, -100, -100);
+                Target.ChangeRelationTo(Target.Spouse, 0, -100);
                 (new RelationshipEvent(Target, Target.Spouse)).Action();
             }
 
@@ -91,72 +107,88 @@ namespace Dramalord.Data.Events
 
         public void AfterDialog()
         {
-            if(!DidMarry)
+            if(!DidMarry && (Actor == Hero.MainHero || Target == Hero.MainHero))
             {
+                int loveLoss = (Actor.GetRelationTo(Target).Love / 4) * -1;
+                if (DramalordMCM.Instance.ShowDramaImages)
+                {
+                    DramalordImageNotification.ShowDramalordImageNotification(Actor == Hero.MainHero ? Target : Actor, Hero.MainHero, null, DramalordImageNotification.ImageContext.Neglection);
+                }
+                else
+                {
+                    DramalordBanner.CreateBanner(Actor == Hero.MainHero ? Target : Actor, ConversationTools.SetTextVariables(new TextObject(DramalordTexts.BANNER_NEGLECTION), ConversationTools.FormatNumber(loveLoss)).ToString(), true);
+                    Actor.ChangeRelationTo(Target, 0, loveLoss);
+                }
                 return;
             }
 
-            if (Actor == Hero.MainHero || Target == Hero.MainHero)
+            if(DidMarry)
             {
-                Hero other = Actor == Hero.MainHero ? Target : Actor;
-                if (DramalordQuests.Instance.GetQuest(other) is MarriagePermissionQuest quest)
+                if (Actor == Hero.MainHero || Target == Hero.MainHero)
                 {
-                    if (quest.HasAsked)
+                    Hero other = Actor == Hero.MainHero ? Target : Actor;
+                    if (DramalordQuests.Instance.GetQuest(other) is MarriagePermissionQuest quest)
                     {
-                        quest.QuestSuccess(Hero.MainHero);
+                        if (quest.HasAsked)
+                        {
+                            quest.QuestSuccess(Hero.MainHero);
+                        }
+                        else
+                        {
+                            return;
+                        }
                     }
-                    else
+                }
+
+                if (Actor != Hero.MainHero)
+                {
+                    foreach (var item in Actor.GetAllRelations())
                     {
-                        return;
+                        //cleanup
+                        if (item.Key != Target && item.Key != Hero.MainHero && item.Value.Love > 0)
+                        {
+                            Actor.ChangeRelationTo(item.Key, 0, item.Value.Love * -1);
+                            (new RelationshipEvent(Actor, item.Key)).Action();
+                        }
                     }
                 }
-            }
 
-            AddLogEntry(this);
-
-            Hero groom = Actor.IsFemale ? Target : Actor;
-            Hero bride = groom == Actor ? Target : Actor;
-            bool showScene = Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan;
-
-            if(groom == Hero.MainHero || bride == Hero.MainHero)
-            {
-                Hero other = groom == Hero.MainHero ? bride : groom;
-                if(other.Clan != Clan.PlayerClan)
+                if (Target != Hero.MainHero)
                 {
-                    DramalordEvents.Instance.StartIntention(new LeaveClanEvent(other));
-                    DramalordEvents.Instance.StartIntention(new JoinClanEvent(other, Clan.PlayerClan));
-                }
-                else if(other.IsPlayerCompanion)
-                {
-                    other.SetNewOccupation(Occupation.Lord);
-                }
-            }
-            else if (groom.Clan != bride.Clan && groom.Clan != null && bride.Clan != null && (groom.Clan == Clan.PlayerClan || bride.Clan == Clan.PlayerClan))
-            {
-                if(DramalordMCM.Instance.ShowDramaImages)
-                {
-                    DramalordInquiry.CreateCustomImageInquiry(
-                        groom,
-                        bride,
-                        new TextObject(ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_MARRIAGE_JOIN_CLAN_2), groom, bride).ToString()),
-                        groom.Clan.Name,
-                        bride.Clan.Name,
-                        () =>
+                    foreach (var item in Target.GetAllRelations())
+                    {
+                        //cleanup
+                        if (item.Key != Actor && item.Key != Hero.MainHero && item.Value.Love > 0)
                         {
-                            DramalordEvents.Instance.StartIntention(new LeaveClanEvent(bride));
-                            DramalordEvents.Instance.StartIntention(new JoinClanEvent(bride, groom.Clan));
-                            bride.SetNewOccupation(Occupation.Lord);
-                        },
-                        () =>
-                        {
-                            DramalordEvents.Instance.StartIntention(new LeaveClanEvent(groom));
-                            DramalordEvents.Instance.StartIntention(new JoinClanEvent(groom, bride.Clan));
-                            groom.SetNewOccupation(Occupation.Lord);
-                        },
-                        InquiryContext.MarriageClan
-                    );
+                            Target.ChangeRelationTo(item.Key, 0, item.Value.Love * -1);
+                            (new RelationshipEvent(Target, item.Key)).Action();
+                        }
+                    }
                 }
-                else
+
+
+                AddLogEntry(this);
+
+                Hero groom = Actor.IsFemale ? Target : Actor;
+                Hero bride = groom == Actor ? Target : Actor;
+                bool showScene = Actor.Clan == Clan.PlayerClan || Target.Clan == Clan.PlayerClan;
+
+                if (groom == Hero.MainHero || bride == Hero.MainHero)
+                {
+                    Hero other = groom == Hero.MainHero ? bride : groom;
+                    if (other.Clan != Clan.PlayerClan)
+                    {
+                        DramalordEvents.Instance.StartIntention(new LeaveClanEvent(other));
+                        DramalordEvents.Instance.StartIntention(new JoinClanEvent(other, Clan.PlayerClan));
+                    }
+                    else if (other.IsPlayerCompanion)
+                    {
+                        other.CompanionOf = null;
+                        other.SetNewOccupation(Occupation.Lord);
+                        DramalordEvents.Instance.StartIntention(new JoinClanEvent(other, Clan.PlayerClan));
+                    }
+                }
+                else if (groom.Clan != bride.Clan && (groom.Clan == Clan.PlayerClan || bride.Clan == Clan.PlayerClan))
                 {
                     Hero other = groom.Clan == Clan.PlayerClan ? bride : groom;
                     DramalordInquiry.CreateYesNoInquiry(other, new TextObject(DramalordTexts.INQUIRY_MARRIAGE_TITLE), new TextObject(DramalordTexts.INQUIRY_MARRIAGE_JOIN_CLAN), () =>
@@ -174,108 +206,82 @@ namespace Dramalord.Data.Events
                             groom.SetNewOccupation(Occupation.Lord);
                         }
                     }, () => { });
+
                 }
-            }
-            else if (groom.Clan == Clan.PlayerClan && !groom.IsPlayerCompanion && (bride.Clan == null || (bride.Clan == Clan.PlayerClan && bride.IsPlayerCompanion)) ) 
-            {
-                if(DramalordMCM.Instance.ShowDramaImages)
+                else if (groom.Clan == Clan.PlayerClan && !groom.IsPlayerCompanion && (bride.Clan == null || bride.IsPlayerCompanion))
                 {
-                    DramalordInquiry.CreateYesNoImageInquiry(
-                       groom,
-                       bride,
-                       new TextObject(ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_MARRIAGE_JOIN_CLAN), bride).ToString()),
-                       () =>
-                       {
-                           DramalordEvents.Instance.StartIntention(new LeaveClanEvent(bride));
-                           DramalordEvents.Instance.StartIntention(new JoinClanEvent(bride, Clan.PlayerClan));
-                           bride.SetNewOccupation(Occupation.Lord);
-                       },
-                       () =>
-                       {
-                       },
-                       InquiryContext.MarriageClan
-                   );
-                }
-                else
-                {
+
                     DramalordInquiry.CreateYesNoInquiry(bride, new TextObject(DramalordTexts.INQUIRY_MARRIAGE_TITLE), new TextObject(DramalordTexts.INQUIRY_MARRIAGE_JOIN_CLAN), () => {
                         DramalordEvents.Instance.StartIntention(new LeaveClanEvent(bride));
                         DramalordEvents.Instance.StartIntention(new JoinClanEvent(bride, Clan.PlayerClan));
                     }, () => { });
+
                 }
-            }
-            else if(bride.Clan == Clan.PlayerClan && !bride.IsPlayerCompanion && (groom.Clan == null || (groom.Clan == Clan.PlayerClan && groom.IsPlayerCompanion)))
-            {
-                if(DramalordMCM.Instance.ShowDramaImages)
-                {
-                    DramalordInquiry.CreateYesNoImageInquiry(
-                       groom,
-                       bride,
-                       new TextObject(ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_MARRIAGE_JOIN_CLAN), groom).ToString()),
-                       () =>
-                       {
-                           DramalordEvents.Instance.StartIntention(new LeaveClanEvent(groom));
-                           DramalordEvents.Instance.StartIntention(new JoinClanEvent(groom, Clan.PlayerClan));
-                           groom.SetNewOccupation(Occupation.Lord);
-                       },
-                       () =>
-                       {
-                       },
-                       InquiryContext.MarriageClan
-                   );
-                }
-                else
+                else if (bride.Clan == Clan.PlayerClan && !bride.IsPlayerCompanion && (groom.Clan == null || groom.IsPlayerCompanion))
                 {
                     DramalordInquiry.CreateYesNoInquiry(groom, new TextObject(DramalordTexts.INQUIRY_MARRIAGE_TITLE), new TextObject(DramalordTexts.INQUIRY_MARRIAGE_JOIN_CLAN), () => {
                         DramalordEvents.Instance.StartIntention(new LeaveClanEvent(groom));
                         DramalordEvents.Instance.StartIntention(new JoinClanEvent(groom, Clan.PlayerClan));
                     }, () => { });
+
                 }
-            }
-            else if (groom.Clan != bride.Clan)
-            {
-                if (groom.Clan != null && bride.Clan != null)
+                else if (groom.Clan != bride.Clan)
                 {
-                    if (bride.Clan.Leader == bride)
+                    if (groom.Clan != null && bride.Clan != null)
                     {
-                        DramalordEvents.Instance.StartIntention(new LeaveClanEvent(groom));
-                        DramalordEvents.Instance.StartIntention(new JoinClanEvent(groom, bride.Clan));
-                        groom.SetNewOccupation(Occupation.Lord);
+                        if (bride.Clan.Leader == bride)
+                        {
+                            DramalordEvents.Instance.StartIntention(new LeaveClanEvent(groom));
+                            DramalordEvents.Instance.StartIntention(new JoinClanEvent(groom, bride.Clan));
+                            groom.SetNewOccupation(Occupation.Lord);
+                        }
+                        else
+                        {
+                            DramalordEvents.Instance.StartIntention(new LeaveClanEvent(bride));
+                            DramalordEvents.Instance.StartIntention(new JoinClanEvent(bride, groom.Clan));
+                            bride.SetNewOccupation(Occupation.Lord);
+                        }
                     }
-                    else
+                    else if (groom.Clan != null)
                     {
                         DramalordEvents.Instance.StartIntention(new LeaveClanEvent(bride));
                         DramalordEvents.Instance.StartIntention(new JoinClanEvent(bride, groom.Clan));
                         bride.SetNewOccupation(Occupation.Lord);
                     }
+                    else if (bride.Clan != null)
+                    {
+                        DramalordEvents.Instance.StartIntention(new LeaveClanEvent(groom));
+                        DramalordEvents.Instance.StartIntention(new JoinClanEvent(groom, bride.Clan));
+                        groom.SetNewOccupation(Occupation.Lord);
+                    }
                 }
-                else if (groom.Clan != null)
-                {
-                    DramalordEvents.Instance.StartIntention(new LeaveClanEvent(bride));
-                    DramalordEvents.Instance.StartIntention(new JoinClanEvent(bride, groom.Clan));
-                    bride.SetNewOccupation(Occupation.Lord);
-                }
-                else if (bride.Clan != null)
-                {
-                    DramalordEvents.Instance.StartIntention(new LeaveClanEvent(groom));
-                    DramalordEvents.Instance.StartIntention(new JoinClanEvent(groom, bride.Clan));
-                    groom.SetNewOccupation(Occupation.Lord);
-                }
-            }
 
-            
 
-            if(showScene)
-            {
-                if(DramalordMCM.Instance.ShowDramaVideos)
+
+                if (showScene)
                 {
-                    DramalordVideoNotification.ShowDramalordVideoNotification(groom, bride, null, DramalordVideoNotification.VideoContext.Wedding);
+                    if (DramalordMCM.Instance.ShowDramaVideos)
+                    {
+                        TextObject txt = ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.LOG_MARRIAGE), groom, bride);
+                        DramalordVideoNotification.ShowDramalordVideoNotification(groom, bride,txt, DramalordVideoNotification.VideoContext.Wedding, DramalordVideoNotification.VideoSound.WeddingChime);
+                        MBInformationManager.AddNotice(new DramalordEventNotification(this, GetEncyclopediaText()));
+                    }
+                    else
+                    {
+                        TextObject textObject = ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.LOG_MARRIAGE), Actor, Target);
+                        MBInformationManager.ShowSceneNotification(new MarriageSceneNotificationItem(groom, bride, CampaignTime.Now));
+                        MBInformationManager.AddNotice(new MarriageMapNotification(groom, bride, textObject, CampaignTime.Now));
+                    }
                 }
-                else
+
+                if (Actor != Hero.MainHero && Target != Hero.MainHero)
                 {
-                    TextObject textObject = ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.LOG_MARRIAGE), Actor, Target);
-                    MBInformationManager.ShowSceneNotification(new MarriageSceneNotificationItem(groom, bride, CampaignTime.Now));
-                    MBInformationManager.AddNotice(new MarriageMapNotification(groom, bride, textObject, CampaignTime.Now));
+                    Actor.ChangeRelationTo(Target, 0, 100);
+                    (new RelationshipEvent(Actor, Target)).Action();
+
+                    SexEvent sEvent = new SexEvent(Actor, Target);
+                    sEvent.Action(3);
+                    sEvent.AfterDialog();
                 }
             }
 
@@ -319,6 +325,7 @@ namespace Dramalord.Data.Events
                                                         CampaignTime.DaysFromNow(21));
                                                     quest.StartQuest();
                                                     DramalordQuests.Instance.AddQuest(Hero.OneToOneConversationHero, quest);
+                                                    MBInformationManager.AddNotice(new DramalordQuestNotification(quest));
                                                 })
                                                 .CloseDialog()
                                             .PlayerOption(DramalordTexts.PLAYER_INTERACTION_END)
@@ -334,16 +341,23 @@ namespace Dramalord.Data.Events
 
         public IDramalordEvent? CreateReaction(Hero hero)
         {
+            if(!DidMarry)
+            {
+                return null; 
+            }
+
             if (hero == Hero.MainHero)
             {
                 IsKnownTo.Add(Hero.MainHero);
                 if (hero.IsEmotionalWith(Actor) || hero.IsEmotionalWith(Target))
                 {
                     Hero cheater = hero.IsEmotionalWith(Actor) ? Actor : Target;
-                    Hero other = cheater == Actor ? Target : Actor;
+                    Hero other = (cheater == Actor) ? Target : Actor;
                     if (DramalordQuests.Instance.GetQuest(cheater) == null)
                     {
-                        DramalordInquiry.CreateYesNoImageInquiry(cheater, other, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_TEXT), cheater, other), () =>
+                        if (DramalordMCM.Instance.ShowDramaImages)
+                        {
+                            DramalordInquiry.CreateYesNoImageInquiry(cheater, other, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_MARRIAGE_TEXT), cheater, other), () =>
                             {
                                 if (DramalordQuests.Instance.GetQuest(cheater) == null)
                                 {
@@ -353,12 +367,28 @@ namespace Dramalord.Data.Events
                                 }
                             },
                                 () => { },
-                                InquiryContext.Confront
+                                InquiryContext.ConfrontMarriage
                              );
-                        }   
-                    }
+                        }
+                        else
+                        {
+                            DramalordInquiry.CreateYesNoInquiry(cheater, DramalordTexts.INQUIRY_CONFRONT_TITLE, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_MARRIAGE_TEXT), cheater, other).ToString(), () =>
+                            {
+                                if (DramalordQuests.Instance.GetQuest(cheater) == null)
+                                {
+                                    ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
+                                    DramalordQuests.Instance.AddQuest(cheater, quest);
+                                    quest.StartQuest();
+                                    MBInformationManager.AddNotice(new DramalordQuestNotification(quest));
+                                }
+                            },
+                                () => { }
+                            );
+                        }
+                    }   
+                }
 
-                    return null;
+                return null;
             }
             else
             {
@@ -372,7 +402,7 @@ namespace Dramalord.Data.Events
                 }
 
                 Hero h = hero.GetCloseHeroes().GetRandomElementWithPredicate(h => !IsKnownTo.Contains(h)); ;
-                if (h != null && Actor.Spouse != Target)
+                if (h != null && Actor.Spouse != Target && ((Actor == Hero.MainHero && Target.IsPlayerSpouse()) || (Actor.IsPlayerSpouse() && Target == Hero.MainHero)))
                 {
                     return new GossiptEvent(hero, h, this);
                 }
@@ -417,21 +447,38 @@ namespace Dramalord.Data.Events
                         if ((Hero.MainHero.IsEmotionalWith(Actor) || Hero.MainHero.IsEmotionalWith(Target)))
                         {
                             Hero cheater = Hero.MainHero.IsEmotionalWith(Actor) ? Actor : Target;
-                            Hero other = cheater == Actor ? Target : Actor;
+                            Hero other = (cheater == Actor) ? Target : Actor;
                             if (DramalordQuests.Instance.GetQuest(cheater) == null)
                             {
-                                DramalordInquiry.CreateYesNoImageInquiry(cheater, other, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_TEXT), cheater, other), () =>
+                                if (DramalordMCM.Instance.ShowDramaImages)
                                 {
-                                    if (DramalordQuests.Instance.GetQuest(cheater) == null)
+                                    DramalordInquiry.CreateYesNoImageInquiry(cheater, other, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_MARRIAGE_TEXT), cheater, other), () =>
                                     {
-                                        ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
-                                        DramalordQuests.Instance.AddQuest(cheater, quest);
-                                        quest.StartQuest();
-                                    }
-                                },
-                                    () => { },
-                                    InquiryContext.Confront
-                                 );
+                                        if (DramalordQuests.Instance.GetQuest(cheater) == null)
+                                        {
+                                            ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
+                                            DramalordQuests.Instance.AddQuest(cheater, quest);
+                                            quest.StartQuest();
+                                        }
+                                    },
+                                        () => { },
+                                        InquiryContext.ConfrontMarriage
+                                     );
+                                }
+                                else
+                                {
+                                    DramalordInquiry.CreateYesNoInquiry(cheater, DramalordTexts.INQUIRY_CONFRONT_TITLE, ConversationTools.SetCharacterObjects(new TextObject(DramalordTexts.INQUIRY_CONFRONT_MARRIAGE_TEXT), cheater, other).ToString(), () =>
+                                    {
+                                        if (DramalordQuests.Instance.GetQuest(cheater) == null)
+                                        {
+                                            ConfrontHeroQuest quest = new ConfrontHeroQuest(cheater, this, CampaignTime.DaysFromNow(3));
+                                            DramalordQuests.Instance.AddQuest(cheater, quest);
+                                            quest.StartQuest();
+                                        }
+                                    },
+                                        () => { }
+                                    );
+                                }
                             }
                         }
                     })
@@ -443,7 +490,21 @@ namespace Dramalord.Data.Events
                             .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
                             .Consequence(() => IsKnownTo.Add(Hero.MainHero))
                             .CloseDialog()
+                        .PlayerOption(DramalordTexts.INTENTION_REACT_STOP)
+                            .Condition(() => ConversationTools.SetConversationHero(speaker))
+                            .Consequence(() =>
+                            {
+                                IsKnownTo.Add(Hero.MainHero);
+                                Hero.MainHero.GetRelationTo(Hero.OneToOneConversationHero).SetBlockedUntil(CampaignTime.DaysFromNow(1000));
+                                DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_APPROACH_STOP);
+                            })
+                            .CloseDialog()
                     .EndPlayerOptions();
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
+        {
+            return null;
         }
 
         public void ReactionResult(Hero speaker, Hero listener, out int trust, out int love)

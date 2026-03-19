@@ -14,9 +14,12 @@ namespace Dramalord.Notifications
     {
         AcceptSex,
         Orphanize,
-        Confront,
-        MarriageClan,
-        MarriagePermission
+        ConfrontDate,
+        ConfrontSex,
+        ConfrontBirth,
+        ConfrontMarriage,
+        MarriagePermission,
+        Threesome
     }
 
     public static class DramalordInquiry
@@ -75,7 +78,7 @@ namespace Dramalord.Notifications
 
         public static void CreateYesNoImageInquiry(Hero actor1, Hero actor2, TextObject text, Action yesAction, Action noAction, InquiryContext context)
         {
-            ConversationTools.SetCharacterObjects(text, actor2);
+            //ConversationTools.SetCharacterObjects(text, actor2);
 
             string basePath = ModuleHelper.GetModuleFullPath("Dramalord");
             string imagePath = System.IO.Path.Combine(basePath, "GUI", "Images", "inquiry");
@@ -88,47 +91,100 @@ namespace Dramalord.Notifications
             {
                 fileName += "orphanize_";
             }
-            else if(context == InquiryContext.Confront)
+            else if(context == InquiryContext.ConfrontDate)
             {
-                fileName += "confront_";
+                fileName += "confrontdate_";
             }
-            else if (context == InquiryContext.MarriageClan)
+            else if (context == InquiryContext.ConfrontSex)
             {
-                fileName += "marriageclan_";
+                fileName += "confrontsex_";
+            }
+            else if (context == InquiryContext.ConfrontBirth)
+            {
+                fileName += "confrontbirth_";
+            }
+            else if (context == InquiryContext.ConfrontMarriage)
+            {
+                fileName += "confrontmarriage_";
             }
             else if (context == InquiryContext.MarriagePermission)
             {
                 fileName += "marriagepermission_";
             }
-
-            if (actor1.IsFemale && actor2.IsFemale)
+            else if (context == InquiryContext.Threesome)
             {
-                fileName += "f_f";
-            }
-            else if (!actor1.IsFemale && !actor2.IsFemale)
-            {
-                fileName += "m_m";
-            }
-            else if (actor1.IsFemale && !actor2.IsFemale)
-            {
-                fileName += "f_m";
-            }
-            else
-            {
-                fileName += "m_f";
+                fileName += "threesome_";
             }
 
-            if (context == InquiryContext.Confront || context == InquiryContext.MarriageClan || context == InquiryContext.MarriagePermission)
+            if(context != InquiryContext.Orphanize && context != InquiryContext.ConfrontMarriage)
             {
-                if ((Hero.MainHero.IsFemale))
+                if (actor1.CurrentSettlement != null)
                 {
-                    fileName += "_f";
+                    fileName += "castle_";
+                }
+                else if (actor1.PartyBelongedTo != null && actor1.PartyBelongedTo.IsCurrentlyAtSea)
+                {
+                    fileName += "ship_";
                 }
                 else
                 {
-                    fileName += "_m";
+                    fileName += "tent_";
+                }
+
+                if (Hero.MainHero.IsFemale)
+                {
+                    fileName += "f_";
+                }
+                else
+                {
+                    fileName += "m_";
                 }
             }
+            else if(context == InquiryContext.ConfrontMarriage)
+            {
+                fileName += "castle_";
+                if (Hero.MainHero.IsFemale)
+                {
+                    fileName += "f_";
+                }
+                else
+                {
+                    fileName += "m_";
+                }
+            }
+            
+
+            if (context != InquiryContext.AcceptSex && context != InquiryContext.Orphanize)
+            {
+                if (actor1.IsFemale && actor2.IsFemale)
+                {
+                    fileName += "f_f";
+                }
+                else if (!actor1.IsFemale && !actor2.IsFemale)
+                {
+                    fileName += "m_m";
+                }
+                else
+                {
+                    fileName += "m_f";
+                }
+            }
+            else if (context != InquiryContext.Orphanize)
+            {
+                if(actor2.IsFemale)
+                {
+                    fileName += "f";
+                }
+                else
+                {
+                    fileName += "m";
+                }
+            }
+            else
+            {
+                fileName += "f";
+            }
+            
 
             fileName += ".jpg";
 
@@ -139,7 +195,7 @@ namespace Dramalord.Notifications
 
         public static void CreateCustomImageInquiry(Hero actor1, Hero actor2, TextObject text, TextObject action1name, TextObject action2name, Action action1, Action action2, InquiryContext context)
         {
-            ConversationTools.SetCharacterObjects(text, actor2);
+            //ConversationTools.SetCharacterObjects(text, actor2);
 
             string basePath = ModuleHelper.GetModuleFullPath("Dramalord");
             string imagePath = System.IO.Path.Combine(basePath, "GUI", "Images", "inquiry");
@@ -152,46 +208,98 @@ namespace Dramalord.Notifications
             {
                 fileName += "orphanize_";
             }
-            else if (context == InquiryContext.Confront)
+            else if (context == InquiryContext.ConfrontDate)
             {
-                fileName += "confront_";
+                fileName += "confrontdate_";
             }
-            else if (context == InquiryContext.MarriageClan)
+            else if (context == InquiryContext.ConfrontSex)
             {
-                fileName += "marriageclan_";
+                fileName += "confrontsex_";
+            }
+            else if (context == InquiryContext.ConfrontBirth)
+            {
+                fileName += "confrontbirth_";
+            }
+            else if (context == InquiryContext.ConfrontMarriage)
+            {
+                fileName += "confrontmarriage_";
             }
             else if (context == InquiryContext.MarriagePermission)
             {
                 fileName += "marriagepermission_";
             }
-
-            if (actor1.IsFemale && actor2.IsFemale)
+            else if (context == InquiryContext.Threesome)
             {
-                fileName += "f_f";
-            }
-            else if (!actor1.IsFemale && !actor2.IsFemale)
-            {
-                fileName += "m_m";
-            }
-            else if (actor1.IsFemale && !actor2.IsFemale)
-            {
-                fileName += "f_m";
-            }
-            else
-            {
-                fileName += "m_f";
+                fileName += "threesome_";
             }
 
-            if (context == InquiryContext.Confront || context == InquiryContext.MarriageClan || context == InquiryContext.MarriagePermission)
+            if (context != InquiryContext.Orphanize && context != InquiryContext.ConfrontMarriage)
             {
-                if ((Hero.MainHero.IsFemale))
+                if (actor1.CurrentSettlement != null)
                 {
-                    fileName += "_f";
+                    fileName += "castle_";
+                }
+                else if (actor1.PartyBelongedTo != null && actor1.PartyBelongedTo.IsCurrentlyAtSea)
+                {
+                    fileName += "ship_";
                 }
                 else
                 {
-                    fileName += "_m";
+                    fileName += "tent_";
                 }
+
+                if (Hero.MainHero.IsFemale)
+                {
+                    fileName += "f_";
+                }
+                else
+                {
+                    fileName += "m_";
+                }
+            }
+            else if (context == InquiryContext.ConfrontMarriage)
+            {
+                fileName += "castle_";
+                if (Hero.MainHero.IsFemale)
+                {
+                    fileName += "f_";
+                }
+                else
+                {
+                    fileName += "m_";
+                }
+            }
+
+
+            if (context != InquiryContext.AcceptSex)
+            {
+                if (actor1.IsFemale && actor2.IsFemale)
+                {
+                    fileName += "f_f";
+                }
+                else if (!actor1.IsFemale && !actor2.IsFemale)
+                {
+                    fileName += "m_m";
+                }
+                else
+                {
+                    fileName += "m_f";
+                }
+            }
+            else if (context != InquiryContext.Orphanize)
+            {
+                if (actor2.IsFemale)
+                {
+                    fileName += "f";
+                }
+                else
+                {
+                    fileName += "m";
+                }
+            }
+            else
+            {
+                fileName += "f";
             }
 
             fileName += ".jpg";

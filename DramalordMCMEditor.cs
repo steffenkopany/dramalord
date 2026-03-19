@@ -5,6 +5,7 @@ using MCM.Abstractions.Attributes.v1;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.PerCampaign;
 using MCM.Common;
+using Newtonsoft.Json.Linq;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 
@@ -30,6 +31,8 @@ namespace Dramalord
             }
         }
 
+        private static string _heroSearch = "";
+        private static string _targetSearch = "";
         private static Hero _selected = null;
         private static Hero _target = Hero.MainHero;
         private static Dropdown<HeroWrapper> _heroList = new(Hero.AllAliveHeroes.Where(hero => (hero.IsDramalordLegit() && hero.HasMet) || hero == Hero.MainHero).Select(hero => new HeroWrapper(hero)).ToList(), 0);
@@ -88,7 +91,26 @@ namespace Dramalord
             _dummy = "";
             OnPropertyChanged();
         }
-      
+
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_HERO)]
+        [SettingPropertyText(DramalordTexts.MCM_EDITOR_HERO_SEARCH, Order = 0, RequireRestart = false)]
+        public string SearchedHero
+        {
+            get
+            {
+                return _heroSearch;
+            }
+
+            set
+            {
+                _heroSearch = value;
+                if (_heroSearch.Length > 0)
+                {
+                    Hero? selected = Hero.AllAliveHeroes.Where(hero => hero.IsDramalordLegit() && hero.HasMet && (hero.Name.ToString().ToLower().Contains(_heroSearch.ToLower()) || (hero.Clan != null && hero.Clan.Name.ToString().ToLower().Contains(_heroSearch.ToLower())))).FirstOrDefault();
+                    SetSelected(selected);
+                }
+            }
+        }
 
         [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_HERO)]
         [SettingPropertyDropdown(DramalordTexts.MCM_EDITOR_HERO_SELECT, Order = 1, RequireRestart = false)]
@@ -188,6 +210,26 @@ namespace Dramalord
             set { _selected.GetDesires().Horny = value; OnPropertyChanged(); }
         }
 
+
+        [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_RELATION)]
+        [SettingPropertyText(DramalordTexts.MCM_EDITOR_HERO_SEARCH, Order = 0, RequireRestart = false)]
+        public string SearchedTarget
+        {
+            get
+            {
+                return _targetSearch;
+            }
+
+            set
+            {
+                _targetSearch = value;
+                if (_targetSearch.Length > 0)
+                {
+                    Hero? selected = Hero.AllAliveHeroes.Where(hero => hero.IsDramalordLegit() && hero.HasMet && (hero.Name.ToString().ToLower().Contains(_targetSearch.ToLower()) || (hero.Clan != null && hero.Clan.Name.ToString().ToLower().Contains(_targetSearch.ToLower())))).FirstOrDefault();
+                    SetTarget(selected);
+                }
+            }
+        }
 
         [SettingPropertyGroup(DramalordTexts.MCM_EDITOR_RELATION)]
         [SettingPropertyDropdown(DramalordTexts.MCM_EDITOR_RELATION_TARGET, Order = 1, RequireRestart = false)]

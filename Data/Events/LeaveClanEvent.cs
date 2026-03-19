@@ -127,6 +127,11 @@ namespace Dramalord.Data.Events
             return null;
         }
 
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
+        {
+            return null;
+        }
+
         public void ReactionResult(Hero speaker, Hero listener, out int trust, out int love)
         {
             trust = 0;

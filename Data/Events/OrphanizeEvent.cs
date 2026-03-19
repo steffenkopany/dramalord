@@ -45,7 +45,7 @@ namespace Dramalord.Data.Events
                 Target.BornSettlement = SettlementHelper.FindRandomSettlement((Settlement x) => x.IsTown);
             }
 
-            Target.ChangeState(Hero.CharacterStates.Disabled);
+            //Target.ChangeState(Hero.CharacterStates.Disabled);
             Target.SetNewOccupation(Occupation.NotAssigned);
             Target.UpdateHomeSettlement();
 
@@ -86,6 +86,11 @@ namespace Dramalord.Data.Events
         }
 
         public DialogFlow? GetGossipDialog(Hero speaker)
+        {
+            return null;
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
         {
             return null;
         }

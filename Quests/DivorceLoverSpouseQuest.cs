@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
+using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Localization;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.SaveSystem;
@@ -34,6 +35,7 @@ namespace Dramalord.Quests
             return ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_DIVORCE_TITLE), QuestGiver, Spouse);
         }
 
+        public override TextObject Description => ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_DIVORCE_INFO), QuestGiver, Spouse);
 
         protected override void HourlyTick()
         {
@@ -60,11 +62,16 @@ namespace Dramalord.Quests
                                     .BeginPlayerOptions()
                                         .PlayerOption(DramalordTexts.INTENTION_DIVORCE_PAY)
                                             .Condition(() => Hero.MainHero.Gold >= QuestGiver.Gold && ConversationTools.SetConversationText(new TextObject(QuestGiver.Gold.ToString())))
-                                            .Consequence(() => {
+                                            .Consequence(() => 
+                                            {
                                                 Hero.MainHero.Gold -= QuestGiver.Gold;
                                                 Hero.OneToOneConversationHero.Gold += QuestGiver.Gold;
                                                 QuestSuccess(Hero.MainHero);
-                                                })
+                                                if (PlayerEncounter.Current != null)
+                                                {
+                                                    PlayerEncounter.LeaveEncounter = true;
+                                                }
+                                            })
                                             .CloseDialog()
                                         .PlayerOption(DramalordTexts.NPC_INTERACTION_UHWELL)
                                         .GotoDialogState("hero_main_options")
@@ -93,6 +100,7 @@ namespace Dramalord.Quests
                             .EndNpcOptions()
                         .NpcOption(DramalordTexts.INTENTION_DIVORCE_START_NO, () => Mission.Current?.GetMissionBehavior<MissionFightHandler>() == null)
                         .GotoDialogState("hero_main_options")
+                    .EndNpcOptions()
                 .EndPlayerOptions();
                 
 
@@ -129,6 +137,7 @@ namespace Dramalord.Quests
 
             (new RelationshipEvent(QuestGiver, Hero.MainHero)).Action();
 
+            DramalordQuests.Instance.RemoveQuest(QuestGiver);
             Campaign.Current.ConversationManager.RemoveRelatedLines(this);
 
             AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_VISIT_FAILED), QuestGiver));

@@ -56,7 +56,7 @@ namespace Dramalord.Data.Events
                 joinClanEvent.AfterDialog();
             }
 
-            Target.ChangeState(Hero.CharacterStates.Active);
+            //Target.ChangeState(Hero.CharacterStates.Active);
             DramalordOrphans.Instance.RemoveOrphan(Target);
             Target.UpdateHomeSettlement();
         }
@@ -66,9 +66,16 @@ namespace Dramalord.Data.Events
             AddLogEntry(this);
             if(Actor.Clan == Clan.PlayerClan)
             {
-                if(DramalordMCM.Instance.ShowDramaImages)
+                if(DramalordMCM.Instance.ShowDramaImages) 
                 {
-                    DramalordImageNotification.ShowDramalordImageNotification(Actor, Target, hero3: Actor.Spouse, context: DramalordImageNotification.ImageContext.Adoption);
+                    if(Actor.Spouse != null)
+                    {
+                        DramalordImageNotification.ShowDramalordImageNotification(Actor, Actor.Spouse, Target, context: DramalordImageNotification.ImageContext.Adoption);
+                    }
+                    else
+                    {
+                        DramalordImageNotification.ShowDramalordImageNotification(Actor, Target, null, context: DramalordImageNotification.ImageContext.Adoption);
+                    }
                 }
                 else
                 {
@@ -114,6 +121,11 @@ namespace Dramalord.Data.Events
         }
 
         public DialogFlow? GetGossipDialog(Hero speaker)
+        {
+            return null;
+        }
+
+        public DialogFlow? GetBlackmailDialog(Hero speaker)
         {
             return null;
         }

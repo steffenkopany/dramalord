@@ -1,6 +1,7 @@
 ﻿using Dramalord.Data;
 using Dramalord.Data.Events;
 using Dramalord.Data.Events.Interfaces;
+using Dramalord.Notifications;
 using Dramalord.Quests;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
@@ -33,6 +34,9 @@ namespace Dramalord
             AddClassDefinition(typeof(ConfrontEvent), 1012);
             AddClassDefinition(typeof(GossiptEvent), 1013);
             AddClassDefinition(typeof(AdoptEvent), 1014);
+            AddClassDefinition(typeof(BreakUpEvent), 1015);
+            AddClassDefinition(typeof(BlackmailEvent), 1016);
+            AddClassDefinition(typeof(ThreesomeEvent), 1017);
 
             AddClassDefinition(typeof(HeroPregnancy), 2000);
             AddClassDefinition(typeof(HeroDesires), 2001);
@@ -44,6 +48,10 @@ namespace Dramalord
             AddClassDefinition(typeof(MarriagePermissionQuest), 2007); 
             AddClassDefinition(typeof(ConfrontHeroQuest), 2008); 
             AddClassDefinition(typeof(DivorceLoverSpouseQuest), 2009);
+            AddClassDefinition(typeof(BlackmailQuest), 2010);
+
+            AddClassDefinition(typeof(DramalordEventNotification), 3000);
+            AddClassDefinition(typeof(DramalordQuestNotification), 3001);
         }
 
         protected override void DefineContainerDefinitions()

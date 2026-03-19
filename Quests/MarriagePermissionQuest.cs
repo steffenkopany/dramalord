@@ -5,6 +5,7 @@ using Dramalord.Notifications;
 using System;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
+using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Localization;
 using TaleWorlds.SaveSystem;
 
@@ -29,6 +30,8 @@ namespace Dramalord.Quests
         {
             return ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_MARRIAGE_TITLE), QuestGiver);
         }
+
+        public override TextObject Description => ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_MARRIAGE_INFO), QuestGiver, Permitter);
 
         protected override void SetDialogs()
         {
@@ -69,10 +72,18 @@ namespace Dramalord.Quests
 
         public override void QuestStartInit()
         {
-            RemoveTrackedObject(QuestGiver);
-            AddTrackedObject(Permitter);
+            if (HasAsked)
+            {
+                AddTrackedObject(QuestGiver);
+                RemoveTrackedObject(Permitter);
+            }
+            else
+            {
+                AddTrackedObject(Permitter);
+                RemoveTrackedObject(QuestGiver);
+            }
 
-            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_MARRIAGE_INFO), QuestGiver, Permitter));
+            AddLog(Description);
         }
 
         internal void GetPermission()
@@ -81,6 +92,7 @@ namespace Dramalord.Quests
             {
                 HasAsked = true;
                 AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_MARRIAGE_BLESSING), Permitter, QuestGiver));
+                RemoveTrackedObject(Permitter);
             }
         }
 
@@ -92,14 +104,39 @@ namespace Dramalord.Quests
                 .Condition(() => Permitter == Hero.OneToOneConversationHero && HasAsked == false)
                 .BeginNpcOptions()
                     .NpcOption(DramalordTexts.INTENTION_MARRY_ENGAGE_OK+ "[ib:confident3][if:convo_excited]", () => Permitter?.GetTrust(Hero.MainHero) >= DramalordMCM.Instance.MinTrustFriends && ConversationTools.SetConversationHero(QuestGiver))
-                        .Consequence(() => GetPermission())
+                        .Consequence(() =>
+                        {
+                            GetPermission();
+                            if (PlayerEncounter.Current != null)
+                            {
+                                PlayerEncounter.LeaveEncounter = true;
+                            }
+                        })
                         .CloseDialog()
                     .NpcOption(DramalordTexts.INTENTION_MARRY_ENGAGE_NO + "[ib:nervous][if:convo_shocked]", () => Hero.OneToOneConversationHero.GetTrust(Hero.MainHero) < DramalordMCM.Instance.MinTrustFriends && ConversationTools.SetConversationHero(QuestGiver))
+                        .Consequence(() =>
+                        {
+                            if (PlayerEncounter.Current != null)
+                            {
+                                PlayerEncounter.LeaveEncounter = true;
+                            }
+                        })
                         .CloseDialog()
                 .EndNpcOptions()
                 .EndPlayerOptions();
 
             Campaign.Current.ConversationManager.AddDialogFlow(permitterFlow, this);
+
+            if (HasAsked)
+            {
+                AddTrackedObject(QuestGiver);
+                RemoveTrackedObject(Permitter);
+            }
+            else
+            {
+                AddTrackedObject(Permitter);
+                RemoveTrackedObject(QuestGiver);
+            }
         }
 
         protected override void HourlyTick()
@@ -112,6 +149,17 @@ namespace Dramalord.Quests
             if(QuestGiver.Spouse != null)
             {
                 QuestTimeout();
+            }
+
+            if (HasAsked)
+            {
+                AddTrackedObject(QuestGiver);
+                RemoveTrackedObject(Permitter);
+            }
+            else
+            {
+                AddTrackedObject(Permitter);
+                RemoveTrackedObject(QuestGiver);
             }
         }
 
@@ -131,6 +179,17 @@ namespace Dramalord.Quests
                 {
                     GetPermission();
                 }
+            }
+
+            if (HasAsked)
+            {
+                AddTrackedObject(QuestGiver);
+                RemoveTrackedObject(Permitter);
+            }
+            else
+            {
+                AddTrackedObject(Permitter);
+                RemoveTrackedObject(QuestGiver);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Dramalord.Conversations;
+using Dramalord.Data.Events;
 using Dramalord.Data.Events.Interfaces;
 using Dramalord.Extensions;
 using Dramalord.Notifications;
@@ -10,7 +11,6 @@ using TaleWorlds.CampaignSystem.Conversation;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.CampaignSystem.LogEntries;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements.Locations;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 
@@ -43,6 +43,7 @@ namespace Dramalord.Data
             //NPC approaches Player
             if (DialogEvent == null && dramaEvent.Target == Hero.MainHero && dramaEvent.GetInitiationDialog() is DialogFlow flow && flow != null)
             {
+
                 DialogEvent = dramaEvent;
 
                 Campaign.Current.ConversationManager.AddDialogFlow(isReaction ? ReactionStartFlow(dramaEvent.Actor) : IntentionStartFlow(dramaEvent.Actor), dramaEvent);
@@ -70,7 +71,7 @@ namespace Dramalord.Data
             else if(DialogEvent == null && Campaign.Current.ConversationManager.IsConversationInProgress && dramaEvent.Actor == Hero.MainHero)
             {
                 DialogEvent = dramaEvent;
-                dramaEvent.Action();
+                dramaEvent.Action(1);
                 return true;
             }
             //NPC approaches NPC
@@ -85,6 +86,21 @@ namespace Dramalord.Data
             return false;
         }
 
+        public IDramalordEvent? GetReaction(Hero actor, Hero target, bool remove = false)
+        {
+            IDramalordEvent? ev = _events.FirstOrDefault(ev => ev.Actor == actor && ev.Target == target && ev is not GossiptEvent);
+            if(ev != null && remove)
+            {
+                _events.Remove(ev);
+            }
+            return ev;
+        }
+
+        public void AddReaction(IDramalordEvent dramaEvent)
+        {
+            _events.Add(dramaEvent);
+        }
+
         internal void OnHourlyTick()
         {
             List<Hero> heroList = new();
@@ -93,16 +109,34 @@ namespace Dramalord.Data
             List<IDramalordEvent> events = _events.ToList();
             events.ForEach(ev =>
             {
-                if (!heroList.Contains(ev.Actor) && ((ev.Actor.GetCloseHeroes() is List<Hero> closeHeroes && closeHeroes.Contains(ev.Target)) || (ev.Target.IsChild) || ev.Actor == ev.Target))
+                List<Hero> closeHeroes = ev.Actor.GetCloseHeroes();
+                if (!heroList.Contains(ev.Actor) && (closeHeroes.Contains(ev.Target) || (ev.Target.IsChild) || ev.Actor == ev.Target))
                 {
-                    if(Instance.StartIntention(ev, isReaction: true))
+                    if(ev.Target != Hero.MainHero || ev is not GossiptEvent || (!ev.Actor.HasMetRecently(ev.Target) && !ev.Actor.IsBlockedBy(ev.Target)))
                     {
-                        heroList.Add(ev.Actor);
-                        garbage.Add(ev);
+                        if (Instance.StartIntention(ev, isReaction: true))
+                        {
+                            heroList.Add(ev.Actor);
+
+                            if (ev is not GossiptEvent)
+                            {
+                                garbage.Add(ev);
+                            }
+                        }
                     }
                 }
-                else if(ev is LogEntry logEntry && logEntry.GameTime + logEntry.KeepInHistoryTime < CampaignTime.Now)
+                
+                if(ev is LogEntry logEntry && logEntry.GameTime + logEntry.KeepInHistoryTime < CampaignTime.Now)
                 {
+                    garbage.Add(ev);
+                }
+                else if(ev is GossiptEvent gossipEvent)
+                {
+                    Hero? newTarget = closeHeroes.FirstOrDefault(ch => !gossipEvent.GetGossipEvent().IsKnownTo.Contains(ch));
+                    if (newTarget != null)
+                    {
+                        _events.Add(new GossiptEvent(ev.Actor, newTarget, gossipEvent.GetGossipEvent()));
+                    }
                     garbage.Add(ev);
                 }
             });
@@ -126,6 +160,7 @@ namespace Dramalord.Data
                 DialogEvent.AfterDialog();
                 HandleWitness(DialogEvent);
                 Campaign.Current.ConversationManager.RemoveRelatedLines(DialogEvent);
+                Campaign.Current.ConversationManager.RemoveRelatedLines(this);
                 DialogEvent = null;
 
                 if (PlayerEncounter.Current != null)
@@ -153,7 +188,7 @@ namespace Dramalord.Data
                         .Condition(() => ConversationTools.SetConversationHero(speaker))
                         .Consequence(() => 
                         {
-                            Hero.MainHero.GetRelationTo(Hero.OneToOneConversationHero).SetBlockedUntil(CampaignTime.Never);
+                            Hero.MainHero.GetRelationTo(Hero.OneToOneConversationHero).SetBlockedUntil(CampaignTime.DaysFromNow(1000));
                             DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_APPROACH_STOP);
                         })
                         .CloseDialog()
@@ -180,6 +215,7 @@ namespace Dramalord.Data
                     && !dr.IsKnownTo.Contains(Hero.MainHero)
                     && DramalordQuests.Instance.GetQuest(dr.Actor) == null
                     && DramalordQuests.Instance.GetQuest(dr.Target) == null
+                    && dr.GetGossipDialog(knownto) != null
                     ).Cast<IDramalordEvent>().FirstOrDefault();
                 if(ev != null)
                 {
@@ -191,7 +227,25 @@ namespace Dramalord.Data
                         return;
                     }
                 }
-                DialogFlow? flow2 = DialogFlow.CreateDialogFlow("start_reaction").NpcLine(DramalordTexts.NPC_INTERACTION_GOSSIP_NONE).BeginPlayerOptions().PlayerOption(DramalordTexts.QUESTION_END).Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero)).CloseDialog().EndPlayerOptions();
+                DialogFlow? flow2 = DialogFlow.CreateDialogFlow("start_reaction")
+                    .NpcLine(DramalordTexts.NPC_INTERACTION_GOSSIP_NONE)
+                    .BeginPlayerOptions()
+                        .PlayerOption(DramalordTexts.QUESTION_END)
+                        .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
+                        .Consequence(() =>
+                        {
+                            if (PlayerEncounter.Current != null)
+                            {
+                                PlayerEncounter.LeaveEncounter = true;
+                            }
+                        })
+                        .CloseDialog()
+                        .PlayerOption(DramalordTexts.PLAYER_INTERACTION_END)
+                        .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
+                        .NpcLine(DramalordTexts.NPC_INTERACTION_ASYOUWISH)
+                            .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
+                            .GotoDialogState("hero_main_options")
+                    .EndPlayerOptions();
                 Campaign.Current.ConversationManager.AddDialogFlow(flow2, Instance);
             }
         }

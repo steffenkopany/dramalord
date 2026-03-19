@@ -5,6 +5,7 @@ using Dramalord.Data.Events.Interfaces;
 using Dramalord.Extensions;
 using Dramalord.Notifications;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.Localization;
 using TaleWorlds.SaveSystem;
 
@@ -20,6 +21,7 @@ namespace Dramalord.Quests
         public ConfrontHeroQuest(Hero questTarget, IDramalordEvent questEvent, CampaignTime duration) : base("DramalordConfrontHeroQuest", questTarget, duration)
         {
             ConfrontEvent = questEvent;
+            OtherHero = ConfrontEvent.Actor == QuestGiver ? ConfrontEvent.Target : ConfrontEvent.Actor;
         }
 
         protected override void SetDialogs()
@@ -32,9 +34,11 @@ namespace Dramalord.Quests
             return new(DramalordTexts.INQUIRY_CONFRONT_TITLE);
         }
 
+        public override TextObject Description => ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_CONFRONT_INFO), QuestGiver, OtherHero);
+
         public override void QuestFail(Hero reason)
         {
-            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_CONFRONT_FAILED), ConfrontEvent.Actor));
+            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_CONFRONT_FAILED), QuestGiver));
             CompleteQuestWithFail();
             Campaign.Current.ConversationManager.RemoveRelatedLines(this);
             DramalordQuests.Instance.RemoveQuest(QuestGiver);
@@ -42,7 +46,7 @@ namespace Dramalord.Quests
 
         public override void QuestSuccess(Hero reason)
         {
-            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_CONFRONT_SUCCESS), ConfrontEvent.Actor));
+            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_CONFRONT_SUCCESS), QuestGiver));
             CompleteQuestWithSuccess();
             Campaign.Current.ConversationManager.RemoveRelatedLines(this);
             DramalordQuests.Instance.RemoveQuest(QuestGiver);
@@ -50,7 +54,7 @@ namespace Dramalord.Quests
 
         public override void QuestTimeout()
         {
-            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_CONFRONT_FAILED), ConfrontEvent.Actor));
+            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_CONFRONT_FAILED), QuestGiver));
             //QuestFail(Hero.MainHero);
         }
 
@@ -62,7 +66,7 @@ namespace Dramalord.Quests
 
         public override void QuestStartInit()
         {
-            AddLog(ConversationTools.SetCharacterObjects(new(DramalordTexts.QUEST_CONFRONT_INFO), ConfrontEvent.Actor, ConfrontEvent.Target));
+            AddLog(Description);
             InitializeQuestOnGameLoad();
         }
 
@@ -79,7 +83,14 @@ namespace Dramalord.Quests
                                     .PlayerOption(ConversationTools.SetCharacterObjects(new(DramalordTexts.CONFRONTATION_RESULT_OK), QuestGiver))
                                         .NpcLine(DramalordTexts.NPC_INTERACTION_ASYOUWISH)
                                             .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
-                                            .Consequence(() => CompleteQuestWithCancel())
+                                            .Consequence(() => 
+                                            { 
+                                                CompleteQuestWithCancel();
+                                                if (PlayerEncounter.Current != null)
+                                                {
+                                                    PlayerEncounter.LeaveEncounter = true;
+                                                }
+                                            })
                                             .CloseDialog()
                                     .PlayerOption(ConversationTools.SetCharacterObjects(new(DramalordTexts.CONFRONTATION_RESULT_BREAKUP), QuestGiver))
                                         .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
@@ -89,6 +100,10 @@ namespace Dramalord.Quests
                                                 Hero.MainHero.ChangeRelationTo(Hero.OneToOneConversationHero, Hero.MainHero.GetTrust(Hero.OneToOneConversationHero) * -1, Hero.MainHero.GetRelationTo(Hero.OneToOneConversationHero).Love * -1);
                                                 (new RelationshipEvent(Hero.MainHero, Hero.OneToOneConversationHero)).Action();
                                                 QuestSuccess(Hero.MainHero);
+                                                if (PlayerEncounter.Current != null)
+                                                {
+                                                    PlayerEncounter.LeaveEncounter = true;
+                                                }
                                             })
                                                 .CloseDialog()
                                     .PlayerOption(ConversationTools.SetCharacterObjects(new(DramalordTexts.CONFRONTATION_RESULT_BREAKUP_OTHER), OtherHero))
@@ -99,6 +114,10 @@ namespace Dramalord.Quests
                                                 OtherHero.ChangeRelationTo(Hero.OneToOneConversationHero, 0, OtherHero.GetRelationTo(Hero.OneToOneConversationHero).Love * -1);
                                                 (new RelationshipEvent(OtherHero, Hero.OneToOneConversationHero)).Action();
                                                 QuestSuccess(Hero.MainHero);
+                                                if (PlayerEncounter.Current != null)
+                                                {
+                                                    PlayerEncounter.LeaveEncounter = true;
+                                                }
                                             })
                                             .CloseDialog()
                                 .EndPlayerOptions();

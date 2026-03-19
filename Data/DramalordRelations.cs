@@ -173,9 +173,24 @@ namespace Dramalord.Data
                                     _relations[firstpair.Key].Add(secondpair.Key, secondpair.Value);
                                 }
                             }
+
+                            if(secondpair.Key == Hero.MainHero && secondpair.Value.Relationship == RelationshipType.Spouse && firstpair.Key.Spouse == null)
+                            {
+                                firstpair.Key.Spouse = Hero.MainHero;
+                            }
                         }
                     });
                 });
+
+                if(_relations.ContainsKey(Hero.MainHero) && Hero.MainHero.Spouse == null)
+                {
+                    Hero? spouse = _relations[Hero.MainHero].FirstOrDefault(kp => kp.Value.Relationship == RelationshipType.Spouse).Key;
+                    if(spouse != null)
+                    {
+                        Hero.MainHero.Spouse = spouse;
+                        spouse.Spouse = Hero.MainHero;
+                    }
+                }
             }
         }
 
@@ -249,9 +264,9 @@ namespace Dramalord.Data
             if (level == Romance.RomanceLevelEnum.Marriage)
             {
                 hero1.GetRelationTo(hero2).Relationship = RelationshipType.Spouse;
-                if(hero1.GetRelationTo(hero2).Love <=0)
+                if(hero1.GetRelationTo(hero2).Love < 75)
                 {
-                    hero1.GetRelationTo(hero2).Love = MBRandom.RandomInt(10, 50);
+                    hero1.GetRelationTo(hero2).Love = MBRandom.RandomInt(75, 100);
                 }
             }
         }

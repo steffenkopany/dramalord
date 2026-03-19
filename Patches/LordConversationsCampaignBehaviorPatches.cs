@@ -131,11 +131,10 @@ namespace Dramalord.Patches
         [HarmonyPostfix]
         public static void conversation_wanderer_preintroduction_on_condition(ref bool __result)
         {
-            if (Hero.OneToOneConversationHero.Occupation == Occupation.Wanderer && Hero.OneToOneConversationHero.Clan == null)
+            if (Hero.OneToOneConversationHero != null && Hero.OneToOneConversationHero.Occupation == Occupation.Wanderer && Hero.OneToOneConversationHero.Clan == null)
             {
-                TextObject check = null;
                 string stringId = Hero.OneToOneConversationHero.Template.StringId;
-                if (!GameTexts.TryGetText("prebackstory", out check, stringId))
+                if (!GameTexts.TryGetText("prebackstory", out TextObject check, stringId))
                 {
 
                     MBTextManager.SetTextVariable("WANDERER_PREBACKSTORY", new TextObject(DramalordTexts.BACKSTORY_START));

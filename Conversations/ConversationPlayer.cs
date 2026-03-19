@@ -8,6 +8,7 @@ using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Conversation;
+using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.CampaignSystem.SceneInformationPopupTypes;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -27,21 +28,22 @@ namespace Dramalord.Conversations
 
         private static bool FreeForMarriage() =>  Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan || Hero.OneToOneConversationHero.Clan?.Leader == Hero.OneToOneConversationHero;
 
+        private static Hero? OtherHornyPlayerSpouseAround() => Hero.OneToOneConversationHero.GetCloseHeroes().Where( h => h.IsPlayerSpouse() && h.GetDesires().Horny >= 50 && h != Hero.OneToOneConversationHero).FirstOrDefault();
+
         internal static void AddDialogs(CampaignGameStarter starter)
         {
-
             DialogFlow startFlow = DialogFlow.CreateDialogFlow("hero_main_options")
                 .BeginPlayerOptions()
                     .PlayerOption(DramalordTexts.PLAYER_INTERACTION_START)
                         .Condition(() => Hero.OneToOneConversationHero.IsDramalordLegit() && !Hero.OneToOneConversationHero.IsPrisoner && !Hero.MainHero.IsPrisoner && ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
                         .BeginNpcOptions()
-                            .NpcOption(DramalordTexts.INTENTION_REACT_YES + "[ib:normal2][if:convo_calm_friendly]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() > -30 && ConversationTools.SetConversationHero(Hero.MainHero))
+                            .NpcOption(DramalordTexts.INTENTION_REACT_YES + "[ib:normal2][if:convo_calm_friendly]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() > DramalordMCM.Instance.MaxTrustEnemies && ConversationTools.SetConversationHero(Hero.MainHero))
                                 .GotoDialogState("player_interaction_selection")
-                            .NpcOption(DramalordTexts.INTENTION_REACT_NO_INTEREST + "[ib:closed][if:convo_bored]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() <= -30 && ConversationTools.SetConversationHero(Hero.MainHero))
+                            .NpcOption(DramalordTexts.INTENTION_REACT_NO_INTEREST + "[ib:closed][if:convo_bored]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() <= DramalordMCM.Instance.MaxTrustEnemies && ConversationTools.SetConversationHero(Hero.MainHero))
                                 .GotoDialogState("hero_main_options")
                         .EndNpcOptions()
                     .PlayerOption(DramalordTexts.INTENTION_PRISON)
-                        .Condition(() => Hero.OneToOneConversationHero.IsDramalordLegit() && Hero.OneToOneConversationHero.IsPrisoner && !Hero.MainHero.IsPrisoner && ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
+                        .Condition(() => DramalordMCM.Instance.AllowCaptivitySex && Hero.OneToOneConversationHero.IsDramalordLegit() && Hero.MainHero.GetClosePrisoners().Contains(Hero.OneToOneConversationHero) && !Hero.MainHero.IsPrisoner && ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
                         .BeginNpcOptions()
                             .NpcOption(DramalordTexts.INTENTION_PRISON_OK + "[ib:normal2][if:convo_calm_friendly]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() > -30 && ConversationTools.SetConversationHero(Hero.MainHero))
                                 .BeginPlayerOptions()
@@ -51,16 +53,19 @@ namespace Dramalord.Conversations
                                                 .Consequence(() => DramalordEvents.Instance.StartIntention(new PrisonSexEvent(Hero.MainHero, Hero.OneToOneConversationHero)))
                                                 .CloseDialog()
                                             .NpcOption(DramalordTexts.INTENTION_PRISON_OFFER_NO, () => Hero.OneToOneConversationHero.GetTraitLevel(DefaultTraits.Honor) >= 1 || Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) < DramalordMCM.Instance.MinAttraction)
-                                                .GoBackToDialogState("hero_main_options")
+                                                .GotoDialogState("hero_main_options")
                                         .EndNpcOptions()
                                     .PlayerOption(DramalordTexts.INTENTION_PRISON_KILL)
                                         .NpcLine(DramalordTexts.INTENTION_PRISON_KILL_OK)
                                             .Consequence(() => MBInformationManager.ShowSceneNotification(HeroExecutionSceneNotificationData.CreateForPlayerExecutingHero(Hero.OneToOneConversationHero, null)))
                                             .CloseDialog()
                                     .PlayerOption(DramalordTexts.PLAYER_INTERACTION_END)
-                                        .GotoDialogState("hero_main_options")
+                                        .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
+                                            .NpcLine(DramalordTexts.NPC_INTERACTION_ASYOUWISH)
+                                                .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
+                                                .GotoDialogState("hero_main_options")
                                 .EndPlayerOptions()
-                            .NpcOption(DramalordTexts.INTENTION_PRISON_NO + "[ib:closed][if:convo_bored]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() <= -30 && ConversationTools.SetConversationHero(Hero.MainHero))
+                            .NpcOption(DramalordTexts.INTENTION_PRISON_NO + "[ib:closed][if:convo_bored]", () => Hero.OneToOneConversationHero.GetRelationWithPlayer() <= -30)
                                 .GotoDialogState("hero_main_options")
                         .EndNpcOptions()
                     .PlayerOption(DramalordTexts.ORPHANAGE_ADOPT)
@@ -94,7 +99,7 @@ namespace Dramalord.Conversations
                             .NpcOption(DramalordTexts.ORPHANAGE_ADOPT_EMPTY, () => DramalordOrphans.Instance.CountOrphans(false) + DramalordOrphans.Instance.CountOrphans(true) == 0 && ConversationTools.SetConversationHero(Hero.MainHero))
                         .EndNpcOptions()
                     .PlayerOption(DramalordTexts.ORPHANAGE_ORPHANIZE)
-                        .Condition(() => Hero.OneToOneConversationHero.Occupation == Occupation.GangLeader)
+                        .Condition(() => Hero.OneToOneConversationHero.Occupation == Occupation.GangLeader && DramalordMCM.Instance.AllowOrphanage)
                         .BeginNpcOptions()
                             .NpcOption(DramalordTexts.ORPHANAGE_ORPHANIZE_OK, () => Hero.MainHero.Children.Where(c => c.Age < 18).ToList().Count > 0 && ConversationTools.SetConversationHero(Hero.MainHero))
                                 .Consequence(() => { SelectedChild = null; ConversationSentence.SetObjectsToRepeatOver(Hero.MainHero.Children.Where(c => c.Age < 18).ToList()); })
@@ -126,7 +131,7 @@ namespace Dramalord.Conversations
                         .Condition(() => Hero.MainHero.IsEmotionalWith(Hero.OneToOneConversationHero) && ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
                         .GotoDialogState("npc_interaction_reply_sex")
                     .PlayerOption(DramalordTexts.PLAYER_INTERACTION_DIVORCE_SPOUSE)
-                        .Condition(() => Hero.MainHero.IsLoverOf(Hero.OneToOneConversationHero) && HasOtherSpouse() && DramalordQuests.Instance.GetQuest(Hero.OneToOneConversationHero) == null && ConversationTools.SetConversationHero(Hero.OneToOneConversationHero.Spouse))
+                        .Condition(() => Hero.MainHero.IsLoverOf(Hero.OneToOneConversationHero) && HasOtherSpouse() && DramalordQuests.Instance.GetQuest(Hero.OneToOneConversationHero) == null && ConversationTools.SetConversationHero(Hero.OneToOneConversationHero, Hero.OneToOneConversationHero.Spouse))
                         .GotoDialogState("npc_interaction_reply_divorce")
                     .PlayerOption(DramalordTexts.PLAYER_INTERACTION_MARRIAGE_START)
                         .Condition(() => Hero.MainHero.IsLoverOf(Hero.OneToOneConversationHero) && !HasOtherSpouse() && DramalordQuests.Instance.GetQuest(Hero.OneToOneConversationHero) == null && ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
@@ -169,14 +174,18 @@ namespace Dramalord.Conversations
 
             DialogFlow flirtFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_flirt")
                 .BeginNpcOptions()
-                    .NpcOption(DramalordTexts.NPC_INTERACTION_FLIRT_1 + "[ib:normal2][if:convo_mocking_teasing]", () => (Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) >= DramalordMCM.Instance.MinAttraction) && !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero))
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_FLIRT_1 + "[ib:normal2][if:convo_mocking_teasing]", () => (Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) || Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) >= DramalordMCM.Instance.MinAttraction) && Hero.OneToOneConversationHero.RomanceAccepted(Hero.MainHero, true) && !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero))
                         .Consequence(() => {
                             ConversationQuestions.SetupQuestions(new FlirtEvent(Hero.MainHero, Hero.OneToOneConversationHero), false); 
                         })
                         .GotoDialogState("start_challenge")
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_FLIRT_NO_1 + "[ib:closed][if:convo_bored]", () => !Timeout() && Hero.OneToOneConversationHero.GetTraitLevel(DefaultTraits.Mercy) < 0 && !Hero.OneToOneConversationHero.RomanceAccepted(Hero.MainHero, true))
+                        .GotoDialogState("player_interaction_selection")
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_FLIRT_NO_2 + "[ib:closed][if:convo_bored]", () => !Timeout() && Hero.OneToOneConversationHero.GetTraitLevel(DefaultTraits.Mercy) >= 0 && !Hero.OneToOneConversationHero.RomanceAccepted(Hero.MainHero, true))
+                        .GotoDialogState("player_interaction_selection")
                     .NpcOption(DramalordTexts.NPC_INTERACTION_TIMEOUT + "[ib:closed][if:convo_bored]", () => Timeout() && ConversationTools.SetConversationHero(Hero.MainHero))
                         .GotoDialogState("player_interaction_selection")
-                    .NpcOption(DramalordTexts.INTENTION_REACT_NO_INTEREST + "[ib:nervous][if:convo_shocked]", () => !Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) < DramalordMCM.Instance.MinAttraction && !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero))
+                    .NpcOption(DramalordTexts.INTENTION_REACT_NO_INTEREST + "[ib:nervous][if:convo_shocked]", () => !Hero.OneToOneConversationHero.HasAnyRelationshipWith(Hero.MainHero) && Hero.OneToOneConversationHero.GetAttractionTo(Hero.MainHero) < DramalordMCM.Instance.MinAttraction && Hero.OneToOneConversationHero.RomanceAccepted(Hero.MainHero, true) && !Timeout() && ConversationTools.SetConversationHero(Hero.MainHero))
                         .GotoDialogState("player_interaction_selection")
                 .EndNpcOptions();
 
@@ -208,9 +217,20 @@ namespace Dramalord.Conversations
                     .NpcOption(DramalordTexts.NPC_INTERACTION_UHWELL + "[ib:nervous2][if:convo_confused_normal]", () => (SpouseAway() || !HasOtherSpouse()) && !Timeout() && Hero.OneToOneConversationHero.IsLoverOf(Hero.MainHero) && !ConversationPersuasions.Success && Hero.OneToOneConversationHero.GetDesires().Horny >= 50)
                         .Consequence(() => ConversationPersuasions.CreatePersuasionTaskForFWB())
                         .GotoDialogState("npc_persuasion_challenge")
-                    .NpcOption(DramalordTexts.NPC_INTERACTION_SEX_OK+ "[ib:confident3][if:convo_excited]", () => !Timeout() && (Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero) || ConversationPersuasions.Success) && Hero.OneToOneConversationHero.GetDesires().Horny >= 50)
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_SEX_OK+ "[ib:confident3][if:convo_excited]", () => !Timeout() && ((Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero) && OtherHornyPlayerSpouseAround() == null) || ConversationPersuasions.Success) && Hero.OneToOneConversationHero.GetDesires().Horny >= 50)
                         .Consequence(() => {DramalordEvents.Instance.StartIntention(new SexEvent(Hero.MainHero, Hero.OneToOneConversationHero)); ConversationPersuasions.Success = false; })
                         .CloseDialog()
+                    .NpcOption(DramalordTexts.NPC_INTERACTION_SEX_THREESOME + "[ib:confident2][if:convo_excited]", () => !Timeout() && Hero.OneToOneConversationHero.IsSpouseOf(Hero.MainHero) && OtherHornyPlayerSpouseAround() != null && Hero.OneToOneConversationHero.GetDesires().Horny >= 50 && ConversationTools.SetConversationHero(OtherHornyPlayerSpouseAround()))
+                            .BeginPlayerOptions()
+                                .PlayerOption(GameTexts.FindText("str_yes"))
+                                    .NpcLine(DramalordTexts.NPC_INTERACTION_SEX_OK + "[ib:confident3][if:convo_excited]")
+                                        .Consequence(() => { DramalordEvents.Instance.StartIntention(new ThreesomeEvent(Hero.MainHero, Hero.OneToOneConversationHero, OtherHornyPlayerSpouseAround())); ConversationPersuasions.Success = false; })
+                                        .CloseDialog()
+                                .PlayerOption(GameTexts.FindText("str_no"))
+                                    .NpcLine(DramalordTexts.NPC_INTERACTION_SEX_OK + "[ib:confident3][if:convo_excited]")
+                                        .Consequence(() => { DramalordEvents.Instance.StartIntention(new SexEvent(Hero.MainHero, Hero.OneToOneConversationHero)); ConversationPersuasions.Success = false; })
+                                        .CloseDialog()
+                            .EndPlayerOptions()
                     .NpcOption(DramalordTexts.NPC_INTERACTION_SPOUSE_NEARBY + "[ib:nervous][if:convo_shocked]", () => !SpouseAway() && HasOtherSpouse() && !Timeout() && Hero.OneToOneConversationHero.IsLoverOf(Hero.MainHero) && ConversationTools.SetConversationHero(Hero.MainHero))
                         .GotoDialogState("player_interaction_selection")
                     .NpcOption(DramalordTexts.NPC_INTERACTION_TIMEOUT + "[ib:closed][if:convo_bored]", () => Timeout() && ConversationTools.SetConversationHero(Hero.MainHero))
@@ -232,6 +252,7 @@ namespace Dramalord.Conversations
                                         CampaignTime.DaysFromNow(21));
                                     quest.StartQuest();
                                     DramalordQuests.Instance.AddQuest(Hero.OneToOneConversationHero, quest);
+                                    MBInformationManager.AddNotice(new DramalordQuestNotification(quest));
                                 })
                                 .CloseDialog()
                             .PlayerOption(DramalordTexts.PLAYER_INTERACTION_END)
@@ -268,6 +289,7 @@ namespace Dramalord.Conversations
                                         CampaignTime.DaysFromNow(21));
                                     quest.StartQuest();
                                     DramalordQuests.Instance.AddQuest(Hero.OneToOneConversationHero, quest);
+                                    MBInformationManager.AddNotice(new DramalordQuestNotification(quest));
                                 })
                                 .CloseDialog()
                             .PlayerOption(DramalordTexts.PLAYER_INTERACTION_END)
@@ -294,14 +316,29 @@ namespace Dramalord.Conversations
 
 
             DialogFlow breakupFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_breakup")
-                .BeginNpcOptions()
-                    .NpcOption(DramalordTexts.NPC_INTERACTION_BREAKUP_OK + "[ib:nervous][if:convo_shocked]", () => ConversationTools.SetConversationHero(Hero.MainHero))
-                        .Consequence(() => { 
-                            Hero.OneToOneConversationHero.ChangeRelationTo(Hero.MainHero, -100 + Hero.OneToOneConversationHero.GetPersonality().Empathy, Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love * -1);
-                            (new RelationshipEvent(Hero.MainHero, Hero.OneToOneConversationHero)).Action();
-                        })
-                        .CloseDialog()
-                .EndNpcOptions();
+                .NpcLine(DramalordTexts.NPC_INTERACTION_BREAKUP_ASK + "[ib:nervous][if:convo_shocked]")
+                    .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
+                    .BeginPlayerOptions()
+                        .PlayerOption(DramalordTexts.PLAYER_INTERACTION_BREAK_UP_CONFIRM)
+                            .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
+                            .NpcLine(DramalordTexts.NPC_INTERACTION_BREAKUP_OK + "[ib:nervous][if:convo_shocked]")
+                                .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
+                                .Consequence(() => {
+                                    Hero.OneToOneConversationHero.ChangeRelationTo(Hero.MainHero, -100 + Hero.OneToOneConversationHero.GetPersonality().Empathy, Hero.OneToOneConversationHero.GetRelationTo(Hero.MainHero).Love * -1);
+                                    (new RelationshipEvent(Hero.MainHero, Hero.OneToOneConversationHero)).Action();
+                                    if (PlayerEncounter.Current != null)
+                                    {
+                                        PlayerEncounter.LeaveEncounter = true;
+                                    }
+                                })
+                                .CloseDialog()
+                        .PlayerOption(DramalordTexts.PLAYER_INTERACTION_BREAK_UP_ABORT)
+                            .Condition(() => ConversationTools.SetConversationHero(Hero.OneToOneConversationHero))
+                            .NpcLine(DramalordTexts.NPC_INTERACTION_ASYOUWISH)
+                                .Condition(() => ConversationTools.SetConversationHero(Hero.MainHero))
+                                .GotoDialogState("player_interaction_selection")
+                    .EndPlayerOptions()
+                .BeginNpcOptions();
 
             DialogFlow askFlow = DialogFlow.CreateDialogFlow("npc_interaction_reply_ask")
                 .BeginNpcOptions()
@@ -457,6 +494,9 @@ namespace Dramalord.Conversations
                             .NpcLine(DramalordTexts.ORPHANAGE_ORPHANIZE_ABORT)
                             .GotoDialogState("hero_main_options")
                     .EndPlayerOptions();
+
+
+            //starter.AddDialogFlow(urgentFlow);
 
             starter.AddDialogFlow(startFlow);
             starter.AddDialogFlow(playerSelectionFlow);

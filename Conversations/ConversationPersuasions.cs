@@ -20,6 +20,7 @@ namespace Dramalord.Conversations
         private static TextObject Date = new TextObject("date");
         private static TextObject Engage = new TextObject("engage");
         private static TextObject FWB = new TextObject("fwb");
+        private static TextObject Break = new TextObject("break");
 
         internal static void AddDialogs(CampaignGameStarter starter)
         {
@@ -31,12 +32,14 @@ namespace Dramalord.Conversations
             starter.AddPlayerLine("player_persuasion_argument_4", "player_persuasion_argument", "npc_persuasion_reaction", "{=!}{PERSUADE_ATTEMPT_4}", ConditionPersuasionLine4, ConsequencePersuasionLine4, 100, persuasionOptionDelegate: SetupOption4);
             starter.AddPlayerLine("player_persuasion_abort", "player_persuasion_argument", "npc_persuasion_reaction_abort", "{=Dramalord255}Nevermind.", null, ConsequencePersuasionAbort);
 
-            starter.AddDialogLine("npc_persuasion_reaction_date", "npc_persuasion_reaction", "npc_interaction_reply_date", "{=0UPds9x3}Very well, then...", ConditionPeruasionDateSuccess, ConsequencePeruasionDateSuccess);
-            starter.AddDialogLine("npc_persuasion_reaction_date1", "npc_persuasion_reaction", "player_interaction_selection", "{=0UPds9x3}Very well, then...", ConditionPeruasionDateFail, ConsequencePeruasionDateFail);
-            starter.AddDialogLine("npc_persuasion_reaction_engage", "npc_persuasion_reaction", "npc_interaction_reply_engage", "{=0UPds9x3}Very well, then...", ConditionPeruasionEngageSuccess, ConsequencePeruasionEngageSuccess);
-            starter.AddDialogLine("npc_persuasion_reaction_engage", "npc_persuasion_reaction", "player_interaction_selection", "{=0UPds9x3}Very well, then...", ConditionPeruasionEngageFail, ConsequencePeruasionEngageFail);
-            starter.AddDialogLine("npc_persuasion_reaction_sex", "npc_persuasion_reaction", "npc_interaction_reply_sex", "{=0UPds9x3}Very well, then...", ConditionPeruasionFWBSuccess, ConsequencePeruasionFWBSuccess);
-            starter.AddDialogLine("npc_persuasion_reaction_sex", "npc_persuasion_reaction", "player_interaction_selection", "{=0UPds9x3}Very well, then...", ConditionPeruasionFWBFail, ConsequencePeruasionFWBFail);
+            starter.AddDialogLine("npc_persuasion_reaction_date", "npc_persuasion_reaction", "npc_interaction_reply_date", "{=0UPds9x3}Very well, then...", ConditionPeruasionDateSuccess, ConsequencePeruasionSuccess);
+            starter.AddDialogLine("npc_persuasion_reaction_date1", "npc_persuasion_reaction", "player_interaction_selection", "{=0UPds9x3}Very well, then...", ConditionPeruasionDateFail, ConsequencePeruasionFail);
+            starter.AddDialogLine("npc_persuasion_reaction_engage", "npc_persuasion_reaction", "npc_interaction_reply_engage", "{=0UPds9x3}Very well, then...", ConditionPeruasionEngageSuccess, ConsequencePeruasionSuccess);
+            starter.AddDialogLine("npc_persuasion_reaction_engage", "npc_persuasion_reaction", "player_interaction_selection", "{=0UPds9x3}Very well, then...", ConditionPeruasionEngageFail, ConsequencePeruasionFail);
+            starter.AddDialogLine("npc_persuasion_reaction_sex", "npc_persuasion_reaction", "npc_interaction_reply_sex", "{=0UPds9x3}Very well, then...", ConditionPeruasionFWBSuccess, ConsequencePeruasionSuccess);
+            starter.AddDialogLine("npc_persuasion_reaction_sex", "npc_persuasion_reaction", "player_interaction_selection", "{=0UPds9x3}Very well, then...", ConditionPeruasionFWBFail, ConsequencePeruasionFail);
+            starter.AddDialogLine("npc_persuasion_reaction_break", "npc_persuasion_reaction", "resolve_breakup", "{=0UPds9x3}Very well, then...", ConditionPeruasionBreakupSuccess, ConsequencePeruasionSuccess);
+            starter.AddDialogLine("npc_persuasion_reaction_break", "npc_persuasion_reaction", "resolve_breakup", "{=0UPds9x3}Very well, then...", ConditionPeruasionBreakupFail, ConsequencePeruasionFail);
             starter.AddDialogLine("npc_persuasion_reaction_abort", "npc_persuasion_reaction_abort", "player_interaction_selection", "{=0UPds9x3}Very well, then...", null, null);
         }
 
@@ -77,66 +80,22 @@ namespace Dramalord.Conversations
         private static bool ConditionPeruasionEngageFail() => CurrentTask.TryLaterLine == Engage && !ConversationManager.GetPersuasionProgressSatisfied();
         private static bool ConditionPeruasionFWBSuccess() => CurrentTask.TryLaterLine == FWB && ConversationManager.GetPersuasionProgressSatisfied();
         private static bool ConditionPeruasionFWBFail() => CurrentTask.TryLaterLine == FWB && !ConversationManager.GetPersuasionProgressSatisfied();
+        private static bool ConditionPeruasionBreakupSuccess() => CurrentTask.TryLaterLine == Break && ConversationManager.GetPersuasionProgressSatisfied();
+        private static bool ConditionPeruasionBreakupFail() => CurrentTask.TryLaterLine == Break && !ConversationManager.GetPersuasionProgressSatisfied();
 
         private static void ConsequencePersuasionAbort()
         {
             ConversationManager.EndPersuasion();
         }
 
-        private static void ConsequencePeruasionDateSuccess()
+        private static void ConsequencePeruasionSuccess()
         {
             Success = true;
-            DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_INFO_PERSIUASION_SUCCESS, true);
-            //ConversationQuestions.SetupQuestions(ConversationQuestions.QuestionType.Date, 3, false);
-            
+            DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_INFO_PERSIUASION_SUCCESS, true);  
             ConversationManager.EndPersuasion();
         }
 
-        private static void ConsequencePeruasionDateFail()
-        {
-            DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_INFO_PERSIUASION_FAIL, true);
-            ConversationManager.EndPersuasion();
-        }
-
-        private static void ConsequencePeruasionEngageSuccess()
-        {
-            Success = true;
-            DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_INFO_PERSIUASION_SUCCESS, true);
-/*
-            if(Hero.OneToOneConversationHero.Clan == null || Hero.OneToOneConversationHero.Clan == Clan.PlayerClan || Hero.OneToOneConversationHero.Clan.Leader == Hero.OneToOneConversationHero)
-            {
-                DramalordEvents.Instance.StartIntention(new MarriageEvent(Hero.MainHero, Hero.OneToOneConversationHero));
-            }
-            else
-            {
-                
-                MarriagePermissionQuest quest = new MarriagePermissionQuest(Hero.OneToOneConversationHero,
-                                        Hero.OneToOneConversationHero.Clan.Leader,
-                                        CampaignTime.DaysFromNow(21));
-                quest.StartQuest();
-                DramalordQuests.Instance.AddQuest(Hero.OneToOneConversationHero, quest);
-               
-            }
- */
-            ConversationManager.EndPersuasion();
-        }
-
-        private static void ConsequencePeruasionEngageFail()
-        {
-            DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_INFO_PERSIUASION_FAIL, true);
-            ConversationManager.EndPersuasion();
-        }
-
-        private static void ConsequencePeruasionFWBSuccess()
-        {
-            Success = true;
-            DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_INFO_PERSIUASION_SUCCESS, true);
-            //DramalordEvents.Instance.StartIntention(new SexEvent(Hero.MainHero, Hero.OneToOneConversationHero));
-            
-            ConversationManager.EndPersuasion();
-        }
-
-        private static void ConsequencePeruasionFWBFail()
+        private static void ConsequencePeruasionFail()
         {
             DramalordBanner.CreateBanner(Hero.OneToOneConversationHero, DramalordTexts.BANNER_INFO_PERSIUASION_FAIL, true);
             ConversationManager.EndPersuasion();
@@ -187,6 +146,23 @@ namespace Dramalord.Conversations
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_SEX_2), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_SEX_3), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.OneHanded, DefaultTraits.Mercy, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_SEX_4), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            CurrentTask = persuasionTask;
+        }
+
+        internal static void CreatePersuasionTaskForBreakUp()
+        {
+            Success = false;
+            PersuasionTask persuasionTask = new PersuasionTask(3);
+            persuasionTask.SpokenLine = new TextObject(DramalordTexts.PERSUASION_BREAKUP_Q);
+            persuasionTask.TryLaterLine = Break;
+
+            int trustDiff = MBMath.ClampInt(((100 - Hero.OneToOneConversationHero.GetTrust(Hero.MainHero)) * -1) / 10, -3, 3);
+            PersuasionArgumentStrength persuasionArgumentStrength = (PersuasionArgumentStrength)trustDiff;
+
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Trade, DefaultTraits.Generosity, TraitEffect.Negative, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_BREAKUP_1), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Charm, DefaultTraits.Generosity, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_BREAKUP_2), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Leadership, DefaultTraits.Calculating, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_BREAKUP_3), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
+            persuasionTask.AddOptionToTask(new PersuasionOptionArgs(DefaultSkills.Roguery, DefaultTraits.Mercy, TraitEffect.Positive, persuasionArgumentStrength, givesCriticalSuccess: false, new TextObject(DramalordTexts.PERSUASION_BREAKUP_4), null, canBlockOtherOption: false, canMoveToTheNextReservation: true));
             CurrentTask = persuasionTask;
         }
     }

@@ -64,6 +64,40 @@ namespace Dramalord.Data
                 dataStore.SyncData(SaveIdentifier, ref data);
                 _orphans.AddRange(data);
             }
+
+            foreach (Hero item in _orphans)
+            {
+                if(item.HeroState == Hero.CharacterStates.Disabled)
+                {
+                    item.ChangeState(Hero.CharacterStates.NotSpawned);
+                }
+            }
+
+            foreach (Hero item in Hero.AllAliveHeroes.ToList())
+            {
+                if(item.IsChild && item.HeroState == Hero.CharacterStates.Active)
+                {
+                    /*
+                    if (item.PartyBelongedTo != null)
+                    {
+                        MobileParty party = item.PartyBelongedTo; 
+                        DisbandPartyAction.StartDisband(party);
+                    }
+                    */
+
+                    if (item.CurrentSettlement != null)
+                    {
+                        LeaveSettlementAction.ApplyForCharacterOnly(item);
+                    }
+
+                    //item.ChangeState(Hero.CharacterStates.Disabled);
+                    item.ChangeState(Hero.CharacterStates.NotSpawned);
+                }
+                if(item.IsChild && item.HeroState == Hero.CharacterStates.Disabled)
+                {
+                    item.ChangeState(Hero.CharacterStates.NotSpawned);
+                }
+            }
         }
 
         internal override void SaveData(IDataStore dataStore)
@@ -90,8 +124,8 @@ namespace Dramalord.Data
             {
                 hero.SetNewOccupation(Occupation.Wanderer);
                 hero.ChangeState(Hero.CharacterStates.Active);
+                _orphans.Remove(hero);
             }
-            _orphans.Remove(hero);
         }
 
         protected override void OnHeroCreated(Hero hero, bool born)
