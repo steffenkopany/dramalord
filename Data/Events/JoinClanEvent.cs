@@ -54,7 +54,7 @@ namespace Dramalord.Data.Events
                 AddLogEntry(this);
         }
 
-        public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase => (Actor == obj || Target == obj);
+        public bool IsVisibleInEncyclopediaPageOf(MBObjectBase obj) => (Actor == obj || Target == obj);
 
         public TextObject GetEncyclopediaText()
         {
