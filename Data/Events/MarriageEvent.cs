@@ -288,7 +288,7 @@ namespace Dramalord.Data.Events
             Actor.GetRelationTo(Target).LastInteraction = CampaignTime.Now;
         }
 
-        public bool IsVisibleInEncyclopediaPageOf<T>(T obj) where T : MBObjectBase => (Actor == obj || Target == obj);
+        public bool IsVisibleInEncyclopediaPageOf(MBObjectBase obj) => (Actor == obj || Target == obj);
 
         public TextObject GetEncyclopediaText()
         {
