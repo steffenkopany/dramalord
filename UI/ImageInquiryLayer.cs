@@ -70,7 +70,7 @@ namespace Dramalord.UI
                 _viewModel = null;
             }
 
-            ScreenManager.RemoveGlobalLayer(this);
+            ScreenManager.RemoveGlobalLayer(this, true);
 
             //Campaign.Current.TimeControlMode = _timeSpeed;
         }
