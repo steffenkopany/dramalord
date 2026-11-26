@@ -162,7 +162,7 @@ namespace Dramalord.UI
             }
 
             VideoCache.Clear();
-            ScreenManager.RemoveGlobalLayer(this);
+            ScreenManager.RemoveGlobalLayer(this, true);
 
             //Campaign.Current.TimeControlMode = _timeSpeed;
         }
